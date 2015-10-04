@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<title>Soma S Dhavala' Home &raquo research &raquo software</title>
+
+<link rel="stylesheet" href="../styles/styleMain.css" type="text/css" />
+<link rel="stylesheet" href="styles/styleFigHome.css" type="text/css" />
+<link rel="stylesheet" href="../styles/styleNavRegular.css" type="text/css" />
+<!--[if gte IE 5]>
+
+<![endif]-->
+</head>
+
+<body>
+
+
+
+
+<div id="outer">
+    <div id="header">
+        
+    </div>
+
+
+
+    <div id="navButtons">
+ 
+		<span class="buttonText" id="nav3"> courses </span>
+
+		
+		<span class="buttonText" id="nav2"><a href="index.html">research</a></span>
+		<span class="buttonText" id="nav2"><a href="../teaching/index.html">teaching</a></span>
+		<span class="buttonText" id="nav2"><a href="../consulting/index.html">consulting</a></span>
+                <span class="buttonText" id="nav2"><a href="../interests/index.html">interests</a></span>
+		<span class="buttonText" id="nav2"><a href="../about/index.html">about</a></span>
+		<span class="buttonText" id="nav1"></span>
+		<span class="buttonText" id="nav1"></span>
+		<span class="buttonText" id="nav1"></span>
+		
+   </div>
+	
+
+    <div id="nav">
+
+<!-- The right floating menu -->
+            <div id="smenu">
+
+                    <div id="b2">
+                        <ul>
+                        <li>
+			<a href="pubs.html">pubs</a>
+			<a href="patents.html">patents</a>
+			<a href="docs.html">reports</a>
+			<a href="courses.html">courses</a>
+			<a href="code.html">software</a>
+
+			</li>
+                        </ul>
+                    </div>
+
+            </div>            
+
+    
+
+   
+   </div>
+   <div id="mainTop"> </div>
+
+    <div id="main">
+	
+	<br><br> <b>MATLAB&dagger </b>
+	 <ul>
+
+	<li> <u>Time-frequency modeling using the EM algorithm:</u>  It models a time-frequency distribution of a signal under analysis as a Gaussian Mixture. The parameters are 	estimated by the EM algorithm. Time-frequency regions are indicated by the individual densities which in turn are used to synthesize corresponding time-domain signal by 		means of  time-frequency projection filters. Later, regionally optimized-kernel time-frequency distributions are applied on the synthesized signal.  Download the zip 		file from here.  This suit is developed by Dr. Mark J Coates while he was at thesignal processing group, Univ. of Cambridge working on his Ph.D thesis. I am thankful to 		him for letting me distribute it for educational purposes. It has many interesting small subroutines like:
+	<ul>
+	
+	    <li>  arc-cosine distance between two normal densities
+   
+   	    <li>  functional merging
+   
+
+  	    <li>      time-frequency projection filters (by W. Kozek)
+
+
+            <li>      regionally-optimized kernel design (richb et al)
+	   </ul>
+
+	Note: You needtime-frequency toolbox (which is also free for non-commercial use)! All the software comes with no warranty and you may distribute the code for non-profit/ 	non-commercial purposes and duely acknowledge the authors whereever necessary. Otherwise, the copyrights are with the respective authors.
+	<br> &nbsp&nbsp&nbsp&nbsp [here]
+
+	<li> <u>Numerical Integration using Gauss-Hermite quadrature if the kernel is normal:</u> Download the zip file from 
+	<br> &nbsp&nbsp&nbsp&nbsp [here]
+
+	<li> <u>Visualize a bi-variate normal density:</u> It plots the ellipse centered around the mean with minor and major axis aligned along the eigen-vectors of the covariance 	matrix and their lengths proportional to the corresponding eigen-values. Get the m-file from here
+	<br> &nbsp&nbsp&nbsp&nbsp [here]
+
+	<li> <u>Integrate MATLAB with R andwinBUGS:</u> example code is given to connect to R from MATLAB and also to export data, perform MCMC analysis using winBUGS and import the 		data back to MATLAB environment for further analysis. Download the zip file fromhere
+	<br> &nbsp&nbsp&nbsp&nbsp [here]
+
+	<li> <u>M-ary PSK</u>: (generation, detection and BER performance)
+	Implements: generation, modulation and detection of a M-ary PSK Digital Modulation technique. Obtains BER performance at different SNRs. Prof. Wangs implementation of 	this is very succinct and crisp as compared to mine. 
+	<br> &nbsp&nbsp&nbsp&nbsp [here]
+
+	<li> <u>Modulation using Instantaneous Frequency:</u> (for even number of symbols) It tries to use Instantaneous Frequency as the modulation method as against phase or frequency 	or amplitude or pulse position etc.. The basic waveform chosen, can, in fact, model any such modulation (please see corresponding document inrecords section). You need 	"Discrete TFDs" suit that can be downloaded frommathtools
+	<br> &nbsp&nbsp&nbsp&nbsp [here]
+
+	<li> <u>Spectral estimation:</u> (Capon's, Periodogram, Min-Norm, MUSIC, and frequency estimation using ESPIRIT and root-MUSIC algorithms)
+	Simulates different number of complex exponentials in complex white additive Guassian noise. Different classical spectral estimation techniques like Periodogram, 	Capon's, Minimum Norm, MUSIC are implemented. The frequencies of the sinusoids are estimated using   root-MUSIC and ESPIRIT methods.
+	<br> &nbsp&nbsp&nbsp&nbsp [here]
+
+	<li> <u>Wavelet Packet Pruning:</u> (using Coding-Gain as the tree-pruning criteria)
+	An algorithm for pruning a completely grown wavelet-tree is implemented. However, coding-gain (defined as the ratio of arithmeic mean of the subband variances to that of 	geometric mean) is used to merge the nodes of the tree. Pruning based on this coding-gain and entrpoy (MATLAB) can be compared (please see corresponding document in 	records section). Several variations are possible like top-down approach, a hybrid approach (which appear to be obvious tree managing methods).
+	<br> &nbsp&nbsp&nbsp&nbsp [here]
+
+	<li> <u>Time-recursive implementation of time-frequency representations</u> (Wigner-Ville and Short-time Fourier transform)
+	This MATLAB suite implements time-recursive algorithms for time-frequency distribution. Some of these algorithms are outcome of my research at Master's level at IIT-	Madras. Any bugs, please report them tosoma@ieee.org
+	<ul>
+	<li>      wvd.m: main function for computing Wigner-Ville distribution (WVD)
+    	<li>      rw_wvd.m: main function for computing running-windowed WVD
+        <li>  outer_matrix.m: computes instantaneous auto-correlation matrix (IACF)
+    	<li>      rearr_outer_matrix.m:computes a re-arranged IACF
+    	<li>      stft.m:recursive impementation of short-time Fourier transform
+	</ul>
+	</ul> 
+
+
+
+
+&dagger files will be uploaded time permitting
+    </div>
+
+
+<div id="mainBot"> </div>
+
+<div id="navTree"> 
+you are here &raquo <a href="../index.html"> home </a> &raquo <a href="./index.html"> research </a> &raquo <a href="./pubs.html"> software </a>
+</div>
+
+
+</div>
+<div id="footer"> &copy Soma S Dhavala 2008</div>
+
+</body>

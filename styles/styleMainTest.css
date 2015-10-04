@@ -1,0 +1,295 @@
+﻿body {
+    background-color: #999999;
+    font-size:12px;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    background: url('../images/bggrad2.jpg') repeat-x;
+	background-color: #464646;
+
+}
+
+div#outer {
+    width: 750px;
+    background-color:#E2E2E2;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    border: 1px #222;
+
+
+}
+
+
+div#navButtons {
+
+    width: 750px;
+    padding-top: 5px;
+    padding-left: 0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    border-left: 0px #E2E2E2;
+    color: #999;
+    float: right;
+    clear both;
+    background-color: #888;
+
+}
+
+
+div#main {
+
+    margin-left: 125px;
+    margin-top: 0px;
+    padding-top: 20px;
+    clear both;
+    background-color: #E2E2E2;
+
+
+}
+
+
+#footer 
+{
+	background-color: #222;
+	color: #999;
+	text-align: center;
+	vertical-align: middle;
+	height: 20px;
+	padding-top: 5px;
+	clear: both;
+	width: auto;
+}
+
+
+
+#nav1 
+{
+	width: 100px;
+	height: 30px;
+	float: left;
+	background: url(../images/button.jpg) no-repeat;
+}
+
+#nav2 
+{
+	width: 100px;
+	height: 30px;
+	float: left;
+	background: url(../images/button1.jpg) no-repeat;
+}
+
+#nav3 
+{
+	width: 100px;
+	height: 30px;
+	float: left;
+	background: url(../images/button2.jpg) no-repeat;
+}
+
+
+#nav4 
+{
+	width: 150px;
+	height: 30px;
+	float: left;
+	background: url(../images/bridge5.jpg) no-repeat;
+}
+
+.buttonText 
+{
+	text-align: center;
+	padding-top: 7px;
+	font-size: 11px;
+	font-weight: bold;
+        font-weight: bold;
+        color: #888;
+}
+h1 
+{
+	font-size: 20px;
+	font-weight: bold;
+	padding-top: 5px;
+}
+
+.hideme 
+{
+	width: 700px;
+	display: none;
+	color: white;
+}
+
+.headertext1 
+{
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.headertext2 
+{
+	font-size: 10px;
+	font-weight: bold;
+}
+
+#b2 
+{
+	width: 100px;
+	padding: 1 1 1 1;
+	margin-bottom: 1em;
+	font-size: 11px;
+	font-weight: normal;
+	font-family: Verdana;
+	color: #444
+}
+
+#b2 ul 
+{
+	list-style: none;
+	margin: 0;
+	padding: 0px;
+	border: none;
+
+}
+
+#b2 li 
+{
+	border-bottom: 1px solid #333;
+	margin: 0px;
+	width: 0px;
+}
+
+#b2 li a 
+{
+	display: block;
+	padding: 3px 3px 8px 3px;
+	border-left: 0px solid #555;
+	border-right: 0px solid #555;
+	color: #000;
+	text-decoration: none;
+	width: 94px;
+	background-color:#757575;
+	text-align: right;
+}
+
+#b2 li a:hover 
+{
+	border-left: 0px solid #222;
+	border-right: 0px solid #222;
+	color: #888;
+	background-color: #333;
+	font-weight:bold;
+	text-align: right;
+}
+
+.bhz 
+{
+	width: 97px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	text-align: center;
+	font-weight: bold;
+	color: #ffffff;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 3px;
+	border-left: 0px solid #444;
+	border-right: 0px solid #444;
+	display: block;
+	background-color: #333;
+}
+
+.bhz1 
+{
+	width: 100px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8px;
+	text-align: left;
+	font-weight: bold;
+	color: #999;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 0px;
+	border-left: 0px solid #444;
+	border-right: 0px solid #444;
+	display: block;
+	background-color: #555;
+}
+
+.ht1 
+{
+	font-size: 10px;
+	font-weight: bold;
+	color: #888;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+
+.hw2 
+{
+	font-size: 11px;
+	font-weight: bold;
+	color: #999;
+	font-family: verdana, arial, helvetica, sans-serif;
+	text-decoration: none;
+
+}
+
+a 
+{
+	text-decoration: none;
+	color: #666;
+}
+.white
+{
+	text-decoration: none;
+	color: #999;
+
+}
+
+a:hover 
+{
+	text-decoration: underline;
+	color: #000;
+}
+.white
+{
+	text-decoration: none;
+	color: #999;
+
+}
+
+
+
+#navTree {
+
+    width: 730px;
+    margin-left: 0px;
+    margin-top: 0px;
+    padding: 10px;
+    
+    clear both;
+    background-color: #222;
+    font-size: 10px;
+    font-weight: normal;
+    color: #999;
+}
+#navTree a 
+{
+	color: #999;
+	text-decoration: none;
+	font-weight:bold;
+
+}
+
+#navTree a:hover 
+{
+	color: #CCCCCC;
+	font-weight:bold;
+
+}
+
+
+
+
+
+

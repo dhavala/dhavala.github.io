@@ -1,0 +1,27 @@
+﻿div#nav {
+
+    width: 100px;
+
+    padding-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    float: left;
+    background-color: #A5A5A5;
+
+    clear both;
+
+
+}
+
+#smenu
+{
+	
+	width: 100px;
+	height: 0%;
+	background: #222;
+	float: left;
+	clear: both;
+        padding-bottom:0px;
+	margin-bottom: 0px;
+}
