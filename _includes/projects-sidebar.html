@@ -1,0 +1,15 @@
+
+
+<div class="panel panel-default">
+<div class="panel-heading"> 
+<a href="{{ site.url }}{{site.data.navigate.Projects.url}}" > Projects </a>
+</div>
+<div class="panel-body">
+<ul>
+{% for project in site.projects %}  	
+  	<li> <a href="{{project.url}}"> {{ project.title }} </a> </li>
+{% endfor %}
+</ul>
+</div>
+</div>
+</div>

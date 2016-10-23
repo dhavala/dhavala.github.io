@@ -1,0 +1,28 @@
+
+
+{% include header.html %}
+
+<div class="container container-left">
+    <div class="row-fluid">
+    	<div class="col-md-3">
+            {% include cv-sidebar.html %}
+        </div>
+
+        <div class="col-md-9">
+        	
+            <div class="panel panel-default">
+			<div class="panel-heading"> 
+			<a href= "{{page.url}}"> {{page.title}} </a>
+			</div>
+			<div class="panel-body">
+			<p> {{ page.content}}</p>
+			</div>
+			</div>
+
+        </div>
+        
+        
+    </div>
+</div>
+{% include disqus-comments.html %}
+{% include footer.html %}

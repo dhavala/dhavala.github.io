@@ -1,0 +1,40 @@
+# Site navigation links
+- title: Blog
+  url: /
+  subdir: [y1, y2]
+  banner: horsesskybw.jpg
+  icon: glyphicon-leaf
+  description: Saddle Point
+  caption: All Things Digital
+
+- title: Projects
+  url: /projects.html
+  subdir: [z1, z2]
+  banner: rocksbw.jpg
+  icon: glyphicon-book
+  description: Work in progress
+  caption: what you see
+
+- title: CV
+  url: /cv.html
+  subdir: [a1, a2, a3]
+  banner: pathwaybw.jpg
+  icon: glyphicon-education
+  description: Top Coder
+  caption: No Bugs
+
+# - title: Software
+#   url: /software.html
+#   subdir: [a1, a2, a3]
+#   banner: pathwaybw.jpg
+#   icon: glyphicon-console
+#   description: Top Coder
+#   caption: No Bugs
+
+# - title: About
+#   url: /about/
+#   subdir: [c1]
+#   banner: stairsbw.jpg
+#   icon: glyphicon-user
+#   description: who am I
+#   caption: find out
