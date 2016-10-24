@@ -1,23 +1,18 @@
 body {
     padding-top: 60px;
-    padding-bottom: 60px;
-    padding-left: 60px;
-    padding-right: 60px;
-    margin-right: auto;
-    margin-left: auto;
     background-color: #d9d9d9;
 }
 
 .copyright {
-    color: #ffffff;
-}
-
-.footer {
+    padding-top: 5px;
     text-align: center;
+    color: #d9d9d9;
+    font-size: 10px;
 }
 
 .footer a {
-    color: #ee4444;
+    color: #d9d9d9;
+    font-size: 10px;
 }
 
 .sidebar h1 {
@@ -55,6 +50,11 @@ body {
     color: #ee4444;
 }
 
+.navbar-fixed-bottom {
+    padding-bottom: 0px;
+    padding-top: 0px;
+    height: 20px
+}
 
 /*.navbar .navbar-nav {
     display: inline-block;
