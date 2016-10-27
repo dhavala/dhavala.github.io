@@ -1,5 +1,5 @@
 ---
-layout: cv-focus
+layout: collection-focus
 title: patents
 
 ---

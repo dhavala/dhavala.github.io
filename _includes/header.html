@@ -179,14 +179,14 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Toggle navigation</span>
+                  <span class="sr-only">Toggle navigate</span>
                   <span class="glyphicon glyphicon-align-justify"></span>
                 </button>
                 <a class="navbar-brand" href="{{ site.baseurl }}/"> <span class="glyphicon glyphicon-home"></span> </a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav list">
-                    {% for link in site.data.navigation %}
+                    {% for link in site.data.navigate %}
                     {% if link.url contains 'http' %}
                         {% assign domain = '' %}
                         {% else %}

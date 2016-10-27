@@ -1,45 +1,14 @@
 ---
-layout: projects
+layout: collection-default
+page_type: projects
 ---
 
 
+<!-- {% assign collection_type=page.collection_type %}
+{% assign local_collection=site.[collection_type] %}
 
 
-<!-- <div class="well">
-
-
-  <h2>Projects</h2>
-  <ul class="nav nav-tabs nav-justified">
-    {% for project in site.projects %}
-    {% if forloop.first %}
-     <li class="active"><a data-toggle="tab" href="#home-button-{{forloop.index}}"> {{ project.title }} </a></li>
-     {% else %}
-     <li ><a data-toggle="tab" href="#home-button-{{forloop.index}}"> {{ project.title }} </a></li>
-     {% endif %}
-    {% endfor %}
-  </ul>
-
-  <div class="tab-content">
-    {% for project in site.projects %}
-
-    <div id="home-button-{{forloop.index}}" class="tab-pane fade in active">
-      <h3>{{ project.title }}</h3>
-      <p>{{ project.content }} </p>
-    </div>
-    {% endfor %}
-  </div>
-
-</div> -->
-
-
-
-<!-- {% for project in site.projects %}
-  <div class="cookie">
-    <h2><a href="{{ project.url }}">{{ project.title }}</a></h2>
-  </div>
-{% endfor %} -->
-
-{% for project in site.projects %}
+{% for project in local_collection %}
 <div class="panel panel-default">
   <div class="panel-heading"> 
   <a href= "{{project.url}}"> {{ project.title }} </a>
@@ -48,4 +17,4 @@ layout: projects
   <p>{{ project.content }} </p>
   </div>
 </div>
-{% endfor %}
+{% endfor %} -->

@@ -1,0 +1,24 @@
+
+
+
+
+{% assign page_type=include.page_type %}  
+{% assign local_url=include.local_url %}
+{% assign local_title=include.local_title %}  
+
+<div class="panel panel-default">
+<div class="panel-heading"> 
+<a href="{{ local_url }}" > {{local_title}} </a>
+</div>
+<div class="panel-body">
+<ul>
+
+
+
+{% for project in site.[include.page_type] %}  	
+  	<li> <a href="{{project.url}}"> {{ project.title }} </a> </li>
+{% endfor %}
+</ul>
+</div>
+</div>
+</div>

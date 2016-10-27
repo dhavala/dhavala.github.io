@@ -1,0 +1,55 @@
+
+
+{% assign page_type=page.page_type %}
+{% assign local_collection=site.[page_type] %}
+
+{% for cols in site.data.navigate %}
+  {%if cols.page_type == page_type %}
+    {% assign local_index=forloop.index0 %}
+  {% endif %}
+{% endfor %}
+{% assign local_title=site.data.navigate[local_index].title %}
+{% assign local_url=site.data.navigate[local_index].url %}
+{% assign local_description=site.data.navigate[local_index].description %}
+
+{% include header.html %}
+
+
+
+<div class="container">
+    <div class="row-fluid">
+    <div class="col-md-3">
+            {% include collection-sidebar.html page_type=page_type local_url=local_url local_title=local_title %}
+        </div>
+        <div class="col-md-9">
+        	
+    <div class="panel panel-default">
+    <div class="panel-heading"> <h3> {{local_title}} </h3></div>
+    <div class="panel-body">
+    <p> {{local_description}}  </p>
+    </div>
+    </div>      
+            
+
+		{% for project in local_collection %}
+			<div class="panel panel-default">
+  			<div class="panel-heading"> 
+  			<a href= "{{project.url}}"> {{ project.title }} </a>
+  			</div>
+  			<div class="panel-body">
+  			<p>{{ project.content }} </p>
+  			</div>
+			</div>
+		{% endfor %}
+
+
+
+            {{ content }}
+
+        </div>
+        
+        
+    </div>
+</div>
+
+{% include footer.html %}

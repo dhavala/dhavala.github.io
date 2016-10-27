@@ -45,3 +45,51 @@ collections:
     output: true
   cv:
     output: true
+
+defaults:
+  -
+    scope:
+      path: ""      # empty string for all files
+      type: posts   # limit to posts
+    values:
+      title: posts
+      is_collection: false # automatically set is_post=true for all any collection
+      page_type: posts # htmls rendered by jekyll
+      excerpt_separator: "<!--more-->" # exceprt for blogs
+
+    scope:
+      path: ""      # empty string for all files
+      type: pages   # limit to collections
+      title: posts
+    values:
+      is_collection: false # automatically set is_collection=true for all any collection
+      page_type: pages # static htmls outside of _posts and are not rendered by jekyll
+      excerpt_separator: "<!--more-->" # exceprt for blogs
+
+    scope:
+      path: ""      # empty string for all files
+      type: drafts   # limit to collections
+    values:
+      title: drafts
+      is_collection: false # automatically set is_collection=true for all any collection
+      page_type: drafts # static htmls outside of _posts that are in staging
+      excerpt_separator: "<!--more-->" # exceprt for blogs
+
+    scope:
+      path: ""      # empty string for all files
+      type: projects   # limit to collections of projects
+    values:
+      title: Projects
+      is_collection: true # automatically set is_collection=true for all any collection
+      page_type: projects # useful in reading "project" specific variables
+      excerpt_separator: "<!--more-->" # exceprt for blogs
+
+    scope:
+      path: ""      # empty string for all files
+      type: cv   # limit to collections of projects
+    values:
+      title: Curriculum Vitae
+      is_collection: true # automatically set is_collection=true for all any collection
+      page_type: cv # useful in reading "cv" specific variables
+      excerpt_separator: <!--more--> # exceprt for blogs
+
