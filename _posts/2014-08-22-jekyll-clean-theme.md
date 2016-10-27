@@ -2,7 +2,7 @@
 layout: post
 title: "Jekyll Clean Theme"
 date: 2014-08-22 16:25:06 -0700
-comments: false
+comments: true
 ---
 
 * Get it from [github](https://github.com/scotte/jekyll-clean).
@@ -14,6 +14,7 @@ Welcome to the sample post for the Jekyll Clean theme.
 A simple and clean Jekyll theme using [bootstrap](http://getbootstrap.com)
 (not to be confused with jekyll-bootstrap) that's easy to modify and very
 modular in component and element reuse.
+
 
 
 It uses Disqus for comments and includes Google Analytics support. Both of

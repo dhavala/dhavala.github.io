@@ -7,13 +7,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="{{ site.baseurl }}/js/jquery.min.js"></script>
     
+    <script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    <!-- twitter tweet buttons -->
+    <script>window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+        t._e.push(f);
+    };
+
+    return t;
+    }(document, "script", "twitter-wjs"));
+    </script>
+
+    <!-- facebook share button -->
+    
+    <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- linkeIn -->
+    <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+
     <!-- Latest compiled and minified JavaScript -->
     <!--
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     -->
     
     <script src="{{ site.baseurl }}/js/bootstrap.min.js"></script>
-    
     
     <!-- Latest compiled and minified CSS -->
     <!--
@@ -23,6 +58,9 @@
 
     <link href="{{ site.baseurl }}/css/theme.css" rel="stylesheet" type="text/css">
     <link href="{{ site.baseurl }}/css/syntax.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="{{ site.baseurl }}/font-awesome/css/font-awesome.min.css">
+
 {% include isso-comments.html %}
 </head>
 

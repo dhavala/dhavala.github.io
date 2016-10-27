@@ -1,7 +1,7 @@
 ---
-layout: collection-default
-title: Ginger Nut 2
-image_path: https://upload.wikimedia.org/wikipedia/commons/f/fa/Freshly_baked_gingerbread_-_Christmas_2004.jpg
+layout: collection-focus
+title: Ginger Nut 2.1
+page_type: projects
 ---
 
 A ginger biscuit, ginger nut or ginger snap is a globally popular biscuit based snack food, flavoured with ginger.

@@ -29,6 +29,16 @@
   is_collection: true
   page_type: cv
 
+- title: About
+  url: /about.html
+  subdir: [a1, a2, a3]
+  banner: pathwaybw.jpg
+  icon: glyphicon-user
+  description: Top Coder
+  caption: No Bugs
+  is_collection: true
+  page_type: about
+
 # - title: Software
 #   url: /software.html
 #   subdir: [a1, a2, a3]

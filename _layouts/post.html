@@ -1,6 +1,9 @@
 {% include header.html %}
 
 
+{% assign wordCount = page.content | number_of_words %}
+{% assign readTime = wordCount | divided_by: 180 | plus: 1 %} 
+
 
 <div class="container">
     <div class="row">
@@ -8,16 +11,20 @@
         <div class="col-md-9">
           <div class="article">
             <div class="well">
-                <h1><a href="{{ site.baseurl}}{{ page.url }}">{{ page.date | date: "%b %-d, %Y" }} - {{ page.title }}</a></h1>
+                <h1><a href="{{ site.baseurl}}{{ page.url }}"> {{ page.title }}</a></h1>
             {% if site.comments and page.comments %}
                 {% if site.disqus != '' %}
-                <p class="author"><a href="#disqus_thread" data-disqus-identifier="{{ page.url | slugify }}">Comments</a></p>
+                <p class="author"> {{ page.date | date: "%b %-d, %Y" }}  | <a href="{{ site.baseurl }}{{ page.url }}/#disqus_thread" data-disqus-identifier="{{ page.url | slugify }}">Comments</a> | {{readTime}} min. read  </p>
                 {% elsif site.isso != '' %}
                 <p class="author"><a href="{{ site.baseurl }}{{ page.url }}{{ site.isso_suffix }}#isso-thread">Comments</a></p>
                 {% endif %}
             {% endif %}
+          
             <div class="post-content">
-            {{ content }}
+          
+            {{ page.content }}
+            <div class="readMore"> {% include share.html %} <br> </div>
+
             </div>
             {% if page.comments %}
                 {% if site.disqus != '' %}
@@ -31,6 +38,8 @@
             {% endif %}
             </div>
           </div>
+
+
           <div class="pagination">
               {% if page.next %}
                 <a class="btn btn-default" href="{{ site.baseurl}}{{ page.next.url }}" class="next">Newer Post</a>

@@ -1,6 +1,8 @@
 
 
 {% assign page_type=page.page_type %}
+
+
 {% assign local_collection=site.[page_type] %}
 
 {% for cols in site.data.navigate %}
@@ -18,7 +20,7 @@
 <div class="container">
     <div class="row-fluid">
     <div class="col-md-3">
-            {% include collection-sidebar.html page_type=page.page_type local_url=local_url local_title=local_title %}
+            {% include collection-sidebar.html page_type=page_type local_url=local_url local_title=local_title %}
         </div>
         <div class="col-md-9">
             

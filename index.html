@@ -79,18 +79,30 @@ layout: default
 
 
 {% for post in paginator.posts %}
+
+
+{% assign wordCount = post.content | number_of_words %}
+{% assign readTime = wordCount | divided_by: 180 | plus: 1 %} 
+
 <div class="article">
     <div class="well">
-        <h1><a href="{{ site.baseurl}}{{ post.url }}">{{ post.date | date: "%b %-d, %Y" }} - {{ post.title }}</a></h1>
+        <h1><a href="{{ site.baseurl}}{{ post.url }}"> {{ post.title }}</a></h1>
         {% if site.comments and post.comments %}
             {% if site.disqus != '' %}
-            <p class="author"><a href="{{ site.baseurl }}{{ post.url }}/#disqus_thread" data-disqus-identifier="{{ post.url | slugify }}">Comments</a></p>
+            <p class="author"> {{ post.date | date: "%b %-d, %Y" }} | <a href="{{ site.baseurl }}{{ post.url }}/#disqus_thread" data-disqus-identifier="{{ post.url | slugify }}">Comments</a> | {{readTime}} min. read  </p>
             {% elsif site.isso != '' %}
-            <p class="author"><a href="{{ site.baseurl }}{{ post.url }}{{ site.isso_suffix }}#isso-thread">Comments</a></p>
+            <p class="author"><a href="{{ site.baseurl }}{{ post.url }}{{ site.isso_suffix }}#isso-thread">Comments</a> | {{ post.date | date: "%b %-d, %Y" }} </p>
             {% endif %}
         {% endif %}
+
         <div class="content">
-            {{ post.content }}
+        {{ post.content | strip_html | truncatewords: 50 }}  
+        {% if wordCount > 50 %}
+             <div class = "readMore"> <br> <a href="{{ site.baseurl}}{{ post.url }}"> read more </a> </div> 
+        {% endif %}
+        
+        <div class="readMore"> {% include share.html %} </div>
+
         </div>
     </div>
 </div>

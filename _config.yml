@@ -55,7 +55,7 @@ defaults:
       title: posts
       is_collection: false # automatically set is_post=true for all any collection
       page_type: posts # htmls rendered by jekyll
-      excerpt_separator: "<!--more-->" # exceprt for blogs
+      excerpt_separator: <!--more--> # exceprt for blogs
 
     scope:
       path: ""      # empty string for all files
@@ -64,7 +64,7 @@ defaults:
     values:
       is_collection: false # automatically set is_collection=true for all any collection
       page_type: pages # static htmls outside of _posts and are not rendered by jekyll
-      excerpt_separator: "<!--more-->" # exceprt for blogs
+      excerpt_separator: <!--more--> # exceprt for blogs
 
     scope:
       path: ""      # empty string for all files
@@ -73,7 +73,7 @@ defaults:
       title: drafts
       is_collection: false # automatically set is_collection=true for all any collection
       page_type: drafts # static htmls outside of _posts that are in staging
-      excerpt_separator: "<!--more-->" # exceprt for blogs
+      excerpt_separator: <!--more--> # exceprt for blogs
 
     scope:
       path: ""      # empty string for all files
@@ -82,7 +82,7 @@ defaults:
       title: Projects
       is_collection: true # automatically set is_collection=true for all any collection
       page_type: projects # useful in reading "project" specific variables
-      excerpt_separator: "<!--more-->" # exceprt for blogs
+      excerpt_separator: <!--more--> # exceprt for blogs
 
     scope:
       path: ""      # empty string for all files

@@ -1,11 +1,13 @@
 ---
-layout: collection-default
+layout: collection-focus
 title: Ginger Nut 3
-image_path: https://upload.wikimedia.org/wikipedia/commons/f/fa/Freshly_baked_gingerbread_-_Christmas_2004.jpg
-type: collection
+page_type: projects
 ---
 
 Père David's deer (Elaphurus davidianus), also known as the milu (Chinese: 麋鹿; pinyin: mílù) or elaphure, is a species of deer that is currently extinct in the wild—all known specimens are found only in captivity. 
+
+<!--more-->
+
 This semiaquatic animal prefers marshland, and is native to the subtropics of China. 
 It grazes mainly on grass and aquatic plants. 
 It is the only extant member of the genus Elaphurus. 

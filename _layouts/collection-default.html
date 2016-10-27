@@ -37,7 +37,14 @@
   			<a href= "{{project.url}}"> {{ project.title }} </a>
   			</div>
   			<div class="panel-body">
-  			<p>{{ project.content }} </p>
+  			<p>{{ project.content | strip_html | truncatewords: 50 }} </p>
+
+        {% assign wordCount = project.content | number_of_words %}
+        {% assign readTime = wordCount | divided_by: 180 | plus: 1 %} 
+        {% if wordCount > 50 %}
+             <div class = "readMore"> <br> <a href="{{ project.url}}"> read more </a> </div> 
+        {% endif %}
+        <div class = "readTime"> {{readTime}} minute read </div> 
   			</div>
 			</div>
 		{% endfor %}
