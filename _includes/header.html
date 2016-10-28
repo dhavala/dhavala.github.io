@@ -228,7 +228,7 @@
                     {% if link.url contains 'http' %}
                         {% assign domain = '' %}
                         {% else %}
-                        {% assign domain = site.url %}
+                        {% assign domain = site.baseurl %}
                     {% endif %}
                     <li class="item "> <a class="link" href="{{ domain }}{{ link.url }}" {% if link.url contains 'http' %}target="_blank"{% endif %}>
                     <span class="glyphicon {{link.icon}}">  </span> 
