@@ -1,7 +1,7 @@
 
 
 
-{% assign pageURL = include.page_URL %}
+{% assign pageURL = site.rooturl | append: include.page_URL %}
 {% assign pagepageTitle = include.page_Title %}
 {% assign pagepageExcerpt = include.page_Excerpt %}
 
