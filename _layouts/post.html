@@ -4,7 +4,7 @@
 {% assign wordCount = page.content | number_of_words %}
 {% assign readTime = wordCount | divided_by: 180 | plus: 1 %}
 
-{% assign pageURL = site.baseurl | append: page.url  %} 
+{% assign page2URL = site.baseurl | append: page.url  %} 
 {% assign pageTitle = page.title  %}
 {% assign pageExcerpt = page.content | strip_html | truncatewords: 50  %}
 
@@ -27,7 +27,7 @@
             <div class="post-content">
           
             {{ page.content }}
-            <div class="shareMore"> {% include share.html pageURL=pageURL pageTitle=pageTitle pageExcerpt=pageExcerpt  %} <br> </div>
+            <div class="shareMore"> {% include share.html page_URL = page2URL page_Title = pageTitle page_Excerpt = pageExcerpt  %} </div>
 
             </div>
             {% if page.comments %}
