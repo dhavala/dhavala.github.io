@@ -83,6 +83,10 @@ layout: default
 
 {% assign wordCount = post.content | number_of_words %}
 {% assign readTime = wordCount | divided_by: 180 | plus: 1 %} 
+{% assign pageURL = site.baseurl | append: post.url  %} 
+{% assign pageTitle = post.title  %}
+{% assign pageExcerpt = post.content | strip_html | truncatewords: 50  %}
+
 
 <div class="article">
     <div class="well">
@@ -98,10 +102,10 @@ layout: default
         <div class="content">
         {{ post.content | strip_html | truncatewords: 50 }}  
         {% if wordCount > 50 %}
-             <div class = "readMore"> <br> <a href="{{ site.baseurl}}{{ post.url }}"> read more </a> </div> 
+           <a href="{{ pageURL }}" class="fa fa-chevron-circle-right readMore"> read more </a>
         {% endif %}
         
-        <div class="readMore"> {% include share.html %} </div>
+        <div class="shareMore"> {% include share.html %} </div>
 
         </div>
     </div>

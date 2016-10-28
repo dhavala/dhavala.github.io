@@ -37,15 +37,23 @@
   			<a href= "{{project.url}}"> {{ project.title }} </a>
   			</div>
   			<div class="panel-body">
-  			<p>{{ project.content | strip_html | truncatewords: 50 }} </p>
-
+  			
         {% assign wordCount = project.content | number_of_words %}
         {% assign readTime = wordCount | divided_by: 180 | plus: 1 %} 
+
+        {% assign pageURL = site.baseurl | append: project.url  %} 
+        {% assign pageTitle = project.title  %}
+        {% assign pageExcerpt = project.content | strip_html | truncatewords: 50  %}
+
+        <p>{{ project.content | strip_html | truncatewords: 50 }} 
         {% if wordCount > 50 %}
-             <div class = "readMore"> <br> <a href="{{ project.url}}"> read more </a> </div> 
+              <a href="{{ pageURL }}" class="fa fa-chevron-circle-right readMore"> read more </a>
         {% endif %}
-        <div class = "readTime"> {{readTime}} minute read </div> 
-  			</div>
+        </p>
+        <div class = "readTime"> {{readTime}} min. read </div> 
+  			<div class="readMore"> {% include share.html %} </div>
+        </div>
+
 			</div>
 		{% endfor %}
 

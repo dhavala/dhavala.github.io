@@ -1,12 +1,33 @@
 
 
 
+
+
 <!-- Floating Share Buttons Container -->
 <div class="share-buttons">
-    <!-- Facebook Share Button -->
-    <a class="fbtn share facebook" href="#"><i class="fa fa-facebook"></i> </a> |
-    <!-- Twitter Share Button -->
-    <a class="fbtn share twitter" href="#"><i class="fa fa-twitter"></i> </a> |
-    <!-- LinkedIn Share Button -->
-    <a class="fbtn share linkedin" href="#"><i class="fa fa-linkedin"></i> </a>
+    
+    <a lass="fb-share-button" href="https://facebook.com/sharer.php?u={{ pageURL }}&src=sdkpreparse" rel="nofollow" target="_blank" title="{{pageTitile}}"> <i class="fa fa-facebook"></i> </a>
+    |
+	<a lass="linkedin-share-button" href="https://www.linkedin.com/shareArticle?mini=true&url={{pageURL}}&title={{pageTitile}}&summary={{pageExcerpt}}&source=LinkedIn" target="_blank" > <i class="fa fa-linkedin"></i> </a>
+	|
+	<a href="https://twitter.com/intent/tweet?text={{pageTitle}}&url={{pageURL}}" target="_blank" > <i class="fa fa-twitter"></i> </a>
 </div>
+
+
+
+
+<!-- <div class="share-page">
+    Share this on &rarr;
+    <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ page.url }}&via={{ site.twitter_username }}&related={{ site.twitter_username }}" rel="nofollow" target="_blank" title="Share on Twitter">Twitter</a>
+    <a href="https://facebook.com/sharer.php?u={{ site.url }}{{ page.url }}&src=sdkpreparse" rel="nofollow" target="_blank" title="Share on Facebook"> <i class="fa fa-facebook"></i> </a>
+    <a href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}" rel="nofollow" target="_blank" title="Share on Google+">Google+</a>
+
+    <a class="twitter-share-button"
+  	href="https://twitter.com/intent/tweet?text=Hello%20world"
+  	data-size="large">
+	Tweet</a>
+
+</div>
+
+
+<div class="fb-share-button" data-href="http://dhavala.github.io/about.html" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdhavala.github.io%2Fabout.html&amp;src=sdkpreparse">Share</a></div> -->

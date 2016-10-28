@@ -10,8 +10,17 @@
     {% assign local_index=forloop.index0 %}
   {% endif %}
 {% endfor %}
+
 {% assign local_title=site.data.navigate[local_index].title %}
 {% assign local_url=site.data.navigate[local_index].url %}
+
+{% assign wordCount = page.content | number_of_words %}
+{% assign readTime = wordCount | divided_by: 180 | plus: 1 %} 
+
+{% assign pageURL = site.baseurl | append: page.url  %} 
+{% assign pageTitle = page.title  %}
+{% assign pageExcerpt = page.content | strip_html | truncatewords: 50  %}
+
 
 {% include header.html %}
 
@@ -29,7 +38,14 @@
   			<a href= "{{page.url}}"> {{ page.title }} </a>
   			</div>
   			<div class="panel-body">
-  			<p>{{ page.content }} </p>
+  			<p>{{ page.content }} 
+        </p>
+        
+        <div class = "readTime"> {{readTime}} min. read </div> 
+        <div class="readMore"> {% include share.html %} </div>
+        </div> 
+
+        </p>
   			</div>
 			</div>
 		

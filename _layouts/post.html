@@ -2,7 +2,11 @@
 
 
 {% assign wordCount = page.content | number_of_words %}
-{% assign readTime = wordCount | divided_by: 180 | plus: 1 %} 
+{% assign readTime = wordCount | divided_by: 180 | plus: 1 %}
+
+{% assign pageURL = site.baseurl | append: page.url  %} 
+{% assign pageTitle = page.title  %}
+{% assign pageExcerpt = page.content | strip_html | truncatewords: 50  %}
 
 
 <div class="container">

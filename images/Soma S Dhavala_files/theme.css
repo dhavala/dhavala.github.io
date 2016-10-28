@@ -91,18 +91,10 @@ body {
     color: SlateGray;
 }
 .readMore a {
-    text-align: left;
+    text-align: right;
     color: SlateGray;
 }
 
-.shareMore  {
-    text-align: right;
-    color: SlateGray;
-}
-.shareMore a {
-    text-align: right;
-    color: SlateGray;
-}
 .connectWith {
     text-align: center;
     color: SlateGray;
