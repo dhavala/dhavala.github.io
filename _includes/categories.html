@@ -1,0 +1,6 @@
+
+<div class="sidebar-module">
+  {% for cat in site.categories %}
+  <span class="fa fa-folder-open-o" > <a href="{{ site.baseurl }}/categories/#{{ cat[0] }}" title="{{ cat[0] }}" rel="{{ cat[1].size }}" class="fa-sidebar">{{ cat[0] }} ({{ cat[1].size }})</a> </span> <br/>
+  {%  endfor %}
+</div>

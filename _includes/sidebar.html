@@ -16,22 +16,49 @@
 
 <div class="panel panel-default">
 	<div class="panel-heading"> 
-  		<a href= "#"> Recent Posts </a>
+  		<span class= "fa fa-leaf"> <a class="fa-sidebar" href= "#"> Recent Posts </a> </span>
   	</div>
 	<div class="panel-body">
-		<ul>
+		
         {% for post in site.posts limit:5 %}
-          <li><a href="{{ site.baseurl}}{{ post.url }}">{{ post.title }}</a></li>
+          <span class="fa fa-angle-right"><a class="fa-sidebar" href="{{ site.baseurl}}{{ post.url }}">{{ post.title }}</a> </span><br>
         {% endfor %}
-    </ul>
+    
 	</div>
 </div> 
 
 <div class="panel panel-default">
 	<div class="panel-heading"> 
-  		<a href= "#"> Other Blogs </a>
+  		<span class= "fa fa-users"> <a class="fa-sidebar" href= "#"> Other Blogs </a> </span>
   	</div>
 	<div class="panel-body">
 		{% include links-list.html %}
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading"> 
+  		<span class= "fa fa-tags"> <a class="fa-sidebar" href="{{ site.baseurl }}/tags"> Tags </a> </span>
+  	</div>
+	<div class="panel-body">
+		{% include tags.html %}
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading"> 
+  		<span class= "fa fa-folder"> <a class="fa-sidebar" href="{{ site.baseurl }}/categories"> Categories </a> </span>
+  	</div>
+	<div class="panel-body">
+		{% include categories.html %}
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading"> 
+  		<span class= "fa fa-archive"> <a class="fa-sidebar" href="{{ site.baseurl }}/archives"> Archives </a>
+  	</div>
+	<div class="panel-body">
+		{% include archives.html %}
 	</div>
 </div>

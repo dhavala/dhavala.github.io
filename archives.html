@@ -1,0 +1,57 @@
+---
+layout: default
+title: Archive
+permalink: /archives/
+---
+
+
+
+
+
+
+
+
+
+
+{% if site.posts != empty %}
+
+    {% assign year = site.posts.first.date | date: "%Y"  %}
+    {% assign previous_year =  year %}
+    
+    
+     <div class = "panel panel-default" id = "{{ tag[0] }}" >
+     <div class="panel-heading"> 
+        <a href="#{{ year }}" > {{ year }} </a>
+     </div>
+     <div class="panel-body">
+
+    
+
+    {% for post in site.posts %}
+
+        {% assign this_year = post.date | date: "%Y"  %}
+        {% if this_year == previous_year %}
+            
+            <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title | capitalize }}</a><br />
+        
+        {% else %}
+            </div>
+            </div>
+            <div class = "panel panel-default" id = "{{ tag[0] }}" >
+                <div class="panel-heading"> 
+                <a href="#{{ year }}" > {{ this_year }} </a>
+                </div>
+            <div class="panel-body">
+            <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title | capitalize }}</a><br />
+        {% assign previous_year=this_year %}
+        {% endif %}
+
+    {% endfor %}
+    </div>
+    </div>
+
+{% else %}
+
+    <span>No posts</span>
+
+{% endif %}

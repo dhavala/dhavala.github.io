@@ -1,9 +1,11 @@
 ---
 layout: post
-title: "Vivamus porttitor porta tortor"
+title: "test markup"
 date: 2016-05-22 16:25:06 -0700
 comments: true
 excerpt_separator: <!--more-->
+tag: [python, R]
+category: [python2, R2]
 ---
 
 try it out

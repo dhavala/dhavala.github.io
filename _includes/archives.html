@@ -1,0 +1,15 @@
+
+
+<div class="sidebar-module">
+  
+  {% for post in site.posts %}
+  {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+  {% unless year == this_year %}
+  {% assign year = this_year %}
+  {% unless post == site.posts.first %}
+  {% endunless %}
+  <span class="fa fa-calendar" ><a id="{{ this_year }}" href="{{ site.baseurl }}/archives/#{{this_year}}" class="fa-sidebar" > {{ this_year }} </a></span> <br/>
+  {% endunless %}
+  {% endfor %}
+
+</div>
