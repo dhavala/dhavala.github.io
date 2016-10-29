@@ -3,72 +3,34 @@ layout: default
 ---
 
 
-<!-- <div class="well">
 
-  <h2>Dynamic Tabs</h2>
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
-  </ul>
 
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <h3>HOME</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      
+      <!-- <div class="panel panel-default"> -->
+
+      {% for carol in site.data.navigate %}  
+
+      {% if  forloop.index == 1 %}
+        <div class="item active">
+
+      {% else %}
+        <div class="item ">
+      {% endif %}
+      <h3> {{ carol.title }} </h3>  
+       <img src="{{ site.baseurl}}/images/{{ carol.banner }}" class="img-responsive" alt="{{ carol.title }}"> 
+      <!-- <div class="panel-body"> -->
+      <p> {{ carol.caption }}  </p>
+      </div>
+      <!-- </div> -->
+      {% endfor %}
+    <!-- </div> -->
     </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
+
+  
   </div>
-
-
-</div>
-
-
-<div class="panel panel-default">
-  <div class="panel-heading">Site Nav</div>
-  <div class="panel-body">
-  <ul>
-  {% for link in site.data.navigation %}
-   <li> {{ link.title }}
-    {% if link.subdir.size > 2 %}
-    <br>size is more than 2
-    {% endif %}
-    <ul>
-      {% for sub in link.subdir %}
-        <li> {{ sub }}
-        </li>
-
-      {% endfor %}    
-    </ul> 
-   </li>
-  {% endfor %}
-  </ul>
-
-  </div>
-</div>
-
-<div class="panel panel-default">
-  <div class="panel-heading">{{ page.name }}</div>
-  <div class="panel-body">
-  <p>{{ page.url }} </p>
-  </div>
-</div>
- -->
-
-
-
 
 <div class="panel panel-default">
   <div class="panel-heading"> <h3>The Saddle Point </h3></div>
@@ -78,86 +40,4 @@ layout: default
 </div>
 
 
-{% for post in paginator.posts %}
 
-
-{% assign wordCount = post.content | number_of_words %}
-{% assign readTime = wordCount | divided_by: 180 | plus: 1 %} 
-{% assign pageURL = site.baseurl | append: post.url  %} 
-{% assign pageTitle = post.title  %}
-{% assign pageExcerpt = post.content | strip_html | truncatewords: 50  %}
-
-
-<div class="article">
-    <div class="well">
-        <h1><a href="{{ site.baseurl}}{{ post.url }}"> {{ post.title }}</a></h1>
-        {% if site.comments and post.comments %}
-            {% if site.disqus != '' %}
-            <p class="author"> {{ post.date | date: "%b %-d, %Y" }} | <a href="{{ site.baseurl }}{{ post.url }}/#disqus_thread" data-disqus-identifier="{{ post.url | slugify }}">Comments</a> | {{readTime}} min. read  </p>
-            {% elsif site.isso != '' %}
-            <p class="author"><a href="{{ site.baseurl }}{{ post.url }}{{ site.isso_suffix }}#isso-thread">Comments</a> | {{ post.date | date: "%b %-d, %Y" }} </p>
-            {% endif %}
-        {% endif %}
-
-        <div class="content">
-        {{ post.content | strip_html | truncatewords: 50 }}  
-        {% if wordCount > 50 %}
-           <a href="{{ pageURL }}" class="fa fa-chevron-circle-right readMore"> read more </a>
-        {% endif %}
-        
-        <div class="shareMore"> {% include share.html page_URL=pageURL page_Title=pageTitle page_Excerpt=pageExcerpt  %} </div>
-
-        </div>
-    </div>
-</div>
-{% endfor %}
-
-
-
-      
-
-<!-- {% for post in paginator.posts %}
-    <div class="panel panel-default">
-    <div class="panel-heading"> 
-      <h1><a href="{{ site.baseurl}}{{ post.url }}">{{ post.date | date: "%b %-d, %Y" }} - {{ post.title }}</a></h1>
-    </div>
-      <div class="panel-body">
-        {% if site.comments and post.comments %}
-            {% if site.disqus != '' %}
-            <p class="author"><a href="{{ site.baseurl }}{{ post.url }}/#disqus_thread" data-disqus-identifier="{{ post.url | slugify }}">Comments</a></p>
-            {% elsif site.isso != '' %}
-            <p class="author"><a href="{{ site.baseurl }}{{ post.url }}{{ site.isso_suffix }}#isso-thread">Comments</a></p>
-            {% endif %}
-        {% endif %}
-        <div class="content">
-            {{ post.content }}
-        </div>
-      </div>
-    </div>
-{% endfor %} -->
-
-
-
-
-<ul class="pager">
-  {% if paginator.previous_page %}
-      {% if paginator.previous_page == 1 %}
-        <li class="next">  <a  href="{{ site.baseurl}}/index.html" class="previous">Newer  <font size="4em">&rarr;</font></a> </li>
-      {% else %}
-        <li class="next"><a  href="{{ site.baseurl}}/page{{ paginator.previous_page }}" class="previous">Newer  <font size="4em">&rarr;</font></a></li>
-      {% endif %}
-  {% else %}
-
-    <li class="next disabled"> <a  href="#" class="previous">Newer  <font size="3em">&rarr;</font></a> </li>
-      
-  {% endif %}
- <li class="page_number" style="line-height:3.5em">page {{ paginator.page }} of {{ paginator.total_pages }}</li> 
- 
-  {% if paginator.next_page %}
-    <li class="previous "> <a href="{{ site.baseurl}}/page{{ paginator.next_page }}" class="next">  <font size="4em">&larr;</font> Older</a> </li>
-    {% else %}
-    <li class="previous disabled"> <a  href="#" class="next"> <font size="4em">&larr; </font> Older</a> </li>
-  {% endif %}
-</ul>
-
-<br>

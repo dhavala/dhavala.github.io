@@ -1,6 +1,6 @@
 # Site navigation links
 - title: Blog
-  url: /
+  url: /blog/
   subdir: [y1, y2]
   banner: horsesskybw.jpg
   icon: glyphicon-leaf
@@ -12,7 +12,7 @@
 - title: Projects
   url: /projects.html
   subdir: [z1, z2]
-  banner: rocksbw.jpg
+  banner: stairsbw.jpg
   icon: glyphicon-book
   description: Work in progress
   caption: what you see
@@ -32,7 +32,7 @@
 - title: About
   url: /about.html
   subdir: [a1, a2, a3]
-  banner: pathwaybw.jpg
+  banner: templebw.jpg
   icon: glyphicon-user
   description: Top Coder
   caption: No Bugs

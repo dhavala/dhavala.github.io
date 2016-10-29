@@ -1,0 +1,72 @@
+---
+layout: default
+---
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading"> <h3>The Saddle Point </h3></div>
+  <div class="panel-body">
+  <p> A Perspective on All Things Digital  </p>
+  </div>
+</div>
+
+{% for post in paginator.posts %}
+
+
+
+{% assign wordCount = post.content | number_of_words %}
+{% assign readTime = wordCount | divided_by: 180 | plus: 1 %} 
+{% assign pageURL = site.baseurl | append: post.url  %} 
+{% assign pageTitle = post.title  %}
+{% assign pageExcerpt = post.content | strip_html | truncatewords: 50  %}
+
+
+<div class="article">
+    <div class="well">
+        <h1><a href="{{ site.baseurl}}{{ post.url }}"> {{ post.title }}</a></h1>
+        {% if site.comments and post.comments %}
+            {% if site.disqus != '' %}
+            <p class="author"> {{ post.date | date: "%b %-d, %Y" }} | {{readTime}} min. read  </p>
+            {% elsif site.isso != '' %}
+            <p class="author"><a href="{{ site.baseurl }}{{ post.url }}{{ site.isso_suffix }}#isso-thread">Comments</a> | {{ post.date | date: "%b %-d, %Y" }} </p>
+            {% endif %}
+        {% endif %}
+
+        <div class="content">
+        {{ post.content | strip_html | truncatewords: 50 }}  
+        {% if wordCount > 50 %}
+           <a href="{{ pageURL }}" class="fa fa-chevron-circle-right readMore"> read more </a>
+        {% endif %}
+        
+        <div class="shareMore"> {% include share.html page_URL=pageURL page_Title=pageTitle page_Excerpt=pageExcerpt  %} </div>
+
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
+<ul class="pager">
+  {% if paginator.previous_page %}
+      {% if paginator.previous_page == 1 %}
+        <li class="next">  <a  href="{{ site.baseurl}}/blog/index.html" class="previous">Newer  <font size="4em">&rarr;</font></a> </li>
+      {% else %}
+        <li class="next"><a  href="{{ site.baseurl}}/blog/page{{ paginator.previous_page }}" class="previous">Newer  <font size="4em">&rarr;</font></a></li>
+      {% endif %}
+  {% else %}
+
+    <li class="next disabled"> <a  href="#" class="previous">Newer  <font size="3em">&rarr;</font></a> </li>
+      
+  {% endif %}
+ <li class="page_number" style="line-height:3.5em">page {{ paginator.page }} of {{ paginator.total_pages }}</li> 
+ 
+  {% if paginator.next_page %}
+    <li class="previous "> <a href="{{ site.baseurl}}/blog/page{{ paginator.next_page }}" class="next">  <font size="4em">&larr;</font> Older</a> </li>
+    {% else %}
+    <li class="previous disabled"> <a  href="#" class="next"> <font size="4em">&larr; </font> Older</a> </li>
+  {% endif %}
+</ul>
+
+<br>
