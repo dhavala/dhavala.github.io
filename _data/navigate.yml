@@ -8,6 +8,7 @@
   caption: All Things Digital
   is_collection: false
   page_type: blog
+  display_banner: true
 
 - title: Projects
   url: /projects.html
@@ -18,6 +19,7 @@
   caption: what you see
   is_collection: true
   page_type: projects
+  display_banner: true
 
 - title: CV
   url: /cv.html
@@ -28,6 +30,7 @@
   caption: No Bugs
   is_collection: true
   page_type: cv
+  display_banner: true
 
 - title: About
   url: /about.html
@@ -38,6 +41,7 @@
   caption: No Bugs
   is_collection: true
   page_type: about
+  display_banner: false
 
 # - title: Software
 #   url: /software.html

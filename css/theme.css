@@ -152,9 +152,10 @@ background: #9ba59d;
     color: #4e4e4e;
 }
 
-.carousel-inner .panel-default{
+.carousel-inner > .panel-heading{
     border: 2px solid #909090;
 }
+
 
 .glyphicon{
 	color: grey;

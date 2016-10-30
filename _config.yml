@@ -1,7 +1,7 @@
 # Jekyll configuration
 
-name: Soma S Dhavala
-description: A perspective on all things Data-Science
+name: The Saddle Point
+description: A perspective on all things Data
 
 # url is currently only used only for the RSS feed in feed.xml
 url: ''
@@ -40,7 +40,13 @@ markdown: kramdown
 gems: ['jekyll-paginate', jekyll-mentions, jekyll-feed, jekyll-sitemap, jekyll-gist]
 jekyll-mentions:
     base_url: https://github.com
-carousal: false
+
+# set this true if want to include banner
+banner_display: true
+# true for carousal, simple panel-layout if false 
+banner_carousal: false
+
+
 exclude: ['README.md', 'LICENSE', '_site']
 
 collections:
