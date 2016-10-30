@@ -18,8 +18,10 @@
 
 <div class="container">
     <div class="row-fluid">
-
+    
+    {% if site.carousal %}  
     {% include banner.html local_index=local_index %}   
+    {% endif %}
 
     <div class="col-md-3">
             {% include collection-sidebar.html page_type=page_type local_url=local_url local_title=local_title %}

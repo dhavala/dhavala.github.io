@@ -7,7 +7,10 @@
 
 <div class="container">
     <div class="row">
-    	{% include banner.html local_index=0 %} 
+
+    	{% if site.carousal %}
+    		{% include banner.html local_index=0 %}
+    	{% endif %}	
 	  <div class="col-md-9">
         	
             {{ content }}

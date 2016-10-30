@@ -40,7 +40,7 @@ markdown: kramdown
 gems: ['jekyll-paginate', jekyll-mentions, jekyll-feed, jekyll-sitemap, jekyll-gist]
 jekyll-mentions:
     base_url: https://github.com
-
+carousal: false
 exclude: ['README.md', 'LICENSE', '_site']
 
 collections:
