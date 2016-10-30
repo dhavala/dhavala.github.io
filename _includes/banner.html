@@ -1,0 +1,66 @@
+
+
+
+<div class="col-md-12">
+  {% if include.local_index >= 0 %}
+  <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="1000" data-slide-to="2">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+      <!-- <div class="panel panel-default"> -->
+
+      {% for carol in site.data.navigate %}  
+
+      {% if  forloop.index0 == include.local_index %}
+      <div class="item active">
+        <div class="panel panel-default">
+          <div class="panel-heading"> <h4> {{carol.title}} </h4></div>    
+          <img src="{{ site.baseurl}}/images/{{ carol.banner }}" class="img-responsive" alt="{{ carol.title }}">
+          <div class="panel-body">
+            <p> {{ carol.description }}  </p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+
+
+  {% else %}
+  <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="3000" data-pause="null" >
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <!-- <div class="panel panel-default"> -->
+      {% for carol in site.data.navigate %}  
+
+
+      {% if  forloop.index == 1 %}
+        <div class="item active">
+      {% else %}
+        <div class="item ">
+      {% endif %}
+      
+        <a href="{{ site.baseurl}}{{carol.url}}" >
+          <div class="panel panel-default">
+          <div class="panel-heading"> <h4> {{carol.title}} </h4></div>    
+          <img src="{{ site.baseurl}}/images/{{ carol.banner }}" class="img-responsive" alt="{{ carol.title }}">
+          <div class="panel-body">
+            <p> {{ carol.description }}  </p>
+          </div>
+        </div>
+        </a>
+      </div>
+      <!-- </div> -->
+      {% endfor %}
+      <!-- </div> -->
+    </div>
+
+
+    </div>
+    {% endif %}
+  </div>
+
+
+

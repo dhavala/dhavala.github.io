@@ -5,32 +5,6 @@ layout: default
 
 
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      
-      <!-- <div class="panel panel-default"> -->
-
-      {% for carol in site.data.navigate %}  
-
-      {% if  forloop.index == 1 %}
-        <div class="item active">
-
-      {% else %}
-        <div class="item ">
-      {% endif %}
-      <h3> {{ carol.title }} </h3>  
-       <img src="{{ site.baseurl}}/images/{{ carol.banner }}" class="img-responsive" alt="{{ carol.title }}"> 
-      <!-- <div class="panel-body"> -->
-      <p> {{ carol.caption }}  </p>
-      </div>
-      <!-- </div> -->
-      {% endfor %}
-    <!-- </div> -->
-    </div>
-
-  
-  </div>
 
 <div class="panel panel-default">
   <div class="panel-heading"> <h3>The Saddle Point </h3></div>

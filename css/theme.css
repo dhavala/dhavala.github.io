@@ -1,179 +1,248 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
 
 body {
-    padding-top: 60px;
-    background-color: #d9d9d9;
-    font-family: 'Roboto Slab', serif;
+	padding-top: 60px;
+	background-color: #d9d9d9;
+	font-family: 'Roboto Slab', serif;
 }
 
 .copyright {
-    padding-top: 5px;
-    text-align: center;
-    color: #d9d9d9;
-    font-size: 10px;
+	padding-top: 5px;
+	text-align: center;
+	color: #d9d9d9;
+	font-size: 10px;
 }
 
 .footer a {
-    color: #d9d9d9;
-    font-size: 10px;
+	color: #d9d9d9;
+	font-size: 10px;
 }
 
 .sidebar h1 {
-    color: #ee4444;
-    font-size: 1.3em;
+	color: #ee4444;
+	font-size: 1.3em;
 }
 
 .sidebar a {
-    color: #428bca;
+	color: #428bca;
 }
 
 .sidebar li {
-    margin-top: .7em;
-    line-height: 1em;
+	margin-top: .7em;
+	line-height: 1em;
 }
 
 .sidebar a:hover {
-    color: #3071a9;
+	color: #3071a9;
 }
 
 .container-left {
-    margin: 0;
+	margin: 0;
 }
 
 .well h1 {
-    color: #ee4444;
-    font-size: 1.3em;
+	color: #ee4444;
+	font-size: 1.3em;
 }
 
 .author {
-    color: SlateGray;
-    font.size: 10px;
+	color: SlateGray;
+	font.size: 10px;
 
 }
 
 .author a {
-    color: SlateGray;
-    font.size: 10px;
+	color: SlateGray;
+	font.size: 10px;
 
 }
 
 
 .navbar-fixed-bottom {
-    padding-bottom: 0px;
-    padding-top: 0px;
-    height: 20px
+	padding-bottom: 0px;
+	padding-top: 0px;
+	height: 20px
 }
 
 /*.navbar .navbar-nav {
-    display: inline-block;
-    float: none;
+	display: inline-block;
+	float: none;
 }
 
 .navbar .navbar-collapse {
-    text-align: center;
-}*/
+	text-align: center;
+	}*/
+
+/*.carousel {
+	position: relative;
+	background-color: #222;
+	margin-top: -20px;
+	}
+	*/
 
 
-.carousel-inner > .item > img, .carousel-inner > .item > a > img, .carousel-inner > .item > h3 {
-      width: 100%;
-      /*height: 95%;*/
-      margin: auto;
-      padding-top: 10px;
-  }
+.carousel-fade .carousel-inner .item {
+	opacity: 0;
+	-webkit-transition-property: opacity;
+	-moz-transition-property: opacity;
+	-o-transition-property: opacity;
+	transition-property: opacity;
+}
+.carousel-fade .carousel-inner .active {
+	opacity: 1;
+}
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+	left: 0;
+	opacity: 0;
+	z-index: 1;
+}
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+	opacity: 1;
+}
+.carousel-fade .carousel-control {
+	z-index: 2;
+}
+
+.carousel-inner > .item > img, .carousel-inner > .item > a > img, .carousel-inner > .item > h3, .carousel-inner > .item > a > h3 {
+	width: 100%;
+	/*height: 95%;*/
+	margin: auto;
+	padding-top: 10px;
+	color: #000;
+}
+
+.carousel-inner > .item > .panel-default > img.img-responsive, .carousel-inner > .item > a > .panel-default > img.img-responsive {  
+    width: 100%;
+}
+
+.carousel-inner > .item > a:hover {
+	text-decoration: none;
+}
+
+.carousel-inner > .item {
+	border: 1px 1px 0px 1px solid black;
+}
 
 /*.carousel-inner > .item{
-    background: #9ba59d;
+background: #9ba59d;
 }*/
 
-.carousel-inner > .item > p {
-  /*width: 70%;*/
-  margin: auto;
-  float: right;
-  margin-right: 0%;
-  padding-top: 5px;
-  margin-bottom: 15px;
+.carousel-inner > .item > p, .carousel-inner > .item > a > p {
+	/*width: 70%;*/
+	margin: auto;
+	float: right;
+	margin-right: 0%;
+	padding-top: 5px;
+	margin-bottom: 15px;
+	color: #000;
+}
+
+.carousel-inner > .item > .panel-default > .panel-heading, .carousel-inner > .item > a > .panel-default > .panel-heading {
+    color: #000;
+    background-color: #cfcfcf;
+    border-color: #cfcfcf;
+    padding: 5px 10px 0px 10px;
+}
+
+
+.carousel-inner > .item > .panel-default > .panel-body, .carousel-inner > .item > a > .panel-default > .panel-body {
+    padding: 10px 10px 0px 10px;
+    color: #4e4e4e;
+}
+
+.carousel-inner .panel-default{
+    border: 2px solid #909090;
 }
 
 .glyphicon{
-    color: grey;
+	color: grey;
 } 
 
 .readTime {
-    text-align: right;
-    font-size: 0.9em;
-    color: grey;
+	text-align: right;
+	font-size: 0.9em;
+	color: grey;
 } 
 .readMore  {
-    text-align: right;
-    color: SlateGray;
+	text-align: right;
+	color: SlateGray;
 }
 .readMore a {
-    text-align: left;
-    color: SlateGray;
+	text-align: left;
+	color: SlateGray;
 }
 
 .shareMore  {
-    text-align: right;
-    color: SlateGray;
+	text-align: right;
+	color: SlateGray;
 }
 .shareMore a {
-    text-align: right;
-    color: SlateGray;
+	text-align: right;
+	color: SlateGray;
 }
 .connectWith {
-    text-align: center;
-    color: SlateGray;
-    font-size: 2
+	text-align: center;
+	color: SlateGray;
+	font-size: 2
 }
 /* share icons */
 .facebook {
-    background-color: ;
-    color: grey;
-    font-size: 1em;
+	background-color: ;
+	color: grey;
+	font-size: 1em;
 }
 
 .twitter {
-    background-color: ;
-    color: grey;
-    font-size: 1em;
+	background-color: ;
+	color: grey;
+	font-size: 1em;
 }
 
 
 .linkedin {
-    background-color: ;
-    color: grey;
-    font-size: 1em;
+	background-color: ;
+	color: grey;
+	font-size: 1em;
 }
 
 .socialfloat {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 200px;
-    z-index: 9999;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 200px;
+	z-index: 9999;
 }
 .socialfloat .fbtn {
-    width: 50px;
-    height: 50px;
-    display: block;
-    color: #fff;
-    text-align: center;
+	width: 50px;
+	height: 50px;
+	display: block;
+	color: #fff;
+	text-align: center;
 }
 .socialfloat .fbtn i {
-    font-size: 30px;
-    line-height: 50px;
+	font-size: 30px;
+	line-height: 50px;
 }
 
 a.fa-sidebar {
-    padding-left: 5px;
-    font-family: 'Roboto Slab', serif;
-    font-size: 0.9em;
+	padding-left: 5px;
+	font-family: 'Roboto Slab', serif;
+	font-size: 0.9em;
 }
 .fa {
-    color: gray;
+	color: gray;
 }
 
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
-    margin-left: 0px !important;
-    color: white;
+	margin-left: 15px !important;
+	color: white;
+}
+div#bs-example-navbar-collapse-1 {
+    float: right;
+}
+
+.panel-default, .well, .jumbotron {
+    border: 1.5px solid #b0b0b0;
 }

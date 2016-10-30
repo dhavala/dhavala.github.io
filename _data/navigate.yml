@@ -2,7 +2,7 @@
 - title: Blog
   url: /blog/
   subdir: [y1, y2]
-  banner: horsesskybw.jpg
+  banner: horsesskybw.png
   icon: glyphicon-leaf
   description: Saddle Point
   caption: All Things Digital
@@ -12,7 +12,7 @@
 - title: Projects
   url: /projects.html
   subdir: [z1, z2]
-  banner: stairsbw.jpg
+  banner: researchbw.png
   icon: glyphicon-book
   description: Work in progress
   caption: what you see
@@ -22,7 +22,7 @@
 - title: CV
   url: /cv.html
   subdir: [a1, a2, a3]
-  banner: pathwaybw.jpg
+  banner: rocksbw.png
   icon: glyphicon-education
   description: Top Coder
   caption: No Bugs
@@ -32,7 +32,7 @@
 - title: About
   url: /about.html
   subdir: [a1, a2, a3]
-  banner: templebw.jpg
+  banner: homebw.png
   icon: glyphicon-user
   description: Top Coder
   caption: No Bugs
