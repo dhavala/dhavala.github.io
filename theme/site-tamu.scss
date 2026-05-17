@@ -207,6 +207,23 @@ nav#quarto-sidebar .sidebar-item a.active {
   font-size: 0.7rem;
 }
 
+// Code blocks — Quarto's highlight-style: monokai handles colors;
+// we just give the dark <pre> some breathing room.
+pre, code { font-size: 0.85rem; }
+pre.sourceCode,
+div.sourceCode {
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+}
+// Inline code keeps a light pill so it doesn't fight the prose.
+:not(pre) > code:not(.sourceCode) {
+  background: #eee;
+  color: #c7254e;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
 // Responsive tweaks
 @media (max-width: 600px) {
   main.content > * { padding: 0 1rem; }
