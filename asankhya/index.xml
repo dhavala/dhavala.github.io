@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Asankhya — Soma S Dhavala</title>
+<link>https://dhavala.github.io/asankhya/</link>
+<atom:link href="https://dhavala.github.io/asankhya/index.xml" rel="self" type="application/rss+xml"/>
+<description>Personal essays, notes, and slow thinking.</description>
+<generator>quarto-1.9.37</generator>
+<lastBuildDate>Mon, 18 May 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Hello</title>
+  <dc:creator>Soma S Dhavala</dc:creator>
+  <link>https://dhavala.github.io/asankhya/hello/</link>
+  <description><![CDATA[ 
+<div class="section-banner">
+  <img src="https://dhavala.github.io/images/banners/rocksbw.jpg" alt="Asankhya banner">
+</div>
+
+
+
+
+<p>This is <strong>Asankhya</strong> — a quieter space for personal writing. Distinct from <a href="../../saddlepoint/">SaddlePoint</a>, which is for academic and technical work.</p>
+<p>Expect essays, notes from books, observations, and slower thinking.</p>
+<p><em>(More to come.)</em></p>
+
+
+
+ ]]></description>
+  <category>meta</category>
+  <guid>https://dhavala.github.io/asankhya/hello/</guid>
+  <pubDate>Mon, 18 May 2026 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

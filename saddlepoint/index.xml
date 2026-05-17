@@ -5,16 +5,16 @@
       xmlns:dc="http://purl.org/dc/elements/1.1/" 
       version="2.0">
 <channel>
-<title>Soma S Dhavala — Blog</title>
-<link>https://dhavala.github.io/posts/</link>
-<atom:link href="https://dhavala.github.io/posts/index.xml" rel="self" type="application/rss+xml"/>
-<description>Posts on statistics, machine learning, and adjacent topics.</description>
+<title>SaddlePoint — Soma S Dhavala</title>
+<link>https://dhavala.github.io/saddlepoint/</link>
+<atom:link href="https://dhavala.github.io/saddlepoint/index.xml" rel="self" type="application/rss+xml"/>
+<description>Academic and technical writing on statistics, ML, and adjacent topics.</description>
 <generator>quarto-1.9.37</generator>
 <lastBuildDate>Sun, 17 May 2026 00:00:00 GMT</lastBuildDate>
 <item>
   <title>PageRank and KNN: an equivalence</title>
   <dc:creator>Soma S Dhavala</dc:creator>
-  <link>https://dhavala.github.io/posts/pagerank-knn/</link>
+  <link>https://dhavala.github.io/saddlepoint/pagerank-knn/</link>
   <description><![CDATA[ 
 <div class="section-banner">
   <img src="https://dhavala.github.io/images/banners/horsesskybw.jpg" alt="Blog banner">
@@ -501,7 +501,7 @@ font-style: inherit;">'-'</span>)</span>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="https://dhavala.github.io/posts/pagerank-knn/index_files/figure-html/cell-3-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="https://dhavala.github.io/saddlepoint/pagerank-knn/index_files/figure-html/cell-3-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -781,13 +781,13 @@ font-style: inherit;">print</span>(matrix)</span></code></pre></div></div>
   <category>graphs</category>
   <category>ml</category>
   <category>notebook</category>
-  <guid>https://dhavala.github.io/posts/pagerank-knn/</guid>
+  <guid>https://dhavala.github.io/saddlepoint/pagerank-knn/</guid>
   <pubDate>Sun, 17 May 2026 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Welcome to the blog</title>
   <dc:creator>Soma S Dhavala</dc:creator>
-  <link>https://dhavala.github.io/posts/welcome/</link>
+  <link>https://dhavala.github.io/saddlepoint/welcome/</link>
   <description><![CDATA[ 
 <div class="section-banner">
   <img src="https://dhavala.github.io/images/banners/horsesskybw.jpg" alt="Blog banner">
@@ -804,7 +804,7 @@ font-style: inherit;">print</span>(matrix)</span></code></pre></div></div>
  ]]></description>
   <category>meta</category>
   <category>intro</category>
-  <guid>https://dhavala.github.io/posts/welcome/</guid>
+  <guid>https://dhavala.github.io/saddlepoint/welcome/</guid>
   <pubDate>Sun, 17 May 2026 00:00:00 GMT</pubDate>
 </item>
 </channel>
