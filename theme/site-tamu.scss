@@ -30,6 +30,10 @@ body {
   background: $body-bg url("images/banners/bggrad2.jpg") repeat-x top center;
 }
 
+// Hide the redundant brand text in the navbar — "Home" already takes its
+// place. Keep the site title in <title>/OG/SEO via _quarto.yml.
+.navbar-title { display: none; }
+
 // Skip-to-content link (injected by a tiny script in _quarto.yml so it
 // becomes the first focusable element on the page). Hidden until focused.
 .skip-link {
