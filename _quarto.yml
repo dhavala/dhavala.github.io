@@ -9,8 +9,12 @@ website:
   site-url: https://dhavala.github.io  # TODO: confirm or replace
   favicon: images/favicon.png
   search: false                        # off until there is real content
-  twitter-card: true
-  open-graph: true
+  image: images/og-image.png           # default share preview (1200x630)
+  twitter-card:
+    image: images/og-image.png
+    card-style: summary_large_image
+  open-graph:
+    image: images/og-image.png
 
   navbar:
     background: "#222"

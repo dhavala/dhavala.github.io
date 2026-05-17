@@ -284,9 +284,6 @@ nav#quarto-sidebar {
   background: $content-bg;
   column-gap: 0;
 }
-@media (min-width: 992px) {
-  main.content > * { padding-left: 1rem; }
-}
 .sidebar .sidebar-item-text {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
