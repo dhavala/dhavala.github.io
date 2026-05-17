@@ -9,8 +9,8 @@
 <link>https://dhavala.github.io/posts/</link>
 <atom:link href="https://dhavala.github.io/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Posts on statistics, machine learning, and adjacent topics.</description>
-<generator>quarto-1.5.55</generator>
-<lastBuildDate>Sat, 16 May 2026 18:30:00 GMT</lastBuildDate>
+<generator>quarto-1.9.37</generator>
+<lastBuildDate>Sun, 17 May 2026 00:00:00 GMT</lastBuildDate>
 <item>
   <title>PageRank and KNN: an equivalence</title>
   <dc:creator>Soma S Dhavala</dc:creator>
@@ -24,7 +24,7 @@
 
 
 <div id="cell-1" class="cell" data-execution_count="59">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># https://github.com/rfsantacruz/cvx-nb/blob/master/DoublyStochasticApproximation.ipynb</span></span>
 <span id="cb1-2"></span>
@@ -323,7 +323,7 @@ background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'n1, n2'</span>,n1,n2)</span>
-<span id="cb1-66"></span></code></pre></div>
+<span id="cb1-66"></span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Random input:
 [[0.55477541 0.00917532]
@@ -341,7 +341,7 @@ n1, n2 [2 0 1] [2 0 1]</code></pre>
 </div>
 </div>
 <div id="cell-2" class="cell" data-execution_count="68">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">N <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">N <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -493,7 +493,7 @@ font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'-'</span>)</span>
 <span id="cb3-32">plt.plot(pr)</span>
-<span id="cb3-33">    </span></code></pre></div>
+<span id="cb3-33">    </span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>top k is 2
 (10,)</code></pre>
@@ -507,7 +507,7 @@ font-style: inherit;">'-'</span>)</span>
 </div>
 </div>
 <div id="cell-3" class="cell" data-execution_count="71">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">pr</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">pr</span>
 <span id="cb5-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -558,7 +558,7 @@ background-color: null;
 font-style: inherit;">/</span> n</span>
 <span id="cb5-12"><span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">print</span>(new_matrix)</span></code></pre></div>
+font-style: inherit;">print</span>(new_matrix)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[0.02445177 0.21162709 0.06239765 0.09071541 0.04288914 0.17370781
   0.10539216 0.01049049 0.11327745 0.14607955]
@@ -593,7 +593,7 @@ font-style: inherit;">print</span>(new_matrix)</span></code></pre></div>
 </div>
 </div>
 <div id="cell-4" class="cell" data-execution_count="73">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
 background-color: null;
@@ -690,7 +690,7 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>))</span>
-<span id="cb7-22"></span></code></pre></div>
+<span id="cb7-22"></span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[0.13497564 0.30151879 0.18229813 0.26785289 0.13428494]
  [0.2927742  0.22823658 0.14675887 0.09669389 0.21909977]
@@ -702,7 +702,7 @@ font-style: inherit;">1</span>))</span>
 </div>
 </div>
 <div id="cell-5" class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
 background-color: null;
@@ -772,7 +772,7 @@ font-style: inherit;">=</span> generate_random_doubly_stochastic_matrix(n)</span
 <span id="cb9-20"></span>
 <span id="cb9-21"><span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">print</span>(matrix)</span></code></pre></div>
+font-style: inherit;">print</span>(matrix)</span></code></pre></div></div>
 </div>
 
 
@@ -782,7 +782,7 @@ font-style: inherit;">print</span>(matrix)</span></code></pre></div>
   <category>ml</category>
   <category>notebook</category>
   <guid>https://dhavala.github.io/posts/pagerank-knn/</guid>
-  <pubDate>Sat, 16 May 2026 18:30:00 GMT</pubDate>
+  <pubDate>Sun, 17 May 2026 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Welcome to the blog</title>
@@ -805,7 +805,7 @@ font-style: inherit;">print</span>(matrix)</span></code></pre></div>
   <category>meta</category>
   <category>intro</category>
   <guid>https://dhavala.github.io/posts/welcome/</guid>
-  <pubDate>Sat, 16 May 2026 18:30:00 GMT</pubDate>
+  <pubDate>Sun, 17 May 2026 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
