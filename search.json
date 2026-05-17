@@ -4,7 +4,7 @@
     "href": "consulting/index.html",
     "title": "Consulting",
     "section": "",
-    "text": "Engagements, services, and how to work with me.\n(Content to be added.)",
+    "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "Consulting"
@@ -48,7 +48,7 @@
     "href": "teaching/notes.html",
     "title": "Notes",
     "section": "",
-    "text": "Lecture notes and supplementary readings.\n(Content to be added.)",
+    "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "Teaching",
@@ -60,7 +60,7 @@
     "href": "teaching/homeworks.html",
     "title": "Homeworks",
     "section": "",
-    "text": "Problem sets and solutions.\n(Content to be added.)",
+    "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "Teaching",
@@ -72,7 +72,7 @@
     "href": "research/reports.html",
     "title": "Reports",
     "section": "",
-    "text": "Technical reports and white papers.\n(Content to be added.)",
+    "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "Research",
@@ -97,7 +97,7 @@
     "href": "research/projects/index.html",
     "title": "Projects",
     "section": "",
-    "text": "A list of research projects, prototypes, and collaborations. Use the sidebar at left to navigate to individual projects.\n(Content to be added.)",
+    "text": "Use the sidebar at left to browse individual projects.",
     "crumbs": [
       "Home",
       "Research",
@@ -109,7 +109,7 @@
     "href": "research/publications.html",
     "title": "Publications",
     "section": "",
-    "text": "Peer-reviewed papers and preprints.\n(Content to be added.)",
+    "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "Research",
@@ -121,7 +121,7 @@
     "href": "about/contact.html",
     "title": "Contact",
     "section": "",
-    "text": "How to reach me.\n(Content to be added.)",
+    "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "About",
@@ -133,7 +133,7 @@
     "href": "about/bio.html",
     "title": "Bio",
     "section": "",
-    "text": "Personal background and biography.\n(Content to be added.)",
+    "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "About",
@@ -163,7 +163,7 @@
     "href": "about/index.html",
     "title": "About",
     "section": "",
-    "text": "A few words about who I am, where I’m from, and how to get in touch. Use the sidebar at left to browse the sub-pages.",
+    "text": "Use the sidebar at left to browse the sub-pages.",
     "crumbs": [
       "Home",
       "About"
@@ -174,7 +174,7 @@
     "href": "about/places.html",
     "title": "Places",
     "section": "",
-    "text": "Vizianagaram, Devarapalli, and other places that shaped me.\n(Content to be added.)",
+    "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "About",
@@ -186,7 +186,7 @@
     "href": "research/patents.html",
     "title": "Patents",
     "section": "",
-    "text": "Granted and pending patents.\n(Content to be added.)",
+    "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "Research",
@@ -211,7 +211,7 @@
     "href": "research/index.html",
     "title": "Research",
     "section": "",
-    "text": "Bayesian methods, semi-parametric modeling, and applied machine learning. Use the sidebar at left to browse publications, patents, reports, and code.",
+    "text": "Use the sidebar at left to browse publications, patents, reports, code, and projects.",
     "crumbs": [
       "Home",
       "Research"
@@ -222,7 +222,7 @@
     "href": "research/code.html",
     "title": "Code",
     "section": "",
-    "text": "Open-source software and project repositories.\n(Content to be added.)",
+    "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "Research",
@@ -234,7 +234,7 @@
     "href": "teaching/index.html",
     "title": "Teaching",
     "section": "",
-    "text": "Course materials, lecture notes, and assignments. Use the sidebar at left to browse notes, homeworks, and exams.",
+    "text": "Use the sidebar at left to browse notes, homeworks, and exams.",
     "crumbs": [
       "Home",
       "Teaching"
@@ -245,7 +245,7 @@
     "href": "teaching/exams.html",
     "title": "Exams",
     "section": "",
-    "text": "Sample exams and quizzes.\n(Content to be added.)",
+    "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "Teaching",
@@ -257,7 +257,7 @@
     "href": "oss/index.html",
     "title": "Open Source",
     "section": "",
-    "text": "Open-source software I’ve authored or contributed to. Use the sidebar at left to browse individual projects.\n(Content to be added.)",
+    "text": "Use the sidebar at left to browse individual projects.",
     "crumbs": [
       "Home",
       "OSS"
