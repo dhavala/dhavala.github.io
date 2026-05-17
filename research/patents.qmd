@@ -1,0 +1,8 @@
+---
+title: "Patents"
+description: "Granted and pending patents."
+---
+
+Granted and pending patents.
+
+*(Content to be added.)*

@@ -1,0 +1,15 @@
+include-before-body: ../_partials/banner-blog.html
+
+# Comments enabled for all blog posts. Fill placeholders after running
+# https://giscus.app on the GitHub repo with Discussions enabled.
+comments:
+  giscus:
+    repo: OWNER/REPO          # TODO
+    repo-id: REPO_ID          # TODO
+    category: General
+    category-id: CATEGORY_ID  # TODO
+    mapping: pathname
+    reactions-enabled: true
+    loading: lazy
+    input-position: top
+    theme: light

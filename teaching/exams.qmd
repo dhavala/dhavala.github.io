@@ -1,0 +1,8 @@
+---
+title: "Exams"
+description: "Sample exams and quizzes."
+---
+
+Sample exams and quizzes.
+
+*(Content to be added.)*

@@ -1,0 +1,14 @@
+---
+title: "Blog"
+description: "Posts on statistics, machine learning, and adjacent topics."
+comments: false
+listing:
+  contents: .
+  type: default
+  sort: "date desc"
+  categories: true
+  feed:
+    title: "Soma S Dhavala — Blog"
+    description: "Posts on statistics, machine learning, and adjacent topics."
+  fields: [date, title, categories, description, reading-time]
+---

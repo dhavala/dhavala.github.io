@@ -1,0 +1,7 @@
+---
+title: "Research"
+description: "Research in Bayesian methods, semi-parametric modeling, and applied machine learning."
+---
+
+Bayesian methods, semi-parametric modeling, and applied machine learning.
+Use the sidebar at left to browse publications, patents, reports, and code.

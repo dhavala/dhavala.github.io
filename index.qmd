@@ -1,0 +1,12 @@
+---
+title: "Soma S Dhavala"
+description: "Personal site of Soma S Dhavala — statistician and applied ML practitioner."
+include-before-body: _partials/banner-home.html
+toc: false
+---
+
+Welcome. This is the landing page.
+
+Browse the nav above for [About](about/), [Research](research/),
+[Teaching](teaching/), [Consulting](consulting/), [Interests](interests/),
+or the [Blog](posts/).

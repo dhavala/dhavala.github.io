@@ -1,0 +1,7 @@
+---
+title: "About"
+description: "About Soma S Dhavala — bio, places, and contact."
+---
+
+A few words about who I am, where I'm from, and how to get in touch.
+Use the sidebar at left to browse the sub-pages.
