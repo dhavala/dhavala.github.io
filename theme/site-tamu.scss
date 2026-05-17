@@ -134,18 +134,18 @@ body:has(.quarto-page-breadcrumbs) {
 }
 
 .quarto-page-breadcrumbs {
-  background: linear-gradient(to bottom, rgba(34, 34, 34, 0.92), #F7F7F7);
-  color: #fff;
-  padding: 0.55rem 1.5rem 0.9rem;
+  background: #222;          // same as navbar / mobile collapsed-nav bg
+  color: #ccc;
+  padding: 0.5rem 1.5rem;
   margin: 0 0 0.75rem;
   border-radius: 0;
 }
 @media (min-width: 992px) {
-  .quarto-page-breadcrumbs { padding: 0.6rem 2rem 1rem; }
+  .quarto-page-breadcrumbs { padding: 0.5rem 2rem; }
 }
 .quarto-page-breadcrumbs a,
 .quarto-page-breadcrumbs .breadcrumb-item.active {
-  color: #ddd;
+  color: #ccc;
   text-decoration: none;
 }
 .quarto-page-breadcrumbs a:hover { color: #fff; }
@@ -155,7 +155,7 @@ body:has(.quarto-page-breadcrumbs) {
   font-size: 0.78rem;
 }
 .quarto-page-breadcrumbs .breadcrumb-item + .breadcrumb-item::before {
-  color: #aaa;
+  color: #888;
 }
 
 // Per-section banner emitted by include-before-body partials.
