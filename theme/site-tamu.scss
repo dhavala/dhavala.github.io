@@ -105,49 +105,54 @@ main.content .listing-description a:hover {
 }
 
 // DESKTOP (≥992px): show a dark ribbon directly under the banner. On sub-
-// pages it's Quarto's breadcrumb (e.g. "Research > Patents"). On section
-// index pages where Quarto omits the breadcrumb, style the h1 as the
-// ribbon instead so visual continuity is preserved as you navigate
-// in and out of sections.
+// pages it's Quarto's title-block breadcrumb (e.g. "Research > Patents").
+// On section index pages where Quarto omits that breadcrumb, style the
+// title-block h1 as the ribbon instead so visual continuity is preserved
+// as you navigate in and out of sections.
+//
+// All selectors target .quarto-title-breadcrumbs (the title-block-only
+// class) rather than the generic .quarto-page-breadcrumbs — Quarto
+// renders a second breadcrumb inside the mobile sidebar-toggle area
+// on EVERY page, so the generic selector would always match.
 @media (min-width: 992px) {
 
   // -- Sub-pages with breadcrumb: hide redundant h1, lay out dark ribbon
-  #title-block-header:has(.quarto-page-breadcrumbs) .quarto-title { display: none; }
+  #title-block-header:has(.quarto-title-breadcrumbs) .quarto-title { display: none; }
 
-  body:has(.quarto-page-breadcrumbs) {
+  body:has(.quarto-title-breadcrumbs) {
     main.content > .section-banner { margin-bottom: 0; }
     main.content > #title-block-header { padding: 0; margin: 0; }
-    .quarto-title-block > div:not(.quarto-page-breadcrumbs):not(nav) {
+    .quarto-title-block > div:not(.quarto-title-breadcrumbs):not(nav) {
       padding: 0 2rem;
     }
   }
 
-  .quarto-page-breadcrumbs {
+  .quarto-title-breadcrumbs {
     background: #222;
     color: #ccc;
     padding: 0.5rem 2rem;
     margin: 0 0 0.75rem;
     border-radius: 0;
   }
-  .quarto-page-breadcrumbs a,
-  .quarto-page-breadcrumbs .breadcrumb-item.active {
+  .quarto-title-breadcrumbs a,
+  .quarto-title-breadcrumbs .breadcrumb-item.active {
     color: #ccc;
     text-decoration: none;
   }
-  .quarto-page-breadcrumbs a:hover { color: #fff; }
-  .quarto-page-breadcrumbs .breadcrumb {
+  .quarto-title-breadcrumbs a:hover { color: #fff; }
+  .quarto-title-breadcrumbs .breadcrumb {
     margin: 0;
     background: transparent;
     font-size: 0.78rem;
   }
-  .quarto-page-breadcrumbs .breadcrumb-item + .breadcrumb-item::before {
+  .quarto-title-breadcrumbs .breadcrumb-item + .breadcrumb-item::before {
     color: #888;
   }
 
-  // -- Section index pages (banner present, no breadcrumb): style the
-  //    title block's h1 as the same dark ribbon so the page reads as
-  //    "Research" (the section name) in the same band.
-  body:has(main.content > .section-banner):not(:has(.quarto-page-breadcrumbs)) {
+  // -- Section index pages (banner present, no title-block breadcrumb):
+  //    style the title block's h1 as the same dark ribbon so the page
+  //    reads as "Research" (the section name) in the same band.
+  body:has(main.content > .section-banner):not(:has(.quarto-title-breadcrumbs)) {
     main.content > .section-banner { margin-bottom: 0; }
     main.content > #title-block-header { padding: 0; margin: 0; }
     .quarto-title-block > .quarto-title {
@@ -169,23 +174,23 @@ main.content .listing-description a:hover {
   }
 }
 
-// MOBILE (<992px): override Bootstrap's d-none so the breadcrumb shows
-// as plain inherit-color text — no dark ribbon, no special spacing.
-// H1 still shows on mobile (no @media (max-width) hide rule above).
+// MOBILE (<992px): override Bootstrap's d-none on the title-block
+// breadcrumb so it shows as plain inherit-color text — no dark ribbon,
+// no special spacing. H1 still shows on mobile.
 @media (max-width: 991.98px) {
-  .quarto-page-breadcrumbs {
+  .quarto-title-breadcrumbs {
     display: block !important;
     background: transparent;
     color: inherit;
     padding: 0;
     margin: 0.5rem 0;
   }
-  .quarto-page-breadcrumbs .breadcrumb {
+  .quarto-title-breadcrumbs .breadcrumb {
     margin: 0;
     background: transparent;
     font-size: 0.75rem;
   }
-  .quarto-page-breadcrumbs a {
+  .quarto-title-breadcrumbs a {
     color: inherit;
     text-decoration: none;
   }
