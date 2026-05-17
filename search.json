@@ -4,7 +4,11 @@
     "href": "consulting/index.html",
     "title": "Consulting",
     "section": "",
-    "text": "Engagements, services, and how to work with me.\n(Content to be added.)"
+    "text": "Engagements, services, and how to work with me.\n(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "Consulting"
+    ]
   },
   {
     "objectID": "saddlepoint/welcome/index.html",
@@ -28,6 +32,7 @@
     "text": "(Content to be added.)",
     "crumbs": [
       "Home",
+      "OSS",
       "Another tool"
     ]
   },
@@ -46,6 +51,7 @@
     "text": "Lecture notes and supplementary readings.\n(Content to be added.)",
     "crumbs": [
       "Home",
+      "Teaching",
       "Notes"
     ]
   },
@@ -57,6 +63,7 @@
     "text": "Problem sets and solutions.\n(Content to be added.)",
     "crumbs": [
       "Home",
+      "Teaching",
       "Homeworks"
     ]
   },
@@ -68,6 +75,7 @@
     "text": "Technical reports and white papers.\n(Content to be added.)",
     "crumbs": [
       "Home",
+      "Research",
       "Reports"
     ]
   },
@@ -79,6 +87,7 @@
     "text": "(Content to be added.)",
     "crumbs": [
       "Home",
+      "Research",
       "Projects",
       "Another project"
     ]
@@ -91,7 +100,7 @@
     "text": "A list of research projects, prototypes, and collaborations. Use the sidebar at left to navigate to individual projects.\n(Content to be added.)",
     "crumbs": [
       "Home",
-      "Projects",
+      "Research",
       "Projects"
     ]
   },
@@ -103,6 +112,7 @@
     "text": "Peer-reviewed papers and preprints.\n(Content to be added.)",
     "crumbs": [
       "Home",
+      "Research",
       "Publications"
     ]
   },
@@ -114,6 +124,7 @@
     "text": "How to reach me.\n(Content to be added.)",
     "crumbs": [
       "Home",
+      "About",
       "Contact"
     ]
   },
@@ -125,6 +136,7 @@
     "text": "Personal background and biography.\n(Content to be added.)",
     "crumbs": [
       "Home",
+      "About",
       "Bio"
     ]
   },
@@ -140,7 +152,11 @@
     "href": "asankhya/index.html",
     "title": "Asankhya",
     "section": "",
-    "text": "Hello\n\n\n\nmeta\n\n\n\nFirst post on Asankhya — what this space is for.\n\n\n\n\n\nMay 18, 2026\n\n1 min\n\n\n\n\nNo matching items"
+    "text": "Hello\n\n\n\nmeta\n\n\n\nFirst post on Asankhya — what this space is for.\n\n\n\n\n\nMay 18, 2026\n\n1 min\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Home",
+      "Asankhya"
+    ]
   },
   {
     "objectID": "about/index.html",
@@ -161,6 +177,7 @@
     "text": "Vizianagaram, Devarapalli, and other places that shaped me.\n(Content to be added.)",
     "crumbs": [
       "Home",
+      "About",
       "Places"
     ]
   },
@@ -172,6 +189,7 @@
     "text": "Granted and pending patents.\n(Content to be added.)",
     "crumbs": [
       "Home",
+      "Research",
       "Patents"
     ]
   },
@@ -183,6 +201,7 @@
     "text": "(Content to be added.)",
     "crumbs": [
       "Home",
+      "Research",
       "Projects",
       "Sample project"
     ]
@@ -206,6 +225,7 @@
     "text": "Open-source software and project repositories.\n(Content to be added.)",
     "crumbs": [
       "Home",
+      "Research",
       "Code"
     ]
   },
@@ -228,6 +248,7 @@
     "text": "Sample exams and quizzes.\n(Content to be added.)",
     "crumbs": [
       "Home",
+      "Teaching",
       "Exams"
     ]
   },
@@ -239,7 +260,7 @@
     "text": "Open-source software I’ve authored or contributed to. Use the sidebar at left to browse individual projects.\n(Content to be added.)",
     "crumbs": [
       "Home",
-      "Open Source"
+      "OSS"
     ]
   },
   {
@@ -250,6 +271,7 @@
     "text": "(Content to be added.)",
     "crumbs": [
       "Home",
+      "OSS",
       "Sample tool"
     ]
   },
@@ -258,6 +280,10 @@
     "href": "saddlepoint/index.html",
     "title": "SaddlePoint",
     "section": "",
-    "text": "PageRank and KNN: an equivalence\n\n\n\ngraphs\n\nml\n\nnotebook\n\n\n\nNotes on a Sinkhorn-based view connecting PageRank and KNN on graphs.\n\n\n\n\n\nMay 17, 2026\n\n1 min\n\n\n\n\n\n\nWelcome to the blog\n\n\n\nmeta\n\nintro\n\n\n\nA first post — what this space is for.\n\n\n\n\n\nMay 17, 2026\n\n1 min\n\n\n\n\nNo matching items"
+    "text": "PageRank and KNN: an equivalence\n\n\n\ngraphs\n\nml\n\nnotebook\n\n\n\nNotes on a Sinkhorn-based view connecting PageRank and KNN on graphs.\n\n\n\n\n\nMay 17, 2026\n\n1 min\n\n\n\n\n\n\nWelcome to the blog\n\n\n\nmeta\n\nintro\n\n\n\nA first post — what this space is for.\n\n\n\n\n\nMay 17, 2026\n\n1 min\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Home",
+      "SaddlePoint"
+    ]
   }
 ]
