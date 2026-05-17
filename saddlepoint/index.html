@@ -114,16 +114,19 @@ document.addEventListener('DOMContentLoaded', function() {
     existingBcr.insertBefore(makeHomeItem(), existingBcr.firstChild);
   }
 
-  // SECTION INDEX PAGES: inject a section-trail using the same
-  // <ol class="breadcrumb"> structure so it renders identical
-  // to Quarto's breadcrumb (same padding, same line height).
-  var banner = document.querySelector('main.content > .section-banner');
+  // SECTION INDEX PAGES: inject a trail INSIDE #title-block-header
+  // so it has the exact same DOM context as Quarto's breadcrumb on
+  // sub-pages. Stamp it with Quarto's own classes so every existing
+  // .quarto-title-breadcrumbs CSS rule (ribbon styling, layout
+  // fixes, h1 hide, mobile plain-text override) applies to it
+  // identically — no parallel selectors needed, no size drift.
+  var titleHeader = document.querySelector('#title-block-header');
   var titleBcr = document.querySelector('.quarto-title-breadcrumbs');
-  if (banner && !titleBcr) {
-    var h1 = document.querySelector('.quarto-title h1.title');
+  if (titleHeader && !titleBcr) {
+    var h1 = titleHeader.querySelector('.quarto-title h1.title');
     if (h1) {
       var trail = document.createElement('nav');
-      trail.className = 'section-trail';
+      trail.className = 'quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block section-trail';
       trail.setAttribute('aria-label', 'breadcrumb');
       var ol = document.createElement('ol');
       ol.className = 'breadcrumb';
@@ -133,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
       currentLi.textContent = h1.textContent.trim();
       ol.appendChild(currentLi);
       trail.appendChild(ol);
-      banner.insertAdjacentElement('afterend', trail);
+      titleHeader.insertBefore(trail, titleHeader.firstChild);
     }
   }
 });
@@ -461,7 +464,7 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Z3JhcGhzJTJDbWwlMkNub3RlYm9vaw==" data-listing-date-sort="1778976000000" data-listing-file-modified-sort="1779055249193" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="quarto-post image-right" data-index="0" data-categories="Z3JhcGhzJTJDbWwlMkNub3RlYm9vaw==" data-listing-date-sort="1778976000000" data-listing-file-modified-sort="1779055835546" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/pagerank-knn/index.html" class="no-external">PageRank and KNN: an equivalence</a>
@@ -488,7 +491,7 @@ May 17, 2026
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="bWV0YSUyQ2ludHJv" data-listing-date-sort="1778976000000" data-listing-file-modified-sort="1779055249193" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="32">
+<div class="quarto-post image-right" data-index="1" data-categories="bWV0YSUyQ2ludHJv" data-listing-date-sort="1778976000000" data-listing-file-modified-sort="1779055835546" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="32">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/welcome/index.html" class="no-external">Welcome to the blog</a>
