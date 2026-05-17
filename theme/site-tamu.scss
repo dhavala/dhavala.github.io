@@ -104,58 +104,64 @@ main.content .listing-description a:hover {
   margin-bottom: 0.75rem;
 }
 
-// On desktop, when a breadcrumb is rendered, hide the redundant h1 title
-// (the breadcrumb's trailing segment already names the page). Mobile keeps
-// the h1 because the breadcrumb is hidden under 992px (Bootstrap d-lg-block).
+// DESKTOP (≥992px): breadcrumb is a full-width dark ribbon flush against
+// the banner; h1 is hidden because the breadcrumb's trailing segment
+// already names the page; banner.margin-bottom + title-block padding are
+// zeroed so the ribbon can sit flush and span the panel's full width.
 @media (min-width: 992px) {
   #title-block-header:has(.quarto-page-breadcrumbs) .quarto-title { display: none; }
-}
 
-// Breadcrumb — full-width strip that bleeds to the panel edges (same width
-// as the banner above) and is flush against it (no gap). Background gradient
-// transitions from the banner's dark tone down to the content panel's
-// off-white, tying the two regions together visually.
-//
-// On pages WITH a breadcrumb: kill the banner's bottom margin and the title-
-// block's horizontal/vertical padding so the breadcrumb can be full-width
-// and flush. Then restore padding on the title-block's other children
-// (description, title, meta) so they don't crash against the panel edges.
-body:has(.quarto-page-breadcrumbs) {
-  main.content > .section-banner { margin-bottom: 0; }
-  main.content > #title-block-header { padding: 0; margin: 0; }
-  .quarto-title-block > div:not(.quarto-page-breadcrumbs):not(nav) {
-    padding: 0 1.5rem;
-  }
-  @media (min-width: 992px) {
+  body:has(.quarto-page-breadcrumbs) {
+    main.content > .section-banner { margin-bottom: 0; }
+    main.content > #title-block-header { padding: 0; margin: 0; }
     .quarto-title-block > div:not(.quarto-page-breadcrumbs):not(nav) {
       padding: 0 2rem;
     }
   }
+
+  .quarto-page-breadcrumbs {
+    background: #222;
+    color: #ccc;
+    padding: 0.5rem 2rem;
+    margin: 0 0 0.75rem;
+    border-radius: 0;
+  }
+  .quarto-page-breadcrumbs a,
+  .quarto-page-breadcrumbs .breadcrumb-item.active {
+    color: #ccc;
+    text-decoration: none;
+  }
+  .quarto-page-breadcrumbs a:hover { color: #fff; }
+  .quarto-page-breadcrumbs .breadcrumb {
+    margin: 0;
+    background: transparent;
+    font-size: 0.78rem;
+  }
+  .quarto-page-breadcrumbs .breadcrumb-item + .breadcrumb-item::before {
+    color: #888;
+  }
 }
 
-.quarto-page-breadcrumbs {
-  background: #222;          // same as navbar / mobile collapsed-nav bg
-  color: #ccc;
-  padding: 0.5rem 1.5rem;
-  margin: 0 0 0.75rem;
-  border-radius: 0;
-}
-@media (min-width: 992px) {
-  .quarto-page-breadcrumbs { padding: 0.5rem 2rem; }
-}
-.quarto-page-breadcrumbs a,
-.quarto-page-breadcrumbs .breadcrumb-item.active {
-  color: #ccc;
-  text-decoration: none;
-}
-.quarto-page-breadcrumbs a:hover { color: #fff; }
-.quarto-page-breadcrumbs .breadcrumb {
-  margin: 0;
-  background: transparent;
-  font-size: 0.78rem;
-}
-.quarto-page-breadcrumbs .breadcrumb-item + .breadcrumb-item::before {
-  color: #888;
+// MOBILE (<992px): override Bootstrap's d-none so the breadcrumb shows
+// as plain inherit-color text — no dark ribbon, no special spacing.
+// H1 still shows on mobile (no @media (max-width) hide rule above).
+@media (max-width: 991.98px) {
+  .quarto-page-breadcrumbs {
+    display: block !important;
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    margin: 0.5rem 0;
+  }
+  .quarto-page-breadcrumbs .breadcrumb {
+    margin: 0;
+    background: transparent;
+    font-size: 0.75rem;
+  }
+  .quarto-page-breadcrumbs a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 // Per-section banner emitted by include-before-body partials.
