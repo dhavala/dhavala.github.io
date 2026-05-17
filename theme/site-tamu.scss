@@ -111,6 +111,30 @@ main.content .listing-description a:hover {
   #title-block-header:has(.quarto-page-breadcrumbs) .quarto-title { display: none; }
 }
 
+// Breadcrumb styled as a thin dark ribbon directly under the banner — feels
+// like a photo caption continuing the banner's tonal range.
+.quarto-page-breadcrumbs {
+  background: #222;
+  color: #ccc;
+  padding: 0.4rem 1rem;
+  margin: 0 0 0.75rem;
+  border-radius: 0;
+}
+.quarto-page-breadcrumbs a,
+.quarto-page-breadcrumbs .breadcrumb-item.active {
+  color: #ccc;
+  text-decoration: none;
+}
+.quarto-page-breadcrumbs a:hover { color: #fff; }
+.quarto-page-breadcrumbs .breadcrumb {
+  margin: 0;
+  background: transparent;
+  font-size: 0.75rem;
+}
+.quarto-page-breadcrumbs .breadcrumb-item + .breadcrumb-item::before {
+  color: #888;
+}
+
 // Per-section banner emitted by include-before-body partials.
 // Sits flush at the top of main.content because main.content has 0 padding
 // and the banner has its own 0 padding (set above).
