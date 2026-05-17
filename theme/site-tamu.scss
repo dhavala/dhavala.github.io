@@ -127,7 +127,10 @@ main.content .listing-description a:hover {
     }
   }
 
-  .quarto-title-breadcrumbs {
+  // Shared ribbon styling for Quarto's breadcrumb and the JS-injected
+  // section-trail. Same selectors → guaranteed identical dimensions.
+  .quarto-title-breadcrumbs,
+  .section-trail {
     background: #222;
     color: #ccc;
     padding: 0.5rem 2rem;
@@ -135,17 +138,22 @@ main.content .listing-description a:hover {
     border-radius: 0;
   }
   .quarto-title-breadcrumbs a,
-  .quarto-title-breadcrumbs .breadcrumb-item.active {
+  .quarto-title-breadcrumbs .breadcrumb-item.active,
+  .section-trail a,
+  .section-trail .breadcrumb-item.active {
     color: #ccc;
     text-decoration: none;
   }
-  .quarto-title-breadcrumbs a:hover { color: #fff; }
-  .quarto-title-breadcrumbs .breadcrumb {
+  .quarto-title-breadcrumbs a:hover,
+  .section-trail a:hover { color: #fff; }
+  .quarto-title-breadcrumbs .breadcrumb,
+  .section-trail .breadcrumb {
     margin: 0;
     background: transparent;
     font-size: 0.78rem;
   }
-  .quarto-title-breadcrumbs .breadcrumb-item + .breadcrumb-item::before {
+  .quarto-title-breadcrumbs .breadcrumb-item + .breadcrumb-item::before,
+  .section-trail .breadcrumb-item + .breadcrumb-item::before {
     color: #888;
   }
 
@@ -163,20 +171,6 @@ main.content .listing-description a:hover {
       padding: 0 2rem;
     }
   }
-  .section-trail {
-    background: #222;
-    color: #ccc;
-    padding: 0.5rem 2rem;
-    margin: 0 0 0.75rem;
-    font-size: 0.78rem;
-    border-radius: 0;
-  }
-  .section-trail a {
-    color: #ccc;
-    text-decoration: none;
-  }
-  .section-trail a:hover { color: #fff; }
-
   // -- Fallback (no JS, or before JS runs): style h1 as ribbon. When
   //    JS injects .section-trail above, the rules in the body:has block
   //    take over (hide h1, style .section-trail), and this becomes
@@ -210,6 +204,10 @@ main.content .listing-description a:hover {
     color: inherit;
     padding: 0;
     margin: 0.5rem 0;
+  }
+  .section-trail .breadcrumb {
+    margin: 0;
+    background: transparent;
     font-size: 0.75rem;
   }
   .section-trail a {

@@ -119,10 +119,27 @@ format:
           skip.textContent = 'Skip to main content';
           document.body.insertBefore(skip, document.body.firstChild);
 
-          // Section-trail: on section index pages (banner present, no
-          // Quarto title-block breadcrumb), inject a "Home > Section"
-          // trail directly after the banner. Mirrors the breadcrumb
-          // format of sub-pages.
+          // Helper: build a <li class="breadcrumb-item"><a>Home</a></li>
+          function makeHomeItem() {
+            var li = document.createElement('li');
+            li.className = 'breadcrumb-item';
+            var a = document.createElement('a');
+            a.href = '/';
+            a.textContent = 'Home';
+            li.appendChild(a);
+            return li;
+          }
+
+          // SUB-PAGES: prepend "Home" to Quarto's existing breadcrumb so
+          // every ribbon starts with Home for consistency.
+          var existingBcr = document.querySelector('.quarto-title-breadcrumbs .breadcrumb');
+          if (existingBcr) {
+            existingBcr.insertBefore(makeHomeItem(), existingBcr.firstChild);
+          }
+
+          // SECTION INDEX PAGES: inject a section-trail using the same
+          // <ol class="breadcrumb"> structure so it renders identical
+          // to Quarto's breadcrumb (same padding, same line height).
           var banner = document.querySelector('main.content > .section-banner');
           var titleBcr = document.querySelector('.quarto-title-breadcrumbs');
           if (banner && !titleBcr) {
@@ -131,13 +148,14 @@ format:
               var trail = document.createElement('nav');
               trail.className = 'section-trail';
               trail.setAttribute('aria-label', 'breadcrumb');
-              var home = document.createElement('a');
-              home.href = '/';
-              home.textContent = 'Home';
-              trail.appendChild(home);
-              trail.appendChild(
-                document.createTextNode(' › ' + h1.textContent.trim())
-              );
+              var ol = document.createElement('ol');
+              ol.className = 'breadcrumb';
+              ol.appendChild(makeHomeItem());
+              var currentLi = document.createElement('li');
+              currentLi.className = 'breadcrumb-item active';
+              currentLi.textContent = h1.textContent.trim();
+              ol.appendChild(currentLi);
+              trail.appendChild(ol);
               banner.insertAdjacentElement('afterend', trail);
             }
           }
