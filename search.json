@@ -117,46 +117,15 @@
     ]
   },
   {
-    "objectID": "about/contact.html",
-    "href": "about/contact.html",
-    "title": "Contact",
+    "objectID": "about/places.html",
+    "href": "about/places.html",
+    "title": "Places",
     "section": "",
     "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "About",
-      "Contact"
-    ]
-  },
-  {
-    "objectID": "about/bio.html",
-    "href": "about/bio.html",
-    "title": "Bio",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "About",
-      "Bio"
-    ]
-  },
-  {
-    "objectID": "asankhya/hello/index.html",
-    "href": "asankhya/hello/index.html",
-    "title": "Hello",
-    "section": "",
-    "text": "This is Asankhya — a quieter space for personal writing. Distinct from SaddlePoint, which is for academic and technical work.\nExpect essays, notes from books, observations, and slower thinking.\n(More to come.)"
-  },
-  {
-    "objectID": "asankhya/index.html",
-    "href": "asankhya/index.html",
-    "title": "Asankhya",
-    "section": "",
-    "text": "Hello\n\n\n\nmeta\n\n\n\nFirst post on Asankhya — what this space is for.\n\n\n\n\n\nMay 18, 2026\n\n1 min\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Home",
-      "Blogs",
-      "Asankhya"
+      "Places"
     ]
   },
   {
@@ -171,15 +140,57 @@
     ]
   },
   {
-    "objectID": "about/places.html",
-    "href": "about/places.html",
-    "title": "Places",
+    "objectID": "asankhya/index.html",
+    "href": "asankhya/index.html",
+    "title": "Asankhya",
+    "section": "",
+    "text": "Hello\n\n\n\nmeta\n\n\n\nFirst post on Asankhya — what this space is for.\n\n\n\n\n\nMay 18, 2026\n\n1 min\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Home",
+      "Blogs",
+      "Asankhya"
+    ]
+  },
+  {
+    "objectID": "asankhya/hello/index.html",
+    "href": "asankhya/hello/index.html",
+    "title": "Hello",
+    "section": "",
+    "text": "This is Asankhya — a quieter space for personal writing. Distinct from SaddlePoint, which is for academic and technical work.\nExpect essays, notes from books, observations, and slower thinking.\n(More to come.)"
+  },
+  {
+    "objectID": "about/bio.html",
+    "href": "about/bio.html",
+    "title": "Bio",
     "section": "",
     "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "About",
-      "Places"
+      "Bio"
+    ]
+  },
+  {
+    "objectID": "about/contact.html",
+    "href": "about/contact.html",
+    "title": "Contact",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "About",
+      "Contact"
+    ]
+  },
+  {
+    "objectID": "blogs/index.html",
+    "href": "blogs/index.html",
+    "title": "Blogs",
+    "section": "",
+    "text": "Two distinct streams of writing live here:\n\nSaddlePoint\nAcademic and technical blog — statistics, machine learning, statistical signal processing, and adjacent topics. Long-form notes, derivations, and write-ups of ideas worth keeping around.\n\n\nAsankhya\nPersonal blog — essays, notes from books, observations, slower thinking. Quieter, less structured, more reflective.\n\nEach blog has its own RSS feed: SaddlePoint feed · Asankhya feed.",
+    "crumbs": [
+      "Home",
+      "Blogs"
     ]
   },
   {
