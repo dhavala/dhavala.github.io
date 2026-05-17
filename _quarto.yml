@@ -84,8 +84,7 @@ website:
   page-footer:
     background: "#222"
     foreground: "#ccc"
-    left: |
-      Built with [Quarto](https://quarto.org) · [OSS](/oss/)
+    left: "Built with [Quarto](https://quarto.org)"
     center: "&copy; 2026 Soma S Dhavala"
     right:
       - icon: github
