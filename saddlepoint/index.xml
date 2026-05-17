@@ -9,6 +9,13 @@
 <link>https://dhavala.github.io/saddlepoint/</link>
 <atom:link href="https://dhavala.github.io/saddlepoint/index.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and technical writing on statistics, ML, and adjacent topics.</description>
+<image>
+<url>https://dhavala.github.io/images/og-image.png</url>
+<title>SaddlePoint — Soma S Dhavala</title>
+<link>https://dhavala.github.io/saddlepoint/</link>
+<height>76</height>
+<width>144</width>
+</image>
 <generator>quarto-1.9.37</generator>
 <lastBuildDate>Sun, 17 May 2026 00:00:00 GMT</lastBuildDate>
 <item>

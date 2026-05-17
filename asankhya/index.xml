@@ -9,6 +9,13 @@
 <link>https://dhavala.github.io/asankhya/</link>
 <atom:link href="https://dhavala.github.io/asankhya/index.xml" rel="self" type="application/rss+xml"/>
 <description>Personal essays, notes, and slow thinking.</description>
+<image>
+<url>https://dhavala.github.io/images/og-image.png</url>
+<title>Asankhya — Soma S Dhavala</title>
+<link>https://dhavala.github.io/asankhya/</link>
+<height>76</height>
+<width>144</width>
+</image>
 <generator>quarto-1.9.37</generator>
 <lastBuildDate>Mon, 18 May 2026 00:00:00 GMT</lastBuildDate>
 <item>
