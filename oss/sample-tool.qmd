@@ -1,0 +1,6 @@
+---
+title: "Sample tool"
+description: "Placeholder for an OSS tool entry."
+---
+
+*(Content to be added.)*

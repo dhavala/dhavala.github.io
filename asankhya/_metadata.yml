@@ -1,0 +1,14 @@
+include-before-body: ../_partials/banner-asankhya.html
+
+# Comments enabled for all Asankhya posts.
+comments:
+  giscus:
+    repo: "dhavala/dhavala.github.io"
+    repo-id: "MDEwOlJlcG9zaXRvcnk0MzYwMTM3MA=="
+    category: "Blog Comments"
+    category-id: "DIC_kwDOAplN2s4C9QQP"
+    mapping: pathname
+    reactions-enabled: true
+    loading: lazy
+    input-position: top
+    theme: light

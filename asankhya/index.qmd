@@ -1,0 +1,14 @@
+---
+title: "Asankhya"
+description: "Personal blog — essays, notes, and slow thinking."
+comments: false
+listing:
+  contents: .
+  type: default
+  sort: "date desc"
+  categories: true
+  feed:
+    title: "Asankhya — Soma S Dhavala"
+    description: "Personal essays, notes, and slow thinking."
+  fields: [date, title, categories, description, reading-time]
+---

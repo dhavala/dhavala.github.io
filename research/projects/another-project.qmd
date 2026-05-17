@@ -1,0 +1,6 @@
+---
+title: "Another project"
+description: "Placeholder for another research project entry."
+---
+
+*(Content to be added.)*

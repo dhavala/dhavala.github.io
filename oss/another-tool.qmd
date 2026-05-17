@@ -1,0 +1,6 @@
+---
+title: "Another tool"
+description: "Placeholder for another OSS tool entry."
+---
+
+*(Content to be added.)*

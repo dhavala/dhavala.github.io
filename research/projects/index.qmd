@@ -1,0 +1,9 @@
+---
+title: "Projects"
+description: "Ongoing and past research projects."
+---
+
+A list of research projects, prototypes, and collaborations.
+Use the sidebar at left to navigate to individual projects.
+
+*(Content to be added.)*

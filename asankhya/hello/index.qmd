@@ -1,0 +1,15 @@
+---
+title: "Hello"
+description: "First post on Asankhya — what this space is for."
+author: "Soma S Dhavala"
+date: "2026-05-18"
+categories: [meta]
+---
+
+This is **Asankhya** — a quieter space for personal writing.
+Distinct from [SaddlePoint](../../saddlepoint/), which is for
+academic and technical work.
+
+Expect essays, notes from books, observations, and slower thinking.
+
+*(More to come.)*

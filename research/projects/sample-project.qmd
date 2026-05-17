@@ -1,0 +1,6 @@
+---
+title: "Sample project"
+description: "Placeholder for a research project entry."
+---
+
+*(Content to be added.)*

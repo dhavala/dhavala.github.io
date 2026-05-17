@@ -1,7 +1,6 @@
-include-before-body: ../_partials/banner-blog.html
+include-before-body: ../_partials/banner-saddlepoint.html
 
-# Comments enabled for all blog posts. Fill placeholders after running
-# https://giscus.app on the GitHub repo with Discussions enabled.
+# Comments enabled for all SaddlePoint posts.
 comments:
   giscus:
     repo: "dhavala/dhavala.github.io"

@@ -26,11 +26,17 @@ website:
         text: Teaching
       - href: consulting/index.qmd
         text: Consulting
-      - href: posts/index.qmd
-        text: Blog
+      - href: saddlepoint/index.qmd
+        text: SaddlePoint
+      - href: asankhya/index.qmd
+        text: Asankhya
     right:
       - icon: rss
-        href: posts/index.xml
+        text: "SaddlePoint feed"
+        href: saddlepoint/index.xml
+      - icon: rss
+        text: "Asankhya feed"
+        href: asankhya/index.xml
 
   sidebar:
     - id: about
@@ -50,6 +56,18 @@ website:
         - research/patents.qmd
         - research/reports.qmd
         - research/code.qmd
+        - section: "Projects"
+          contents:
+            - research/projects/index.qmd
+            - research/projects/sample-project.qmd
+            - research/projects/another-project.qmd
+    - id: oss
+      style: floating
+      collapse-level: 1
+      contents:
+        - oss/index.qmd
+        - oss/sample-tool.qmd
+        - oss/another-tool.qmd
     - id: teaching
       style: floating
       collapse-level: 1
@@ -62,7 +80,8 @@ website:
   page-footer:
     background: "#222"
     foreground: "#ccc"
-    left: "Built with [Quarto](https://quarto.org)"
+    left: |
+      Built with [Quarto](https://quarto.org) · [OSS](/oss/)
     center: "&copy; 2026 Soma S Dhavala"
     right:
       - icon: github

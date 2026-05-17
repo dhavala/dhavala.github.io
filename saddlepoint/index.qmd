@@ -1,0 +1,14 @@
+---
+title: "SaddlePoint"
+description: "Academic and technical blog — statistics, machine learning, and adjacent topics."
+comments: false
+listing:
+  contents: .
+  type: default
+  sort: "date desc"
+  categories: true
+  feed:
+    title: "SaddlePoint — Soma S Dhavala"
+    description: "Academic and technical writing on statistics, ML, and adjacent topics."
+  fields: [date, title, categories, description, reading-time]
+---
