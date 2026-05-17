@@ -1,0 +1,23 @@
+---
+title: "Blogs"
+description: "Two distinct blogs — SaddlePoint for academic and technical writing, Asankhya for personal essays."
+---
+
+Two distinct streams of writing live here:
+
+### [SaddlePoint](../saddlepoint/)
+
+Academic and technical blog — statistics, machine learning, statistical
+signal processing, and adjacent topics. Long-form notes, derivations,
+and write-ups of ideas worth keeping around.
+
+### [Asankhya](../asankhya/)
+
+Personal blog — essays, notes from books, observations, slower thinking.
+Quieter, less structured, more reflective.
+
+---
+
+Each blog has its own RSS feed:
+[SaddlePoint feed](../saddlepoint/index.xml) ·
+[Asankhya feed](../asankhya/index.xml).

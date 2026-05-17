@@ -72,6 +72,7 @@ website:
           - oss/sample-tool.qmd
           - oss/another-tool.qmd
       - section: "Blogs"
+        href: blogs/index.qmd
         contents:
           - text: "SaddlePoint"
             href: saddlepoint/index.qmd
