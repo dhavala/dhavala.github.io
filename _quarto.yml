@@ -38,44 +38,48 @@ website:
         text: "Asankhya feed"
         href: asankhya/index.xml
 
+  # Single global sidebar — applies to every page (unless `sidebar: false`
+  # in frontmatter). Top-level sections always visible; the current
+  # section auto-expands to show its sub-pages.
   sidebar:
-    - id: about
-      style: floating
-      collapse-level: 1
-      contents:
-        - about/index.qmd
-        - about/bio.qmd
-        - about/places.qmd
-        - about/contact.qmd
-    - id: research
-      style: floating
-      collapse-level: 1
-      contents:
-        - research/index.qmd
-        - research/publications.qmd
-        - research/patents.qmd
-        - research/reports.qmd
-        - research/code.qmd
-        - section: "Projects"
-          contents:
-            - research/projects/index.qmd
-            - research/projects/sample-project.qmd
-            - research/projects/another-project.qmd
-    - id: oss
-      style: floating
-      collapse-level: 1
-      contents:
-        - oss/index.qmd
-        - oss/sample-tool.qmd
-        - oss/another-tool.qmd
-    - id: teaching
-      style: floating
-      collapse-level: 1
-      contents:
-        - teaching/index.qmd
-        - teaching/notes.qmd
-        - teaching/homeworks.qmd
-        - teaching/exams.qmd
+    style: floating
+    collapse-level: 1
+    contents:
+      - section: "About"
+        href: about/index.qmd
+        contents:
+          - about/bio.qmd
+          - about/places.qmd
+          - about/contact.qmd
+      - section: "Research"
+        href: research/index.qmd
+        contents:
+          - research/publications.qmd
+          - research/patents.qmd
+          - research/reports.qmd
+          - research/code.qmd
+          - section: "Projects"
+            href: research/projects/index.qmd
+            contents:
+              - research/projects/sample-project.qmd
+              - research/projects/another-project.qmd
+      - section: "Teaching"
+        href: teaching/index.qmd
+        contents:
+          - teaching/notes.qmd
+          - teaching/homeworks.qmd
+          - teaching/exams.qmd
+      - text: "Consulting"
+        href: consulting/index.qmd
+      - section: "OSS"
+        href: oss/index.qmd
+        contents:
+          - oss/sample-tool.qmd
+          - oss/another-tool.qmd
+      - text: "SaddlePoint"
+        href: saddlepoint/index.qmd
+      - text: "Asankhya"
+        href: asankhya/index.qmd
 
   page-footer:
     background: "#222"
