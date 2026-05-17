@@ -141,16 +141,19 @@ format:
             existingBcr.insertBefore(makeHomeItem(), existingBcr.firstChild);
           }
 
-          // SECTION INDEX PAGES: inject a section-trail using the same
-          // <ol class="breadcrumb"> structure so it renders identical
-          // to Quarto's breadcrumb (same padding, same line height).
-          var banner = document.querySelector('main.content > .section-banner');
+          // SECTION INDEX PAGES: inject a trail INSIDE #title-block-header
+          // so it has the exact same DOM context as Quarto's breadcrumb on
+          // sub-pages. Stamp it with Quarto's own classes so every existing
+          // .quarto-title-breadcrumbs CSS rule (ribbon styling, layout
+          // fixes, h1 hide, mobile plain-text override) applies to it
+          // identically — no parallel selectors needed, no size drift.
+          var titleHeader = document.querySelector('#title-block-header');
           var titleBcr = document.querySelector('.quarto-title-breadcrumbs');
-          if (banner && !titleBcr) {
-            var h1 = document.querySelector('.quarto-title h1.title');
+          if (titleHeader && !titleBcr) {
+            var h1 = titleHeader.querySelector('.quarto-title h1.title');
             if (h1) {
               var trail = document.createElement('nav');
-              trail.className = 'section-trail';
+              trail.className = 'quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block section-trail';
               trail.setAttribute('aria-label', 'breadcrumb');
               var ol = document.createElement('ol');
               ol.className = 'breadcrumb';
@@ -160,7 +163,7 @@ format:
               currentLi.textContent = h1.textContent.trim();
               ol.appendChild(currentLi);
               trail.appendChild(ol);
-              banner.insertAdjacentElement('afterend', trail);
+              titleHeader.insertBefore(trail, titleHeader.firstChild);
             }
           }
         });
