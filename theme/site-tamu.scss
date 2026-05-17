@@ -162,6 +162,20 @@ nav#quarto-sidebar .sidebar-item a {
   text-decoration: none;
   font-style: normal;
 }
+
+// Section heads (clickable collapse toggles) are visually distinct from
+// leaf items: slightly bolder, slightly darker bg, so the user can tell
+// 'Blogs' is a parent group vs SaddlePoint/Asankhya being its children.
+nav#quarto-sidebar .sidebar-item-text[data-bs-toggle="collapse"] {
+  font-weight: 600;
+  color: #333;
+  background: #ececec;
+}
+
+// Indent nested items so the visual hierarchy is obvious.
+nav#quarto-sidebar .sidebar-section.depth1 .sidebar-link { padding-left: 1.25rem; }
+nav#quarto-sidebar .sidebar-section.depth2 .sidebar-link { padding-left: 2rem; }
+nav#quarto-sidebar .sidebar-section.depth3 .sidebar-link { padding-left: 2.75rem; }
 .sidebar-item-text.sidebar-link:hover,
 nav#quarto-sidebar .sidebar-item a:hover {
   color: #000;
