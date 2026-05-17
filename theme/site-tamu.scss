@@ -149,10 +149,39 @@ main.content .listing-description a:hover {
     color: #888;
   }
 
-  // -- Section index pages (banner present, no title-block breadcrumb):
-  //    style the title block's h1 as the same dark ribbon so the page
-  //    reads as "Research" (the section name) in the same band.
-  body:has(main.content > .section-banner):not(:has(.quarto-title-breadcrumbs)) {
+  // -- Section index pages: JS injects a .section-trail "Home > Section"
+  //    nav directly after the banner. Style it as the dark ribbon AND
+  //    apply the layout fixes (flush banner, zero title-block padding).
+  //    When the trail is present, hide the h1 (the trail already names
+  //    the page). If JS is disabled or hasn't run yet, the fallback
+  //    rules below style the h1 itself as the ribbon.
+  body:has(main.content > .section-trail) {
+    main.content > .section-banner { margin-bottom: 0; }
+    main.content > #title-block-header { padding: 0; margin: 0; }
+    .quarto-title-block > .quarto-title { display: none; }
+    .quarto-title-block > div:not(.quarto-title):not(nav) {
+      padding: 0 2rem;
+    }
+  }
+  .section-trail {
+    background: #222;
+    color: #ccc;
+    padding: 0.5rem 2rem;
+    margin: 0 0 0.75rem;
+    font-size: 0.78rem;
+    border-radius: 0;
+  }
+  .section-trail a {
+    color: #ccc;
+    text-decoration: none;
+  }
+  .section-trail a:hover { color: #fff; }
+
+  // -- Fallback (no JS, or before JS runs): style h1 as ribbon. When
+  //    JS injects .section-trail above, the rules in the body:has block
+  //    take over (hide h1, style .section-trail), and this becomes
+  //    inert.
+  body:has(main.content > .section-banner):not(:has(.quarto-title-breadcrumbs)):not(:has(.section-trail)) {
     main.content > .section-banner { margin-bottom: 0; }
     main.content > #title-block-header { padding: 0; margin: 0; }
     .quarto-title-block > .quarto-title {
@@ -171,6 +200,21 @@ main.content .listing-description a:hover {
     .quarto-title-block > div:not(.quarto-title):not(nav) {
       padding: 0 2rem;
     }
+  }
+}
+
+// MOBILE: section-trail also visible, as plain text.
+@media (max-width: 991.98px) {
+  .section-trail {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    margin: 0.5rem 0;
+    font-size: 0.75rem;
+  }
+  .section-trail a {
+    color: inherit;
+    text-decoration: none;
   }
 }
 
