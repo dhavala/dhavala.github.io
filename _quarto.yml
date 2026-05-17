@@ -28,15 +28,10 @@ website:
         text: Consulting
       - href: saddlepoint/index.qmd
         text: SaddlePoint
-      - href: asankhya/index.qmd
-        text: Asankhya
     right:
       - icon: rss
         text: "SaddlePoint feed"
         href: saddlepoint/index.xml
-      - icon: rss
-        text: "Asankhya feed"
-        href: asankhya/index.xml
 
   # Single global sidebar — applies to every page (unless `sidebar: false`
   # in frontmatter). Top-level sections always visible; the current
@@ -109,6 +104,7 @@ format:
     anchor-sections: false
     code-copy: true
     smooth-scroll: true
+    highlight-style: monokai           # dark code blocks on the light page
     # Inject the skip-to-content link as the first body child for keyboard
     # / screen-reader users. Styled via .skip-link in theme SCSS.
     include-in-header:

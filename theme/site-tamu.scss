@@ -83,6 +83,19 @@ main.content h1 { margin-top: 0; }
 main.content a { text-decoration: underline; }
 main.content a:hover { text-decoration: underline; }
 
+// Listing (blog) items wrap title / description in anchors — don't
+// underline those (only inline prose links should be underlined).
+main.content .listing-title a,
+main.content .listing-description a,
+main.content .quarto-post a,
+main.content .quarto-listing a.no-external {
+  text-decoration: none;
+}
+main.content .listing-title a:hover,
+main.content .listing-description a:hover {
+  text-decoration: underline;
+}
+
 // Title block above content — minimal, integrated with banner above
 .quarto-title-block .quarto-title h1.title {
   font-size: 1.4rem;
