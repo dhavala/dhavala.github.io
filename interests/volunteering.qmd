@@ -1,8 +1,0 @@
----
-title: "Volunteering"
-description: "Volunteer work and community involvement."
----
-
-Volunteer work and community involvement.
-
-*(Content to be added.)*

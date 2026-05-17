@@ -1,8 +1,0 @@
----
-title: "Acting"
-description: "Theatre and acting."
----
-
-Theatre and acting.
-
-*(Content to be added.)*

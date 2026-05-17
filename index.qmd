@@ -8,5 +8,4 @@ toc: false
 Welcome. This is the landing page.
 
 Browse the nav above for [About](about/), [Research](research/),
-[Teaching](teaching/), [Consulting](consulting/), [Interests](interests/),
-or the [Blog](posts/).
+[Teaching](teaching/), [Consulting](consulting/), or the [Blog](posts/).

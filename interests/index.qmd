@@ -1,7 +1,0 @@
----
-title: "Interests"
-description: "Beyond work — photography, video, theatre, and volunteering."
----
-
-Beyond work — photography, video, theatre, and volunteering.
-Use the sidebar at left to browse the sub-pages.

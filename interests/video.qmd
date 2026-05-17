@@ -1,8 +1,0 @@
----
-title: "Video"
-description: "Video work and short films."
----
-
-Video work and short films.
-
-*(Content to be added.)*

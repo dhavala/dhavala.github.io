@@ -26,8 +26,6 @@ website:
         text: Teaching
       - href: consulting/index.qmd
         text: Consulting
-      - href: interests/index.qmd
-        text: Interests
       - href: posts/index.qmd
         text: Blog
     right:
@@ -60,15 +58,6 @@ website:
         - teaching/notes.qmd
         - teaching/homeworks.qmd
         - teaching/exams.qmd
-    - id: interests
-      style: floating
-      collapse-level: 1
-      contents:
-        - interests/index.qmd
-        - interests/photography.qmd
-        - interests/video.qmd
-        - interests/acting.qmd
-        - interests/volunteering.qmd
 
   page-footer:
     background: "#222"
