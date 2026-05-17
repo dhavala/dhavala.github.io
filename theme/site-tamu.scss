@@ -104,11 +104,14 @@ main.content .listing-description a:hover {
   margin-bottom: 0.75rem;
 }
 
-// DESKTOP (≥992px): breadcrumb is a full-width dark ribbon flush against
-// the banner; h1 is hidden because the breadcrumb's trailing segment
-// already names the page; banner.margin-bottom + title-block padding are
-// zeroed so the ribbon can sit flush and span the panel's full width.
+// DESKTOP (≥992px): show a dark ribbon directly under the banner. On sub-
+// pages it's Quarto's breadcrumb (e.g. "Research > Patents"). On section
+// index pages where Quarto omits the breadcrumb, style the h1 as the
+// ribbon instead so visual continuity is preserved as you navigate
+// in and out of sections.
 @media (min-width: 992px) {
+
+  // -- Sub-pages with breadcrumb: hide redundant h1, lay out dark ribbon
   #title-block-header:has(.quarto-page-breadcrumbs) .quarto-title { display: none; }
 
   body:has(.quarto-page-breadcrumbs) {
@@ -139,6 +142,30 @@ main.content .listing-description a:hover {
   }
   .quarto-page-breadcrumbs .breadcrumb-item + .breadcrumb-item::before {
     color: #888;
+  }
+
+  // -- Section index pages (banner present, no breadcrumb): style the
+  //    title block's h1 as the same dark ribbon so the page reads as
+  //    "Research" (the section name) in the same band.
+  body:has(main.content > .section-banner):not(:has(.quarto-page-breadcrumbs)) {
+    main.content > .section-banner { margin-bottom: 0; }
+    main.content > #title-block-header { padding: 0; margin: 0; }
+    .quarto-title-block > .quarto-title {
+      background: #222;
+      padding: 0.5rem 2rem;
+      margin: 0 0 0.75rem;
+    }
+    .quarto-title-block > .quarto-title h1.title {
+      color: #ccc;
+      font-size: 0.78rem;
+      font-weight: normal;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+    .quarto-title-block > div:not(.quarto-title):not(nav) {
+      padding: 0 2rem;
+    }
   }
 }
 
