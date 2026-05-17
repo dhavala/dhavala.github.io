@@ -3,6 +3,4 @@ title: "Places"
 description: "Vizianagaram, Devarapalli, and other places that shaped me."
 ---
 
-Vizianagaram, Devarapalli, and other places that shaped me.
-
 *(Content to be added.)*

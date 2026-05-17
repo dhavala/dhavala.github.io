@@ -3,6 +3,4 @@ title: "Contact"
 description: "How to reach Soma S Dhavala."
 ---
 
-How to reach me.
-
 *(Content to be added.)*

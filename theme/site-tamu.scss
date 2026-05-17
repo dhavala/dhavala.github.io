@@ -91,6 +91,13 @@ main.content a:hover { text-decoration: underline; }
   margin-bottom: 0.75rem;
 }
 
+// On desktop, when a breadcrumb is rendered, hide the redundant h1 title
+// (the breadcrumb's trailing segment already names the page). Mobile keeps
+// the h1 because the breadcrumb is hidden under 992px (Bootstrap d-lg-block).
+@media (min-width: 992px) {
+  #title-block-header:has(.quarto-page-breadcrumbs) .quarto-title { display: none; }
+}
+
 // Per-section banner emitted by include-before-body partials.
 // Sits flush at the top of main.content because main.content has 0 padding
 // and the banner has its own 0 padding (set above).

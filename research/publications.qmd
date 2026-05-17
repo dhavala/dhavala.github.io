@@ -3,6 +3,4 @@ title: "Publications"
 description: "Peer-reviewed papers and preprints."
 ---
 
-Peer-reviewed papers and preprints.
-
 *(Content to be added.)*

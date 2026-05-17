@@ -3,7 +3,4 @@ title: "Open Source"
 description: "Open-source software, tools, and contributions."
 ---
 
-Open-source software I've authored or contributed to.
 Use the sidebar at left to browse individual projects.
-
-*(Content to be added.)*

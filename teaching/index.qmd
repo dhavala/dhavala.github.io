@@ -3,5 +3,4 @@ title: "Teaching"
 description: "Course materials, lecture notes, and assignments."
 ---
 
-Course materials, lecture notes, and assignments.
 Use the sidebar at left to browse notes, homeworks, and exams.
