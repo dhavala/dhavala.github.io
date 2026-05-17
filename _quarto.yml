@@ -76,10 +76,12 @@ website:
         contents:
           - oss/sample-tool.qmd
           - oss/another-tool.qmd
-      - text: "SaddlePoint"
-        href: saddlepoint/index.qmd
-      - text: "Asankhya"
-        href: asankhya/index.qmd
+      - section: "Blogs"
+        contents:
+          - text: "SaddlePoint"
+            href: saddlepoint/index.qmd
+          - text: "Asankhya"
+            href: asankhya/index.qmd
 
   page-footer:
     background: "#222"
