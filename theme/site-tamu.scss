@@ -13,9 +13,9 @@ $font-family-sans-serif:   Verdana, "Helvetica Neue", Helvetica, Arial, sans-ser
 $font-size-base:           0.78rem;
 $line-height-base:         1.5;
 $headings-font-weight:     700;
-$h1-font-size:             1.4rem;
-$h2-font-size:             1.15rem;
-$h3-font-size:             1rem;
+$h1-font-size:             1.05rem;
+$h2-font-size:             0.9rem;
+$h3-font-size:             0.8rem;
 
 // Navbar
 $navbar-bg:                #222;
@@ -98,7 +98,7 @@ main.content .listing-description a:hover {
 
 // Title block above content — minimal, integrated with banner above
 .quarto-title-block .quarto-title h1.title {
-  font-size: 1.4rem;
+  font-size: 1.05rem;
   color: #222;
   padding-bottom: 0.25rem;
   margin-bottom: 0.75rem;
@@ -383,31 +383,12 @@ nav#quarto-sidebar .sidebar-item a.active {
 }
 
 .cta-row {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
   margin: 0.5rem 0 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #444;
 }
-.cta-row p { margin: 0; display: contents; }  // strip pandoc's <p> wrap
-.cta-link {
-  display: inline-block;
-  background: #222;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 3px;
-  font-size: 0.85rem;
-  text-decoration: none;
-  transition: background 0.15s ease;
-}
-.cta-link:hover,
-.cta-link:focus {
-  background: #555;
-  color: #fff;
-  text-decoration: none;
-}
-// Override the underline-all rule from main.content a
-main.content .cta-link,
-main.content .cta-link:hover { text-decoration: none; }
+.cta-row p { margin: 0; }
 
 @media (max-width: 600px) {
   .intro-card { flex-direction: column-reverse; }  // photo above text on phone

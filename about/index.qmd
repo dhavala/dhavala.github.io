@@ -1,6 +1,6 @@
 ---
 title: "About"
-description: "AI Researcher | Systems Architect | Educator | Technologist"
+description: ""
 ---
 
 I am an AI researcher, systems architect, and educator with over two decades of experience spanning Machine Learning, Artificial Intelligence, Bayesian Statistics, Signal Processing, Distributed Systems, and Scientific Computing. My work lies at the intersection of rigorous mathematical foundations and large-scale deployable AI systems, with applications across Agriculture, Healthcare, Education, Computational Biology, and Public-Interest Technology.

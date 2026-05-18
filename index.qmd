@@ -1,5 +1,5 @@
 ---
-title: "Soma S Dhavala"
+title: ""
 description: "Personal site of Soma S Dhavala — Applied Mathematician, Statistician, and Applied AI/ML Practitioner."
 include-before-body: _partials/banner-home.html
 title-block-style: none
@@ -9,9 +9,10 @@ title-block-style: none
 
 ::: {.intro-text}
 
-**AI Researcher · Systems Architect · Educator · Technologist**
 
-*Professor, IIT Jammu*
+Soma S. Dhavala, Professor, IIT Jammu
+
+*AI Researcher | Systems Architect | Educator | Technologist*
 
 Two decades across machine learning, Bayesian statistics, signal processing,
 and large-scale AI systems. Current focus: frontier model development, deep
@@ -19,10 +20,12 @@ learning theory, and scalable AI infrastructure for GPT-scale models, with
 applications across agriculture, healthcare, education, and computational
 biology.
 
+Read more [about me](about/), or browse [recent publications](research/publications.html) or explore my [research interests](research/index.html). Questions? [Email me](mailto:soma.dhavala@iitjammu.ac.in).
+
 :::
 
 ::: {.intro-photo}
-![Soma S Dhavala](images/soma-speaker.jpg){.profile-pic fig-alt="Soma S Dhavala"}
+![Soma S Dhavala](images/soma-speaker-crop-fg.png){.profile-pic fig-alt="Soma S Dhavala"}
 :::
 
 ::::
@@ -47,8 +50,6 @@ EE · Math · Stats · CS
 ::::
 
 :::: {.cta-row}
-[CV (PDF)](files/Soma_Dhavala_CV.pdf){.cta-link}
-[About / Bio](about/){.cta-link}
-[Recent papers](research/publications.html){.cta-link}
-[Email](mailto:soma.dhavala@gmail.com){.cta-link}
+
+
 ::::
