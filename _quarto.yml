@@ -3,6 +3,7 @@ project:
   output-dir: _site
   resources:
     - "images/**"
+    - "files/**"
 
 website:
   title: "Soma S Dhavala"
@@ -147,9 +148,12 @@ format:
           // .quarto-title-breadcrumbs CSS rule (ribbon styling, layout
           // fixes, h1 hide, mobile plain-text override) applies to it
           // identically — no parallel selectors needed, no size drift.
+          // SKIP on the actual home page (/) — "Home > Home" is meaningless.
           var titleHeader = document.querySelector('#title-block-header');
           var titleBcr = document.querySelector('.quarto-title-breadcrumbs');
-          if (titleHeader && !titleBcr) {
+          var path = window.location.pathname.replace(/\/+$/, '');
+          var isHome = (path === '' || path.endsWith('/index') || /\/index\.html?$/.test(path));
+          if (titleHeader && !titleBcr && !isHome) {
             var h1 = titleHeader.querySelector('.quarto-title h1.title');
             if (h1) {
               var trail = document.createElement('nav');

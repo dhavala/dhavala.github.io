@@ -331,6 +331,90 @@ nav#quarto-sidebar .sidebar-item a.active {
   font-size: 0.7rem;
 }
 
+// ----- Home page intro card -----
+.intro-card {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin: 1rem 0 1.5rem;
+  flex-wrap: wrap;
+}
+.intro-text { flex: 1 1 320px; }
+.intro-text p:first-of-type {
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+  text-align: left;
+}
+.intro-text p { text-align: left; }
+.intro-photo {
+  flex: 0 0 180px;
+  max-width: 180px;
+}
+.intro-photo figure { margin: 0; }
+.intro-photo figcaption { display: none; }
+.profile-pic {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.quick-stats {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1.25rem;
+  flex-wrap: wrap;
+  background: #ececec;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+}
+.quick-stats .stat {
+  flex: 1 1 180px;
+  text-align: center;
+  font-size: 0.82rem;
+  line-height: 1.3;
+  color: #444;
+}
+.quick-stats .stat strong {
+  display: block;
+  font-size: 1rem;
+  color: #222;
+  margin-bottom: 0.15rem;
+}
+
+.cta-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.5rem 0 1.5rem;
+}
+.cta-row p { margin: 0; display: contents; }  // strip pandoc's <p> wrap
+.cta-link {
+  display: inline-block;
+  background: #222;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+.cta-link:hover,
+.cta-link:focus {
+  background: #555;
+  color: #fff;
+  text-decoration: none;
+}
+// Override the underline-all rule from main.content a
+main.content .cta-link,
+main.content .cta-link:hover { text-decoration: none; }
+
+@media (max-width: 600px) {
+  .intro-card { flex-direction: column-reverse; }  // photo above text on phone
+  .intro-photo { flex: 0 0 auto; max-width: 140px; margin: 0 auto; }
+  .quick-stats .stat { flex: 1 1 100%; }
+}
+
 // Code blocks — Quarto's highlight-style: monokai handles colors;
 // we just give the dark <pre> some breathing room.
 pre, code { font-size: 0.85rem; }

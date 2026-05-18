@@ -1,10 +1,54 @@
 ---
 title: "Soma S Dhavala"
-description: "Personal site of Soma S Dhavala — statistician and applied ML practitioner."
+description: "AI researcher, systems architect, and educator. Adjunct Faculty at IIT Jammu; Founder & CTO at VitalTicks. Frontier models, Bayesian inference, and scalable AI systems."
 include-before-body: _partials/banner-home.html
+title-block-style: none
 ---
 
-Welcome. This is the landing page.
+:::: {.intro-card}
 
-Browse the nav above for [About](about/), [Research](research/),
-[Teaching](teaching/), [Consulting](consulting/), or the [Blog](posts/).
+::: {.intro-text}
+
+**AI Researcher · Systems Architect · Educator · Technologist**
+
+*Adjunct Faculty, IIT Jammu* · *Founder & CTO, VitalTicks*
+
+Two decades across machine learning, Bayesian statistics, signal processing,
+and large-scale AI systems. Current focus: frontier model development, deep
+learning theory, and scalable AI infrastructure for GPT-scale models, with
+applications across agriculture, healthcare, education, and computational
+biology.
+
+:::
+
+::: {.intro-photo}
+![Soma S Dhavala](images/soma-speaker.jpg){.profile-pic fig-alt="Soma S Dhavala"}
+:::
+
+::::
+
+:::: {.quick-stats}
+
+::: {.stat}
+**20+ years**
+across ML, AI, and signal processing
+:::
+
+::: {.stat}
+**Ph.D. Statistics**
+Texas A&M University
+:::
+
+::: {.stat}
+**Cross-disciplinary**
+EE · Math · Stats · CS
+:::
+
+::::
+
+:::: {.cta-row}
+[CV (PDF)](files/Soma_Dhavala_CV.pdf){.cta-link}
+[About / Bio](about/){.cta-link}
+[Recent papers](research/publications.html){.cta-link}
+[Email](mailto:soma.dhavala@gmail.com){.cta-link}
+::::

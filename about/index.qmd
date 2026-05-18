@@ -1,6 +1,219 @@
 ---
 title: "About"
-description: "About Soma S Dhavala — bio, places, and contact."
+description: "About Soma S Dhavala — bio, and contact."
 ---
 
-Use the sidebar at left to browse the sub-pages.
+# Soma S. Dhavala
+
+AI Researcher | Systems Architect | Educator | Technologist
+
+---
+
+# About Me
+
+I am an AI researcher, systems architect, and educator with over two decades of experience spanning Machine Learning, Artificial Intelligence, Bayesian Statistics, Signal Processing, Distributed Systems, and Scientific Computing. My work lies at the intersection of rigorous mathematical foundations and large-scale deployable AI systems, with applications across Agriculture, Healthcare, Education, Computational Biology, and Public-Interest Technology.
+
+My current focus is on Frontier Model Development, especially understanding why Deep Learning works and developing a unified theoretical framework connecting optimization, representation learning, probabilistic inference, dynamical systems, and information theory. I am also interested in scalable AI infrastructure for distributed training and inference of GPT-scale models, along with curriculum design for systems programmers and AI engineers working on large-scale AI systems.
+
+Over the years, I have worked across academia, industrial research, startups, open-source ecosystems, and public-sector AI initiatives, contributing both to foundational research and production-grade AI deployments.
+
+---
+
+# Educational Qualifications
+
+## University of Washington, USA
+**M.S. in Applied & Computational Mathematics**  
+2020 – 2022
+
+Areas: Dynamical Systems, Stochastic Processes, PDEs, Numerical Linear Algebra, Deep Learning in NLP
+
+---
+
+## Texas A&M University, USA
+**Ph.D. in Statistics**  
+2005 – 2010
+
+Research Area:
+Bayesian Semiparametric Models for Heterogeneous Cross-Platform Differential Gene Expression
+
+Advisor: Prof. Bani K. Mallick
+
+---
+
+## Iowa State University, USA
+**Ph.D. Program (Transferred to TAMU)**  
+2003 – 2005
+
+Research Area:
+Distributed Estimation Techniques
+
+Advisor: Prof. Alexander Doganzic
+
+---
+
+## Indian Institute of Technology Madras, India
+**M.S. in Electrical Engineering**  
+1997 – 2000
+
+Research Area:
+Time-Frequency Representations: Analysis, Synthesis and Implementation
+
+Advisors: Prof. K. M. M. Prabhu, Prof. S. Srinivasan
+
+---
+
+## Andhra University, India
+**B.E. in Electronics & Communication Engineering**  
+1993 – 1997
+
+---
+
+# Industry and Research Experience
+
+## IIT Jammu / CPMU, Ministry of Education
+**Adjunct Faculty and Sector Expert – Agri & AI**  
+2024 – Present
+
+Focus Areas:
+- AI policy ecosystems
+- Intellectual Property Rights (IPR)
+- Monitoring, Evaluation and Learning (MEL) for AI programs
+- AI and Agriculture
+
+---
+
+## Wadhwani AI
+**Director, Machine Learning / Principal ML Scientist**  
+2020 – 2024
+
+Focus Areas:
+- Applied Research in Machine Learning and Generative AI
+- Large Language Models (LLMs)
+- Document Intelligence
+- AI for Agriculture, Healthcare, and Education
+- Retrieval-Augmented Generation (RAG)
+- Reliable and uncertainty-aware AI systems
+- Scalable AI deployment
+
+---
+
+## Embibe
+**Senior Principal Statistical Engineer**  
+2019 – 2020
+
+Focus Areas:
+- Learning Analytics
+- Causal Inference
+- Recommendation Systems
+- AI for Education
+
+---
+
+## EkStep / NIIT StackRoute / Consulting
+**Consulting ML Architect**  
+2015 – 2019
+
+Focus Areas:
+- AI for Education
+- ML Platforms and Infrastructure
+- Recommendation Engines
+- NLP-based Educational Systems
+- Conversational Analytics
+- Interoperable AI Systems
+
+---
+
+## VitalTicks
+**Founder & CTO**  
+2017 – Present
+
+Focus Areas:
+- Connected Healthcare
+- IoT Systems
+- Smart Diagnostics
+- Embedded AI Systems
+
+---
+
+## Dow AgroSciences
+**Associate Research Scientist**  
+2011 – 2014
+
+Focus Areas:
+- Computational Biology
+- Genomics
+- Bayesian Modeling
+- Scientific Computing
+- High-dimensional Statistical Methods
+
+---
+
+## Texas A&M University
+**Postdoctoral Researcher**  
+2010 – 2011
+
+Focus Areas:
+- Bayesian Inference
+- Dynamical Systems
+- Uncertainty Quantification
+
+---
+
+## GE John F. Welch Technology Center
+**Research Engineer**  
+2000 – 2002
+
+Focus Areas:
+- Signal Processing
+- Scientific Computing
+- Monte Carlo Methods
+- Compression Algorithms
+
+---
+
+# Research and Academic Interests
+
+- Frontier Models and Large Language Models (LLMs)
+- Unified Theories of Deep Learning
+- Understanding Generalization and Scaling in Neural Networks
+- Bayesian Statistics and Probabilistic Modeling
+- Uncertainty Quantification in AI Systems
+- Distributed Training and Inference for GPT-scale Models
+- ML Systems and AI Infrastructure
+- Generative AI and Multimodal Systems
+- Retrieval-Augmented Generation (RAG)
+- Deep Learning Theory
+- Scientific Computing
+- Dynamical Systems and Optimization
+- Statistical Signal Processing
+- Explainable and Interoperable AI
+- AI for Education, Healthcare, and Agriculture
+- Curriculum Design for Systems Programmers and AI Engineers
+
+---
+
+# Selected Recent Publications
+
+1. **Lattice-Based Vector Quantization for Low-Bit Quantization-Aware Training**  
+   Proceedings of Machine Learning Research, 2026.
+
+2. **Health Sentinel: An AI Pipeline for Real-time Disease Outbreak Detection**  
+   NLP4PI Workshop, 2025.
+
+3. **Learning to Detect PII: Tabular vs Document Classification Models for Network Traffic Analysis**  
+   Journal of Information Security and Applications, 2025.
+
+4. **QuantProb: Generalizing Probabilities along with Predictions for a Pre-trained Classifier**  
+   UAI 2024.
+
+5. **Automatic Interpretation of Line Probe Assay Test for TB**  
+   AAAI 2024.
+
+---
+
+# Selected Keywords
+
+Machine Learning, Generative AI, Frontier Models, Bayesian Statistics, Deep Learning, LLMs, Distributed AI Systems, AI Infrastructure, Signal Processing, Scientific Computing, Optimization, Computational Mathematics, NLP, Multimodal AI, AI for Social Impact
+
+---
+
