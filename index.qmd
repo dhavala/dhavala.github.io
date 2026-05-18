@@ -1,6 +1,6 @@
 ---
 title: "Soma S Dhavala"
-description: "Personal site of Soma S Dhavala — Apllied Mathematician, Statistician and Applied AI/ML Practitioner."
+description: "Personal site of Soma S Dhavala — Applied Mathematician, Statistician, and Applied AI/ML Practitioner."
 include-before-body: _partials/banner-home.html
 title-block-style: none
 ---
