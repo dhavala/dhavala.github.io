@@ -1,6 +1,6 @@
 ---
 title: "Soma S Dhavala"
-description: "AI researcher, systems architect, and educator. Adjunct Faculty at IIT Jammu; Founder & CTO at VitalTicks. Frontier models, Bayesian inference, and scalable AI systems."
+description: "Personal site of Soma S Dhavala — Apllied Mathematician, Statistician and Applied AI/ML Practitioner."
 include-before-body: _partials/banner-home.html
 title-block-style: none
 ---
@@ -11,7 +11,7 @@ title-block-style: none
 
 **AI Researcher · Systems Architect · Educator · Technologist**
 
-*Adjunct Faculty, IIT Jammu* · *Founder & CTO, VitalTicks*
+*Professor, IIT Jammu*
 
 Two decades across machine learning, Bayesian statistics, signal processing,
 and large-scale AI systems. Current focus: frontier model development, deep
