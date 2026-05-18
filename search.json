@@ -117,178 +117,16 @@
     ]
   },
   {
-    "objectID": "about/places.html",
-    "href": "about/places.html",
-    "title": "Places",
+    "objectID": "about/contact.html",
+    "href": "about/contact.html",
+    "title": "Contact",
     "section": "",
     "text": "(Content to be added.)",
     "crumbs": [
       "Home",
       "About",
-      "Places"
+      "Contact"
     ]
-  },
-  {
-    "objectID": "about/index.html#university-of-washington-usa",
-    "href": "about/index.html#university-of-washington-usa",
-    "title": "About",
-    "section": "University of Washington, USA",
-    "text": "University of Washington, USA\nM.S. in Applied & Computational Mathematics\n2020 – 2022\nAreas: Dynamical Systems, Stochastic Processes, PDEs, Numerical Linear Algebra, Deep Learning in NLP",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "about/index.html#texas-am-university-usa",
-    "href": "about/index.html#texas-am-university-usa",
-    "title": "About",
-    "section": "Texas A&M University, USA",
-    "text": "Texas A&M University, USA\nPh.D. in Statistics\n2005 – 2010\nResearch Area: Bayesian Semiparametric Models for Heterogeneous Cross-Platform Differential Gene Expression\nAdvisor: Prof. Bani K. Mallick",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "about/index.html#iowa-state-university-usa",
-    "href": "about/index.html#iowa-state-university-usa",
-    "title": "About",
-    "section": "Iowa State University, USA",
-    "text": "Iowa State University, USA\nPh.D. Program (Transferred to TAMU)\n2003 – 2005\nResearch Area: Distributed Estimation Techniques\nAdvisor: Prof. Alexander Doganzic",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "about/index.html#indian-institute-of-technology-madras-india",
-    "href": "about/index.html#indian-institute-of-technology-madras-india",
-    "title": "About",
-    "section": "Indian Institute of Technology Madras, India",
-    "text": "Indian Institute of Technology Madras, India\nM.S. in Electrical Engineering\n1997 – 2000\nResearch Area: Time-Frequency Representations: Analysis, Synthesis and Implementation\nAdvisors: Prof. K. M. M. Prabhu, Prof. S. Srinivasan",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "about/index.html#andhra-university-india",
-    "href": "about/index.html#andhra-university-india",
-    "title": "About",
-    "section": "Andhra University, India",
-    "text": "Andhra University, India\nB.E. in Electronics & Communication Engineering\n1993 – 1997",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "about/index.html#iit-jammu-cpmu-ministry-of-education",
-    "href": "about/index.html#iit-jammu-cpmu-ministry-of-education",
-    "title": "About",
-    "section": "IIT Jammu / CPMU, Ministry of Education",
-    "text": "IIT Jammu / CPMU, Ministry of Education\nAdjunct Faculty and Sector Expert – Agri & AI\n2024 – Present\nFocus Areas: - AI policy ecosystems - Intellectual Property Rights (IPR) - Monitoring, Evaluation and Learning (MEL) for AI programs - AI and Agriculture",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "about/index.html#wadhwani-ai",
-    "href": "about/index.html#wadhwani-ai",
-    "title": "About",
-    "section": "Wadhwani AI",
-    "text": "Wadhwani AI\nDirector, Machine Learning / Principal ML Scientist\n2020 – 2024\nFocus Areas: - Applied Research in Machine Learning and Generative AI - Large Language Models (LLMs) - Document Intelligence - AI for Agriculture, Healthcare, and Education - Retrieval-Augmented Generation (RAG) - Reliable and uncertainty-aware AI systems - Scalable AI deployment",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "about/index.html#embibe",
-    "href": "about/index.html#embibe",
-    "title": "About",
-    "section": "Embibe",
-    "text": "Embibe\nSenior Principal Statistical Engineer\n2019 – 2020\nFocus Areas: - Learning Analytics - Causal Inference - Recommendation Systems - AI for Education",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "about/index.html#ekstep-niit-stackroute-consulting",
-    "href": "about/index.html#ekstep-niit-stackroute-consulting",
-    "title": "About",
-    "section": "EkStep / NIIT StackRoute / Consulting",
-    "text": "EkStep / NIIT StackRoute / Consulting\nConsulting ML Architect\n2015 – 2019\nFocus Areas: - AI for Education - ML Platforms and Infrastructure - Recommendation Engines - NLP-based Educational Systems - Conversational Analytics - Interoperable AI Systems",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "about/index.html#vitalticks",
-    "href": "about/index.html#vitalticks",
-    "title": "About",
-    "section": "VitalTicks",
-    "text": "VitalTicks\nFounder & CTO\n2017 – Present\nFocus Areas: - Connected Healthcare - IoT Systems - Smart Diagnostics - Embedded AI Systems",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "about/index.html#dow-agrosciences",
-    "href": "about/index.html#dow-agrosciences",
-    "title": "About",
-    "section": "Dow AgroSciences",
-    "text": "Dow AgroSciences\nAssociate Research Scientist\n2011 – 2014\nFocus Areas: - Computational Biology - Genomics - Bayesian Modeling - Scientific Computing - High-dimensional Statistical Methods",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "about/index.html#texas-am-university",
-    "href": "about/index.html#texas-am-university",
-    "title": "About",
-    "section": "Texas A&M University",
-    "text": "Texas A&M University\nPostdoctoral Researcher\n2010 – 2011\nFocus Areas: - Bayesian Inference - Dynamical Systems - Uncertainty Quantification",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "about/index.html#ge-john-f.-welch-technology-center",
-    "href": "about/index.html#ge-john-f.-welch-technology-center",
-    "title": "About",
-    "section": "GE John F. Welch Technology Center",
-    "text": "GE John F. Welch Technology Center\nResearch Engineer\n2000 – 2002\nFocus Areas: - Signal Processing - Scientific Computing - Monte Carlo Methods - Compression Algorithms",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "asankhya/index.html",
-    "href": "asankhya/index.html",
-    "title": "Asankhya",
-    "section": "",
-    "text": "Hello\n\n\n\nmeta\n\n\n\nFirst post on Asankhya — what this space is for.\n\n\n\n\n\nMay 18, 2026\n\n1 min\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Home",
-      "Blogs",
-      "Asankhya"
-    ]
-  },
-  {
-    "objectID": "asankhya/hello/index.html",
-    "href": "asankhya/hello/index.html",
-    "title": "Hello",
-    "section": "",
-    "text": "This is Asankhya — a quieter space for personal writing. Distinct from SaddlePoint, which is for academic and technical work.\nExpect essays, notes from books, observations, and slower thinking.\n(More to come.)"
   },
   {
     "objectID": "about/bio.html",
@@ -303,15 +141,33 @@
     ]
   },
   {
-    "objectID": "about/contact.html",
-    "href": "about/contact.html",
-    "title": "Contact",
+    "objectID": "asankhya/hello/index.html",
+    "href": "asankhya/hello/index.html",
+    "title": "Hello",
     "section": "",
-    "text": "(Content to be added.)",
+    "text": "This is Asankhya — a quieter space for personal writing. Distinct from SaddlePoint, which is for academic and technical work.\nExpect essays, notes from books, observations, and slower thinking.\n(More to come.)"
+  },
+  {
+    "objectID": "asankhya/index.html",
+    "href": "asankhya/index.html",
+    "title": "Asankhya",
+    "section": "",
+    "text": "Hello\n\n\n\nmeta\n\n\n\nFirst post on Asankhya — what this space is for.\n\n\n\n\n\nMay 18, 2026\n\n1 min\n\n\n\n\nNo matching items",
     "crumbs": [
       "Home",
-      "About",
-      "Contact"
+      "Blogs",
+      "Asankhya"
+    ]
+  },
+  {
+    "objectID": "about/index.html",
+    "href": "about/index.html",
+    "title": "About",
+    "section": "",
+    "text": "I am an AI researcher, systems architect, and educator with over two decades of experience spanning Machine Learning, Artificial Intelligence, Bayesian Statistics, Signal Processing, Distributed Systems, and Scientific Computing. My work lies at the intersection of rigorous mathematical foundations and large-scale deployable AI systems, with applications across Agriculture, Healthcare, Education, Computational Biology, and Public-Interest Technology.\nMy current focus is on Frontier Model Development, especially understanding why Deep Learning works and developing a unified theoretical framework connecting optimization, representation learning, probabilistic inference, dynamical systems, and information theory. I am also interested in scalable AI infrastructure for distributed training and inference of GPT-scale models, along with curriculum design for systems programmers and AI engineers working on large-scale AI systems.\nOver the years, I have worked across academia, industrial research, startups, open-source ecosystems, and public-sector AI initiatives, contributing both to foundational research and production-grade AI deployments.\n\n\nEducational Qualifications\n\nM.S. in Applied & Computational Mathematics — University of Washington, USA (2020 – 2022)\n\nAreas: Dynamical Systems, Stochastic Processes, PDEs, Numerical Linear Algebra, Deep Learning in NLP\n\nPh.D. in Statistics — Texas A&M University, USA (2005 – 2010)\n\nResearch area: Bayesian Semiparametric Models for Heterogeneous Cross-Platform Differential Gene Expression\nAdvisor: Prof. Bani K. Mallick\n\nPh.D. Program (transferred to TAMU) — Iowa State University, USA (2003 – 2005)\n\nResearch area: Distributed Estimation Techniques\nAdvisor: Prof. Alexander Doganzic\n\nM.S. in Electrical Engineering — Indian Institute of Technology Madras, India (1997 – 2000)\n\nResearch area: Time-Frequency Representations: Analysis, Synthesis and Implementation\nAdvisors: Prof. K. M. M. Prabhu, Prof. S. Srinivasan\n\nB.E. in Electronics & Communication Engineering — S.R.K.R. Engineering College (affiliated to Andhra University), Bhimavaram, India (1993 – 1997)\n\n\n\n\nIndustry and Research Experience\n\nAdjunct Faculty and Sector Expert – Agri & AI — IIT Jammu / CPMU, Ministry of Education (2024 – 2026)\n\nAI policy ecosystems\nIntellectual Property Rights (IPR)\nMonitoring, Evaluation and Learning (MEL) for AI programs\nAI and Agriculture\n\nDirector, Machine Learning / Principal ML Scientist — Wadhwani AI (2020 – 2024)\n\nApplied Research in Machine Learning and Generative AI\nLarge Language Models (LLMs)\nDocument Intelligence\nAI for Agriculture, Healthcare, and Education\nReliable and uncertainty-aware AI systems\nScalable AI deployment\n\nSenior Principal Statistical Engineer — Embibe (2019 – 2020)\n\nLearning Analytics\nCausal Inference\nRecommendation Systems\nAI for Education\n\nConsulting ML Architect — EkStep / NIIT StackRoute / Consulting (2014 – 2019)\n\nAI for Education\nML Platforms and Infrastructure\nRecommendation Engines\nNLP-based Educational Systems\nConversational Analytics\nInteroperable AI Systems\n\nFounder & CTO — VitalTicks (2017 – 2025)\n\nConnected Healthcare\nIoT Systems\nSmart Diagnostics\nEmbedded AI Systems\n\nAssociate Research Scientist — Dow AgroSciences (2011 – 2014)\n\nComputational Biology\nGenomics\nBayesian Modeling\nScientific Computing\nHigh-dimensional Statistical Methods\nDesign of Experiments\n\nPostdoctoral Researcher — Texas A&M University (2010 – 2011)\n\nBayesian Inference\nDynamical Systems\nUncertainty Quantification\n\nResearch Engineer — GE John F. Welch Technology Center (2000 – 2002)\n\nSignal Processing\nScientific Computing\nMonte Carlo Methods\nCompression Algorithms\n\n\n\n\n\nResearch and Academic Interests\n\nFrontier Models and Large Language Models (LLMs)\nUnified Theories of Deep Learning\nUnderstanding Generalization and Scaling in Neural Networks\nBayesian Statistics and Probabilistic Modeling\nUncertainty Quantification in AI Systems\nDistributed Training and Inference for GPT-scale Models\nML Systems and AI Infrastructure\nGenerative AI and Multimodal Systems\nRetrieval-Augmented Generation (RAG)\nDeep Learning Theory\nScientific Computing\nDynamical Systems and Optimization\nStatistical Signal Processing\nExplainable and Interoperable AI\nAI for Education, Healthcare, and Agriculture\nCurriculum Design for Systems Programmers and AI Engineers\n\n\n\n\nSelected Recent Publications\n\nLattice-Based Vector Quantization for Low-Bit Quantization-Aware Training\nProceedings of Machine Learning Research, 2026.\nHealth Sentinel: An AI Pipeline for Real-time Disease Outbreak Detection\nNLP4PI Workshop, 2025.\nLearning to Detect PII: Tabular vs Document Classification Models for Network Traffic Analysis\nJournal of Information Security and Applications, 2025.\nQuantProb: Generalizing Probabilities along with Predictions for a Pre-trained Classifier\nUAI 2024.\nAutomatic Interpretation of Line Probe Assay Test for TB\nAAAI 2024.\n\n\n\n\nSelected Keywords\nMachine Learning, Generative AI, Frontier Models, Bayesian Statistics, Deep Learning, LLMs, Distributed AI Systems, AI Infrastructure, Signal Processing, Scientific Computing, Optimization, Computational Mathematics, NLP, Multimodal AI, AI for Social Impact",
+    "crumbs": [
+      "Home",
+      "About"
     ]
   },
   {
