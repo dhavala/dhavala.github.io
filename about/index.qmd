@@ -1,15 +1,7 @@
 ---
 title: "About"
-description: "About Soma S Dhavala — bio, and contact."
+description: "AI Researcher | Systems Architect | Educator | Technologist"
 ---
-
-# Soma S. Dhavala
-
-AI Researcher | Systems Architect | Educator | Technologist
-
----
-
-# About Me
 
 I am an AI researcher, systems architect, and educator with over two decades of experience spanning Machine Learning, Artificial Intelligence, Bayesian Statistics, Signal Processing, Distributed Systems, and Scientific Computing. My work lies at the intersection of rigorous mathematical foundations and large-scale deployable AI systems, with applications across Agriculture, Healthcare, Education, Computational Biology, and Public-Interest Technology.
 
@@ -21,153 +13,68 @@ Over the years, I have worked across academia, industrial research, startups, op
 
 # Educational Qualifications
 
-## University of Washington, USA
-**M.S. in Applied & Computational Mathematics**  
-2020 – 2022
-
-Areas: Dynamical Systems, Stochastic Processes, PDEs, Numerical Linear Algebra, Deep Learning in NLP
-
----
-
-## Texas A&M University, USA
-**Ph.D. in Statistics**  
-2005 – 2010
-
-Research Area:
-Bayesian Semiparametric Models for Heterogeneous Cross-Platform Differential Gene Expression
-
-Advisor: Prof. Bani K. Mallick
-
----
-
-## Iowa State University, USA
-**Ph.D. Program (Transferred to TAMU)**  
-2003 – 2005
-
-Research Area:
-Distributed Estimation Techniques
-
-Advisor: Prof. Alexander Doganzic
-
----
-
-## Indian Institute of Technology Madras, India
-**M.S. in Electrical Engineering**  
-1997 – 2000
-
-Research Area:
-Time-Frequency Representations: Analysis, Synthesis and Implementation
-
-Advisors: Prof. K. M. M. Prabhu, Prof. S. Srinivasan
-
----
-
-## Andhra University, India
-**B.E. in Electronics & Communication Engineering**  
-1993 – 1997
+- **M.S. in Applied & Computational Mathematics** — University of Washington, USA (2020 – 2022)
+  - Areas: Dynamical Systems, Stochastic Processes, PDEs, Numerical Linear Algebra, Deep Learning in NLP
+- **Ph.D. in Statistics** — Texas A&M University, USA (2005 – 2010)
+  - Research area: Bayesian Semiparametric Models for Heterogeneous Cross-Platform Differential Gene Expression
+  - Advisor: Prof. Bani K. Mallick
+- **Ph.D. Program** (transferred to TAMU) — Iowa State University, USA (2003 – 2005)
+  - Research area: Distributed Estimation Techniques
+  - Advisor: Prof. Alexander Doganzic
+- **M.S. in Electrical Engineering** — Indian Institute of Technology Madras, India (1997 – 2000)
+  - Research area: Time-Frequency Representations: Analysis, Synthesis and Implementation
+  - Advisors: Prof. K. M. M. Prabhu, Prof. S. Srinivasan
+- **B.E. in Electronics & Communication Engineering** — S.R.K.R. Engineering College (affiliated to Andhra University), Bhimavaram, India (1993 – 1997)
 
 ---
 
 # Industry and Research Experience
 
-## IIT Jammu / CPMU, Ministry of Education
-**Adjunct Faculty and Sector Expert – Agri & AI**  
-2024 – Present
-
-Focus Areas:
-- AI policy ecosystems
-- Intellectual Property Rights (IPR)
-- Monitoring, Evaluation and Learning (MEL) for AI programs
-- AI and Agriculture
-
----
-
-## Wadhwani AI
-**Director, Machine Learning / Principal ML Scientist**  
-2020 – 2024
-
-Focus Areas:
-- Applied Research in Machine Learning and Generative AI
-- Large Language Models (LLMs)
-- Document Intelligence
-- AI for Agriculture, Healthcare, and Education
-- Retrieval-Augmented Generation (RAG)
-- Reliable and uncertainty-aware AI systems
-- Scalable AI deployment
-
----
-
-## Embibe
-**Senior Principal Statistical Engineer**  
-2019 – 2020
-
-Focus Areas:
-- Learning Analytics
-- Causal Inference
-- Recommendation Systems
-- AI for Education
-
----
-
-## EkStep / NIIT StackRoute / Consulting
-**Consulting ML Architect**  
-2015 – 2019
-
-Focus Areas:
-- AI for Education
-- ML Platforms and Infrastructure
-- Recommendation Engines
-- NLP-based Educational Systems
-- Conversational Analytics
-- Interoperable AI Systems
-
----
-
-## VitalTicks
-**Founder & CTO**  
-2017 – Present
-
-Focus Areas:
-- Connected Healthcare
-- IoT Systems
-- Smart Diagnostics
-- Embedded AI Systems
-
----
-
-## Dow AgroSciences
-**Associate Research Scientist**  
-2011 – 2014
-
-Focus Areas:
-- Computational Biology
-- Genomics
-- Bayesian Modeling
-- Scientific Computing
-- High-dimensional Statistical Methods
-
----
-
-## Texas A&M University
-**Postdoctoral Researcher**  
-2010 – 2011
-
-Focus Areas:
-- Bayesian Inference
-- Dynamical Systems
-- Uncertainty Quantification
-
----
-
-## GE John F. Welch Technology Center
-**Research Engineer**  
-2000 – 2002
-
-Focus Areas:
-- Signal Processing
-- Scientific Computing
-- Monte Carlo Methods
-- Compression Algorithms
+- **Adjunct Faculty and Sector Expert – Agri & AI** — IIT Jammu / CPMU, Ministry of Education (2024 – 2026)
+  - AI policy ecosystems
+  - Intellectual Property Rights (IPR)
+  - Monitoring, Evaluation and Learning (MEL) for AI programs
+  - AI and Agriculture
+- **Director, Machine Learning / Principal ML Scientist** — Wadhwani AI (2020 – 2024)
+  - Applied Research in Machine Learning and Generative AI
+  - Large Language Models (LLMs)
+  - Document Intelligence
+  - AI for Agriculture, Healthcare, and Education
+  - Reliable and uncertainty-aware AI systems
+  - Scalable AI deployment
+- **Senior Principal Statistical Engineer** — Embibe (2019 – 2020)
+  - Learning Analytics
+  - Causal Inference
+  - Recommendation Systems
+  - AI for Education
+- **Consulting ML Architect** — EkStep / NIIT StackRoute / Consulting (2014 – 2019)
+  - AI for Education
+  - ML Platforms and Infrastructure
+  - Recommendation Engines
+  - NLP-based Educational Systems
+  - Conversational Analytics
+  - Interoperable AI Systems
+- **Founder & CTO** — VitalTicks (2017 – 2025)
+  - Connected Healthcare
+  - IoT Systems
+  - Smart Diagnostics
+  - Embedded AI Systems
+- **Associate Research Scientist** — Dow AgroSciences (2011 – 2014)
+  - Computational Biology
+  - Genomics
+  - Bayesian Modeling
+  - Scientific Computing
+  - High-dimensional Statistical Methods
+  - Design of Experiments
+- **Postdoctoral Researcher** — Texas A&M University (2010 – 2011)
+  - Bayesian Inference
+  - Dynamical Systems
+  - Uncertainty Quantification
+- **Research Engineer** — GE John F. Welch Technology Center (2000 – 2002)
+  - Signal Processing
+  - Scientific Computing
+  - Monte Carlo Methods
+  - Compression Algorithms
 
 ---
 

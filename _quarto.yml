@@ -49,7 +49,6 @@ website:
         href: about/index.qmd
         contents:
           - about/bio.qmd
-          - about/places.qmd
           - about/contact.qmd
       - section: "Research"
         href: research/index.qmd
