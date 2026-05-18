@@ -25,7 +25,7 @@ Read more [about me](about/), or browse [recent publications](research/publicati
 :::
 
 ::: {.intro-photo}
-![Soma S Dhavala](images/soma-speaker-crop-fg.png){.profile-pic fig-alt="Soma S Dhavala"}
+![Soma S Dhavala](images/soma-speaker-fg-reduced.png){.profile-pic fig-alt="Soma S Dhavala"}
 :::
 
 ::::
