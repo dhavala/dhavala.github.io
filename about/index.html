@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="About Soma S Dhavala — bio, places, and contact.">
+<meta name="description" content="About Soma S Dhavala — bio, and contact.">
 
 <title>About – Soma S Dhavala</title>
 <style>
@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ce05b8d7aa51a056aab18503b076ed14.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-3b14aad7013cdc799608761147f6bd46.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -89,9 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // .quarto-title-breadcrumbs CSS rule (ribbon styling, layout
   // fixes, h1 hide, mobile plain-text override) applies to it
   // identically — no parallel selectors needed, no size drift.
+  // SKIP on the actual home page (/) — "Home > Home" is meaningless.
   var titleHeader = document.querySelector('#title-block-header');
   var titleBcr = document.querySelector('.quarto-title-breadcrumbs');
-  if (titleHeader && !titleBcr) {
+  var path = window.location.pathname.replace(/\/+$/, '');
+  var isHome = (path === '' || path.endsWith('/index') || /\/index\.html?$/.test(path));
+  if (titleHeader && !titleBcr && !isHome) {
     var h1 = titleHeader.querySelector('.quarto-title h1.title');
     if (h1) {
       var trail = document.createElement('nav');
@@ -113,11 +116,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <meta property="og:title" content="About – Soma S Dhavala">
-<meta property="og:description" content="About Soma S Dhavala — bio, places, and contact.">
+<meta property="og:description" content="About Soma S Dhavala — bio, and contact.">
 <meta property="og:image" content="https://dhavala.github.io/about/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
 <meta name="twitter:title" content="About – Soma S Dhavala">
-<meta name="twitter:description" content="About Soma S Dhavala — bio, places, and contact.">
+<meta name="twitter:description" content="About Soma S Dhavala — bio, and contact.">
 <meta name="twitter:image" content="https://dhavala.github.io/about/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -365,8 +368,37 @@ document.addEventListener('DOMContentLoaded', function() {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#soma-s.-dhavala" id="toc-soma-s.-dhavala" class="nav-link active" data-scroll-target="#soma-s.-dhavala">Soma S. Dhavala</a></li>
+  <li><a href="#about-me" id="toc-about-me" class="nav-link" data-scroll-target="#about-me">About Me</a></li>
+  <li><a href="#educational-qualifications" id="toc-educational-qualifications" class="nav-link" data-scroll-target="#educational-qualifications">Educational Qualifications</a>
+  <ul class="collapse">
+  <li><a href="#university-of-washington-usa" id="toc-university-of-washington-usa" class="nav-link" data-scroll-target="#university-of-washington-usa">University of Washington, USA</a></li>
+  <li><a href="#texas-am-university-usa" id="toc-texas-am-university-usa" class="nav-link" data-scroll-target="#texas-am-university-usa">Texas A&amp;M University, USA</a></li>
+  <li><a href="#iowa-state-university-usa" id="toc-iowa-state-university-usa" class="nav-link" data-scroll-target="#iowa-state-university-usa">Iowa State University, USA</a></li>
+  <li><a href="#indian-institute-of-technology-madras-india" id="toc-indian-institute-of-technology-madras-india" class="nav-link" data-scroll-target="#indian-institute-of-technology-madras-india">Indian Institute of Technology Madras, India</a></li>
+  <li><a href="#andhra-university-india" id="toc-andhra-university-india" class="nav-link" data-scroll-target="#andhra-university-india">Andhra University, India</a></li>
+  </ul></li>
+  <li><a href="#industry-and-research-experience" id="toc-industry-and-research-experience" class="nav-link" data-scroll-target="#industry-and-research-experience">Industry and Research Experience</a>
+  <ul class="collapse">
+  <li><a href="#iit-jammu-cpmu-ministry-of-education" id="toc-iit-jammu-cpmu-ministry-of-education" class="nav-link" data-scroll-target="#iit-jammu-cpmu-ministry-of-education">IIT Jammu / CPMU, Ministry of Education</a></li>
+  <li><a href="#wadhwani-ai" id="toc-wadhwani-ai" class="nav-link" data-scroll-target="#wadhwani-ai">Wadhwani AI</a></li>
+  <li><a href="#embibe" id="toc-embibe" class="nav-link" data-scroll-target="#embibe">Embibe</a></li>
+  <li><a href="#ekstep-niit-stackroute-consulting" id="toc-ekstep-niit-stackroute-consulting" class="nav-link" data-scroll-target="#ekstep-niit-stackroute-consulting">EkStep / NIIT StackRoute / Consulting</a></li>
+  <li><a href="#vitalticks" id="toc-vitalticks" class="nav-link" data-scroll-target="#vitalticks">VitalTicks</a></li>
+  <li><a href="#dow-agrosciences" id="toc-dow-agrosciences" class="nav-link" data-scroll-target="#dow-agrosciences">Dow AgroSciences</a></li>
+  <li><a href="#texas-am-university" id="toc-texas-am-university" class="nav-link" data-scroll-target="#texas-am-university">Texas A&amp;M University</a></li>
+  <li><a href="#ge-john-f.-welch-technology-center" id="toc-ge-john-f.-welch-technology-center" class="nav-link" data-scroll-target="#ge-john-f.-welch-technology-center">GE John F. Welch Technology Center</a></li>
+  </ul></li>
+  <li><a href="#research-and-academic-interests" id="toc-research-and-academic-interests" class="nav-link" data-scroll-target="#research-and-academic-interests">Research and Academic Interests</a></li>
+  <li><a href="#selected-recent-publications" id="toc-selected-recent-publications" class="nav-link" data-scroll-target="#selected-recent-publications">Selected Recent Publications</a></li>
+  <li><a href="#selected-keywords" id="toc-selected-keywords" class="nav-link" data-scroll-target="#selected-keywords">Selected Keywords</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -381,7 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div>
   <div class="description">
-    About Soma S Dhavala — bio, places, and contact.
+    About Soma S Dhavala — bio, and contact.
   </div>
 </div>
 
@@ -398,9 +430,162 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 
-<p>Use the sidebar at left to browse the sub-pages.</p>
+<section id="soma-s.-dhavala" class="level1">
+<h1>Soma S. Dhavala</h1>
+<p>AI Researcher | Systems Architect | Educator | Technologist</p>
+<hr>
+</section>
+<section id="about-me" class="level1">
+<h1>About Me</h1>
+<p>I am an AI researcher, systems architect, and educator with over two decades of experience spanning Machine Learning, Artificial Intelligence, Bayesian Statistics, Signal Processing, Distributed Systems, and Scientific Computing. My work lies at the intersection of rigorous mathematical foundations and large-scale deployable AI systems, with applications across Agriculture, Healthcare, Education, Computational Biology, and Public-Interest Technology.</p>
+<p>My current focus is on Frontier Model Development, especially understanding why Deep Learning works and developing a unified theoretical framework connecting optimization, representation learning, probabilistic inference, dynamical systems, and information theory. I am also interested in scalable AI infrastructure for distributed training and inference of GPT-scale models, along with curriculum design for systems programmers and AI engineers working on large-scale AI systems.</p>
+<p>Over the years, I have worked across academia, industrial research, startups, open-source ecosystems, and public-sector AI initiatives, contributing both to foundational research and production-grade AI deployments.</p>
+<hr>
+</section>
+<section id="educational-qualifications" class="level1">
+<h1>Educational Qualifications</h1>
+<section id="university-of-washington-usa" class="level2">
+<h2 data-anchor-id="university-of-washington-usa">University of Washington, USA</h2>
+<p><strong>M.S. in Applied &amp; Computational Mathematics</strong><br>
+2020 – 2022</p>
+<p>Areas: Dynamical Systems, Stochastic Processes, PDEs, Numerical Linear Algebra, Deep Learning in NLP</p>
+<hr>
+</section>
+<section id="texas-am-university-usa" class="level2">
+<h2 data-anchor-id="texas-am-university-usa">Texas A&amp;M University, USA</h2>
+<p><strong>Ph.D.&nbsp;in Statistics</strong><br>
+2005 – 2010</p>
+<p>Research Area: Bayesian Semiparametric Models for Heterogeneous Cross-Platform Differential Gene Expression</p>
+<p>Advisor: Prof.&nbsp;Bani K. Mallick</p>
+<hr>
+</section>
+<section id="iowa-state-university-usa" class="level2">
+<h2 data-anchor-id="iowa-state-university-usa">Iowa State University, USA</h2>
+<p><strong>Ph.D.&nbsp;Program (Transferred to TAMU)</strong><br>
+2003 – 2005</p>
+<p>Research Area: Distributed Estimation Techniques</p>
+<p>Advisor: Prof.&nbsp;Alexander Doganzic</p>
+<hr>
+</section>
+<section id="indian-institute-of-technology-madras-india" class="level2">
+<h2 data-anchor-id="indian-institute-of-technology-madras-india">Indian Institute of Technology Madras, India</h2>
+<p><strong>M.S. in Electrical Engineering</strong><br>
+1997 – 2000</p>
+<p>Research Area: Time-Frequency Representations: Analysis, Synthesis and Implementation</p>
+<p>Advisors: Prof.&nbsp;K. M. M. Prabhu, Prof.&nbsp;S. Srinivasan</p>
+<hr>
+</section>
+<section id="andhra-university-india" class="level2">
+<h2 data-anchor-id="andhra-university-india">Andhra University, India</h2>
+<p><strong>B.E. in Electronics &amp; Communication Engineering</strong><br>
+1993 – 1997</p>
+<hr>
+</section>
+</section>
+<section id="industry-and-research-experience" class="level1">
+<h1>Industry and Research Experience</h1>
+<section id="iit-jammu-cpmu-ministry-of-education" class="level2">
+<h2 data-anchor-id="iit-jammu-cpmu-ministry-of-education">IIT Jammu / CPMU, Ministry of Education</h2>
+<p><strong>Adjunct Faculty and Sector Expert – Agri &amp; AI</strong><br>
+2024 – Present</p>
+<p>Focus Areas: - AI policy ecosystems - Intellectual Property Rights (IPR) - Monitoring, Evaluation and Learning (MEL) for AI programs - AI and Agriculture</p>
+<hr>
+</section>
+<section id="wadhwani-ai" class="level2">
+<h2 data-anchor-id="wadhwani-ai">Wadhwani AI</h2>
+<p><strong>Director, Machine Learning / Principal ML Scientist</strong><br>
+2020 – 2024</p>
+<p>Focus Areas: - Applied Research in Machine Learning and Generative AI - Large Language Models (LLMs) - Document Intelligence - AI for Agriculture, Healthcare, and Education - Retrieval-Augmented Generation (RAG) - Reliable and uncertainty-aware AI systems - Scalable AI deployment</p>
+<hr>
+</section>
+<section id="embibe" class="level2">
+<h2 data-anchor-id="embibe">Embibe</h2>
+<p><strong>Senior Principal Statistical Engineer</strong><br>
+2019 – 2020</p>
+<p>Focus Areas: - Learning Analytics - Causal Inference - Recommendation Systems - AI for Education</p>
+<hr>
+</section>
+<section id="ekstep-niit-stackroute-consulting" class="level2">
+<h2 data-anchor-id="ekstep-niit-stackroute-consulting">EkStep / NIIT StackRoute / Consulting</h2>
+<p><strong>Consulting ML Architect</strong><br>
+2015 – 2019</p>
+<p>Focus Areas: - AI for Education - ML Platforms and Infrastructure - Recommendation Engines - NLP-based Educational Systems - Conversational Analytics - Interoperable AI Systems</p>
+<hr>
+</section>
+<section id="vitalticks" class="level2">
+<h2 data-anchor-id="vitalticks">VitalTicks</h2>
+<p><strong>Founder &amp; CTO</strong><br>
+2017 – Present</p>
+<p>Focus Areas: - Connected Healthcare - IoT Systems - Smart Diagnostics - Embedded AI Systems</p>
+<hr>
+</section>
+<section id="dow-agrosciences" class="level2">
+<h2 data-anchor-id="dow-agrosciences">Dow AgroSciences</h2>
+<p><strong>Associate Research Scientist</strong><br>
+2011 – 2014</p>
+<p>Focus Areas: - Computational Biology - Genomics - Bayesian Modeling - Scientific Computing - High-dimensional Statistical Methods</p>
+<hr>
+</section>
+<section id="texas-am-university" class="level2">
+<h2 data-anchor-id="texas-am-university">Texas A&amp;M University</h2>
+<p><strong>Postdoctoral Researcher</strong><br>
+2010 – 2011</p>
+<p>Focus Areas: - Bayesian Inference - Dynamical Systems - Uncertainty Quantification</p>
+<hr>
+</section>
+<section id="ge-john-f.-welch-technology-center" class="level2">
+<h2 data-anchor-id="ge-john-f.-welch-technology-center">GE John F. Welch Technology Center</h2>
+<p><strong>Research Engineer</strong><br>
+2000 – 2002</p>
+<p>Focus Areas: - Signal Processing - Scientific Computing - Monte Carlo Methods - Compression Algorithms</p>
+<hr>
+</section>
+</section>
+<section id="research-and-academic-interests" class="level1">
+<h1>Research and Academic Interests</h1>
+<ul>
+<li>Frontier Models and Large Language Models (LLMs)</li>
+<li>Unified Theories of Deep Learning</li>
+<li>Understanding Generalization and Scaling in Neural Networks</li>
+<li>Bayesian Statistics and Probabilistic Modeling</li>
+<li>Uncertainty Quantification in AI Systems</li>
+<li>Distributed Training and Inference for GPT-scale Models</li>
+<li>ML Systems and AI Infrastructure</li>
+<li>Generative AI and Multimodal Systems</li>
+<li>Retrieval-Augmented Generation (RAG)</li>
+<li>Deep Learning Theory</li>
+<li>Scientific Computing</li>
+<li>Dynamical Systems and Optimization</li>
+<li>Statistical Signal Processing</li>
+<li>Explainable and Interoperable AI</li>
+<li>AI for Education, Healthcare, and Agriculture</li>
+<li>Curriculum Design for Systems Programmers and AI Engineers</li>
+</ul>
+<hr>
+</section>
+<section id="selected-recent-publications" class="level1">
+<h1>Selected Recent Publications</h1>
+<ol type="1">
+<li><p><strong>Lattice-Based Vector Quantization for Low-Bit Quantization-Aware Training</strong><br>
+Proceedings of Machine Learning Research, 2026.</p></li>
+<li><p><strong>Health Sentinel: An AI Pipeline for Real-time Disease Outbreak Detection</strong><br>
+NLP4PI Workshop, 2025.</p></li>
+<li><p><strong>Learning to Detect PII: Tabular vs Document Classification Models for Network Traffic Analysis</strong><br>
+Journal of Information Security and Applications, 2025.</p></li>
+<li><p><strong>QuantProb: Generalizing Probabilities along with Predictions for a Pre-trained Classifier</strong><br>
+UAI 2024.</p></li>
+<li><p><strong>Automatic Interpretation of Line Probe Assay Test for TB</strong><br>
+AAAI 2024.</p></li>
+</ol>
+<hr>
+</section>
+<section id="selected-keywords" class="level1">
+<h1>Selected Keywords</h1>
+<p>Machine Learning, Generative AI, Frontier Models, Bayesian Statistics, Deep Learning, LLMs, Distributed AI Systems, AI Infrastructure, Signal Processing, Scientific Computing, Optimization, Computational Mathematics, NLP, Multimodal AI, AI for Social Impact</p>
+<hr>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

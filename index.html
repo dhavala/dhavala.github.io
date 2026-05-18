@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Personal site of Soma S Dhavala — statistician and applied ML practitioner.">
+<meta name="description" content="AI researcher, systems architect, and educator. Adjunct Faculty at IIT Jammu; Founder &amp; CTO at VitalTicks. Frontier models, Bayesian inference, and scalable AI systems.">
 
 <title>Soma S Dhavala</title>
 <style>
@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ce05b8d7aa51a056aab18503b076ed14.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2ccadcb778260692689e3415bcc90571.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -89,9 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // .quarto-title-breadcrumbs CSS rule (ribbon styling, layout
   // fixes, h1 hide, mobile plain-text override) applies to it
   // identically — no parallel selectors needed, no size drift.
+  // SKIP on the actual home page (/) — "Home > Home" is meaningless.
   var titleHeader = document.querySelector('#title-block-header');
   var titleBcr = document.querySelector('.quarto-title-breadcrumbs');
-  if (titleHeader && !titleBcr) {
+  var path = window.location.pathname.replace(/\/+$/, '');
+  var isHome = (path === '' || path.endsWith('/index') || /\/index\.html?$/.test(path));
+  if (titleHeader && !titleBcr && !isHome) {
     var h1 = titleHeader.querySelector('.quarto-title h1.title');
     if (h1) {
       var trail = document.createElement('nav');
@@ -113,13 +116,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <meta property="og:title" content="Soma S Dhavala">
-<meta property="og:description" content="Personal site of Soma S Dhavala — statistician and applied ML practitioner.">
+<meta property="og:description" content="AI researcher, systems architect, and educator. Adjunct Faculty at IIT Jammu; Founder &amp; CTO at VitalTicks. Frontier models, Bayesian inference, and scalable AI systems.">
 <meta property="og:image" content="https://dhavala.github.io/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
 <meta property="og:image:height" content="630">
 <meta property="og:image:width" content="1200">
 <meta name="twitter:title" content="Soma S Dhavala">
-<meta name="twitter:description" content="Personal site of Soma S Dhavala — statistician and applied ML practitioner.">
+<meta name="twitter:description" content="AI researcher, systems architect, and educator. Adjunct Faculty at IIT Jammu; Founder &amp; CTO at VitalTicks. Frontier models, Bayesian inference, and scalable AI systems.">
 <meta name="twitter:image" content="https://dhavala.github.io/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image-height" content="630">
@@ -373,37 +376,46 @@ document.addEventListener('DOMContentLoaded', function() {
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Soma S Dhavala</h1></header>
 <div class="section-banner">
   <img src="./images/banners/homebw.jpg" alt="Home banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Soma S Dhavala</h1>
-</div>
-
-<div>
-  <div class="description">
-    Personal site of Soma S Dhavala — statistician and applied ML practitioner.
-  </div>
-</div>
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
+<header id="title-block-header">
 
 
 </header>
 
 
-<p>Welcome. This is the landing page.</p>
-<p>Browse the nav above for <a href="about/">About</a>, <a href="research/">Research</a>, <a href="teaching/">Teaching</a>, <a href="consulting/">Consulting</a>, or the <a href="posts/">Blog</a>.</p>
+<div class="intro-card">
+<div class="intro-text">
+<p><strong>AI Researcher · Systems Architect · Educator · Technologist</strong></p>
+<p><em>Adjunct Faculty, IIT Jammu</em> · <em>Founder &amp; CTO, VitalTicks</em></p>
+<p>Two decades across machine learning, Bayesian statistics, signal processing, and large-scale AI systems. Current focus: frontier model development, deep learning theory, and scalable AI infrastructure for GPT-scale models, with applications across agriculture, healthcare, education, and computational biology.</p>
+</div>
+<div class="intro-photo">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/soma-speaker.jpg" class="profile-pic img-fluid figure-img" alt="Soma S Dhavala"></p>
+<figcaption>Soma S Dhavala</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quick-stats">
+<div class="stat">
+<p><strong>20+ years</strong> across ML, AI, and signal processing</p>
+</div>
+<div class="stat">
+<p><strong>Ph.D.&nbsp;Statistics</strong> Texas A&amp;M University</p>
+</div>
+<div class="stat">
+<p><strong>Cross-disciplinary</strong> EE · Math · Stats · CS</p>
+</div>
+</div>
+<div class="cta-row">
+<p><a href="files/Soma_Dhavala_CV.pdf" class="cta-link">CV (PDF)</a> <a href="about/" class="cta-link">About / Bio</a> <a href="research/publications.html" class="cta-link">Recent papers</a> <a href="mailto:soma.dhavala@gmail.com" class="cta-link">Email</a></p>
+</div>
 
 
 

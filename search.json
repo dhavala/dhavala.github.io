@@ -41,7 +41,7 @@
     "href": "index.html",
     "title": "Soma S Dhavala",
     "section": "",
-    "text": "Welcome. This is the landing page.\nBrowse the nav above for About, Research, Teaching, Consulting, or the Blog."
+    "text": "AI Researcher · Systems Architect · Educator · Technologist\nAdjunct Faculty, IIT Jammu · Founder & CTO, VitalTicks\nTwo decades across machine learning, Bayesian statistics, signal processing, and large-scale AI systems. Current focus: frontier model development, deep learning theory, and scalable AI infrastructure for GPT-scale models, with applications across agriculture, healthcare, education, and computational biology.\n\n\n\n\n\nSoma S Dhavala\n\n\n\n\n\n\n20+ years across ML, AI, and signal processing\n\n\nPh.D. Statistics Texas A&M University\n\n\nCross-disciplinary EE · Math · Stats · CS\n\n\n\nCV (PDF) About / Bio Recent papers Email"
   },
   {
     "objectID": "teaching/notes.html",
@@ -129,11 +129,143 @@
     ]
   },
   {
-    "objectID": "about/index.html",
-    "href": "about/index.html",
+    "objectID": "about/index.html#university-of-washington-usa",
+    "href": "about/index.html#university-of-washington-usa",
     "title": "About",
-    "section": "",
-    "text": "Use the sidebar at left to browse the sub-pages.",
+    "section": "University of Washington, USA",
+    "text": "University of Washington, USA\nM.S. in Applied & Computational Mathematics\n2020 – 2022\nAreas: Dynamical Systems, Stochastic Processes, PDEs, Numerical Linear Algebra, Deep Learning in NLP",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about/index.html#texas-am-university-usa",
+    "href": "about/index.html#texas-am-university-usa",
+    "title": "About",
+    "section": "Texas A&M University, USA",
+    "text": "Texas A&M University, USA\nPh.D. in Statistics\n2005 – 2010\nResearch Area: Bayesian Semiparametric Models for Heterogeneous Cross-Platform Differential Gene Expression\nAdvisor: Prof. Bani K. Mallick",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about/index.html#iowa-state-university-usa",
+    "href": "about/index.html#iowa-state-university-usa",
+    "title": "About",
+    "section": "Iowa State University, USA",
+    "text": "Iowa State University, USA\nPh.D. Program (Transferred to TAMU)\n2003 – 2005\nResearch Area: Distributed Estimation Techniques\nAdvisor: Prof. Alexander Doganzic",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about/index.html#indian-institute-of-technology-madras-india",
+    "href": "about/index.html#indian-institute-of-technology-madras-india",
+    "title": "About",
+    "section": "Indian Institute of Technology Madras, India",
+    "text": "Indian Institute of Technology Madras, India\nM.S. in Electrical Engineering\n1997 – 2000\nResearch Area: Time-Frequency Representations: Analysis, Synthesis and Implementation\nAdvisors: Prof. K. M. M. Prabhu, Prof. S. Srinivasan",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about/index.html#andhra-university-india",
+    "href": "about/index.html#andhra-university-india",
+    "title": "About",
+    "section": "Andhra University, India",
+    "text": "Andhra University, India\nB.E. in Electronics & Communication Engineering\n1993 – 1997",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about/index.html#iit-jammu-cpmu-ministry-of-education",
+    "href": "about/index.html#iit-jammu-cpmu-ministry-of-education",
+    "title": "About",
+    "section": "IIT Jammu / CPMU, Ministry of Education",
+    "text": "IIT Jammu / CPMU, Ministry of Education\nAdjunct Faculty and Sector Expert – Agri & AI\n2024 – Present\nFocus Areas: - AI policy ecosystems - Intellectual Property Rights (IPR) - Monitoring, Evaluation and Learning (MEL) for AI programs - AI and Agriculture",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about/index.html#wadhwani-ai",
+    "href": "about/index.html#wadhwani-ai",
+    "title": "About",
+    "section": "Wadhwani AI",
+    "text": "Wadhwani AI\nDirector, Machine Learning / Principal ML Scientist\n2020 – 2024\nFocus Areas: - Applied Research in Machine Learning and Generative AI - Large Language Models (LLMs) - Document Intelligence - AI for Agriculture, Healthcare, and Education - Retrieval-Augmented Generation (RAG) - Reliable and uncertainty-aware AI systems - Scalable AI deployment",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about/index.html#embibe",
+    "href": "about/index.html#embibe",
+    "title": "About",
+    "section": "Embibe",
+    "text": "Embibe\nSenior Principal Statistical Engineer\n2019 – 2020\nFocus Areas: - Learning Analytics - Causal Inference - Recommendation Systems - AI for Education",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about/index.html#ekstep-niit-stackroute-consulting",
+    "href": "about/index.html#ekstep-niit-stackroute-consulting",
+    "title": "About",
+    "section": "EkStep / NIIT StackRoute / Consulting",
+    "text": "EkStep / NIIT StackRoute / Consulting\nConsulting ML Architect\n2015 – 2019\nFocus Areas: - AI for Education - ML Platforms and Infrastructure - Recommendation Engines - NLP-based Educational Systems - Conversational Analytics - Interoperable AI Systems",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about/index.html#vitalticks",
+    "href": "about/index.html#vitalticks",
+    "title": "About",
+    "section": "VitalTicks",
+    "text": "VitalTicks\nFounder & CTO\n2017 – Present\nFocus Areas: - Connected Healthcare - IoT Systems - Smart Diagnostics - Embedded AI Systems",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about/index.html#dow-agrosciences",
+    "href": "about/index.html#dow-agrosciences",
+    "title": "About",
+    "section": "Dow AgroSciences",
+    "text": "Dow AgroSciences\nAssociate Research Scientist\n2011 – 2014\nFocus Areas: - Computational Biology - Genomics - Bayesian Modeling - Scientific Computing - High-dimensional Statistical Methods",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about/index.html#texas-am-university",
+    "href": "about/index.html#texas-am-university",
+    "title": "About",
+    "section": "Texas A&M University",
+    "text": "Texas A&M University\nPostdoctoral Researcher\n2010 – 2011\nFocus Areas: - Bayesian Inference - Dynamical Systems - Uncertainty Quantification",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about/index.html#ge-john-f.-welch-technology-center",
+    "href": "about/index.html#ge-john-f.-welch-technology-center",
+    "title": "About",
+    "section": "GE John F. Welch Technology Center",
+    "text": "GE John F. Welch Technology Center\nResearch Engineer\n2000 – 2002\nFocus Areas: - Signal Processing - Scientific Computing - Monte Carlo Methods - Compression Algorithms",
     "crumbs": [
       "Home",
       "About"

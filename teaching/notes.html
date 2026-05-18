@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ce05b8d7aa51a056aab18503b076ed14.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-3b14aad7013cdc799608761147f6bd46.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -89,9 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // .quarto-title-breadcrumbs CSS rule (ribbon styling, layout
   // fixes, h1 hide, mobile plain-text override) applies to it
   // identically — no parallel selectors needed, no size drift.
+  // SKIP on the actual home page (/) — "Home > Home" is meaningless.
   var titleHeader = document.querySelector('#title-block-header');
   var titleBcr = document.querySelector('.quarto-title-breadcrumbs');
-  if (titleHeader && !titleBcr) {
+  var path = window.location.pathname.replace(/\/+$/, '');
+  var isHome = (path === '' || path.endsWith('/index') || /\/index\.html?$/.test(path));
+  if (titleHeader && !titleBcr && !isHome) {
     var h1 = titleHeader.querySelector('.quarto-title h1.title');
     if (h1) {
       var trail = document.createElement('nav');
