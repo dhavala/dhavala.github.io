@@ -1,0 +1,73 @@
+---
+title: "Normal Approximation"
+subtitle: "Laplace (normal) approximation of a bivariate posterior"
+author: "Soma Sekhar Dhavala"
+---
+
+Let the likelihood function be
+
+$$
+L(\theta; y) = c \exp(-f(\theta; y)) \tag{1}
+$$
+
+for some arbitrary bi-variate function $f$ and for some constant $c$. It might be useful if we have a normal likelihood function, in which case it is possible to compute the posterior either analytically (e.g. if the prior is also normal) or by resorting to numerical integration techniques [1] (e.g. Gauss–Hermite quadrature). It can also be used to calculate moments and cumulants in an efficient way [2].
+
+In general, we can approximate the function $f(\theta)$ (in the neighborhood of $\tau$) using a multi-variate Taylor series. In the present case, we will be considering the bi-variate case. We consider only terms up to order two since the log-likelihood of a normal density is quadratic,
+
+$$
+f(\theta) \approx a_{00} + a_{10}(\theta_1 - \tau_1) + a_{01}(\theta_2 - \tau_2) + a_{11}(\theta_1 - \tau_1)(\theta_2 - \tau_2) + a_{20}(\theta_1 - \tau_1)^2 + a_{02}(\theta_2 - \tau_2)^2 \tag{2}
+$$
+
+where
+
+$$
+a_{ij} = \frac{1}{i!\, j!} \left[ \left(\frac{\partial}{\partial \theta_1}\right)^i \left(\frac{\partial}{\partial \theta_2}\right)^j f \right](\tau) \tag{3}
+$$
+
+Then the likelihood is approximated as:
+
+$$
+L(\theta; y) \sim N(\mu_L, \Sigma_L) \tag{4a}
+$$
+
+$$
+\mu_L = -\frac{1}{2}
+\begin{bmatrix}
+(a_{11} + a_{10} - a_{11}\tau_2 - 2a_{20}\tau_1)/a_{20} \\
+(a_{11} + a_{01} - a_{11}\tau_1 - 2a_{02}\tau_2)/a_{02}
+\end{bmatrix} \tag{4b}
+$$
+
+$$
+\Sigma_L = \frac{-2 a_{20} a_{02}}{4 a_{20} a_{02} - a_{11}^2}
+\begin{bmatrix}
+1/a_{02} & -2a_{11} \\
+-2a_{11} & 1/a_{20}
+\end{bmatrix} \tag{4c}
+$$
+
+We can expand the Taylor series around the *mode* or *ML estimate*. Having approximated the likelihood as a bivariate normal, below we will provide a closed-form expression for calculating the posterior density for a given normal prior. If the prior $\pi(\theta)$ is of the form
+
+$$
+\pi(\theta) \sim N(\mu_\pi, \Sigma_\pi) \tag{5}
+$$
+
+then the posterior $p(\theta)$ will be of the form
+
+$$
+p(\theta) \sim N(\mu_p, \Sigma_p) \tag{6a}
+$$
+
+$$
+\Sigma_p = \left(\Sigma_L^{-1} + \Sigma_\pi^{-1}\right)^{-1} \tag{6b}
+$$
+
+$$
+\mu_p = \Sigma_p \left(\Sigma_L^{-1}\mu_L + \Sigma_\pi^{-1}\mu_\pi\right) \tag{6c}
+$$
+
+## References
+
+[1] J. C. Naylor and A. F. M. Smith, "Applications of a method for the efficient computation of posterior distributions," *Applied Statistics*, vol. 31, 1982.
+
+[2] Kostas Triantafyllopoulos, "Moments and cumulants of the multivariate real and complex Gaussian distributions," 2002, www.stats.bris.ac.uk/research/stats/pub/ResRept/2002.html.

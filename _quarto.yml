@@ -55,7 +55,6 @@ website:
         contents:
           - research/publications.qmd
           - research/patents.qmd
-          - research/reports.qmd
           - research/code.qmd
           - section: "Projects"
             href: research/projects/index.qmd
@@ -68,6 +67,16 @@ website:
           - teaching/notes.qmd
           - teaching/homeworks.qmd
           - teaching/exams.qmd
+          - section: "Archives"
+            href: teaching/archives.qmd
+            contents:
+              - section: "Tutorials"
+                contents:
+                  - teaching/docs/archives/tutLaplace.qmd
+                  - teaching/docs/archives/tutGmm.qmd
+                  - teaching/docs/archives/tutEM.qmd
+                  - teaching/docs/archives/tutMCMC.qmd
+                  - teaching/docs/archives/tutChirp.qmd
       - text: "Consulting"
         href: consulting/index.qmd
       - section: "OSS"
