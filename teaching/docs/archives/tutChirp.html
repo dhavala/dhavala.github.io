@@ -6,11 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Soma S Dhavala">
-<meta name="dcterms.date" content="2026-05-17">
-<meta name="description" content="A first post — what this space is for.">
+<meta name="author" content="Soma Sekhar Dhavala">
 
-<title>Welcome to the blog – Soma S Dhavala</title>
+<title>Chirplet Decomposition – Soma S Dhavala</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,19 +27,19 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../../images/favicon.png" rel="icon" type="image/png">
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-ac5053a147da57e4dead3041ce999681.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../../images/favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-ac5053a147da57e4dead3041ce999681.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -116,14 +114,43 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Welcome to the blog – Soma S Dhavala">
-<meta property="og:description" content="A first post — what this space is for.">
-<meta property="og:image" content="https://dhavala.github.io/saddlepoint/welcome/images/og-image.png">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Chirplet Decomposition – Soma S Dhavala">
+<meta property="og:description" content="Joint estimation of Gaussian chirplet parameters via mixture modeling">
+<meta property="og:image" content="https://dhavala.github.io/teaching/docs/archives/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
-<meta name="twitter:title" content="Welcome to the blog – Soma S Dhavala">
-<meta name="twitter:description" content="A first post — what this space is for.">
-<meta name="twitter:image" content="https://dhavala.github.io/saddlepoint/welcome/images/og-image.png">
+<meta name="twitter:title" content="Chirplet Decomposition – Soma S Dhavala">
+<meta name="twitter:description" content="Joint estimation of Gaussian chirplet parameters via mixture modeling">
+<meta name="twitter:image" content="https://dhavala.github.io/teaching/docs/archives/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -134,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Soma S Dhavala</span>
     </a>
   </div>
@@ -144,33 +171,33 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../about/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../about/index.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../research/index.html"> 
+    <a class="nav-link" href="../../../research/index.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../teaching/index.html"> 
+    <a class="nav-link" href="../../../teaching/index.html"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../consulting/index.html"> 
+    <a class="nav-link" href="../../../consulting/index.html"> 
 <span class="menu-text">Consulting</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../saddlepoint/index.html"> 
+    <a class="nav-link" href="../../../saddlepoint/index.html"> 
 <span class="menu-text">SaddlePoint</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
 </i> 
 <span class="menu-text">SaddlePoint feed</span></a>
   </li>  
@@ -185,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Welcome to the blog</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../teaching/index.html">Teaching</a></li><li class="breadcrumb-item"><a href="../../../teaching/archives.html">Archives</a></li><li class="breadcrumb-item"><a href="../../../teaching/docs/archives/tutLaplace.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../../../teaching/docs/archives/tutChirp.html">Chirplet Decomposition</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -199,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../about/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../about/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -208,13 +235,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../about/bio.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../about/bio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../about/contact.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../about/contact.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contact</span></a>
   </div>
 </li>
@@ -222,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../research/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../research/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Research</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -231,25 +258,25 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../research/publications.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/publications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Publications</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../research/patents.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/patents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Patents</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../research/code.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Code</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../research/projects/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../research/projects/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Projects</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -258,13 +285,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../research/projects/sample-project.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/projects/sample-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample project</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../research/projects/another-project.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/projects/another-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Another project</span></a>
   </div>
 </li>
@@ -274,76 +301,76 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../teaching/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../teaching/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Teaching</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Homeworks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/exams.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/exams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exams</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../teaching/archives.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../teaching/archives.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Archives</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
  <span class="menu-text">Tutorials</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/docs/archives/tutLaplace.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutLaplace.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normal Approximation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/docs/archives/tutGmm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutGmm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Gaussian Mixture for Multi-modal Posteriors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/docs/archives/tutEM.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutEM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">EM Algorithm for Mixture Modeling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/docs/archives/tutMCMC.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutMCMC.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical Methods for Bayesian Inference</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/docs/archives/tutChirp.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutChirp.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Chirplet Decomposition</span></a>
   </div>
 </li>
@@ -355,13 +382,13 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../consulting/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../consulting/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Consulting</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../oss/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../oss/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">OSS</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -370,13 +397,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample tool</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../oss/another-tool.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../oss/another-tool.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Another tool</span></a>
   </div>
 </li>
@@ -384,7 +411,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../blogs/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../blogs/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Blogs</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -393,13 +420,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SaddlePoint</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../asankhya/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../asankhya/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Asankhya</span></a>
   </div>
 </li>
@@ -410,29 +437,33 @@ document.addEventListener('DOMContentLoaded', function() {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#chirplet-decomposition" id="toc-chirplet-decomposition" class="nav-link" data-scroll-target="#chirplet-decomposition">Chirplet Decomposition</a></li>
+  <li><a href="#time-frequency-modeling" id="toc-time-frequency-modeling" class="nav-link" data-scroll-target="#time-frequency-modeling">Time-frequency modeling</a></li>
+  <li><a href="#nested-fisher-scoring" id="toc-nested-fisher-scoring" class="nav-link" data-scroll-target="#nested-fisher-scoring">Nested Fisher scoring</a></li>
+  <li><a href="#cramer-rao-bound" id="toc-cramer-rao-bound" class="nav-link" data-scroll-target="#cramer-rao-bound">Cramer-Rao bound</a></li>
+  <li><a href="#gradients" id="toc-gradients" class="nav-link" data-scroll-target="#gradients">Gradients</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <div class="section-banner">
-  <img src="../../images/banners/horsesskybw.jpg" alt="Blog banner">
+  <img src="../../../images/banners/templebw.jpg" alt="Teaching banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../teaching/index.html">Teaching</a></li><li class="breadcrumb-item"><a href="../../../teaching/archives.html">Archives</a></li><li class="breadcrumb-item"><a href="../../../teaching/docs/archives/tutLaplace.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../../../teaching/docs/archives/tutChirp.html">Chirplet Decomposition</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Welcome to the blog</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">meta</div>
-    <div class="quarto-category">intro</div>
-  </div>
-  </div>
-
-<div>
-  <div class="description">
-    A first post — what this space is for.
-  </div>
+<h1 class="title">Chirplet Decomposition</h1>
+<p class="subtitle lead">Joint estimation of Gaussian chirplet parameters via mixture modeling</p>
 </div>
+
 
 
 <div class="quarto-title-meta">
@@ -440,16 +471,10 @@ document.addEventListener('DOMContentLoaded', function() {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Soma S Dhavala </p>
+             <p>Soma Sekhar Dhavala </p>
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">May 17, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -459,10 +484,215 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 
-<p>This is the first post on the relaunched site. Expect notes on statistics, applied machine learning, teaching, and the occasional aside on tooling.</p>
-<p>The site is built with <a href="https://quarto.org">Quarto</a>. Comments are powered by <a href="https://giscus.app">giscus</a> (GitHub Discussions).</p>
+<section id="introduction" class="level2">
+<h2 data-anchor-id="introduction">Introduction</h2>
+<p>Many signals that exist in nature are inherently non-stationary or transient like Bat and Whale echoes, evoked-potentials, RADAR clutters. There exist many methods to analyze such signals including wavelet-transforms, short-time Fourier transform, adaptive time-frequency distributions, Matching Pursuits etc.. The signal representations which adapt the tilings in the time-frequency (t-f) plane perform prominently in terms of achieving higher resolution in time and frequency simultaneously. Atomic decompositions [1, 2, 3] is one such class of algorithms which attempt to approximate the signal as a weighed combination of the atoms from a chosen dictionary. The atoms in the dictionary should contain all possible tilings that best suit the inner structure of the signal under analysis. Hence, some a priori information about the signal under analysis is needed if one were working with a finite vocabulary. Another alternative is to use, if an efficient method for choosing an atom exists, an infinite size vocabulary. Chirplets, windowed linear frequency modulated signals, offer a very flexible set of tilings like shearing, translation and rotation. Gaussian chirplets are particularly attractive in terms of computational tractability in addition to offering optimum time-frequency resolution (attain minimum time-bandwidth product). Numerous algorithms have been proposed to decompose a signal as a weighed combination of chirplets. However, most of the methods proposed in the literature use a divide and conquer approach, i.e., repeatedly decompose the residue until the residue is of insignificant energy. It should be noted that chirplets are not orthogonal and hence such decompositions are not unique. Also, there is no formal mechanism to estimate the number of components in the model and efficiency of the estimator in terms of Cramer-Rao bounds were not provided (except in single component cases).</p>
+<p>In the present work, we jointly estimate the parameters of these chirplets. We assume that the number of components is unknown. We model the computed (specified) spectrogram of the signal to be analyzed (synthesized) as a mixture of normal densities (Gaussian Mixture model - GMM). The mixture model parameters are estimated using the Expectation-Maximization (EM) algorithm. Functional merging is used to estimate the number of components in the GMM. We obtain the chirplets parameters (except for the phase) by the method of moments. These parameters are refined by Fisher-Scoring method. We obtain the Cramer-Rao bounds for all the parameters. If the EM algorithms produces a closer-to-global maximum, the parameters estimated would be optimal.</p>
+</section>
+<section id="chirplet-decomposition" class="level2">
+<h2 data-anchor-id="chirplet-decomposition">Chirplet Decomposition</h2>
+<p>Employing chirplets to decompose a signal unifies the t-f tilings such as rotation, shearing, scaling and shifting. Hence, we proceed with the following assumption that any signal can be represented as a weighed sum of Gaussian chirplets given by:</p>
+<p><span class="math display">\[
+y(t) = s(t) + w(t) \tag{1a}
+\]</span></p>
+<p><span class="math display">\[
+s(t) = \sum_{k=1}^{K} (a_k + jb_k)\, g_k(t) \tag{1b}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+g_{k;t_c,\omega_c,\beta,d^2}(t) = \left(\frac{1}{\pi d^2}\right)^{\frac{1}{4}} \exp\left(-\frac{(t-t_c)^2}{4d^2} + j\frac{\beta(t-t_c)^2}{2} + j\omega_c(t-t_c)\right) \tag{2}
+\]</span></p>
+<p><span class="math inline">\(t_c, \omega_c, \beta, d^2\)</span> represent the location in time, location in frequency, chirp rate and the duration parameter of the chirplet and <span class="math inline">\(w(t)\)</span> is additive complex white Gaussian noise with unknown variance. Further</p>
+<p><span class="math display">\[
+\| g_{t_c,\omega_c,\beta,d^2} \| = 1 \tag{3}
+\]</span></p>
+<p>to make them unit energy signals.</p>
+</section>
+<section id="time-frequency-modeling" class="level2">
+<h2 data-anchor-id="time-frequency-modeling">Time-frequency modeling</h2>
+<p>We model the t-f plane as a mixture of normal pdfs [4] and estimate the parameters of the chirplets. It requires interpreting the t-f representation as an arbitrary bivariate pdf which would be modeled as GMM. It may appear strange that we are trying to view the t-f space as a mixture of normal pdfs by applying a random process modeling technique to a deterministic problem. However, we are using it just as a means to accomplish the task of decomposing the signal into chirplets. The initial choice of the t-f representation affects the model parameter estimation. We observe that the spectrogram of a Gaussian chirplet and normal density have structural similarities. We will utilize this fact to derive a set of mapping rules. Let <span class="math inline">\(T(t, f)\)</span> be the spectrogram of the signal under consideration. Also assume that <span class="math inline">\(t\)</span> and <span class="math inline">\(f\)</span> axis, representing time and frequency respectively, are sampled sufficiently smoothly on an <span class="math inline">\(N \times M\)</span> grid and let <span class="math inline">\(\theta_{mn} = [t(n), f(m)]^T\)</span></p>
+<p><span class="math display">\[
+f(\theta_{mn}; \Phi) = \sum_{k=1}^{K} \lambda_k f_k(\theta_{mn}; \phi_k) \tag{4a}
+\]</span></p>
+<p><span class="math display">\[
+T(\theta_{mn}) \approx f(\theta_{mn}; \Phi) \tag{4b}
+\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(K\)</span> is the total number of densities</li>
+<li><span class="math inline">\(\theta_{mn}\)</span> is the <span class="math inline">\(mn\)</span>th sample in the <span class="math inline">\(N \times M\)</span> grid</li>
+<li><span class="math inline">\(\phi_k = [\mu_k, \Sigma_k]\)</span> represent the mean vector and covariance matrix of the <span class="math inline">\(k\)</span>th density</li>
+<li><span class="math inline">\(f_k \sim \mathcal{N}(\mu_k, \Sigma_k)\)</span></li>
+<li><span class="math inline">\(\Phi = [\phi_1 \ldots \phi_K, \lambda_1 \ldots \lambda_K]\)</span></li>
+<li><span class="math inline">\(\{\lambda_k\}\)</span> represent the mixing weights with constraint <span class="math inline">\(\sum_{k=1}^{K} \lambda_k = 1\)</span></li>
+</ul>
+<p>We can estimate these parameters by the application of EM algorithm as:</p>
+<p><span class="math display">\[
+\hat{\lambda}_{k,new} = \sum_{n=1}^{N} \sum_{m=1}^{M} \gamma_k(\theta_{mn}; \hat{\Phi}) \tag{5}
+\]</span></p>
+<p><span class="math display">\[
+\hat{\mu}_{k,new} = \frac{1}{\hat{\lambda}_{k,new}} \sum_{n=1}^{N} \sum_{m=1}^{M} \gamma_k(\theta_{mn}; \hat{\Phi})\, \theta_{mn} \tag{6}
+\]</span></p>
+<p><span class="math display">\[
+\hat{\Sigma}_{k,new} = \frac{1}{\hat{\lambda}_{k,new}} \sum_{n=1}^{N} \sum_{m=1}^{M} \gamma_k(\theta_{mn}; \hat{\Phi})(\theta_{mn} - \hat{\mu}_k)^T (\theta_{mn} - \hat{\mu}_k) \tag{7}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\gamma_k(\theta_{mn}; \hat{\Phi}) = \frac{\hat{\lambda}_k f_k(\theta_{mn}; \hat{\theta}_k) T(\theta_{mn}; \Phi)}{f(\theta_{mn}; \hat{\Phi})} \tag{8}
+\]</span></p>
+<p>In [4], time-frequency projection filters were used synthesize time-domain signals based on the regions identified by the individual densities in the mixture. However, we show that, if the initial t-f representation is chosen as spectrogram, one can immediately synthesize corresponding time-domain signals except for the phase. This is so because phase information is lost in the spectrogram decomposition. We map the parameters of a bivariate normal density to a chirplet by matching the moments. A Gaussian window with duration parameter <span class="math inline">\(\alpha^2\)</span> is chosen in computing the spectrogram. The spectrogram of a chirplet <span class="math inline">\(g_k\)</span> is given by [5]:</p>
+<p><span class="math display">\[
+T_{g_k}(t, f) = \frac{P(t - t_c)}{\sqrt{2\pi\sigma^2_{\omega/t}}} \exp\left(-\frac{(\omega - \omega_c - \langle \omega_t \rangle)^2}{2\sigma^2_{\langle \omega_t \rangle}}\right) \tag{9a}
+\]</span></p>
+<p><span class="math display">\[
+P(t - t_c) = \left(\frac{1}{\pi(d^2 + \alpha^2)}\right)^{\frac{1}{2}} \exp\left(\frac{1}{\pi(d^2 + \alpha^2)} t^2\right) \tag{9b}
+\]</span></p>
+<p><span class="math display">\[
+\langle \omega_t \rangle = \left(\frac{1}{\pi(d^2 + \alpha^2)}\right) \beta(t - t_c) \tag{9c}
+\]</span></p>
+<p>and a bivariate normal density is given as:</p>
+<p><span class="math display">\[
+f_k(\theta) = \frac{1}{\sqrt{2\pi|\Sigma_k|}} \exp\left(-\frac{1}{2}(\mu_k - \theta)^T \Sigma_k^{-1} (\mu_k - \theta)\right) \tag{10a}
+\]</span></p>
+<p><span class="math display">\[
+\Sigma_k = \begin{bmatrix} \sigma^2_{k1} &amp; \sigma_{k1}\sigma_{k2} \\ \sigma_{k1}\sigma_{k2} &amp; \sigma^2_{k2} \end{bmatrix} \tag{10b}
+\]</span></p>
+<p><span class="math display">\[
+\mu_k = \begin{bmatrix} \mu_{k1} \\ \mu_{k2} \end{bmatrix} \tag{10c}
+\]</span></p>
+<p>By matching the moments (method of moments) of the spectrogram (a time-frequency distribution) and the bivariate normal density given above, we obtain:</p>
+<p><span class="math display">\[
+\frac{\alpha^2}{(d^2 + \alpha^2)}\beta = \rho\left(\frac{\sigma_1}{\sigma_2}\right) \tag{11a}
+\]</span></p>
+<p><span class="math display">\[
+\frac{1}{(d^2 + \alpha^2)} = \frac{1}{2\sigma^2_1} \tag{11b}
+\]</span></p>
+<p><span class="math display">\[
+\sigma^2_2(1 - \rho^2) = \frac{d^2 + \alpha^2}{2d^2\alpha^2} + \frac{\beta^2 d^2 \alpha^2}{2(d^2 + \alpha^2)} \tag{11c}
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix} \mu_{k1} \\ \mu_{k2} \end{bmatrix} = \begin{bmatrix} t_c \\ \omega_c \end{bmatrix} \tag{11d}
+\]</span></p>
+<p>The parameters of the chirplet are obtained by solving the above equations simultaneously as:</p>
+<p><span class="math display">\[
+d^2 = \frac{1 + (\alpha^2 \rho\, r)^2}{r^2(1 - \rho^2)} \tag{12a}
+\]</span></p>
+<p><span class="math display">\[
+\beta = \frac{\rho\, r(d^2 + \alpha^2)}{d^2 \alpha^2} \tag{12b}
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix} \mu_{k1} \\ \mu_{k2} \end{bmatrix} = \begin{bmatrix} t_c \\ \omega_c \end{bmatrix} \tag{12c}
+\]</span></p>
+<p>where <span class="math inline">\(r = \sigma_1/\sigma_2\)</span>. It should be noted that we can not estimate the complex weight <span class="math inline">\(c_k\)</span> since we lose phase information in the spectrogram. We consider using quasi-Newton optimization algorithms to refine the parameters and also to estimate the amplitudes of the individual components. We use the estimates provided by the EM algorithms as initial estimates to the quasi-Newton algorithms. Besides providing faster convergence, if the initial estimates are carefully chosen, they also provide error covariances which could be used in designing time-frequency detectors.</p>
+</section>
+<section id="nested-fisher-scoring" class="level2">
+<h2 data-anchor-id="nested-fisher-scoring">Nested Fisher scoring</h2>
+<p>We rewrite the model in vector form as:</p>
+<p><span class="math display">\[
+\mathbf{y} = \mathbf{s} + \mathbf{w} \tag{13a}
+\]</span></p>
+<p><span class="math display">\[
+\mathbf{s} = \mathbf{G}\boldsymbol{\lambda} \tag{13b}
+\]</span></p>
+<p><span class="math display">\[
+\mathbf{G} = [\mathbf{g}_1, j\mathbf{g}_1, \ldots \mathbf{g}_K, j\mathbf{g}_K] \tag{13c}
+\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(\mathbf{y}\)</span> : <span class="math inline">\(N \times 1\)</span> vector of measurements</li>
+<li><span class="math inline">\(\mathbf{w} \sim \mathcal{CN}(\mathbf{0}, \sigma^2 \mathbf{I})\)</span> complex AWGN with unknown variance <span class="math inline">\(\sigma^2\)</span></li>
+<li><span class="math inline">\(\boldsymbol{\theta}_k = [t_{ck}, f_{ck}, \alpha_k, \beta_k]^T\)</span></li>
+<li><span class="math inline">\(\boldsymbol{\theta} = [\boldsymbol{\theta}_1^T, \ldots, \boldsymbol{\theta}_K^T]^T\)</span></li>
+<li><span class="math inline">\(\boldsymbol{\lambda} = [a_1, b_1, \ldots, a_K, b_K]^T\)</span></li>
+<li><span class="math inline">\(\boldsymbol{\phi} = [\boldsymbol{\lambda}^T, \boldsymbol{\theta}^T]\)</span></li>
+<li><span class="math inline">\(\boldsymbol{\gamma} = [\sigma^2, \boldsymbol{\phi}^T]^T\)</span></li>
+<li><span class="math inline">\(\mathbf{g}_k\)</span> is a function of <span class="math inline">\(\boldsymbol{\theta}_k\)</span></li>
+</ul>
+<p>The log-likelihood is given as:</p>
+<p><span class="math display">\[
+\ell(\mathbf{y}; \boldsymbol{\gamma}) = -N \log(\pi\sigma^2) - \frac{1}{\sigma^2}(\mathbf{y} - \mathbf{s})^H (\mathbf{y} - \mathbf{s}) \tag{14}
+\]</span></p>
+<p>and the Fisher’s method of scoring produces the estimates using the following iteration,</p>
+<p><span class="math display">\[
+\hat{\boldsymbol{\gamma}}^{i+1} = \hat{\boldsymbol{\gamma}}^i + \mathcal{I}_{\boldsymbol{\gamma}}^{-1}\, 2\mathcal{R}e\left\{\frac{\partial}{\partial\boldsymbol{\gamma}}\ell^H(\mathbf{y}; \boldsymbol{\gamma})\right\}\bigg|_{\boldsymbol{\gamma} = \hat{\boldsymbol{\gamma}}^i} \tag{15}
+\]</span></p>
+<p>Using [6, Appendix 15.c], the Fisher Information matrix is given as:</p>
+<p><span class="math display">\[
+\mathcal{I}_{\boldsymbol{\gamma}} = \begin{bmatrix} \mathcal{I}_{\sigma^2} &amp; \mathbf{0} \\ \mathbf{0} &amp; \mathcal{I}_{\boldsymbol{\phi}} \end{bmatrix} \tag{16}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\mathcal{I}_{\sigma^2} = \frac{N}{\sigma^4} \quad \text{and} \quad \mathcal{I}_{\boldsymbol{\phi}} = \frac{2}{\sigma^2}\left[\frac{\partial \mathbf{s}^H}{\partial\boldsymbol{\phi}} \frac{\partial \mathbf{s}}{\partial\boldsymbol{\phi}}\right] \tag{17}
+\]</span></p>
+<p>Ignoring the nuisance parameter <span class="math inline">\(\sigma^2\)</span>,</p>
+<p><span class="math display">\[
+\hat{\boldsymbol{\phi}}^{i+1} = \hat{\boldsymbol{\phi}}^i + \mathcal{I}_{\boldsymbol{\phi}}^{-1}\, 2\mathcal{R}e\left\{\frac{\partial}{\partial\boldsymbol{\phi}}\ell^H(\mathbf{y}; \boldsymbol{\gamma})\right\}\bigg|_{\boldsymbol{\phi} = \hat{\boldsymbol{\phi}}^i} \tag{18}
+\]</span></p>
+<p>Since the parameters <span class="math inline">\(\boldsymbol{\lambda}\)</span> enter linearly, we could use nested-Fisher scoring [7]. This also becomes the separable non-linear least squares since the noise is Gaussian. Fisher-scoring iteration on the concentrated log-likelihood is then given as:</p>
+<p><span class="math display">\[
+\hat{\boldsymbol{\theta}}^{i+1} = \hat{\boldsymbol{\theta}}^i + \mathcal{I}_{\boldsymbol{\theta}}'^{-1}\, 2\mathcal{R}e\left\{\frac{\partial}{\partial\boldsymbol{\phi}}\ell^H(\mathbf{y}; \boldsymbol{\gamma})\right\} \tag{19a}
+\]</span></p>
+<p><span class="math display">\[
+\mathcal{I}_{\boldsymbol{\theta}}' = \frac{2}{\sigma^2} \frac{\partial \mathbf{s}^H}{\partial\boldsymbol{\theta}} \left(\mathbf{I} - \frac{\partial \mathbf{s}^H}{\partial\boldsymbol{\lambda}} \left(\frac{\partial \mathbf{s}}{\partial\boldsymbol{\lambda}} \frac{\partial \mathbf{s}^H}{\partial\boldsymbol{\lambda}}\right)^{-1} \frac{\partial \mathbf{s}^H}{\partial\boldsymbol{\lambda}}\right) \frac{\partial \mathbf{s}}{\partial\boldsymbol{\theta}} \tag{19b}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial}{\partial\boldsymbol{\phi}}\ell^H(\mathbf{y}; \boldsymbol{\gamma}) = \frac{2}{\sigma^2} \frac{\partial \mathbf{s}^H}{\partial\boldsymbol{\theta}} (\mathbf{y} - \mathbf{s}) \tag{19c}
+\]</span></p>
+<p>The score vector and the Fisher information matrix are evaluated at:</p>
+<p><span class="math display">\[
+\boldsymbol{\theta} \leftarrow \hat{\boldsymbol{\theta}}^i \tag{20a}
+\]</span></p>
+<p><span class="math display">\[
+\boldsymbol{\lambda} \leftarrow (\mathbf{G}^H\mathbf{G})^{-1}\mathbf{G}^H\mathbf{y} \tag{20b}
+\]</span></p>
+</section>
+<section id="cramer-rao-bound" class="level2">
+<h2 data-anchor-id="cramer-rao-bound">Cramer-Rao bound</h2>
+<p>The Cramer-Rao lower bounds on the variance of the parameters are given as:</p>
+<ul>
+<li><span class="math inline">\(\mathrm{CRLB}_{\sigma^2} = \dfrac{\sigma^4}{N}\)</span></li>
+<li><span class="math inline">\(\mathrm{CRLB}_{\boldsymbol{\lambda}} = \dfrac{1}{\sigma^2}\mathbf{G}^H\mathbf{G}\)</span></li>
+<li><span class="math inline">\(\mathrm{CRLB}_{\boldsymbol{\theta}} = \mathcal{I}_{\boldsymbol{\theta}}'^{-1}\)</span></li>
+</ul>
+</section>
+<section id="gradients" class="level2">
+<h2 data-anchor-id="gradients">Gradients</h2>
+<p>Here analytical expressions for the gradients are given. The discrete version of the signal is given by:</p>
+<p><span class="math display">\[
+g_k(n) = \left(\frac{1}{\pi d^2_k}\right)^{\frac{1}{4}} \exp\left(-\frac{(n - t_{c,k})^2}{4d^2_k} + j\frac{\beta(n - t_{c,k})^2}{2} + j\omega_{c,k}(n - t_{c,k})\right) \tag{21}
+\]</span></p>
+<p>By noting that,</p>
+<p><span class="math display">\[
+\frac{\partial s(n)}{\partial\boldsymbol{\theta}_k} = \frac{\partial g_k(n)}{\partial\boldsymbol{\theta}_k} \tag{22}
+\]</span></p>
+<p>we calculate the gradients of a chirplet and drop the subscript <span class="math inline">\(k\)</span> for simplicity</p>
+<p><span class="math display">\[
+\frac{\partial g(n)}{\partial t_c} = g(n)\left(\frac{n - t_c}{4d^2} - j\beta(n - t_c) - j\omega_c\right) \tag{23a}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial g(n)}{\partial\omega_c} = g(n)\left(j\omega(n - t_c)\right) \tag{23b}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial g(n)}{\partial d^2} = g(n)\left(\frac{(n - t_c)^2}{4d^4} - \frac{1}{d^2}\right) \tag{23c}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial g(n)}{\partial\beta} = g(n)\left(\frac{j}{2}(n - t_c)^2\right) \tag{23d}
+\]</span></p>
+<p>We can use [8] to obtain closed-form expressions for the Cramer-Rao bound. This completes the estimation process.</p>
+</section>
+<section id="references" class="level2">
+<h2 data-anchor-id="references">References</h2>
+<p>[1] A. Bultan, “A four-parameter atomic decomposition of chirplets,” <em>IEEE Trans. on Signal Processing</em>, vol.&nbsp;41, pp.&nbsp;731–745, 1999.</p>
+<p>[2] J. C. O’Neill and P. Flandrin, “Chirp hunting,” in <em>Proc. of the IEEE-SP International Symposium on Time-Frequency and Time-Scale Analysis</em>, 1998, pp.&nbsp;425–428.</p>
+<p>[3] R. N. Bracewell and D Mihovilovic, “Adaptive chirplet representation of signals on time-frequency plane,” <em>Electronics Letters</em>, vol.&nbsp;27, pp.&nbsp;1159–1161, 1991.</p>
+<p>[4] Mark Coates, <em>Time-frequency modeling</em>, Ph. D, Univ. of Cambridge, Signal Processing and Communications Laboratory, Dept. of Engineering, August 1998.</p>
+<p>[5] Leon Cohen, <em>Time-Frequency Analysis</em>, Prentice-Hall, Englewood Cliffs, New Jersey, 1995.</p>
+<p>[6] Steven M. Kay, <em>Fundamentals of Statistical Signal Processing, Vol-1 Estimation theory</em>, Prentice-Hall PTR, 1993.</p>
+<p>[7] Gordon K Smith, “Partitioned algorithms for maximum likelihood and other nonlinear estimation,” <em>Statistics and Computing</em>, vol.&nbsp;6, pp.&nbsp;201–216, 1996.</p>
+<p>[8] Kostas Triantafyllopoulos, “Moments and cumulants of the multivariate real and complex Gaussian distributions,” 2002, www.stats.bris.ac.uk/research/stats/pub/ResRept/2002.html.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -858,35 +1088,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="light">
-<input type="hidden" id="giscus-alt-theme" value="light">
-<script>
-  function loadGiscus() {
-    // Function to get the theme based on body class
-    const getTheme = () => {
-      let baseTheme = document.getElementById('giscus-base-theme').value;
-      let altTheme = document.getElementById('giscus-alt-theme').value;
-      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
-    };
-    const script = document.createElement("script");
-    script.src = "https://giscus.app/client.js";
-    script.async = true;
-    script.dataset.repo = "dhavala/dhavala.github.io";
-    script.dataset.repoId = "MDEwOlJlcG9zaXRvcnk0MzYwMTM3MA==";
-    script.dataset.category = "Blog Comments";
-    script.dataset.categoryId = "DIC_kwDOAplN2s4C9QQP";
-    script.dataset.mapping = "pathname";
-    script.dataset.reactionsEnabled = "1";
-    script.dataset.emitMetadata = "0";
-    script.dataset.inputPosition = "top";
-    script.dataset.theme = getTheme();
-    script.dataset.lang = "en";
-    script.crossOrigin = "anonymous";
-    // Append the script to the desired div instead of at the end of the body
-    document.getElementById("quarto-content").appendChild(script);
-  }
-  loadGiscus();
-</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -924,5 +1125,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

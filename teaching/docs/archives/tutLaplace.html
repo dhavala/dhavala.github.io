@@ -6,11 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Soma S Dhavala">
-<meta name="dcterms.date" content="2026-05-17">
-<meta name="description" content="A first post — what this space is for.">
+<meta name="author" content="Soma Sekhar Dhavala">
 
-<title>Welcome to the blog – Soma S Dhavala</title>
+<title>Normal Approximation – Soma S Dhavala</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,19 +27,19 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../../images/favicon.png" rel="icon" type="image/png">
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-ac5053a147da57e4dead3041ce999681.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../../images/favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-ac5053a147da57e4dead3041ce999681.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -116,14 +114,43 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Welcome to the blog – Soma S Dhavala">
-<meta property="og:description" content="A first post — what this space is for.">
-<meta property="og:image" content="https://dhavala.github.io/saddlepoint/welcome/images/og-image.png">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Normal Approximation – Soma S Dhavala">
+<meta property="og:description" content="Laplace (normal) approximation of a bivariate posterior">
+<meta property="og:image" content="https://dhavala.github.io/teaching/docs/archives/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
-<meta name="twitter:title" content="Welcome to the blog – Soma S Dhavala">
-<meta name="twitter:description" content="A first post — what this space is for.">
-<meta name="twitter:image" content="https://dhavala.github.io/saddlepoint/welcome/images/og-image.png">
+<meta name="twitter:title" content="Normal Approximation – Soma S Dhavala">
+<meta name="twitter:description" content="Laplace (normal) approximation of a bivariate posterior">
+<meta name="twitter:image" content="https://dhavala.github.io/teaching/docs/archives/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -134,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Soma S Dhavala</span>
     </a>
   </div>
@@ -144,33 +171,33 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../about/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../about/index.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../research/index.html"> 
+    <a class="nav-link" href="../../../research/index.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../teaching/index.html"> 
+    <a class="nav-link" href="../../../teaching/index.html"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../consulting/index.html"> 
+    <a class="nav-link" href="../../../consulting/index.html"> 
 <span class="menu-text">Consulting</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../saddlepoint/index.html"> 
+    <a class="nav-link" href="../../../saddlepoint/index.html"> 
 <span class="menu-text">SaddlePoint</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
 </i> 
 <span class="menu-text">SaddlePoint feed</span></a>
   </li>  
@@ -185,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Welcome to the blog</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../teaching/index.html">Teaching</a></li><li class="breadcrumb-item"><a href="../../../teaching/archives.html">Archives</a></li><li class="breadcrumb-item"><a href="../../../teaching/docs/archives/tutLaplace.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../../../teaching/docs/archives/tutLaplace.html">Normal Approximation</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -199,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../about/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../about/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -208,13 +235,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../about/bio.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../about/bio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../about/contact.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../about/contact.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contact</span></a>
   </div>
 </li>
@@ -222,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../research/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../research/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Research</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -231,25 +258,25 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../research/publications.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/publications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Publications</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../research/patents.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/patents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Patents</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../research/code.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Code</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../research/projects/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../research/projects/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Projects</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -258,13 +285,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../research/projects/sample-project.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/projects/sample-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample project</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../research/projects/another-project.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/projects/another-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Another project</span></a>
   </div>
 </li>
@@ -274,76 +301,76 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../teaching/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../teaching/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Teaching</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Homeworks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/exams.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/exams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exams</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../teaching/archives.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../teaching/archives.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Archives</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
  <span class="menu-text">Tutorials</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/docs/archives/tutLaplace.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutLaplace.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Normal Approximation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/docs/archives/tutGmm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutGmm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Gaussian Mixture for Multi-modal Posteriors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/docs/archives/tutEM.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutEM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">EM Algorithm for Mixture Modeling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/docs/archives/tutMCMC.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutMCMC.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical Methods for Bayesian Inference</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/docs/archives/tutChirp.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutChirp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Chirplet Decomposition</span></a>
   </div>
 </li>
@@ -355,13 +382,13 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../consulting/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../consulting/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Consulting</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../oss/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../oss/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">OSS</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -370,13 +397,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample tool</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../oss/another-tool.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../oss/another-tool.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Another tool</span></a>
   </div>
 </li>
@@ -384,7 +411,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../blogs/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../blogs/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Blogs</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -393,13 +420,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SaddlePoint</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../asankhya/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../asankhya/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Asankhya</span></a>
   </div>
 </li>
@@ -410,29 +437,27 @@ document.addEventListener('DOMContentLoaded', function() {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <div class="section-banner">
-  <img src="../../images/banners/horsesskybw.jpg" alt="Blog banner">
+  <img src="../../../images/banners/templebw.jpg" alt="Teaching banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../teaching/index.html">Teaching</a></li><li class="breadcrumb-item"><a href="../../../teaching/archives.html">Archives</a></li><li class="breadcrumb-item"><a href="../../../teaching/docs/archives/tutLaplace.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../../../teaching/docs/archives/tutLaplace.html">Normal Approximation</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Welcome to the blog</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">meta</div>
-    <div class="quarto-category">intro</div>
-  </div>
-  </div>
-
-<div>
-  <div class="description">
-    A first post — what this space is for.
-  </div>
+<h1 class="title">Normal Approximation</h1>
+<p class="subtitle lead">Laplace (normal) approximation of a bivariate posterior</p>
 </div>
+
 
 
 <div class="quarto-title-meta">
@@ -440,16 +465,10 @@ document.addEventListener('DOMContentLoaded', function() {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Soma S Dhavala </p>
+             <p>Soma Sekhar Dhavala </p>
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">May 17, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -459,10 +478,58 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 
-<p>This is the first post on the relaunched site. Expect notes on statistics, applied machine learning, teaching, and the occasional aside on tooling.</p>
-<p>The site is built with <a href="https://quarto.org">Quarto</a>. Comments are powered by <a href="https://giscus.app">giscus</a> (GitHub Discussions).</p>
+<p>Let the likelihood function be</p>
+<p><span class="math display">\[
+L(\theta; y) = c \exp(-f(\theta; y)) \tag{1}
+\]</span></p>
+<p>for some arbitrary bi-variate function <span class="math inline">\(f\)</span> and for some constant <span class="math inline">\(c\)</span>. It might be useful if we have a normal likelihood function, in which case it is possible to compute the posterior either analytically (e.g.&nbsp;if the prior is also normal) or by resorting to numerical integration techniques [1] (e.g.&nbsp;Gauss–Hermite quadrature). It can also be used to calculate moments and cumulants in an efficient way [2].</p>
+<p>In general, we can approximate the function <span class="math inline">\(f(\theta)\)</span> (in the neighborhood of <span class="math inline">\(\tau\)</span>) using a multi-variate Taylor series. In the present case, we will be considering the bi-variate case. We consider only terms up to order two since the log-likelihood of a normal density is quadratic,</p>
+<p><span class="math display">\[
+f(\theta) \approx a_{00} + a_{10}(\theta_1 - \tau_1) + a_{01}(\theta_2 - \tau_2) + a_{11}(\theta_1 - \tau_1)(\theta_2 - \tau_2) + a_{20}(\theta_1 - \tau_1)^2 + a_{02}(\theta_2 - \tau_2)^2 \tag{2}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+a_{ij} = \frac{1}{i!\, j!} \left[ \left(\frac{\partial}{\partial \theta_1}\right)^i \left(\frac{\partial}{\partial \theta_2}\right)^j f \right](\tau) \tag{3}
+\]</span></p>
+<p>Then the likelihood is approximated as:</p>
+<p><span class="math display">\[
+L(\theta; y) \sim N(\mu_L, \Sigma_L) \tag{4a}
+\]</span></p>
+<p><span class="math display">\[
+\mu_L = -\frac{1}{2}
+\begin{bmatrix}
+(a_{11} + a_{10} - a_{11}\tau_2 - 2a_{20}\tau_1)/a_{20} \\
+(a_{11} + a_{01} - a_{11}\tau_1 - 2a_{02}\tau_2)/a_{02}
+\end{bmatrix} \tag{4b}
+\]</span></p>
+<p><span class="math display">\[
+\Sigma_L = \frac{-2 a_{20} a_{02}}{4 a_{20} a_{02} - a_{11}^2}
+\begin{bmatrix}
+1/a_{02} &amp; -2a_{11} \\
+-2a_{11} &amp; 1/a_{20}
+\end{bmatrix} \tag{4c}
+\]</span></p>
+<p>We can expand the Taylor series around the <em>mode</em> or <em>ML estimate</em>. Having approximated the likelihood as a bivariate normal, below we will provide a closed-form expression for calculating the posterior density for a given normal prior. If the prior <span class="math inline">\(\pi(\theta)\)</span> is of the form</p>
+<p><span class="math display">\[
+\pi(\theta) \sim N(\mu_\pi, \Sigma_\pi) \tag{5}
+\]</span></p>
+<p>then the posterior <span class="math inline">\(p(\theta)\)</span> will be of the form</p>
+<p><span class="math display">\[
+p(\theta) \sim N(\mu_p, \Sigma_p) \tag{6a}
+\]</span></p>
+<p><span class="math display">\[
+\Sigma_p = \left(\Sigma_L^{-1} + \Sigma_\pi^{-1}\right)^{-1} \tag{6b}
+\]</span></p>
+<p><span class="math display">\[
+\mu_p = \Sigma_p \left(\Sigma_L^{-1}\mu_L + \Sigma_\pi^{-1}\mu_\pi\right) \tag{6c}
+\]</span></p>
+<section id="references" class="level2">
+<h2 data-anchor-id="references">References</h2>
+<p>[1] J. C. Naylor and A. F. M. Smith, “Applications of a method for the efficient computation of posterior distributions,” <em>Applied Statistics</em>, vol.&nbsp;31, 1982.</p>
+<p>[2] Kostas Triantafyllopoulos, “Moments and cumulants of the multivariate real and complex Gaussian distributions,” 2002, www.stats.bris.ac.uk/research/stats/pub/ResRept/2002.html.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -858,35 +925,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="light">
-<input type="hidden" id="giscus-alt-theme" value="light">
-<script>
-  function loadGiscus() {
-    // Function to get the theme based on body class
-    const getTheme = () => {
-      let baseTheme = document.getElementById('giscus-base-theme').value;
-      let altTheme = document.getElementById('giscus-alt-theme').value;
-      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
-    };
-    const script = document.createElement("script");
-    script.src = "https://giscus.app/client.js";
-    script.async = true;
-    script.dataset.repo = "dhavala/dhavala.github.io";
-    script.dataset.repoId = "MDEwOlJlcG9zaXRvcnk0MzYwMTM3MA==";
-    script.dataset.category = "Blog Comments";
-    script.dataset.categoryId = "DIC_kwDOAplN2s4C9QQP";
-    script.dataset.mapping = "pathname";
-    script.dataset.reactionsEnabled = "1";
-    script.dataset.emitMetadata = "0";
-    script.dataset.inputPosition = "top";
-    script.dataset.theme = getTheme();
-    script.dataset.lang = "en";
-    script.crossOrigin = "anonymous";
-    // Append the script to the desired div instead of at the end of the body
-    document.getElementById("quarto-content").appendChild(script);
-  }
-  loadGiscus();
-</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -924,5 +962,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

@@ -44,15 +44,164 @@
     "text": "Soma S. Dhavala, Professor, IIT Jammu\nAI Researcher | Systems Architect | Educator | Technologist\nTwo decades across machine learning, Bayesian statistics, signal processing, and large-scale AI systems. Current focus: frontier model development, deep learning theory, and scalable AI infrastructure for GPT-scale models, with applications across agriculture, healthcare, education, and computational biology.\nRead more about me, or browse recent publications or explore my research interests. Questions? Email me.\n\n\n\n\n\nSoma S Dhavala\n\n\n\n\n\n\n20+ years across ML, AI, and signal processing\n\n\nPh.D. Statistics Texas A&M University\n\n\nCross-disciplinary EE · Math · Stats · CS"
   },
   {
-    "objectID": "teaching/notes.html",
-    "href": "teaching/notes.html",
-    "title": "Notes",
+    "objectID": "teaching/archives.html",
+    "href": "teaching/archives.html",
+    "title": "Archives",
     "section": "",
-    "text": "(Content to be added.)",
+    "text": "A set of short, self-contained notes and tutorials written during my graduate years, transcribed here from their original PDFs with rendered LaTeX. They cover Bayesian computation and statistical signal processing. Use the links below (or the sidebar) to browse them.",
     "crumbs": [
       "Home",
       "Teaching",
-      "Notes"
+      "Archives"
+    ]
+  },
+  {
+    "objectID": "teaching/archives.html#tutorials",
+    "href": "teaching/archives.html#tutorials",
+    "title": "Archives",
+    "section": "Tutorials",
+    "text": "Tutorials\n\nNormal Approximation — Laplace (normal) approximation of a bivariate posterior, with a closed form for the posterior under a normal prior.\nGaussian Mixture for Multi-modal Posteriors — approximating a multi-modal posterior by a mixture of normals, with merging to select the number of components.\nEM Algorithm for Mixture Modeling — derivation of Expectation-Maximization for Gaussian mixture models.\nNumerical Methods for Bayesian Inference — quadrature, Monte Carlo integration, rejection sampling, and random-walk Metropolis with a normal prior or likelihood.\nChirplet Decomposition — decomposing a signal into Gaussian chirplets via mixture modeling, method of moments, and nested Fisher scoring.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives"
+    ]
+  },
+  {
+    "objectID": "teaching/index.html",
+    "href": "teaching/index.html",
+    "title": "Teaching",
+    "section": "",
+    "text": "Use the sidebar at left to browse notes, homeworks, and exams.",
+    "crumbs": [
+      "Home",
+      "Teaching"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutGmm.html",
+    "href": "teaching/docs/archives/tutGmm.html",
+    "title": "Gaussian Mixture for Multi-modal Posteriors",
+    "section": "",
+    "text": "It might be the case that we want to draw samples from an arbitrary posterior pdf having more than one mode. In such cases, normal approximation might be too bad an approximation. We consider modeling this arbitrary pdf as a mixture of normal densities. Further, the number of modes (which in turn dictate the number of components in the mixture) in the posterior is also assumed unknown.\nThe mixture model considered in [1] tries to estimate the model parameters based on data. However, in the present context, we have the pdf in semi-closed form and this becomes a special case of [1].\nLet \\(f(\\theta)\\) be the known arbitrary pdf which we want to approximate. For illustration purposes, we assume a bivariate density (\\(\\theta = [\\theta_1, \\theta_2]^T\\)) and discretize \\(\\theta\\) on a uniform \\(N \\times M\\) grid. Further let \\(\\theta_{mn}\\) represent the \\((\\theta_1(n), \\theta_2(m))\\) sample in the grid. Also assume that the discretized pdf (\\(f(\\theta_{mn})\\)) is appropriately normalized.\n\\[\nf(\\theta_{mn}; \\Phi) = \\sum_{k=1}^{K} \\lambda_k f_k(\\theta_{mn}; \\phi_k) \\tag{1}\n\\]\nwhere\nThen we obtain the estimates for the mixture model parameters as:\n\\[\n\\hat{\\lambda}_{k,\\text{new}} = \\sum_{n=1}^{N} \\sum_{m=1}^{M} \\gamma_k(\\theta_{mn}; \\hat{\\Phi}) \\tag{2}\n\\]\n\\[\n\\hat{\\mu}_{k,\\text{new}} = \\frac{1}{\\hat{\\lambda}_{k,\\text{new}}} \\sum_{n=1}^{N} \\sum_{m=1}^{M} \\gamma_k(\\theta_{mn}; \\hat{\\Phi}) \\theta_{mn} \\tag{3}\n\\]\n\\[\n\\hat{\\Sigma}_{k,\\text{new}} = \\frac{1}{\\hat{\\lambda}_{k,\\text{new}}} \\sum_{n=1}^{N} \\sum_{m=1}^{M} \\gamma_k(\\theta_{mn}; \\hat{\\Phi}) (\\theta_{mn} - \\hat{\\mu}_k)^T (\\theta_{mn} - \\hat{\\mu}_k) \\tag{4}\n\\]\nwhere\n\\[\n\\gamma_k(\\theta_{mn}; \\hat{\\Phi}) = \\frac{\\hat{\\lambda}_k f_k(\\theta_{mn}; \\hat{\\theta}_k) f(\\theta_{mn}; \\Phi)}{f(\\theta_{mn}; \\hat{\\Phi})} \\tag{5}\n\\]\nHowever, we need to know the number of components \\(K\\) in the above equations. In order to circumvent this difficulty, we overestimate the number of components and estimate the model components. Later, we repeatedly: 1) merge any two distributions and 2) replace them with a new merged distribution (still a normal distribution) such that the distance between the newly formed distribution and the two distributions which got merged is minimized and this distance is above a certain threshold. Essentially, we overfit the posterior distribution and later prune the mixture until no further merging is possible. Based on the distance measure chosen, there could be different approaches. For a discussion please see [2, 3].\nNow it becomes a trivial task to generate samples from the posterior. Instead of drawing the samples from \\(p(\\theta)\\), we draw from the mixture. The algorithm is outlined below:\nEssentially, we have \\(K\\) number of states and each state has a certain pdf. Based on this relationship, we can draw random numbers quite efficiently.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Gaussian Mixture for Multi-modal Posteriors"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutGmm.html#references",
+    "href": "teaching/docs/archives/tutGmm.html#references",
+    "title": "Gaussian Mixture for Multi-modal Posteriors",
+    "section": "References",
+    "text": "References\n[1] Soma Sekhar Dhavala, “EM algorithm for Gaussian Mixture modeling,” report, ECpE Dept., Iowa State University.\n[2] Mark Coates, Time-frequency modeling, Ph. D, Univ. of Cambridge, Signal Processing and Communications Laboratory, Dept. of Engineering, August 1998.\n[3] M. Figueiredo, J. Leitao and A. K. Jain, “On fitting mixture models,” in Energy Minimization Methods in Computer Vision and Pattern Recognition, vol. 1654, pp. 54–69. Springer-Verlag, 1999.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Gaussian Mixture for Multi-modal Posteriors"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutMCMC.html",
+    "href": "teaching/docs/archives/tutMCMC.html",
+    "title": "Numerical Methods for Bayesian Inference",
+    "section": "",
+    "text": "We review several numerical methods for making inference from the posterior distribution if either the prior or the likelihood function (when viewed as a function of the parameter of interest and not as a function of the data) is a normal distribution. We consider the following techniques:\nOne of the contentions of frequentists against the Bayesians is the need to calculate multidimensional integrals which are difficult to compute and analyze. However, with the advent of faster chips, computational power is no longer a scarce resource. Hence, there is a shift (in my view) in computational statistics from providing computationally feasible solutions to obtaining numerically accurate results.\nNotation:",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Numerical Methods for Bayesian Inference"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutMCMC.html#quadrature-methods",
+    "href": "teaching/docs/archives/tutMCMC.html#quadrature-methods",
+    "title": "Numerical Methods for Bayesian Inference",
+    "section": "Quadrature methods",
+    "text": "Quadrature methods\nPlease see [1] for an introduction to numerical integration methods. If the weight function is in the form of \\(\\exp(-\\theta^2)\\), one can use Gauss-Hermite quadrature method of numerical integration. For demonstration purpose, we assume a bivariate normal prior.\nThe posterior expectation of a function \\(g(\\theta)\\) is given as:\n\\[\nE[g(\\theta)] = \\int g(\\theta) L(\\theta)\\, \\pi(\\theta)\\, d\\theta \\tag{1}\n\\]\nUpon expanding, we get,\n\\[\n= \\int \\pi(\\theta_2) \\int g(\\theta)\\, \\pi(\\theta_1 \\mid \\theta_2)\\, L(\\theta)\\, d\\theta_1\\, d\\theta_2 \\tag{2}\n\\]\nwhere we have written the joint density of \\(\\theta_1\\) and \\(\\theta_2\\) as\n\\[\n\\pi(\\theta_1, \\theta_2) = \\pi(\\theta_2)\\pi(\\theta_1 \\mid \\theta_2) \\tag{3}\n\\]\nA numerical approximation to the above equation is sought using the Hermite polynomials [2] which leads us to the following:\n\\[\nE[g(\\theta_1, \\theta_2)] \\approx \\sum_{i=1}^{N_1} m_{1,i}\\,\\pi(z_{2,i}) \\sum_{j=1}^{N_2} m_{2,j}\\, g(z_{1,i}, z_{2,j})\\, L(z_{1,i}, z_{2,j})\\, \\pi(z_{2,j} \\mid z_{1,i}) \\tag{4}\n\\]\nwhere\n\\[\n\\begin{aligned}\n\\mu_1' &= \\mu_1 + \\rho \\frac{\\sigma_1}{\\sigma_2}(\\theta_2 - \\mu_2) \\\\[4pt]\n\\sigma_1' &= \\sigma_1 (1 - \\rho^2)^{0.5} \\\\[4pt]\nm_{1,i} &= w_{1,i}\\, \\exp(t_{1,i})\\, \\sqrt{2}\\, \\sigma_2 \\\\[4pt]\nz_{1,i} &= \\mu_2 + \\sqrt{2}\\, \\sigma_2\\, t_{1,i} \\\\[4pt]\nm_{2,j} &= w_{2,j}\\, \\exp(t_{2,j})\\, \\sqrt{2}\\, \\sigma_1' \\\\[4pt]\nz_{2,j} &= \\mu_1' + \\sqrt{2}\\, \\sigma_1'\\, t_{2,j}\n\\end{aligned} \\tag{5}\n\\]\nand \\(w_{1,i}, t_{1,i}, w_{2,j}, t_{2,j}\\) are the weights and abscissa of Hermite polynomials of orders \\(N_1\\) and \\(N_2\\), respectively. We can estimate posterior mean vector and covariance matrix by choosing an appropriate \\(g(\\theta_1, \\theta_2)\\). To be specific,\n\\[\n\\begin{aligned}\n\\hat{\\theta}_1 &= E[\\theta_1] \\\\[4pt]\n\\hat{\\theta}_2 &= E[\\theta_2] \\\\[4pt]\n\\hat{\\sigma}_1^2 &= E[\\theta_1^2] - \\hat{\\theta}_1^{\\,2} \\\\[4pt]\n\\hat{\\sigma}_2^2 &= E[\\theta_2^2] - \\hat{\\theta}_2^{\\,2} \\\\[4pt]\n\\hat{\\rho} &= \\frac{E[\\theta_1 \\theta_2] - \\hat{\\theta}_1 \\hat{\\theta}_2}{\\hat{\\sigma}_1 \\hat{\\sigma}_2}\n\\end{aligned} \\tag{6}\n\\]\nThis approximation will produce exact results if the function multiplying the prior is a polynomial of order less than or equal to \\(2N - 1\\) (in the univariate case). If extended to the bivariate case, this condition becomes even stricter. It would produce decent results if the function is smooth or slowly varying. It is also argued that this is in fact a deterministic version of the Monte Carlo integration. On the other side, if the likelihood falls somewhere in between the sampling points (abscissa of the Hermite polynomials), the results are disastrous. For example consider a function of this form:\n\\[\nL(\\theta_1, \\theta_2) \\propto \\exp\\left( -\\frac{1}{2\\sigma^2}\\left(y - a(\\theta_1^2 + \\theta_2^2)^{-1}\\right)^2 \\right) \\tag{7}\n\\]\nThe loci of \\(\\theta\\) maximizing this function is a circle with center at the origin and radius \\(\\sqrt{\\frac{a}{y}}\\). Now it is easy to see a case where this radius is enclosed by two abscissa. If the variance is too small, then it is very likely that sampling grid misses the ML solution and in fact we may get numerically unstable results which is somewhat paradoxical. Adaptive quadrature methods [3] can be used to circumvent such difficulties.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Numerical Methods for Bayesian Inference"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutMCMC.html#adaptive-quadrature-methods",
+    "href": "teaching/docs/archives/tutMCMC.html#adaptive-quadrature-methods",
+    "title": "Numerical Methods for Bayesian Inference",
+    "section": "Adaptive quadrature methods",
+    "text": "Adaptive quadrature methods\nIn the adaptive quadrature methods, we approximate the posterior with a normal near the mode and use this normal approximation as the quadrature kernel. More precisely,\n\\[\nE[g(\\theta)] = \\int g(\\theta) L(\\theta)\\, \\frac{\\pi(\\theta)}{\\psi(\\theta)}\\, \\psi(\\theta)\\, d\\theta \\tag{8}\n\\]\nwhere \\(\\psi(\\theta)\\) is a normal approximation to the posterior at the MAP estimate. Let the posterior density be\n\\[\np(\\theta) = L(\\theta)\\, \\pi(\\theta) \\tag{9}\n\\]\nThen, \\(\\psi(\\theta)\\) is obtained as follows:\n\\[\n\\theta_{MAP} = \\arg\\max_{\\theta} p(\\theta) \\tag{10a}\n\\]\n\\[\n\\psi(\\theta) = \\mathcal{N}\\left(\\theta_{MAP},\\; -\\left[\\left.\\frac{\\partial^2 \\log p(\\theta)}{\\partial\\theta\\,\\partial\\theta^T}\\right|_{\\theta = \\theta_{MAP}}\\right]^{-1}\\right) \\tag{10b}\n\\]\nWe can use Gauss-Hermite quadrature methods by replacing \\(\\pi(\\theta)\\) with \\(\\psi(\\theta)\\).",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Numerical Methods for Bayesian Inference"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutMCMC.html#monte-carlo-integration",
+    "href": "teaching/docs/archives/tutMCMC.html#monte-carlo-integration",
+    "title": "Numerical Methods for Bayesian Inference",
+    "section": "Monte Carlo integration",
+    "text": "Monte Carlo integration\nIn general, the approximation error in Monte Carlo integration is independent of the dimensionality of the parameters and is only dependent on the sample size. The very assumption is that we should be able to generate random samples from some distribution efficiently. If either the prior or the likelihood is normal, we have every reason to follow this approach since efficient generators exist for multivariate (pseudo) random numbers.\n\\[\nE[g(\\theta)] = E_\\pi[g(\\theta) L(\\theta)] \\tag{11}\n\\]\n\\[\nE_\\pi[g(\\theta) L(\\theta)] = \\int (g(\\theta) L(\\theta))\\, \\pi(\\theta)\\, d\\theta \\tag{12a}\n\\]\n\\[\n\\approx \\frac{1}{N} \\sum_{i=1}^{N} g\\left(\\theta^{(i)}\\right) L\\left(\\theta^{(i)}\\right) \\tag{12b}\n\\]\nwhere \\(\\theta^{(i)} \\sim \\pi\\). The Monte Carlo error is inversely proportional to \\(\\sqrt{N}\\). If we choose to visit certain points (the abscissa of a certain polynomial) only once, it reduces to a quadrature method and the convergence is a function of \\(N\\) rather than that of \\(\\sqrt{N}\\). Thus, we can consider quadrature methods as deterministic version of Monte Carlo. But these methods are more general than quadrature methods and would tend to produce accurate results as long as the proposal distribution (in this case the prior distribution) encompasses the target distribution (for example the posterior distribution) and \\(N\\) is sufficiently large. In the case of posterior distribution, we don’t need to impose such a restriction because an unlikely event (with probability zero) is also unlikely in the posterior.\nThe above two methods can be used to calculate (or approximate) a function of the parameter from the posterior distribution like the normalizing constant, posterior moments etc.. However, we can not obtain the posterior distribution as such. For example, we can not (as far as I know) calculate the mode or construct posterior confidence intervals. Whereas, if we draw samples from the posterior, not only we can evaluate functions of the parameter but also obtain summary statistics including confidence intervals or even construct an empirical cdf or pdf. We review rejection sampling and Markov chain Monte Carlo techniques in this light.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Numerical Methods for Bayesian Inference"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutMCMC.html#rejection-sampling",
+    "href": "teaching/docs/archives/tutMCMC.html#rejection-sampling",
+    "title": "Numerical Methods for Bayesian Inference",
+    "section": "Rejection sampling",
+    "text": "Rejection sampling\nWe can view the Bayes relation as a way to generate posterior samples from the prior [4]. In this perspective, the likelihood acts as resampler. We draw samples from the prior and based on the likelihood of this sample coming from the likelihood we accept or reject the sample. The rejection sampling mechanism is outlined below:\n\nstep-1: draw \\(\\theta\\) from \\(\\pi\\)\nstep-2: draw \\(u\\) from \\(U[0, 1]\\)\nstep-3: accept \\(\\theta\\) if \\(u \\le \\dfrac{p(\\theta)}{M\\pi(\\theta)}\\) otherwise repeat steps-1 to 2 until desired number of samples are generated.\n\nwhere \\(M = \\max \\dfrac{p(\\theta)}{\\pi(\\theta)}\\). Since \\(p(\\theta) = L(\\theta)\\pi(\\theta)\\) the rejection reduces to a very simple form:\n\nstep-3: accept \\(\\theta\\) if \\(u \\le \\dfrac{L(\\theta)}{L(\\hat{\\theta}_{ML})}\\)\n\nThis method is very useful if \\(\\hat{\\theta}_{ML}\\), the ML estimate of \\(\\theta\\), can be found efficiently. This method can be easily modified to accommodate importance sampling as well by bootstrapping the samples generated thus far. Besides that, this interpretation is helpful if one were evaluating different likelihoods with the same prior or vice versa [4].",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Numerical Methods for Bayesian Inference"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutMCMC.html#random-walk-metropolis",
+    "href": "teaching/docs/archives/tutMCMC.html#random-walk-metropolis",
+    "title": "Numerical Methods for Bayesian Inference",
+    "section": "Random-walk Metropolis",
+    "text": "Random-walk Metropolis\nMarkov-Chain Monte Carlo (MCMC) methods have revolutionized applied statistics at least in Bayesian analysis. In MCMC, we simulate an ergodic Markov chain whose samples are distributed as the intended one, asymptotically. For a review of MCMC techniques please refer to [5, 6]. Terminology:\n\n\\(p(\\theta)\\) target distribution: the distribution from which we want to draw the samples\n\\(J(\\theta^* \\mid \\theta)\\) proposal density: the distribution from which we will draw samples\n\nBased on some strategy we accept new draws or retain old draws. Algorithms would differ in the way they choose the proposal. Though some guidelines exist on how to choose a proposal distribution, I feel it is an art rather than a science (no offense meant to die-hard Bayesians).\nMetropolis-Hastings algorithm:\n\nstep-1: draw a sample from the proposal density conditioned on the previous draw\n\n\\[\n\\theta^* \\sim J(\\theta \\mid \\theta_t)\n\\]\n\nstep-2: calculate the acceptance probability\n\n\\[\n\\alpha(\\theta^*, \\theta_t) = \\min\\left( \\frac{p(\\theta^*) J(\\theta^* \\mid \\theta_t)}{p(\\theta_t) J(\\theta_t \\mid \\theta^*)},\\; 1 \\right)\n\\]\n\nstep-3: \\(u \\sim U[0, 1]\\) if \\(u \\le \\alpha(\\theta^*, \\theta_t)\\), then \\(\\theta_{t+1} = \\theta^*\\) else \\(\\theta_{t+1} = \\theta_t\\)\n\nIf the proposal density is symmetric, then it is called Metropolis algorithm. Even the Gibbs sampler is a special case of the M-H algorithms in which the vector parameter is sampled on conditional marginal densities one at a time.\nrandom notes: We throw away certain number of samples (called burn-in) since MCMC samples converge to the stationary distribution (target distribution) only asymptotically. Also, we may need to start multiple parallel chains to make sure that all the chains merge after the burn-in. Another check for convergence is the Gelman-Rubin statistic which should approach to one near convergence. In my view this has to happen because, by construction Markov Chain is ergodic and hence the ensemble (across chain) variance and sample (with-in) variance must be (approximately) the same. Hence the ratio of with-in to across variance should be unity.\nRandom-walk Metropolis algorithm: The proposal density is chosen as:\n\\[\nJ(\\theta^* \\mid \\theta_t) \\sim \\mathcal{N}(\\theta_t, \\Sigma).\n\\]\nBy construction this distribution is symmetric and hence step-2 of the M-H algorithm simplifies to\n\\[\n\\alpha(\\theta^*, \\theta_t) = \\min\\left( \\frac{p(\\theta^*)}{p(\\theta_t)},\\; 1 \\right)\n\\]\nrandom trick: Suppose that the likelihood is in the form of (7), then the posterior will be in the form:\n\\(p(\\theta) \\propto \\exp(f(\\theta))\\) for some function \\(f\\). Step-2 and 3 of the M-H reduce to:\n\nstep-2: calculate the acceptance probability\n\n\\[\n\\alpha(\\theta^*, \\theta_t) = f(\\theta^*) - f(\\theta_t)\n\\]\n\nstep-3: \\(u \\sim U[0, 1]\\) if \\(\\log(u) \\le \\alpha(\\theta^*, \\theta_t)\\), then \\(\\theta_{t+1} = \\theta^*\\) else \\(\\theta_{t+1} = \\theta_t\\)\n\nWe can avoid expensive multiplications and perform operations with additions and one logarithm which also leads to some numerical stability. For example if the argument of the \\(\\exp(.)\\) is large, then the arithmetic calculations may overflow.\nrandom notes: The variance of the proposal distribution should be chosen such that entire parameter space is traversed. If the variance is too large (reckless proposal as Dr. AC calls it), we reject too many samples. In this case, MCMC chain might have to be thinned-down as the auto-correlation of the chain might be slowly decaying up to certain lags. Whereas if we choose small proposal (a timid proposal), it might take a really long time to traverse the parameter space. In order to obtain a reasonable estimate of the covariance, we can use Quadrature methods to obtain an estimate of the posterior covariance \\(\\Sigma\\) and then use a scaled version of this covariance matrix for the proposal as suggested by [7, Section 11.9, pp-306].\n\\[\nJ(\\theta^* \\mid \\theta_t) \\sim \\mathcal{N}\\left(\\theta_t,\\, (2.4/d)^2 \\Sigma\\right) \\tag{13}\n\\]\nwhere \\(d\\) is the dimensionality of the parameter space.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Numerical Methods for Bayesian Inference"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutMCMC.html#references",
+    "href": "teaching/docs/archives/tutMCMC.html#references",
+    "title": "Numerical Methods for Bayesian Inference",
+    "section": "References",
+    "text": "References\n[1] Brian Smith, “Introduction to numerical integration,” Spring, 1998, CS 375 class notes, CS Dept., UMN, url: www.arc.unm.edu/~acpineda/cs375/cs375.html.\n[2] J. C. Naylor and A. F. M. Smith, “Applications of a method for the efficient computation of posterior distributions,” Applied Statistics, vol. 31, 1982.\n[3] Sophia Rabe-Hesketh and Anders Skrondal, “Reliable estimation of generalized linear mixed models using adaptive quadrature,” The Stata Journal, vol. 2, no. 1, pp. 1–21, 2002.\n[4] A. F. M. Smith and A. E. Gelfand, “Bayesian statistics with no tears: A sampling-resampling perspective,” The American Statistician, vol. 46, 1992.\n[5] Dr. Alicia Carriquiry, “Bayesian analysis,” Spring, 2005, class notes, Stat. Dept., Iowa State University, url: www.stat.iastate.edu/stat544/homepage.html.\n[6] Siddhartha Chib and Edward Greenberg, “Understanding the metropolis-hastings algorithm,” The American Statistician, vol. 49, 1995.\n[7] Andrew Gelman, Hal S. Stern, John B. Carlin, and Donald B. Rubin, Bayesian Data Analysis, Chapman & Hall/CRC, second edition, 2003.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Numerical Methods for Bayesian Inference"
     ]
   },
   {
@@ -68,129 +217,14 @@
     ]
   },
   {
-    "objectID": "research/reports.html",
-    "href": "research/reports.html",
-    "title": "Reports",
+    "objectID": "research/index.html",
+    "href": "research/index.html",
+    "title": "Research",
     "section": "",
-    "text": "(Content to be added.)",
+    "text": "Use the sidebar at left to browse publications, patents, reports, code, and projects.",
     "crumbs": [
       "Home",
-      "Research",
-      "Reports"
-    ]
-  },
-  {
-    "objectID": "research/projects/another-project.html",
-    "href": "research/projects/another-project.html",
-    "title": "Another project",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "Research",
-      "Projects",
-      "Another project"
-    ]
-  },
-  {
-    "objectID": "research/projects/index.html",
-    "href": "research/projects/index.html",
-    "title": "Projects",
-    "section": "",
-    "text": "Use the sidebar at left to browse individual projects.",
-    "crumbs": [
-      "Home",
-      "Research",
-      "Projects"
-    ]
-  },
-  {
-    "objectID": "research/publications.html",
-    "href": "research/publications.html",
-    "title": "Publications",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "Research",
-      "Publications"
-    ]
-  },
-  {
-    "objectID": "about/contact.html",
-    "href": "about/contact.html",
-    "title": "Contact",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "About",
-      "Contact"
-    ]
-  },
-  {
-    "objectID": "about/bio.html",
-    "href": "about/bio.html",
-    "title": "Bio",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "About",
-      "Bio"
-    ]
-  },
-  {
-    "objectID": "asankhya/hello/index.html",
-    "href": "asankhya/hello/index.html",
-    "title": "Hello",
-    "section": "",
-    "text": "This is Asankhya — a quieter space for personal writing. Distinct from SaddlePoint, which is for academic and technical work.\nExpect essays, notes from books, observations, and slower thinking.\n(More to come.)"
-  },
-  {
-    "objectID": "asankhya/index.html",
-    "href": "asankhya/index.html",
-    "title": "Asankhya",
-    "section": "",
-    "text": "Hello\n\n\n\nmeta\n\n\n\nFirst post on Asankhya — what this space is for.\n\n\n\n\n\nMay 18, 2026\n\n1 min\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Home",
-      "Blogs",
-      "Asankhya"
-    ]
-  },
-  {
-    "objectID": "about/index.html",
-    "href": "about/index.html",
-    "title": "About",
-    "section": "",
-    "text": "I am an AI researcher, systems architect, and educator with over two decades of experience spanning Machine Learning, Artificial Intelligence, Bayesian Statistics, Signal Processing, Distributed Systems, and Scientific Computing. My work lies at the intersection of rigorous mathematical foundations and large-scale deployable AI systems, with applications across Agriculture, Healthcare, Education, Computational Biology, and Public-Interest Technology.\nMy current focus is on Frontier Model Development, especially understanding why Deep Learning works and developing a unified theoretical framework connecting optimization, representation learning, probabilistic inference, dynamical systems, and information theory. I am also interested in scalable AI infrastructure for distributed training and inference of GPT-scale models, along with curriculum design for systems programmers and AI engineers working on large-scale AI systems.\nOver the years, I have worked across academia, industrial research, startups, open-source ecosystems, and public-sector AI initiatives, contributing both to foundational research and production-grade AI deployments.\n\n\nEducational Qualifications\n\nM.S. in Applied & Computational Mathematics — University of Washington, USA (2020 – 2022)\n\nAreas: Dynamical Systems, Stochastic Processes, PDEs, Numerical Linear Algebra, Deep Learning in NLP\n\nPh.D. in Statistics — Texas A&M University, USA (2005 – 2010)\n\nResearch area: Bayesian Semiparametric Models for Heterogeneous Cross-Platform Differential Gene Expression\nAdvisor: Prof. Bani K. Mallick\n\nPh.D. Program (transferred to TAMU) — Iowa State University, USA (2003 – 2005)\n\nResearch area: Distributed Estimation Techniques\nAdvisor: Prof. Alexander Doganzic\n\nM.S. in Electrical Engineering — Indian Institute of Technology Madras, India (1997 – 2000)\n\nResearch area: Time-Frequency Representations: Analysis, Synthesis and Implementation\nAdvisors: Prof. K. M. M. Prabhu, Prof. S. Srinivasan\n\nB.E. in Electronics & Communication Engineering — S.R.K.R. Engineering College (affiliated to Andhra University), Bhimavaram, India (1993 – 1997)\n\n\n\n\nIndustry and Research Experience\n\nAdjunct Faculty and Sector Expert – Agri & AI — IIT Jammu / CPMU, Ministry of Education (2024 – 2026)\n\nAI policy ecosystems\nIntellectual Property Rights (IPR)\nMonitoring, Evaluation and Learning (MEL) for AI programs\nAI and Agriculture\n\nDirector, Machine Learning / Principal ML Scientist — Wadhwani AI (2020 – 2024)\n\nApplied Research in Machine Learning and Generative AI\nLarge Language Models (LLMs)\nDocument Intelligence\nAI for Agriculture, Healthcare, and Education\nReliable and uncertainty-aware AI systems\nScalable AI deployment\n\nSenior Principal Statistical Engineer — Embibe (2019 – 2020)\n\nLearning Analytics\nCausal Inference\nRecommendation Systems\nAI for Education\n\nConsulting ML Architect — EkStep / NIIT StackRoute / Consulting (2014 – 2019)\n\nAI for Education\nML Platforms and Infrastructure\nRecommendation Engines\nNLP-based Educational Systems\nConversational Analytics\nInteroperable AI Systems\n\nFounder & CTO — VitalTicks (2017 – 2025)\n\nConnected Healthcare\nIoT Systems\nSmart Diagnostics\nEmbedded AI Systems\n\nAssociate Research Scientist — Dow AgroSciences (2011 – 2014)\n\nComputational Biology\nGenomics\nBayesian Modeling\nScientific Computing\nHigh-dimensional Statistical Methods\nDesign of Experiments\n\nPostdoctoral Researcher — Texas A&M University (2010 – 2011)\n\nBayesian Inference\nDynamical Systems\nUncertainty Quantification\n\nResearch Engineer — GE John F. Welch Technology Center (2000 – 2002)\n\nSignal Processing\nScientific Computing\nMonte Carlo Methods\nCompression Algorithms\n\n\n\n\n\nResearch and Academic Interests\n\nFrontier Models and Large Language Models (LLMs)\nUnified Theories of Deep Learning\nUnderstanding Generalization and Scaling in Neural Networks\nBayesian Statistics and Probabilistic Modeling\nUncertainty Quantification in AI Systems\nDistributed Training and Inference for GPT-scale Models\nML Systems and AI Infrastructure\nGenerative AI and Multimodal Systems\nRetrieval-Augmented Generation (RAG)\nDeep Learning Theory\nScientific Computing\nDynamical Systems and Optimization\nStatistical Signal Processing\nExplainable and Interoperable AI\nAI for Education, Healthcare, and Agriculture\nCurriculum Design for Systems Programmers and AI Engineers\n\n\n\n\nSelected Recent Publications\n\nLattice-Based Vector Quantization for Low-Bit Quantization-Aware Training\nProceedings of Machine Learning Research, 2026.\nHealth Sentinel: An AI Pipeline for Real-time Disease Outbreak Detection\nNLP4PI Workshop, 2025.\nLearning to Detect PII: Tabular vs Document Classification Models for Network Traffic Analysis\nJournal of Information Security and Applications, 2025.\nQuantProb: Generalizing Probabilities along with Predictions for a Pre-trained Classifier\nUAI 2024.\nAutomatic Interpretation of Line Probe Assay Test for TB\nAAAI 2024.\n\n\n\n\nSelected Keywords\nMachine Learning, Generative AI, Frontier Models, Bayesian Statistics, Deep Learning, LLMs, Distributed AI Systems, AI Infrastructure, Signal Processing, Scientific Computing, Optimization, Computational Mathematics, NLP, Multimodal AI, AI for Social Impact",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "blogs/index.html",
-    "href": "blogs/index.html",
-    "title": "Blogs",
-    "section": "",
-    "text": "Two distinct streams of writing live here:\n\nSaddlePoint\nAcademic and technical blog — statistics, machine learning, statistical signal processing, and adjacent topics. Long-form notes, derivations, and write-ups of ideas worth keeping around.\n\n\nAsankhya\nPersonal blog — essays, notes from books, observations, slower thinking. Quieter, less structured, more reflective.\n\nEach blog has its own RSS feed: SaddlePoint feed · Asankhya feed.",
-    "crumbs": [
-      "Home",
-      "Blogs"
-    ]
-  },
-  {
-    "objectID": "research/patents.html",
-    "href": "research/patents.html",
-    "title": "Patents",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "Research",
-      "Patents"
+      "Research"
     ]
   },
   {
@@ -207,14 +241,117 @@
     ]
   },
   {
-    "objectID": "research/index.html",
-    "href": "research/index.html",
-    "title": "Research",
+    "objectID": "research/patents.html",
+    "href": "research/patents.html",
+    "title": "Patents",
     "section": "",
-    "text": "Use the sidebar at left to browse publications, patents, reports, code, and projects.",
+    "text": "(Content to be added.)",
     "crumbs": [
       "Home",
-      "Research"
+      "Research",
+      "Patents"
+    ]
+  },
+  {
+    "objectID": "blogs/index.html",
+    "href": "blogs/index.html",
+    "title": "Blogs",
+    "section": "",
+    "text": "Two distinct streams of writing live here:\n\nSaddlePoint\nAcademic and technical blog — statistics, machine learning, statistical signal processing, and adjacent topics. Long-form notes, derivations, and write-ups of ideas worth keeping around.\n\n\nAsankhya\nPersonal blog — essays, notes from books, observations, slower thinking. Quieter, less structured, more reflective.\n\nEach blog has its own RSS feed: SaddlePoint feed · Asankhya feed.",
+    "crumbs": [
+      "Home",
+      "Blogs"
+    ]
+  },
+  {
+    "objectID": "about/index.html",
+    "href": "about/index.html",
+    "title": "About",
+    "section": "",
+    "text": "I am an AI researcher, systems architect, and educator with over two decades of experience spanning Machine Learning, Artificial Intelligence, Bayesian Statistics, Signal Processing, Distributed Systems, and Scientific Computing. My work lies at the intersection of rigorous mathematical foundations and large-scale deployable AI systems, with applications across Agriculture, Healthcare, Education, Computational Biology, and Public-Interest Technology.\nMy current focus is on Frontier Model Development, especially understanding why Deep Learning works and developing a unified theoretical framework connecting optimization, representation learning, probabilistic inference, dynamical systems, and information theory. I am also interested in scalable AI infrastructure for distributed training and inference of GPT-scale models, along with curriculum design for systems programmers and AI engineers working on large-scale AI systems.\nOver the years, I have worked across academia, industrial research, startups, open-source ecosystems, and public-sector AI initiatives, contributing both to foundational research and production-grade AI deployments.\n\n\nEducational Qualifications\n\nM.S. in Applied & Computational Mathematics — University of Washington, USA (2020 – 2022)\n\nAreas: Dynamical Systems, Stochastic Processes, PDEs, Numerical Linear Algebra, Deep Learning in NLP\n\nPh.D. in Statistics — Texas A&M University, USA (2005 – 2010)\n\nResearch area: Bayesian Semiparametric Models for Heterogeneous Cross-Platform Differential Gene Expression\nAdvisor: Prof. Bani K. Mallick\n\nPh.D. Program (transferred to TAMU) — Iowa State University, USA (2003 – 2005)\n\nResearch area: Distributed Estimation Techniques\nAdvisor: Prof. Alexander Doganzic\n\nM.S. in Electrical Engineering — Indian Institute of Technology Madras, India (1997 – 2000)\n\nResearch area: Time-Frequency Representations: Analysis, Synthesis and Implementation\nAdvisors: Prof. K. M. M. Prabhu, Prof. S. Srinivasan\n\nB.E. in Electronics & Communication Engineering — S.R.K.R. Engineering College (affiliated to Andhra University), Bhimavaram, India (1993 – 1997)\n\n\n\n\nIndustry and Research Experience\n\nAdjunct Faculty and Sector Expert – Agri & AI — IIT Jammu / CPMU, Ministry of Education (2024 – 2026)\n\nAI policy ecosystems\nIntellectual Property Rights (IPR)\nMonitoring, Evaluation and Learning (MEL) for AI programs\nAI and Agriculture\n\nDirector, Machine Learning / Principal ML Scientist — Wadhwani AI (2020 – 2024)\n\nApplied Research in Machine Learning and Generative AI\nLarge Language Models (LLMs)\nDocument Intelligence\nAI for Agriculture, Healthcare, and Education\nReliable and uncertainty-aware AI systems\nScalable AI deployment\n\nSenior Principal Statistical Engineer — Embibe (2019 – 2020)\n\nLearning Analytics\nCausal Inference\nRecommendation Systems\nAI for Education\n\nConsulting ML Architect — EkStep / NIIT StackRoute / Consulting (2014 – 2019)\n\nAI for Education\nML Platforms and Infrastructure\nRecommendation Engines\nNLP-based Educational Systems\nConversational Analytics\nInteroperable AI Systems\n\nFounder & CTO — VitalTicks (2017 – 2025)\n\nConnected Healthcare\nIoT Systems\nSmart Diagnostics\nEmbedded AI Systems\n\nAssociate Research Scientist — Dow AgroSciences (2011 – 2014)\n\nComputational Biology\nGenomics\nBayesian Modeling\nScientific Computing\nHigh-dimensional Statistical Methods\nDesign of Experiments\n\nPostdoctoral Researcher — Texas A&M University (2010 – 2011)\n\nBayesian Inference\nDynamical Systems\nUncertainty Quantification\n\nResearch Engineer — GE John F. Welch Technology Center (2000 – 2002)\n\nSignal Processing\nScientific Computing\nMonte Carlo Methods\nCompression Algorithms\n\n\n\n\n\nResearch and Academic Interests\n\nFrontier Models and Large Language Models (LLMs)\nUnified Theories of Deep Learning\nUnderstanding Generalization and Scaling in Neural Networks\nBayesian Statistics and Probabilistic Modeling\nUncertainty Quantification in AI Systems\nDistributed Training and Inference for GPT-scale Models\nML Systems and AI Infrastructure\nGenerative AI and Multimodal Systems\nRetrieval-Augmented Generation (RAG)\nDeep Learning Theory\nScientific Computing\nDynamical Systems and Optimization\nStatistical Signal Processing\nExplainable and Interoperable AI\nAI for Education, Healthcare, and Agriculture\nCurriculum Design for Systems Programmers and AI Engineers\n\n\n\n\nSelected Recent Publications\n\nLattice-Based Vector Quantization for Low-Bit Quantization-Aware Training\nProceedings of Machine Learning Research, 2026.\nHealth Sentinel: An AI Pipeline for Real-time Disease Outbreak Detection\nNLP4PI Workshop, 2025.\nLearning to Detect PII: Tabular vs Document Classification Models for Network Traffic Analysis\nJournal of Information Security and Applications, 2025.\nQuantProb: Generalizing Probabilities along with Predictions for a Pre-trained Classifier\nUAI 2024.\nAutomatic Interpretation of Line Probe Assay Test for TB\nAAAI 2024.\n\n\n\n\nSelected Keywords\nMachine Learning, Generative AI, Frontier Models, Bayesian Statistics, Deep Learning, LLMs, Distributed AI Systems, AI Infrastructure, Signal Processing, Scientific Computing, Optimization, Computational Mathematics, NLP, Multimodal AI, AI for Social Impact",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "asankhya/index.html",
+    "href": "asankhya/index.html",
+    "title": "Asankhya",
+    "section": "",
+    "text": "Hello\n\n\n\nmeta\n\n\n\nFirst post on Asankhya — what this space is for.\n\n\n\n\n\nMay 18, 2026\n\n1 min\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Home",
+      "Blogs",
+      "Asankhya"
+    ]
+  },
+  {
+    "objectID": "asankhya/hello/index.html",
+    "href": "asankhya/hello/index.html",
+    "title": "Hello",
+    "section": "",
+    "text": "This is Asankhya — a quieter space for personal writing. Distinct from SaddlePoint, which is for academic and technical work.\nExpect essays, notes from books, observations, and slower thinking.\n(More to come.)"
+  },
+  {
+    "objectID": "about/bio.html",
+    "href": "about/bio.html",
+    "title": "Bio",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "About",
+      "Bio"
+    ]
+  },
+  {
+    "objectID": "about/contact.html",
+    "href": "about/contact.html",
+    "title": "Contact",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "About",
+      "Contact"
+    ]
+  },
+  {
+    "objectID": "research/publications.html",
+    "href": "research/publications.html",
+    "title": "Publications",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "Research",
+      "Publications"
+    ]
+  },
+  {
+    "objectID": "research/projects/index.html",
+    "href": "research/projects/index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Use the sidebar at left to browse individual projects.",
+    "crumbs": [
+      "Home",
+      "Research",
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "research/projects/another-project.html",
+    "href": "research/projects/another-project.html",
+    "title": "Another project",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "Research",
+      "Projects",
+      "Another project"
     ]
   },
   {
@@ -230,14 +367,197 @@
     ]
   },
   {
-    "objectID": "teaching/index.html",
-    "href": "teaching/index.html",
-    "title": "Teaching",
+    "objectID": "teaching/docs/archives/tutLaplace.html",
+    "href": "teaching/docs/archives/tutLaplace.html",
+    "title": "Normal Approximation",
     "section": "",
-    "text": "Use the sidebar at left to browse notes, homeworks, and exams.",
+    "text": "Let the likelihood function be\n\\[\nL(\\theta; y) = c \\exp(-f(\\theta; y)) \\tag{1}\n\\]\nfor some arbitrary bi-variate function \\(f\\) and for some constant \\(c\\). It might be useful if we have a normal likelihood function, in which case it is possible to compute the posterior either analytically (e.g. if the prior is also normal) or by resorting to numerical integration techniques [1] (e.g. Gauss–Hermite quadrature). It can also be used to calculate moments and cumulants in an efficient way [2].\nIn general, we can approximate the function \\(f(\\theta)\\) (in the neighborhood of \\(\\tau\\)) using a multi-variate Taylor series. In the present case, we will be considering the bi-variate case. We consider only terms up to order two since the log-likelihood of a normal density is quadratic,\n\\[\nf(\\theta) \\approx a_{00} + a_{10}(\\theta_1 - \\tau_1) + a_{01}(\\theta_2 - \\tau_2) + a_{11}(\\theta_1 - \\tau_1)(\\theta_2 - \\tau_2) + a_{20}(\\theta_1 - \\tau_1)^2 + a_{02}(\\theta_2 - \\tau_2)^2 \\tag{2}\n\\]\nwhere\n\\[\na_{ij} = \\frac{1}{i!\\, j!} \\left[ \\left(\\frac{\\partial}{\\partial \\theta_1}\\right)^i \\left(\\frac{\\partial}{\\partial \\theta_2}\\right)^j f \\right](\\tau) \\tag{3}\n\\]\nThen the likelihood is approximated as:\n\\[\nL(\\theta; y) \\sim N(\\mu_L, \\Sigma_L) \\tag{4a}\n\\]\n\\[\n\\mu_L = -\\frac{1}{2}\n\\begin{bmatrix}\n(a_{11} + a_{10} - a_{11}\\tau_2 - 2a_{20}\\tau_1)/a_{20} \\\\\n(a_{11} + a_{01} - a_{11}\\tau_1 - 2a_{02}\\tau_2)/a_{02}\n\\end{bmatrix} \\tag{4b}\n\\]\n\\[\n\\Sigma_L = \\frac{-2 a_{20} a_{02}}{4 a_{20} a_{02} - a_{11}^2}\n\\begin{bmatrix}\n1/a_{02} & -2a_{11} \\\\\n-2a_{11} & 1/a_{20}\n\\end{bmatrix} \\tag{4c}\n\\]\nWe can expand the Taylor series around the mode or ML estimate. Having approximated the likelihood as a bivariate normal, below we will provide a closed-form expression for calculating the posterior density for a given normal prior. If the prior \\(\\pi(\\theta)\\) is of the form\n\\[\n\\pi(\\theta) \\sim N(\\mu_\\pi, \\Sigma_\\pi) \\tag{5}\n\\]\nthen the posterior \\(p(\\theta)\\) will be of the form\n\\[\np(\\theta) \\sim N(\\mu_p, \\Sigma_p) \\tag{6a}\n\\]\n\\[\n\\Sigma_p = \\left(\\Sigma_L^{-1} + \\Sigma_\\pi^{-1}\\right)^{-1} \\tag{6b}\n\\]\n\\[\n\\mu_p = \\Sigma_p \\left(\\Sigma_L^{-1}\\mu_L + \\Sigma_\\pi^{-1}\\mu_\\pi\\right) \\tag{6c}\n\\]",
     "crumbs": [
       "Home",
-      "Teaching"
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Normal Approximation"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutLaplace.html#references",
+    "href": "teaching/docs/archives/tutLaplace.html#references",
+    "title": "Normal Approximation",
+    "section": "References",
+    "text": "References\n[1] J. C. Naylor and A. F. M. Smith, “Applications of a method for the efficient computation of posterior distributions,” Applied Statistics, vol. 31, 1982.\n[2] Kostas Triantafyllopoulos, “Moments and cumulants of the multivariate real and complex Gaussian distributions,” 2002, www.stats.bris.ac.uk/research/stats/pub/ResRept/2002.html.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Normal Approximation"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutEM.html",
+    "href": "teaching/docs/archives/tutEM.html",
+    "title": "EM Algorithm for Mixture Modeling",
+    "section": "",
+    "text": "We derive the Expectation-Maximization (EM) algorithm for Gaussian Mixture modeling (GMM). In general, any random space can be modeled by a mixture (weighed linear combination) of normal densities. Then, such an arbitrary density can be represented as:\n\\[\nf(\\phi; y) = \\sum_{k=1}^{K} \\lambda_k f_k(\\theta_k; y) \\tag{1}\n\\]\nwhere\nFrom now onwards, we drop the bold face notation for vectors and matrices for convenience. To derive the EM algorithm, we need to identify the missing information. Often identifying this missing information can lead to different results affecting convergence. In the mixture modeling problem, if know the label of the data, i.e., if we know the density index that could have possibly produced the observation, we could easily estimate the mixture parameters by simply collecting all the data corresponding to that particular density. In other words, if we associate each observation to one of the \\(K\\) densities, estimating each density parameters is trivial. Hence, we choose the label as the missing information.\nOnce we identify the missing information, we need to define the complete data likelihood and marginal unobserved data density conditional on the observed data. A very good explanation of the EM algorithm is given in [1, pp. 66-87].\nLet \\(u(n) \\in \\{1 \\ldots K\\}\\) be the missing label corresponding to the \\(n\\)th observation \\(y(n)\\). The marginal density (in fact pmf) of this unobserved data is then given as:\n\\[\np(u(n) = k) = \\lambda_k \\tag{2}\n\\]\nThe density of the observed data given the unobserved data is:\n\\[\np(y(n) \\mid u(n)) = f_{u(n)}(y(n); \\theta_{u(n)}) \\tag{3}\n\\]\nThen we obtain the complete data density as:\n\\[\np(y(n), u(n); \\phi) = f_{u(n)}(y(n); \\theta_{u(n)}) \\lambda_{u(n)} \\tag{4}\n\\]\nThe complete data density of \\(N\\) independent observations is then:\n\\[\np(y, u; \\phi) = \\prod_{n=1}^{N} p(y(n), u(n); \\phi) \\tag{5}\n\\]\nMarginal unobserved data density given the observed data is:\n\\[\np(u \\mid y; \\phi) = p(y, u; \\phi) / p(y; \\phi) \\tag{6}\n\\]\nwhere \\(p(y; \\phi)\\) is the incomplete or observed data density (likelihood function of the observed data).\nThe EM algorithm proceeds as follows:",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "EM Algorithm for Mixture Modeling"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutEM.html#e-step",
+    "href": "teaching/docs/archives/tutEM.html#e-step",
+    "title": "EM Algorithm for Mixture Modeling",
+    "section": "E-Step",
+    "text": "E-Step\nSince we have independent observations\n\\[\nE_{u \\mid y}\\left[\\ln p(u, y; \\phi)\\right] = \\sum_{n=1}^{N} E_{u(n) \\mid y(n)}\\left[\\ln p(u(n), y(n); \\theta_{u(n)})\\right] \\tag{7}\n\\]\nUpon expanding the expectation operator and letting \\(u(n) = k\\),\n\\[\nE_{k \\mid y(n)}\\left[\\ln p(k, y(n); \\theta_k)\\right] = \\sum_{k=1}^{K} \\left[\\ln p(k, y(n); \\theta_k)\\right] \\frac{p(y(n), k; \\hat{\\theta}_k)}{p(y(n); \\hat{\\phi})} \\tag{8}\n\\]\nThe dependence of \\(u(n)\\) on \\(k\\) becomes obvious if we recollect that \\(u(n) \\in \\{1 \\ldots K\\}\\). Also, the denominator is only a function of the data and hence can be ignored while performing the M-step. Hence, we restate the above equation as:\n\\[\nE_{k \\mid y(n)}\\left[\\ln p(k, y(n); \\theta_k)\\right] \\propto \\sum_{k=1}^{K} \\left[\\ln p(k, y(n); \\theta_k)\\right] p(y(n), k; \\hat{\\theta}_k) \\tag{9}\n\\]\nThen,\n\\[\nE_{u \\mid y}\\left[\\ln p(u, y; \\phi)\\right] \\propto \\sum_{n=1}^{N} \\sum_{k=1}^{K} \\hat{\\lambda}_k f_k(y(n); \\hat{\\theta}_k) \\left[\\ln \\lambda_k - \\frac{1}{2} \\exp\\left[(y(n) - \\mu_k)^T \\Sigma_k^{-1} (y(n) - \\mu_k)\\right] - \\ln |\\Sigma_k|\\right] \\tag{10}\n\\]\nThe above function has to be maximized subject to the constraint \\(\\sum_{k=1}^{K} \\lambda_k = 1\\) and define it as \\(Q(\\phi; \\hat{\\phi})\\).",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "EM Algorithm for Mixture Modeling"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutEM.html#m-step",
+    "href": "teaching/docs/archives/tutEM.html#m-step",
+    "title": "EM Algorithm for Mixture Modeling",
+    "section": "M-Step",
+    "text": "M-Step\n\\[\n\\hat{\\phi}_{new} = \\arg\\max_{\\phi} Q(\\phi; \\hat{\\phi}) \\tag{11}\n\\]\nLet \\(\\varphi\\) be the Lagrange multiplier. The function to be maximized is then:\n\\[\nU(\\phi; \\hat{\\phi}) = Q(\\phi; \\hat{\\phi}) - \\varphi \\left(\\sum_{k=1}^{K} \\lambda_k - 1\\right) \\tag{12}\n\\]\nTo obtain \\(\\hat{\\lambda}_{k,new}\\), we set the derivative of \\(U(\\phi; \\hat{\\phi})\\) w.r.t \\(\\lambda_k\\) to zero and solve for the roots and similarly for \\(\\mu_k\\) and \\(\\Sigma_k\\). After some straightforward algebraic manipulations, we obtain the expressions for the estimates as [2, Chapter 5]:\n\\[\n\\hat{\\lambda}_{k,new} = \\frac{1}{N} \\sum_{n=1}^{N} \\frac{\\hat{\\lambda}_k f_k(y(n); \\hat{\\theta}_k)}{f(y(n); \\hat{\\phi})} \\tag{13}\n\\]\n\\[\n\\hat{\\mu}_{k,new} = \\frac{1}{N \\hat{\\lambda}_{k,new}} \\sum_{n=1}^{N} \\frac{\\hat{\\lambda}_k f_k(y(n); \\hat{\\theta}_k)}{f(y(n); \\hat{\\phi})} y(n) \\tag{14}\n\\]\n\\[\n\\hat{\\Sigma}_{k,new} = \\frac{1}{N \\hat{\\lambda}_{k,new}} \\sum_{n=1}^{N} \\frac{\\hat{\\lambda}_k f_k(y(n); \\hat{\\theta}_k)}{f(y(n); \\hat{\\phi})} \\left[(y(n) - \\hat{\\mu}_k)^T (y(n) - \\hat{\\mu}_k)\\right] \\tag{15}\n\\]",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "EM Algorithm for Mixture Modeling"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutEM.html#references",
+    "href": "teaching/docs/archives/tutEM.html#references",
+    "title": "EM Algorithm for Mixture Modeling",
+    "section": "References",
+    "text": "References\n[1] Aleksander Dogandžić, “Detection and estimation theory,” Spring, 2005, class notes #3, ECpE Dept., Iowa State University, url: home.eng.iastate.edu/~ald/EE527.html.\n[2] Soma Sekhar Dhavala, Time-frequency representations: Analysis, Synthesis and Implementation, M.S. thesis, Indian Institute of Technology, Madras, March 2000.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "EM Algorithm for Mixture Modeling"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutChirp.html#introduction",
+    "href": "teaching/docs/archives/tutChirp.html#introduction",
+    "title": "Chirplet Decomposition",
+    "section": "Introduction",
+    "text": "Introduction\nMany signals that exist in nature are inherently non-stationary or transient like Bat and Whale echoes, evoked-potentials, RADAR clutters. There exist many methods to analyze such signals including wavelet-transforms, short-time Fourier transform, adaptive time-frequency distributions, Matching Pursuits etc.. The signal representations which adapt the tilings in the time-frequency (t-f) plane perform prominently in terms of achieving higher resolution in time and frequency simultaneously. Atomic decompositions [1, 2, 3] is one such class of algorithms which attempt to approximate the signal as a weighed combination of the atoms from a chosen dictionary. The atoms in the dictionary should contain all possible tilings that best suit the inner structure of the signal under analysis. Hence, some a priori information about the signal under analysis is needed if one were working with a finite vocabulary. Another alternative is to use, if an efficient method for choosing an atom exists, an infinite size vocabulary. Chirplets, windowed linear frequency modulated signals, offer a very flexible set of tilings like shearing, translation and rotation. Gaussian chirplets are particularly attractive in terms of computational tractability in addition to offering optimum time-frequency resolution (attain minimum time-bandwidth product). Numerous algorithms have been proposed to decompose a signal as a weighed combination of chirplets. However, most of the methods proposed in the literature use a divide and conquer approach, i.e., repeatedly decompose the residue until the residue is of insignificant energy. It should be noted that chirplets are not orthogonal and hence such decompositions are not unique. Also, there is no formal mechanism to estimate the number of components in the model and efficiency of the estimator in terms of Cramer-Rao bounds were not provided (except in single component cases).\nIn the present work, we jointly estimate the parameters of these chirplets. We assume that the number of components is unknown. We model the computed (specified) spectrogram of the signal to be analyzed (synthesized) as a mixture of normal densities (Gaussian Mixture model - GMM). The mixture model parameters are estimated using the Expectation-Maximization (EM) algorithm. Functional merging is used to estimate the number of components in the GMM. We obtain the chirplets parameters (except for the phase) by the method of moments. These parameters are refined by Fisher-Scoring method. We obtain the Cramer-Rao bounds for all the parameters. If the EM algorithms produces a closer-to-global maximum, the parameters estimated would be optimal.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Chirplet Decomposition"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutChirp.html#chirplet-decomposition",
+    "href": "teaching/docs/archives/tutChirp.html#chirplet-decomposition",
+    "title": "Chirplet Decomposition",
+    "section": "Chirplet Decomposition",
+    "text": "Chirplet Decomposition\nEmploying chirplets to decompose a signal unifies the t-f tilings such as rotation, shearing, scaling and shifting. Hence, we proceed with the following assumption that any signal can be represented as a weighed sum of Gaussian chirplets given by:\n\\[\ny(t) = s(t) + w(t) \\tag{1a}\n\\]\n\\[\ns(t) = \\sum_{k=1}^{K} (a_k + jb_k)\\, g_k(t) \\tag{1b}\n\\]\nwhere\n\\[\ng_{k;t_c,\\omega_c,\\beta,d^2}(t) = \\left(\\frac{1}{\\pi d^2}\\right)^{\\frac{1}{4}} \\exp\\left(-\\frac{(t-t_c)^2}{4d^2} + j\\frac{\\beta(t-t_c)^2}{2} + j\\omega_c(t-t_c)\\right) \\tag{2}\n\\]\n\\(t_c, \\omega_c, \\beta, d^2\\) represent the location in time, location in frequency, chirp rate and the duration parameter of the chirplet and \\(w(t)\\) is additive complex white Gaussian noise with unknown variance. Further\n\\[\n\\| g_{t_c,\\omega_c,\\beta,d^2} \\| = 1 \\tag{3}\n\\]\nto make them unit energy signals.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Chirplet Decomposition"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutChirp.html#time-frequency-modeling",
+    "href": "teaching/docs/archives/tutChirp.html#time-frequency-modeling",
+    "title": "Chirplet Decomposition",
+    "section": "Time-frequency modeling",
+    "text": "Time-frequency modeling\nWe model the t-f plane as a mixture of normal pdfs [4] and estimate the parameters of the chirplets. It requires interpreting the t-f representation as an arbitrary bivariate pdf which would be modeled as GMM. It may appear strange that we are trying to view the t-f space as a mixture of normal pdfs by applying a random process modeling technique to a deterministic problem. However, we are using it just as a means to accomplish the task of decomposing the signal into chirplets. The initial choice of the t-f representation affects the model parameter estimation. We observe that the spectrogram of a Gaussian chirplet and normal density have structural similarities. We will utilize this fact to derive a set of mapping rules. Let \\(T(t, f)\\) be the spectrogram of the signal under consideration. Also assume that \\(t\\) and \\(f\\) axis, representing time and frequency respectively, are sampled sufficiently smoothly on an \\(N \\times M\\) grid and let \\(\\theta_{mn} = [t(n), f(m)]^T\\)\n\\[\nf(\\theta_{mn}; \\Phi) = \\sum_{k=1}^{K} \\lambda_k f_k(\\theta_{mn}; \\phi_k) \\tag{4a}\n\\]\n\\[\nT(\\theta_{mn}) \\approx f(\\theta_{mn}; \\Phi) \\tag{4b}\n\\]\nwhere\n\n\\(K\\) is the total number of densities\n\\(\\theta_{mn}\\) is the \\(mn\\)th sample in the \\(N \\times M\\) grid\n\\(\\phi_k = [\\mu_k, \\Sigma_k]\\) represent the mean vector and covariance matrix of the \\(k\\)th density\n\\(f_k \\sim \\mathcal{N}(\\mu_k, \\Sigma_k)\\)\n\\(\\Phi = [\\phi_1 \\ldots \\phi_K, \\lambda_1 \\ldots \\lambda_K]\\)\n\\(\\{\\lambda_k\\}\\) represent the mixing weights with constraint \\(\\sum_{k=1}^{K} \\lambda_k = 1\\)\n\nWe can estimate these parameters by the application of EM algorithm as:\n\\[\n\\hat{\\lambda}_{k,new} = \\sum_{n=1}^{N} \\sum_{m=1}^{M} \\gamma_k(\\theta_{mn}; \\hat{\\Phi}) \\tag{5}\n\\]\n\\[\n\\hat{\\mu}_{k,new} = \\frac{1}{\\hat{\\lambda}_{k,new}} \\sum_{n=1}^{N} \\sum_{m=1}^{M} \\gamma_k(\\theta_{mn}; \\hat{\\Phi})\\, \\theta_{mn} \\tag{6}\n\\]\n\\[\n\\hat{\\Sigma}_{k,new} = \\frac{1}{\\hat{\\lambda}_{k,new}} \\sum_{n=1}^{N} \\sum_{m=1}^{M} \\gamma_k(\\theta_{mn}; \\hat{\\Phi})(\\theta_{mn} - \\hat{\\mu}_k)^T (\\theta_{mn} - \\hat{\\mu}_k) \\tag{7}\n\\]\nwhere\n\\[\n\\gamma_k(\\theta_{mn}; \\hat{\\Phi}) = \\frac{\\hat{\\lambda}_k f_k(\\theta_{mn}; \\hat{\\theta}_k) T(\\theta_{mn}; \\Phi)}{f(\\theta_{mn}; \\hat{\\Phi})} \\tag{8}\n\\]\nIn [4], time-frequency projection filters were used synthesize time-domain signals based on the regions identified by the individual densities in the mixture. However, we show that, if the initial t-f representation is chosen as spectrogram, one can immediately synthesize corresponding time-domain signals except for the phase. This is so because phase information is lost in the spectrogram decomposition. We map the parameters of a bivariate normal density to a chirplet by matching the moments. A Gaussian window with duration parameter \\(\\alpha^2\\) is chosen in computing the spectrogram. The spectrogram of a chirplet \\(g_k\\) is given by [5]:\n\\[\nT_{g_k}(t, f) = \\frac{P(t - t_c)}{\\sqrt{2\\pi\\sigma^2_{\\omega/t}}} \\exp\\left(-\\frac{(\\omega - \\omega_c - \\langle \\omega_t \\rangle)^2}{2\\sigma^2_{\\langle \\omega_t \\rangle}}\\right) \\tag{9a}\n\\]\n\\[\nP(t - t_c) = \\left(\\frac{1}{\\pi(d^2 + \\alpha^2)}\\right)^{\\frac{1}{2}} \\exp\\left(\\frac{1}{\\pi(d^2 + \\alpha^2)} t^2\\right) \\tag{9b}\n\\]\n\\[\n\\langle \\omega_t \\rangle = \\left(\\frac{1}{\\pi(d^2 + \\alpha^2)}\\right) \\beta(t - t_c) \\tag{9c}\n\\]\nand a bivariate normal density is given as:\n\\[\nf_k(\\theta) = \\frac{1}{\\sqrt{2\\pi|\\Sigma_k|}} \\exp\\left(-\\frac{1}{2}(\\mu_k - \\theta)^T \\Sigma_k^{-1} (\\mu_k - \\theta)\\right) \\tag{10a}\n\\]\n\\[\n\\Sigma_k = \\begin{bmatrix} \\sigma^2_{k1} & \\sigma_{k1}\\sigma_{k2} \\\\ \\sigma_{k1}\\sigma_{k2} & \\sigma^2_{k2} \\end{bmatrix} \\tag{10b}\n\\]\n\\[\n\\mu_k = \\begin{bmatrix} \\mu_{k1} \\\\ \\mu_{k2} \\end{bmatrix} \\tag{10c}\n\\]\nBy matching the moments (method of moments) of the spectrogram (a time-frequency distribution) and the bivariate normal density given above, we obtain:\n\\[\n\\frac{\\alpha^2}{(d^2 + \\alpha^2)}\\beta = \\rho\\left(\\frac{\\sigma_1}{\\sigma_2}\\right) \\tag{11a}\n\\]\n\\[\n\\frac{1}{(d^2 + \\alpha^2)} = \\frac{1}{2\\sigma^2_1} \\tag{11b}\n\\]\n\\[\n\\sigma^2_2(1 - \\rho^2) = \\frac{d^2 + \\alpha^2}{2d^2\\alpha^2} + \\frac{\\beta^2 d^2 \\alpha^2}{2(d^2 + \\alpha^2)} \\tag{11c}\n\\]\n\\[\n\\begin{bmatrix} \\mu_{k1} \\\\ \\mu_{k2} \\end{bmatrix} = \\begin{bmatrix} t_c \\\\ \\omega_c \\end{bmatrix} \\tag{11d}\n\\]\nThe parameters of the chirplet are obtained by solving the above equations simultaneously as:\n\\[\nd^2 = \\frac{1 + (\\alpha^2 \\rho\\, r)^2}{r^2(1 - \\rho^2)} \\tag{12a}\n\\]\n\\[\n\\beta = \\frac{\\rho\\, r(d^2 + \\alpha^2)}{d^2 \\alpha^2} \\tag{12b}\n\\]\n\\[\n\\begin{bmatrix} \\mu_{k1} \\\\ \\mu_{k2} \\end{bmatrix} = \\begin{bmatrix} t_c \\\\ \\omega_c \\end{bmatrix} \\tag{12c}\n\\]\nwhere \\(r = \\sigma_1/\\sigma_2\\). It should be noted that we can not estimate the complex weight \\(c_k\\) since we lose phase information in the spectrogram. We consider using quasi-Newton optimization algorithms to refine the parameters and also to estimate the amplitudes of the individual components. We use the estimates provided by the EM algorithms as initial estimates to the quasi-Newton algorithms. Besides providing faster convergence, if the initial estimates are carefully chosen, they also provide error covariances which could be used in designing time-frequency detectors.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Chirplet Decomposition"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutChirp.html#nested-fisher-scoring",
+    "href": "teaching/docs/archives/tutChirp.html#nested-fisher-scoring",
+    "title": "Chirplet Decomposition",
+    "section": "Nested Fisher scoring",
+    "text": "Nested Fisher scoring\nWe rewrite the model in vector form as:\n\\[\n\\mathbf{y} = \\mathbf{s} + \\mathbf{w} \\tag{13a}\n\\]\n\\[\n\\mathbf{s} = \\mathbf{G}\\boldsymbol{\\lambda} \\tag{13b}\n\\]\n\\[\n\\mathbf{G} = [\\mathbf{g}_1, j\\mathbf{g}_1, \\ldots \\mathbf{g}_K, j\\mathbf{g}_K] \\tag{13c}\n\\]\nwhere\n\n\\(\\mathbf{y}\\) : \\(N \\times 1\\) vector of measurements\n\\(\\mathbf{w} \\sim \\mathcal{CN}(\\mathbf{0}, \\sigma^2 \\mathbf{I})\\) complex AWGN with unknown variance \\(\\sigma^2\\)\n\\(\\boldsymbol{\\theta}_k = [t_{ck}, f_{ck}, \\alpha_k, \\beta_k]^T\\)\n\\(\\boldsymbol{\\theta} = [\\boldsymbol{\\theta}_1^T, \\ldots, \\boldsymbol{\\theta}_K^T]^T\\)\n\\(\\boldsymbol{\\lambda} = [a_1, b_1, \\ldots, a_K, b_K]^T\\)\n\\(\\boldsymbol{\\phi} = [\\boldsymbol{\\lambda}^T, \\boldsymbol{\\theta}^T]\\)\n\\(\\boldsymbol{\\gamma} = [\\sigma^2, \\boldsymbol{\\phi}^T]^T\\)\n\\(\\mathbf{g}_k\\) is a function of \\(\\boldsymbol{\\theta}_k\\)\n\nThe log-likelihood is given as:\n\\[\n\\ell(\\mathbf{y}; \\boldsymbol{\\gamma}) = -N \\log(\\pi\\sigma^2) - \\frac{1}{\\sigma^2}(\\mathbf{y} - \\mathbf{s})^H (\\mathbf{y} - \\mathbf{s}) \\tag{14}\n\\]\nand the Fisher’s method of scoring produces the estimates using the following iteration,\n\\[\n\\hat{\\boldsymbol{\\gamma}}^{i+1} = \\hat{\\boldsymbol{\\gamma}}^i + \\mathcal{I}_{\\boldsymbol{\\gamma}}^{-1}\\, 2\\mathcal{R}e\\left\\{\\frac{\\partial}{\\partial\\boldsymbol{\\gamma}}\\ell^H(\\mathbf{y}; \\boldsymbol{\\gamma})\\right\\}\\bigg|_{\\boldsymbol{\\gamma} = \\hat{\\boldsymbol{\\gamma}}^i} \\tag{15}\n\\]\nUsing [6, Appendix 15.c], the Fisher Information matrix is given as:\n\\[\n\\mathcal{I}_{\\boldsymbol{\\gamma}} = \\begin{bmatrix} \\mathcal{I}_{\\sigma^2} & \\mathbf{0} \\\\ \\mathbf{0} & \\mathcal{I}_{\\boldsymbol{\\phi}} \\end{bmatrix} \\tag{16}\n\\]\nwhere\n\\[\n\\mathcal{I}_{\\sigma^2} = \\frac{N}{\\sigma^4} \\quad \\text{and} \\quad \\mathcal{I}_{\\boldsymbol{\\phi}} = \\frac{2}{\\sigma^2}\\left[\\frac{\\partial \\mathbf{s}^H}{\\partial\\boldsymbol{\\phi}} \\frac{\\partial \\mathbf{s}}{\\partial\\boldsymbol{\\phi}}\\right] \\tag{17}\n\\]\nIgnoring the nuisance parameter \\(\\sigma^2\\),\n\\[\n\\hat{\\boldsymbol{\\phi}}^{i+1} = \\hat{\\boldsymbol{\\phi}}^i + \\mathcal{I}_{\\boldsymbol{\\phi}}^{-1}\\, 2\\mathcal{R}e\\left\\{\\frac{\\partial}{\\partial\\boldsymbol{\\phi}}\\ell^H(\\mathbf{y}; \\boldsymbol{\\gamma})\\right\\}\\bigg|_{\\boldsymbol{\\phi} = \\hat{\\boldsymbol{\\phi}}^i} \\tag{18}\n\\]\nSince the parameters \\(\\boldsymbol{\\lambda}\\) enter linearly, we could use nested-Fisher scoring [7]. This also becomes the separable non-linear least squares since the noise is Gaussian. Fisher-scoring iteration on the concentrated log-likelihood is then given as:\n\\[\n\\hat{\\boldsymbol{\\theta}}^{i+1} = \\hat{\\boldsymbol{\\theta}}^i + \\mathcal{I}_{\\boldsymbol{\\theta}}'^{-1}\\, 2\\mathcal{R}e\\left\\{\\frac{\\partial}{\\partial\\boldsymbol{\\phi}}\\ell^H(\\mathbf{y}; \\boldsymbol{\\gamma})\\right\\} \\tag{19a}\n\\]\n\\[\n\\mathcal{I}_{\\boldsymbol{\\theta}}' = \\frac{2}{\\sigma^2} \\frac{\\partial \\mathbf{s}^H}{\\partial\\boldsymbol{\\theta}} \\left(\\mathbf{I} - \\frac{\\partial \\mathbf{s}^H}{\\partial\\boldsymbol{\\lambda}} \\left(\\frac{\\partial \\mathbf{s}}{\\partial\\boldsymbol{\\lambda}} \\frac{\\partial \\mathbf{s}^H}{\\partial\\boldsymbol{\\lambda}}\\right)^{-1} \\frac{\\partial \\mathbf{s}^H}{\\partial\\boldsymbol{\\lambda}}\\right) \\frac{\\partial \\mathbf{s}}{\\partial\\boldsymbol{\\theta}} \\tag{19b}\n\\]\n\\[\n\\frac{\\partial}{\\partial\\boldsymbol{\\phi}}\\ell^H(\\mathbf{y}; \\boldsymbol{\\gamma}) = \\frac{2}{\\sigma^2} \\frac{\\partial \\mathbf{s}^H}{\\partial\\boldsymbol{\\theta}} (\\mathbf{y} - \\mathbf{s}) \\tag{19c}\n\\]\nThe score vector and the Fisher information matrix are evaluated at:\n\\[\n\\boldsymbol{\\theta} \\leftarrow \\hat{\\boldsymbol{\\theta}}^i \\tag{20a}\n\\]\n\\[\n\\boldsymbol{\\lambda} \\leftarrow (\\mathbf{G}^H\\mathbf{G})^{-1}\\mathbf{G}^H\\mathbf{y} \\tag{20b}\n\\]",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Chirplet Decomposition"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutChirp.html#cramer-rao-bound",
+    "href": "teaching/docs/archives/tutChirp.html#cramer-rao-bound",
+    "title": "Chirplet Decomposition",
+    "section": "Cramer-Rao bound",
+    "text": "Cramer-Rao bound\nThe Cramer-Rao lower bounds on the variance of the parameters are given as:\n\n\\(\\mathrm{CRLB}_{\\sigma^2} = \\dfrac{\\sigma^4}{N}\\)\n\\(\\mathrm{CRLB}_{\\boldsymbol{\\lambda}} = \\dfrac{1}{\\sigma^2}\\mathbf{G}^H\\mathbf{G}\\)\n\\(\\mathrm{CRLB}_{\\boldsymbol{\\theta}} = \\mathcal{I}_{\\boldsymbol{\\theta}}'^{-1}\\)",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Chirplet Decomposition"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutChirp.html#gradients",
+    "href": "teaching/docs/archives/tutChirp.html#gradients",
+    "title": "Chirplet Decomposition",
+    "section": "Gradients",
+    "text": "Gradients\nHere analytical expressions for the gradients are given. The discrete version of the signal is given by:\n\\[\ng_k(n) = \\left(\\frac{1}{\\pi d^2_k}\\right)^{\\frac{1}{4}} \\exp\\left(-\\frac{(n - t_{c,k})^2}{4d^2_k} + j\\frac{\\beta(n - t_{c,k})^2}{2} + j\\omega_{c,k}(n - t_{c,k})\\right) \\tag{21}\n\\]\nBy noting that,\n\\[\n\\frac{\\partial s(n)}{\\partial\\boldsymbol{\\theta}_k} = \\frac{\\partial g_k(n)}{\\partial\\boldsymbol{\\theta}_k} \\tag{22}\n\\]\nwe calculate the gradients of a chirplet and drop the subscript \\(k\\) for simplicity\n\\[\n\\frac{\\partial g(n)}{\\partial t_c} = g(n)\\left(\\frac{n - t_c}{4d^2} - j\\beta(n - t_c) - j\\omega_c\\right) \\tag{23a}\n\\]\n\\[\n\\frac{\\partial g(n)}{\\partial\\omega_c} = g(n)\\left(j\\omega(n - t_c)\\right) \\tag{23b}\n\\]\n\\[\n\\frac{\\partial g(n)}{\\partial d^2} = g(n)\\left(\\frac{(n - t_c)^2}{4d^4} - \\frac{1}{d^2}\\right) \\tag{23c}\n\\]\n\\[\n\\frac{\\partial g(n)}{\\partial\\beta} = g(n)\\left(\\frac{j}{2}(n - t_c)^2\\right) \\tag{23d}\n\\]\nWe can use [8] to obtain closed-form expressions for the Cramer-Rao bound. This completes the estimation process.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Chirplet Decomposition"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutChirp.html#references",
+    "href": "teaching/docs/archives/tutChirp.html#references",
+    "title": "Chirplet Decomposition",
+    "section": "References",
+    "text": "References\n[1] A. Bultan, “A four-parameter atomic decomposition of chirplets,” IEEE Trans. on Signal Processing, vol. 41, pp. 731–745, 1999.\n[2] J. C. O’Neill and P. Flandrin, “Chirp hunting,” in Proc. of the IEEE-SP International Symposium on Time-Frequency and Time-Scale Analysis, 1998, pp. 425–428.\n[3] R. N. Bracewell and D Mihovilovic, “Adaptive chirplet representation of signals on time-frequency plane,” Electronics Letters, vol. 27, pp. 1159–1161, 1991.\n[4] Mark Coates, Time-frequency modeling, Ph. D, Univ. of Cambridge, Signal Processing and Communications Laboratory, Dept. of Engineering, August 1998.\n[5] Leon Cohen, Time-Frequency Analysis, Prentice-Hall, Englewood Cliffs, New Jersey, 1995.\n[6] Steven M. Kay, Fundamentals of Statistical Signal Processing, Vol-1 Estimation theory, Prentice-Hall PTR, 1993.\n[7] Gordon K Smith, “Partitioned algorithms for maximum likelihood and other nonlinear estimation,” Statistics and Computing, vol. 6, pp. 201–216, 1996.\n[8] Kostas Triantafyllopoulos, “Moments and cumulants of the multivariate real and complex Gaussian distributions,” 2002, www.stats.bris.ac.uk/research/stats/pub/ResRept/2002.html.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Chirplet Decomposition"
+    ]
+  },
+  {
+    "objectID": "teaching/notes.html",
+    "href": "teaching/notes.html",
+    "title": "Notes",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Notes"
     ]
   },
   {
