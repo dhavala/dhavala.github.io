@@ -1,8 +1,10 @@
 ---
 title: "EM Algorithm for Mixture Modeling"
 subtitle: "Deriving Expectation-Maximization for Gaussian mixture models"
-author: "Soma Sekhar Dhavala"
+author: "Soma S. Dhavala"
 ---
+
+# EM Algorithm for Mixture Modeling
 
 We derive the Expectation-Maximization (EM) algorithm for Gaussian Mixture modeling (GMM). In general, any random space can be modeled by a mixture (weighed linear combination) of normal densities. Then, such an arbitrary density can be represented as:
 
@@ -117,4 +119,4 @@ $$
 
 [1] Aleksander Dogandžić, "Detection and estimation theory," Spring, 2005, class notes #3, ECpE Dept., Iowa State University, url: home.eng.iastate.edu/~ald/EE527.html.
 
-[2] Soma Sekhar Dhavala, *Time-frequency representations: Analysis, Synthesis and Implementation*, M.S. thesis, Indian Institute of Technology, Madras, March 2000.
+[2] Soma S. Dhavala, *Time-frequency representations: Analysis, Synthesis and Implementation*, M.S. thesis, Indian Institute of Technology, Madras, March 2000.

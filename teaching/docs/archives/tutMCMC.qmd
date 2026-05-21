@@ -1,8 +1,10 @@
 ---
 title: "Numerical Methods for Bayesian Inference"
 subtitle: "Quadrature, Monte Carlo, and MCMC with a normal prior or likelihood"
-author: "Soma Sekhar Dhavala"
+author: "Soma S. Dhavala"
 ---
+
+# Numerical Methods for Bayesian Inference
 
 We review several numerical methods for making inference from the posterior distribution if either the prior or the likelihood function (when viewed as a function of the parameter of interest and not as a function of the data) is a normal distribution. We consider the following techniques:
 

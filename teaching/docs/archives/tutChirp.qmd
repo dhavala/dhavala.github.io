@@ -1,8 +1,10 @@
 ---
 title: "Chirplet Decomposition"
 subtitle: "Joint estimation of Gaussian chirplet parameters via mixture modeling"
-author: "Soma Sekhar Dhavala"
+author: "Soma S. Dhavala"
 ---
+
+# Chirplet Decomposition
 
 ## Introduction
 

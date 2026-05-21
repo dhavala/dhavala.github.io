@@ -1,14 +1,12 @@
-# Joint estimation in Dynamic State-Space Models
+---
+title: "Joint Estimation in Dynamic State-Space Models"
+subtitle: "Rolling-window Sequential Monte Carlo for joint state and parameter estimation"
+author: "Soma S. Dhavala"
+---
 
-*Soma Sekhar Dhavala*
+# Joint Estimation in Dynamic State-Space Models
 
-*Stat689: Statistical Methods for Finance*
-
-*Instructor: Jianhua Huang*
-
-## Abstract
-
-In this report, we consider the joint estimation of state sequences and the (static) parameters in a dynamic state space model. In particular, we review the algorithms presented in Polson et al (2008) that use rolling-window Sequential Monte Carlo techniques. The joint estimation is performed by repeatedly alternating between parameter estimation given the states and the state estimation given the parameters. In the state estimation phase, smoothing & filtering densities of states in the current window are updated by using their estimates available outside the window backwards in time. In the parameter estimation phase, sufficient statistics based on the entire history of smoothed states up to the current time point are used to make the algorithm run in linear time. We review Forward-Filtering Backward-Sampling (FFBS) algorithm that forms the back bone of many Monte-Carlo simulation strategies and provide the theory (with proofs) needed to adapt the FFBS to the rolling-window case. We discuss some possible variations and present an ad-hoc (vague in theory) algorithm that was conceived in the due course. We implement the algorithms on a simulated data-set from an AR(1) plus noise model.†
+These notes consider the joint estimation of state sequences and the (static) parameters in a dynamic state-space model, using rolling-window Sequential Monte Carlo techniques (Polson et al., 2008). The joint estimation alternates between parameter estimation given the states and state estimation given the parameters. In the state-estimation phase, the smoothing and filtering densities of the states in the current window are updated using estimates available outside the window backwards in time. In the parameter-estimation phase, sufficient statistics based on the entire history of smoothed states up to the current time point are used to make the algorithm run in linear time. We review the Forward-Filtering Backward-Sampling (FFBS) algorithm that forms the backbone of many Monte-Carlo simulation strategies, develop the theory needed to adapt FFBS to the rolling-window case, and discuss several possible variations.
 
 ## Introduction
 
@@ -35,8 +33,6 @@ g(\mathbf{y}_t|\mathbf{x}_t, \mathbf{x}_{t-1}\ldots, \theta) &= g(\mathbf{y}_t|\
 \end{aligned}
 $$
 
-> †For a general introduction, motivation and background of the work, please refer to the companion report by Krista Rister. You can also find rolling-window Monte-Carlo algorithm with known parameter case in her report. I will spend time in providing proofs and discussing the algorithm instead
-
 As a consequence, the following results will be useful:
 
 Identities:
@@ -48,7 +44,7 @@ f(\mathbf{x}_{t-k+1:t}|\mathbf{x}_{t-k}, \mathbf{y}_{1:T}) &= f(\mathbf{x}_{t-k+
 \end{aligned}
 $$
 
-The above model is quite general and encompasses several well-studied models such as noisy AR process, for example. The above model is very well studied when $\theta$ is known: Kalman filtering and a wide variety of its extensions, for example. Similarly, time-series analysis specifically deals with the case where $\theta$ is unknown but the states are known. However, there is not much literature available to tackle the problem when both parameter and states are unknown, relatively speaking. The focus of the report is the joint estimation of states and parameters, specifically the algorithms proposed in Polson et al (2008). In the next Section, we will briefly review sequential Monte Carlo, establish the notation and terminology that will be used in the subsequent Sections.
+The above model is quite general and encompasses several well-studied models such as noisy AR process, for example. The above model is very well studied when $\theta$ is known: Kalman filtering and a wide variety of its extensions, for example. Similarly, time-series analysis specifically deals with the case where $\theta$ is unknown but the states are known. However, there is not much literature available to tackle the problem when both parameter and states are unknown, relatively speaking. The focus here is the joint estimation of states and parameters, specifically the algorithms proposed in Polson et al. (2008). In the next section, we briefly review sequential Monte Carlo and establish the notation and terminology used in the subsequent sections.
 
 ## Sequential Monte Carlo methods
 
@@ -150,7 +146,7 @@ Now, in order to obtain the filtering density $p(\mathbf{x}_t|\mathbf{y}_{1:t})$
   - update the weights $w_t^{(i)} = w_{t-1}^{(i)}g(\mathbf{y}_t|\mathbf{x}_t^{(i)})$
   - normalize the weights s.t $\sum_{i=1}^{N} w_t^{(i)} = 1$
 
-Drawing $\mathbf{x}_t^{(i)}$ from the state evolution is just one of the many choices available. In fact, one can choose any proposal distribution based on an educated guess about how close it is to the target distribution and being easy to sample from, at the same time. Weights have to modified accordingly, of course! In fact, the state evolution density may be a poor choice sometimes. It could lead to particle degeneration which means that some weights tend to be too large and often the particles get stuck in their vicinity. Many strategies have been suggested in the literature. However, in our simulations we have chosen the state density itself as it was easy to draw from. Likewise, to obtain the smoothing density $p(\mathbf{x}_{t-1}|\mathbf{x}_{t:T}^i)\mathbf{y}_{1:T})$, do
+Drawing $\mathbf{x}_t^{(i)}$ from the state evolution is just one of the many choices available. In fact, one can choose any proposal distribution based on an educated guess about how close it is to the target distribution and being easy to sample from, at the same time. Weights have to modified accordingly, of course! In fact, the state evolution density may be a poor choice sometimes. It could lead to particle degeneration which means that some weights tend to be too large and often the particles get stuck in their vicinity. Many strategies have been suggested in the literature. A simple choice is the state evolution density itself, as it is easy to draw from. Likewise, to obtain the smoothing density $p(\mathbf{x}_{t-1}|\mathbf{x}_{t:T}^i)\mathbf{y}_{1:T})$, do
 
 - for $i = 1 \ldots N$
   - update the weights $w_{t-1}^{(i)} = w_{t-1}^{(i)}f(\mathbf{x}_t^{(i)}|\mathbf{x}_{t-1}^{(i)})$
@@ -240,7 +236,7 @@ The algorithm for learning states when the parameters are **known** is described
 >     3. Store $\mathbf{x}_{t-k+1:t}^{(i)}$ as draw from $p(\mathbf{x}_{t-k+1}|\mathbf{y}_{1:t})$
 >     4. Report $\mathbf{x}_t^{(i)}$ as draw from $p(\mathbf{x}_t|\mathbf{y}_{1:t})$
 
-The algorithm requires three inputs: $N$, the number sample paths in the MCMC and $G$, the number of MCMC iterations to obtain one draw from the fixed-lag smoothing distribution ( the number times we update weights for each state in the window, in our simulations we used one cycle) and the length of the rolling-window size $k$. The choice of the window length depends on how well the following approximation holds for that chosen window length:
+The algorithm requires three inputs: $N$, the number sample paths in the MCMC and $G$, the number of MCMC iterations to obtain one draw from the fixed-lag smoothing distribution (the number of times we update the weights for each state in the window), and the rolling-window length $k$. The choice of the window length depends on how well the following approximation holds for that chosen window length:
 
 $$
 \begin{aligned}
@@ -287,9 +283,9 @@ $$
 p(\mathbf{x}_{t-k+1:t}|E[\theta], \mathbf{x}_{t-k}, \mathbf{y}_{1:t}) \rightleftarrows p(\theta|E[\mathbf{x}_{t-k+1:t}], \mathbf{x}_{t-k}, \mathbf{y}_{1:t})
 $$
 
-It is particularly suitable when the dynamic state-space model reduces to the familiar linear models given the states and closed-form solutions exist for $E[\theta]$ and Monte-Carlo estimates can be replaced in the place of $E(\mathbf{x}_t)$. This is ad-hoc because, I did study the properties of the algorithm or established any theoretical results in this. It would be interesting to study those properties. With the plug-in estimator based algorithm is summarized here:
+It is particularly suitable when the dynamic state-space model reduces to the familiar linear models given the states and closed-form solutions exist for $E[\theta]$ and Monte-Carlo estimates can be replaced in the place of $E(\mathbf{x}_t)$. This variant is ad-hoc: its theoretical properties have not been established, and studying them would be of interest. With the plug-in estimator based algorithm is summarized here:
 
-> **Algorithm 2a§: Filtering with unknown parameters (plug-in estimators)**
+> **Algorithm 2a: Filtering with unknown parameters (plug-in estimators)**
 >
 > - For each time period $t = k + 1, \ldots, T$
 >   - For each sample path $i = 1, \ldots, N$
@@ -309,7 +305,7 @@ However, the technical difficulty is, in the FFBS step, we are using sequential 
 
 Then Algorithm 2a can be modified so that we can use FFBS for the states as:
 
-> **Algorithm 2b§: Filtering with unknown parameters (plug-in estimators)**
+> **Algorithm 2b: Filtering with unknown parameters (plug-in estimators)**
 >
 > - For each time period $t = k + 1, \ldots, T$
 >   - For each sample path $i = 1, \ldots, N$
@@ -320,11 +316,9 @@ Then Algorithm 2a can be modified so that we can use FFBS for the states as:
 > - obtain $\hat{\mathbf{x}}_{t-k+1:t}^t = \frac{1}{N}\sum_1^N \mathbf{x}_{t-k+1:t}^{(i)}$
 > - update $\hat{\theta}^t = E\left[ p(\theta|\hat{\mathbf{x}}_{t-k+1:t}, \hat{\mathbf{x}}_{t-k}, \mathbf{y}_{1:t}) \right]$
 
-> §These algorithms are ad-hoc and are the outcome of my research
+Another variation possible is due to the following observations: in the FFBS steps, parameter estimate $\theta_i$ does not change. It essentially means that, the filtering and smoothing are carried on based on the histories available at $t - k$ and the parameter estimates are not update while running the FFBS inside the window. We modify Algorithm 2 so that parameters can be updated as states are updated in the window. Care must be taken while updating the parameters because, the estimates might be based on over-smoothened states, so we reset the state such that the at the end of the window, state estimates would be identical to FFBS. The only change we make is to update the parameters on the fly instead of waiting till the FFBS is completed in the window. The algorithm is summarized below:
 
-Another variation possible is due to to the following observations: in the FFBS steps, parameter estimate $\theta_i$ does not change. It essentially means that, the filtering and smoothing are carried on based on the histories available at $t - k$ and the parameter estimates are not update while running the FFBS inside the window. We modify Algorithm 2 so that parameters can be updated as states are updated in the window. Care must be taken while updating the parameters because, the estimates might be based on over-smoothened states, so we reset the state such that the at the end of the window, state estimates would be identical to FFBS. The only change we make is to update the parameters on the fly instead of waiting till the FFBS is completed in the window. The algorithm is summarized below:
-
-> **Algorithm 2c§: Filtering with unknown parameters**
+> **Algorithm 2c: Filtering with unknown parameters**
 >
 > For each time period $t = k + 1, \ldots, T$:
 >
@@ -393,27 +387,11 @@ v_t &= v_{t-k} + \mathbf{b}_{t-k}'\mathbf{B}_{t-k}\mathbf{b}_{t-k} + \mathbf{x}'
 \end{aligned}
 $$
 
-where $\mathbf{F} = [\mathbf{F}_{t-k+1}', \ldots, \mathbf{F}_t']$, $\mathbf{x} = [\mathbf{x}_{t-k+1}', \ldots, \mathbf{x}_t']$, and $p$ is the dimension of $\mathbf{x}_t$, $k$ the window length. Similar expressions can be derived for $\alpha, \tau^2$ as well. We will use AR(1) model that is a special case of the above state-space model to study all the three algorithms described in this report so far.
-
-## Simulation details
-
-We generated 500 data points from a AR(1) model with the following parameters:
-
-$$
-\begin{aligned}
-\mathbf{y}_t &= \mathbf{x}_t + \epsilon_t \\
-\mathbf{x}_t &= 0.9\mathbf{x}_{t-1} + \mathbf{w}_t \\
-\mathbf{e}_t &\sim \mathcal{N}(0, 0.1) \\
-\mathbf{w}_t &\sim \mathcal{N}(0, 0.04) \\
-\mathbf{x}_0 &\sim \mathcal{N}(0, 1) \quad \text{initial state,}
-\end{aligned}
-$$
-
-The parameter vector then becomes $(\beta, \tau^2, \sigma^2) = (1, [0, 0.9], 0.1, 0.04')$. The simulated states are shown in Fig. 1(a) and the observations in Fig. 1(b). In all the algorithms, 1000 sample paths were generated. In running-window algorithms, a window of size 15 is chosen. Regular FFBS was used in the burn-in period in all the cases. While implementing Algorithms 2-3, we assumed the noise variances to be known to allow easy implementation. The algorithms are implemented in MATLAB® and the code is provided in the Appendix.
+where $\mathbf{F} = [\mathbf{F}_{t-k+1}', \ldots, \mathbf{F}_t']$, $\mathbf{x} = [\mathbf{x}_{t-k+1}', \ldots, \mathbf{x}_t']$, and $p$ is the dimension of $\mathbf{x}_t$, $k$ the window length. Similar expressions can be derived for $\alpha, \tau^2$ as well.
 
 Similar to Algorithm 2c, we can modify Algorithm 3 to exploit the sufficient statistics as:
 
-> **Algorithm 3a§: Filtering with unknown parameters**
+> **Algorithm 3a: Filtering with unknown parameters**
 >
 > For each time period $t = k + 1, \ldots, T$:
 >
@@ -435,7 +413,7 @@ Similar to Algorithm 2c, we can modify Algorithm 3 to exploit the sufficient sta
 
 We can run a full-FFBS at each iteration to learn about the parameters, this leads to the Algorithm-3b
 
-> **Algorithm 3b§: Filtering with unknown parameters**
+> **Algorithm 3b: Filtering with unknown parameters**
 >
 > For each time period $t = k + 1, \ldots, T$
 >
@@ -457,13 +435,9 @@ We can run a full-FFBS at each iteration to learn about the parameters, this lea
 > - Store $\mathbf{x}_{0:t-k+1}^{(i)}$ as draw from $p(\mathbf{x}_{0:t-k+1}|\mathbf{y}_{1:t})$
 > - Report $(\mathbf{x}_t^{(i)}, \theta_{t-k+1}^{(i)})$ as draw from $p(\mathbf{x}_t, \theta|\mathbf{y}_{1:t})$
 
-## Results and discussion
-
-We compare the FFBS and Algo-1 in Fig. 2, . FFBS is closely following the true states compared to Algo-1. Some reasons could be the size of the window and the choice of the proposal density in the importance sampling stage. Because in algo-1 each state is visited several times, the states could be oversmoothed. The parameter estimates from the algo-2 are shown in Figs. 3(a-b) and the state estimates are shown in Fig. 4. The parameter estimates are converging even though they are not the true values. We might have to run Monte-Caro analysis to assess the performance all the algorithms in terms of the MSE. We can not conclusively argue about the merits based a single realization of the data. The parameter estimates and 95% credible intervals are shown in Fig. 5(a-b). Compared to algo-2b, the parameters are closer to the true values. in Fig. 6 the states estimated by the algorithm are shown. Both in algo-2 and algo-3, the states are smoothed compared to the true states. This is because, we have been traversing the states multiple times during the estimation process. Finally, in Fig. 7, we plot the states estimated by all the algorithms. In general, algo-3 is able to estimate the parameters and states well, cosidering the fact that it is a joint estimation problem. FFBS methods do not oversmooth the states as much as the windowing-based methods are doing.
-
 ## Conclusions
 
-We have provided a brief review of the sequential Monte Carlo techniques and discussed the necessary tools required to derive new algorithms. In particular, Forward-Filtering Backward sampling strategy is discussed. We reviewed the algorithms presented to Polson et al (2008) that consider running-window Sequential Monte carlo techniques to estimate the states as well the parameters jointly. In this light, we have provided the details of how to adapt the FFBS so that sequential importance sampling can be used as opposed to MCMC based algorithms. We have suggested few variations that are possible with-in the frame-work set-up by Polson et al. Estimation algorithms in all the cases: parameters known and unknown, using full histories or sufficient statistic are implemented for comparison purposes. To compare different algorithms, we have simulated the data from a AR(1) process observed in noise. Joint estimation is challenging problem and there seems to lot of scope for developing new algorithms. Running a full Monte-Carlo simulation study to asses the performance of all the algorithms is needed for objectively assessing their the merits and demerits
+We have provided a brief review of sequential Monte Carlo techniques and the tools required to derive new algorithms, focusing on the Forward-Filtering Backward-Sampling (FFBS) strategy. We reviewed the algorithms of Polson et al. (2008) that use rolling-window Sequential Monte Carlo to estimate states and parameters jointly, and showed how to adapt FFBS so that sequential importance sampling can be used in place of MCMC-based algorithms. We also discussed several variations within this framework, covering the cases of known and unknown parameters and the use of either full histories or sufficient statistics. Joint estimation remains a challenging problem with considerable scope for developing new algorithms.
 
 ## References
 
@@ -487,175 +461,3 @@ Polson, N. G., Stroud, J. R., and Müller, P. (2008). Practical Filtering with S
 
 Sylvia Früwith-Schnatter. (1992), Data augmentation and dynamic linear models, *J. Time Series Anal*, 15, 183-202
 
-## Figures
-
-*[Figure 1: Data simulated from an AR(1) plus noise model. (a) states; (b) observations]*
-
-*[Figure 2: estimated states from different algorithms (with fixed parameters)]*
-
-*[Figure 3: estimated parameters from Algo-2b. (a) $\beta_0$; (b) $\beta_1$]*
-
-*[Figure 4: estimated states from algo-2]*
-
-*[Figure 5: CIs for parameters in Algo-3. (a) CIs for $\beta_0$; (b) CIs for $\beta_1$]*
-
-*[Figure 6: estimates from different algorithms. (a) Algo-2; (b) All the Algorithms]*
-
-## Appendix B: MATLAB® pseudo code
-
-### Data generation
-
-```matlab
-% generate data
-bet = [0,0.9]';
-sig2 = (0.04);
-sig = sqrt(sig2);
-tau2 = (0.1);
-tau = sqrt(tau2);
-T = 500;
-N = 2000; % number of sample paths
-x = zeros(T,length(sig2));
-y = zeros(T,length(tau2));
-% initialize x0 state vector
-x0 = normrnd(0,0.1);
-x(1) = normrnd([1,x0]*bet,sig);
-y(1) = normrnd(x(1),tau);
-for p = 2:T+1
-    x(p) = normrnd([1,x(p-1)]*bet,sig);
-    y(p) = normrnd(x(p-1),tau);
-end
-% save the data for all simulations
-```
-
-### FFBS
-
-```matlab
-load ar1.mat; % use the same data in all simulations
-xt = zeros(T+1,N);
-wf = zeros(T+1,N);% forward weights
-wb = zeros(T+1,N); % backward weights
-
-% run forward filtering
-xt(1,:) = normrnd(0,1,[1,N]);
-wf(1,:) = 1/N;
-for p = 2:T+1
-    xt(p,:) = normrnd(bet(1)+ (bet(2)*xt(p-1,:)),sig);
-    wf(p,:) = wf(p-1,:).*normpdf(y(p-1),xt(p,:),tau);
-    wf(p,:) = wf(p,:)/sum(wf(p,:));
-end
-
-% run backward smoothing (t=T-1 to 1)
-wb(T+1,:) = wf(T+1,:);
-for p = T:-1:1
-    % wb(p,:) = wf(p+1,:).*normpdf(x(p+1),xt(p,:),sig);
-    wb(p,:) = wf(p+1,:).*normpdf(x(p+1,:),(bet(1)+bet(2)*xt(p,:)),sig);
-    wb(p,:) = wb(p,:)/sum(wb(p,:));
-end
-% full FFBS is done. % Now implement algorithm-1
-```
-
-### Algorithm-1
-
-```matlab
-k = 15;
-for t = k+2 : T+1
-    % you are actually at t=k+1
-    fprintf(1,'in %d\n',t);
-    for p = t-k+1:t
-        xt(p,:) = normrnd(bet(1)+ (bet(2)*xt(p-1,:)),sig);
-        wf(p,:) = wf(p-1,:).*normpdf(y(p-1),xt(p,:),tau);
-        wf(p,:) = wf(p,:)/sum(wf(p,:));
-    end
-    % now smooth them
-    for p = t-1:-1:t-1-(k-1)+1
-        %wb(p,:) = wf(p+1,:).*normpdf(x(p+1),xt(p,:),sig);
-        wb(p,:) = wf(p,:).*normpdf(x(p+1,:),(bet(1)+bet(2)*xt(p,:)),sig);
-        wb(p,:) = wb(p,:)/sum(wb(p,:));
-        wf(p,:) = wb(p,:);
-    end
-end
-```
-
-### Algorithm-2b
-
-```matlab
-%run rolling window FFBS on this
-k = 30;
-for t = k+2 : T+1
-    % you are actually at t=k+1
-    fprintf(1,'in %d\n',t);
-    for p = t-k+1:t
-        xt(p,:) = normrnd(b0Hat(t-1)+ (b1Hat(t-1)*xt(p-1,:)),sigHat(t-1));
-        wf(p,:) = wf(p-1,:).*normpdf(y(p-1),xt(p,:),tauHat(t-1));
-        wf(p,:) = wf(p,:)/sum(wf(p,:));
-    end
-    % now smooth them
-    wb(t,:) = wf(t,:);
-    for p = t-1:-1:t-1-(k-1)+1
-        %wb(p,:) = wf(p+1,:).*normpdf(x(p+1),xt(p,:),sig);
-        wb(p,:) = wf(p,:).*normpdf(xt(p+1,:),(b0Hat(t-1)+b1Hat(t-1)*xt(p,:)),sigHat(t-1));
-        wb(p,:) = wb(p,:)/sum(wb(p,:));
-        % resmaple the states
-        [wTemp,xTemp] = resample(wb(p,:),xt(p,:));
-        wf(p,:) =  wTemp;
-        xt(p,:) = xTemp;
-    end
-    % estimate theta (plug-in)
-    ind = [t-k+1:t];
-    xHat(ind) = sum(xt(ind,:).*wb(ind,:),2);
-    tauHat(t) = tau; %std(y(1:t-1)'-xHat(2:t));
-    s = regstats(xHat(ind),xHat(ind-1),'linear');
-    sigHat(t) = sig;%0.2;sqrt(s.mse);
-    b0Hat(t) = bet(1);s.beta(1);
-    b1Hat(t) = bet(2);s.beta(2);
-end
-```
-
-### Algorithm-3
-
-```matlab
-% define the sufficient statistic vevtors
-b0rec = zeros(T+1,N);
-b1rec = zeros(T+1,N);
-Bt = cell(N,1);
-bt = cell(N,1);
-for p = 1:N
-    Bt{p} = eye(2);
-    bt{p} = [0;0.9];
-end
-b0rec(1:k+1,:) = repmat(b0Hat(1:k+1),1,N);
-b1rec(1:k+1,:) = repmat(b1Hat(1:k+1),1,N);
-for t = k+2 : T+1
-    % you are actually at t=k+1
-    fprintf(1,'in %d\n',t);
-    for p = t-k+1:t
-        xt(p,:) = normrnd(b0rec(t-1,:)+ (b1rec(t-1,:).*xt(p-1,:)),sigHat(t-1));
-        wf(p,:) = wf(p-1,:).*normpdf(y(p-1),xt(p,:),tauHat(t-1));
-        wf(p,:) = wf(p,:)/sum(wf(p,:));
-    end
-    % now smooth them
-    wb(t,:) = wf(t,:);
-    for p = t-1:-1:t-1-(k-1)+1
-        %wb(p,:) = wf(p+1,:).*normpdf(x(p+1),xt(p,:),sig);
-        wb(p,:) = wf(p,:).*normpdf(xt(p+1,:),(b0rec(t-1,:)+b1rec(t-1,:).*xt(p,:)),sigHat(t-1));
-        wb(p,:) = wb(p,:)/sum(wb(p,:));
-        [wTemp,xTemp] = resample(wb(p,:),xt(p,:));
-        wf(p,:) =  wTemp;
-        xt(p,:) = xTemp;
-    end
-    % now obtain recursively sample b0 and b1
-    ind = [t-k+1:t];
-    for p = 1:N
-        xTemp = xt(ind,p);
-        F = [ones(k,1), xt(ind-1,p)];
-        Bt{p} = Bt{p} + F'*F;
-        bt{p} = bt{p} + F'*xTemp;
-        BtInv = inv(Bt{p}+diag(1e-3));
-        bTemp = mvnrnd(BtInv*bt{p},sig2*BtInv); % update posterior distribution
-        b0rec(t,p) =bTemp(1); % posterior draws for unknown parameters
-        b1rec(t,p) =bTemp(2); %
-    end
-    sigHat(t) = sig; % we assume noise variances are known
-    tauHat(t) = tau;
-end
-```

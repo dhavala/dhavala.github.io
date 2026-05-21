@@ -1,8 +1,10 @@
 ---
 title: "Normal Approximation"
 subtitle: "Laplace (normal) approximation of a bivariate posterior"
-author: "Soma Sekhar Dhavala"
+author: "Soma S. Dhavala"
 ---
+
+# Normal Approximation
 
 Let the likelihood function be
 

@@ -1,6 +1,6 @@
 # Architecture for Distributed Source Localization in Wireless Sensor Networks
 
-*Soma Sekhar Dhavala*
+*Soma S. Dhavala*
 
 ECpE Dept., ISU — Nov. 2004
 

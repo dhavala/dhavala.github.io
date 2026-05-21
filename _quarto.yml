@@ -77,6 +77,7 @@ website:
                   - teaching/docs/archives/tutEM.qmd
                   - teaching/docs/archives/tutMCMC.qmd
                   - teaching/docs/archives/tutChirp.qmd
+                  - teaching/docs/archives/rpt689.qmd
       - text: "Consulting"
         href: consulting/index.qmd
       - section: "OSS"

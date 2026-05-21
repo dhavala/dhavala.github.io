@@ -1,8 +1,10 @@
 ---
 title: "Gaussian Mixture for Multi-modal Posteriors"
 subtitle: "Approximating a multi-modal posterior by a mixture of normals"
-author: "Soma Sekhar Dhavala"
+author: "Soma S. Dhavala"
 ---
+
+# Gaussian Mixture for Multi-modal Posteriors
 
 It might be the case that we want to draw samples from an arbitrary posterior pdf having more than one mode. In such cases, normal approximation might be too bad an approximation. We consider modeling this arbitrary pdf as a mixture of normal densities. Further, the number of modes (which in turn dictate the number of components in the mixture) in the posterior is also assumed unknown.
 
@@ -54,7 +56,7 @@ Essentially, we have $K$ number of states and each state has a certain pdf. Base
 
 ## References
 
-[1] Soma Sekhar Dhavala, "EM algorithm for Gaussian Mixture modeling," report, ECpE Dept., Iowa State University.
+[1] Soma S. Dhavala, "EM algorithm for Gaussian Mixture modeling," report, ECpE Dept., Iowa State University.
 
 [2] Mark Coates, *Time-frequency modeling*, Ph. D, Univ. of Cambridge, Signal Processing and Communications Laboratory, Dept. of Engineering, August 1998.
 
