@@ -13,9 +13,14 @@ $font-family-sans-serif:   Verdana, "Helvetica Neue", Helvetica, Arial, sans-ser
 $font-size-base:           0.78rem;
 $line-height-base:         1.5;
 $headings-font-weight:     700;
-$h1-font-size:             1.05rem;
-$h2-font-size:             0.9rem;
-$h3-font-size:             0.8rem;
+// Headings sit just above the 0.78rem body text — small, monotonic scale.
+// (Bootstrap leaves h4–h6 at 1.25/1.1/1rem, i.e. larger than h1, unless pinned.)
+$h1-font-size:             0.95rem;
+$h2-font-size:             0.86rem;
+$h3-font-size:             0.80rem;
+$h4-font-size:             0.78rem;
+$h5-font-size:             0.78rem;
+$h6-font-size:             0.78rem;
 
 // Navbar
 $navbar-bg:                #222;
