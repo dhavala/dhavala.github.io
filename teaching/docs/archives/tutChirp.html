@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Soma Sekhar Dhavala">
+<meta name="author" content="Soma S. Dhavala">
 
 <title>Chirplet Decomposition – Soma S Dhavala</title>
 <style>
@@ -374,6 +374,12 @@ window.Quarto = {
  <span class="menu-text">Chirplet Decomposition</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/docs/archives/rpt689.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Joint Estimation in Dynamic State-Space Models</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -442,13 +448,16 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#chirplet-decomposition" id="toc-chirplet-decomposition" class="nav-link" data-scroll-target="#chirplet-decomposition">Chirplet Decomposition</a></li>
+  <li><a href="#chirplet-decomposition" id="toc-chirplet-decomposition" class="nav-link active" data-scroll-target="#chirplet-decomposition">Chirplet Decomposition</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#chirplet-decomposition-1" id="toc-chirplet-decomposition-1" class="nav-link" data-scroll-target="#chirplet-decomposition-1">Chirplet Decomposition</a></li>
   <li><a href="#time-frequency-modeling" id="toc-time-frequency-modeling" class="nav-link" data-scroll-target="#time-frequency-modeling">Time-frequency modeling</a></li>
   <li><a href="#nested-fisher-scoring" id="toc-nested-fisher-scoring" class="nav-link" data-scroll-target="#nested-fisher-scoring">Nested Fisher scoring</a></li>
   <li><a href="#cramer-rao-bound" id="toc-cramer-rao-bound" class="nav-link" data-scroll-target="#cramer-rao-bound">Cramer-Rao bound</a></li>
   <li><a href="#gradients" id="toc-gradients" class="nav-link" data-scroll-target="#gradients">Gradients</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -471,7 +480,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Soma Sekhar Dhavala </p>
+             <p>Soma S. Dhavala </p>
           </div>
   </div>
     
@@ -484,13 +493,15 @@ window.Quarto = {
 </header>
 
 
+<section id="chirplet-decomposition" class="level1">
+<h1>Chirplet Decomposition</h1>
 <section id="introduction" class="level2">
 <h2 data-anchor-id="introduction">Introduction</h2>
 <p>Many signals that exist in nature are inherently non-stationary or transient like Bat and Whale echoes, evoked-potentials, RADAR clutters. There exist many methods to analyze such signals including wavelet-transforms, short-time Fourier transform, adaptive time-frequency distributions, Matching Pursuits etc.. The signal representations which adapt the tilings in the time-frequency (t-f) plane perform prominently in terms of achieving higher resolution in time and frequency simultaneously. Atomic decompositions [1, 2, 3] is one such class of algorithms which attempt to approximate the signal as a weighed combination of the atoms from a chosen dictionary. The atoms in the dictionary should contain all possible tilings that best suit the inner structure of the signal under analysis. Hence, some a priori information about the signal under analysis is needed if one were working with a finite vocabulary. Another alternative is to use, if an efficient method for choosing an atom exists, an infinite size vocabulary. Chirplets, windowed linear frequency modulated signals, offer a very flexible set of tilings like shearing, translation and rotation. Gaussian chirplets are particularly attractive in terms of computational tractability in addition to offering optimum time-frequency resolution (attain minimum time-bandwidth product). Numerous algorithms have been proposed to decompose a signal as a weighed combination of chirplets. However, most of the methods proposed in the literature use a divide and conquer approach, i.e., repeatedly decompose the residue until the residue is of insignificant energy. It should be noted that chirplets are not orthogonal and hence such decompositions are not unique. Also, there is no formal mechanism to estimate the number of components in the model and efficiency of the estimator in terms of Cramer-Rao bounds were not provided (except in single component cases).</p>
 <p>In the present work, we jointly estimate the parameters of these chirplets. We assume that the number of components is unknown. We model the computed (specified) spectrogram of the signal to be analyzed (synthesized) as a mixture of normal densities (Gaussian Mixture model - GMM). The mixture model parameters are estimated using the Expectation-Maximization (EM) algorithm. Functional merging is used to estimate the number of components in the GMM. We obtain the chirplets parameters (except for the phase) by the method of moments. These parameters are refined by Fisher-Scoring method. We obtain the Cramer-Rao bounds for all the parameters. If the EM algorithms produces a closer-to-global maximum, the parameters estimated would be optimal.</p>
 </section>
-<section id="chirplet-decomposition" class="level2">
-<h2 data-anchor-id="chirplet-decomposition">Chirplet Decomposition</h2>
+<section id="chirplet-decomposition-1" class="level2">
+<h2 data-anchor-id="chirplet-decomposition-1">Chirplet Decomposition</h2>
 <p>Employing chirplets to decompose a signal unifies the t-f tilings such as rotation, shearing, scaling and shifting. Hence, we proceed with the following assumption that any signal can be represented as a weighed sum of Gaussian chirplets given by:</p>
 <p><span class="math display">\[
 y(t) = s(t) + w(t) \tag{1a}
@@ -692,6 +703,7 @@ g_k(n) = \left(\frac{1}{\pi d^2_k}\right)^{\frac{1}{4}} \exp\left(-\frac{(n - t_
 <p>[8] Kostas Triantafyllopoulos, “Moments and cumulants of the multivariate real and complex Gaussian distributions,” 2002, www.stats.bris.ac.uk/research/stats/pub/ResRept/2002.html.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

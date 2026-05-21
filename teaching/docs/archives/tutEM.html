@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Soma Sekhar Dhavala">
+<meta name="author" content="Soma S. Dhavala">
 
 <title>EM Algorithm for Mixture Modeling – Soma S Dhavala</title>
 <style>
@@ -374,6 +374,12 @@ window.Quarto = {
  <span class="menu-text">Chirplet Decomposition</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/docs/archives/rpt689.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Joint Estimation in Dynamic State-Space Models</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -442,9 +448,12 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#e-step" id="toc-e-step" class="nav-link active" data-scroll-target="#e-step">E-Step</a></li>
+  <li><a href="#em-algorithm-for-mixture-modeling" id="toc-em-algorithm-for-mixture-modeling" class="nav-link active" data-scroll-target="#em-algorithm-for-mixture-modeling">EM Algorithm for Mixture Modeling</a>
+  <ul class="collapse">
+  <li><a href="#e-step" id="toc-e-step" class="nav-link" data-scroll-target="#e-step">E-Step</a></li>
   <li><a href="#m-step" id="toc-m-step" class="nav-link" data-scroll-target="#m-step">M-Step</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -467,7 +476,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Soma Sekhar Dhavala </p>
+             <p>Soma S. Dhavala </p>
           </div>
   </div>
     
@@ -480,6 +489,8 @@ window.Quarto = {
 </header>
 
 
+<section id="em-algorithm-for-mixture-modeling" class="level1">
+<h1>EM Algorithm for Mixture Modeling</h1>
 <p>We derive the Expectation-Maximization (EM) algorithm for Gaussian Mixture modeling (GMM). In general, any random space can be modeled by a mixture (weighed linear combination) of normal densities. Then, such an arbitrary density can be represented as:</p>
 <p><span class="math display">\[
 f(\phi; y) = \sum_{k=1}^{K} \lambda_k f_k(\theta_k; y) \tag{1}
@@ -563,9 +574,10 @@ U(\phi; \hat{\phi}) = Q(\phi; \hat{\phi}) - \varphi \left(\sum_{k=1}^{K} \lambda
 <section id="references" class="level2">
 <h2 data-anchor-id="references">References</h2>
 <p>[1] Aleksander Dogandžić, “Detection and estimation theory,” Spring, 2005, class notes #3, ECpE Dept., Iowa State University, url: home.eng.iastate.edu/~ald/EE527.html.</p>
-<p>[2] Soma Sekhar Dhavala, <em>Time-frequency representations: Analysis, Synthesis and Implementation</em>, M.S. thesis, Indian Institute of Technology, Madras, March 2000.</p>
+<p>[2] Soma S. Dhavala, <em>Time-frequency representations: Analysis, Synthesis and Implementation</em>, M.S. thesis, Indian Institute of Technology, Madras, March 2000.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

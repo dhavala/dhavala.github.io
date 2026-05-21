@@ -60,7 +60,7 @@
     "href": "teaching/archives.html#tutorials",
     "title": "Archives",
     "section": "Tutorials",
-    "text": "Tutorials\n\nNormal Approximation — Laplace (normal) approximation of a bivariate posterior, with a closed form for the posterior under a normal prior.\nGaussian Mixture for Multi-modal Posteriors — approximating a multi-modal posterior by a mixture of normals, with merging to select the number of components.\nEM Algorithm for Mixture Modeling — derivation of Expectation-Maximization for Gaussian mixture models.\nNumerical Methods for Bayesian Inference — quadrature, Monte Carlo integration, rejection sampling, and random-walk Metropolis with a normal prior or likelihood.\nChirplet Decomposition — decomposing a signal into Gaussian chirplets via mixture modeling, method of moments, and nested Fisher scoring.",
+    "text": "Tutorials\n\nNormal Approximation — Laplace (normal) approximation of a bivariate posterior, with a closed form for the posterior under a normal prior.\nGaussian Mixture for Multi-modal Posteriors — approximating a multi-modal posterior by a mixture of normals, with merging to select the number of components.\nEM Algorithm for Mixture Modeling — derivation of Expectation-Maximization for Gaussian mixture models.\nNumerical Methods for Bayesian Inference — quadrature, Monte Carlo integration, rejection sampling, and random-walk Metropolis with a normal prior or likelihood.\nChirplet Decomposition — decomposing a signal into Gaussian chirplets via mixture modeling, method of moments, and nested Fisher scoring.\nJoint Estimation in Dynamic State-Space Models — rolling-window Sequential Monte Carlo (FFBS) for jointly estimating states and static parameters in a dynamic state-space model.",
     "crumbs": [
       "Home",
       "Teaching",
@@ -79,25 +79,11 @@
     ]
   },
   {
-    "objectID": "teaching/docs/archives/tutGmm.html",
-    "href": "teaching/docs/archives/tutGmm.html",
-    "title": "Gaussian Mixture for Multi-modal Posteriors",
-    "section": "",
-    "text": "It might be the case that we want to draw samples from an arbitrary posterior pdf having more than one mode. In such cases, normal approximation might be too bad an approximation. We consider modeling this arbitrary pdf as a mixture of normal densities. Further, the number of modes (which in turn dictate the number of components in the mixture) in the posterior is also assumed unknown.\nThe mixture model considered in [1] tries to estimate the model parameters based on data. However, in the present context, we have the pdf in semi-closed form and this becomes a special case of [1].\nLet \\(f(\\theta)\\) be the known arbitrary pdf which we want to approximate. For illustration purposes, we assume a bivariate density (\\(\\theta = [\\theta_1, \\theta_2]^T\\)) and discretize \\(\\theta\\) on a uniform \\(N \\times M\\) grid. Further let \\(\\theta_{mn}\\) represent the \\((\\theta_1(n), \\theta_2(m))\\) sample in the grid. Also assume that the discretized pdf (\\(f(\\theta_{mn})\\)) is appropriately normalized.\n\\[\nf(\\theta_{mn}; \\Phi) = \\sum_{k=1}^{K} \\lambda_k f_k(\\theta_{mn}; \\phi_k) \\tag{1}\n\\]\nwhere\nThen we obtain the estimates for the mixture model parameters as:\n\\[\n\\hat{\\lambda}_{k,\\text{new}} = \\sum_{n=1}^{N} \\sum_{m=1}^{M} \\gamma_k(\\theta_{mn}; \\hat{\\Phi}) \\tag{2}\n\\]\n\\[\n\\hat{\\mu}_{k,\\text{new}} = \\frac{1}{\\hat{\\lambda}_{k,\\text{new}}} \\sum_{n=1}^{N} \\sum_{m=1}^{M} \\gamma_k(\\theta_{mn}; \\hat{\\Phi}) \\theta_{mn} \\tag{3}\n\\]\n\\[\n\\hat{\\Sigma}_{k,\\text{new}} = \\frac{1}{\\hat{\\lambda}_{k,\\text{new}}} \\sum_{n=1}^{N} \\sum_{m=1}^{M} \\gamma_k(\\theta_{mn}; \\hat{\\Phi}) (\\theta_{mn} - \\hat{\\mu}_k)^T (\\theta_{mn} - \\hat{\\mu}_k) \\tag{4}\n\\]\nwhere\n\\[\n\\gamma_k(\\theta_{mn}; \\hat{\\Phi}) = \\frac{\\hat{\\lambda}_k f_k(\\theta_{mn}; \\hat{\\theta}_k) f(\\theta_{mn}; \\Phi)}{f(\\theta_{mn}; \\hat{\\Phi})} \\tag{5}\n\\]\nHowever, we need to know the number of components \\(K\\) in the above equations. In order to circumvent this difficulty, we overestimate the number of components and estimate the model components. Later, we repeatedly: 1) merge any two distributions and 2) replace them with a new merged distribution (still a normal distribution) such that the distance between the newly formed distribution and the two distributions which got merged is minimized and this distance is above a certain threshold. Essentially, we overfit the posterior distribution and later prune the mixture until no further merging is possible. Based on the distance measure chosen, there could be different approaches. For a discussion please see [2, 3].\nNow it becomes a trivial task to generate samples from the posterior. Instead of drawing the samples from \\(p(\\theta)\\), we draw from the mixture. The algorithm is outlined below:\nEssentially, we have \\(K\\) number of states and each state has a certain pdf. Based on this relationship, we can draw random numbers quite efficiently.",
-    "crumbs": [
-      "Home",
-      "Teaching",
-      "Archives",
-      "Tutorials",
-      "Gaussian Mixture for Multi-modal Posteriors"
-    ]
-  },
-  {
     "objectID": "teaching/docs/archives/tutGmm.html#references",
     "href": "teaching/docs/archives/tutGmm.html#references",
     "title": "Gaussian Mixture for Multi-modal Posteriors",
     "section": "References",
-    "text": "References\n[1] Soma Sekhar Dhavala, “EM algorithm for Gaussian Mixture modeling,” report, ECpE Dept., Iowa State University.\n[2] Mark Coates, Time-frequency modeling, Ph. D, Univ. of Cambridge, Signal Processing and Communications Laboratory, Dept. of Engineering, August 1998.\n[3] M. Figueiredo, J. Leitao and A. K. Jain, “On fitting mixture models,” in Energy Minimization Methods in Computer Vision and Pattern Recognition, vol. 1654, pp. 54–69. Springer-Verlag, 1999.",
+    "text": "References\n[1] Soma S. Dhavala, “EM algorithm for Gaussian Mixture modeling,” report, ECpE Dept., Iowa State University.\n[2] Mark Coates, Time-frequency modeling, Ph. D, Univ. of Cambridge, Signal Processing and Communications Laboratory, Dept. of Engineering, August 1998.\n[3] M. Figueiredo, J. Leitao and A. K. Jain, “On fitting mixture models,” in Energy Minimization Methods in Computer Vision and Pattern Recognition, vol. 1654, pp. 54–69. Springer-Verlag, 1999.",
     "crumbs": [
       "Home",
       "Teaching",
@@ -107,17 +93,221 @@
     ]
   },
   {
-    "objectID": "teaching/docs/archives/tutMCMC.html",
-    "href": "teaching/docs/archives/tutMCMC.html",
-    "title": "Numerical Methods for Bayesian Inference",
-    "section": "",
-    "text": "We review several numerical methods for making inference from the posterior distribution if either the prior or the likelihood function (when viewed as a function of the parameter of interest and not as a function of the data) is a normal distribution. We consider the following techniques:\nOne of the contentions of frequentists against the Bayesians is the need to calculate multidimensional integrals which are difficult to compute and analyze. However, with the advent of faster chips, computational power is no longer a scarce resource. Hence, there is a shift (in my view) in computational statistics from providing computationally feasible solutions to obtaining numerically accurate results.\nNotation:",
+    "objectID": "teaching/docs/archives/tutEM.html#e-step",
+    "href": "teaching/docs/archives/tutEM.html#e-step",
+    "title": "EM Algorithm for Mixture Modeling",
+    "section": "E-Step",
+    "text": "E-Step\nSince we have independent observations\n\\[\nE_{u \\mid y}\\left[\\ln p(u, y; \\phi)\\right] = \\sum_{n=1}^{N} E_{u(n) \\mid y(n)}\\left[\\ln p(u(n), y(n); \\theta_{u(n)})\\right] \\tag{7}\n\\]\nUpon expanding the expectation operator and letting \\(u(n) = k\\),\n\\[\nE_{k \\mid y(n)}\\left[\\ln p(k, y(n); \\theta_k)\\right] = \\sum_{k=1}^{K} \\left[\\ln p(k, y(n); \\theta_k)\\right] \\frac{p(y(n), k; \\hat{\\theta}_k)}{p(y(n); \\hat{\\phi})} \\tag{8}\n\\]\nThe dependence of \\(u(n)\\) on \\(k\\) becomes obvious if we recollect that \\(u(n) \\in \\{1 \\ldots K\\}\\). Also, the denominator is only a function of the data and hence can be ignored while performing the M-step. Hence, we restate the above equation as:\n\\[\nE_{k \\mid y(n)}\\left[\\ln p(k, y(n); \\theta_k)\\right] \\propto \\sum_{k=1}^{K} \\left[\\ln p(k, y(n); \\theta_k)\\right] p(y(n), k; \\hat{\\theta}_k) \\tag{9}\n\\]\nThen,\n\\[\nE_{u \\mid y}\\left[\\ln p(u, y; \\phi)\\right] \\propto \\sum_{n=1}^{N} \\sum_{k=1}^{K} \\hat{\\lambda}_k f_k(y(n); \\hat{\\theta}_k) \\left[\\ln \\lambda_k - \\frac{1}{2} \\exp\\left[(y(n) - \\mu_k)^T \\Sigma_k^{-1} (y(n) - \\mu_k)\\right] - \\ln |\\Sigma_k|\\right] \\tag{10}\n\\]\nThe above function has to be maximized subject to the constraint \\(\\sum_{k=1}^{K} \\lambda_k = 1\\) and define it as \\(Q(\\phi; \\hat{\\phi})\\).",
     "crumbs": [
       "Home",
       "Teaching",
       "Archives",
       "Tutorials",
-      "Numerical Methods for Bayesian Inference"
+      "EM Algorithm for Mixture Modeling"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutEM.html#m-step",
+    "href": "teaching/docs/archives/tutEM.html#m-step",
+    "title": "EM Algorithm for Mixture Modeling",
+    "section": "M-Step",
+    "text": "M-Step\n\\[\n\\hat{\\phi}_{new} = \\arg\\max_{\\phi} Q(\\phi; \\hat{\\phi}) \\tag{11}\n\\]\nLet \\(\\varphi\\) be the Lagrange multiplier. The function to be maximized is then:\n\\[\nU(\\phi; \\hat{\\phi}) = Q(\\phi; \\hat{\\phi}) - \\varphi \\left(\\sum_{k=1}^{K} \\lambda_k - 1\\right) \\tag{12}\n\\]\nTo obtain \\(\\hat{\\lambda}_{k,new}\\), we set the derivative of \\(U(\\phi; \\hat{\\phi})\\) w.r.t \\(\\lambda_k\\) to zero and solve for the roots and similarly for \\(\\mu_k\\) and \\(\\Sigma_k\\). After some straightforward algebraic manipulations, we obtain the expressions for the estimates as [2, Chapter 5]:\n\\[\n\\hat{\\lambda}_{k,new} = \\frac{1}{N} \\sum_{n=1}^{N} \\frac{\\hat{\\lambda}_k f_k(y(n); \\hat{\\theta}_k)}{f(y(n); \\hat{\\phi})} \\tag{13}\n\\]\n\\[\n\\hat{\\mu}_{k,new} = \\frac{1}{N \\hat{\\lambda}_{k,new}} \\sum_{n=1}^{N} \\frac{\\hat{\\lambda}_k f_k(y(n); \\hat{\\theta}_k)}{f(y(n); \\hat{\\phi})} y(n) \\tag{14}\n\\]\n\\[\n\\hat{\\Sigma}_{k,new} = \\frac{1}{N \\hat{\\lambda}_{k,new}} \\sum_{n=1}^{N} \\frac{\\hat{\\lambda}_k f_k(y(n); \\hat{\\theta}_k)}{f(y(n); \\hat{\\phi})} \\left[(y(n) - \\hat{\\mu}_k)^T (y(n) - \\hat{\\mu}_k)\\right] \\tag{15}\n\\]",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "EM Algorithm for Mixture Modeling"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutEM.html#references",
+    "href": "teaching/docs/archives/tutEM.html#references",
+    "title": "EM Algorithm for Mixture Modeling",
+    "section": "References",
+    "text": "References\n[1] Aleksander Dogandžić, “Detection and estimation theory,” Spring, 2005, class notes #3, ECpE Dept., Iowa State University, url: home.eng.iastate.edu/~ald/EE527.html.\n[2] Soma S. Dhavala, Time-frequency representations: Analysis, Synthesis and Implementation, M.S. thesis, Indian Institute of Technology, Madras, March 2000.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "EM Algorithm for Mixture Modeling"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/tutLaplace.html#references",
+    "href": "teaching/docs/archives/tutLaplace.html#references",
+    "title": "Normal Approximation",
+    "section": "References",
+    "text": "References\n[1] J. C. Naylor and A. F. M. Smith, “Applications of a method for the efficient computation of posterior distributions,” Applied Statistics, vol. 31, 1982.\n[2] Kostas Triantafyllopoulos, “Moments and cumulants of the multivariate real and complex Gaussian distributions,” 2002, www.stats.bris.ac.uk/research/stats/pub/ResRept/2002.html.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Normal Approximation"
+    ]
+  },
+  {
+    "objectID": "research/code.html",
+    "href": "research/code.html",
+    "title": "Code",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "Research",
+      "Code"
+    ]
+  },
+  {
+    "objectID": "research/projects/another-project.html",
+    "href": "research/projects/another-project.html",
+    "title": "Another project",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "Research",
+      "Projects",
+      "Another project"
+    ]
+  },
+  {
+    "objectID": "research/projects/index.html",
+    "href": "research/projects/index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Use the sidebar at left to browse individual projects.",
+    "crumbs": [
+      "Home",
+      "Research",
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "research/publications.html",
+    "href": "research/publications.html",
+    "title": "Publications",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "Research",
+      "Publications"
+    ]
+  },
+  {
+    "objectID": "about/contact.html",
+    "href": "about/contact.html",
+    "title": "Contact",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "About",
+      "Contact"
+    ]
+  },
+  {
+    "objectID": "about/bio.html",
+    "href": "about/bio.html",
+    "title": "Bio",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "About",
+      "Bio"
+    ]
+  },
+  {
+    "objectID": "asankhya/hello/index.html",
+    "href": "asankhya/hello/index.html",
+    "title": "Hello",
+    "section": "",
+    "text": "This is Asankhya — a quieter space for personal writing. Distinct from SaddlePoint, which is for academic and technical work.\nExpect essays, notes from books, observations, and slower thinking.\n(More to come.)"
+  },
+  {
+    "objectID": "asankhya/index.html",
+    "href": "asankhya/index.html",
+    "title": "Asankhya",
+    "section": "",
+    "text": "Hello\n\n\n\nmeta\n\n\n\nFirst post on Asankhya — what this space is for.\n\n\n\n\n\nMay 18, 2026\n\n1 min\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Home",
+      "Blogs",
+      "Asankhya"
+    ]
+  },
+  {
+    "objectID": "about/index.html",
+    "href": "about/index.html",
+    "title": "About",
+    "section": "",
+    "text": "I am an AI researcher, systems architect, and educator with over two decades of experience spanning Machine Learning, Artificial Intelligence, Bayesian Statistics, Signal Processing, Distributed Systems, and Scientific Computing. My work lies at the intersection of rigorous mathematical foundations and large-scale deployable AI systems, with applications across Agriculture, Healthcare, Education, Computational Biology, and Public-Interest Technology.\nMy current focus is on Frontier Model Development, especially understanding why Deep Learning works and developing a unified theoretical framework connecting optimization, representation learning, probabilistic inference, dynamical systems, and information theory. I am also interested in scalable AI infrastructure for distributed training and inference of GPT-scale models, along with curriculum design for systems programmers and AI engineers working on large-scale AI systems.\nOver the years, I have worked across academia, industrial research, startups, open-source ecosystems, and public-sector AI initiatives, contributing both to foundational research and production-grade AI deployments.\n\n\nEducational Qualifications\n\nM.S. in Applied & Computational Mathematics — University of Washington, USA (2020 – 2022)\n\nAreas: Dynamical Systems, Stochastic Processes, PDEs, Numerical Linear Algebra, Deep Learning in NLP\n\nPh.D. in Statistics — Texas A&M University, USA (2005 – 2010)\n\nResearch area: Bayesian Semiparametric Models for Heterogeneous Cross-Platform Differential Gene Expression\nAdvisor: Prof. Bani K. Mallick\n\nPh.D. Program (transferred to TAMU) — Iowa State University, USA (2003 – 2005)\n\nResearch area: Distributed Estimation Techniques\nAdvisor: Prof. Alexander Doganzic\n\nM.S. in Electrical Engineering — Indian Institute of Technology Madras, India (1997 – 2000)\n\nResearch area: Time-Frequency Representations: Analysis, Synthesis and Implementation\nAdvisors: Prof. K. M. M. Prabhu, Prof. S. Srinivasan\n\nB.E. in Electronics & Communication Engineering — S.R.K.R. Engineering College (affiliated to Andhra University), Bhimavaram, India (1993 – 1997)\n\n\n\n\nIndustry and Research Experience\n\nAdjunct Faculty and Sector Expert – Agri & AI — IIT Jammu / CPMU, Ministry of Education (2024 – 2026)\n\nAI policy ecosystems\nIntellectual Property Rights (IPR)\nMonitoring, Evaluation and Learning (MEL) for AI programs\nAI and Agriculture\n\nDirector, Machine Learning / Principal ML Scientist — Wadhwani AI (2020 – 2024)\n\nApplied Research in Machine Learning and Generative AI\nLarge Language Models (LLMs)\nDocument Intelligence\nAI for Agriculture, Healthcare, and Education\nReliable and uncertainty-aware AI systems\nScalable AI deployment\n\nSenior Principal Statistical Engineer — Embibe (2019 – 2020)\n\nLearning Analytics\nCausal Inference\nRecommendation Systems\nAI for Education\n\nConsulting ML Architect — EkStep / NIIT StackRoute / Consulting (2014 – 2019)\n\nAI for Education\nML Platforms and Infrastructure\nRecommendation Engines\nNLP-based Educational Systems\nConversational Analytics\nInteroperable AI Systems\n\nFounder & CTO — VitalTicks (2017 – 2025)\n\nConnected Healthcare\nIoT Systems\nSmart Diagnostics\nEmbedded AI Systems\n\nAssociate Research Scientist — Dow AgroSciences (2011 – 2014)\n\nComputational Biology\nGenomics\nBayesian Modeling\nScientific Computing\nHigh-dimensional Statistical Methods\nDesign of Experiments\n\nPostdoctoral Researcher — Texas A&M University (2010 – 2011)\n\nBayesian Inference\nDynamical Systems\nUncertainty Quantification\n\nResearch Engineer — GE John F. Welch Technology Center (2000 – 2002)\n\nSignal Processing\nScientific Computing\nMonte Carlo Methods\nCompression Algorithms\n\n\n\n\n\nResearch and Academic Interests\n\nFrontier Models and Large Language Models (LLMs)\nUnified Theories of Deep Learning\nUnderstanding Generalization and Scaling in Neural Networks\nBayesian Statistics and Probabilistic Modeling\nUncertainty Quantification in AI Systems\nDistributed Training and Inference for GPT-scale Models\nML Systems and AI Infrastructure\nGenerative AI and Multimodal Systems\nRetrieval-Augmented Generation (RAG)\nDeep Learning Theory\nScientific Computing\nDynamical Systems and Optimization\nStatistical Signal Processing\nExplainable and Interoperable AI\nAI for Education, Healthcare, and Agriculture\nCurriculum Design for Systems Programmers and AI Engineers\n\n\n\n\nSelected Recent Publications\n\nLattice-Based Vector Quantization for Low-Bit Quantization-Aware Training\nProceedings of Machine Learning Research, 2026.\nHealth Sentinel: An AI Pipeline for Real-time Disease Outbreak Detection\nNLP4PI Workshop, 2025.\nLearning to Detect PII: Tabular vs Document Classification Models for Network Traffic Analysis\nJournal of Information Security and Applications, 2025.\nQuantProb: Generalizing Probabilities along with Predictions for a Pre-trained Classifier\nUAI 2024.\nAutomatic Interpretation of Line Probe Assay Test for TB\nAAAI 2024.\n\n\n\n\nSelected Keywords\nMachine Learning, Generative AI, Frontier Models, Bayesian Statistics, Deep Learning, LLMs, Distributed AI Systems, AI Infrastructure, Signal Processing, Scientific Computing, Optimization, Computational Mathematics, NLP, Multimodal AI, AI for Social Impact",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "blogs/index.html",
+    "href": "blogs/index.html",
+    "title": "Blogs",
+    "section": "",
+    "text": "Two distinct streams of writing live here:\n\nSaddlePoint\nAcademic and technical blog — statistics, machine learning, statistical signal processing, and adjacent topics. Long-form notes, derivations, and write-ups of ideas worth keeping around.\n\n\nAsankhya\nPersonal blog — essays, notes from books, observations, slower thinking. Quieter, less structured, more reflective.\n\nEach blog has its own RSS feed: SaddlePoint feed · Asankhya feed.",
+    "crumbs": [
+      "Home",
+      "Blogs"
+    ]
+  },
+  {
+    "objectID": "research/patents.html",
+    "href": "research/patents.html",
+    "title": "Patents",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "Research",
+      "Patents"
+    ]
+  },
+  {
+    "objectID": "research/projects/sample-project.html",
+    "href": "research/projects/sample-project.html",
+    "title": "Sample project",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "Research",
+      "Projects",
+      "Sample project"
+    ]
+  },
+  {
+    "objectID": "research/index.html",
+    "href": "research/index.html",
+    "title": "Research",
+    "section": "",
+    "text": "Use the sidebar at left to browse publications, patents, reports, code, and projects.",
+    "crumbs": [
+      "Home",
+      "Research"
+    ]
+  },
+  {
+    "objectID": "teaching/homeworks.html",
+    "href": "teaching/homeworks.html",
+    "title": "Homeworks",
+    "section": "",
+    "text": "(Content to be added.)",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Homeworks"
     ]
   },
   {
@@ -205,249 +395,73 @@
     ]
   },
   {
-    "objectID": "teaching/homeworks.html",
-    "href": "teaching/homeworks.html",
-    "title": "Homeworks",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "Teaching",
-      "Homeworks"
-    ]
-  },
-  {
-    "objectID": "research/index.html",
-    "href": "research/index.html",
-    "title": "Research",
-    "section": "",
-    "text": "Use the sidebar at left to browse publications, patents, reports, code, and projects.",
-    "crumbs": [
-      "Home",
-      "Research"
-    ]
-  },
-  {
-    "objectID": "research/projects/sample-project.html",
-    "href": "research/projects/sample-project.html",
-    "title": "Sample project",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "Research",
-      "Projects",
-      "Sample project"
-    ]
-  },
-  {
-    "objectID": "research/patents.html",
-    "href": "research/patents.html",
-    "title": "Patents",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "Research",
-      "Patents"
-    ]
-  },
-  {
-    "objectID": "blogs/index.html",
-    "href": "blogs/index.html",
-    "title": "Blogs",
-    "section": "",
-    "text": "Two distinct streams of writing live here:\n\nSaddlePoint\nAcademic and technical blog — statistics, machine learning, statistical signal processing, and adjacent topics. Long-form notes, derivations, and write-ups of ideas worth keeping around.\n\n\nAsankhya\nPersonal blog — essays, notes from books, observations, slower thinking. Quieter, less structured, more reflective.\n\nEach blog has its own RSS feed: SaddlePoint feed · Asankhya feed.",
-    "crumbs": [
-      "Home",
-      "Blogs"
-    ]
-  },
-  {
-    "objectID": "about/index.html",
-    "href": "about/index.html",
-    "title": "About",
-    "section": "",
-    "text": "I am an AI researcher, systems architect, and educator with over two decades of experience spanning Machine Learning, Artificial Intelligence, Bayesian Statistics, Signal Processing, Distributed Systems, and Scientific Computing. My work lies at the intersection of rigorous mathematical foundations and large-scale deployable AI systems, with applications across Agriculture, Healthcare, Education, Computational Biology, and Public-Interest Technology.\nMy current focus is on Frontier Model Development, especially understanding why Deep Learning works and developing a unified theoretical framework connecting optimization, representation learning, probabilistic inference, dynamical systems, and information theory. I am also interested in scalable AI infrastructure for distributed training and inference of GPT-scale models, along with curriculum design for systems programmers and AI engineers working on large-scale AI systems.\nOver the years, I have worked across academia, industrial research, startups, open-source ecosystems, and public-sector AI initiatives, contributing both to foundational research and production-grade AI deployments.\n\n\nEducational Qualifications\n\nM.S. in Applied & Computational Mathematics — University of Washington, USA (2020 – 2022)\n\nAreas: Dynamical Systems, Stochastic Processes, PDEs, Numerical Linear Algebra, Deep Learning in NLP\n\nPh.D. in Statistics — Texas A&M University, USA (2005 – 2010)\n\nResearch area: Bayesian Semiparametric Models for Heterogeneous Cross-Platform Differential Gene Expression\nAdvisor: Prof. Bani K. Mallick\n\nPh.D. Program (transferred to TAMU) — Iowa State University, USA (2003 – 2005)\n\nResearch area: Distributed Estimation Techniques\nAdvisor: Prof. Alexander Doganzic\n\nM.S. in Electrical Engineering — Indian Institute of Technology Madras, India (1997 – 2000)\n\nResearch area: Time-Frequency Representations: Analysis, Synthesis and Implementation\nAdvisors: Prof. K. M. M. Prabhu, Prof. S. Srinivasan\n\nB.E. in Electronics & Communication Engineering — S.R.K.R. Engineering College (affiliated to Andhra University), Bhimavaram, India (1993 – 1997)\n\n\n\n\nIndustry and Research Experience\n\nAdjunct Faculty and Sector Expert – Agri & AI — IIT Jammu / CPMU, Ministry of Education (2024 – 2026)\n\nAI policy ecosystems\nIntellectual Property Rights (IPR)\nMonitoring, Evaluation and Learning (MEL) for AI programs\nAI and Agriculture\n\nDirector, Machine Learning / Principal ML Scientist — Wadhwani AI (2020 – 2024)\n\nApplied Research in Machine Learning and Generative AI\nLarge Language Models (LLMs)\nDocument Intelligence\nAI for Agriculture, Healthcare, and Education\nReliable and uncertainty-aware AI systems\nScalable AI deployment\n\nSenior Principal Statistical Engineer — Embibe (2019 – 2020)\n\nLearning Analytics\nCausal Inference\nRecommendation Systems\nAI for Education\n\nConsulting ML Architect — EkStep / NIIT StackRoute / Consulting (2014 – 2019)\n\nAI for Education\nML Platforms and Infrastructure\nRecommendation Engines\nNLP-based Educational Systems\nConversational Analytics\nInteroperable AI Systems\n\nFounder & CTO — VitalTicks (2017 – 2025)\n\nConnected Healthcare\nIoT Systems\nSmart Diagnostics\nEmbedded AI Systems\n\nAssociate Research Scientist — Dow AgroSciences (2011 – 2014)\n\nComputational Biology\nGenomics\nBayesian Modeling\nScientific Computing\nHigh-dimensional Statistical Methods\nDesign of Experiments\n\nPostdoctoral Researcher — Texas A&M University (2010 – 2011)\n\nBayesian Inference\nDynamical Systems\nUncertainty Quantification\n\nResearch Engineer — GE John F. Welch Technology Center (2000 – 2002)\n\nSignal Processing\nScientific Computing\nMonte Carlo Methods\nCompression Algorithms\n\n\n\n\n\nResearch and Academic Interests\n\nFrontier Models and Large Language Models (LLMs)\nUnified Theories of Deep Learning\nUnderstanding Generalization and Scaling in Neural Networks\nBayesian Statistics and Probabilistic Modeling\nUncertainty Quantification in AI Systems\nDistributed Training and Inference for GPT-scale Models\nML Systems and AI Infrastructure\nGenerative AI and Multimodal Systems\nRetrieval-Augmented Generation (RAG)\nDeep Learning Theory\nScientific Computing\nDynamical Systems and Optimization\nStatistical Signal Processing\nExplainable and Interoperable AI\nAI for Education, Healthcare, and Agriculture\nCurriculum Design for Systems Programmers and AI Engineers\n\n\n\n\nSelected Recent Publications\n\nLattice-Based Vector Quantization for Low-Bit Quantization-Aware Training\nProceedings of Machine Learning Research, 2026.\nHealth Sentinel: An AI Pipeline for Real-time Disease Outbreak Detection\nNLP4PI Workshop, 2025.\nLearning to Detect PII: Tabular vs Document Classification Models for Network Traffic Analysis\nJournal of Information Security and Applications, 2025.\nQuantProb: Generalizing Probabilities along with Predictions for a Pre-trained Classifier\nUAI 2024.\nAutomatic Interpretation of Line Probe Assay Test for TB\nAAAI 2024.\n\n\n\n\nSelected Keywords\nMachine Learning, Generative AI, Frontier Models, Bayesian Statistics, Deep Learning, LLMs, Distributed AI Systems, AI Infrastructure, Signal Processing, Scientific Computing, Optimization, Computational Mathematics, NLP, Multimodal AI, AI for Social Impact",
-    "crumbs": [
-      "Home",
-      "About"
-    ]
-  },
-  {
-    "objectID": "asankhya/index.html",
-    "href": "asankhya/index.html",
-    "title": "Asankhya",
-    "section": "",
-    "text": "Hello\n\n\n\nmeta\n\n\n\nFirst post on Asankhya — what this space is for.\n\n\n\n\n\nMay 18, 2026\n\n1 min\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Home",
-      "Blogs",
-      "Asankhya"
-    ]
-  },
-  {
-    "objectID": "asankhya/hello/index.html",
-    "href": "asankhya/hello/index.html",
-    "title": "Hello",
-    "section": "",
-    "text": "This is Asankhya — a quieter space for personal writing. Distinct from SaddlePoint, which is for academic and technical work.\nExpect essays, notes from books, observations, and slower thinking.\n(More to come.)"
-  },
-  {
-    "objectID": "about/bio.html",
-    "href": "about/bio.html",
-    "title": "Bio",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "About",
-      "Bio"
-    ]
-  },
-  {
-    "objectID": "about/contact.html",
-    "href": "about/contact.html",
-    "title": "Contact",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "About",
-      "Contact"
-    ]
-  },
-  {
-    "objectID": "research/publications.html",
-    "href": "research/publications.html",
-    "title": "Publications",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "Research",
-      "Publications"
-    ]
-  },
-  {
-    "objectID": "research/projects/index.html",
-    "href": "research/projects/index.html",
-    "title": "Projects",
-    "section": "",
-    "text": "Use the sidebar at left to browse individual projects.",
-    "crumbs": [
-      "Home",
-      "Research",
-      "Projects"
-    ]
-  },
-  {
-    "objectID": "research/projects/another-project.html",
-    "href": "research/projects/another-project.html",
-    "title": "Another project",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "Research",
-      "Projects",
-      "Another project"
-    ]
-  },
-  {
-    "objectID": "research/code.html",
-    "href": "research/code.html",
-    "title": "Code",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "Research",
-      "Code"
-    ]
-  },
-  {
-    "objectID": "teaching/docs/archives/tutLaplace.html",
-    "href": "teaching/docs/archives/tutLaplace.html",
-    "title": "Normal Approximation",
-    "section": "",
-    "text": "Let the likelihood function be\n\\[\nL(\\theta; y) = c \\exp(-f(\\theta; y)) \\tag{1}\n\\]\nfor some arbitrary bi-variate function \\(f\\) and for some constant \\(c\\). It might be useful if we have a normal likelihood function, in which case it is possible to compute the posterior either analytically (e.g. if the prior is also normal) or by resorting to numerical integration techniques [1] (e.g. Gauss–Hermite quadrature). It can also be used to calculate moments and cumulants in an efficient way [2].\nIn general, we can approximate the function \\(f(\\theta)\\) (in the neighborhood of \\(\\tau\\)) using a multi-variate Taylor series. In the present case, we will be considering the bi-variate case. We consider only terms up to order two since the log-likelihood of a normal density is quadratic,\n\\[\nf(\\theta) \\approx a_{00} + a_{10}(\\theta_1 - \\tau_1) + a_{01}(\\theta_2 - \\tau_2) + a_{11}(\\theta_1 - \\tau_1)(\\theta_2 - \\tau_2) + a_{20}(\\theta_1 - \\tau_1)^2 + a_{02}(\\theta_2 - \\tau_2)^2 \\tag{2}\n\\]\nwhere\n\\[\na_{ij} = \\frac{1}{i!\\, j!} \\left[ \\left(\\frac{\\partial}{\\partial \\theta_1}\\right)^i \\left(\\frac{\\partial}{\\partial \\theta_2}\\right)^j f \\right](\\tau) \\tag{3}\n\\]\nThen the likelihood is approximated as:\n\\[\nL(\\theta; y) \\sim N(\\mu_L, \\Sigma_L) \\tag{4a}\n\\]\n\\[\n\\mu_L = -\\frac{1}{2}\n\\begin{bmatrix}\n(a_{11} + a_{10} - a_{11}\\tau_2 - 2a_{20}\\tau_1)/a_{20} \\\\\n(a_{11} + a_{01} - a_{11}\\tau_1 - 2a_{02}\\tau_2)/a_{02}\n\\end{bmatrix} \\tag{4b}\n\\]\n\\[\n\\Sigma_L = \\frac{-2 a_{20} a_{02}}{4 a_{20} a_{02} - a_{11}^2}\n\\begin{bmatrix}\n1/a_{02} & -2a_{11} \\\\\n-2a_{11} & 1/a_{20}\n\\end{bmatrix} \\tag{4c}\n\\]\nWe can expand the Taylor series around the mode or ML estimate. Having approximated the likelihood as a bivariate normal, below we will provide a closed-form expression for calculating the posterior density for a given normal prior. If the prior \\(\\pi(\\theta)\\) is of the form\n\\[\n\\pi(\\theta) \\sim N(\\mu_\\pi, \\Sigma_\\pi) \\tag{5}\n\\]\nthen the posterior \\(p(\\theta)\\) will be of the form\n\\[\np(\\theta) \\sim N(\\mu_p, \\Sigma_p) \\tag{6a}\n\\]\n\\[\n\\Sigma_p = \\left(\\Sigma_L^{-1} + \\Sigma_\\pi^{-1}\\right)^{-1} \\tag{6b}\n\\]\n\\[\n\\mu_p = \\Sigma_p \\left(\\Sigma_L^{-1}\\mu_L + \\Sigma_\\pi^{-1}\\mu_\\pi\\right) \\tag{6c}\n\\]",
+    "objectID": "teaching/docs/archives/rpt689.html#introduction",
+    "href": "teaching/docs/archives/rpt689.html#introduction",
+    "title": "Joint Estimation in Dynamic State-Space Models",
+    "section": "Introduction",
+    "text": "Introduction\nA dynamic state-space model has two components: state evolution equation and the observation equation, described by some parameter. In general, the states are not observed and only some function the these states is observed. It is often of interest to infer the states given the measurements and/or the parameters that describe the state evolution and measurement process. The model can be expressed as:\nModel:\n\\[\n\\begin{aligned}\n\\text{Observation:} \\quad & \\mathbf{y}_t \\sim g(\\mathbf{y}_t|\\mathbf{x}_t, \\theta) \\\\\n\\text{State evolution:} \\quad & \\mathbf{x}_t \\sim f(\\mathbf{x}_t|\\mathbf{x}_{t-1}, \\theta) \\\\\n\\text{Initial state:} \\quad & \\mathbf{x}_0 \\sim \\pi(\\mathbf{x}_0|\\theta_0)\n\\end{aligned}\n\\]\nwhere \\(\\theta\\) is the parameter vector, \\(\\mathbf{x}_t\\) the state vector at time \\(t\\), \\(\\mathbf{y}_t\\) the observation vector at time \\(t\\), \\(g\\) the observation density and \\(f\\) the evolution density and some assumptions in the model are:\nAssumptions:\n\\[\n\\begin{aligned}\nf(\\mathbf{x}_t|\\mathbf{x}_{t-1}, \\mathbf{x}_{t-2}\\ldots, \\theta) &= f(\\mathbf{x}_t|\\mathbf{x}_{t-1}, \\theta) \\\\\ng(\\mathbf{y}_t|\\mathbf{x}_t, \\mathbf{x}_{t-1}\\ldots, \\theta) &= g(\\mathbf{y}_t|\\mathbf{x}_t, \\theta).\n\\end{aligned}\n\\]\nAs a consequence, the following results will be useful:\nIdentities:\n\\[\n\\begin{aligned}\nf(\\mathbf{x}_t|\\mathbf{x}_{t+1}\\ldots, \\mathbf{y}_{1:T}) &= f(\\mathbf{x}_t|\\mathbf{x}_{t+1}\\ldots, \\mathbf{y}_{1:t}) \\quad T \\geq t \\\\\nf(\\mathbf{x}_{t-k+1:t}|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:T}) &= f(\\mathbf{x}_{t-k+1:t}|\\mathbf{x}_{t-k}, \\mathbf{y}_{t-k+1:t})\n\\end{aligned}\n\\]\nThe above model is quite general and encompasses several well-studied models such as noisy AR process, for example. The above model is very well studied when \\(\\theta\\) is known: Kalman filtering and a wide variety of its extensions, for example. Similarly, time-series analysis specifically deals with the case where \\(\\theta\\) is unknown but the states are known. However, there is not much literature available to tackle the problem when both parameter and states are unknown, relatively speaking. The focus here is the joint estimation of states and parameters, specifically the algorithms proposed in Polson et al. (2008). In the next section, we briefly review sequential Monte Carlo and establish the notation and terminology used in the subsequent sections.",
     "crumbs": [
       "Home",
       "Teaching",
       "Archives",
       "Tutorials",
-      "Normal Approximation"
+      "Joint Estimation in Dynamic State-Space Models"
     ]
   },
   {
-    "objectID": "teaching/docs/archives/tutLaplace.html#references",
-    "href": "teaching/docs/archives/tutLaplace.html#references",
-    "title": "Normal Approximation",
+    "objectID": "teaching/docs/archives/rpt689.html#sequential-monte-carlo-methods",
+    "href": "teaching/docs/archives/rpt689.html#sequential-monte-carlo-methods",
+    "title": "Joint Estimation in Dynamic State-Space Models",
+    "section": "Sequential Monte Carlo methods",
+    "text": "Sequential Monte Carlo methods\nInference in the state-space model is based on the joint density of the states ( and parameters if they are known) given the observed data, i.e., we want to know\n\\[\np(\\mathbf{x}_{0:t}, \\theta|\\mathbf{y}_{1:t})\n\\]\nFor example, we can obtain point estimates for the state from the joint density by taking the expecttion over the posterior marginal density. The marginal density can be obtained by integrating-out the nuisance states. However, it is often the case that, analytical form for the joint density is not available or it is very complex to compute. Monte-Carlo simulation techniques offer practical alternatives to analytical computations. Further, they can be suitably adapted to update the joint densities as and when new observations arrive, i.e.,\n\\[\np(\\mathbf{x}_{0:t+1}, \\theta|\\mathbf{y}_{1:t+1}) \\xleftarrow{\\mathbf{y}_{t+1}} p(\\mathbf{x}_{0:t}, \\theta|\\mathbf{y}_{1:t})\n\\]\nMonte Carlo techniques that accomplish task similar to what was mentioned above are usually referred to as sequential Monte Carlo methods (SMC). Three major tasks have to be performed in updating the joint density with the newest observation. The three tasks are (\\(\\theta\\) is dropped for brevity):\n\\[\n\\begin{aligned}\n\\text{Filtering:} \\quad & p(\\mathbf{x}_t, |\\mathbf{y}_{1:t}) \\\\\n\\text{Prediction:} \\quad & p(\\mathbf{x}_{t+k}, |\\mathbf{y}_{1:t}), \\quad k &gt; 0 \\\\\n\\text{Smoothing:} \\quad & p(\\mathbf{x}_{t-k}, |\\mathbf{y}_{1:t}), \\quad 1 \\leq k &lt; t.\n\\end{aligned}\n\\]\nUsing the Bayes rule\n\\[\np(A|B) \\propto p(B|A)p(A)\n\\]\nand the chain rule of probability\n\\[\np(A, B, C) = p(A)p(B|A)p(C|A, B)\n\\]\nwe can establish any recursive relationships. In particular,\nRecursion for the joint density:\nGoal:\n\\[\np(\\mathbf{x}_{0:T}|\\mathbf{y}_{1:T}) \\xleftarrow{\\mathbf{y}_{1:t}} p(\\mathbf{x}_0)\n\\]\nFactorize:\n\\[\n\\begin{aligned}\np(\\mathbf{x}_{1:T}|\\mathbf{y}_{1:T}) &= p(\\mathbf{x}_T|\\mathbf{y}_{1:T}) \\prod_{t=0}^{T-1} p(\\mathbf{x}_t|\\mathbf{x}_{t+1:T}, \\mathbf{y}_{1:T}) \\\\\np(\\mathbf{x}_t|\\mathbf{x}_{t+1:T}, \\mathbf{y}_{1:T}) &= p(\\mathbf{x}_t|\\mathbf{x}_{t+1}, \\mathbf{y}_{1:t}) \\\\\n&= \\frac{p(\\mathbf{x}_t|\\mathbf{y}_{1:t})f(\\mathbf{x}_{t+1}|\\mathbf{x}_t)}{p(\\mathbf{x}_{t+1}|\\mathbf{y}_{1:t})} \\\\\n&\\propto p(\\mathbf{x}_t|\\mathbf{y}_{1:t})f(\\mathbf{x}_{t+1}|\\mathbf{x}_t)\n\\end{aligned}\n\\]\nThe above factorization helps us in obtaining draws from the joint density. We can see from the above equations that we should be able to efficiently (in a recursive manner) generate the filtering distribution. It can be obtained as:\nRecursion for filtering:\nGoal:\n\\[\np(\\mathbf{x}_t|\\mathbf{y}_{1:t}) \\xleftarrow{\\mathbf{y}_t} p(\\mathbf{x}_{t-1}|\\mathbf{y}_{1:t-1})\n\\]\nRecursion:\n\\[\n\\begin{aligned}\n\\text{predict:} \\quad & p(\\mathbf{x}_t|\\mathbf{y}_{1:t-1}) = \\int p(\\mathbf{x}_{t-1}|\\mathbf{y}_{1:t-1})f(\\mathbf{x}_t|\\mathbf{x}_{t-1})d\\mathbf{x}_t \\\\\n\\text{update:} \\quad & p(\\mathbf{x}_t|\\mathbf{y}_{1:t}) \\propto g(\\mathbf{y}_t|\\mathbf{x}_t)p(\\mathbf{x}_t|\\mathbf{y}_{1:t-1})\n\\end{aligned}\n\\]\nNow we can describe the algorithm (in terms of the densities) to obtain the joint density that is referred to as forward-filtering, backward-sampling as:\n\\[\n\\begin{aligned}\n\\text{step-1:} \\quad & p(\\mathbf{x}_{t-1}|\\mathbf{y}_{1:t-1}) \\xrightarrow[\\text{for } t = 1:T]{\\text{forward-filtering}} p(\\mathbf{x}_t|\\mathbf{y}_{1:t}) \\\\\n\\text{step-2:} \\quad & p(\\mathbf{x}_t|\\mathbf{x}_{t+1:T}, \\mathbf{y}_{1:T}) \\xleftarrow[\\text{for } t = \\text{T-1:1}]{\\text{backward-sampling}} p(\\mathbf{x}_t|\\mathbf{y}_{1:t})\n\\end{aligned}\n\\]\nObtaining draws from the joint densities relies heavily on the filtering densities. There can be several approaches to sampling from the filtering densities and use them to update the future filtering densities (step-1) or updating the smoothing densities (step-2). One technique that efficiently adjusts the samples (realizations) and is easy to update is sequential importance. Suppose that we have samples, \\(\\mathbf{x}_{t-1}^{(i)}\\), from the filtering density each with a a weight \\(w_{t-1}^{(i)}\\), i.e, we can approximate the density as a p.m.f given by:\n\\[\np(\\mathbf{x}_{t-1}|\\mathbf{y}_{1:t-1}) \\approx \\sum_{i=1}^{N} w_{t-1}^{(i)}\\delta(\\mathbf{x}_{t-1} - \\mathbf{x}_{t-1}^{(i)})\n\\]\nwhere \\(\\delta\\) is indicator function and \\(\\sum_{i=1}^{N} w_{t-1}^{(i)} = 1\\).\nNow, in order to obtain the filtering density \\(p(\\mathbf{x}_t|\\mathbf{y}_{1:t})\\), do\n\nfor \\(i = 1 \\ldots N\\)\n\ndraw \\(\\mathbf{x}_t^{(i)}\\) from \\(f(\\mathbf{x}_t|\\mathbf{x}_{t-1}^{(i)})\\)\nupdate the weights \\(w_t^{(i)} = w_{t-1}^{(i)}g(\\mathbf{y}_t|\\mathbf{x}_t^{(i)})\\)\nnormalize the weights s.t \\(\\sum_{i=1}^{N} w_t^{(i)} = 1\\)\n\n\nDrawing \\(\\mathbf{x}_t^{(i)}\\) from the state evolution is just one of the many choices available. In fact, one can choose any proposal distribution based on an educated guess about how close it is to the target distribution and being easy to sample from, at the same time. Weights have to modified accordingly, of course! In fact, the state evolution density may be a poor choice sometimes. It could lead to particle degeneration which means that some weights tend to be too large and often the particles get stuck in their vicinity. Many strategies have been suggested in the literature. A simple choice is the state evolution density itself, as it is easy to draw from. Likewise, to obtain the smoothing density \\(p(\\mathbf{x}_{t-1}|\\mathbf{x}_{t:T}^i)\\mathbf{y}_{1:T})\\), do\n\nfor \\(i = 1 \\ldots N\\)\n\nupdate the weights \\(w_{t-1}^{(i)} = w_{t-1}^{(i)}f(\\mathbf{x}_t^{(i)}|\\mathbf{x}_{t-1}^{(i)})\\)\nnormalize the weights s.t \\(\\sum_{i=1}^{N} w_t^{(i)} = 1\\)\n\n\nHaving established the method for regular SMC, we will now discuss the rolling-window SMC in the next Section.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Joint Estimation in Dynamic State-Space Models"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/rpt689.html#rolling-window-smc-methods",
+    "href": "teaching/docs/archives/rpt689.html#rolling-window-smc-methods",
+    "title": "Joint Estimation in Dynamic State-Space Models",
+    "section": "Rolling-window SMC methods",
+    "text": "Rolling-window SMC methods\nIn the regular SMC, we obtained the filtering densities and the smoothening densities by conditioning on the look-ahead observations and states. The forward-filtering goes forward in time all the way up to \\(T\\), the last observation. And the smoothening distribution samples the states (by updating the weights that were updated in the forward filtering phase) backwards in time to the time origin. As we can see, each state is updated exactly twice. Like any iterative algorithm, we might need to scan the data several times, adjust the weights several times to reach the point of convergence. This might be particularly true when the parameter are unknown. In the rolling-window SMC (rSMC), each state is sampled about twice the length of the window, thereby allowing the particles to mix and settle and reach the stationary distribution. We will first discuss rSMC when the parameters are fixed (known) and reserve the next subsection for the unknown parameter case.\n\nFixed parameters\nThe central idea in rSMC is based on the following representation:\n\\[\n\\begin{aligned}\np(\\mathbf{x}_{t-k+1:t}|\\mathbf{y}_{1:t}) &= \\int p(\\mathbf{x}_{t-k+1:t}|\\mathbf{x}_{0:t-k}, \\mathbf{y}_{1:t})p(\\mathbf{x}_{0:t-k}|\\mathbf{y}_{1:t})d\\mathbf{x}_{0:t-k} \\\\\n&= \\int p(\\mathbf{x}_{t-k+1:t}|\\mathbf{x}_{t-k}, \\mathbf{y}_{t-k+1:t})p(\\mathbf{x}_{t-k}|\\mathbf{y}_{1:t})d\\mathbf{x}_{t-k} \\\\\n&\\approx \\int p(\\mathbf{x}_{t-k+1:t}|\\mathbf{x}_{t-k}, \\mathbf{y}_{t-k+1:t})p(\\mathbf{x}_{t-k}|\\mathbf{y}_{1:t-1})d\\mathbf{x}_{t-k}\n\\end{aligned}\n\\]\nDue the to approximation in the last step above, we can reuse the particles \\(\\mathbf{x}_{t-k}^{(i)}\\) from \\(p(\\mathbf{x}_{t-k}|\\mathbf{y}_{1:t-1})\\). Now, suppose that we can evaluate \\(p(\\mathbf{x}_{t-k+1:t}|\\mathbf{x}_{t-k}^{(i)}, \\mathbf{y}_{1:t})\\). Then we can evaluate the integral without any difficulty just by performing the monte-carlo average. In fact, our goal is to generate the samples \\(\\mathbf{x}_{t-k+1:t}^{(i)}\\), so we do not even need to evaluate the integral. However, a strong requirement here is the ability t draw sampled from \\(p(\\mathbf{x}_{t-k+1:t}|\\mathbf{x}_{t-k}^{(i)}, \\mathbf{y}_{1:t})\\). It turns out that we can adapt the FFBS in this case too as detailed below:\nRecursion for the joint density:\nGoal:\n\\[\np(\\mathbf{x}_{t-k+1:t}|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:t}) \\xleftarrow{\\mathbf{y}_t} p(\\mathbf{x}_{t-k}|\\mathbf{y}_{1:t-1})\n\\]\nFactorize:\n\\[\n\\begin{aligned}\np(\\mathbf{x}_{t-k+1:t}|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:t}) &= p(\\mathbf{x}_t|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:t}) \\prod_{j=t-k+1}^{t-1} p(\\mathbf{x}_j|\\mathbf{x}_{j+1,t-k}, \\mathbf{y}_{1:t}) \\\\\np(\\mathbf{x}_j|\\mathbf{x}_{j+1,t-k}, \\mathbf{y}_{1:t}) &= p(\\mathbf{x}_j|\\mathbf{x}_{j+1,t-k}, \\mathbf{y}_{1:j}) \\\\\n&= \\frac{p(\\mathbf{x}_j|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:j})f(\\mathbf{x}_{j+1}|\\mathbf{x}_j)}{p(\\mathbf{x}_{j+1}|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:j})} \\\\\n&\\propto p(\\mathbf{x}_j|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:j})f(\\mathbf{x}_{j+1}|\\mathbf{x}_j)\n\\end{aligned}\n\\]\nAs before, forward filtering recursion is obtained as:\nRecursion for filtering:\nGoal:\n\\[\np(\\mathbf{x}_t|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:t}) \\xleftarrow{\\mathbf{y}_t} p(\\mathbf{x}_{t-1}|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:t-1})\n\\]\nRecursion:\n\\[\n\\begin{aligned}\n\\text{predict:} \\quad & p(\\mathbf{x}_t|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:t-1}) = \\int p(\\mathbf{x}_{t-1}|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:t-1})f(\\mathbf{x}_t|\\mathbf{x}_{t-1})d\\mathbf{x}_t \\\\\n\\text{update:} \\quad & p(\\mathbf{x}_t|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:t}) \\propto g(\\mathbf{y}_t|\\mathbf{x}_t)p(\\mathbf{x}_t|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:t-1})\n\\end{aligned}\n\\]\nNow we can describe the FFBS algorithm (in terms of the particles) to obtain the joint density.\nSuppose that we have samples, \\((\\mathbf{x}_{j-1}^{(i)}, t - k &lt; j \\leq t)\\), from the filtering density \\(p(\\mathbf{x}_{j-1}|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:t-1})\\) each with a weight \\(w_{j-1}^{(i)}\\). In order to obtain the filtering density \\(p(\\mathbf{x}_j|\\mathbf{x}_{t-k}, \\mathbf{y}_{1:t})\\), do\n\nfor \\(i = 1 \\ldots N\\)\n\ndraw \\(\\mathbf{x}_j^{(i)}\\) from \\(f(\\mathbf{x}_j|\\mathbf{x}_{j-1}^{(i)})\\)\nupdate the weights \\(w_j^{(i)} = w_{j-1}^{(i)}g(\\mathbf{y}_t|\\mathbf{x}_j^{(i)})\\)\nnormalize the weights s.t \\(\\sum_{i=1}^{N} w_t^{(i)} = 1\\)\n\n\nTo obtain the smoothing density \\(p(\\mathbf{x}_{j-1}|\\mathbf{x}_{t-k,j:t}^{(i)}, \\mathbf{y}_{1:t})\\), do\n\nfor \\(i = 1 \\ldots N\\)\n\nupdate the weights \\(w_{j-1}^{(i)} = w_{j-1}^{(i)}f(\\mathbf{x}_j^{(i)}|\\mathbf{x}_{j-1}^{(i)})\\)\nnormalize the weights s.t \\(\\sum_{i=1}^{N} w_j^{(i)} = 1\\)\n\n\nThe algorithm for learning states when the parameters are known is described below:\n\nAlgorithm 1: Filtering with Fixed parameters\n\nFor each time period \\(t = k + 1, \\ldots, T\\)\n\nFor each sample path \\(i = 1, \\ldots, N\\)\n\nRun an (FFBS) MCMC with stationary distribution \\(p(\\mathbf{x}_{t-k+1:t}|\\mathbf{x}_{t-k}^{(i)}, \\mathbf{y}_{1:t})\\)\nDefine \\(\\mathbf{x}_{t-k+1:t}^{(i)}\\) as the last value of \\((\\mathbf{x}_{t-k+1:t})\\) in the chain\nStore \\(\\mathbf{x}_{t-k+1:t}^{(i)}\\) as draw from \\(p(\\mathbf{x}_{t-k+1}|\\mathbf{y}_{1:t})\\)\nReport \\(\\mathbf{x}_t^{(i)}\\) as draw from \\(p(\\mathbf{x}_t|\\mathbf{y}_{1:t})\\)\n\n\n\n\nThe algorithm requires three inputs: \\(N\\), the number sample paths in the MCMC and \\(G\\), the number of MCMC iterations to obtain one draw from the fixed-lag smoothing distribution (the number of times we update the weights for each state in the window), and the rolling-window length \\(k\\). The choice of the window length depends on how well the following approximation holds for that chosen window length:\n\\[\n\\begin{aligned}\np(\\mathbf{x}_{0:t-k}|\\mathbf{y}_{1:t}) &= \\frac{p(\\mathbf{y}_t|\\mathbf{x}_{0:t-k}, \\mathbf{y}_{1:t-1})}{p(\\mathbf{y}_t|\\mathbf{y}_{1:t-1})} p(\\mathbf{x}_{0:t-k}|\\mathbf{y}_{1:t-1}) \\\\\n&\\approx p(\\mathbf{x}_{0:t-k}|\\mathbf{y}_{1:t-1}) \\quad \\text{iff} \\quad p(\\mathbf{y}_t|\\mathbf{y}_{1:t-1}) \\approx p(\\mathbf{y}_t|\\mathbf{x}_{0:t-k}, \\mathbf{y}_{1:t-1})\n\\end{aligned}\n\\]\nThe last approximation hold good when \\(\\mathbf{x}_{0:t-k}\\) and \\(t_t\\) are independent given \\(\\mathbf{y}_{1:t-1}\\). One approach to finding the optimal \\(k\\) is by choosing the \\(k\\) that minimizes the distance between the two densities. The authors suggest that using a window of size 15 to 25 is good enough for practical purposes but it may depend on the specific problem. Also note that the algorithm starts at \\(t = k + 1\\). We need to run a regular or full FFBS to get the histories of the states given the data up to \\(t = k\\). Then the practical filtering (that is what the authors call it) algorithm can begin. So far, we assumed that we know the parameters. Now we turn our attention the case where the parameters are unknown.\n\n\nUnknown parameters\nOur goal is to obtain the joint density of states as well as the parameters. More specifically, obtain \\(p(\\mathbf{x}_{0:t}, \\theta|\\mathbf{y}_{1:t})\\). We can accomplish this by noting that:\n\\[\n\\begin{aligned}\np(\\mathbf{x}_{t-k+1:t}, \\theta|\\mathbf{y}_{1:t}) &= \\int p(\\mathbf{x}_{t-k+1:t}, \\theta|\\mathbf{x}_{0:t-k}, \\mathbf{y}_{1:t})p(\\mathbf{x}_{0:t-k}|\\mathbf{y}_{1:t})d\\mathbf{x}_{0:t-k} \\\\\n&\\approx \\int p(\\mathbf{x}_{t-k+1:t}, \\theta|\\mathbf{x}_{0:t-k}, \\mathbf{y}_{t-k+1:t})p(\\mathbf{x}_{0:t-k}|\\mathbf{y}_{1:t-1})d\\mathbf{x}_{0:t-k}\n\\end{aligned}\n\\]\nHowever, the requirement is the ability to draw from \\(p(\\mathbf{x}_{t-k+1:t}, \\theta|\\mathbf{x}_{0:t-k}, \\mathbf{y}_{t-k+1:t})\\) given the draws from \\(p(\\mathbf{x}_{0:t-k}|\\mathbf{y}_{1:t-1})\\). We can accomplish this by repeatedly alternating between conditional distribution of states given the parameters and vice versa, i.e.,\n\\[\np(\\mathbf{x}_{t-k+1:t}|\\theta, \\mathbf{x}_{t-k}, \\mathbf{y}_{1:t}) \\rightleftarrows p(\\theta|\\mathbf{x}_{t-k+1:t}, \\mathbf{x}_{t-k}, \\mathbf{y}_{1:t})\n\\]\nWe must note that conditioned on \\(\\theta\\), we do not need full histories of the states but only states up to \\(t - k\\) are sufficient due to the Markovian property (model assumption). Whereas, the conditional distribution requires all the histories up to \\(t\\). The algorithm for learning states when the parameters are unknown is described below:\n\nAlgorithm 2: Filtering with unknown parameters\n\nFor each time period \\(t = k + 1, \\ldots, T\\)\n\nFor each sample path \\(i = 1, \\ldots, N\\)\n\nRun an (FFBS) MCMC with stationary distribution \\(p(\\mathbf{x}_{t-k+1:t}, \\theta|\\mathbf{x}_{t-k}^{(i)}, \\mathbf{y}_{1:t})\\)\n\n\ndraw from \\(p(\\mathbf{x}_{t-k+1:t}|\\theta^{(i)}\\mathbf{x}_{t-k}^{(i)}, \\mathbf{y}_{1:t})\\)\n\n\ndraw from \\(p(\\theta|\\mathbf{x}_{t-k+1:t}^{(i)}, \\mathbf{x}_{t-k}^{(i)}, \\mathbf{y}_{1:t})\\)\n\n\nDefine \\((\\mathbf{x}_{t-k+1:t}^{(i)}, \\theta_t^{(i)})\\) as the last value of \\((\\mathbf{x}_{t-k+1:t}, \\theta)\\) in the chain\nStore \\(\\mathbf{x}_{0:t-k+1:t}^{(i)}\\) as draw from \\(p(\\mathbf{x}_{0:t-k+1}|\\mathbf{y}_{1:t})\\)\nReport \\((\\mathbf{x}_t^{(i)}, \\theta^{(i)})\\) as draw from \\(p(\\mathbf{x}_t, \\theta|\\mathbf{y}_{1:t})\\)\n\n\n\n\nIn the above implementation, we need to draw samples from the conditional distribution of the parameters as well (that is the major difference from Algorithm 1). Another variation that is possible is the use of plug-in estimators while alternating between conditional distributions, i.e.,\n\\[\np(\\mathbf{x}_{t-k+1:t}|E[\\theta], \\mathbf{x}_{t-k}, \\mathbf{y}_{1:t}) \\rightleftarrows p(\\theta|E[\\mathbf{x}_{t-k+1:t}], \\mathbf{x}_{t-k}, \\mathbf{y}_{1:t})\n\\]\nIt is particularly suitable when the dynamic state-space model reduces to the familiar linear models given the states and closed-form solutions exist for \\(E[\\theta]\\) and Monte-Carlo estimates can be replaced in the place of \\(E(\\mathbf{x}_t)\\). This variant is ad-hoc: its theoretical properties have not been established, and studying them would be of interest. With the plug-in estimator based algorithm is summarized here:\n\nAlgorithm 2a: Filtering with unknown parameters (plug-in estimators)\n\nFor each time period \\(t = k + 1, \\ldots, T\\)\n\nFor each sample path \\(i = 1, \\ldots, N\\)\n\nRun an (FFBS) MCMC with stationary distribution \\(p(\\mathbf{x}_{t-k+1:t}, \\theta|\\mathbf{x}_{t-k}^{(i)}, \\mathbf{y}_{1:t})\\)\n\n\ndraw from \\(p(\\mathbf{x}_{t-k+1:t}|\\hat{\\theta}_{t-1}\\mathbf{x}_{t-k}^{(i)}, \\mathbf{y}_{1:t})\\)\n\n\nupdate \\(\\hat{\\theta}_t = E\\left[ p(\\theta|\\mathbf{x}_{t-k+1:t}^{(i)}, \\mathbf{x}_{t-k}^{(i)}, \\mathbf{y}_{1:t}) \\right]\\)\n\n\nDefine \\((\\mathbf{x}_{t-k+1:t}^{(i)}, \\theta_t^{(i)})\\) as the last value of \\((\\mathbf{x}_{t-k+1:t}, \\theta)\\) in the chain\nStore \\(\\mathbf{x}_{0:t-k+1:t}^{(i)}\\) as draw from \\(p(\\mathbf{x}_{0:t-k+1}|\\mathbf{y}_{1:t})\\)\nReport \\((\\mathbf{x}_t^{(i)}, \\theta^{(i)})\\) as draw from \\(p(\\mathbf{x}_t, \\theta|\\mathbf{y}_{1:t})\\)\n\n\n\n\nHowever, the technical difficulty is, in the FFBS step, we are using sequential importance sampling and not Markov-Chain Monte Carlo methods. This makes the computation in 1(a) above difficult. Instead, we can modify the above algorithm so that sequential Monte-Carlo weights can be effectively used in the parameter estimation phase. The importance weights in the FFBS step are reweighed in the backward-sampling step to obtain \\(p(\\mathbf{x}_{j-1}|\\theta, \\mathbf{x}_{t-k,j:t}^{(i)}, \\mathbf{y}_{1:t})\\) as:\n\nfor \\(i = 1 \\ldots N\\)\n\nupdate the weights \\(w_{j-1}^{(i)} = w_{j-1}^{(i)}f(\\mathbf{x}_j^{(i)}|\\mathbf{x}_{j-1}^{(i)})\\)\n\nre-sample \\(\\mathbf{x}_{j-1}^{(i)}\\) so that \\(w_j^{(i)} \\approx \\frac{1}{N} \\forall i\\)\nnormalize the weights s.t \\(\\sum_{i=1}^{N} w_j^{(i)} = 1\\)\n\nThen Algorithm 2a can be modified so that we can use FFBS for the states as:\n\nAlgorithm 2b: Filtering with unknown parameters (plug-in estimators)\n\nFor each time period \\(t = k + 1, \\ldots, T\\)\n\nFor each sample path \\(i = 1, \\ldots, N\\)\n\nRun an (FFBS) MCMC with stationary distribution \\(p(\\mathbf{x}_{t-k+1:t}|\\theta^t\\mathbf{x}_{t-k}^{(i)}, \\mathbf{y}_{1:t})\\)\nDefine \\((\\mathbf{x}_{t-k+1:t}^{(i)}, \\theta_t)\\) as the last value of \\((\\mathbf{x}_{t-k+1:t}, \\theta)\\) in the chain\nStore \\(\\mathbf{x}_{0:t-k+1:t}^{(i)}\\) as draw from \\(p(\\mathbf{x}_{0:t-k+1}|\\mathbf{y}_{1:t})\\)\nReport \\((\\mathbf{x}_t^{(i)}, \\theta^{(i)})\\) as draw from \\(p(\\mathbf{x}_t, \\theta|\\mathbf{y}_{1:t})\\)\n\n\nobtain \\(\\hat{\\mathbf{x}}_{t-k+1:t}^t = \\frac{1}{N}\\sum_1^N \\mathbf{x}_{t-k+1:t}^{(i)}\\)\nupdate \\(\\hat{\\theta}^t = E\\left[ p(\\theta|\\hat{\\mathbf{x}}_{t-k+1:t}, \\hat{\\mathbf{x}}_{t-k}, \\mathbf{y}_{1:t}) \\right]\\)\n\n\nAnother variation possible is due to the following observations: in the FFBS steps, parameter estimate \\(\\theta_i\\) does not change. It essentially means that, the filtering and smoothing are carried on based on the histories available at \\(t - k\\) and the parameter estimates are not update while running the FFBS inside the window. We modify Algorithm 2 so that parameters can be updated as states are updated in the window. Care must be taken while updating the parameters because, the estimates might be based on over-smoothened states, so we reset the state such that the at the end of the window, state estimates would be identical to FFBS. The only change we make is to update the parameters on the fly instead of waiting till the FFBS is completed in the window. The algorithm is summarized below:\n\nAlgorithm 2c: Filtering with unknown parameters\nFor each time period \\(t = k + 1, \\ldots, T\\):\n\nInitialize the forward filter: For \\(i = 1, \\ldots, N\\), \\(\\mathbf{x}_{t-k+1}^{(i,f)}\\) from \\(p(\\mathbf{x}_{t-k+1}|\\theta_{t-k}^{(i)}, \\mathbf{x}_{t-k}, \\mathbf{y}_{1:t-k+1})\\)\nInitialize \\(\\theta\\): run MCMC for \\(p(\\theta|\\mathbf{x}_{t-k}^{(i,f)}, \\mathbf{x}_{t-k+1}^{(i)}, \\mathbf{y}_{1:t-k+1})\\) and assign it to \\(\\theta_{t-k}^{(i,1)}\\)\nFor each time state in the window \\(p = 2 \\ldots, k - 1, \\forall i\\)\n\nrun forward-filtering \\(p(\\mathbf{x}_{t-k+p}|\\theta_{t-k}^{(i,p-1)}\\mathbf{x}_{t-k}, \\mathbf{y}_{1:t-k+p})\\) for \\(\\mathbf{x}_{t-k+p}^{(i,f)}\\)\nrun backward-sampler for \\(q = p - 1, \\ldots, 1\\) \\(p(\\mathbf{x}_{t-k+q}|\\theta_{j-1}^{(i,p-1)}, \\mathbf{x}_{t-k}^{(i)}, \\mathbf{x}_{t-k+q+1:t-k+p}^{(i,f)}, \\mathbf{y}_{1:t-k+p})\\) for \\(\\mathbf{x}_{t-k+1:t-k+p}^{(i,b)}\\)\nrun an MCMC for \\(p(\\theta|\\mathbf{x}_{t-k}^{(i)}, \\mathbf{x}_{t-k+1:t-k+p}^{(i,b)}, \\mathbf{y}_{1:t-k+p})\\) and assign it to \\(\\theta_{t-k}^{(i,p-1)}\\)\n\nFor \\(p = k\\)\n\nrun forward-filtering and store \\(\\mathbf{x}_t^{(i,f)}\\)\nrun backward-sampler for \\(q = k - 1, \\ldots, 1\\) and store \\(\\mathbf{x}_{t-k+1:t-1}^{(i,b)}\\)\nrun an MCMC for \\(p(\\theta|\\mathbf{x}_{t-k}^{(i)}, \\mathbf{x}_{t-k+1}^{(i,b)}, \\mathbf{y}_{1:t})\\) and assign it to \\(\\theta_{t-k+1}^{(i)}\\)\n\nStore \\(\\mathbf{x}_{0:t-k+1}^{(i)}\\) as draw from \\(p(\\mathbf{x}_{0:t-k+1}|\\mathbf{y}_{1:t})\\)\nReport \\((\\mathbf{x}_t^{(i)}, \\theta_{t-k+1}^{(i)})\\) as draw from \\(p(\\mathbf{x}_t, \\theta|\\mathbf{y}_{1:t})\\)\n\n\nIn all the algorithms (Algorithm 2,2a and 2b), estimation of \\(\\theta\\) either using a Monte-Carlo technique or plug-in method requires the full histories. Often times, the distribution of the parameter may just depend on the sufficient statistics and if those sufficient statistics can be obtained recursively, the algorithm will be linear in time and efficient too. The central idea in the Algorithm 3 can be described as:\n\\[\np(\\mathbf{x}_{t-k+1:t}, \\theta|\\mathbf{x}_{0:t-k}, \\mathbf{y}_{t-k+1:t}) = p(\\mathbf{x}_{t-k+1:t}, \\theta|\\mathbf{T}_{t-k})\n\\]\nwhere \\(\\mathbf{T}_t = h(\\mathbf{T}_{t-1}, \\mathbf{x}_t, \\mathbf{y}_t)\\) are the sufficient statistics. That is the third algorithm mentioned in the paper which is summarized below:\n\nAlgorithm 3: Filtering with unknown parameters (sufficient statistics)\n\nFor each time period \\(t = k + 1, \\ldots, T\\)\n\nFor each sample path \\(i = 1, \\ldots, N\\)\n\nRun an (FFBS) MCMC with stationary distribution \\(p(\\mathbf{x}_{t-k+1:t}, \\theta|\\mathbf{T}_{t-k}^{(i)}, \\mathbf{y}_{1:t})\\)\n\n\ndraw from \\(p(\\mathbf{x}_{t-k+1:t}|\\theta^{(i)}\\mathbf{T}_{t-k}^{(i)}, \\mathbf{y}_{1:t})\\)\n\n\ndraw from \\(p(\\theta|\\mathbf{x}_{t-k+1:t}^{(i)}, \\mathbf{T}_{t-k}^{(i)}, \\mathbf{y}_{1:t})\\)\n\n\nDefine \\((\\mathbf{x}_{t-k+1:t}^{(i)}, \\theta_t^{(i)})\\) as the last value of \\((\\mathbf{x}_{t-k+1:t}, \\theta)\\) in the chain\nSet \\(\\mathbf{T}_{t-k}^{(i)} = h(\\mathbf{T}_{t-1}^{(i)}, \\mathbf{x}_{t-k+1}^{(i)}, \\mathbf{y}_t)\\)\nStore \\(\\mathbf{T}_{t-k+1}^{(i)}\\) as draw from \\(p(\\mathbf{T}_{t-k+1}|\\mathbf{y}_{1:t})\\)\nReport \\((\\mathbf{x}_t^{(i)}, \\theta^{(i)})\\) as a draw from \\(p(\\mathbf{x}_t, \\theta|\\mathbf{y}_{1:t})\\)\n\n\n\n\nSufficient statistics based algorithms run in linear time and if a recursive relation exist, they may be efficient too. For example, consider the model of the form\n\\[\n\\begin{aligned}\n\\mathbf{y}_t &= \\mathbf{H}_t'\\alpha + \\epsilon_t \\\\\n\\mathbf{x}_t &= \\mathbf{F}_t'\\beta + \\mathbf{w}_t \\\\\n\\mathbf{e}_t &\\sim \\mathcal{N}(\\mathbf{0}, \\tau^2\\mathbf{I}) \\\\\n\\mathbf{w}_t &\\sim \\mathcal{N}(\\mathbf{0}, \\sigma^2\\mathbf{I})\n\\end{aligned}\n\\]\nwhere \\(\\mathbf{H}_t' = H(\\mathbf{x}_t)\\) and \\(\\mathbf{F}_t' = F(\\mathbf{x}_{t-1})\\) are matrices whose elements can be some nonlinear functions of the states and \\(\\theta = (\\alpha, \\beta, \\tau^2, \\sigma^2)\\) is the vector of the unknown parameters. Suppose, we elicit conjugate priors of the parameters (Normal-Inverse Gamma family in this case), the posterior distribution of the parameters can be described in terms of the sufficient statistics, given by:\n\\[\n\\begin{aligned}\n\\beta|\\sigma^2, \\mathbf{x}_t, \\mathbf{y}_{1:t} &\\sim \\mathcal{N}(\\mathbf{B}_t^{-1}\\mathbf{t}, \\sigma^2\\mathbf{B}_t^{-1}) \\\\\n\\sigma^2|\\mathbf{x}_t, \\mathbf{y}_{1:t} &\\sim \\mathcal{IG}\\left(\\frac{u_t}{2}, \\frac{v_t}{2}\\right)\n\\end{aligned}\n\\]\nThe sufficient statistics can be obtained recursively as:\n\\[\n\\begin{aligned}\n\\mathbf{B}_t &= \\mathbf{B}_{t-k} + \\mathbf{F}'\\mathbf{F} \\\\\n\\mathbf{b}_t &= \\mathbf{b}_{t-k} + \\mathbf{F}'\\mathbf{x} \\\\\nu_t &= u_{t-k} + kp \\\\\nv_t &= v_{t-k} + \\mathbf{b}_{t-k}'\\mathbf{B}_{t-k}\\mathbf{b}_{t-k} + \\mathbf{x}'\\mathbf{x} - \\mathbf{b}_t'\\mathbf{B}_t\\mathbf{b}_{t-k}\n\\end{aligned}\n\\]\nwhere \\(\\mathbf{F} = [\\mathbf{F}_{t-k+1}', \\ldots, \\mathbf{F}_t']\\), \\(\\mathbf{x} = [\\mathbf{x}_{t-k+1}', \\ldots, \\mathbf{x}_t']\\), and \\(p\\) is the dimension of \\(\\mathbf{x}_t\\), \\(k\\) the window length. Similar expressions can be derived for \\(\\alpha, \\tau^2\\) as well.\nSimilar to Algorithm 2c, we can modify Algorithm 3 to exploit the sufficient statistics as:\n\nAlgorithm 3a: Filtering with unknown parameters\nFor each time period \\(t = k + 1, \\ldots, T\\):\n\nInitialize the forward filter: For \\(i = 1, \\ldots, N\\), \\(\\mathbf{x}_{t-k+1}^{(i,f)}\\) from \\(p(\\mathbf{x}_{t-k+1}|\\theta_{t-k}^{(i)}, \\mathbf{T}_{t-k}^{(i,f)}, \\mathbf{y}_{1:t-k+1})\\)\nInitialize \\(\\theta\\): run MCMC for \\(p(\\theta|\\mathbf{T}_{t-k}^{(i)}, \\mathbf{x}_{t-k+1}^{(i)}, \\mathbf{y}_{1:t-k+1})\\) and assign it to \\(\\theta_{t-k}^{(i,1)}\\)\nFor each time state in the window \\(p = 2 \\ldots, k - 1, \\forall i\\)\n\nrun forward-filtering \\(p(\\mathbf{x}_{t-k+p}|\\theta_{t-k}^{(i,p-1)}, \\mathbf{T}_{t-k}^{(i)}, \\mathbf{y}_{1:t-k+p})\\) for \\(\\mathbf{x}_{t-k+p}^{(i,f)}\\)\nrun backward-sampler for \\(q = p - 1, \\ldots, 1\\) \\(p(\\mathbf{x}_{t-k+q}|\\theta_{j-1}^{(i,p-1)}, \\mathbf{x}_{t-k}^{(i)}, \\mathbf{x}_{t-k+q+1:t-k+p}^{(i,f)}, \\mathbf{y}_{1:t-k+p})\\) for \\(\\mathbf{x}_{t-k+1:t-k+p}^{(i,b)}\\)\n\\(\\mathbf{T}_{t-k}^{(i,b)} = f(\\mathbf{T}_{t-k}^{(i)}, \\mathbf{x}_{t-k+1:t-k+p}^{(i,b)}, \\mathbf{y}_{1:t-k+p})\\)\nrun an MCMC for \\(p(\\theta|\\mathbf{T}_{t-k}^{(i,b)})\\) and assign it to \\(\\theta_{t-k}^{(i,p-1)}\\)\n\nFor \\(p = k\\)\n\nrun forward-filtering and store \\(\\mathbf{x}_t^{(i,f)}\\)\nrun backward-sampler for \\(q = k - 1, \\ldots, 1\\) and store \\(\\mathbf{x}_{t-k+1:t-1}^{(i,b)}\\)\n\\(\\mathbf{T}_{t-k+1}^{(i)} = f(\\mathbf{T}_{t-k}^{(i)}, \\mathbf{x}_{t-k+1}^{(i,b)}, \\mathbf{y}_{1:t})\\)\nrun an MCMC for \\(p(\\theta|\\mathbf{T}_{t-k+1}^{(i)}\\) and assign it to \\(\\theta_{t-k+1}^{(i)}\\)\n\nStore \\(\\mathbf{x}_{0:t-k+1}^{(i)}\\) as draw from \\(p(\\mathbf{x}_{0:t-k+1}|\\mathbf{y}_{1:t})\\)\nReport \\((\\mathbf{x}_t^{(i)}, \\theta_{t-k+1}^{(i)})\\) as draw from \\(p(\\mathbf{x}_t, \\theta|\\mathbf{y}_{1:t})\\)\n\n\nWe can run a full-FFBS at each iteration to learn about the parameters, this leads to the Algorithm-3b\n\nAlgorithm 3b: Filtering with unknown parameters\nFor each time period \\(t = k + 1, \\ldots, T\\)\nfor \\(i = 1, \\ldots, N\\)\n\nFor \\(j = 1, \\ldots, k\\)\n\nrun FF to get \\(\\mathbf{x}_{t-k+1}^{(i)}\\) from \\(p(\\mathbf{x}_{t-k+1}|\\mathbf{T}_{t-k}^{(i)}, \\theta_{t-k+j-1}^{(i)}\\mathbf{y}_{1:t-k+p})\\)\n\\(\\mathbf{T}_{t-k+j}^{(i,1)} = h(\\mathbf{T}_{t-k}^{(i)}, \\mathbf{x}_{t-k+1}^i, \\mathbf{y}_{1:t-k+1})\\)\nrun MCMC for \\(\\theta_{t-k+j}^{(i)} \\sim p(\\theta|\\mathbf{T}_{t-k+j}^{(i,1)})\\)\nFor \\(p = 2, \\ldots, j - 1\\)\n\nrun FF to get \\(\\mathbf{x}_{t-k+p}^{(i)}\\) from \\(p(\\mathbf{x}_{t-k+p}|\\theta_{t-k+j}^{(i)}\\mathbf{y}_{1:t-k+p})\\)\nrun BS to get \\(\\mathbf{x}_{t-k+1:t-k+p-1}^{(i)}\\) from \\(p(\\mathbf{x}_{t-k+1:t-k+p-1}|\\theta_{t-k+j}^{(i)}\\mathbf{y}_{1:t-k+p})\\)\n\\(\\mathbf{T}_{t-k+j}^{(i,p)} = f(\\mathbf{T}_{t-k}^{(i)}, \\mathbf{x}_{t-k+1:t-k+p}^{(i)}, \\mathbf{y}_{1:t-k+p})\\)\nrun MCMC to get \\(\\theta_{t-k+j}^{(i)}\\) from \\(p(\\theta|\\mathbf{T}_{t-k+j}^{(i,p)})\\)\n\nrun FF to get \\(\\mathbf{x}_{t-k+j}^{(i)}\\) from \\(p(\\mathbf{x}_{t-k+j}|\\theta_{t-k+j}^{(i)}\\mathbf{y}_{1:t-k+j})\\)\nrun BS to get \\(\\mathbf{x}_{t-k+1:t-k+j-1}^{(i)}\\) from \\(p(\\mathbf{x}_{t-k+1:t-k+j-1}|\\theta_{t-k+j}^{(i)}\\mathbf{y}_{1:t-k+j})\\)\n\n\\(\\mathbf{T}_{t-k+1}^{(i)} = f(\\mathbf{T}_{t-k}^{(i)}, \\mathbf{x}_{t-k+1}^{(i)}, \\mathbf{y}_{1:t-k+1})\\)\nrun MCMC to get \\(\\theta_{t-k+1}^{(i)}\\) from \\(p(\\theta|\\mathbf{T}_{t-k+1}^{(i)})\\)\nStore \\(\\mathbf{x}_{0:t-k+1}^{(i)}\\) as draw from \\(p(\\mathbf{x}_{0:t-k+1}|\\mathbf{y}_{1:t})\\)\nReport \\((\\mathbf{x}_t^{(i)}, \\theta_{t-k+1}^{(i)})\\) as draw from \\(p(\\mathbf{x}_t, \\theta|\\mathbf{y}_{1:t})\\)",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Joint Estimation in Dynamic State-Space Models"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/rpt689.html#conclusions",
+    "href": "teaching/docs/archives/rpt689.html#conclusions",
+    "title": "Joint Estimation in Dynamic State-Space Models",
+    "section": "Conclusions",
+    "text": "Conclusions\nWe have provided a brief review of sequential Monte Carlo techniques and the tools required to derive new algorithms, focusing on the Forward-Filtering Backward-Sampling (FFBS) strategy. We reviewed the algorithms of Polson et al. (2008) that use rolling-window Sequential Monte Carlo to estimate states and parameters jointly, and showed how to adapt FFBS so that sequential importance sampling can be used in place of MCMC-based algorithms. We also discussed several variations within this framework, covering the cases of known and unknown parameters and the use of either full histories or sufficient statistics. Joint estimation remains a challenging problem with considerable scope for developing new algorithms.",
+    "crumbs": [
+      "Home",
+      "Teaching",
+      "Archives",
+      "Tutorials",
+      "Joint Estimation in Dynamic State-Space Models"
+    ]
+  },
+  {
+    "objectID": "teaching/docs/archives/rpt689.html#references",
+    "href": "teaching/docs/archives/rpt689.html#references",
+    "title": "Joint Estimation in Dynamic State-Space Models",
     "section": "References",
-    "text": "References\n[1] J. C. Naylor and A. F. M. Smith, “Applications of a method for the efficient computation of posterior distributions,” Applied Statistics, vol. 31, 1982.\n[2] Kostas Triantafyllopoulos, “Moments and cumulants of the multivariate real and complex Gaussian distributions,” 2002, www.stats.bris.ac.uk/research/stats/pub/ResRept/2002.html.",
+    "text": "References\nClapp, T. C. and Godsill, S. (1999). Fixed-lag smoothing using sequential importance sampling. Bayesian Statistics, 6, 743-752.\nDoucet, Arnaud., Freitas Nando, N. and Gordon Neil, eds, (2001), Sequential Monte Carlo methods in Practice, Springer, New York\nDjurić, P. M., et. al. (2003). Particle Filtering: A review of the theory and how it can be used for solving problems in wireless communications. IEEE Signal Processing Magazine, 20, 5, 19-38.\nGeir Storvik. (2002), Particle Filters for state-space models with the presence of unknown static parameters, IEEE Trans. on Sig. Proc., 50(2), 281-289\nGodsill, S. J., Doucet, A., and West, M. (2004). Monte Carlo smoothing for non-linear time series. Journal of the American Statistical Association, 99, 465, 156-168.\nKitagawa, G. and Sato. S. (2001). Monte Carlo smoothing and self-organizing state-space model. Sequential Monte Carlo Methods in Practice. Springer, New York.\nLiu, J. S. (2001). Monte Carlo Strategies in Scientific Computing. Springer Series in Statistics, New York.\nPitt, M. K. and Shephard, N. (2001). Auxiliary variable based particle filters. Sequential Monte Carlo Methods in Practice. Springer, New York.\nPolson, N. G., Stroud, J. R., and Müller, P. (2008). Practical Filtering with Sequential Parameter Learning, Journal of the Royal Statistical Society, Series B, 70, 413-428\nSylvia Früwith-Schnatter. (1992), Data augmentation and dynamic linear models, J. Time Series Anal, 15, 183-202",
     "crumbs": [
       "Home",
       "Teaching",
       "Archives",
       "Tutorials",
-      "Normal Approximation"
-    ]
-  },
-  {
-    "objectID": "teaching/docs/archives/tutEM.html",
-    "href": "teaching/docs/archives/tutEM.html",
-    "title": "EM Algorithm for Mixture Modeling",
-    "section": "",
-    "text": "We derive the Expectation-Maximization (EM) algorithm for Gaussian Mixture modeling (GMM). In general, any random space can be modeled by a mixture (weighed linear combination) of normal densities. Then, such an arbitrary density can be represented as:\n\\[\nf(\\phi; y) = \\sum_{k=1}^{K} \\lambda_k f_k(\\theta_k; y) \\tag{1}\n\\]\nwhere\nFrom now onwards, we drop the bold face notation for vectors and matrices for convenience. To derive the EM algorithm, we need to identify the missing information. Often identifying this missing information can lead to different results affecting convergence. In the mixture modeling problem, if know the label of the data, i.e., if we know the density index that could have possibly produced the observation, we could easily estimate the mixture parameters by simply collecting all the data corresponding to that particular density. In other words, if we associate each observation to one of the \\(K\\) densities, estimating each density parameters is trivial. Hence, we choose the label as the missing information.\nOnce we identify the missing information, we need to define the complete data likelihood and marginal unobserved data density conditional on the observed data. A very good explanation of the EM algorithm is given in [1, pp. 66-87].\nLet \\(u(n) \\in \\{1 \\ldots K\\}\\) be the missing label corresponding to the \\(n\\)th observation \\(y(n)\\). The marginal density (in fact pmf) of this unobserved data is then given as:\n\\[\np(u(n) = k) = \\lambda_k \\tag{2}\n\\]\nThe density of the observed data given the unobserved data is:\n\\[\np(y(n) \\mid u(n)) = f_{u(n)}(y(n); \\theta_{u(n)}) \\tag{3}\n\\]\nThen we obtain the complete data density as:\n\\[\np(y(n), u(n); \\phi) = f_{u(n)}(y(n); \\theta_{u(n)}) \\lambda_{u(n)} \\tag{4}\n\\]\nThe complete data density of \\(N\\) independent observations is then:\n\\[\np(y, u; \\phi) = \\prod_{n=1}^{N} p(y(n), u(n); \\phi) \\tag{5}\n\\]\nMarginal unobserved data density given the observed data is:\n\\[\np(u \\mid y; \\phi) = p(y, u; \\phi) / p(y; \\phi) \\tag{6}\n\\]\nwhere \\(p(y; \\phi)\\) is the incomplete or observed data density (likelihood function of the observed data).\nThe EM algorithm proceeds as follows:",
-    "crumbs": [
-      "Home",
-      "Teaching",
-      "Archives",
-      "Tutorials",
-      "EM Algorithm for Mixture Modeling"
-    ]
-  },
-  {
-    "objectID": "teaching/docs/archives/tutEM.html#e-step",
-    "href": "teaching/docs/archives/tutEM.html#e-step",
-    "title": "EM Algorithm for Mixture Modeling",
-    "section": "E-Step",
-    "text": "E-Step\nSince we have independent observations\n\\[\nE_{u \\mid y}\\left[\\ln p(u, y; \\phi)\\right] = \\sum_{n=1}^{N} E_{u(n) \\mid y(n)}\\left[\\ln p(u(n), y(n); \\theta_{u(n)})\\right] \\tag{7}\n\\]\nUpon expanding the expectation operator and letting \\(u(n) = k\\),\n\\[\nE_{k \\mid y(n)}\\left[\\ln p(k, y(n); \\theta_k)\\right] = \\sum_{k=1}^{K} \\left[\\ln p(k, y(n); \\theta_k)\\right] \\frac{p(y(n), k; \\hat{\\theta}_k)}{p(y(n); \\hat{\\phi})} \\tag{8}\n\\]\nThe dependence of \\(u(n)\\) on \\(k\\) becomes obvious if we recollect that \\(u(n) \\in \\{1 \\ldots K\\}\\). Also, the denominator is only a function of the data and hence can be ignored while performing the M-step. Hence, we restate the above equation as:\n\\[\nE_{k \\mid y(n)}\\left[\\ln p(k, y(n); \\theta_k)\\right] \\propto \\sum_{k=1}^{K} \\left[\\ln p(k, y(n); \\theta_k)\\right] p(y(n), k; \\hat{\\theta}_k) \\tag{9}\n\\]\nThen,\n\\[\nE_{u \\mid y}\\left[\\ln p(u, y; \\phi)\\right] \\propto \\sum_{n=1}^{N} \\sum_{k=1}^{K} \\hat{\\lambda}_k f_k(y(n); \\hat{\\theta}_k) \\left[\\ln \\lambda_k - \\frac{1}{2} \\exp\\left[(y(n) - \\mu_k)^T \\Sigma_k^{-1} (y(n) - \\mu_k)\\right] - \\ln |\\Sigma_k|\\right] \\tag{10}\n\\]\nThe above function has to be maximized subject to the constraint \\(\\sum_{k=1}^{K} \\lambda_k = 1\\) and define it as \\(Q(\\phi; \\hat{\\phi})\\).",
-    "crumbs": [
-      "Home",
-      "Teaching",
-      "Archives",
-      "Tutorials",
-      "EM Algorithm for Mixture Modeling"
-    ]
-  },
-  {
-    "objectID": "teaching/docs/archives/tutEM.html#m-step",
-    "href": "teaching/docs/archives/tutEM.html#m-step",
-    "title": "EM Algorithm for Mixture Modeling",
-    "section": "M-Step",
-    "text": "M-Step\n\\[\n\\hat{\\phi}_{new} = \\arg\\max_{\\phi} Q(\\phi; \\hat{\\phi}) \\tag{11}\n\\]\nLet \\(\\varphi\\) be the Lagrange multiplier. The function to be maximized is then:\n\\[\nU(\\phi; \\hat{\\phi}) = Q(\\phi; \\hat{\\phi}) - \\varphi \\left(\\sum_{k=1}^{K} \\lambda_k - 1\\right) \\tag{12}\n\\]\nTo obtain \\(\\hat{\\lambda}_{k,new}\\), we set the derivative of \\(U(\\phi; \\hat{\\phi})\\) w.r.t \\(\\lambda_k\\) to zero and solve for the roots and similarly for \\(\\mu_k\\) and \\(\\Sigma_k\\). After some straightforward algebraic manipulations, we obtain the expressions for the estimates as [2, Chapter 5]:\n\\[\n\\hat{\\lambda}_{k,new} = \\frac{1}{N} \\sum_{n=1}^{N} \\frac{\\hat{\\lambda}_k f_k(y(n); \\hat{\\theta}_k)}{f(y(n); \\hat{\\phi})} \\tag{13}\n\\]\n\\[\n\\hat{\\mu}_{k,new} = \\frac{1}{N \\hat{\\lambda}_{k,new}} \\sum_{n=1}^{N} \\frac{\\hat{\\lambda}_k f_k(y(n); \\hat{\\theta}_k)}{f(y(n); \\hat{\\phi})} y(n) \\tag{14}\n\\]\n\\[\n\\hat{\\Sigma}_{k,new} = \\frac{1}{N \\hat{\\lambda}_{k,new}} \\sum_{n=1}^{N} \\frac{\\hat{\\lambda}_k f_k(y(n); \\hat{\\theta}_k)}{f(y(n); \\hat{\\phi})} \\left[(y(n) - \\hat{\\mu}_k)^T (y(n) - \\hat{\\mu}_k)\\right] \\tag{15}\n\\]",
-    "crumbs": [
-      "Home",
-      "Teaching",
-      "Archives",
-      "Tutorials",
-      "EM Algorithm for Mixture Modeling"
-    ]
-  },
-  {
-    "objectID": "teaching/docs/archives/tutEM.html#references",
-    "href": "teaching/docs/archives/tutEM.html#references",
-    "title": "EM Algorithm for Mixture Modeling",
-    "section": "References",
-    "text": "References\n[1] Aleksander Dogandžić, “Detection and estimation theory,” Spring, 2005, class notes #3, ECpE Dept., Iowa State University, url: home.eng.iastate.edu/~ald/EE527.html.\n[2] Soma Sekhar Dhavala, Time-frequency representations: Analysis, Synthesis and Implementation, M.S. thesis, Indian Institute of Technology, Madras, March 2000.",
-    "crumbs": [
-      "Home",
-      "Teaching",
-      "Archives",
-      "Tutorials",
-      "EM Algorithm for Mixture Modeling"
+      "Joint Estimation in Dynamic State-Space Models"
     ]
   },
   {
@@ -465,8 +479,8 @@
     ]
   },
   {
-    "objectID": "teaching/docs/archives/tutChirp.html#chirplet-decomposition",
-    "href": "teaching/docs/archives/tutChirp.html#chirplet-decomposition",
+    "objectID": "teaching/docs/archives/tutChirp.html#chirplet-decomposition-1",
+    "href": "teaching/docs/archives/tutChirp.html#chirplet-decomposition-1",
     "title": "Chirplet Decomposition",
     "section": "Chirplet Decomposition",
     "text": "Chirplet Decomposition\nEmploying chirplets to decompose a signal unifies the t-f tilings such as rotation, shearing, scaling and shifting. Hence, we proceed with the following assumption that any signal can be represented as a weighed sum of Gaussian chirplets given by:\n\\[\ny(t) = s(t) + w(t) \\tag{1a}\n\\]\n\\[\ns(t) = \\sum_{k=1}^{K} (a_k + jb_k)\\, g_k(t) \\tag{1b}\n\\]\nwhere\n\\[\ng_{k;t_c,\\omega_c,\\beta,d^2}(t) = \\left(\\frac{1}{\\pi d^2}\\right)^{\\frac{1}{4}} \\exp\\left(-\\frac{(t-t_c)^2}{4d^2} + j\\frac{\\beta(t-t_c)^2}{2} + j\\omega_c(t-t_c)\\right) \\tag{2}\n\\]\n\\(t_c, \\omega_c, \\beta, d^2\\) represent the location in time, location in frequency, chirp rate and the duration parameter of the chirplet and \\(w(t)\\) is additive complex white Gaussian noise with unknown variance. Further\n\\[\n\\| g_{t_c,\\omega_c,\\beta,d^2} \\| = 1 \\tag{3}\n\\]\nto make them unit energy signals.",

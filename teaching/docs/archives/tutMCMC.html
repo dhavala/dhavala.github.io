@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Soma Sekhar Dhavala">
+<meta name="author" content="Soma S. Dhavala">
 
 <title>Numerical Methods for Bayesian Inference – Soma S Dhavala</title>
 <style>
@@ -374,6 +374,12 @@ window.Quarto = {
  <span class="menu-text">Chirplet Decomposition</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/docs/archives/rpt689.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Joint Estimation in Dynamic State-Space Models</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -442,12 +448,15 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#quadrature-methods" id="toc-quadrature-methods" class="nav-link active" data-scroll-target="#quadrature-methods">Quadrature methods</a></li>
+  <li><a href="#numerical-methods-for-bayesian-inference" id="toc-numerical-methods-for-bayesian-inference" class="nav-link active" data-scroll-target="#numerical-methods-for-bayesian-inference">Numerical Methods for Bayesian Inference</a>
+  <ul class="collapse">
+  <li><a href="#quadrature-methods" id="toc-quadrature-methods" class="nav-link" data-scroll-target="#quadrature-methods">Quadrature methods</a></li>
   <li><a href="#adaptive-quadrature-methods" id="toc-adaptive-quadrature-methods" class="nav-link" data-scroll-target="#adaptive-quadrature-methods">Adaptive quadrature methods</a></li>
   <li><a href="#monte-carlo-integration" id="toc-monte-carlo-integration" class="nav-link" data-scroll-target="#monte-carlo-integration">Monte Carlo integration</a></li>
   <li><a href="#rejection-sampling" id="toc-rejection-sampling" class="nav-link" data-scroll-target="#rejection-sampling">Rejection sampling</a></li>
   <li><a href="#random-walk-metropolis" id="toc-random-walk-metropolis" class="nav-link" data-scroll-target="#random-walk-metropolis">Random-walk Metropolis</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -470,7 +479,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Soma Sekhar Dhavala </p>
+             <p>Soma S. Dhavala </p>
           </div>
   </div>
     
@@ -483,6 +492,8 @@ window.Quarto = {
 </header>
 
 
+<section id="numerical-methods-for-bayesian-inference" class="level1">
+<h1>Numerical Methods for Bayesian Inference</h1>
 <p>We review several numerical methods for making inference from the posterior distribution if either the prior or the likelihood function (when viewed as a function of the parameter of interest and not as a function of the data) is a normal distribution. We consider the following techniques:</p>
 <ul>
 <li>quadrature methods</li>
@@ -660,6 +671,7 @@ J(\theta^* \mid \theta_t) \sim \mathcal{N}\left(\theta_t,\, (2.4/d)^2 \Sigma\rig
 <p>[7] Andrew Gelman, Hal S. Stern, John B. Carlin, and Donald B. Rubin, <em>Bayesian Data Analysis</em>, Chapman &amp; Hall/CRC, second edition, 2003.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

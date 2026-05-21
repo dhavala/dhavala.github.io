@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Soma Sekhar Dhavala">
+<meta name="author" content="Soma S. Dhavala">
 
 <title>Gaussian Mixture for Multi-modal Posteriors – Soma S Dhavala</title>
 <style>
@@ -374,6 +374,12 @@ window.Quarto = {
  <span class="menu-text">Chirplet Decomposition</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/docs/archives/rpt689.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Joint Estimation in Dynamic State-Space Models</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -442,7 +448,10 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
+  <li><a href="#gaussian-mixture-for-multi-modal-posteriors" id="toc-gaussian-mixture-for-multi-modal-posteriors" class="nav-link active" data-scroll-target="#gaussian-mixture-for-multi-modal-posteriors">Gaussian Mixture for Multi-modal Posteriors</a>
+  <ul class="collapse">
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -465,7 +474,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Soma Sekhar Dhavala </p>
+             <p>Soma S. Dhavala </p>
           </div>
   </div>
     
@@ -478,6 +487,8 @@ window.Quarto = {
 </header>
 
 
+<section id="gaussian-mixture-for-multi-modal-posteriors" class="level1">
+<h1>Gaussian Mixture for Multi-modal Posteriors</h1>
 <p>It might be the case that we want to draw samples from an arbitrary posterior pdf having more than one mode. In such cases, normal approximation might be too bad an approximation. We consider modeling this arbitrary pdf as a mixture of normal densities. Further, the number of modes (which in turn dictate the number of components in the mixture) in the posterior is also assumed unknown.</p>
 <p>The mixture model considered in [1] tries to estimate the model parameters based on data. However, in the present context, we have the pdf in semi-closed form and this becomes a special case of [1].</p>
 <p>Let <span class="math inline">\(f(\theta)\)</span> be the known arbitrary pdf which we want to approximate. For illustration purposes, we assume a bivariate density (<span class="math inline">\(\theta = [\theta_1, \theta_2]^T\)</span>) and discretize <span class="math inline">\(\theta\)</span> on a uniform <span class="math inline">\(N \times M\)</span> grid. Further let <span class="math inline">\(\theta_{mn}\)</span> represent the <span class="math inline">\((\theta_1(n), \theta_2(m))\)</span> sample in the grid. Also assume that the discretized pdf (<span class="math inline">\(f(\theta_{mn})\)</span>) is appropriately normalized.</p>
@@ -516,11 +527,12 @@ f(\theta_{mn}; \Phi) = \sum_{k=1}^{K} \lambda_k f_k(\theta_{mn}; \phi_k) \tag{1}
 <p>Essentially, we have <span class="math inline">\(K\)</span> number of states and each state has a certain pdf. Based on this relationship, we can draw random numbers quite efficiently.</p>
 <section id="references" class="level2">
 <h2 data-anchor-id="references">References</h2>
-<p>[1] Soma Sekhar Dhavala, “EM algorithm for Gaussian Mixture modeling,” report, ECpE Dept., Iowa State University.</p>
+<p>[1] Soma S. Dhavala, “EM algorithm for Gaussian Mixture modeling,” report, ECpE Dept., Iowa State University.</p>
 <p>[2] Mark Coates, <em>Time-frequency modeling</em>, Ph. D, Univ. of Cambridge, Signal Processing and Communications Laboratory, Dept. of Engineering, August 1998.</p>
 <p>[3] M. Figueiredo, J. Leitao and A. K. Jain, “On fitting mixture models,” in <em>Energy Minimization Methods in Computer Vision and Pattern Recognition</em>, vol.&nbsp;1654, pp.&nbsp;54–69. Springer-Verlag, 1999.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
