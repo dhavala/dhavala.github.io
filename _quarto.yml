@@ -70,14 +70,12 @@ website:
           - section: "Archives"
             href: teaching/archives.qmd
             contents:
-              - section: "Tutorials"
-                contents:
-                  - teaching/docs/archives/tutLaplace.qmd
-                  - teaching/docs/archives/tutGmm.qmd
-                  - teaching/docs/archives/tutEM.qmd
-                  - teaching/docs/archives/tutMCMC.qmd
-                  - teaching/docs/archives/tutChirp.qmd
-                  - teaching/docs/archives/rpt689.qmd
+              - teaching/docs/archives/tutLaplace.qmd
+              - teaching/docs/archives/tutGmm.qmd
+              - teaching/docs/archives/tutEM.qmd
+              - teaching/docs/archives/tutMCMC.qmd
+              - teaching/docs/archives/tutChirp.qmd
+              - teaching/docs/archives/rpt689.qmd
       - text: "Consulting"
         href: consulting/index.qmd
       - section: "OSS"
