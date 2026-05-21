@@ -1,0 +1,150 @@
+---
+title: "Generalized Digital Modulation Techniques"
+subtitle: "A unified chirplet-based framework, with emphasis on IF modulation"
+author: "Soma S. Dhavala"
+---
+
+# Generalized Digital Modulation Techniques
+
+These notes propose a framework for generating various digital modulation techniques. The generalized modulation scheme is useful for deriving new modulation schemes, and we study, in brief, a particular scheme based on "instantaneous frequency".
+
+When developing new digital modulation schemes, the aim is to construct new waveforms that can represent a message while meeting certain criteria. In all the existing schemes, orthogonal or biorthogonal waveforms are used. By relaxing the orthogonality, one can try to span the spectrum with a larger number of waveforms (redundant representations). However, in doing so, these waveforms must remain decodable at the receiver.
+
+The signals of interest have the form:
+
+$$
+g_{t_c,f_c,\beta,\alpha}(t) = \left(\frac{\alpha}{\pi}\right)^{\frac{1}{4}} e^{-\frac{\alpha(t-t_c)^2}{2}} e^{\,j\beta(t-t_c)^2/2 + j\omega_c(t-t_c) + j\phi}
+$$
+
+where the parameters $t_c, f_c, \beta, \alpha$ represent, respectively, the location in time, the location in frequency, the chirp rate and the amplitude modulation parameter and $\phi$ represents phase off-set; and $g$ is defined such that
+
+$$
+\left\| g_{t_c,f_c,\beta,\alpha} \right\|^2 = \int \left| g(t; t_c, f_c, \beta, \alpha) \right|^2 dt = 1.
+$$
+
+We can use $\text{Re}\{A_m\, g(t)\}$ for modulating any message signal. Here, $A_m$ is a real number. We can map a symbol to many waveforms that can be obtained by different parameter set. For example, we obtain FSK at $\beta = 0$ with different $f_c$s and PSK by choosing different $\phi$s for each of the symbols. The introduction of $\beta$ makes these waveforms lose orthogonality and this is what we want to exploit. If we were able to detect non-orthogonal waveforms at the receiver, why not use them! We can obtain different pulse shapes by varying the parameter $\alpha$. The above waveforms are known as "chirplets".
+
+We then discuss how various modulation schemes can be realized within the framework suggested above. In particular, "instantaneous frequency (IF)" is used as the message carrier.
+
+## Introduction
+
+The objective of a digital modulation technique is to allow reliable and efficient transmission of information under the given constraints. "Reliability" refers to how well the information can be recovered to the one that is transmitted when the information being transmitted is corrupted in some manner. Probability of error is such a measure of reliability. Efficiency does not have a strict definition as it is entirely dependent on the circumstances in which it is being considered. In other words, it is application specific. Nevertheless, power required to transmit a message, required bandwidth to accomplish the task of transmission, susceptibility to channel induced errors and other distortions and even complexity of the transmitter/ receiver can together contribute the factors describing the efficiency. In an ideal situation, we wish to have a scheme that requires minimum power, utilizes minimum bandwidth and achieves the lowest possible probability of error and of course all this at cheap computational complexity. As one can feel, such system is not possible and often, as in most engineering applications, we trade-off one quantity to the other. This leads to choosing different modulation schemes that have different characteristics like "power-efficient schemes", "bandwidth-efficient schemes". It is therefore, in this interest, we study different modulation schemes.
+
+There exist many modulation schemes like Pulse-Amplitude modulation (PAM), Pulse Position Modulation (PPM), Phase-Shift Keying (PSK), Frequency-Shift Keying (FSK), Quadrature-Amplitude Modulation (QAM), Pulse-Width Modulation (PWM) etc.. However, their study is often dealt with in isolation and there is no general frame-work in studying their behavior. These notes present a view point that can be considered as a unified representation of the above mentioned modulation schemes. It is also possible to include a new class of modulation based on "instantaneous frequency (IF)". This view point is presented with illustrations, treating the special case of modulation involving IF, the idea of modulating an information sequence with IF modulation, and the demodulation and detection of the transmitted information sequence. The spectral properties, which are essential for complete analysis of any modulation scheme, are not studied here as there is no signal space concept yet.
+
+## Chirplets
+
+Chirplets are a class of non-stationary signals defined in a six-parameter space. A Gaussian chirplet is given by
+
+$$
+g_{t_c,f_c,\beta,\alpha}(t) = A_m \left(\frac{\alpha_m}{\pi}\right)^{\frac{1}{4}} e^{-\frac{\alpha_m(t-t_m^c)^2}{2}} e^{\,j\beta_m(t-t_m^c)^2/2 + j\omega_m^c(t-t_m^c) + j\phi_m}.
+$$
+
+The parameters represent:
+
+- $A_m$ : Amplitude
+- $\alpha_m$ : Spread of the envelope
+- $t_m^c$ : Time-center
+- $\omega_m^c$ : Frequency center
+- $\beta_m$ : Instantaneous frequency Law (chirp-rate) and
+- $\phi_m$ : Phase.
+
+Some remarkable properties of the waveform described by the above parameters are that these chirplets
+
+(a) are Covariant to
+- a. Scale ($\alpha_m$)
+- b. Chirp ($\beta_m$)
+- c. Time ($t_m^c$)
+- d. Frequency ($\omega_m^c$)
+
+  (very desirable property in the detection frame-work)
+
+(b) can model variety of signals
+
+(c) are the only signals which can satisfy the uncertainty principle with equality
+
+(d) have a non-negative Wigner distribution (attains optimum resolution in both time and frequency)
+
+(e) can be estimated using many techniques eg. Atomic decomposition, Chirp-hunting, Mixture modeling etc.. However, they are not real-time algorithms.
+
+## Unified modulation techniques
+
+Each chirplet parameter maps naturally onto a familiar modulation scheme.
+
+### (a) Time-center (location) $t_m^c$
+
+Varying the time-center, for example placing one chirplet around $N/4$ and another around $3N/4$, moves the chirplet along the time axis. This parameter can be used for PPM.
+
+### (b) Frequency centers ($\omega_m^c$)
+
+Varying the frequency-center, for example centering one chirplet around $0.125$ and another around $0.375$, moves the chirplet along the frequency axis. This parameter can be used for FSK.
+
+### (c) Spread of the envelope / scale ($\alpha_m$)
+
+Varying the spread, for example a wider envelope versus a much narrower one, changes the pulse width. This parameter can be used for PWM.
+
+### (d) Chirp-rate / linear-IF ($\beta_m$)
+
+Varying the chirp-rate changes the slope of the instantaneous frequency in the time-frequency plane, for example an IF of $45^0$ (slope $= 1$) versus an IF of $15^0$ (slope $= 0.269$). This parameter can be used for Instantaneous Frequency Modulation, which is explored next.
+
+With these illustrations, it is clear that "chirplets" are capable of producing any desired modulation scheme. As there exist various methods to estimate the parameters of these waveforms, it should be possible to employ them as digital modulating waveforms.
+
+## IF modulation
+
+We know that in the FSK case, we have finite number of waveforms to choose from, given the bandwidth. This is particularly true because we are dealing with orthogonal waveforms. What happens if we relax the orthogonality for the sake of effective bandwidth. Chirplets having same frequency center, time center, spread but different chirp-rate are not orthogonal but they have quite a different signature in the time-frequency plane. So, if we define time-dependent orthogonality, then these chirplets are not orthogonal only at their time-centers and their instantaneous frequencies do not cross at any other time. Hence, though they are not strictly orthogonal, we can still safely detect them by looking at their time-frequency overlappings. This has led us to consider IF as a modulation parameter.
+
+We can vary the IF from anywhere from [-0.5,0) and (0,0.5] or [-$45^0$,$0^0$), ($0^0$, $45^0$]. We do not want to consider IFs in the range because the scale parameter has to be appropriately chosen in order to be within the spectrum (i.e., not exceed the Fi and Ff).
+
+Consider an IF map drawn on a Time vs. IF plane, where $F_f$ and $F_i$ define the support in the frequency domain and $T$ is the symbol duration. The IF can be varied anywhere from $-45^0$ to $45^0$ excluding zero. This is the reason why $M$ is forced to be even. The reason for not including $0^0$ is to exclusively study the IF modulation. At $0^0$, we obtain frequency modulation, i.e., chirplets with different frequency centers ranging from $F_i$ to $F_f$. Moreover, we want to have slopes with positive and negative magnitudes as well. This makes the total number of waveforms even, and zero cannot be associated with either of them.
+
+We can interpret the IF in terms of degrees as follows. IF is nothing but the slope of lines seen in the above figure and $\text{slope} = \tan(\theta)$. We also know that
+
+$$
+\text{IF} = (\text{slope} \cdot t) + fc
+$$
+
+Where fc is y-intercept of the IF line. So we can conveniently represent the IF in terms of $\theta$. For example, as shown in the above figure, $\theta = 45^0$ corresponds to IF of (0,0.5] with full spread and tc and fc at N/2 and 0.25 respectively.
+
+Effectively, we have to divide the region [-$45^0$, $45^0$] into M-1 regions.
+
+Thus, a symbol m (m=1,2…M: M even) can be assigned an angle as:
+
+$$
+\theta_m = \frac{360}{2\pi}\,\frac{\pi}{2}\,\frac{1}{M-1}\,(2m - M - 1).
+$$
+
+which gets translated to
+
+$$
+\beta_m = \frac{2\pi}{N}\,\tan\!\left(\frac{\theta_m\, 2\pi}{360}\right)
+$$
+
+where N is the number of time-domain samples.
+
+Each $\beta_m$ then has an associated detection region, the plane being partitioned into sectors (one per symbol) bounded by the lines of constant slope. The symbol can be recovered with the following decision statistic:
+
+If $\theta_{estimates} >= \dfrac{\pi}{4}$,
+
+&nbsp;&nbsp;&nbsp;&nbsp;sym = M;
+
+else
+
+If $\theta_{estimates} <= -\dfrac{\pi}{4}$,
+
+&nbsp;&nbsp;&nbsp;&nbsp;sym = 1;
+
+else
+
+$$
+\text{sym} = \left\lfloor \frac{\left(\dfrac{\pi}{4} + \theta_{estimates}\right)}{\theta} \right\rfloor + 1
+$$
+
+where $\theta = \dfrac{\pi}{2(M-1)}$ and $\theta_{estimates}$ is the estimated IF in terms of degrees.
+
+## References
+
+[1] Chirp hunting O'Neill, J.C.; Flandrin, P; Proceedings of the IEEE-SP International Symposium on Time-Frequency and Time-Scale Analysis, 6-9 Oct. 1998 , pp: 425 - 428.
+
+[2] Akan, A. Yalcin, M. Chaparro, L.F., "An iterative method for instantaneous frequency estimation," Electronics, Circuits and Systems, 2001. ICECS 2001, Malta, Vol.3, pp. 1335-1338.
+
+[3] A four-parameter atomic decomposition of chirplets, Bultan, A.;, IEEE Transactions on Signal processing, Volume: 47 Issue: 3 , March 1999, pp. 731 -745.

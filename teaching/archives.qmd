@@ -3,16 +3,16 @@ title: "Archives"
 description: "Early notes and tutorials on Bayesian computation and signal processing."
 ---
 
-A set of short, self-contained notes and tutorials written during my graduate
-years, transcribed here from their original PDFs with rendered LaTeX. They cover
-Bayesian computation and statistical signal processing. Use the links below (or
-the sidebar) to browse them.
+A set of self-contained notes and tutorials written during my graduate years,
+transcribed here from their original PDFs with rendered LaTeX, covering Bayesian
+computation and statistical signal processing. Figures have been omitted so each
+page stands on its own. (Longer technical reports are collected under
+[Research › Reports](../research/reports.qmd).)
 
-## Tutorials
+## Tutorials & notes
 
 - [Normal Approximation](docs/archives/tutLaplace.qmd) — Laplace (normal) approximation of a bivariate posterior, with a closed form for the posterior under a normal prior.
 - [Gaussian Mixture for Multi-modal Posteriors](docs/archives/tutGmm.qmd) — approximating a multi-modal posterior by a mixture of normals, with merging to select the number of components.
 - [EM Algorithm for Mixture Modeling](docs/archives/tutEM.qmd) — derivation of Expectation-Maximization for Gaussian mixture models.
 - [Numerical Methods for Bayesian Inference](docs/archives/tutMCMC.qmd) — quadrature, Monte Carlo integration, rejection sampling, and random-walk Metropolis with a normal prior or likelihood.
 - [Chirplet Decomposition](docs/archives/tutChirp.qmd) — decomposing a signal into Gaussian chirplets via mixture modeling, method of moments, and nested Fisher scoring.
-- [Joint Estimation in Dynamic State-Space Models](docs/archives/rpt689.qmd) — rolling-window Sequential Monte Carlo (FFBS) for jointly estimating states and static parameters in a dynamic state-space model.

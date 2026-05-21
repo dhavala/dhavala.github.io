@@ -1,0 +1,15 @@
+---
+title: "Reports"
+description: "Technical reports on signal processing, communications, and Bayesian computation."
+---
+
+Technical reports written during my graduate years, transcribed from their
+original PDFs with rendered LaTeX and adapted as self-contained tutorials —
+figures and experimental results have been omitted so each stands on its own.
+
+- [Generalized Digital Modulation Techniques](docs/reports/rpt521.qmd) — a unified chirplet-based view of digital modulation, with emphasis on instantaneous-frequency (IF) modulation.
+- [Wavelet Packets and Signal-Adapted Filterbanks](docs/reports/rpt524.qmd) — principal component filter banks, compaction filters, and wavelet packets for designing signal-adapted bases.
+- [Architecture for Distributed Source Localization in Wireless Sensor Networks](docs/reports/rpt543x.qmd) — a cross-layer ad-hoc protocol with a self-organizing MAC for collaborative source localization.
+- [Space-Frequency Coded OFDM](docs/reports/rpt621.qmd) — Alamouti coding across OFDM sub-carriers for frequency-selective fading channels.
+- [An Empirical Bayesian Kernel Density Estimator](docs/reports/rpt632.qmd) — a multiscale, rank-adapted kernel density estimator with hierarchical priors and Gibbs sampling.
+- [Joint Estimation in Dynamic State-Space Models](docs/reports/rpt689.qmd) — rolling-window Sequential Monte Carlo (FFBS) for jointly estimating states and static parameters in a dynamic state-space model.

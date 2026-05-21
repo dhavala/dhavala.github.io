@@ -10,7 +10,7 @@ These notes consider the joint estimation of state sequences and the (static) pa
 
 ## Introduction
 
-A dynamic state-space model has two components: state evolution equation and the observation equation, described by some parameter. In general, the states are not observed and only some function the these states is observed. It is often of interest to infer the states given the measurements and/or the parameters that describe the state evolution and measurement process. The model can be expressed as:
+A dynamic state-space model has two components: state evolution equation and the observation equation, described by some parameter. In general, the states are not observed and only some function of these states is observed. It is often of interest to infer the states given the measurements and/or the parameters that describe the state evolution and measurement process. The model can be expressed as:
 
 Model:
 
@@ -54,13 +54,13 @@ $$
 p(\mathbf{x}_{0:t}, \theta|\mathbf{y}_{1:t})
 $$
 
-For example, we can obtain point estimates for the state from the joint density by taking the expecttion over the posterior marginal density. The marginal density can be obtained by integrating-out the nuisance states. However, it is often the case that, analytical form for the joint density is not available or it is very complex to compute. Monte-Carlo simulation techniques offer practical alternatives to analytical computations. Further, they can be suitably adapted to update the joint densities as and when new observations arrive, i.e.,
+For example, we can obtain point estimates for the state from the joint density by taking the expectation over the posterior marginal density. The marginal density can be obtained by integrating-out the nuisance states. However, it is often the case that, analytical form for the joint density is not available or it is very complex to compute. Monte-Carlo simulation techniques offer practical alternatives to analytical computations. Further, they can be suitably adapted to update the joint densities as and when new observations arrive, i.e.,
 
 $$
 p(\mathbf{x}_{0:t+1}, \theta|\mathbf{y}_{1:t+1}) \xleftarrow{\mathbf{y}_{t+1}} p(\mathbf{x}_{0:t}, \theta|\mathbf{y}_{1:t})
 $$
 
-Monte Carlo techniques that accomplish task similar to what was mentioned above are usually referred to as sequential Monte Carlo methods (SMC). Three major tasks have to be performed in updating the joint density with the newest observation. The three tasks are ($\theta$ is dropped for brevity):
+Monte Carlo techniques that accomplish a task similar to what was mentioned above are usually referred to as sequential Monte Carlo methods (SMC). Three major tasks have to be performed in updating the joint density with the newest observation. The three tasks are ($\theta$ is dropped for brevity):
 
 $$
 \begin{aligned}
@@ -131,7 +131,7 @@ $$
 \end{aligned}
 $$
 
-Obtaining draws from the joint densities relies heavily on the filtering densities. There can be several approaches to sampling from the filtering densities and use them to update the future filtering densities (step-1) or updating the smoothing densities (step-2). One technique that efficiently adjusts the samples (realizations) and is easy to update is sequential importance. Suppose that we have samples, $\mathbf{x}_{t-1}^{(i)}$, from the filtering density each with a a weight $w_{t-1}^{(i)}$, i.e, we can approximate the density as a p.m.f given by:
+Obtaining draws from the joint densities relies heavily on the filtering densities. There can be several approaches to sampling from the filtering densities and use them to update the future filtering densities (step-1) or updating the smoothing densities (step-2). One technique that efficiently adjusts the samples (realizations) and is easy to update is sequential importance. Suppose that we have samples, $\mathbf{x}_{t-1}^{(i)}$, from the filtering density each with a weight $w_{t-1}^{(i)}$, i.e, we can approximate the density as a p.m.f given by:
 
 $$
 p(\mathbf{x}_{t-1}|\mathbf{y}_{1:t-1}) \approx \sum_{i=1}^{N} w_{t-1}^{(i)}\delta(\mathbf{x}_{t-1} - \mathbf{x}_{t-1}^{(i)})
@@ -146,7 +146,7 @@ Now, in order to obtain the filtering density $p(\mathbf{x}_t|\mathbf{y}_{1:t})$
   - update the weights $w_t^{(i)} = w_{t-1}^{(i)}g(\mathbf{y}_t|\mathbf{x}_t^{(i)})$
   - normalize the weights s.t $\sum_{i=1}^{N} w_t^{(i)} = 1$
 
-Drawing $\mathbf{x}_t^{(i)}$ from the state evolution is just one of the many choices available. In fact, one can choose any proposal distribution based on an educated guess about how close it is to the target distribution and being easy to sample from, at the same time. Weights have to modified accordingly, of course! In fact, the state evolution density may be a poor choice sometimes. It could lead to particle degeneration which means that some weights tend to be too large and often the particles get stuck in their vicinity. Many strategies have been suggested in the literature. A simple choice is the state evolution density itself, as it is easy to draw from. Likewise, to obtain the smoothing density $p(\mathbf{x}_{t-1}|\mathbf{x}_{t:T}^i)\mathbf{y}_{1:T})$, do
+Drawing $\mathbf{x}_t^{(i)}$ from the state evolution is just one of the many choices available. In fact, one can choose any proposal distribution based on an educated guess about how close it is to the target distribution and being easy to sample from, at the same time. Weights have to be modified accordingly, of course! In fact, the state evolution density may be a poor choice sometimes. It could lead to particle degeneration which means that some weights tend to be too large and often the particles get stuck in their vicinity. Many strategies have been suggested in the literature. A simple choice is the state evolution density itself, as it is easy to draw from. Likewise, to obtain the smoothing density $p(\mathbf{x}_{t-1}|\mathbf{x}_{t:T}^i)\mathbf{y}_{1:T})$, do
 
 - for $i = 1 \ldots N$
   - update the weights $w_{t-1}^{(i)} = w_{t-1}^{(i)}f(\mathbf{x}_t^{(i)}|\mathbf{x}_{t-1}^{(i)})$
@@ -156,7 +156,7 @@ Having established the method for regular SMC, we will now discuss the rolling-w
 
 ## Rolling-window SMC methods
 
-In the regular SMC, we obtained the filtering densities and the smoothening densities by conditioning on the look-ahead observations and states. The forward-filtering goes forward in time all the way up to $T$, the last observation. And the smoothening distribution samples the states (by updating the weights that were updated in the forward filtering phase) backwards in time to the time origin. As we can see, each state is updated exactly twice. Like any iterative algorithm, we might need to scan the data several times, adjust the weights several times to reach the point of convergence. This might be particularly true when the parameter are unknown. In the rolling-window SMC (rSMC), each state is sampled about twice the length of the window, thereby allowing the particles to mix and settle and reach the stationary distribution. We will first discuss rSMC when the parameters are fixed (known) and reserve the next subsection for the unknown parameter case.
+In the regular SMC, we obtained the filtering densities and the smoothening densities by conditioning on the look-ahead observations and states. The forward-filtering goes forward in time all the way up to $T$, the last observation. And the smoothening distribution samples the states (by updating the weights that were updated in the forward filtering phase) backwards in time to the time origin. As we can see, each state is updated exactly twice. Like any iterative algorithm, we might need to scan the data several times, adjust the weights several times to reach the point of convergence. This might be particularly true when the parameters are unknown. In the rolling-window SMC (rSMC), each state is sampled about twice the length of the window, thereby allowing the particles to mix and settle and reach the stationary distribution. We will first discuss rSMC when the parameters are fixed (known) and reserve the next subsection for the unknown parameter case.
 
 ### Fixed parameters
 
@@ -170,7 +170,7 @@ p(\mathbf{x}_{t-k+1:t}|\mathbf{y}_{1:t}) &= \int p(\mathbf{x}_{t-k+1:t}|\mathbf{
 \end{aligned}
 $$
 
-Due the to approximation in the last step above, we can reuse the particles $\mathbf{x}_{t-k}^{(i)}$ from $p(\mathbf{x}_{t-k}|\mathbf{y}_{1:t-1})$. Now, suppose that we can evaluate $p(\mathbf{x}_{t-k+1:t}|\mathbf{x}_{t-k}^{(i)}, \mathbf{y}_{1:t})$. Then we can evaluate the integral without any difficulty just by performing the monte-carlo average. In fact, our goal is to generate the samples $\mathbf{x}_{t-k+1:t}^{(i)}$, so we do not even need to evaluate the integral. However, a strong requirement here is the ability t draw sampled from $p(\mathbf{x}_{t-k+1:t}|\mathbf{x}_{t-k}^{(i)}, \mathbf{y}_{1:t})$. It turns out that we can adapt the FFBS in this case too as detailed below:
+Due to the approximation in the last step above, we can reuse the particles $\mathbf{x}_{t-k}^{(i)}$ from $p(\mathbf{x}_{t-k}|\mathbf{y}_{1:t-1})$. Now, suppose that we can evaluate $p(\mathbf{x}_{t-k+1:t}|\mathbf{x}_{t-k}^{(i)}, \mathbf{y}_{1:t})$. Then we can evaluate the integral without any difficulty just by performing the monte-carlo average. In fact, our goal is to generate the samples $\mathbf{x}_{t-k+1:t}^{(i)}$, so we do not even need to evaluate the integral. However, a strong requirement here is the ability to draw samples from $p(\mathbf{x}_{t-k+1:t}|\mathbf{x}_{t-k}^{(i)}, \mathbf{y}_{1:t})$. It turns out that we can adapt the FFBS in this case too as detailed below:
 
 Recursion for the joint density:
 
@@ -236,7 +236,7 @@ The algorithm for learning states when the parameters are **known** is described
 >     3. Store $\mathbf{x}_{t-k+1:t}^{(i)}$ as draw from $p(\mathbf{x}_{t-k+1}|\mathbf{y}_{1:t})$
 >     4. Report $\mathbf{x}_t^{(i)}$ as draw from $p(\mathbf{x}_t|\mathbf{y}_{1:t})$
 
-The algorithm requires three inputs: $N$, the number sample paths in the MCMC and $G$, the number of MCMC iterations to obtain one draw from the fixed-lag smoothing distribution (the number of times we update the weights for each state in the window), and the rolling-window length $k$. The choice of the window length depends on how well the following approximation holds for that chosen window length:
+The algorithm requires three inputs: $N$, the number of sample paths in the MCMC and $G$, the number of MCMC iterations to obtain one draw from the fixed-lag smoothing distribution (the number of times we update the weights for each state in the window), and the rolling-window length $k$. The choice of the window length depends on how well the following approximation holds for that chosen window length:
 
 $$
 \begin{aligned}
@@ -245,7 +245,7 @@ p(\mathbf{x}_{0:t-k}|\mathbf{y}_{1:t}) &= \frac{p(\mathbf{y}_t|\mathbf{x}_{0:t-k
 \end{aligned}
 $$
 
-The last approximation hold good when $\mathbf{x}_{0:t-k}$ and $t_t$ are independent given $\mathbf{y}_{1:t-1}$. One approach to finding the optimal $k$ is by choosing the $k$ that minimizes the distance between the two densities. The authors suggest that using a window of size 15 to 25 is good enough for practical purposes but it may depend on the specific problem. Also note that the algorithm starts at $t = k + 1$. We need to run a regular or full FFBS to get the histories of the states given the data up to $t = k$. Then the practical filtering (that is what the authors call it) algorithm can begin. So far, we assumed that we know the parameters. Now we turn our attention the case where the parameters are unknown.
+The last approximation hold good when $\mathbf{x}_{0:t-k}$ and $t_t$ are independent given $\mathbf{y}_{1:t-1}$. One approach to finding the optimal $k$ is by choosing the $k$ that minimizes the distance between the two densities. The authors suggest that using a window of size 15 to 25 is good enough for practical purposes but it may depend on the specific problem. Also note that the algorithm starts at $t = k + 1$. We need to run a regular or full FFBS to get the histories of the states given the data up to $t = k$. Then the practical filtering (that is what the authors call it) algorithm can begin. So far, we assumed that we know the parameters. Now we turn our attention to the case where the parameters are unknown.
 
 ### Unknown parameters
 
@@ -316,7 +316,7 @@ Then Algorithm 2a can be modified so that we can use FFBS for the states as:
 > - obtain $\hat{\mathbf{x}}_{t-k+1:t}^t = \frac{1}{N}\sum_1^N \mathbf{x}_{t-k+1:t}^{(i)}$
 > - update $\hat{\theta}^t = E\left[ p(\theta|\hat{\mathbf{x}}_{t-k+1:t}, \hat{\mathbf{x}}_{t-k}, \mathbf{y}_{1:t}) \right]$
 
-Another variation possible is due to the following observations: in the FFBS steps, parameter estimate $\theta_i$ does not change. It essentially means that, the filtering and smoothing are carried on based on the histories available at $t - k$ and the parameter estimates are not update while running the FFBS inside the window. We modify Algorithm 2 so that parameters can be updated as states are updated in the window. Care must be taken while updating the parameters because, the estimates might be based on over-smoothened states, so we reset the state such that the at the end of the window, state estimates would be identical to FFBS. The only change we make is to update the parameters on the fly instead of waiting till the FFBS is completed in the window. The algorithm is summarized below:
+Another variation possible is due to the following observations: in the FFBS steps, parameter estimate $\theta_i$ does not change. It essentially means that, the filtering and smoothing are carried on based on the histories available at $t - k$ and the parameter estimates are not updated while running the FFBS inside the window. We modify Algorithm 2 so that parameters can be updated as states are updated in the window. Care must be taken while updating the parameters because, the estimates might be based on over-smoothened states, so we reset the state such that at the end of the window, state estimates would be identical to FFBS. The only change we make is to update the parameters on the fly instead of waiting till the FFBS is completed in the window. The algorithm is summarized below:
 
 > **Algorithm 2c: Filtering with unknown parameters**
 >
@@ -459,5 +459,5 @@ Pitt, M. K. and Shephard, N. (2001). Auxiliary variable based particle filters. 
 
 Polson, N. G., Stroud, J. R., and Müller, P. (2008). Practical Filtering with Sequential Parameter Learning, *Journal of the Royal Statistical Society, Series B*, 70, 413-428
 
-Sylvia Früwith-Schnatter. (1992), Data augmentation and dynamic linear models, *J. Time Series Anal*, 15, 183-202
+Sylvia Frühwirth-Schnatter. (1992), Data augmentation and dynamic linear models, *J. Time Series Anal*, 15, 183-202
 

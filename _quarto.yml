@@ -55,6 +55,15 @@ website:
         contents:
           - research/publications.qmd
           - research/patents.qmd
+          - section: "Reports"
+            href: research/reports.qmd
+            contents:
+              - research/docs/reports/rpt521.qmd
+              - research/docs/reports/rpt524.qmd
+              - research/docs/reports/rpt543x.qmd
+              - research/docs/reports/rpt621.qmd
+              - research/docs/reports/rpt632.qmd
+              - research/docs/reports/rpt689.qmd
           - research/code.qmd
           - section: "Projects"
             href: research/projects/index.qmd
@@ -75,7 +84,6 @@ website:
               - teaching/docs/archives/tutEM.qmd
               - teaching/docs/archives/tutMCMC.qmd
               - teaching/docs/archives/tutChirp.qmd
-              - teaching/docs/archives/rpt689.qmd
       - text: "Consulting"
         href: consulting/index.qmd
       - section: "OSS"
