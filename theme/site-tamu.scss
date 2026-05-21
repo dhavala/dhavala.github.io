@@ -23,6 +23,11 @@ $navbar-dark-color:        #ccc;
 $navbar-dark-hover-color:  #fff;
 $navbar-padding-y:         0.4rem;
 
+// Layout — trim Quarto's defaults (sidebar 250px, gutter 1.5rem) so the
+// sidebar reads compact and the content gets more width.
+$grid-sidebar-width:       180px;
+$grid-column-gutter-width: 1rem;
+
 /*-- scss:rules --*/
 
 // Surround: gradient JPG on dark fallback, repeating horizontally
@@ -266,13 +271,13 @@ main.content .listing-description a:hover {
   .section-banner { display: none; }
 }
 
-// Sidebar — monospace, minimal. Solid $content-bg so desktop visually merges
-// with the .page-columns parent (same color) AND mobile overlay has its own
-// readable backing.
+// Sidebar — Verdana sans-serif (same stack as the navbar), minimal. Solid
+// $content-bg so desktop visually merges with the .page-columns parent (same
+// color) AND mobile overlay has its own readable backing.
 .sidebar.sidebar-navigation,
 nav#quarto-sidebar {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.7rem;
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base * 0.9;   // match navbar items (.navbar-nav uses .9em)
   background: $content-bg;
   padding: 1.25rem 0.75rem 2rem;
 }
@@ -285,14 +290,24 @@ nav#quarto-sidebar {
   column-gap: 0;
 }
 .sidebar .sidebar-item-text {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-family: $font-family-sans-serif;
+}
+// Quarto sizes sidebar items/links at 0.875–1.1rem, which overrides the
+// container size above. Pin them (ID prefix for specificity) to the same size
+// as the navbar items: .navbar-nav uses .9em on the 0.78rem base, i.e.
+// $font-size-base * 0.9.
+nav#quarto-sidebar .sidebar-item,
+nav#quarto-sidebar .sidebar-item a,
+nav#quarto-sidebar .sidebar-section .sidebar-item,
+nav#quarto-sidebar ul.sidebar-section.depth1 .sidebar-section-item {
+  font-size: $font-size-base * 0.9;
 }
 .sidebar-item-text.sidebar-link,
 nav#quarto-sidebar .sidebar-item a {
   color: #555;
   background: $content-bg;
   display: block;
-  padding: 4px 6px;
+  padding: 3px 6px;
   margin: 0;
   border-radius: 0;
   border-bottom: 1px solid #ddd;
@@ -324,6 +339,34 @@ nav#quarto-sidebar .sidebar-item a.active {
   color: #000;
   background: #f7f7f7;
   font-weight: 700;
+}
+
+// Right-hand TOC ("On this page") — match the left sidebar: Verdana, the same
+// $font-size-base * 0.9 (≈0.702rem) size, and the same muted color scheme.
+// The #quarto-margin-sidebar ID prefix beats Quarto's defaults (incl. !important).
+#quarto-margin-sidebar nav[role="doc-toc"] {
+  font-family: $font-family-sans-serif;
+}
+#quarto-margin-sidebar nav[role="doc-toc"] > h2,
+#quarto-margin-sidebar nav[role="doc-toc"] > .h2 {
+  font-size: $font-size-base * 0.9;
+  font-weight: 600;
+  color: #333;
+}
+#quarto-margin-sidebar nav[role="doc-toc"] > ul {
+  font-size: $font-size-base * 0.9;
+}
+#quarto-margin-sidebar nav[role="doc-toc"] ul li a {
+  color: #555;
+}
+#quarto-margin-sidebar nav[role="doc-toc"] ul > li > a:hover,
+#quarto-margin-sidebar nav[role="doc-toc"] ul > li > ul > li > a:hover {
+  color: #000 !important;
+}
+#quarto-margin-sidebar nav[role="doc-toc"] ul > li > a.active,
+#quarto-margin-sidebar nav[role="doc-toc"] ul > li > ul > li > a.active {
+  color: #000 !important;
+  border-left-color: #000;
 }
 
 // Footer
