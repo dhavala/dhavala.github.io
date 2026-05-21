@@ -8,7 +8,7 @@
 
 <meta name="author" content="Soma S. Dhavala">
 
-<title>Gaussian Mixture for Multi-modal Posteriors – Soma S Dhavala</title>
+<title>Architecture for Distributed Source Localization in Wireless Sensor Networks – Soma S Dhavala</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -144,13 +144,13 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="Gaussian Mixture for Multi-modal Posteriors – Soma S Dhavala">
-<meta property="og:description" content="Approximating a multi-modal posterior by a mixture of normals">
-<meta property="og:image" content="https://dhavala.github.io/teaching/docs/archives/images/og-image.png">
+<meta property="og:title" content="Architecture for Distributed Source Localization in Wireless Sensor Networks – Soma S Dhavala">
+<meta property="og:description" content="A cross-layer ad-hoc network protocol with self-organizing MAC for collaborative source localization">
+<meta property="og:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
-<meta name="twitter:title" content="Gaussian Mixture for Multi-modal Posteriors – Soma S Dhavala">
-<meta name="twitter:description" content="Approximating a multi-modal posterior by a mixture of normals">
-<meta name="twitter:image" content="https://dhavala.github.io/teaching/docs/archives/images/og-image.png">
+<meta name="twitter:title" content="Architecture for Distributed Source Localization in Wireless Sensor Networks – Soma S Dhavala">
+<meta name="twitter:description" content="A cross-layer ad-hoc network protocol with self-organizing MAC for collaborative source localization">
+<meta name="twitter:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -212,7 +212,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../teaching/index.html">Teaching</a></li><li class="breadcrumb-item"><a href="../../../teaching/archives.html">Archives</a></li><li class="breadcrumb-item"><a href="../../../teaching/docs/archives/tutGmm.html">Gaussian Mixture for Multi-modal Posteriors</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../research/index.html">Research</a></li><li class="breadcrumb-item"><a href="../../../research/reports.html">Reports</a></li><li class="breadcrumb-item"><a href="../../../research/docs/reports/rpt543x.html">Architecture for Distributed Source Localization in Wireless Sensor Networks</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -251,11 +251,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../../research/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Research</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../research/publications.html" class="sidebar-item-text sidebar-link">
@@ -272,11 +272,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../../research/reports.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reports</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../research/docs/reports/rpt521.html" class="sidebar-item-text sidebar-link">
@@ -291,7 +291,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../research/docs/reports/rpt543x.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt543x.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Architecture for Distributed Source Localization in Wireless Sensor Networks</span></a>
   </div>
 </li>
@@ -350,11 +350,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../../teaching/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Teaching</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../teaching/notes.html" class="sidebar-item-text sidebar-link">
@@ -377,11 +377,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../../teaching/archives.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Archives</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../teaching/docs/archives/tutLaplace.html" class="sidebar-item-text sidebar-link">
@@ -390,7 +390,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../teaching/docs/archives/tutGmm.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../teaching/docs/archives/tutGmm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Gaussian Mixture for Multi-modal Posteriors</span></a>
   </div>
 </li>
@@ -478,9 +478,19 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#gaussian-mixture-for-multi-modal-posteriors" id="toc-gaussian-mixture-for-multi-modal-posteriors" class="nav-link active" data-scroll-target="#gaussian-mixture-for-multi-modal-posteriors">Gaussian Mixture for Multi-modal Posteriors</a>
+  <li><a href="#architecture-for-distributed-source-localization-in-wireless-sensor-networks" id="toc-architecture-for-distributed-source-localization-in-wireless-sensor-networks" class="nav-link active" data-scroll-target="#architecture-for-distributed-source-localization-in-wireless-sensor-networks">Architecture for Distributed Source Localization in Wireless Sensor Networks</a>
   <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#source-location-estimation-algorithm" id="toc-source-location-estimation-algorithm" class="nav-link" data-scroll-target="#source-location-estimation-algorithm">Source Location Estimation Algorithm</a></li>
+  <li><a href="#architecture" id="toc-architecture" class="nav-link" data-scroll-target="#architecture">Architecture</a></li>
+  <li><a href="#the-protocol" id="toc-the-protocol" class="nav-link" data-scroll-target="#the-protocol">The Protocol</a>
+  <ul class="collapse">
+  <li><a href="#network-management-phase-nmp" id="toc-network-management-phase-nmp" class="nav-link" data-scroll-target="#network-management-phase-nmp">Network Management Phase (NMP)</a></li>
+  </ul></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#web-resources" id="toc-web-resources" class="nav-link" data-scroll-target="#web-resources">Web Resources</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -488,13 +498,13 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <div class="section-banner">
-  <img src="../../../images/banners/templebw.jpg" alt="Teaching banner">
+  <img src="../../../images/banners/researchbw.jpg" alt="Research banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../teaching/index.html">Teaching</a></li><li class="breadcrumb-item"><a href="../../../teaching/archives.html">Archives</a></li><li class="breadcrumb-item"><a href="../../../teaching/docs/archives/tutGmm.html">Gaussian Mixture for Multi-modal Posteriors</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../research/index.html">Research</a></li><li class="breadcrumb-item"><a href="../../../research/reports.html">Reports</a></li><li class="breadcrumb-item"><a href="../../../research/docs/reports/rpt543x.html">Architecture for Distributed Source Localization in Wireless Sensor Networks</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Gaussian Mixture for Multi-modal Posteriors</h1>
-<p class="subtitle lead">Approximating a multi-modal posterior by a mixture of normals</p>
+<h1 class="title">Architecture for Distributed Source Localization in Wireless Sensor Networks</h1>
+<p class="subtitle lead">A cross-layer ad-hoc network protocol with self-organizing MAC for collaborative source localization</p>
 </div>
 
 
@@ -517,49 +527,107 @@ window.Quarto = {
 </header>
 
 
-<section id="gaussian-mixture-for-multi-modal-posteriors" class="level1">
-<h1>Gaussian Mixture for Multi-modal Posteriors</h1>
-<p>It might be the case that we want to draw samples from an arbitrary posterior pdf having more than one mode. In such cases, normal approximation might be too bad an approximation. We consider modeling this arbitrary pdf as a mixture of normal densities. Further, the number of modes (which in turn dictate the number of components in the mixture) in the posterior is also assumed unknown.</p>
-<p>The mixture model considered in [1] tries to estimate the model parameters based on data. However, in the present context, we have the pdf in semi-closed form and this becomes a special case of [1].</p>
-<p>Let <span class="math inline">\(f(\theta)\)</span> be the known arbitrary pdf which we want to approximate. For illustration purposes, we assume a bivariate density (<span class="math inline">\(\theta = [\theta_1, \theta_2]^T\)</span>) and discretize <span class="math inline">\(\theta\)</span> on a uniform <span class="math inline">\(N \times M\)</span> grid. Further let <span class="math inline">\(\theta_{mn}\)</span> represent the <span class="math inline">\((\theta_1(n), \theta_2(m))\)</span> sample in the grid. Also assume that the discretized pdf (<span class="math inline">\(f(\theta_{mn})\)</span>) is appropriately normalized.</p>
+<section id="architecture-for-distributed-source-localization-in-wireless-sensor-networks" class="level1">
+<h1>Architecture for Distributed Source Localization in Wireless Sensor Networks</h1>
+<p>These notes describe an architecture for distributed source localization in wireless sensor networks. The sensors, which are deployed randomly, form an ad-hoc network and establish a communication link amongst them that makes possible the application of various collaborative signal processing algorithms. After briefly reviewing some recent developments in distributed signal processing with applications in wireless sensor networks (WSNs), existing protocols for WSNs are examined from this application point of view. The architecture can form scalable ad-hoc networks with self-organizing medium access control (S-MAC), can support source mobility, and to a certain extent is fault-tolerant. Several variations are also possible, trading off latency against hardware complexity (rather, availability).</p>
+<section id="introduction" class="level2">
+<h2 data-anchor-id="introduction">Introduction</h2>
+<p>Continued growth and advancements in fabrication of micro-electro-mechanical systems (MEMS) and actuators makes it possible to develop low-cost sensors in huge numbers. These sensors could drive the future of embedded systems and span a wide range of applications. For example, sensor networks could be employed to monitor wild life habitat or control the operating conditions of a nuclear power plant or just can be used to guide a robot operating under hazardous conditions. They could also have applications in unmanned surveillance of potential enemy lands.</p>
+<p>As the number of sensors is large and as they are sensing almost the same physical phenomena (like temperature, pressure or acoustic energy or chemical concentration), the data generated by these sensors is highly correlated and it might be much more advantageous to process the data gathered by them before sending it for further analysis to extract any useful information. For example, sensors might be monitoring the earth temperature at a particular site. Then the average of all the data collected might give a better estimate of the temperature of the region than a single sensor data would. This idea of extracting useful information from the sensors is widely known as collaborative signal processing. Recently, several algorithms in distributed computing were found attractive for use in sensor networks [1,2]. The reason being local communication requires less energy as opposed to global communication (a.k.a centralized vs.&nbsp;distributed) which consumes most of the precious resources. The architecture described here is based on a cross-layer design intended to work with distributed CSP algorithms.</p>
+</section>
+<section id="source-location-estimation-algorithm" class="level2">
+<h2 data-anchor-id="source-location-estimation-algorithm">Source Location Estimation Algorithm</h2>
+<p>Below we describe the source model and CSP algorithm to obtain the estimate of the location of the source:</p>
+<p>Omni-directional sensors are distributed over the field randomly. All the sensors within the radius of 15 units are considered active and will collaborate with other active sensors to identify the location of the source, in this case, an acoustic source. It is also assumed that no sensor is close (as much as 1 unit) to the target (or source).</p>
+<p>The impinging acoustic energy is measured at the sensor. This energy is inversely proportional to the distance between the source and the sensor. To be more specific, the following model is considered:</p>
 <p><span class="math display">\[
-f(\theta_{mn}; \Phi) = \sum_{k=1}^{K} \lambda_k f_k(\theta_{mn}; \phi_k) \tag{1}
+s_j(i) = \frac{A}{(\theta_1 - x_j)^2 + (\theta_2 - y_j)^2} + e_j(i), \text{ where}
 \]</span></p>
-<p>where</p>
 <ul>
-<li><span class="math inline">\(K\)</span> is the total number of densities (unknown)</li>
-<li><span class="math inline">\(\phi_k = [\mu_k, \Sigma_k]\)</span> represent the mean vector and covariance matrix of the <span class="math inline">\(k\)</span>th density</li>
-<li><span class="math inline">\(f_k \sim \mathcal{N}(\mu_k, \Sigma_k)\)</span></li>
-<li><span class="math inline">\(\{\lambda_k\}\)</span> represent the mixing weights with constraint <span class="math inline">\(\sum_{k=1}^{K} \lambda_k = 1\)</span></li>
-<li><span class="math inline">\(\Phi = [\phi_1 \ldots \phi_K, \lambda_1 \ldots \lambda_K]\)</span></li>
+<li><span class="math inline">\(s_j(i)\)</span> is the <span class="math inline">\(i^{\text{th}}\)</span> sample of received energy at the <span class="math inline">\(j^{\text{th}}\)</span> sensor</li>
+<li><span class="math inline">\(N\)</span> is the total # of samples being observed at each sensor</li>
+<li><span class="math inline">\(M\)</span> is the total # of sensors (active) in total</li>
+<li><span class="math inline">\(\theta_1, \theta_2, x_j, y_j\)</span> are the x- and y- coordinates of the source and the <span class="math inline">\(j^{\text{th}}\)</span> sensor respectively.</li>
+<li><span class="math inline">\(e_j(i)\)</span> samples are i.i.d AWGN with zero mean and variance <span class="math inline">\(\sigma^2\)</span></li>
 </ul>
-<p>Then we obtain the estimates for the mixture model parameters as:</p>
+<p>We estimate the parameter by minimizing the least-squares function and since the parameters enter non-linearly into the equation it is a non-linear least-squares estimation problem.</p>
 <p><span class="math display">\[
-\hat{\lambda}_{k,\text{new}} = \sum_{n=1}^{N} \sum_{m=1}^{M} \gamma_k(\theta_{mn}; \hat{\Phi}) \tag{2}
+f = \frac{1}{MN} \sum_{j=1}^{M} \sum_{i=1}^{N} \left[ s_j(i) - \frac{A}{(\theta_1 - x_j)^2 + (\theta_2 - y_j)^2} \right]^2 .
 \]</span></p>
+<p>In distributed/ decentralized processing, we minimize communication between sensor nodes and centralized processing unit by refining the parameter estimates based on the neighbor’s rather than processing the accumulated data.</p>
+<p>Let <span class="math inline">\(\theta_{1,j-1}, \theta_{2,j-1}\)</span> be the previous estimate, and <span class="math inline">\(r_j\)</span> (a function of the data) be the current estimate of the distance between the source and the <span class="math inline">\(j^{\text{th}}\)</span> sensor.</p>
+<p>Then, <span class="math inline">\(\phi_j = \tan^{-1}\left( \dfrac{y_j - \theta_{2,j-1}}{x_j - \theta_{1,j-1}} \right)\)</span> then,</p>
 <p><span class="math display">\[
-\hat{\mu}_{k,\text{new}} = \frac{1}{\hat{\lambda}_{k,\text{new}}} \sum_{n=1}^{N} \sum_{m=1}^{M} \gamma_k(\theta_{mn}; \hat{\Phi}) \theta_{mn} \tag{3}
+\theta_{1,j} = x_j + r_j \cos(\phi_j), \qquad \theta_{2,j} = y_j + r_j \sin(\phi_j)
 \]</span></p>
-<p><span class="math display">\[
-\hat{\Sigma}_{k,\text{new}} = \frac{1}{\hat{\lambda}_{k,\text{new}}} \sum_{n=1}^{N} \sum_{m=1}^{M} \gamma_k(\theta_{mn}; \hat{\Phi}) (\theta_{mn} - \hat{\mu}_k)^T (\theta_{mn} - \hat{\mu}_k) \tag{4}
-\]</span></p>
-<p>where</p>
-<p><span class="math display">\[
-\gamma_k(\theta_{mn}; \hat{\Phi}) = \frac{\hat{\lambda}_k f_k(\theta_{mn}; \hat{\theta}_k) f(\theta_{mn}; \Phi)}{f(\theta_{mn}; \hat{\Phi})} \tag{5}
-\]</span></p>
-<p>However, we need to know the number of components <span class="math inline">\(K\)</span> in the above equations. In order to circumvent this difficulty, we overestimate the number of components and estimate the model components. Later, we repeatedly: 1) merge any two distributions and 2) replace them with a new merged distribution (still a normal distribution) such that the distance between the newly formed distribution and the two distributions which got merged is minimized and this distance is above a certain threshold. Essentially, we overfit the posterior distribution and later prune the mixture until no further merging is possible. Based on the distance measure chosen, there could be different approaches. For a discussion please see [2, 3].</p>
-<p>Now it becomes a trivial task to generate samples from the posterior. Instead of drawing the samples from <span class="math inline">\(p(\theta)\)</span>, we draw from the mixture. The algorithm is outlined below:</p>
+<p>Below, we describe a network architecture that would allow the application of the CSP algorithms of the above type.</p>
+</section>
+<section id="architecture" class="level2">
+<h2 data-anchor-id="architecture">Architecture</h2>
+<p>The sensor networks fundamentally differ from cellular networks or any other networks in the sense that energy efficiency is the single most factor in the design of the protocols. In Cellular Networks and Mobile Ad-hoc Networks (MANETs), the design criterion to be met is QoS and not performing the task with minimal energy. Furthermore, WSNs are unattended, they often remain in hostile environments and their battery power is an extremely precious resource. Also, the very objective in using sensor networks is to sense a phenomenon and process the data. There is a lot of communication between and/or among sensors and/or a base station. The sensors can be mobile or stationary and even the phenomena being observed could also be mobile. Thus, the design of a WSN architecture is particularly dependent on the application being considered [3-5]. Now, we state the requirements of the algorithm to be met by the architecture:</p>
 <ul>
-<li><span class="math inline">\(u \sim U[0, 1]\)</span></li>
-<li>choose <span class="math inline">\(k\)</span>th component if <span class="math inline">\(\sum_{i=0}^{k-1} \lambda_i \leq u &lt; \sum_{i=0}^{k} \lambda_i\)</span></li>
-<li>generate a multivariate random number from <span class="math inline">\(f_k(\mu_k, \Sigma_k)\)</span></li>
+<li><p><strong>Ad-hoc network</strong></p>
+<p>The nodes are scattered randomly, there is no pre-defined topology for the network. Even if there is a base station, the nodes communicate with the base station only at the end of the estimation process. Hence, the WSN is an ad-hoc network.</p></li>
+<li><p><strong>Self-organizing MAC</strong></p>
+<p>No particular node plays the role of a Master or Cluster head: so to speak. Upon deployment, the networks themselves have to organize and form a network. We can use protocols similar to Bluetooth which support up to 7 slaves connected to a Master (piconet) and multiple piconets can be inter-networked to form larger networks. However, in the cluster/ Master type of frameworks, all the nodes connected to them communicate with the Master/ Cluster head, thereby consuming more energy and does not support the distributed-CSP (d-CSP).</p></li>
+<li><p><strong>Scalable</strong></p>
+<p>The node density could vary from region to region as the sensor moves. Thus, the Architecture should be scalable in the sense of forming a network with 100 nodes or 1000 nodes!</p></li>
+<li><p><strong>Node insertion (new node)</strong></p>
+<p>It might be the case that, if the source is moving, new nodes might have excellent receive signal strength (RSS) than some nodes which are already a part of the network and nodes having high RSS and thus high SNR would lead to better estimates of the source. Besides that, the network may start with only two nodes and could dynamically grow with time. This is an operation such as adding a new node to the existing network.</p></li>
+<li><p><strong>Node deletion (node out-of-range)</strong></p>
+<p>Some of the nodes might be at the verge of losing battery power or it is just that their RSS drops below a pre-defined threshold in which case these can no longer be useful in the d-CSP.</p></li>
+<li><p><strong>Directed graph (cyclical communication)</strong></p>
+<p>The source location estimation problem can be thought of as solving a non-linear optimization problem. We can regard the parameter updations as, typically, an initial estimate being modified by an additive corrective term that depends on the current data as well as the previous estimate of the parameter of interest. Thus, the parameter estimate has to be cycled from one sensor to the other. Thus, the network forms a directed-closed-graph. Several other topologies are also possible and that is certainly a topic worth considering (it might lead to better topologies for a given instance of the network)</p></li>
 </ul>
-<p>Essentially, we have <span class="math inline">\(K\)</span> number of states and each state has a certain pdf. Based on this relationship, we can draw random numbers quite efficiently.</p>
+<p>The reader is referred to an excellent review paper comparing various protocols [6]. Now, we discuss whether there exist any suitable protocols. Almost all protocols rule-out the possibility of using complete contention-based protocols like CSMA-CA used in 802.11 for the simple reason that the nodes have to listen to the channel always and drain the battery of the nodes very quickly. However, we have to use some form of contention-based protocols during the network management frame. Alternatives to contention-based protocols are contention-less protocols like FDMA, TDMA or CDMA or a combination of them. Some trade-offs exist among the: for e.g.., TDMA would be the simplest in terms of hardware and most energy efficient as the nodes would wake-up only during transmission or reception phases. CDMA based communication would be most helpful if we can afford huge bandwidth but cannot tolerate latency, whereas FDMA also offers low latency it may require complex hardware compared to TDMA. Different protocols use different combinations of contention-based and contention-less protocols to achieve S-MAC. The most promising protocol proposed for WSNs is Self-Organizing MAC (S-MAC) [3].</p>
+<p>It divided the whole communication into two parts: one is the network management phase and the other is the actual communication phase during which actual data transmission and reception happens. However, independent links could be formed and they may never be able to join the full network. This may need some monitoring or knowledge about local estimates of the sources. We intend to modify the S-MAC framework to suit the current requirements. Similarly, many algorithms in literature do form either cluster-based protocols or would form isolated sub-nets. Henceforth, we take a new look at the problem with ideas borrowed from S-MAC. Before that we make the following assumptions:</p>
+</section>
+<section id="the-protocol" class="level2">
+<h2 data-anchor-id="the-protocol">The Protocol</h2>
+<p>Like, S-MAC, we divide the network communication into two phases: network management phase (NMP) (a.k.a boot-up phase, set-up phase) and data communication phase (DCP, steady-state phase). During the NMP, the network is either formed or is updated by inserting new nodes into the network or deleting nodes that no longer have a good RSS. Since a node has to perform a signal processing task only once in a cycle, it is very appropriate to choose a TDMA schedule for contention-free access of the channel in the DCP phase. However, the length of the TDMA frame and the slot allocations for each of the nodes that are already included in the network has to be determined. This is one of the tasks of NMP.</p>
+<section id="network-management-phase-nmp" class="level3">
+<h3 data-anchor-id="network-management-phase-nmp">Network Management Phase (NMP)</h3>
+<p>In the very beginning, no network is formed and all the active nodes are wanting to be associated with the network that is yet to be formed. These nodes would hear for any ongoing messages (it will be clear later what these bands are). After waiting for a certain amount of time that is much larger than a typical NMP super frame plus DCP super frame (will be defined what these super frames are in a moment). Then each of nodes would wait for a certain random back-off period and upon hearing a clear channel, the node that has the smallest random back-off time would broadcast a TA-insert type frame indicating that the node wants to be inserted in the network. Since this node did not hear any beacon frame or any other communication frames, it knows that it is the first one who is initiating the network. So it makes this information explicit by setting a flag field to one. The payload also contains the location of this node (lets say node-1). All the neighboring nodes upon hearing TA-insert-1 frame node-1, would direct a TB-frame with payload containing the self-location. Then node-1 determines closest neighbor by comparing the distances between all potential connected-neighbors. Then node-1 broadcasts to all the neighbors that it wants to be associated with node-2 (just a name given) and node-2 updates its local routing table that it would receive from as well as send to node-1 and vice-versa and a hand-shake (MA type frames) happens between these two nodes in the freshly formed network. Based on pre-defined constant describing the number of nodes that can be added or deleted during the NMP, the process may continue or one cycle of communication (exchanging MB type frame). At the end of this phase, a beacon frame is transmitted by all the nodes (at this point only two).</p>
+<p>Suppose that the network exists and that node-1 and node-2 have established a link. And a beacon frame has just elapsed. Upon hearing the beacon frame, node-3 (arbitrary node), waits for a random back-off period and if the channel is clear, sends a TA-insert-0 frame (now node-3 knows that the network exists since it heard the beacon frame). Now either node-1 or node-2 or both can respond to node-3’s request by sending their respective TB frames (on different frequency bands to avoid collisions). Upon receiving multiple TB frames with location information and the number of nodes that currently exist in the network, node-3 chooses the neighbor which results in minimum of the sum of the energies required for reception from the responding node and transmission to the transmitter located in the responder’s routing table. Once node-3 chooses its neighbor, it would send another broadcast frame TC to all the neighbors that node-3 is being associated with node-1 (for e.g.). Upon hearing TC frame node-3, node-1 updates its local routing table. The receiver location in the routing table is now replaced with node-3’s location.</p>
+<p>Now node-3 sets its logical index to 1, increments the total number of nodes it received from node-2 in TB frame and broadcasts MA frame (there is no actual content but there is only information about the logical index of the sender and increment total number of nodes message along with location of node-2). Now all the active nodes would hear on MA band for updates. Node-2 receives MA from node-1 (earlier it was node-3) and compares the location information in the payload with its position. Upon successful comparison, it increments the logical index in the payload by one and assigns this number to itself and also increments the total number of nodes in network to three. Now node-2 remained node-2. Likewise, node-1 (earlier) will be renamed to node-3. Now the link structure is 1-2-3-1. This would always be the case. At the end of each TC frame, the logical indices might represent different physical nodes. Now we have added node-3 to the network which is now being referred to as node-1. Each node would again wait for TA frame either insert or delete request and if they don’t hear anything in this TA interval, everybody starts actual data frame. Right from the beacon interval to the commencement of DCP phase, we call it as NMP super frame. And a DCP super frame contains <span class="math inline">\(\log_2(N)\)</span> MB message frames. Now node-1 starts processing data and sends data to node-2 and sleeps. During this time, node-3 falls asleep. While node-2 starts transmitting data, node-3 awakens and starts receiving data.</p>
+<p>Similarly a node can be deleted from the network. A node that does not want to participate would place a TA-delete frame and upon hearing TA-delete those nodes which have this location information in their local routing table will delete the entry. They update the routing table based on the routing table of the node that placed the delete request. In this way, a node can be added to or removed from the network, with the TA, TB, TC, and MA frames re-routing the connections accordingly.</p>
+<p>DCP begins at the end of the TA waiting period after N MA frames. By this time, every node knows how many nodes are present in the network and their logical indices. This enables each node to determine when to wake-up for data reception and data transmissions. The energy efficiency vs.&nbsp;latency factor very much depends on the following factor.</p>
+<ul>
+<li>Velocity of the source</li>
+<li>Number of cycles in the DCP super frame</li>
+<li>Number of nodes that can be added or deleted during NMP super frame</li>
+</ul>
+<p>The above protocol works under certain assumption:</p>
+</section>
+</section>
+<section id="assumptions" class="level2">
+<h2 data-anchor-id="assumptions">Assumptions</h2>
+<ul>
+<li><strong>Time synchronization:</strong> Since we are using TDMA for contention-free access, it is very much implied that good time synchronization is available.</li>
+<li><strong>Dense Sensor network:</strong> If the density is low, then a very degenerate network could be formed in which case a different topology of the graph may work better. For example, if all the sensors are aligned in a straight line, the first node and the last are supposed to form one end of the link which may break-down.</li>
+<li>Further, we are also assuming that the sensor node is capable of receiving multiple bands at the same time. Like, multiple TB frames or TA-insert and TA-delete frames.</li>
+</ul>
+<p>Violating any of these assumptions could lead to a very unusable protocol.</p>
+</section>
+<section id="conclusions" class="level2">
+<h2 data-anchor-id="conclusions">Conclusions</h2>
+<p>We proposed an architecture for distributed source localization in wireless sensor networks. Instead of designing each of the layers (like MAC, Application Layer etc..), we followed a cross-layer design allowing us to customize the protocol for the application. This is particularly needed because, resources are very scarce in sensor networks and utmost care has to be taken to ensure that they are efficiently utilized.</p>
+<p>The proposed protocol forms an ad-hoc network by randomly choosing two nodes initially and then the network grows by adding a node at a time. Though latency may be affected, the protocol could manage the formation of the network even if the number of nodes is highly variable. This insertion and deletion of nodes also enables us to accommodate moving sources. We use a TDMA based channel access mechanism for actual data communication. Using TDMA results in a lot of energy savings (as opposed to CSMA-CA) and TDMA is the most natural choice for the application. The TDMA schedule and network formation are accomplished by a combination of contention-based channel access as well as FDMA. Using FDMA reduces the overall latency and helps in achieving a balance in energy savings and latency. Each node maintains a routing table containing the location information about the sender and the receiver. It would also contain its own logical index as well as the total number of nodes being present at that point of time. This information is used in TB, TA, TC and MA frames. Several variations are possible and it would be required to study how to reduce the latency in the NMP phase. Once the protocol evolves and is robust to node failures etc.., simulation studies would be performed to verify the arguments.</p>
+</section>
 <section id="references" class="level2">
 <h2 data-anchor-id="references">References</h2>
-<p>[1] Soma S. Dhavala, “EM algorithm for Gaussian Mixture modeling,” report, ECpE Dept., Iowa State University.</p>
-<p>[2] Mark Coates, <em>Time-frequency modeling</em>, Ph. D, Univ. of Cambridge, Signal Processing and Communications Laboratory, Dept. of Engineering, August 1998.</p>
-<p>[3] M. Figueiredo, J. Leitao and A. K. Jain, “On fitting mixture models,” in <em>Energy Minimization Methods in Computer Vision and Pattern Recognition</em>, vol.&nbsp;1654, pp.&nbsp;54–69. Springer-Verlag, 1999.</p>
+<p>[1] Michel Rabbat and Robert Nowak, “Distributed Optimization in Wireless Sensor Networks,” <em>ICASSP’04</em>, 2004.</p>
+<p>[2] Angelia Nedic and Dimitri P. Bertsekas, “Incremental subgradient methods for nondifferentiable optimization,” <em>SIAM J. on Optimization</em>, Vol. 12, pp.&nbsp;109-138, 2001.</p>
+<p>[3] Sohrabi K, Gao J, Ailawadhi V and Pottie G.J, “Protocols for self-organization of a wireless ad-hoc sensor network,” <em>IEEE Personal Communications</em>, Vol. 7, Issue 5, pp.&nbsp;16-27, 200</p>
+<p>[4] Heinzelman W.R, Chandrakasan A and Balakrishnan H, “Energy-efficient communication protocol for wireless micro sensor networks,” <em>Proceedings of the 33rd Annual Hawaii Intl. Con. On System Sciences</em>, pp.&nbsp;3005-3014, 2000</p>
+<p>[5] Lindsay S, Raghavendra C. S, “PEGASIS: Power Efficient Gathering in Sensor Information Systems,” <em>ICC</em>, 2001</p>
+<p>[6] Praveen R, Ravi M, Shashidhar G and Udit S, “A survey on Sensor networks,” <em>CS6392 course project report, UT-Dallas</em></p>
+</section>
+<section id="web-resources" class="level2">
+<h2 data-anchor-id="web-resources">Web Resources</h2>
+<p>Literature Archive: http://www.research.rutgers.edu/~mini/sensornetworks.html</p>
+<p>Links to sensor networks: http://wwwcsif.cs.ucdavis.edu/~bharathi/sensor/snw.html</p>
+<p>Research at MIT: http://nms.lcs.mit.edu/publications/</p>
 
 
 </section>

@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Personal background and biography of Soma S Dhavala.">
+<meta name="author" content="Soma S. Dhavala">
 
-<title>Bio – Soma S Dhavala</title>
+<title>Space-Frequency Coded OFDM – Soma S Dhavala</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,19 +27,19 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../images/favicon.png" rel="icon" type="image/png">
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-10f4948e065e4e2a931233443de4b76e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../../images/favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-10f4948e065e4e2a931233443de4b76e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -114,14 +114,43 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Bio – Soma S Dhavala">
-<meta property="og:description" content="Personal background and biography of Soma S Dhavala.">
-<meta property="og:image" content="https://dhavala.github.io/about/images/og-image.png">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Space-Frequency Coded OFDM – Soma S Dhavala">
+<meta property="og:description" content="Alamouti coding across OFDM sub-carriers for frequency-selective fading channels">
+<meta property="og:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
-<meta name="twitter:title" content="Bio – Soma S Dhavala">
-<meta name="twitter:description" content="Personal background and biography of Soma S Dhavala.">
-<meta name="twitter:image" content="https://dhavala.github.io/about/images/og-image.png">
+<meta name="twitter:title" content="Space-Frequency Coded OFDM – Soma S Dhavala">
+<meta name="twitter:description" content="Alamouti coding across OFDM sub-carriers for frequency-selective fading channels">
+<meta name="twitter:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -132,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Soma S Dhavala</span>
     </a>
   </div>
@@ -142,33 +171,33 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../about/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../about/index.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../research/index.html"> 
+    <a class="nav-link" href="../../../research/index.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../teaching/index.html"> 
+    <a class="nav-link" href="../../../teaching/index.html"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../consulting/index.html"> 
+    <a class="nav-link" href="../../../consulting/index.html"> 
 <span class="menu-text">Consulting</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../saddlepoint/index.html"> 
+    <a class="nav-link" href="../../../saddlepoint/index.html"> 
 <span class="menu-text">SaddlePoint</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
 </i> 
 <span class="menu-text">SaddlePoint feed</span></a>
   </li>  
@@ -183,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../about/index.html">About</a></li><li class="breadcrumb-item"><a href="../about/bio.html">Bio</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../research/index.html">Research</a></li><li class="breadcrumb-item"><a href="../../../research/reports.html">Reports</a></li><li class="breadcrumb-item"><a href="../../../research/docs/reports/rpt621.html">Space-Frequency Coded OFDM</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -197,22 +226,22 @@ document.addEventListener('DOMContentLoaded', function() {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../about/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../about/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/bio.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../about/bio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/contact.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../about/contact.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contact</span></a>
   </div>
 </li>
@@ -220,67 +249,67 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../research/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../research/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Research</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/publications.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/publications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Publications</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/patents.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/patents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Patents</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../research/reports.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../research/reports.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reports</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt521.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt521.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Generalized Digital Modulation Techniques</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt524.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt524.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Wavelet Packets and Signal-Adapted Filterbanks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt543x.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt543x.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Architecture for Distributed Source Localization in Wireless Sensor Networks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt621.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt621.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Space-Frequency Coded OFDM</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt632.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt632.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">An Empirical Bayesian Kernel Density Estimator</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt689.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt689.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Joint Estimation in Dynamic State-Space Models</span></a>
   </div>
 </li>
@@ -288,13 +317,13 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/code.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Code</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../research/projects/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../research/projects/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Projects</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -303,13 +332,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/projects/sample-project.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/projects/sample-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample project</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/projects/another-project.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/projects/another-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Another project</span></a>
   </div>
 </li>
@@ -319,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../teaching/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../teaching/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Teaching</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -328,25 +357,25 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Homeworks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/exams.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/exams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exams</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../teaching/archives.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../teaching/archives.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Archives</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -355,31 +384,31 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutLaplace.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutLaplace.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normal Approximation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutGmm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutGmm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Gaussian Mixture for Multi-modal Posteriors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutEM.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutEM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">EM Algorithm for Mixture Modeling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutMCMC.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutMCMC.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical Methods for Bayesian Inference</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutChirp.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutChirp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Chirplet Decomposition</span></a>
   </div>
 </li>
@@ -389,13 +418,13 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../consulting/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../consulting/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Consulting</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../oss/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../oss/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">OSS</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -404,13 +433,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample tool</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../oss/another-tool.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../oss/another-tool.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Another tool</span></a>
   </div>
 </li>
@@ -418,7 +447,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../blogs/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../blogs/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Blogs</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -427,13 +456,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SaddlePoint</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../asankhya/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../asankhya/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Asankhya</span></a>
   </div>
 </li>
@@ -444,29 +473,44 @@ document.addEventListener('DOMContentLoaded', function() {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#space-frequency-coded-ofdm" id="toc-space-frequency-coded-ofdm" class="nav-link active" data-scroll-target="#space-frequency-coded-ofdm">Space-Frequency Coded OFDM</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#system-description" id="toc-system-description" class="nav-link" data-scroll-target="#system-description">System Description</a></li>
+  <li><a href="#over-loaded-ofdm" id="toc-over-loaded-ofdm" class="nav-link" data-scroll-target="#over-loaded-ofdm">Over-loaded OFDM</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <div class="section-banner">
-  <img src="../images/banners/path.jpg" alt="About banner">
+  <img src="../../../images/banners/researchbw.jpg" alt="Research banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../about/index.html">About</a></li><li class="breadcrumb-item"><a href="../about/bio.html">Bio</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../research/index.html">Research</a></li><li class="breadcrumb-item"><a href="../../../research/reports.html">Reports</a></li><li class="breadcrumb-item"><a href="../../../research/docs/reports/rpt621.html">Space-Frequency Coded OFDM</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Bio</h1>
+<h1 class="title">Space-Frequency Coded OFDM</h1>
+<p class="subtitle lead">Alamouti coding across OFDM sub-carriers for frequency-selective fading channels</p>
 </div>
 
-<div>
-  <div class="description">
-    Personal background and biography of Soma S Dhavala.
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Soma S. Dhavala </p>
+          </div>
+  </div>
     
   
     
@@ -477,9 +521,107 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 
-<p><em>(Content to be added.)</em></p>
+<section id="space-frequency-coded-ofdm" class="level1">
+<h1>Space-Frequency Coded OFDM</h1>
+<p>These notes describe a space-frequency coded OFDM system consisting of two transmitters and a single receiver. A simple Alamouti space-time code is used, and an M-ary PSK modulation maps the symbols across an OFDM channel. We also consider a variation of the scheme that spreads additional symbols across the time-frequency plane, aiming to increase the transmission rate without changing the modulation employed or increasing the bandwidth. A Rayleigh frequency-selective slow-fading channel is assumed throughout.</p>
+<p><strong>Key words:</strong> Space time/ frequency coding, OFDM, MIMO, frequency-selective channel</p>
+<section id="introduction" class="level2">
+<h2 data-anchor-id="introduction">Introduction</h2>
+<p>High data rate reliable transmission over wireless channels is seemingly possible due to the advent of Space-time codes. Space-time codes rely on transmit diversity and are particularly suitable when the signal undergoes frequency flat fading due to the channel. In the original space-time code scheme [1], Alamouti showed that it is possible to obtain the same diversity as with multiple receivers. Since then, transmit diversity has been pursued with great interest among the research community. However, the fundamental assumption based on which the scheme works is that the channel is frequency flat, i.e., the coherence bandwidth of the channel is much smaller than bandwidth of the signal which may not be true in wideband communication [2-5]. This assumption may not be generally true in wideband communication systems. For example, high-data rates are made possible with increased resources in terms of bandwidth in WWAN and outdoor wireless networks. There is a need to develop new technologies for providing wideband wireless communications.</p>
+<p>OFDM (orthogonal frequency division multiplexing) has matured into a very practicable technique and has been incorporated into the IEEE 802.11a [2]. OFDM splits the channel into sub-channels equal to the no. of carriers under use. Each sub-channel is treated independently and the multiplexed modulated symbols are sent over each carrier. This operation is performed via IFFT at the transmitter side and with FFT at the receiver side. This is another interesting aspect of OFDM.</p>
+<p>Thus marrying OFDM with Space-time codes appears very natural in frequency selective fading scenarios. OFDM splits the channel into near frequency-flat sub-channels and Space-time codes exploit the transmit diversity under these frequency-flat sub-channels. Together they form a promising technological alternative for high data rate broadband communications.</p>
+<p>These notes consider a 2 x 1 Alamouti space-time code with OFDM (which is called a space-frequency code, as the space-time code is transmitted over another carrier rather than another time-slot). A frequency selective Rayleigh channel is assumed. Information bits are M-ary PSK modulated, which are then converted into space-frequency codes. These are multiplexed to form OFDM frames for final transmission. A variation that improves the system is also considered: information about a few more symbols is spread over all the carriers by varying both the phase and energy of that constellation in a controlled manner. The encoding and decoding mechanisms are described below.</p>
+</section>
+<section id="system-description" class="level2">
+<h2 data-anchor-id="system-description">System Description</h2>
+<ul>
+<li>No.&nbsp;of carriers: <span class="math inline">\(N_c\)</span></li>
+<li>Total Bandwidth: W Hz</li>
+<li>Input symbols (M-ary coded) in a frame: <span class="math inline">\(X_0, X_1, \ldots, X_{N_c}\)</span></li>
+<li>Modulation: M-ary PSK</li>
+<li>No.&nbsp;of Tx: 2</li>
+<li>No.&nbsp;of Rx: 1</li>
+<li>Space time code: Alamouti 2 x 2 code</li>
+</ul>
+<p>Channel Model [3][4][5]:</p>
+<p>No.&nbsp;of taps: L = 6</p>
+<p><span class="math display">\[
+h_i(n) = \sum_{l=1}^{L} a_l(n)\,\delta(t - l/W)
+\]</span></p>
+<p>where <span class="math inline">\(a_l\)</span> are zero mean complex Gaussian random variables with variance 1/L</p>
+<p><span class="math display">\[
+H_i(k) = \sum_{j=1}^{N_c} h_i(j)\,\exp(-j2\pi kn / N_c)
+\]</span></p>
+<p>Space-frequency code at Tx -1 (total <span class="math inline">\(N_c\)</span> symbols) :</p>
+<p><span class="math display">\[
+\mathbf{X}_1 = [\,X_{0,}\ -X_1^*, \ldots, X_{N_c-2}\ -X_{N_c-1}^*\,]^T
+\]</span></p>
+<p>Space-frequency code at Tx -2 (total <span class="math inline">\(N_c\)</span> symbols):</p>
+<p><span class="math display">\[
+\mathbf{X}_2 = [\,X_1,\ X_0^*, \ldots, X_{N_c-1}\ X_{N_c-2}^*\,]^T
+\]</span></p>
+<p>Received symbols at the receiver:</p>
+<p><span class="math display">\[
+\mathbf{Y}_e = \mathbf{\Lambda}_{1e}\mathbf{X}_{1e} + \mathbf{\Lambda}_{1e}\mathbf{X}_{2e} + \mathbf{N}_e
+\]</span></p>
+<p><span class="math display">\[
+\mathbf{Y}_o = \mathbf{\Lambda}_{1o}\mathbf{X}_{1o} + \mathbf{\Lambda}_{2o}\mathbf{X}_{2o} + \mathbf{N}_o
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\mathbf{X}_{ie} = \mathbf{X}_i(2k)
+\]</span></p>
+<p><span class="math display">\[
+\mathbf{X}_{io} = \mathbf{X}_i(2k+1),\ k = 0,1 \ldots Nc/2
+\]</span></p>
+<p>and <span class="math inline">\(\mathbf{N}_e, \mathbf{Y}_e, \mathbf{\Lambda}\)</span> defined likewise.</p>
+<p><span class="math inline">\(\mathbf{\Lambda}\)</span> is a diagonal matrix with <span class="math inline">\(H_i(k)\)</span> as its diagonal elements</p>
+<p>The estimated (decoded) symbols (assuming that two adjacent sub-channels have approximately same frequency response) after stripping the cyclic prefix and performing FFT operation on the received symbols, are [6],</p>
+<p><span class="math display">\[
+\hat{\mathbf{X}}_e = (|\mathbf{\Lambda}_{1e}|^2 + |\mathbf{\Lambda}_{2e}|^2)\mathbf{X}_e + \mathbf{\Lambda}_{1e}^*\mathbf{N}_e + \mathbf{\Lambda}_{1e}\mathbf{N}_o^*
+\]</span></p>
+<p><span class="math display">\[
+\hat{\mathbf{X}}_e = (|\mathbf{\Lambda}_o|^2 + |\mathbf{\Lambda}_{2o}|^2)\mathbf{X}_o + \mathbf{\Lambda}_{2e}^*\mathbf{N}_e - \mathbf{\Lambda}_{1o}\mathbf{N}_o^*
+\]</span></p>
+<p>This equation enables us to study the performance of the scheme completely in the constellation domain.</p>
+</section>
+<section id="over-loaded-ofdm" class="level2">
+<h2 data-anchor-id="over-loaded-ofdm">Over-loaded OFDM</h2>
+<p>A natural idea is to spread a message symbol onto all the carriers. An explanation is sought to suggest a way of spreading the message symbols. In the OFDM case, message symbols are modulated on to separate carriers which are orthogonal. Suppose if we use time-varying signals to modulate these message symbols, we can overload the time-frequency plane i.e., besides all the carriers, we can modulate some additional symbols using these time-varying signals. In the context of M-ary FSK, this affects the constellation in two ways:</p>
+<p>The phase as well as radius of the constellation is varied. In the regular M-ary OFDM, the constellation is cylinder. The radius is equal to the symbol energy and each section of the cylinder corresponds to a carrier. When chirp signals are used to modulate additional symbols, then, the phase of the message symbol in a particular is corrupted by the phase of the chirp signal and phase of the message symbols this chirp signal is carrying. The radius is affected by the addition of instantaneous energy of the chirp signal. The modified constellation can be represented as:</p>
+<p><span class="math display">\[
+\begin{bmatrix} S'_o \\ \vdots \\ S'_{Nc} \end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; 0 \ldots 0 &amp; W_1^0 \ldots W_{Ne} \\
+\vdots &amp; &amp; \\
+0 &amp; \ldots\ 1 &amp; W_1^{Nc} \ldots W_{ne}^{Nc}
+\end{bmatrix}
+\begin{bmatrix} \vdots \\ S_{Nc} \\ S_{Nc+1} \\ \vdots \\ S_{Nc+Ne} \end{bmatrix}
+\]</span></p>
+<p><span class="math inline">\(S_i\)</span> : mapped symbol <span class="math inline">\(i \in [0, Nc - 1]\)</span></p>
+<p><span class="math inline">\(W_i^k\)</span> : weight of ith symbol over ith carrier</p>
+<p><span class="math display">\[
+\sum_{i=0}^{Nc-1} W_i^k = 1
+\]</span></p>
+<p>These modified symbols are now used to form the space-frequency codes. The decoding is performed by inverting the weight matrix to obtain approximate Nc+Ne constellation vectors which are then subjected to M-ary PSK detection. The choice of the weight matrix affects the performance severely. It is of much interest to study how to design the weight matrix for a given modulation and given number of carriers. Constructing such a pseudo-orthogonal weight matrix is a problem of great interest.</p>
+</section>
+<section id="conclusions" class="level2">
+<h2 data-anchor-id="conclusions">Conclusions</h2>
+<p>For a large number of carriers at a given bandwidth, the symbol error rate is expected to be almost the same, because the sub-channels are frequency flat, each sub-channel can be used to its full capacity, and the assumption that adjacent sub-channels are identical also holds. As M increases, the SER curve shifts: to achieve the same SER, more power is required to push the constellation further away from the origin and offer more resolution or detection capability. For the over-loaded scheme, one would expect little degradation in the SER, because the Ne extra symbols are spread over all the carriers and all the carriers suffer independent fading, so frequency diversity should offer some advantage. This motivates the design of new pseudo-orthogonal weight matrices.</p>
+</section>
+<section id="references" class="level2">
+<h2 data-anchor-id="references">References</h2>
+<p>[1] S.M. Alamouti, “A simple transmitter diversity scheme for wireless communications,” <em>IEEE JSAC</em>, Vol. 16, No.&nbsp;3, pp 1451-1458, 1998</p>
+<p>[2] http://www.nari.ee.ethz.ch/commth/pubs/files/proc03.pdf</p>
+<p>[3] http://www.tele.ntnu.no/projects/beats/Documents/GesbertMIMOlecture.pdf</p>
+<p>[4] D. Agarwal, V. Tarokh, A. Naguib, and Nambi Seshadri, “Space-time coded OFDM for High Data Rate Wireless Communication over wideband,” <em>Proc. VTC</em>, Ottawa, Canada, Vol. 3, pp.&nbsp;2232-2236, 1998</p>
+<p>[5] M, <em>Torabi, M.R. Soleymani</em>, “Adaptive bit allocation for space-time block coded OFDM system,” <em>Acoustics, Speech, and Signal Processing, 2003. Proceedings. (ICASSP ’03). 2003 IEEE International Conference on</em>, Volume: 4 , 6-10 April 2003, Pages: IV - 409-12 vol.4</p>
+<p>[6] <em>Lee, K.F.; Williams, D.B.</em>, “A space-frequency transmitter diversity technique for OFDM systems,” <em>Global Telecommunications Conference, 2000. GLOBECOM ’00. IEEE</em>, Volume: 3 , 27 Nov.-1 Dec.&nbsp;2000, Pages: 1473 - 1477 vol.3</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -912,5 +1054,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

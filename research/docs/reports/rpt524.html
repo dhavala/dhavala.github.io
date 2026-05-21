@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Personal background and biography of Soma S Dhavala.">
+<meta name="author" content="Soma S. Dhavala">
 
-<title>Bio – Soma S Dhavala</title>
+<title>Wavelet Packets and Signal-Adapted Filterbanks – Soma S Dhavala</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,19 +27,19 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../images/favicon.png" rel="icon" type="image/png">
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-10f4948e065e4e2a931233443de4b76e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../../images/favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-10f4948e065e4e2a931233443de4b76e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -114,14 +114,43 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Bio – Soma S Dhavala">
-<meta property="og:description" content="Personal background and biography of Soma S Dhavala.">
-<meta property="og:image" content="https://dhavala.github.io/about/images/og-image.png">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Wavelet Packets and Signal-Adapted Filterbanks – Soma S Dhavala">
+<meta property="og:description" content="Designing signal-adapted bases via principal component filter banks, compaction filters, and wavelet packets">
+<meta property="og:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
-<meta name="twitter:title" content="Bio – Soma S Dhavala">
-<meta name="twitter:description" content="Personal background and biography of Soma S Dhavala.">
-<meta name="twitter:image" content="https://dhavala.github.io/about/images/og-image.png">
+<meta name="twitter:title" content="Wavelet Packets and Signal-Adapted Filterbanks – Soma S Dhavala">
+<meta name="twitter:description" content="Designing signal-adapted bases via principal component filter banks, compaction filters, and wavelet packets">
+<meta name="twitter:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -132,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Soma S Dhavala</span>
     </a>
   </div>
@@ -142,33 +171,33 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../about/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../about/index.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../research/index.html"> 
+    <a class="nav-link" href="../../../research/index.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../teaching/index.html"> 
+    <a class="nav-link" href="../../../teaching/index.html"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../consulting/index.html"> 
+    <a class="nav-link" href="../../../consulting/index.html"> 
 <span class="menu-text">Consulting</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../saddlepoint/index.html"> 
+    <a class="nav-link" href="../../../saddlepoint/index.html"> 
 <span class="menu-text">SaddlePoint</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
 </i> 
 <span class="menu-text">SaddlePoint feed</span></a>
   </li>  
@@ -183,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../about/index.html">About</a></li><li class="breadcrumb-item"><a href="../about/bio.html">Bio</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../research/index.html">Research</a></li><li class="breadcrumb-item"><a href="../../../research/reports.html">Reports</a></li><li class="breadcrumb-item"><a href="../../../research/docs/reports/rpt524.html">Wavelet Packets and Signal-Adapted Filterbanks</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -197,22 +226,22 @@ document.addEventListener('DOMContentLoaded', function() {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../about/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../about/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/bio.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../about/bio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/contact.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../about/contact.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contact</span></a>
   </div>
 </li>
@@ -220,67 +249,67 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../research/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../research/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Research</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/publications.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/publications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Publications</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/patents.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/patents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Patents</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../research/reports.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../research/reports.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reports</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt521.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt521.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Generalized Digital Modulation Techniques</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt524.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt524.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Wavelet Packets and Signal-Adapted Filterbanks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt543x.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt543x.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Architecture for Distributed Source Localization in Wireless Sensor Networks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt621.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt621.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Space-Frequency Coded OFDM</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt632.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt632.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">An Empirical Bayesian Kernel Density Estimator</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt689.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt689.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Joint Estimation in Dynamic State-Space Models</span></a>
   </div>
 </li>
@@ -288,13 +317,13 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/code.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Code</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../research/projects/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../research/projects/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Projects</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -303,13 +332,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/projects/sample-project.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/projects/sample-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample project</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/projects/another-project.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/projects/another-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Another project</span></a>
   </div>
 </li>
@@ -319,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../teaching/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../teaching/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Teaching</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -328,25 +357,25 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Homeworks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/exams.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/exams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exams</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../teaching/archives.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../teaching/archives.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Archives</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -355,31 +384,31 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutLaplace.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutLaplace.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normal Approximation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutGmm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutGmm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Gaussian Mixture for Multi-modal Posteriors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutEM.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutEM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">EM Algorithm for Mixture Modeling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutMCMC.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutMCMC.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical Methods for Bayesian Inference</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutChirp.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutChirp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Chirplet Decomposition</span></a>
   </div>
 </li>
@@ -389,13 +418,13 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../consulting/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../consulting/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Consulting</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../oss/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../oss/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">OSS</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -404,13 +433,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample tool</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../oss/another-tool.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../oss/another-tool.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Another tool</span></a>
   </div>
 </li>
@@ -418,7 +447,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../blogs/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../blogs/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Blogs</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -427,13 +456,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SaddlePoint</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../asankhya/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../asankhya/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Asankhya</span></a>
   </div>
 </li>
@@ -444,29 +473,46 @@ document.addEventListener('DOMContentLoaded', function() {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#wavelet-packets-and-signal-adapted-filterbanks" id="toc-wavelet-packets-and-signal-adapted-filterbanks" class="nav-link active" data-scroll-target="#wavelet-packets-and-signal-adapted-filterbanks">Wavelet Packets and Signal-Adapted Filterbanks</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#filter-bank" id="toc-filter-bank" class="nav-link" data-scroll-target="#filter-bank">Filter-bank</a></li>
+  <li><a href="#principal-component-filter-banks-pcfbs" id="toc-principal-component-filter-banks-pcfbs" class="nav-link" data-scroll-target="#principal-component-filter-banks-pcfbs">Principal component filter-banks (PCFBS)</a></li>
+  <li><a href="#wavelet-packets" id="toc-wavelet-packets" class="nav-link" data-scroll-target="#wavelet-packets">Wavelet Packets</a></li>
+  <li><a href="#wavelet-packets-as-signal-adapted-fbs" id="toc-wavelet-packets-as-signal-adapted-fbs" class="nav-link" data-scroll-target="#wavelet-packets-as-signal-adapted-fbs">Wavelet Packets as signal-adapted FBs</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <div class="section-banner">
-  <img src="../images/banners/path.jpg" alt="About banner">
+  <img src="../../../images/banners/researchbw.jpg" alt="Research banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../about/index.html">About</a></li><li class="breadcrumb-item"><a href="../about/bio.html">Bio</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../research/index.html">Research</a></li><li class="breadcrumb-item"><a href="../../../research/reports.html">Reports</a></li><li class="breadcrumb-item"><a href="../../../research/docs/reports/rpt524.html">Wavelet Packets and Signal-Adapted Filterbanks</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Bio</h1>
+<h1 class="title">Wavelet Packets and Signal-Adapted Filterbanks</h1>
+<p class="subtitle lead">Designing signal-adapted bases via principal component filter banks, compaction filters, and wavelet packets</p>
 </div>
 
-<div>
-  <div class="description">
-    Personal background and biography of Soma S Dhavala.
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Soma S. Dhavala </p>
+          </div>
+  </div>
     
   
     
@@ -477,9 +523,82 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 
-<p><em>(Content to be added.)</em></p>
+<section id="wavelet-packets-and-signal-adapted-filterbanks" class="level1">
+<h1>Wavelet Packets and Signal-Adapted Filterbanks</h1>
+<p>These notes investigate methods for designing signal-adapted bases from filter banks, in particular principal component filter banks (PCFBs), FIR compaction filters, and wavelet packets (WPs), and the interplay among them. Signal-adapted filter banks, when viewed as a way of designing a best basis, find many applications in communication, source coding, and feature detection. There exist many ways of designing such filter banks, arising mainly from the various properties one may demand of them: finite length, number of channels, smoothness, regularity, compactness, and existence in all practical cases. Quite naturally, choosing a design mechanism is not a simple task. PCFBs are optimal in the sense of coding gain but may not always exist. FIR compaction filters, on the other hand, are particularly suitable for implementation but are sub-optimal. As an alternative for optimal energy compaction, one can consider wavelet packets: a fully-grown wavelet tree is nothing but a uniform filter bank, the bandwidth of each band proportional to the depth of the tree. Pruning this fully-grown tree can lead to a non-uniform filter bank, or to any structure driven by the design criteria, so WPs can be considered an alternative to PCFBs and FIR compaction filters.</p>
+<section id="introduction" class="level2">
+<h2 data-anchor-id="introduction">Introduction</h2>
+<p>Signal Adapted Filter-Banks find numerous applications in signal representation, data compression, noise suppression, progressive transmission. These filters are designed based on the input power spectral density subject to certain constraints on the number of channels, order of the filter lengths, bandwidth of the filters etc.. There exist numerous procedures to derive and design filters. Some of them include Principal Component filter banks, Compaction filters [1-3].</p>
+<p>Based on the design criteria and input spectral density, the nature these filters vary. For example, it turns that, an optimal transform coder is an optimal subband coder with constant polyphase matrix.</p>
+<p>Due to the presence of many constraints in the design stage, one should be very careful in designing appropriate filters. For example, if the number of channels is more than two and filter length is constrained, then PCFBs may not exist. These difficulties pose significant challenge to the designer.</p>
+<p>These notes consider an alternative to these signal-adapted filter banks: a class of filter banks derived from wavelet packets.</p>
+</section>
+<section id="filter-bank" class="level2">
+<h2 data-anchor-id="filter-bank">Filter-bank</h2>
+<p>A filterbank, essentially decomposes the input spectrum into certain number of sub-bands where the subbands may or may not overlap. The advantage of dividing the spectrum into smaller bands is that most of the energy might be present in only few of the subbands while the remaining bands may not have any energy in them. This helps us in processing only the subband corresponding to the maximum energy. Applications of such principle can be found in data compression, progressive transmission.</p>
+<p>A subband coder is optimal if it follows the following two properties ( a necessary and sufficient condition for optimality)</p>
+<p>The coding gain is maximized if:</p>
+<ol type="a">
+<li>Total decorrelation (the subbands are decorrelated one from the other)</li>
+<li>The subbands majorize the spectrum</li>
+</ol>
+<p>Where the coding gain is defined as:</p>
+<p><span class="math display">\[
+G_{SBC}(M) = \frac{\sum_{i=0}^{M-1} \sigma_i^2 / M}{\left( \prod_{i=0}^{M-1} \sigma_i^2 \right)^{1/M}} = \frac{\sigma_x^2}{\left( \prod_{i=0}^{M-1} \sigma_i^2 \right)^{1/M}}.
+\]</span></p>
+<p><span class="math inline">\(\sigma_i^2\)</span>, is the variance of the <span class="math inline">\(i^{th}\)</span> subband. <span class="math inline">\(\sigma_x^2\)</span> is the variance of the input.</p>
+</section>
+<section id="principal-component-filter-banks-pcfbs" class="level2">
+<h2 data-anchor-id="principal-component-filter-banks-pcfbs">Principal component filter-banks (PCFBS)</h2>
+<p><strong>Definition:</strong> Let C be a class of FBs (like transform coder class, class of filter of infinite order etc..), then for a given input spectral density, PCFB is the FB that if its the variance vector majorizes all vectors in the subbands belonging to the class C.</p>
+<p>PCFBs are optimal in the sense that, they maximize the coding gain (<span class="math inline">\(G_{SBC}\)</span>). PCFBs have strong connection with transforms coders (in the case of FBs belonging to the class C), to Wiener filters (when the objective is to estimate the signal in the presence of noise) and are also the filters which minimize the transmit power in the discrete multi-tone modulation. In particular, when the filter order is less than the number of channels, KLT maximizes the coding gain which in this case is the PCFB.</p>
+<p>Despite their many desirable properties, their existence is not always guaranteed. At least in the case of DFT filterbanks and cosine-modulated filter banks PCFBs cease to exist. However, in the two-channel case, FBs with unconstrained order and in the transform coder case, they always exist. In other situations, one has to analyze case-by-case. This makes them less interesting despite their many desirable attributes.</p>
+<p>In the case when we don’t have PCFBS, we design compaction filters. An FIR compaction filter is said to be the one that compacts most of the energy into only one band. Then, remaining N-1 filters are completed by considering the complement of the power spectral density. or . A compaction filter is necessarily a Nyquist(M) filter, i.e.,</p>
+<p><span class="math display">\[
+|H_i(e^{j\omega})|^2 \Big|_{\downarrow M} = 1
+\]</span></p>
+<p>Let <span class="math inline">\(G(e^{j\omega}) = |H(e^{j\omega})|^2\)</span>, and compaction gain is defined as:</p>
+<p><span class="math display">\[
+G_{comp}(M,N) = \frac{\sigma_y^2}{\sigma_x^2} = \frac{\int_{-\pi}^{\pi} G(e^{j\omega}) S_{xx}(e^{j\omega}) \frac{d\omega}{2\pi}}{\int_{-\pi}^{\pi} S_{xx}(e^{j\omega}) \frac{d\omega}{2\pi}}
+\]</span></p>
+<p>The method of designing compaction filters is in designing a filter which maximizes the compaction gain subject to the constraints,</p>
+<p><span class="math display">\[
+g(Mn) = \delta(n) \text{ (Nyquist}(M) \text{ condition)} \quad \text{and} \quad G(e^{j\omega}) \geq 0 \text{ (nonnegativity)}
+\]</span></p>
+<p>Several methods were proposed to designing such filters in [4]. In the present context, we motivate ourselves to consider the following :</p>
+<p>We want to design filters that are easily computable and share the elegance of PCFBs. That is we want to retain the existence of FIR compaction filters and retain and yet try to maximize the coding gain. We try to solve this by resorting to wavelet packets.</p>
+</section>
+<section id="wavelet-packets" class="level2">
+<h2 data-anchor-id="wavelet-packets">Wavelet Packets</h2>
+<p>A Wavelet packet is a complete grown wavelet tree. That is in dyadic wavelet transform, we only further filter the approximation coefficients and leave the detailed coefficients unattended. If think of the first analysis filter in as an approximate low-pass filter, then we repeatedly filter this low-pass filtered signal. Thus, after M levels of decomposition, we would have one approximate coefficient band and M-1 detailed coefficient band. We keep splitting the low-pass band repeatedly. In wavelet packets, we can process any of these low-pass or high-pass bands. If we selectively perform this operation of splitting, we can obtain a non-uniform filter-bank. A fully-grown wavelet packet upto M levels, would have M bands each of width 2Pi/M. This is the central idea behind using WPs as signal-adapted FBs.</p>
+</section>
+<section id="wavelet-packets-as-signal-adapted-fbs" class="level2">
+<h2 data-anchor-id="wavelet-packets-as-signal-adapted-fbs">Wavelet Packets as signal-adapted FBs</h2>
+<p>We achieve this by pruning the WP tree based on a certain criteria. It is suggested that certain entropy based techniques can be used to prune the tree. This problem was considered in the context of best-basis selection. Indeed, WP offer a wide variety of bases over which the signal can be projected. Thus, it is very suitable for processing large class of signals. As we increase the number of bands or in other words if we increase the depth of the decomposition, we search for even larger number of bases that can best approximate the signal under consideration.</p>
+<p>A wavelet packet has an equivalent subband (filter-bank) representation: the wavelet packet tree splits the spectrum hierarchically, and each leaf of the tree corresponds to a band of the input spectrum.</p>
+<p>The definition of best tree (i.e., the best way to prune the tree) very much depends on the objective function being used. In the context of best basis selection, [5], have used entropy as the criteria. Those nodes are pruned which minimize the cost function specified in terms of entropy. For example, when “pruning” corresponds to merging, i.e., we first grow the wavelet tree to its fullest depth possible, then we try to merge those two nodes which result in minimum increase in the entropy. We repeat this process until a stopping criteria is met. This stopping criteria can be given computational complexity, number of bands needed. On the other hand it is also possible to prune the tree by merging. In this case, we start with a initial tree and try to that node which results in maximum reduction in entropy. Like the earlier case, here also the stopping criteria can be desired number of subbands or desired SNR. The entropy function used in this operation is:</p>
+<p><span class="math display">\[
+- \sum_x x^2 \ln(x^2)
+\]</span></p>
+<p>And this function is an additive function. However, as mentioned earlier, we want to prune the WP tree such that coding gain is maximized. For simplicity in implementation, we start with just two bands in the tree and try to split the bands which result in maximum increase in coding gain!</p>
+</section>
+<section id="conclusions" class="level2">
+<h2 data-anchor-id="conclusions">Conclusions</h2>
+<p>The criteria for pruning the tree play an important role in determining the structure of the resulting filter bank.</p>
+<p>Wavelet packets are practically feasible; one needs alternate criteria for speeding up the pruning.</p>
+<p>The entropy used in this pruning is an additive function, but it is not directly related to information.</p>
+</section>
+<section id="references" class="level2">
+<h2 data-anchor-id="references">References</h2>
+<p>[1] Sony Akkarakaran, P.P. Vaidyanathan, “Principal component filter banks- Existence issues and applications to modulated filter banks”, IEEE ISCAS –May 2000, pp.&nbsp;I-523-526</p>
+<p>[2] P.P. Vaidyanathan, “Theory of optimal subband coders”, IEEE Trans. on Sig. Proc., Vol. 46, No.&nbsp;6, June, 1998</p>
+<p>[3] P.P. Vaidyanathan, “The best basis problem, compaction filters and PCFB design problems”, IEEE ICAS, Orlando, Florida, June, 1999.</p>
+<p>[4] A. Kirac, P.P. Vaidyanathan, “Efficient methods of optimal FIR compaction filters for M-channel FIR subband coders”, Proc. of 30th ASILMORE conf. on Signals, Systems and Computers, 1996</p>
+<p>[5] Ronald R. Coifman, M. V. Wickerhauser, “Entropy-based Algorithms for best basis selection”, IEEE Trans. on. Info. Th., Vol. 38, No.&nbsp;2, March, 1992, pp.&nbsp;713-718</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -912,5 +1031,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

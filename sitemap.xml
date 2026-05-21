@@ -2,130 +2,154 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dhavala.github.io/consulting/index.html</loc>
-    <lastmod>2026-05-21T10:58:15.664Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.406Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/saddlepoint/welcome/index.html</loc>
-    <lastmod>2026-05-21T10:58:15.677Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.420Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/saddlepoint/pagerank-knn/index.html</loc>
-    <lastmod>2026-05-21T10:58:15.677Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.420Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/oss/another-tool.html</loc>
-    <lastmod>2026-05-21T10:58:15.677Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.419Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/index.html</loc>
-    <lastmod>2026-05-21T10:58:15.675Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.418Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/teaching/archives.html</loc>
-    <lastmod>2026-05-21T10:58:15.678Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.421Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/teaching/index.html</loc>
-    <lastmod>2026-05-21T10:58:15.678Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.421Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/teaching/docs/archives/tutGmm.html</loc>
-    <lastmod>2026-05-21T10:58:15.678Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/teaching/docs/archives/tutEM.html</loc>
-    <lastmod>2026-05-21T10:58:15.678Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/teaching/docs/archives/tutLaplace.html</loc>
-    <lastmod>2026-05-21T10:58:15.678Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/research/code.html</loc>
-    <lastmod>2026-05-21T10:58:15.677Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/research/projects/another-project.html</loc>
-    <lastmod>2026-05-21T10:58:15.677Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/research/projects/index.html</loc>
-    <lastmod>2026-05-21T10:58:15.677Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/research/publications.html</loc>
-    <lastmod>2026-05-21T10:58:15.677Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/about/contact.html</loc>
-    <lastmod>2026-05-21T10:58:15.663Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/about/bio.html</loc>
-    <lastmod>2026-05-21T10:58:15.663Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/asankhya/hello/index.html</loc>
-    <lastmod>2026-05-21T10:58:15.663Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/asankhya/index.html</loc>
-    <lastmod>2026-05-21T10:58:15.663Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/about/index.html</loc>
-    <lastmod>2026-05-21T10:58:15.663Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/blogs/index.html</loc>
-    <lastmod>2026-05-21T10:58:15.663Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/research/patents.html</loc>
-    <lastmod>2026-05-21T10:58:15.677Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/research/projects/sample-project.html</loc>
-    <lastmod>2026-05-21T10:58:15.677Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/research/index.html</loc>
-    <lastmod>2026-05-21T10:58:15.677Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhavala.github.io/teaching/homeworks.html</loc>
-    <lastmod>2026-05-21T10:58:15.678Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.421Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/teaching/docs/archives/tutMCMC.html</loc>
-    <lastmod>2026-05-21T10:58:15.678Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.421Z</lastmod>
   </url>
   <url>
-    <loc>https://dhavala.github.io/teaching/docs/archives/rpt689.html</loc>
-    <lastmod>2026-05-21T10:58:15.678Z</lastmod>
+    <loc>https://dhavala.github.io/teaching/homeworks.html</loc>
+    <lastmod>2026-05-21T15:59:39.421Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/reports.html</loc>
+    <lastmod>2026-05-21T15:59:39.420Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/projects/another-project.html</loc>
+    <lastmod>2026-05-21T15:59:39.420Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/projects/index.html</loc>
+    <lastmod>2026-05-21T15:59:39.420Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/docs/reports/rpt543x.html</loc>
+    <lastmod>2026-05-21T15:59:39.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/docs/reports/rpt632.html</loc>
+    <lastmod>2026-05-21T15:59:39.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/docs/reports/rpt524.html</loc>
+    <lastmod>2026-05-21T15:59:39.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/publications.html</loc>
+    <lastmod>2026-05-21T15:59:39.420Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/about/contact.html</loc>
+    <lastmod>2026-05-21T15:59:39.406Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/about/bio.html</loc>
+    <lastmod>2026-05-21T15:59:39.406Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/asankhya/hello/index.html</loc>
+    <lastmod>2026-05-21T15:59:39.406Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/asankhya/index.html</loc>
+    <lastmod>2026-05-21T15:59:39.406Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/about/index.html</loc>
+    <lastmod>2026-05-21T15:59:39.406Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/blogs/index.html</loc>
+    <lastmod>2026-05-21T15:59:39.406Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/patents.html</loc>
+    <lastmod>2026-05-21T15:59:39.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/docs/reports/rpt521.html</loc>
+    <lastmod>2026-05-21T15:59:39.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/docs/reports/rpt689.html</loc>
+    <lastmod>2026-05-21T15:59:39.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/docs/reports/rpt621.html</loc>
+    <lastmod>2026-05-21T15:59:39.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/projects/sample-project.html</loc>
+    <lastmod>2026-05-21T15:59:39.420Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/index.html</loc>
+    <lastmod>2026-05-21T15:59:39.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/research/code.html</loc>
+    <lastmod>2026-05-21T15:59:39.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/teaching/docs/archives/tutLaplace.html</loc>
+    <lastmod>2026-05-21T15:59:39.421Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhavala.github.io/teaching/docs/archives/tutEM.html</loc>
+    <lastmod>2026-05-21T15:59:39.421Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/teaching/docs/archives/tutChirp.html</loc>
-    <lastmod>2026-05-21T10:58:15.678Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.421Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/teaching/notes.html</loc>
-    <lastmod>2026-05-21T10:58:15.678Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.421Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/teaching/exams.html</loc>
-    <lastmod>2026-05-21T10:58:15.678Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.421Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/oss/index.html</loc>
-    <lastmod>2026-05-21T10:58:15.677Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.419Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/oss/sample-tool.html</loc>
-    <lastmod>2026-05-21T10:58:15.677Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.419Z</lastmod>
   </url>
   <url>
     <loc>https://dhavala.github.io/saddlepoint/index.html</loc>
-    <lastmod>2026-05-21T10:58:15.677Z</lastmod>
+    <lastmod>2026-05-21T15:59:39.420Z</lastmod>
   </url>
 </urlset>

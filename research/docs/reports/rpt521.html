@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Personal background and biography of Soma S Dhavala.">
+<meta name="author" content="Soma S. Dhavala">
 
-<title>Bio – Soma S Dhavala</title>
+<title>Generalized Digital Modulation Techniques – Soma S Dhavala</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,19 +27,19 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../images/favicon.png" rel="icon" type="image/png">
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-10f4948e065e4e2a931233443de4b76e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../../images/favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-10f4948e065e4e2a931233443de4b76e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -114,14 +114,43 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Bio – Soma S Dhavala">
-<meta property="og:description" content="Personal background and biography of Soma S Dhavala.">
-<meta property="og:image" content="https://dhavala.github.io/about/images/og-image.png">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Generalized Digital Modulation Techniques – Soma S Dhavala">
+<meta property="og:description" content="A unified chirplet-based framework, with emphasis on IF modulation">
+<meta property="og:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
-<meta name="twitter:title" content="Bio – Soma S Dhavala">
-<meta name="twitter:description" content="Personal background and biography of Soma S Dhavala.">
-<meta name="twitter:image" content="https://dhavala.github.io/about/images/og-image.png">
+<meta name="twitter:title" content="Generalized Digital Modulation Techniques – Soma S Dhavala">
+<meta name="twitter:description" content="A unified chirplet-based framework, with emphasis on IF modulation">
+<meta name="twitter:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -132,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Soma S Dhavala</span>
     </a>
   </div>
@@ -142,33 +171,33 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../about/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../about/index.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../research/index.html"> 
+    <a class="nav-link" href="../../../research/index.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../teaching/index.html"> 
+    <a class="nav-link" href="../../../teaching/index.html"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../consulting/index.html"> 
+    <a class="nav-link" href="../../../consulting/index.html"> 
 <span class="menu-text">Consulting</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../saddlepoint/index.html"> 
+    <a class="nav-link" href="../../../saddlepoint/index.html"> 
 <span class="menu-text">SaddlePoint</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
 </i> 
 <span class="menu-text">SaddlePoint feed</span></a>
   </li>  
@@ -183,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../about/index.html">About</a></li><li class="breadcrumb-item"><a href="../about/bio.html">Bio</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../research/index.html">Research</a></li><li class="breadcrumb-item"><a href="../../../research/reports.html">Reports</a></li><li class="breadcrumb-item"><a href="../../../research/docs/reports/rpt521.html">Generalized Digital Modulation Techniques</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -197,22 +226,22 @@ document.addEventListener('DOMContentLoaded', function() {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../about/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../about/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/bio.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../about/bio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/contact.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../about/contact.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contact</span></a>
   </div>
 </li>
@@ -220,67 +249,67 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../research/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../research/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Research</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/publications.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/publications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Publications</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/patents.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/patents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Patents</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../research/reports.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../research/reports.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reports</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt521.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt521.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Generalized Digital Modulation Techniques</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt524.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt524.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Wavelet Packets and Signal-Adapted Filterbanks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt543x.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt543x.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Architecture for Distributed Source Localization in Wireless Sensor Networks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt621.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt621.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Space-Frequency Coded OFDM</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt632.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt632.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">An Empirical Bayesian Kernel Density Estimator</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/docs/reports/rpt689.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/docs/reports/rpt689.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Joint Estimation in Dynamic State-Space Models</span></a>
   </div>
 </li>
@@ -288,13 +317,13 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/code.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Code</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../research/projects/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../research/projects/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Projects</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -303,13 +332,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/projects/sample-project.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/projects/sample-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample project</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/projects/another-project.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../research/projects/another-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Another project</span></a>
   </div>
 </li>
@@ -319,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../teaching/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../teaching/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Teaching</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -328,25 +357,25 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Homeworks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/exams.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/exams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exams</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../teaching/archives.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../teaching/archives.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Archives</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -355,31 +384,31 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutLaplace.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutLaplace.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normal Approximation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutGmm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutGmm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Gaussian Mixture for Multi-modal Posteriors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutEM.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutEM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">EM Algorithm for Mixture Modeling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutMCMC.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutMCMC.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical Methods for Bayesian Inference</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/docs/archives/tutChirp.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../teaching/docs/archives/tutChirp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Chirplet Decomposition</span></a>
   </div>
 </li>
@@ -389,13 +418,13 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../consulting/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../consulting/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Consulting</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../oss/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../oss/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">OSS</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -404,13 +433,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample tool</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../oss/another-tool.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../oss/another-tool.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Another tool</span></a>
   </div>
 </li>
@@ -418,7 +447,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../blogs/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../blogs/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Blogs</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -427,13 +456,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SaddlePoint</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../asankhya/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../asankhya/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Asankhya</span></a>
   </div>
 </li>
@@ -444,29 +473,50 @@ document.addEventListener('DOMContentLoaded', function() {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#generalized-digital-modulation-techniques" id="toc-generalized-digital-modulation-techniques" class="nav-link active" data-scroll-target="#generalized-digital-modulation-techniques">Generalized Digital Modulation Techniques</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#chirplets" id="toc-chirplets" class="nav-link" data-scroll-target="#chirplets">Chirplets</a></li>
+  <li><a href="#unified-modulation-techniques" id="toc-unified-modulation-techniques" class="nav-link" data-scroll-target="#unified-modulation-techniques">Unified modulation techniques</a>
+  <ul class="collapse">
+  <li><a href="#a-time-center-location-t_mc" id="toc-a-time-center-location-t_mc" class="nav-link" data-scroll-target="#a-time-center-location-t_mc">(a) Time-center (location) <span class="math inline">\(t_m^c\)</span></a></li>
+  <li><a href="#b-frequency-centers-omega_mc" id="toc-b-frequency-centers-omega_mc" class="nav-link" data-scroll-target="#b-frequency-centers-omega_mc">(b) Frequency centers (<span class="math inline">\(\omega_m^c\)</span>)</a></li>
+  <li><a href="#c-spread-of-the-envelope-scale-alpha_m" id="toc-c-spread-of-the-envelope-scale-alpha_m" class="nav-link" data-scroll-target="#c-spread-of-the-envelope-scale-alpha_m">(c) Spread of the envelope / scale (<span class="math inline">\(\alpha_m\)</span>)</a></li>
+  <li><a href="#d-chirp-rate-linear-if-beta_m" id="toc-d-chirp-rate-linear-if-beta_m" class="nav-link" data-scroll-target="#d-chirp-rate-linear-if-beta_m">(d) Chirp-rate / linear-IF (<span class="math inline">\(\beta_m\)</span>)</a></li>
+  </ul></li>
+  <li><a href="#if-modulation" id="toc-if-modulation" class="nav-link" data-scroll-target="#if-modulation">IF modulation</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <div class="section-banner">
-  <img src="../images/banners/path.jpg" alt="About banner">
+  <img src="../../../images/banners/researchbw.jpg" alt="Research banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../about/index.html">About</a></li><li class="breadcrumb-item"><a href="../about/bio.html">Bio</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../research/index.html">Research</a></li><li class="breadcrumb-item"><a href="../../../research/reports.html">Reports</a></li><li class="breadcrumb-item"><a href="../../../research/docs/reports/rpt521.html">Generalized Digital Modulation Techniques</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Bio</h1>
+<h1 class="title">Generalized Digital Modulation Techniques</h1>
+<p class="subtitle lead">A unified chirplet-based framework, with emphasis on IF modulation</p>
 </div>
 
-<div>
-  <div class="description">
-    Personal background and biography of Soma S Dhavala.
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Soma S. Dhavala </p>
+          </div>
+  </div>
     
   
     
@@ -477,9 +527,128 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 
-<p><em>(Content to be added.)</em></p>
+<section id="generalized-digital-modulation-techniques" class="level1">
+<h1>Generalized Digital Modulation Techniques</h1>
+<p>These notes propose a framework for generating various digital modulation techniques. The generalized modulation scheme is useful for deriving new modulation schemes, and we study, in brief, a particular scheme based on “instantaneous frequency”.</p>
+<p>When developing new digital modulation schemes, the aim is to construct new waveforms that can represent a message while meeting certain criteria. In all the existing schemes, orthogonal or biorthogonal waveforms are used. By relaxing the orthogonality, one can try to span the spectrum with a larger number of waveforms (redundant representations). However, in doing so, these waveforms must remain decodable at the receiver.</p>
+<p>The signals of interest have the form:</p>
+<p><span class="math display">\[
+g_{t_c,f_c,\beta,\alpha}(t) = \left(\frac{\alpha}{\pi}\right)^{\frac{1}{4}} e^{-\frac{\alpha(t-t_c)^2}{2}} e^{\,j\beta(t-t_c)^2/2 + j\omega_c(t-t_c) + j\phi}
+\]</span></p>
+<p>where the parameters <span class="math inline">\(t_c, f_c, \beta, \alpha\)</span> represent, respectively, the location in time, the location in frequency, the chirp rate and the amplitude modulation parameter and <span class="math inline">\(\phi\)</span> represents phase off-set; and <span class="math inline">\(g\)</span> is defined such that</p>
+<p><span class="math display">\[
+\left\| g_{t_c,f_c,\beta,\alpha} \right\|^2 = \int \left| g(t; t_c, f_c, \beta, \alpha) \right|^2 dt = 1.
+\]</span></p>
+<p>We can use <span class="math inline">\(\text{Re}\{A_m\, g(t)\}\)</span> for modulating any message signal. Here, <span class="math inline">\(A_m\)</span> is a real number. We can map a symbol to many waveforms that can be obtained by different parameter set. For example, we obtain FSK at <span class="math inline">\(\beta = 0\)</span> with different <span class="math inline">\(f_c\)</span>s and PSK by choosing different <span class="math inline">\(\phi\)</span>s for each of the symbols. The introduction of <span class="math inline">\(\beta\)</span> makes these waveforms lose orthogonality and this is what we want to exploit. If we were able to detect non-orthogonal waveforms at the receiver, why not use them! We can obtain different pulse shapes by varying the parameter <span class="math inline">\(\alpha\)</span>. The above waveforms are known as “chirplets”.</p>
+<p>We then discuss how various modulation schemes can be realized within the framework suggested above. In particular, “instantaneous frequency (IF)” is used as the message carrier.</p>
+<section id="introduction" class="level2">
+<h2 data-anchor-id="introduction">Introduction</h2>
+<p>The objective of a digital modulation technique is to allow reliable and efficient transmission of information under the given constraints. “Reliability” refers to how well the information can be recovered to the one that is transmitted when the information being transmitted is corrupted in some manner. Probability of error is such a measure of reliability. Efficiency does not have a strict definition as it is entirely dependent on the circumstances in which it is being considered. In other words, it is application specific. Nevertheless, power required to transmit a message, required bandwidth to accomplish the task of transmission, susceptibility to channel induced errors and other distortions and even complexity of the transmitter/ receiver can together contribute the factors describing the efficiency. In an ideal situation, we wish to have a scheme that requires minimum power, utilizes minimum bandwidth and achieves the lowest possible probability of error and of course all this at cheap computational complexity. As one can feel, such system is not possible and often, as in most engineering applications, we trade-off one quantity to the other. This leads to choosing different modulation schemes that have different characteristics like “power-efficient schemes”, “bandwidth-efficient schemes”. It is therefore, in this interest, we study different modulation schemes.</p>
+<p>There exist many modulation schemes like Pulse-Amplitude modulation (PAM), Pulse Position Modulation (PPM), Phase-Shift Keying (PSK), Frequency-Shift Keying (FSK), Quadrature-Amplitude Modulation (QAM), Pulse-Width Modulation (PWM) etc.. However, their study is often dealt with in isolation and there is no general frame-work in studying their behavior. These notes present a view point that can be considered as a unified representation of the above mentioned modulation schemes. It is also possible to include a new class of modulation based on “instantaneous frequency (IF)”. This view point is presented with illustrations, treating the special case of modulation involving IF, the idea of modulating an information sequence with IF modulation, and the demodulation and detection of the transmitted information sequence. The spectral properties, which are essential for complete analysis of any modulation scheme, are not studied here as there is no signal space concept yet.</p>
+</section>
+<section id="chirplets" class="level2">
+<h2 data-anchor-id="chirplets">Chirplets</h2>
+<p>Chirplets are a class of non-stationary signals defined in a six-parameter space. A Gaussian chirplet is given by</p>
+<p><span class="math display">\[
+g_{t_c,f_c,\beta,\alpha}(t) = A_m \left(\frac{\alpha_m}{\pi}\right)^{\frac{1}{4}} e^{-\frac{\alpha_m(t-t_m^c)^2}{2}} e^{\,j\beta_m(t-t_m^c)^2/2 + j\omega_m^c(t-t_m^c) + j\phi_m}.
+\]</span></p>
+<p>The parameters represent:</p>
+<ul>
+<li><span class="math inline">\(A_m\)</span> : Amplitude</li>
+<li><span class="math inline">\(\alpha_m\)</span> : Spread of the envelope</li>
+<li><span class="math inline">\(t_m^c\)</span> : Time-center</li>
+<li><span class="math inline">\(\omega_m^c\)</span> : Frequency center</li>
+<li><span class="math inline">\(\beta_m\)</span> : Instantaneous frequency Law (chirp-rate) and</li>
+<li><span class="math inline">\(\phi_m\)</span> : Phase.</li>
+</ul>
+<p>Some remarkable properties of the waveform described by the above parameters are that these chirplets</p>
+<ol type="a">
+<li>are Covariant to</li>
+</ol>
+<ul>
+<li><ol type="a">
+<li>Scale (<span class="math inline">\(\alpha_m\)</span>)</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li>Chirp (<span class="math inline">\(\beta_m\)</span>)</li>
+</ol></li>
+<li><ol start="3" type="a">
+<li>Time (<span class="math inline">\(t_m^c\)</span>)</li>
+</ol></li>
+<li><ol start="4" type="a">
+<li>Frequency (<span class="math inline">\(\omega_m^c\)</span>)</li>
+</ol>
+(very desirable property in the detection frame-work)</li>
+</ul>
+<ol start="2" type="a">
+<li><p>can model variety of signals</p></li>
+<li><p>are the only signals which can satisfy the uncertainty principle with equality</p></li>
+<li><p>have a non-negative Wigner distribution (attains optimum resolution in both time and frequency)</p></li>
+<li><p>can be estimated using many techniques eg. Atomic decomposition, Chirp-hunting, Mixture modeling etc.. However, they are not real-time algorithms.</p></li>
+</ol>
+</section>
+<section id="unified-modulation-techniques" class="level2">
+<h2 data-anchor-id="unified-modulation-techniques">Unified modulation techniques</h2>
+<p>Each chirplet parameter maps naturally onto a familiar modulation scheme.</p>
+<section id="a-time-center-location-t_mc" class="level3">
+<h3 data-anchor-id="a-time-center-location-t_mc">(a) Time-center (location) <span class="math inline">\(t_m^c\)</span></h3>
+<p>Varying the time-center, for example placing one chirplet around <span class="math inline">\(N/4\)</span> and another around <span class="math inline">\(3N/4\)</span>, moves the chirplet along the time axis. This parameter can be used for PPM.</p>
+</section>
+<section id="b-frequency-centers-omega_mc" class="level3">
+<h3 data-anchor-id="b-frequency-centers-omega_mc">(b) Frequency centers (<span class="math inline">\(\omega_m^c\)</span>)</h3>
+<p>Varying the frequency-center, for example centering one chirplet around <span class="math inline">\(0.125\)</span> and another around <span class="math inline">\(0.375\)</span>, moves the chirplet along the frequency axis. This parameter can be used for FSK.</p>
+</section>
+<section id="c-spread-of-the-envelope-scale-alpha_m" class="level3">
+<h3 data-anchor-id="c-spread-of-the-envelope-scale-alpha_m">(c) Spread of the envelope / scale (<span class="math inline">\(\alpha_m\)</span>)</h3>
+<p>Varying the spread, for example a wider envelope versus a much narrower one, changes the pulse width. This parameter can be used for PWM.</p>
+</section>
+<section id="d-chirp-rate-linear-if-beta_m" class="level3">
+<h3 data-anchor-id="d-chirp-rate-linear-if-beta_m">(d) Chirp-rate / linear-IF (<span class="math inline">\(\beta_m\)</span>)</h3>
+<p>Varying the chirp-rate changes the slope of the instantaneous frequency in the time-frequency plane, for example an IF of <span class="math inline">\(45^0\)</span> (slope <span class="math inline">\(= 1\)</span>) versus an IF of <span class="math inline">\(15^0\)</span> (slope <span class="math inline">\(= 0.269\)</span>). This parameter can be used for Instantaneous Frequency Modulation, which is explored next.</p>
+<p>With these illustrations, it is clear that “chirplets” are capable of producing any desired modulation scheme. As there exist various methods to estimate the parameters of these waveforms, it should be possible to employ them as digital modulating waveforms.</p>
+</section>
+</section>
+<section id="if-modulation" class="level2">
+<h2 data-anchor-id="if-modulation">IF modulation</h2>
+<p>We know that in the FSK case, we have finite number of waveforms to choose from, given the bandwidth. This is particularly true because we are dealing with orthogonal waveforms. What happens if we relax the orthogonality for the sake of effective bandwidth. Chirplets having same frequency center, time center, spread but different chirp-rate are not orthogonal but they have quite a different signature in the time-frequency plane. So, if we define time-dependent orthogonality, then these chirplets are not orthogonal only at their time-centers and their instantaneous frequencies do not cross at any other time. Hence, though they are not strictly orthogonal, we can still safely detect them by looking at their time-frequency overlappings. This has led us to consider IF as a modulation parameter.</p>
+<p>We can vary the IF from anywhere from [-0.5,0) and (0,0.5] or [-<span class="math inline">\(45^0\)</span>,<span class="math inline">\(0^0\)</span>), (<span class="math inline">\(0^0\)</span>, <span class="math inline">\(45^0\)</span>]. We do not want to consider IFs in the range because the scale parameter has to be appropriately chosen in order to be within the spectrum (i.e., not exceed the Fi and Ff).</p>
+<p>Consider an IF map drawn on a Time vs.&nbsp;IF plane, where <span class="math inline">\(F_f\)</span> and <span class="math inline">\(F_i\)</span> define the support in the frequency domain and <span class="math inline">\(T\)</span> is the symbol duration. The IF can be varied anywhere from <span class="math inline">\(-45^0\)</span> to <span class="math inline">\(45^0\)</span> excluding zero. This is the reason why <span class="math inline">\(M\)</span> is forced to be even. The reason for not including <span class="math inline">\(0^0\)</span> is to exclusively study the IF modulation. At <span class="math inline">\(0^0\)</span>, we obtain frequency modulation, i.e., chirplets with different frequency centers ranging from <span class="math inline">\(F_i\)</span> to <span class="math inline">\(F_f\)</span>. Moreover, we want to have slopes with positive and negative magnitudes as well. This makes the total number of waveforms even, and zero cannot be associated with either of them.</p>
+<p>We can interpret the IF in terms of degrees as follows. IF is nothing but the slope of lines seen in the above figure and <span class="math inline">\(\text{slope} = \tan(\theta)\)</span>. We also know that</p>
+<p><span class="math display">\[
+\text{IF} = (\text{slope} \cdot t) + fc
+\]</span></p>
+<p>Where fc is y-intercept of the IF line. So we can conveniently represent the IF in terms of <span class="math inline">\(\theta\)</span>. For example, as shown in the above figure, <span class="math inline">\(\theta = 45^0\)</span> corresponds to IF of (0,0.5] with full spread and tc and fc at N/2 and 0.25 respectively.</p>
+<p>Effectively, we have to divide the region [-<span class="math inline">\(45^0\)</span>, <span class="math inline">\(45^0\)</span>] into M-1 regions.</p>
+<p>Thus, a symbol m (m=1,2…M: M even) can be assigned an angle as:</p>
+<p><span class="math display">\[
+\theta_m = \frac{360}{2\pi}\,\frac{\pi}{2}\,\frac{1}{M-1}\,(2m - M - 1).
+\]</span></p>
+<p>which gets translated to</p>
+<p><span class="math display">\[
+\beta_m = \frac{2\pi}{N}\,\tan\!\left(\frac{\theta_m\, 2\pi}{360}\right)
+\]</span></p>
+<p>where N is the number of time-domain samples.</p>
+<p>Each <span class="math inline">\(\beta_m\)</span> then has an associated detection region, the plane being partitioned into sectors (one per symbol) bounded by the lines of constant slope. The symbol can be recovered with the following decision statistic:</p>
+<p>If <span class="math inline">\(\theta_{estimates} &gt;= \dfrac{\pi}{4}\)</span>,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;sym = M;</p>
+<p>else</p>
+<p>If <span class="math inline">\(\theta_{estimates} &lt;= -\dfrac{\pi}{4}\)</span>,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;sym = 1;</p>
+<p>else</p>
+<p><span class="math display">\[
+\text{sym} = \left\lfloor \frac{\left(\dfrac{\pi}{4} + \theta_{estimates}\right)}{\theta} \right\rfloor + 1
+\]</span></p>
+<p>where <span class="math inline">\(\theta = \dfrac{\pi}{2(M-1)}\)</span> and <span class="math inline">\(\theta_{estimates}\)</span> is the estimated IF in terms of degrees.</p>
+</section>
+<section id="references" class="level2">
+<h2 data-anchor-id="references">References</h2>
+<p>[1] Chirp hunting O’Neill, J.C.; Flandrin, P; Proceedings of the IEEE-SP International Symposium on Time-Frequency and Time-Scale Analysis, 6-9 Oct.&nbsp;1998 , pp: 425 - 428.</p>
+<p>[2] Akan, A. Yalcin, M. Chaparro, L.F., “An iterative method for instantaneous frequency estimation,” Electronics, Circuits and Systems, 2001. ICECS 2001, Malta, Vol.3, pp.&nbsp;1335-1338.</p>
+<p>[3] A four-parameter atomic decomposition of chirplets, Bultan, A.;, IEEE Transactions on Signal processing, Volume: 47 Issue: 3 , March 1999, pp.&nbsp;731 -745.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -912,5 +1081,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
