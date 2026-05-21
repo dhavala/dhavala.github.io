@@ -425,7 +425,7 @@ nav#quarto-sidebar .sidebar-item a.active {
 }
 .quick-stats .stat strong {
   display: block;
-  font-size: 1rem;
+  font-size: $font-size-base;   // match main body bold, not enlarged
   color: #222;
   margin-bottom: 0.15rem;
 }
