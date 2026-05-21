@@ -1,6 +1,6 @@
 ---
 title: ""
-description: "Personal site of Soma S Dhavala — Applied Mathematician, Statistician, and Applied AI/ML Practitioner."
+description: "Soma S. Dhavala — Applied Mathematician, Statistician, and AI/ML/DL Practitioner."
 include-before-body: _partials/banner-home.html
 title-block-style: none
 ---
@@ -34,7 +34,7 @@ Read more [about me](about/), or browse [recent publications](research/publicati
 
 ::: {.stat}
 **20+ years**
-across ML, AI, and signal processing
+Across ML, AI, and signal processing
 :::
 
 ::: {.stat}

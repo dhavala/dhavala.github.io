@@ -30,7 +30,7 @@ Over the years, I have worked across academia, industrial research, startups, op
 
 # Industry and Research Experience
 
-- **Adjunct Faculty and Sector Expert – Agri & AI** — IIT Jammu / CPMU, Ministry of Education (2024 – 2026)
+- **Adjunct Faculty and Sectoral Expert – Agri & AI** — IIT Jammu / CPMU, Ministry of Education (2024 – 2026)
   - AI policy ecosystems
   - Intellectual Property Rights (IPR)
   - Monitoring, Evaluation and Learning (MEL) for AI programs
@@ -101,20 +101,20 @@ Over the years, I have worked across academia, industrial research, startups, op
 
 # Selected Recent Publications
 
-1. **Lattice-Based Vector Quantization for Low-Bit Quantization-Aware Training**  
-   Proceedings of Machine Learning Research, 2026.
+1. Lattice-Based Vector Quantization for Low-Bit Quantization-Aware Training 
+   [CPAL](https://cpal.cc/), 2026. [paper](https://openreview.net/forum?id=oTbUCHufvj)
 
-2. **Health Sentinel: An AI Pipeline for Real-time Disease Outbreak Detection**  
-   NLP4PI Workshop, 2025.
+2. Health Sentinel: An AI Pipeline for Real-time Disease Outbreak Detection
+   NLP4PI Workshop, 2025. [paper](https://aclanthology.org/2025.nlp4pi-1.3/)
 
-3. **Learning to Detect PII: Tabular vs Document Classification Models for Network Traffic Analysis**  
-   Journal of Information Security and Applications, 2025.
+3. Learning to Detect PII: Tabular vs Document Classification Models for Network Traffic Analysis
+   Journal of Information Security and Applications, 2025. [paper](https://doi.org/10.1016/j.jisa.2025.104196)
 
-4. **QuantProb: Generalizing Probabilities along with Predictions for a Pre-trained Classifier**  
-   UAI 2024.
+4. QuantProb: Generalizing Probabilities along with Predictions for a Pre-trained Classifier
+   UAI 2024. [paper](https://proceedings.mlr.press/v244/challa24a.html)
 
-5. **Automatic Interpretation of Line Probe Assay Test for TB**  
-   AAAI 2024.
+5. Automatic Interpretation of Line Probe Assay Test for TB  
+   AAAI 2024. [paper](https://ojs.aaai.org/index.php/AAAI/article/view/30191)
 
 ---
 
