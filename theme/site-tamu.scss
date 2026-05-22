@@ -329,10 +329,11 @@ nav#quarto-sidebar .sidebar-item-text[data-bs-toggle="collapse"] {
   background: #ececec;
 }
 
-// Indent nested items so the visual hierarchy is obvious.
-nav#quarto-sidebar .sidebar-section.depth1 .sidebar-link { padding-left: 1.25rem; }
-nav#quarto-sidebar .sidebar-section.depth2 .sidebar-link { padding-left: 2rem; }
-nav#quarto-sidebar .sidebar-section.depth3 .sidebar-link { padding-left: 2.75rem; }
+// Indent nested items so the hierarchy is visible but compact (kept shallow so
+// deep sections like Teaching › Archives › <article> don't march far right).
+nav#quarto-sidebar .sidebar-section.depth1 .sidebar-link { padding-left: 0.6rem; }
+nav#quarto-sidebar .sidebar-section.depth2 .sidebar-link { padding-left: 1rem; }
+nav#quarto-sidebar .sidebar-section.depth3 .sidebar-link { padding-left: 1.4rem; }
 .sidebar-item-text.sidebar-link:hover,
 nav#quarto-sidebar .sidebar-item a:hover {
   color: #000;

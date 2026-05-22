@@ -3,16 +3,26 @@ title: "Archives"
 description: "Early notes and tutorials on Bayesian computation and signal processing."
 ---
 
-A set of self-contained notes and tutorials written during my graduate years,
-transcribed here from their original PDFs with rendered LaTeX, covering Bayesian
-computation and statistical signal processing. Figures have been omitted so each
-page stands on its own. (Longer technical reports are collected under
-[Research › Reports](../research/reports.qmd).)
+A collection of self-contained notes and tutorials written during my graduate
+years, transcribed from their original sources with rendered LaTeX. They span
+Bayesian computation, time-frequency signal processing, and coding/compression.
+(Longer technical reports are collected under [Research › Reports](../research/reports.qmd).)
 
-## Tutorials & notes
+## Bayesian computation
 
 - [Normal Approximation](docs/archives/tutLaplace.qmd) — Laplace (normal) approximation of a bivariate posterior, with a closed form for the posterior under a normal prior.
 - [Gaussian Mixture for Multi-modal Posteriors](docs/archives/tutGmm.qmd) — approximating a multi-modal posterior by a mixture of normals, with merging to select the number of components.
 - [EM Algorithm for Mixture Modeling](docs/archives/tutEM.qmd) — derivation of Expectation-Maximization for Gaussian mixture models.
 - [Numerical Methods for Bayesian Inference](docs/archives/tutMCMC.qmd) — quadrature, Monte Carlo integration, rejection sampling, and random-walk Metropolis with a normal prior or likelihood.
+
+## Time-frequency & signal processing
+
+- [Introduction to Time-Frequency Analysis](docs/archives/intro2tfr.qmd) — Cohen's class, the Wigner–Ville and affine classes, and adaptive time-frequency representations.
 - [Chirplet Decomposition](docs/archives/tutChirp.qmd) — decomposing a signal into Gaussian chirplets via mixture modeling, method of moments, and nested Fisher scoring.
+- [Computational Complexity of the Wavelet Transform](docs/archives/wavelet-complexity.qmd) — operation counts for the 1-D, 2-D, 3-D, and incomplete-3-D wavelet transforms.
+
+## Coding & compression
+
+- [Golomb–Rice Coding](docs/archives/golomb.qmd) — prefix codes for geometrically distributed integers, and run-length coding with Golomb codes.
+- [Arithmetic Coding](docs/archives/arithmetic-coding.qmd) — interval-subdivision arithmetic coding, integer arithmetic, and adaptive models.
+- [Quad-Trees, EZW and SPIHT Codecs](docs/archives/review-n1.qmd) — quad-tree image partitioning and the EZW and SPIHT wavelet codecs.

@@ -1,0 +1,356 @@
+---
+title: "Computational Complexity of the Wavelet Transform"
+subtitle: "Complexity estimates for 1D, 2D, 3D and incomplete-3D wavelet transforms"
+author: "Soma S. Dhavala"
+---
+
+# Computational Complexity of the Wavelet Transform
+
+## I. Introduction
+
+Let P x Q x R be the size of the original image sequence (for 2D R=1). As we have to compare 2D, 3D and "incomplete 3D", we will put the size of the volume as P x Q x R and L, M and N be the number of levels of decomposition on P x Q x R respectively.
+
+And let C be the complexity (of additions / multiplications / total complexity) per pixel pair. The complexity C depends on the wavelet transform under consideration. Let $C_1$, $C_2$ and $C_3$ be the complexity of the wavelet used in P, Q and R dimensions. In the following discussion we will assume that, the order of the levels of decomposition is such that,
+
+$$
+L \geq M \geq N .
+$$
+
+## II. Complexity
+
+If we are working with different wavelets in different directions, then, the complexity estimates are modified as:
+
+Let C1, C2 and C3 be the computations required per point for the wavelets used in x, y and z directions respectively.
+
+### 1D Case
+
+Expression:
+
+$$
+PC_1\left(1 - \frac{1}{2^L}\right)
+$$
+
+### 2D Case
+
+Expression:
+
+$$
+\frac{2.PQ(C_1 + C_2)(4^M - 1)}{3.4^M} + \frac{PQC_1(2^{L-M} - 1)}{2^{L+M}}
+$$
+
+### 3D Case
+
+Expression:
+
+$$
+\frac{4.PQR(C_1 + C_2 + C_3)(8^N - 1)}{7.8^N} + \frac{2.PQR(C_1 + C_2)(4^{M-N} - 1)}{3.2^{N+2M}} + \frac{PQRC_1(2^{L-M} - 1)}{2^{M+L+N}}
+$$
+
+### Specific Case
+
+Same wavelets are used in all directions, then the expressions presented above can be simplified as:
+
+#### 1D case
+
+Expression:
+
+$$
+PC_1\left(1 - \frac{1}{2^L}\right)
+$$
+
+#### 2D Case
+
+Expression:
+
+$$
+\frac{4.PQC_1(4^M - 1)}{3.4^M} + \frac{PQC_1(2^{L-M} - 1)}{2^{L+M}}
+$$
+
+#### 3D Case
+
+Expression:
+
+$$
+\frac{12.PQRC_1(8^N - 1)}{7.8^N} + \frac{4.PQRC_1(4^{M-N} - 1)}{3.2^{N+2M}} + \frac{PQRC_1(2^{L-M} - 1)}{2^{M+L+N}}
+$$
+
+For $(L = M = N = 1)$, the complexity estimate ratios would be,
+
+$1 : 2 : 3$ for 1D, 2D and 3D.
+
+As $(L = M = N), N \to \infty$, the complexity estimate ratios would be,
+
+$1 : 1.33 : 1.71$ for 1D, 2D and 3D.
+
+## III. Incomplete 3D
+
+In the incomplete 3D WT transform, the WT is decomposed in a incomplete dyadic fashion. For some image sequence the correlation in Z dimension is very high. If WT is performed in Z-dimension on such sequence, the high frequency sub-band is de-correlated and may not yield much benefit if we go for further decomposition in X and Y dimension. Hence the concept of incomplete WT transform came in to existence.
+
+The decision to decompose further is based on the case under consideration rather than any fixed set of rules. Hence, we can not derive a generalized formula for that. However, one can make use of the 1-D and 3-D formulae presented in the earlier sections. For example, we can consider, the whole 3D incomplete transform as a set of 1-D operations. In the 1-D formulae, we have to plug in the updated image dimensions and recursively do the process. One can derive the formula for any given structure by understanding the procedure described in the appendix. The reader is advised to go through the appendix to get an understanding of the derivation process. In the following section, we present a restricted class of incomplete 3D by imposing certain constraints.
+
+### Incomplete 3D case
+
+In this case, we decompose the volume in the Z-direction first. After splitting it into two (approximate and detail), we don't do any operations on the detail ones. So, the size of image volume (for further processing) becomes halved, and from then onwards, we will treat them as 2D independent slices. That is, we do only 2D processing. The above explanation is a special case of incomplete 3DWT. In general, it can be applied any where in x-y-z direction. However, with such adaptive selection, we cannot arrive at a closed form expression for the complexity. So, we imposed certain conditions upon which the expressions will be derived. The levels of decomposition are divided into two parts as, "incomplete" and "complete". So L, M, N levels are split as $L_i, M_i, N_i \text{ and } L_c, M_c, N_c$. The conditions imposed are:
+
+$$
+L_c \geq M_i, \quad M_c \geq N_i \quad \text{and} \quad L_c \geq M_c \geq N_c
+$$
+
+Even though the intent is to generalize the expression, it is done at the sacrifice of certain "possible combinations". The condition above assumes that, in general, you have less number of levels to go in z-direction and after every z-operation, will follow y and x-operations. In this case, we cannot do z-operations twice and go to x and y operations. It is considered keeping in mind the idea behind wavelet transform decomposition.
+
+Expression:
+
+$$
+PQR\left[\frac{8C_3}{7.2}\left(1 - \frac{1}{8^{N_i}}\right) + \frac{8C_2}{7.4}\left(1 - \frac{1}{8^{M_i}}\right) + \frac{8C_1}{7.8}\left(1 - \frac{1}{8^{L_i}}\right) + \frac{1}{2^{N_i+M_i+L_i}}\left(\frac{4(C_1 + C_2 + C_3)(8^{N_c} - 1)}{7.8^{N_c}} + \frac{2(C_1 + C_2)(4^{M_c-N_c} - 1)}{3.2^{N_c+2M_c}} + \frac{C_1(2^{L_c-M_c} - 1)}{2^{M_c+L_c+N_c}}\right)\right]
+$$
+
+### Incomplete 3D specific case (same wavelets in all directions)
+
+The complexity is given as:
+
+Expression:
+
+$$
+PQR\left[\frac{8}{7.2}\left(1 - \frac{1}{8^{N_i}}\right) + \frac{8}{7.4}\left(1 - \frac{1}{8^{M_i}}\right) + \frac{8}{7.8}\left(1 - \frac{1}{8^{L_i}}\right) + \frac{1}{2^{N_i+M_i+L_i}}\left(\frac{12(8^{N_c} - 1)}{7.8^{N_c}} + \frac{4.(4^{M_c-N_c} - 1)}{3.2^{N_c+2M_c}} + \frac{(2^{L_c-M_c} - 1)}{2^{M_c+L_c+N_c}}\right)\right]
+$$
+
+For most cases, we use (4,4,0), (0,0,1) for $L_i, M_i, N_i \text{ and } L_c, M_c, N_c$. It is more convenient to represent them as:
+
+$(L_i, L_c), (M_i, M_c) \text{ and } (N_i, N_c)$, so that (4,4,0), (0,0,1) becomes (4,0), (4,0) and (0,1).
+
+In this case, substituting zeros wherever, they are, the expression reduces to
+
+$$
+PQRC\left[\frac{1}{2} + \frac{1}{2^{N_i}}\left(\frac{4.(4^{M_c} - 1)}{3.2^{2M_c}} + \frac{(2^{L_c-M_c} - 1)}{2^{M_c+L_c}}\right)\right]
+$$
+
+## IV. Computing Complexity (C)
+
+$s_{add}$ is the number of real additions/subtractions required to compute one approximate coefficient and $s_{mul}$ is the number of real multiplications/divisions required compute one approximate coefficient. Similarly $d_{add}$ is the number of real additions/subtractions required to compute one detailed coefficient and $d_{mul}$ is the number of real multiplications/divisions required compute one detailed coefficient.
+
+For (2,2) wavelet transform implemented using lifting scheme [1], $s_{add}, s_{nul}, d_{add} \text{ and } d_{mul}$ are given by
+
+$$
+\begin{aligned}
+s_{add} &= 3 & s_{mul} &= 1 \\
+d_{add} &= 3 & d_{mul} &= 1
+\end{aligned}
+$$
+
+and for (4,2) wavelet transform [1]
+
+$$
+\begin{aligned}
+s_{add} &= 3 & s_{mul} &= 1 \\
+d_{add} &= 5 & d_{mul} &= 2
+\end{aligned}
+$$
+
+Then we can compute C as:
+
+$$
+\begin{aligned}
+C_{total} &= s_{add} + s_{mul} + d_{add} + d_{mul} \\
+C_{mul} &= s_{mul} + d_{mul} \\
+C_{add} &= s_{add} + d_{add}
+\end{aligned}
+$$
+
+The computational complexity is same for forward and inverse wavelet transform. Computational complexity for various levels and dimensions (size) of the image are provided in the EXCEL sheet [2].
+
+## References
+
+1. R. Calderbank, Wim Sweldens, I. Daubechies and B.-L. Yeo, 'Wavelet transforms that map integers to integers', Appl. Comput. Harmon. Anal., 5(3):332-369, 1998.
+2. S. Dhavala, "Complexity Estimates Template", (Complexity_Wavelets.xls) June 22, 2001.
+
+## Appendix A: Different Wavelets
+
+### $1D$ Case
+
+P is the length of the signal or a row of the image and L is the number of levels of decomposition then, the complexity at one level the complexity is given by,
+
+$\frac{P}{2}C_1$ where $C_1$ is the complexity for the wavelet employed. After the first level, the complexity can be estimated by reducing $P$ to $\frac{P}{2}$.
+
+It becomes, $\frac{P}{4}C_1$. On a whole, it can be represented as:
+
+$$
+\frac{PC_1}{2}\left(1 + \frac{1}{2} + \frac{1}{4} + \ldots + \frac{1}{2^{L-1}}\right) = \frac{PC_1}{2}\sum_{i=0}^{L-1}\frac{1}{2^i} = PC_1\left(1 - \frac{1}{2^L}\right)
+$$
+
+### $2D$ Case
+
+Here the 2D signal dimension is assumed to be a P x Q and let the levels of decomposition be L and M for P and Q respectively and with a condition $M \leq L$ and $C_1 \text{ and } C_2$ being the complexity of the wavelets employed in P and Q dimensions respectively.
+
+For a specific case, let M=2 and L=4, then
+
+At one level
+
+| | L direction | M direction |
+|---|---|---|
+| Complexity | $\frac{P}{2}QC_1$ | $P\frac{Q}{2}C_2$ |
+| At second level | $\frac{P}{4}\frac{Q}{2}C_1$ | $\frac{P}{2}\frac{Q}{4}C_2$ |
+| At third level | $\frac{P}{8}\frac{Q}{4}C_1$ | -- |
+| At fourth level | $\frac{P}{16}\frac{Q}{4}C_1$ | -- |
+
+Now, it can be generalized into two summations as:
+
+$$
+\frac{PQ(C_1 + C_2)}{2}\left(1 + \frac{1}{4} + \frac{1}{16} + \ldots + \frac{1}{4^{M-1}}\right) + \frac{PQC_1}{2^{2M}}\left(\frac{1}{2} + \frac{1}{4} + \ldots + \frac{1}{2^{L-M}}\right)
+$$
+
+$$
+= \frac{2.PQ(C_1 + C_2)(4^M - 1)}{3.4^M} + \frac{PQC_1(2^{L-M} - 1)}{2^{L+M}} .
+$$
+
+### $3D$ Case
+
+Here the 3D signal dimension is assumed to be a P x Q x R and let the levels of decomposition be L, M and N for P, Q and R respectively and with a condition $N \leq M \leq L$ and $C_1, C_2 \text{ and } C_3$ being the complexity of the wavelets employed in P and Q dimensions respectively.
+
+For a specific case, let N=2, M=4 and L=6, then
+
+At one level
+
+| | L direction | M direction | N direction |
+|---|---|---|---|
+| Complexity | $\frac{P}{2}QRC_1$ | $P\frac{Q}{2}RC_2$ | $PQ\frac{R}{2}C_3$ |
+| At second level | $\frac{P}{4}\frac{Q}{2}\frac{R}{2}C_1$ | $\frac{P}{2}\frac{Q}{4}\frac{R}{2}C_2$ | $\frac{P}{2}\frac{Q}{2}\frac{R}{4}C_3$ |
+| At third level | $\frac{P}{8}\frac{Q}{4}\frac{R}{4}C_1$ | $\frac{P}{4}\frac{Q}{8}\frac{R}{4}C_2$ | -- |
+| At fourth level | $\frac{P}{16}\frac{Q}{8}\frac{R}{4}C_1$ | $\frac{P}{8}\frac{Q}{16}\frac{R}{4}C_2$ | -- |
+| At fifth level | $\frac{P}{32}\frac{Q}{16}\frac{R}{4}C_1$ | -- | -- |
+| At sixth level | $\frac{P}{64}\frac{Q}{16}\frac{R}{4}C_1$ | -- | -- |
+
+Now, it can be generalized into three summations as:
+
+$$
+\frac{PQR(C_1 + C_2 + C_3)}{2}\left(1 + \frac{1}{8} + \frac{1}{64} + \ldots + \frac{1}{8^{N-1}}\right) + 2.\frac{PQR(C_1 + C_2)}{2^{3N+1}}\left(1 + \frac{1}{4} + \frac{1}{16} + \ldots + \frac{1}{4^{M-N-1}}\right) + \frac{PQRC_1}{2^{L+M+N}}\left(1 + \frac{1}{2} + \frac{1}{4} + \ldots + \frac{1}{4^{L-1}}\right)
+$$
+
+$$
+= \frac{4.PQR(C_1 + C_2 + C_3)(8^N - 1)}{7.8^N} + \frac{2.PQR(C_1 + C_2)(4^{M-N} - 1)}{3.2^{N+2M}} + \frac{PQRC_1(2^{L-M} - 1)}{2^{M+L+N}}
+$$
+
+#### For Incomplete 3D
+
+$L_i, M_i, N_i \text{ and } L_c, M_c, N_c$ as (4,2), (4,2) and (0,1).
+
+| | L direction | M direction | N direction |
+|---|---|---|---|
+| At $N_i = 1$ | -- | -- | $PQ\frac{R}{2}C_3$ |
+| At $M_i = 1$ | -- | $P\frac{Q}{2}\frac{R}{2}C_2$ | -- |
+| At $L_i = 1$ | $\frac{P}{2}\frac{Q}{2}\frac{R}{2}C_1$ | -- | -- |
+| At $M_i = 2$ | -- | $\frac{P}{2}\frac{Q}{4}\frac{R}{2}C_2$ | -- |
+| At $L_i = 2$ | $\frac{P}{4}\frac{Q}{4}\frac{R}{2}C_1$ | -- | -- |
+
+Till this point, the complexity is given by
+
+$$
+\frac{PQRC_3}{2}\left(1 + \frac{1}{8} + \frac{1}{64} + \ldots + \frac{1}{8^{N_i-1}}\right) + \frac{PQRC_2}{4}\left(1 + \frac{1}{8} + \frac{1}{64} + \ldots + \frac{1}{8^{M_i-1}}\right) + \frac{PQRC_1}{8}\left(1 + \frac{1}{8} + \frac{1}{64} + \ldots + \frac{1}{8^{L_i-1}}\right)
+$$
+
+By plugging updated P, Q and R in the 3D formula, we obtain the total complexity.
+
+$$
+PQR\left[\frac{8C_3}{7.2}\left(1 - \frac{1}{8^{N_i}}\right) + \frac{8C_2}{7.4}\left(1 - \frac{1}{8^{M_i}}\right) + \frac{8C_1}{7.8}\left(1 - \frac{1}{8^{L_i}}\right) + \frac{1}{2^{N_i+M_i+L_i}}\left(\frac{4(C_1 + C_2 + C_3)(8^{N_c} - 1)}{7.8^{N_c}} + \frac{2(C_1 + C_2)(4^{M_c-N_c} - 1)}{3.2^{N_c+2M_c}} + \frac{C_1(2^{L_c-M_c} - 1)}{2^{M_c+L_c+N_c}}\right)\right]
+$$
+
+## Appendix B: Same Wavelet
+
+$$
+C1 = C2 = C3 = C
+$$
+
+### $1D$ Case
+
+P is the length of the signal or a row of the image and L is the number of levels of decomposition then, the complexity at one level the complexity is given by,
+
+$\frac{P}{2}C$ and after the first level, the complexity can be estimated by reducing $P$ to $\frac{P}{2}$.
+
+It becomes, $\frac{P}{4}C$. On a whole, it can be represented as:
+
+$$
+\frac{PC}{2}\left(1 + \frac{1}{2} + \frac{1}{4} + \ldots + \frac{1}{2^{L-1}}\right) = \frac{PC}{2}\sum_{i=0}^{L-1}\frac{1}{2^i} = PC\left(1 - \frac{1}{2^L}\right)
+$$
+
+### $2D$ Case
+
+Here the 2D signal dimension is assumed to be a P x Q and let the levels of decomposition be L and M for P and Q respectively and with a condition $M \leq L$.
+
+For a specific case, let M=2 and L=4, then
+
+At one level
+
+| | L direction | M direction |
+|---|---|---|
+| Complexity | $\frac{P}{2}QC$ | $P\frac{Q}{2}C$ |
+| At second level | $\frac{P}{4}\frac{Q}{2}C$ | $\frac{P}{2}\frac{Q}{4}C$ |
+| At third level | $\frac{P}{8}\frac{Q}{4}C$ | -- |
+| At fourth level | $\frac{P}{16}\frac{Q}{4}C$ | -- |
+
+Now, it can be generalized into two summations as:
+
+$$
+2.\frac{PQC}{2}\left(1 + \frac{1}{4} + \frac{1}{16} + \ldots + \frac{1}{4^{M-1}}\right) + \frac{PQC}{2^{2M}}\left(\frac{1}{2} + \frac{1}{4} + \ldots + \frac{1}{2^{L-M}}\right)
+$$
+
+$$
+= \frac{4.PQC(4^M - 1)}{3.4^M} + \frac{PQC(2^{L-M} - 1)}{2^{L+M}} .
+$$
+
+### $3D$ Case
+
+Here the 3D signal dimension is assumed to be a P x Q x R and let the levels of decomposition be L, M and N for P, Q and R respectively and with a condition $N \leq M \leq L$.
+
+For a specific case, let N=2, M=4 and L=6, then
+
+At one level
+
+| | L direction | M direction | N direction |
+|---|---|---|---|
+| Complexity | $\frac{P}{2}QRC$ | $P\frac{Q}{2}RC$ | $PQ\frac{R}{2}C$ |
+| At second level | $\frac{P}{4}\frac{Q}{2}\frac{R}{2}C$ | $\frac{P}{2}\frac{Q}{4}\frac{R}{2}C$ | $\frac{P}{2}\frac{Q}{2}\frac{R}{4}C$ |
+| At third level | $\frac{P}{8}\frac{Q}{4}\frac{R}{4}C$ | $\frac{P}{4}\frac{Q}{8}\frac{R}{4}C$ | -- |
+| At fourth level | $\frac{P}{16}\frac{Q}{8}\frac{R}{4}C$ | $\frac{P}{8}\frac{Q}{16}\frac{R}{4}C$ | -- |
+| At fifth level | $\frac{P}{32}\frac{Q}{16}\frac{R}{4}C$ | -- | -- |
+| At sixth level | $\frac{P}{64}\frac{Q}{16}\frac{R}{4}C$ | -- | -- |
+
+Now, it can be generalized into three summations as:
+
+$$
+3.\frac{PQRC}{2}\left(1 + \frac{1}{8} + \frac{1}{64} + \ldots + \frac{1}{8^{N-1}}\right) + 2.\frac{PQRC}{2^{3N+1}}\left(1 + \frac{1}{4} + \frac{1}{16} + \ldots + \frac{1}{4^{M-N-1}}\right) + \frac{PQRC}{2^{L+M+N}}\left(1 + \frac{1}{2} + \frac{1}{4} + \ldots + \frac{1}{4^{L-1}}\right)
+$$
+
+$$
+= \frac{12.PQRC(8^N - 1)}{7.8^N} + \frac{4.PQRC(4^{M-N} - 1)}{3.2^{N+2M}} + \frac{PQRC(2^{L-M} - 1)}{2^{M+L+N}}
+$$
+
+#### For Incomplete 3D
+
+$L_i, M_i, N_i \text{ and } L_c, M_c, N_c$ as (4,2), (4,2) and (0,1).
+
+| | L direction | M direction | N direction |
+|---|---|---|---|
+| At $N_i = 1$ | -- | -- | $PQ\frac{R}{2}C$ |
+| At $M_i = 1$ | -- | $P\frac{Q}{2}\frac{R}{2}C$ | -- |
+| At $L_i = 1$ | $\frac{P}{2}\frac{Q}{2}\frac{R}{2}C$ | -- | -- |
+| At $M_i = 2$ | -- | $\frac{P}{2}\frac{Q}{4}\frac{R}{2}C$ | -- |
+| At $L_i = 2$ | $\frac{P}{4}\frac{Q}{4}\frac{R}{2}C$ | -- | -- |
+
+Now the regular 3D with N=0 continues as was done in the earlier case for 3D and 2D. So we have to plug in the old formulae the updated P, Q and R.
+
+It becomes,
+
+$$
+\frac{PQRC}{2}\left(1 + \frac{1}{8} + \frac{1}{64} + \ldots + \frac{1}{8^{N_i-1}}\right) + \frac{PQRC}{4}\left(1 + \frac{1}{8} + \frac{1}{64} + \ldots + \frac{1}{8^{M_i-1}}\right) + \frac{PQRC}{8}\left(1 + \frac{1}{8} + \frac{1}{64} + \ldots + \frac{1}{8^{L_i-1}}\right)
+$$
+
+for incomplete decompositions and we have to plug in the 3D formula with
+
+$$
+P, Q \text{ and } R \quad \text{as} \quad \frac{P}{2^{L_i}}, \frac{Q}{2^{M_i}} \text{ and } \frac{R}{2^{N_i}} \quad \text{with } L, M \text{ and } N \text{ as } L_c, M_c \text{ and } N_c.
+$$
+
+Hence, the expression is
+
+$$
+PQRC\left[\frac{8}{7.2}\left(1 - \frac{1}{8^{N_i}}\right) + \frac{8}{7.4}\left(1 - \frac{1}{8^{M_i}}\right) + \frac{8}{7.8}\left(1 - \frac{1}{8^{L_i}}\right) + \frac{1}{2^{N_i+M_i+L_i}}\left(\frac{12(8^{N_c} - 1)}{7.8^{N_c}} + \frac{4.(4^{M_c-N_c} - 1)}{3.2^{N_c+2M_c}} + \frac{(2^{L_c-M_c} - 1)}{2^{M_c+L_c+N_c}}\right)\right]
+$$

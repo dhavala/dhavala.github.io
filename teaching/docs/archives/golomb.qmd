@@ -1,0 +1,230 @@
+---
+title: "Golomb–Rice Coding"
+subtitle: "Golomb–Rice coding of positive integers and run-length coding using Golomb codes"
+author: "Soma S. Dhavala"
+---
+
+# Golomb–Rice Coding
+
+## Golomb Coding
+
+This is a prefix code that can represent positive integers [1]. Given a positive integer parameter $m$, Golomb code $G_m$ encodes an integer $n \geq 0$ in two parts: a binary representation of $n \bmod m$, and a unary representation of $\lfloor n/m \rfloor$ where $\lfloor x \rfloor$ gives the largest integer smaller than $x$.
+
+Golomb codes are optimal for exponentially decaying (geometric) probability distributions of non-negative integers, i.e., distributions of the form $Q(n) = (1-\rho)\rho^n$, where $0 < \rho < 1$. For every distribution of this form, there exists a value of the parameter $m$ such that $G_m$ yields the shortest possible average code length over all uniquely decipherable codes for the nonnegative integers. The optimal value of $m$ is given by
+
+$$
+m = \left\lceil \frac{\log(1+\rho)}{\log(\rho^{-1})} \right\rceil
+$$
+
+where $\lceil x \rceil$ gives the smallest integer greater than $x$.
+
+Rice emphasized the special case of Golomb code with $m = 2^k$. Choosing $m$ to be a power of two leads to a very simple encoding/decoding procedure: the $k$ least significant bits are nothing but the least $k$ least significant bits of $n$ succeeding $\lfloor n/m \rfloor$ in unary representation. The length of the encoding is $k + 1 + \lfloor n/2^k \rfloor$. The $1 + \lfloor n/2^k \rfloor$ bits are required to represent $\lfloor n/2^k \rfloor$ in unary format and $k$ bits are needed to code the remainder.
+
+We refer to codes $G_{2^k}$ as Golomb–Rice codes.
+
+Knowledge of unary codes is required to understand Golomb coding.
+
+Unary representation of an integer is nothing but a sequence of ones equal to the integer to be represented followed by a zero [2].
+
+Example of unary representation of some integers (always positive):
+
+| Integer | Unary representation |
+|---------|----------------------|
+| 0 | 0 |
+| 1 | 1 0 |
+| 2 | 11 0 |
+| 3 | 111 0 |
+| 4 | 1111 0 |
+| 5 | 11111 0 |
+| 6 | 111111 0 |
+
+### Algorithm
+
+#### Encoding [1-2]
+
+Let us assume that the Golomb–Rice parameter is $\log_2(m)$.
+
+The steps involved in representing a positive integer, given a Golomb parameter, are:
+
+1. Divide the integer $N$ with $m$.
+2. Take the nearest integer towards zero, call it the "divider".
+3. Remainder = $N - (\text{divider} \times m)$.
+4. Represent the divider in unary and code the remainder with $\log_2(m)$.
+5. Append them.
+
+##### Example
+
+$m = 4$ and $N = 15$.
+
+The remainder has to be represented now in 2 bits. The possible values the remainder can take are 0, 1, 2 and 3 with code as 00, 01, 10 and 11 respectively.
+
+1. Divide the integer $N$ with $m$.
+2. Take the nearest integer towards zero, call it the "divider".
+
+$$
+\left\lfloor 15/4 \right\rfloor = 3
+$$
+
+3. Remainder = $N - (\text{divider} \times m)$.
+
+$$
+15 - (4 * 3) = 3.
+$$
+
+4. Represent the divider in unary and code the remainder with $\log_2(m)$.
+
+Divider: $3 \overset{\text{unary}}{\Longleftrightarrow} 111\,0$
+
+Remainder: $3 \overset{\log_2(4)\ \text{bits}}{\Longleftrightarrow} 11$
+
+5. Append them.
+
+Code for 15 with $m = 4$ is $111\,0\,11$.
+
+An example table is given for $m = 4$:
+
+| Integer | Divider | Remainder | Divider code | Remainder code | Append |
+|---------|---------|-----------|--------------|----------------|--------|
+| 0 | 0 | 0 | 0 | 00 | 000 |
+| 2 | 0 | 2 | 0 | 10 | 010 |
+| 5 | 1 | 1 | 10 | 01 | 1001 |
+| 8 | 2 | 0 | 110 | 00 | 11000 |
+| 11 | 2 | 3 | 110 | 11 | 11011 |
+| 14 | 3 | 2 | 1110 | 10 | 111010 |
+
+#### Decoding
+
+The decoder knows the Golomb parameter. Given the Golomb parameter:
+
+- **Step 1:** Parse off the leading ones until you come across a zero and count the number of ones and call it "count".
+- **Step 2:** Ignoring the immediate zero after a run of ones, extract the next $k$ bits. Name the decimal equivalent of the $k$-bit value as "remainder".
+- **Step 3:** The positive integer can be decoded as $(m \times \text{count}) + \text{remainder}$.
+- **Step 4:** Go to Step 1 until you reach the end of the file.
+
+## Run-length Coding
+
+A run-length code is a prefix code that encodes a distribution of non-negative integers whose distribution resembles the geometric distribution [3]. A run-length is defined as a number of successive occurrences of a selected symbol, or a statistical outcome chosen to be the run-event. For an alphabet of $M$-ary outcomes, one (or more) of the outcomes can be chosen as the run-event and the remaining outcomes would belong to the stop event set.
+
+### Golomb Coding Revisited
+
+In the earlier paragraph, we have considered a special case of Golomb coding with the parameter being constrained as a power of two. In this section, the condition is relaxed.
+
+In Golomb's algorithm, each codeword corresponds to a run-length. The binary coder receives a binary input sequence of symbols, or simply input. We can treat a sequence of 0s and 1s as binary events C and S, where C continues the run and S stops the run. The distribution of the run-length random variable value 0, 1, 2, …, etc., is a distribution characterized by the single parameter $P_c$: the run-continue probability. The run-stop probability, $P_s$, is calculated as $1 - P_c$. A sequence of these binary events may be parsed into run-lengths of zero or more C (or continue) events followed by a single stop event.
+
+The key to Golomb's parameterized family of codes is that Golomb converts ranges of probability value $P_c \geq 1/2$ to a single parameter characterized by a positive integer $m \geq 1$, such that the following approximation holds, where $m$ is an integer that we can call as the Golomb parameter such that
+
+$$
+P_c^m = 0.5
+$$
+
+Golomb code for $m = 2^k$ has been discussed earlier. We will now describe Golomb coding for $2^k < m < 2^{k+1}$.
+
+The unary representation of the divider is the same as for Golomb–Rice coding. The difficult part lies in representing the remainder. It is illustrated in the example below.
+
+#### Example
+
+Let us take $m = 5$.
+
+Since $m = 5$, the remainder can take on the possible values 0, 1, 2, 3, and 4. If we represent the remainder with 3 bits, then some remainder values are coded with more bits than is actually required. It is not possible to represent them with 2 bits because one remainder value is not represented. However, consider the 2-bit code words for the remainder values from $m = 4$: 0 is 00, 1 is 01, 2 is 10 and 3 is 11. Let $h$ denote the number of code words we need beyond the $2^k$: $h = m - 2^k$. In this example, $5 - 4 = 1$ more code word. So, to get the extra codeword, we have to extend the code word in the last bit position: 11 extends to 110 and 111. So, we represent all 5 remainder values for $m = 5$ as follows:
+
+```
+0: 00
+1: 01
+2: 10
+3: 110
+4: 111
+```
+
+Now consider $m = 6$. Here $h = 6 - 4 = 2$, so two of the $k = 2$ length code words have to be split. The two 2-bit length code words are: 10 and 11, which respectively become 100, 101, 110 and 111. Therefore 2-bit code words 00 and 10 continue to represent remainder values 0 and 1. In summary, of the longer code words, half will represent remainder values that were shorter code words in the $2^k$ Golomb code case; the other half will represent the $h$ code words for the $h = m - 2^k$ remainder values that exceed the remainder whose value is $2^{k-1}$.
+
+For $m = 13$, as $8 < 13 < 16$, splitting the code words can be done as follows:
+
+$h = 13 - 8 = 5$ code words have to be split.
+
+```
+0: 000             0
+1: 001             1
+2: 010             2
+3: 011 →  0110     3
+          0111     4
+4: 100 →  1000     5
+          1001     6
+5: 101 →  1010     7
+          1011     8
+6: 110 →  1100    10
+          1101    11
+7: 111 →  1110    12
+          1111    13
+```
+
+A complete example for coding a positive integer is given in the following table for $m = 5$:
+
+| Integer | Divider | Remainder | Divider code | Remainder code | Append |
+|---------|---------|-----------|--------------|----------------|--------|
+| 0 | 0 | 0 | 0 | 00 | 0 00 |
+| 1 | 0 | 1 | 0 | 01 | 0 01 |
+| 7 | 1 | 2 | 10 | 10 | 10 10 |
+| 8 | 1 | 3 | 10 | 110 | 10 110 |
+| 14 | 2 | 4 | 110 | 111 | 110 110 |
+| 20 | 3 | 0 | 1110 | 00 | 1110 00 |
+
+### Application of Golomb Coding in Run-length Coding
+
+Suppose that in run-length coding we discover it is optimal when $m$ successive C events should increase the code length by one bit. In other words, $m$ successive C events have a self-information of 1 bit. Converting the self-information to a probability, this means that $m$ successive C events should have a probability of ½. Golomb's response has the insight of defining parameter $m$ to be such that $P_c^m = 1/2$. Taking the log to the base 2 of each side, we get
+
+$$
+m \approx \frac{-1}{\log_2 P_c}
+$$
+
+A practical way to determine this parameter is to first estimate $P_c$.
+
+$$
+P_c = 1 - \frac{\text{total number of stop symbol occurences}}{\text{total number of occurences of all events}}
+$$
+
+#### Encoding
+
+- **Step 1:** Estimate the Golomb parameter from the given observations.
+- **Step 2:** Count the runs of zeros and code them with the Golomb prefix code described earlier.
+- **Step 3:** Continue till the end of the file.
+
+#### Example of Run-length Coding
+
+Suppose we wish to encode run-lengths 7, 13, 8, 6 and 11. They look like
+
+```
+0000000 1 000000000000000 1 00000000 1 000000 1 000000000000
+```
+
+In this case, we have 5 run-stop events of the total 50 events that have occurred. So $P_c = 45/50$, i.e., $P_c = 0.9$. Hence, $m = 7$. With the proper value of $m$, we need to determine the codes for the seven remainder values of 0, 1, 2, 3, 4, 5 and 6. It turns out that, were there 8 remainder values, each would be of 3 bits (000, 001, 010, 011, 100, 101, 110 and 111). With seven values, it means that the first value can be of only two bits: 00 (the union of 000 and 001). So the next six values are 010 through 111.
+
+The encoding of runs 7, 13, 8, 6, 11 proceeds as follows. 7: 1000, 13: 10111, 8: 10010, 6: 0111, 11: 10101.
+
+Concatenating the individual runs onto a single code string, we have
+
+```
+10001011110010011110101
+```
+
+which is 23 coded bits instead of 50 uncoded bits.
+
+#### Decoding
+
+1. Parse off the leading 1s (which may be none) up to and including the first delimiting 0 that ends the unary code used for "divider".
+2. Set the "divider" equal to the number of leading 1s.
+3. The value of "remainder" can be determined by traversing the "tree" until you reach the leaf. (Huffman tree of $m$ equi-probable symbols.)
+4. Once "divider" and "remainder" are calculated from the code string, the number of runs of the zeros can be determined as ("divider" $\times$ $m$) + "remainder", and this code string is followed by "1", the stop symbol.
+
+## References
+
+[1] P. G. Howard and J. S. Vitter, "Fast and Efficient Lossless Image Compression," *Proc. Data Compression Conference*, pp. 351-360, Mar. 1993.
+
+[2] M. J. Weinberger, G. Seroussi, and G. Sapiro, "LOCO-I: A Low Complexity, Context-Based, Lossless Image Compression Algorithm," *Proc. of the Int. Data Compression Conference*, pp. 140-149, March 1996.
+
+[3] Glen G. Langdon, Jr., "Data Compression," CE108. W99, Department of Computer Engineering, University of California at Santa Cruz. <http://www.cse.ucsc.edu/classes/cmpe263/Winter01/>
+
+## Bibliography
+
+[1] E. M. Gabidulin, P. Z. Fan and M. Darnell, "Autocorrelation of Golomb sequences," *IEE Proc. Comm.*, Vol. 142, No. 5, October 1995.
+
+[2] Robert F. Rice, "Lossless Coding Standards for Space Data Systems," Jet Propulsion Laboratory Technical Report, California Institute of Technology, Pasadena, California.

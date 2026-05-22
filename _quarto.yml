@@ -55,35 +55,16 @@ website:
         contents:
           - research/publications.qmd
           - research/patents.qmd
-          - section: "Reports"
-            href: research/reports.qmd
-            contents:
-              - research/docs/reports/rpt521.qmd
-              - research/docs/reports/rpt524.qmd
-              - research/docs/reports/rpt543x.qmd
-              - research/docs/reports/rpt621.qmd
-              - research/docs/reports/rpt632.qmd
-              - research/docs/reports/rpt689.qmd
+          - research/reports.qmd
           - research/code.qmd
-          - section: "Projects"
-            href: research/projects/index.qmd
-            contents:
-              - research/projects/sample-project.qmd
-              - research/projects/another-project.qmd
+          - research/projects/index.qmd
       - section: "Teaching"
         href: teaching/index.qmd
         contents:
           - teaching/notes.qmd
           - teaching/homeworks.qmd
           - teaching/exams.qmd
-          - section: "Archives"
-            href: teaching/archives.qmd
-            contents:
-              - teaching/docs/archives/tutLaplace.qmd
-              - teaching/docs/archives/tutGmm.qmd
-              - teaching/docs/archives/tutEM.qmd
-              - teaching/docs/archives/tutMCMC.qmd
-              - teaching/docs/archives/tutChirp.qmd
+          - teaching/archives.qmd
       - text: "Consulting"
         href: consulting/index.qmd
       - section: "OSS"
@@ -150,6 +131,28 @@ format:
             return li;
           }
 
+          // Build a <li><a href>text</a></li> crumb.
+          function crumbLink(text, href) {
+            var li = document.createElement('li');
+            li.className = 'breadcrumb-item';
+            var a = document.createElement('a');
+            a.href = href; a.textContent = text;
+            li.appendChild(a);
+            return li;
+          }
+          // Ancestor crumbs for content pages that are intentionally NOT listed
+          // in the sidebar (their landing page is the index). Keeps the banner
+          // anchor working: Home > Section > Subsection > <page>.
+          function ancestorCrumbs(p) {
+            if (p.indexOf('/research/docs/reports/') >= 0)
+              return [['Research', '/research/index.html'], ['Reports', '/research/reports.html']];
+            if (p.indexOf('/teaching/docs/archives/') >= 0)
+              return [['Teaching', '/teaching/index.html'], ['Archives', '/teaching/archives.html']];
+            if (p.indexOf('/research/projects/') >= 0)
+              return [['Research', '/research/index.html'], ['Projects', '/research/projects/index.html']];
+            return [];
+          }
+
           // SUB-PAGES: prepend "Home" to Quarto's existing breadcrumb so
           // every ribbon starts with Home for consistency.
           var existingBcr = document.querySelector('.quarto-title-breadcrumbs .breadcrumb');
@@ -177,6 +180,7 @@ format:
               var ol = document.createElement('ol');
               ol.className = 'breadcrumb';
               ol.appendChild(makeHomeItem());
+              ancestorCrumbs(path).forEach(function (c) { ol.appendChild(crumbLink(c[0], c[1])); });
               var currentLi = document.createElement('li');
               currentLi.className = 'breadcrumb-item active';
               currentLi.textContent = h1.textContent.trim();

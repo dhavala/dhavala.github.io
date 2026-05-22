@@ -3,4 +3,5 @@ title: "Projects"
 description: "Ongoing and past research projects."
 ---
 
-Use the sidebar at left to browse individual projects.
+- [Sample project](sample-project.qmd)
+- [Another project](another-project.qmd)
