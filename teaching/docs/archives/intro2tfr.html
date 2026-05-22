@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Soma S. Dhavala">
+
+<title>Introduction to Time-Frequency Analysis – Soma S Dhavala</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../../images/favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-63972d3e766282ea4d3afe8f863b15f1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Skip-to-content link as the first focusable body child.
+  var skip = document.createElement('a');
+  skip.href = '#quarto-document-content';
+  skip.className = 'skip-link';
+  skip.textContent = 'Skip to main content';
+  document.body.insertBefore(skip, document.body.firstChild);
+
+  // Helper: build a <li class="breadcrumb-item"><a>Home</a></li>
+  function makeHomeItem() {
+    var li = document.createElement('li');
+    li.className = 'breadcrumb-item';
+    var a = document.createElement('a');
+    a.href = '/';
+    a.textContent = 'Home';
+    li.appendChild(a);
+    return li;
+  }
+
+  // Build a <li><a href>text</a></li> crumb.
+  function crumbLink(text, href) {
+    var li = document.createElement('li');
+    li.className = 'breadcrumb-item';
+    var a = document.createElement('a');
+    a.href = href; a.textContent = text;
+    li.appendChild(a);
+    return li;
+  }
+  // Ancestor crumbs for content pages that are intentionally NOT listed
+  // in the sidebar (their landing page is the index). Keeps the banner
+  // anchor working: Home > Section > Subsection > <page>.
+  function ancestorCrumbs(p) {
+    if (p.indexOf('/research/docs/reports/') >= 0)
+      return [['Research', '/research/index.html'], ['Reports', '/research/reports.html']];
+    if (p.indexOf('/teaching/docs/archives/') >= 0)
+      return [['Teaching', '/teaching/index.html'], ['Archives', '/teaching/archives.html']];
+    if (p.indexOf('/research/projects/') >= 0)
+      return [['Research', '/research/index.html'], ['Projects', '/research/projects/index.html']];
+    return [];
+  }
+
+  // SUB-PAGES: prepend "Home" to Quarto's existing breadcrumb so
+  // every ribbon starts with Home for consistency.
+  var existingBcr = document.querySelector('.quarto-title-breadcrumbs .breadcrumb');
+  if (existingBcr) {
+    existingBcr.insertBefore(makeHomeItem(), existingBcr.firstChild);
+  }
+
+  // SECTION INDEX PAGES: inject a trail INSIDE #title-block-header
+  // so it has the exact same DOM context as Quarto's breadcrumb on
+  // sub-pages. Stamp it with Quarto's own classes so every existing
+  // .quarto-title-breadcrumbs CSS rule (ribbon styling, layout
+  // fixes, h1 hide, mobile plain-text override) applies to it
+  // identically — no parallel selectors needed, no size drift.
+  // SKIP on the actual home page (/) — "Home > Home" is meaningless.
+  var titleHeader = document.querySelector('#title-block-header');
+  var titleBcr = document.querySelector('.quarto-title-breadcrumbs');
+  var path = window.location.pathname.replace(/\/+$/, '');
+  var isHome = (path === '' || path.endsWith('/index') || /\/index\.html?$/.test(path));
+  if (titleHeader && !titleBcr && !isHome) {
+    var h1 = titleHeader.querySelector('.quarto-title h1.title');
+    if (h1) {
+      var trail = document.createElement('nav');
+      trail.className = 'quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block section-trail';
+      trail.setAttribute('aria-label', 'breadcrumb');
+      var ol = document.createElement('ol');
+      ol.className = 'breadcrumb';
+      ol.appendChild(makeHomeItem());
+      ancestorCrumbs(path).forEach(function (c) { ol.appendChild(crumbLink(c[0], c[1])); });
+      var currentLi = document.createElement('li');
+      currentLi.className = 'breadcrumb-item active';
+      currentLi.textContent = h1.textContent.trim();
+      ol.appendChild(currentLi);
+      trail.appendChild(ol);
+      titleHeader.insertBefore(trail, titleHeader.firstChild);
+    }
+  }
+});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Introduction to Time-Frequency Analysis – Soma S Dhavala">
+<meta property="og:description" content="A review of Cohen’s class, the Affine class, and adaptive time-frequency representations">
+<meta property="og:image" content="https://dhavala.github.io/teaching/docs/archives/images/og-image.png">
+<meta property="og:site_name" content="Soma S Dhavala">
+<meta name="twitter:title" content="Introduction to Time-Frequency Analysis – Soma S Dhavala">
+<meta name="twitter:description" content="A review of Cohen’s class, the Affine class, and adaptive time-frequency representations">
+<meta name="twitter:image" content="https://dhavala.github.io/teaching/docs/archives/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Soma S Dhavala</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../about/index.html" aria-current="page"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../research/index.html"> 
+<span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../teaching/index.html"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../consulting/index.html"> 
+<span class="menu-text">Consulting</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../saddlepoint/index.html"> 
+<span class="menu-text">SaddlePoint</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text">SaddlePoint feed</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Introduction to Time-Frequency Analysis</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../about/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../about/bio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../about/contact.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Contact</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../research/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/patents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Patents</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../teaching/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Homeworks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/exams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exams</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/archives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Archives</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../consulting/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Consulting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../oss/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">OSS</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample tool</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../oss/another-tool.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Another tool</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../blogs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blogs</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SaddlePoint</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../asankhya/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Asankhya</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-time-frequency-analysis" id="toc-introduction-to-time-frequency-analysis" class="nav-link active" data-scroll-target="#introduction-to-time-frequency-analysis">Introduction to Time-Frequency Analysis</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#brief-historical-perspective" id="toc-brief-historical-perspective" class="nav-link" data-scroll-target="#brief-historical-perspective">Brief Historical Perspective</a></li>
+  <li><a href="#objectives-of-tfds" id="toc-objectives-of-tfds" class="nav-link" data-scroll-target="#objectives-of-tfds">Objectives of TFDs</a></li>
+  </ul></li>
+  <li><a href="#general-classes-of-tfds" id="toc-general-classes-of-tfds" class="nav-link" data-scroll-target="#general-classes-of-tfds">General Classes of TFDs</a>
+  <ul class="collapse">
+  <li><a href="#cohens-class" id="toc-cohens-class" class="nav-link" data-scroll-target="#cohens-class">Cohen’s Class</a></li>
+  <li><a href="#wigner-ville-distribution" id="toc-wigner-ville-distribution" class="nav-link" data-scroll-target="#wigner-ville-distribution">Wigner-Ville Distribution</a></li>
+  <li><a href="#choi-williams-distribution" id="toc-choi-williams-distribution" class="nav-link" data-scroll-target="#choi-williams-distribution">Choi-Williams Distribution</a></li>
+  <li><a href="#spectrogram" id="toc-spectrogram" class="nav-link" data-scroll-target="#spectrogram">Spectrogram</a></li>
+  <li><a href="#properties-of-tfds-in-cohens-class" id="toc-properties-of-tfds-in-cohens-class" class="nav-link" data-scroll-target="#properties-of-tfds-in-cohens-class">Properties of TFDs in Cohen’s Class</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  </ul></li>
+  <li><a href="#affine-class" id="toc-affine-class" class="nav-link" data-scroll-target="#affine-class">Affine Class</a></li>
+  <li><a href="#adaptive-tfds" id="toc-adaptive-tfds" class="nav-link" data-scroll-target="#adaptive-tfds">Adaptive TFDs</a></li>
+  <li><a href="#other-representations" id="toc-other-representations" class="nav-link" data-scroll-target="#other-representations">Other Representations</a>
+  <ul class="collapse">
+  <li><a href="#matching-pursuits" id="toc-matching-pursuits" class="nav-link" data-scroll-target="#matching-pursuits">Matching Pursuits</a></li>
+  <li><a href="#atomic-decomposition" id="toc-atomic-decomposition" class="nav-link" data-scroll-target="#atomic-decomposition">Atomic Decomposition</a></li>
+  <li><a href="#fractional-fourier-transform" id="toc-fractional-fourier-transform" class="nav-link" data-scroll-target="#fractional-fourier-transform">Fractional Fourier Transform</a></li>
+  <li><a href="#short-time-fourier-transform" id="toc-short-time-fourier-transform" class="nav-link" data-scroll-target="#short-time-fourier-transform">Short-Time Fourier Transform</a></li>
+  <li><a href="#wavelet-transform" id="toc-wavelet-transform" class="nav-link" data-scroll-target="#wavelet-transform">Wavelet Transform</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<div class="section-banner">
+  <img src="../../../images/banners/templebw.jpg" alt="Teaching banner">
+</div>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Introduction to Time-Frequency Analysis</h1>
+<p class="subtitle lead">A review of Cohen’s class, the Affine class, and adaptive time-frequency representations</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Soma S. Dhavala </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction-to-time-frequency-analysis" class="level1">
+<h1>Introduction to Time-Frequency Analysis</h1>
+<p><em>Most of the content is adapted from O’Neill (1997).</em></p>
+<section id="introduction" class="level2">
+<h2 data-anchor-id="introduction">Introduction</h2>
+<p>The distribution of signal energy in the time or frequency-domain is very straightforward. The distribution of energy in time is defined as the squared magnitude of the signal, <span class="math inline">\(|s(t)|^2\)</span>, and the energy distribution in frequency is defined as the magnitude of the Fourier transform, <span class="math inline">\(|S(f)|^2\)</span>. The Fourier transform, being a unitary operator, provides a different but equivalent representation of the signal. However, neither the signal nor its Fourier transform indicates how the energy is distributed simultaneously in time and frequency. For example, consider time-frequency distributions of two synthetic signals shown in Fig. 1. The two signals appear identical only if the time or the frequency energy distribution is considered. However, the two signals are clearly not identical from their time-frequency distribution. Hence, to distinguish such signals and to provide a more revealing picture of the signal’s characteristics, a joint time-frequency representation is necessary. Time-frequency distributions (TFDs) are two-dimensional functions that indicate the joint time-frequency energy content of a signal. They have been utilized in a wide range of signals, including speech, music and other acoustic signals, biological signals, radar and sonar signals, and geographical signals. Most TFDs of interest are members of Cohen’s class. However, the current representations are adaptive and offer more advantageous properties like Affine class, L-Wigner distribution, etc. In this chapter we review TFDs of Cohen’s class, the Affine class and some adaptive signal representations and form a sufficient background to understand Chapters three and four.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig1.png" class="img-fluid figure-img"></p>
+<figcaption>Fig. 1. (a) Frequency marginal, time-frequency representation and time marginal of a low frequency signal followed by a high frequency signal</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig2.png" class="img-fluid figure-img"></p>
+<figcaption>Fig. 1. (b) Frequency marginal, time-frequency representation and time marginal of a high frequency signal followed by a low frequency signal</figcaption>
+</figure>
+</div>
+<section id="brief-historical-perspective" class="level3">
+<h3 data-anchor-id="brief-historical-perspective">Brief Historical Perspective</h3>
+<p>The origin of time-frequency analysis goes back to the 1940s when Gabor’s instrumental work on signal representation based on elementary Gaussian elements for a proper description of the signal in combined time and frequency domains took place. Later, the work done by Wigner in the field of quantum mechanics had been applied to signal processing by Ville. Page had developed the concept of instantaneous power spectrum as the rate of change of energy spectrum in the range <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(t\)</span>. Levin used the same definition for the segment <span class="math inline">\(t\)</span> and <span class="math inline">\(\infty\)</span>, and defined a new function as the average of both the types of instantaneous power spectra (Cohen, 1989). TFDs for the nonstationary process were considered by (Flandrin et al, 1985). In 1968, a fundamental result was published by Rihaczek that stemmed from physical observations, now known as the Rihaczek distribution (Rihaczek, 1968). The existing results were given a mathematical treatment and an insight had been provided into their properties by Claasen and Mecklenbrauker in their series of papers (Claasen et al, 1980a) and in particular, the Wigner-Ville distribution (WVD) was investigated. Cohen had generalized the concept of time-frequency analysis by unifying the definition of TFDs having different properties. Adaptive signal representations have been given a lot of attention to overcome some of the difficulties associated with TFDs. These representations were mainly investigated by Jones and Baraniuk (Jones et al, 1993b), Choi and Williams (Choi et al, 1989) and Jones and Parks (Jones et al, 1992a). The recent focus is towards extending the analysis domain beyond time and frequency to obtain more redundant representations (Mann, 1995). We will discuss some of these methods in the subsequent Chapters.</p>
+</section>
+<section id="objectives-of-tfds" class="level3">
+<h3 data-anchor-id="objectives-of-tfds">Objectives of TFDs</h3>
+<p>Before we present what the TFDs should reflect, it would be appropriate to define the instantaneous frequency (IF) and the group delay, as:</p>
+<p><span class="math display">\[
+f_i(t) = \frac{1}{2\pi}\frac{d}{dt}\arg s(t)
+\quad\text{and}\quad
+t_g(f) = -\frac{1}{2\pi}\frac{d}{df}\arg S(f),
+\quad\text{respectively.} \tag{1}
+\]</span></p>
+<p>The IF, which represents the energy concentration in the frequency domain as a function of time, describes the signal’s true characteristics. However, the concept of IF is meaningless for multicomponent and nonanalytic signals, where IF is an ambiguous representation. Hence the TFDs are expected to represent the true energy along the path of the instantaneous frequency even when the constraints are lifted. Thus the TFDs are required to attain the following goals:</p>
+<ul>
+<li>Discriminate multicomponent signals from monocomponent signals.</li>
+<li>Facilitate the separation of multicomponent signals from monocomponent signals.</li>
+<li>Track the IF as accurately as possible.</li>
+<li>Existence of an inversion method to uniquely reconstruct the signal.</li>
+</ul>
+</section>
+</section>
+<section id="general-classes-of-tfds" class="level2">
+<h2 data-anchor-id="general-classes-of-tfds">General Classes of TFDs</h2>
+<p>The TFDs can be classified according to their properties. Two types of time-frequency distributions are those that are linear or quadratic functions of the signal. Examples of linear time-frequency distributions are short-time Fourier transform (STFT) and wavelet transform (WT). Examples of quadratic time-frequency distributions are the spectrogram, scalogram, WVD, etc. A general classification is shown in Fig. 2 (O’Neill, 1997). They are also classified according to their behavior when an operator is applied to a signal.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig3.png" class="img-fluid figure-img"></p>
+<figcaption>Fig. 2. Classification of time-frequency representations</figcaption>
+</figure>
+</div>
+<p>Three prominent examples of operators are the time-shift operator, the frequency shift operator and the scale operator. We review some general classes of quadratic distributions, the Affine class and the shift-covariant class. Finally, we present the adaptive signal representations that give flexibility in analyzing the signal by depicting them in domains other than time and frequency.</p>
+<section id="cohens-class" class="level3">
+<h3 data-anchor-id="cohens-class">Cohen’s Class</h3>
+<p>To distribute the energy of the signal over time and frequency, several authors have proposed different methods with each of them having unique properties. A unified approach proposed by Cohen can be expressed as:</p>
+<p><span class="math display">\[
+C_s(t,f) = \iint \phi(\theta,\tau)\, A_s(\theta,\tau)\, e^{j2\pi(t\theta - f\tau)}\, d\tau\, d\theta \tag{2}
+\]</span></p>
+<p>where <span class="math inline">\(\phi(\theta,\tau)\)</span> is an arbitrary function called the kernel by Claasen and Mecklenbrauker (Claasen et al, 1980a). The kernel can be a function of time and frequency. In general it is preferred to be of low pass in nature because it acts as a filtering means in the ambiguity function (AF) domain. The kernel determines the properties of the TFDs built upon it. Stated otherwise, the desired properties get reflected as constraints on the kernel. We have mentioned some desired properties of the kernel at a later stage. The kernels can be time and frequency dependent but they are not considered to be of Cohen’s class (Cohen, 1995). Some adaptive representations vary the kernel in a time and/or frequency dependent fashion to match the signal’s characteristics. We will now briefly review some of the TFDs belonging to Cohen’s class.</p>
+</section>
+<section id="wigner-ville-distribution" class="level3">
+<h3 data-anchor-id="wigner-ville-distribution">Wigner-Ville Distribution</h3>
+<p>The Wigner distribution is the prototype of a distribution that is qualitatively different from the spectrogram (magnitude squared of the STFT). The WVD has been successfully used in analyzing nonstationary signals, i.e., signals whose frequency behavior varies with time. The WVD of a signal <span class="math inline">\(s(t)\)</span> is given by</p>
+<p><span class="math display">\[
+W(t,\omega) = \frac{1}{2\pi}\int s\!\left(t+\frac{\tau}{2}\right) s^*\!\left(t-\frac{\tau}{2}\right) e^{-j\omega\tau}\, d\tau. \tag{3}
+\]</span></p>
+<p>This equation can be obtained by setting the kernel equal to one in Eqn. (2). Most of the properties of WVD can be obtained with this interpretation. Perhaps the most remarkable property of the WVD is that for a Gaussian windowed linear chirp signal, defined as:</p>
+<p><span class="math display">\[
+s(t) = e^{-\alpha t^2}\, e^{j(a_0 + a_1 t + a_2 t^2)} \tag{4}
+\]</span></p>
+<p>the WVD concentrates the energy of the signal along the instantaneous frequency of the signal, given by:</p>
+<p><span class="math display">\[
+W_s(t,\omega) = e^{-(\omega - a_1 - 2a_2 t)^2}\, e^{-2\alpha t^2}. \tag{5}
+\]</span></p>
+<p>The distribution and the instantaneous frequency are shown in Fig. 3. The WVD of the sum of two signals is not the sum of individual WVDs. Instead, it will be the sum of their WVDs plus another component that is the cross WVD of the two signals:</p>
+<p><span class="math display">\[
+W_{s_1+s_2}(t,f) = W_{s_1}(t,f) + W_{s_2}(t,f) + 2\,\mathrm{Re}\{W_{s_1,s_2}(t,f)\}, \tag{2.6}
+\]</span></p>
+<p>where the cross Wigner distribution of the two signals is defined as:</p>
+<p><span class="math display">\[
+W_{s_1,s_2}(t,f) = \int s_1\!\left(t+\frac{\tau}{2}\right) s_2^*\!\left(t-\frac{\tau}{2}\right) e^{-j2\pi f\tau}\, d\tau. \tag{2.7}
+\]</span></p>
+<p>The cross Wigner distribution of the two signals is commonly called a cross term. All quadratic time-frequency distributions, including the spectrogram, will contain cross terms.</p>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig4.png" class="img-fluid figure-img"></p>
+<figcaption>(a) Wigner distribution</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig5.png" class="img-fluid figure-img"></p>
+<figcaption>(b) Instantaneous frequency</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Fig. 3. (a) Wigner distribution and (b) Instantaneous frequency of a linear FM signal</p>
+<p>Cross terms can also occur within a single component signal, e.g., non-linear frequency modulated signals. An example of cross terms within a signal is shown in Fig. 4. An auto term is defined, rather vaguely, as parts of the Wigner distribution that correspond to the true spectrum of the signal.</p>
+<p>The cross terms do not actually represent the signal’s energy and are hence undesirable. The structure of cross terms has been investigated and well understood by many researchers (Bikdash et al, 1993). Suppose the two auto terms are separated in time by <span class="math inline">\(\Delta t\)</span> and in frequency by <span class="math inline">\(\Delta f\)</span>, as shown in Fig. 5; there will be a cross term centered between the two auto terms in the time-frequency plane and it oscillates in the time direction with a rate <span class="math inline">\(\Delta f\)</span> and in the frequency direction with a <span class="math inline">\(\Delta t\)</span> rate.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig-interference.png" class="img-fluid figure-img"></p>
+<figcaption>Fig. 5. The interference geometry in the time-frequency plane</figcaption>
+</figure>
+</div>
+<p>Later, we will see how we can employ the kernel as a filtering means to suppress these cross terms at the expense of the degradation in auto term resolution. In spite of these spurious cross terms, the Wigner distribution has been often employed because of its capability to resolve multicomponent signals that are time-frequency disjoint. Of all the quadratic representations, the Wigner distribution alone attains simultaneous resolution in time and frequency. Besides, it satisfies most of the properties that a TFD has to satisfy. Some distributions belonging to Cohen’s class are tabulated in Table 1. A more detailed discussion can be found in (Hlawatsch et al, 1992a).</p>
+<p>Table 1: Different time-frequency distributions belonging to Cohen’s class</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>S. No.</th>
+<th>Time-Frequency Distribution</th>
+<th><span class="math inline">\(\phi(\theta,\tau)\)</span></th>
+<th><span class="math inline">\(C_s(t,f)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Page distribution</td>
+<td><span class="math inline">\(e^{-j\pi\lvert\tau\rvert\,\theta}\)</span></td>
+<td><span class="math inline">\(2\,\mathrm{Re}\left\{ s^*(t)\, e^{j2\pi ft} \displaystyle\int_{t}^{\infty} s(t')\, e^{-j2\pi ft'}\, dt' \right\}\)</span></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Levin distribution</td>
+<td><span class="math inline">\(e^{-j\pi\lvert\tau\rvert\,\theta}\)</span></td>
+<td><span class="math inline">\(2\,\mathrm{Re}\left\{ s^*(t)\, e^{j2\pi ft} \displaystyle\int_{t}^{\infty} s(t')\, e^{-j2\pi ft'}\, dt' \right\}\)</span></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Wigner distribution</td>
+<td><span class="math inline">\(1\)</span></td>
+<td><span class="math inline">\(\displaystyle\int_{\tau} s\!\left(t+\frac{\tau}{2}\right) s^*\!\left(t-\frac{\tau}{2}\right) e^{-j2\pi f\tau}\, d\tau\)</span></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Choi-Williams distribution</td>
+<td><span class="math inline">\(\exp(-\tau^2\theta^2/\sigma)\)</span></td>
+<td><span class="math inline">\(\displaystyle\iint \phi(\theta,\tau)\, A_s(\theta,\tau)\, e^{j2\pi(t\nu - f\tau)}\, d\tau\, d\theta\)</span>; here <span class="math inline">\(A_s(\theta,\tau)\)</span> is the ambiguity function.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Spectrogram</td>
+<td><span class="math inline">\(\displaystyle\int h^*\!\left(v-\frac{\tau}{2}\right) h\!\left(v+\frac{\tau}{2}\right) \exp(-j\theta v)\, dv\)</span>, where <span class="math inline">\(h\)</span> is the window function</td>
+<td><span class="math inline">\(\left\lvert \displaystyle\int e^{-j2\pi f}\, s(\tau)\, h(\tau - t)\, d\tau \right\rvert^2\)</span></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Rihaczek distribution</td>
+<td><span class="math inline">\(e^{-j\pi\tau\theta}\)</span></td>
+<td><span class="math inline">\(\displaystyle\int_{\tau} x(t+\tau)\, x^*(t)\, e^{-j2\pi f\tau}\, d\tau\)</span></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Generalized exponential distribution</td>
+<td><span class="math inline">\(\exp\!\left[ -\left(\dfrac{\tau}{\tau_0}\right)^{2M}\!\left(\dfrac{\theta}{\theta_0}\right)^{2N} \right]\)</span></td>
+<td><span class="math inline">\(\displaystyle\iint \phi(\theta,\tau)\, A_s(\theta,\tau)\, e^{j2\pi(t\theta - f\tau)}\, d\tau\, d\theta\)</span>; here <span class="math inline">\(A_s(\theta,\tau)\)</span> is the ambiguity function.</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Butterworth distribution</td>
+<td><span class="math inline">\(\dfrac{1}{\,1 + \left(\dfrac{\tau}{\tau_0}\right)^{2M}\!\left(\dfrac{\theta}{\theta_0}\right)^{2N}}\)</span></td>
+<td><span class="math inline">\(\displaystyle\iint \phi(\theta,\tau)\, A_s(\theta,\tau)\, e^{j2\pi(t\theta - f\tau)}\, d\tau\, d\theta\)</span>; here <span class="math inline">\(A_s(\theta,\tau)\)</span> is the ambiguity function.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="choi-williams-distribution" class="level3">
+<h3 data-anchor-id="choi-williams-distribution">Choi-Williams Distribution</h3>
+<p>The inherently associated cross terms in all bilinear distributions are of major concern in spectral estimation and in multicomponent signal separation. By looking at the kernel as a filtering function in the ambiguity function (AF) domain, there have been many kernels which reduce these cross terms. However, kernels constrained to construct distributions of desired properties are of utmost importance. In the AF domain, the locus of the auto terms falls around the origin while those of cross terms lie away from the origin. Choi and Williams have identified this property of the AF and have chosen a kernel that has larger weights in the vicinity of the auto terms and smaller weights farther away from the origin in the AF domain, given as:</p>
+<p><span class="math display">\[
+\phi(\theta,\tau) = e^{-\dfrac{\theta^2\tau^2}{\sigma}}.
+\]</span></p>
+<p>The CWD can be expressed as (Choi et al, 1989):</p>
+<p><span class="math display">\[
+\mathrm{CWD}(t,f) = \int e^{-j2\pi f\tau} \int \frac{1}{\sqrt{4\pi\tau^2/\sigma}}\, s\!\left(u+\frac{\tau}{2}\right) s^*\!\left(u-\frac{\tau}{2}\right) e^{-\dfrac{(u-t)^2}{4\tau^2/\sigma}}\, du\, d\tau \tag{8}
+\]</span></p>
+<p>The capability of the CWD in suppressing the cross terms without much degradation in auto terms can be controlled by a proper choice of the kernel spread (i.e., <span class="math inline">\(\sigma\)</span>). A resolution comparison of several distributions and a detailed discussion of CWD can be found in (Jones et al, 1992a).</p>
+</section>
+<section id="spectrogram" class="level3">
+<h3 data-anchor-id="spectrogram">Spectrogram</h3>
+<p>The classical definition of the spectrogram can be considered as the squared magnitude of the short-time Fourier transform (Nawab et al, 1988). However, the spectrogram can be considered as a member of Cohen’s class with the kernel being the ambiguity function of the analysis window, and it is given by:</p>
+<p><span class="math display">\[
+S(t,\omega; h) = \left\lvert \int s(\tau)\, h(t-\tau)\, e^{-j\omega\tau}\, d\tau \right\rvert^2. \tag{9}
+\]</span></p>
+<p>The properties of the spectrogram obviously change with a change in the window function. The interesting property of the spectrogram is that, unlike other bilinear TFDs, it is always nonnegative. Apparently it seems that the spectrogram does not suffer from cross terms, but strictly speaking the cross terms in this representation exactly fall in the auto term region and interfere with them. Hence, the spectrogram can be considered as a smoothed version of the WVD to suppress cross terms and, as a natural consequence, the auto term resolution reduces. A comparison of CWD, WVD and spectrogram for a synthetic signal in their cross term suppression and auto term resolution is shown in Fig. 6.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig6.png" class="img-fluid figure-img"></p>
+<figcaption>(a) Wigner distribution</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig7.png" class="img-fluid figure-img"></p>
+<figcaption>(b) Choi-Williams distribution</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig8.png" class="img-fluid figure-img"></p>
+<figcaption>(c) Spectrogram</figcaption>
+</figure>
+</div>
+<p>Fig. 6. Resolution and cross terms comparison of (a) Wigner distribution, (b) Choi-Williams distribution and (c) Spectrogram of a multicomponent signal</p>
+</section>
+<section id="properties-of-tfds-in-cohens-class" class="level3">
+<h3 data-anchor-id="properties-of-tfds-in-cohens-class">Properties of TFDs in Cohen’s Class</h3>
+<p>As indicated earlier, the properties of the distributions constructed in Cohen’s class reflect as constraints on the kernel. We look at the kernel’s behavior to get the desired property. We briefly mention some properties now. Many other properties like finite time support, strong time support, inversion and realizability have been discussed with proofs in (Giridhar, 1998).</p>
+<p><strong>a) Marginals: Instantaneous Energy and Energy Density Spectrum.</strong> Integrating the distribution along one axis gives the energy density in the other domain. For the time marginal to give instantaneous energy the kernel must be constrained as <span class="math inline">\(\phi(\theta,0)=1\)</span>, and for the frequency marginal to give the energy density spectrum <span class="math inline">\(\phi(0,\tau)=1\)</span>.</p>
+<p><strong>b) Total Energy.</strong> If the marginals are given, then the total energy will be the energy of the signal. Evaluating the integral in the expression for the distribution with respect to time and frequency shows that for the total energy to be preserved, the kernel should satisfy <span class="math inline">\(\phi(0,0)=1\)</span>.</p>
+<p><strong>c) Uncertainty Principle.</strong> Any joint distribution that satisfies the marginals will yield the uncertainty principle. Thus the condition for the uncertainty principle is that both marginals must be correctly given.</p>
+<p><strong>d) Reality.</strong> Since time-frequency distributions are usually considered to be energy distributions, they should be real and positive. For the distribution to be real, the kernel has to satisfy the constraint <span class="math inline">\(\phi(\theta,\tau) = \phi^*(-\theta,-\tau)\)</span>.</p>
+<p><strong>e) Positivity.</strong> The constraint on the kernel is difficult to evaluate and the characteristic function approach is used to check for positivity. In general, we are interested in distributions satisfying marginals. Wigner had shown that distributions which simultaneously satisfy marginals and positivity cannot exist. Loughlin-Pitton-Atlas have devised a scheme to construct positive distributions. Even though one is interested in a distribution with marginals, it would be more appealing for an energy function to be positive-valued. Unfortunately such is not the case.</p>
+<p><strong>f) Time and Frequency Shifts.</strong> If we translate a signal shifted in time by <span class="math inline">\(t_0\)</span>, we expect the distribution to be translated in time by the same amount. This can happen only if the kernel is time independent. Similarly, if the kernel is frequency independent the distribution would be shift invariant in frequency. That is, the kernel must be of the form <span class="math inline">\(\phi(\theta,\tau)\)</span> independent of <span class="math inline">\(t\)</span> and <span class="math inline">\(f\)</span>.</p>
+<p><strong>g) Scale Invariance.</strong> If a signal is linearly scaled, then the spectrum is inversely scaled. Hence, when a signal <span class="math inline">\(s(t)\)</span> is scaled by a factor of <span class="math inline">\(a\)</span>, the requirement on the distribution is that:</p>
+<p><span class="math display">\[
+C_{s_a}(t,f) = C_s(at, f/a) \quad\text{for}\quad s_a(t) = \sqrt{a}\, s(at). \tag{10}
+\]</span></p>
+<p>The above equation holds well for <span class="math inline">\(\phi(\theta,\tau) = \phi(\theta\tau)\)</span>. The kernel of this type is also known as the product kernel.</p>
+</section>
+<section id="limitations" class="level3">
+<h3 data-anchor-id="limitations">Limitations</h3>
+<p>The unified approach has been presented to construct new distributions with desired properties by varying the properties of the kernel. However, the kernel is not varied in a time and frequency dependent fashion and hence the distribution is independent of the signal characteristics and does not reflect the true characteristics because of the inherently associated cross terms in bilinear distributions, and signal dependent kernels have to be investigated.</p>
+</section>
+</section>
+<section id="affine-class" class="level2">
+<h2 data-anchor-id="affine-class">Affine Class</h2>
+<p>Cohen’s class includes all the quadratic distributions that are invariant to shifts in time and frequency. We can define an operator (e.g., shift in time, shift in frequency, shear in frequency, etc.) and construct distributions that are covariant to shifts on these operators. When we choose scale and time shifts as the operators, we obtain the Affine class (O’Neill, 1997). Time-frequency distributions in the Affine class can be computed through smoothing of the Wigner distribution, as the WVD is covariant to both shift in frequency and scale. For example, the Affine class can be written as:</p>
+<p><span class="math display">\[
+\Omega_s(t,a) = \iint \Pi\!\left(\frac{s-t}{a}, a\nu\right) W_s(s,\nu)\, ds\, d\nu. \tag{11}
+\]</span></p>
+<p>The relationship between the Affine class and the wavelet transform is similar to the relationship between Cohen’s class and the short-time Fourier transform. The scalogram is defined as the squared magnitude of the wavelet transform. We can construct innumerable distributions that fundamentally differ from Cohen’s class, but can be constructed using the same general structure by defining a new set of operators on which the class would be covariant. Recently, Papandreou et al.&nbsp;have defined another class of quadratic distributions called the “hyperbolic class”. This class consists of all quadratic time-frequency distributions that are covariant to hyperbolic shifts in time (Papandreou et al, 1993). The hyperbolic time shift operator is defined as:</p>
+<p><span class="math display">\[
+(H_c\, s)(t) = s(t)\, e^{-j2\pi c \ln t}. \tag{12}
+\]</span></p>
+<p>More information on the existence and construction of arbitrary operators can be found in (Baraniuk et al, 1996). Higher order distributions were proposed to match very specific signals that have nonlinear frequency modulation or polynomial instantaneous frequency, e.g., Wigner-bispectrum, polynomial Wigner distribution and L-Wigner distribution (Stankovic, 1994).</p>
+</section>
+<section id="adaptive-tfds" class="level2">
+<h2 data-anchor-id="adaptive-tfds">Adaptive TFDs</h2>
+<p>The TFDs in Cohen’s class can be obtained by convolving the Wigner distribution with the kernel function. As mentioned earlier, the purpose of this kernel is to filter out cross terms and maintain the resolution of the auto terms. Since the structure of the auto terms in the Wigner distribution changes with signals, the kernels that work well for one signal may not work well for other signals. A fixed kernel results in good performance for only certain configurations of ambiguity function auto terms and cross terms. Since the locations of the auto components and cross components depend on the signals to be analyzed, we expect to obtain good performance for a broad class of signals by using only the signal dependent kernel. Jones et al.&nbsp;have proposed methods for creating signal adaptive kernels (Jones et al, 1993a). The optimal kernel design is formulated in the ambiguity plane because of its property to distinguish the auto components and cross components, and can be formulated as:</p>
+<p><span class="math display">\[
+\max_{\phi} \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} \lvert A(\theta,\tau)\, \phi(\theta,\tau) \rvert^2\, d\theta\, d\tau,
+\]</span></p>
+<p>which is subject to the constraints <span class="math inline">\(\phi(0,0)=1\)</span> and <span class="math inline">\(\phi\)</span> is radially non-increasing. The TFD of a bat signal using the adaptive optimal kernel design is shown in Fig. 7. A fast algorithm to compute the above representation is proposed in (Jones et al, 1994b). Further, constraining the kernel to be a radially Gaussian kernel is proposed in (Jones et al, 1993c). Jeong et al.&nbsp;have investigated the kernel design for reduced interference (Jeong et al, 1992a). Jones et al.&nbsp;have considered the problem of finding a best estimate using the short-time Fourier transform (STFT) by choosing a concentration measure and then adapting the window parameter in each time and frequency bin using this measure (Jones et al, 1992b). They claim that it outperforms all representations in terms of concentration, but it is computationally very expensive.</p>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig9.png" class="img-fluid figure-img"></p>
+<figcaption>(a) A bat signal</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig10.png" class="img-fluid figure-img"></p>
+<figcaption>(b) Adaptive optimal kernel time-frequency representation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Fig. 7. (a) A bat signal and (b) Adaptive optimal kernel time-frequency representation of the signal</p>
+</section>
+<section id="other-representations" class="level2">
+<h2 data-anchor-id="other-representations">Other Representations</h2>
+<p>Flexible decompositions are particularly important for representing signal components whose localizations in time and frequency vary. Hence, a multidimensional parameter space is considered to reveal the signal’s inner structure more effectively. Extending the analysis domain beyond time and frequency is gaining momentum. However, the existing methods have their limitations from the computational point of view (Baraniuk et al, 1996b). We now review some decomposition algorithms.</p>
+<section id="matching-pursuits" class="level3">
+<h3 data-anchor-id="matching-pursuits">Matching Pursuits</h3>
+<p>The matching pursuits algorithm decomposes any signal into a linear expansion of waveforms that are selected from a redundant dictionary of functions (Mallat et al, 1993). These waveforms are chosen in order to best match the signal’s structures. These are general procedures to compute adaptive signal representations. Decompositions of signals over the family of functions that are well localized in time and frequency have found many applications in signal processing. Such functions are called time-frequency atoms. A general family of time-frequency atoms can be generated by scaling, translating and modulating the window signal. In general, we can represent a signal expanded in terms of these atoms, as:</p>
+<p><span class="math display">\[
+f = \sum_{n} \langle f, g_{\gamma_n}\rangle\, g_{\gamma_n}. \tag{13}
+\]</span></p>
+<p>This algorithm finds its expansion set <span class="math inline">\(\{g_{\gamma_n}\}\)</span> by successive approximations of <span class="math inline">\(f\)</span> with orthogonal projections on elements of the dictionary. The vector <span class="math inline">\(f\)</span> can be decomposed into:</p>
+<p><span class="math display">\[
+f = \langle f, g_{\gamma_0}\rangle\, g_{\gamma_0} + Rf, \tag{14}
+\]</span></p>
+<p>where <span class="math inline">\(Rf\)</span> is the residue vector after approximating <span class="math inline">\(f\)</span> in the direction of <span class="math inline">\(g_{\gamma_0}\)</span>. The above equation is computed iteratively until the residue vector approaches a threshold, assuring that the signal can be reconstructed from the expansion set <span class="math inline">\(\{g_{\gamma_n}\}\)</span> with a tolerable error. Adaptive time-frequency representations can be constructed using these expansion coefficients. Some of its applications in spectral estimation, denoising, multicomponent separation, etc., can be found in (Mallat et al, 1993).</p>
+</section>
+<section id="atomic-decomposition" class="level3">
+<h3 data-anchor-id="atomic-decomposition">Atomic Decomposition</h3>
+<p>Atomic decomposition expands any signal in terms of four-parameter time-frequency atoms that are localized in the time-frequency plane. The Gaussian function is chosen as the basic atom because of its minimum area property in the time-frequency plane. The four-parameter atom is obtained by successive applications of scaling, rotation, time and frequency-shift operators to the Gaussian elements, giving:</p>
+<p><span class="math display">\[
+g_{\gamma}(t) = \big(S_a R_\beta T_{t_0} F_{f_0}\, g\big)(t), \tag{15}
+\]</span></p>
+<p>where <span class="math inline">\(\gamma\)</span> is the index of the atom. The scaled and rotated atom is found as:</p>
+<p><span class="math display">\[
+g_{a,\beta}(t) = \frac{1}{\sqrt{a}}\, e^{-\pi (t/a)^2}\, e^{j\pi\beta t^2}, \tag{16}
+\]</span></p>
+<p>where <span class="math inline">\(\gamma = (a, \beta, t_0, f_0)\)</span>.</p>
+<p>The decomposition is done via matching pursuits in which the dictionary is constituted by the four-parameter space. A similar kind of approach in representing the signal as a sum of chirped Gaussians can be found in (Bultan, 1999). Adjustment of rectangular shell shapes adapted to the local structure will permit a clearer representation of the signal. The oblique cells are obtained by chirping the Gaussian. Its applications in finding the drift rate and separation of multicomponents are also presented.</p>
+</section>
+<section id="fractional-fourier-transform" class="level3">
+<h3 data-anchor-id="fractional-fourier-transform">Fractional Fourier Transform</h3>
+<p>The fractional Fourier transform (FRFT) rotates the time-frequency plane with a specified angle. This can cause the analysis grid to shear in the time-frequency plane and can represent signals of a dispersive nature. It is defined for any function <span class="math inline">\(f(t)\)</span>, as:</p>
+<p><span class="math display">\[
+f_{-\alpha}(t) \triangleq (\Gamma_{-\alpha} f)(t)
+\triangleq \sqrt{\frac{1 - j\cot\alpha}{2\pi}}\;
+e^{\,j\frac{\cot\alpha}{2} t^2}
+\int f(\tau)\, e^{\,j\frac{\cot\alpha}{2}\tau^2}\, e^{-j\,\csc\alpha\,\tau t}\, d\tau \tag{17}
+\]</span></p>
+<p>where <span class="math inline">\(\Gamma_{-\alpha}\)</span> is the rotation operator corresponding to the counter-clockwise rotation of <span class="math inline">\(\alpha\)</span> radians. The FRFT is equal to the Fourier transform at <span class="math inline">\(\alpha = \pi/2\)</span>. The discretization of FRFT is considered in (Bultan et al, 1998). An example depicting the rotation of the time-frequency plane at an angle of <span class="math inline">\(\pi/2\)</span> is shown in Fig. 8.</p>
+<p>Fig. 8. (a) A rectangular pulse and (b) Its Fractional Fourier transform at <span class="math inline">\(\alpha = \pi/2\)</span></p>
+</section>
+<section id="short-time-fourier-transform" class="level3">
+<h3 data-anchor-id="short-time-fourier-transform">Short-Time Fourier Transform</h3>
+<p>The STFT analysis and synthesis are fundamental for describing any quasi-stationary signals such as speech. As mentioned in our earlier discussion, the Fourier transform does not explicitly show the time localization of the frequency components. So the time localization can be obtained by suitably pre-windowing the signal <span class="math inline">\(s(t)\)</span> (Nawab et al, 1988). The STFT can be defined as:</p>
+<p><span class="math display">\[
+S_x(u,\zeta) = \langle x, g_{u,\zeta}\rangle = \int x(t)\, g(t-u)\, e^{-j\zeta u}\, dt. \tag{18}
+\]</span></p>
+<p>It uses an atom which is the product of a sinusoidal wave with a symmetric finite energy window function <span class="math inline">\(g\)</span>. These atoms are obtained by time translations and frequency modulations of the original window function:</p>
+<p><span class="math display">\[
+g_{u,\zeta}(t) = g(t-u)\, e^{j\zeta t}. \tag{19}
+\]</span></p>
+<p>The atom is time centered at <span class="math inline">\(u\)</span> and frequency centered at <span class="math inline">\(\zeta\)</span>. Multiplication by a relatively short window effectively suppresses the signal outside the neighborhood around the “analysis time” <span class="math inline">\(u\)</span>. The effect of varying the length of the window is shown in Fig. 9.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig11.png" class="img-fluid figure-img"></p>
+<figcaption>(a) Energy spectral density, real part and STFT of a 128 point truncated sinusoid</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig12.png" class="img-fluid figure-img"></p>
+<figcaption>(b) STFT with 64 point Hamming window</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig13.png" class="img-fluid figure-img"></p>
+<figcaption>(c) STFT with 7 point Hamming window</figcaption>
+</figure>
+</div>
+<p>Fig. 9. (a) Energy spectral density, real part and STFT of a 128 point truncated sinusoid, (b) STFT with 64 point Hamming window and (c) STFT with 7 point Hamming window</p>
+<p>The localization and energy concentration of the STFT depends only on the window and does not vary unless the window is changed, i.e., the time and frequency spread are constant throughout. This can be considered as a bank of filters having constant bandwidth as exemplified in Fig. 10.</p>
+<p>Fig. 10. Time-frequency tilings in STFT analysis</p>
+</section>
+<section id="wavelet-transform" class="level3">
+<h3 data-anchor-id="wavelet-transform">Wavelet Transform</h3>
+<p>The wavelet transform (WT) provides an alternative to the classical STFT or Gabor transform for the analysis of nonstationary signals. It also provides a unified framework for a number of techniques such as multiresolution analysis, subband coding, and wavelet series expansions that have been developed for various signal processing applications. In contrast to the STFT, the WT uses short windows at high frequencies and long windows at low frequencies. The continuous wavelet transform can be defined as:</p>
+<p><span class="math display">\[
+WT_x(u,s) = \langle x, \psi_{u,s}\rangle = \int_{-\infty}^{\infty} x(t)\, \frac{1}{\sqrt{s}}\, \psi^*\!\left(\frac{t-u}{s}\right) dt, \tag{20}
+\]</span></p>
+<p>where the mother wavelet is a zero-averaging function centered around zero with finite energy. The db4 mother wavelet and the scaling function are shown in Fig. 11. The atoms are obtained by translations and dilations of the mother wavelet.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig14.png" class="img-fluid figure-img"></p>
+<figcaption>(a) The db4 scaling function</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig15.png" class="img-fluid figure-img"></p>
+<figcaption>(b) The db4 mother wavelet</figcaption>
+</figure>
+</div>
+<p>Fig. 11. (a) The db4 scaling function and (b) The db4 mother wavelet</p>
+<p>The atom <span class="math inline">\(\psi_{u,s}\)</span> is centered around <span class="math inline">\(u\)</span>. If the frequency centering of <span class="math inline">\(\psi\)</span> is <span class="math inline">\(\eta\)</span>, then the frequency centering of the dilated function is <span class="math inline">\(\eta/s\)</span>. The time spread of the above function is proportional to <span class="math inline">\(s\)</span> and the frequency spread is inversely proportional to <span class="math inline">\(s\)</span>. It is as though the filters have a constant <span class="math inline">\(Q\)</span>, the bandwidth being proportional to the frequency. The time-frequency support of the WT is shown in Fig. 12. The WT applied to a narrow rectangular pulse demonstrates the time localization properties shown in Fig. 13. It can be observed from the figure that at lower scales or in high frequency regions, the WT is localized in time. However, at higher scales the frequency resolution is better. Wavelet analysis is capable of revealing aspects of data that other signal analysis techniques miss, for example aspects like trends, breakdown points, discontinuities in higher derivatives and self-similarity. Further, because it affords a different view of data than those presented by traditional techniques, wavelet analysis can often compress or de-noise a signal without appreciable degradation. A good review on the wavelet transform, its applications, the filter bank interpretation and fast computations can be found in (Rao et al, 1998).</p>
+<p>Fig. 12. Time-frequency tilings in the wavelet analysis</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/intro2tfr/intro2tfr-fig16.png" class="img-fluid figure-img"></p>
+<figcaption>Fig. 13. Wavelet transform of a narrow rectangular pulse using db4 wavelet</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Abeysekara, S. S. (1990) Computation of Wigner-Ville Distribution for Complex Data. <em>Electronics Letters</em>, 26, 1315-1317.</li>
+<li>Allen, J. B. and Rabiner, L. R. (1977) A Unified Approach to Short-Time Fourier Analysis and Synthesis. <em>Proc. of IEEE</em>, 65, 1558-1564.</li>
+<li>Baraniuk, R. G. (1996a) Joint Distributions of Arbitrary Variables Made Easy. <em>Proceedings of the IEEE DSP Workshop</em>, Leon, Norway, 394-397.</li>
+<li>Baraniuk, R. G. and Jones, D. L. (1996b) Wigner Based Formulation of the Chirplet Transform. <em>IEEE Trans. on Signal Processing</em>, 44, 3129-3535.</li>
+<li>Barry, D. T. (1992) Fast Calculation of the Choi-Williams Time-Frequency Distribution. <em>IEEE Trans. on Signal Processing</em>, 44, 450-455.</li>
+<li>Bergmann, N. (1991) New Formulation of Discrete Wigner-Ville Distribution. <em>Electronics Letters</em>, 26, 111-112.</li>
+<li>Bikdash, U. M. and Yu, K. B. (1993) Analysis and Filtering using Optimally Smoothed Wigner Distribution. <em>IEEE Trans. on Signal Processing</em>, 41, 1603-1617.</li>
+<li>Boashash, B. and Black, P. J. (1987) An Efficient Real-Time Implementation of the Wigner-Ville Distribution. <em>IEEE Trans. on Acoust., Speech and Signal Processing</em>, ASSP-35, 1611-1619.</li>
+<li>Boudreaux-Bartles, G. F. and Parks, T. W. (1986) Time-Varying Filtering and Signal Estimation using Wigner Distribution Synthesis Techniques. <em>IEEE Trans. on Acoust., Speech and Signal Processing</em>, ASSP-34, 442-451.</li>
+<li>Bracewell, R. N. and Mihovilovic, D. (1991) Adaptive Chirplet Representation of Signals on Time-Frequency Plane. <em>Electronics Letters</em>, 27, 1159-1161.</li>
+<li>Bultan, A. (1999) A Four-Parameter Atomic Decomposition of Chirplets. <em>IEEE Trans. on Signal Processing</em>, 41, 731-745.</li>
+<li>Bultan, A. and Akansu, A. N. (1998) A Novel Time-Frequency Exciser in Spread Spectrum Communications for Chirp-Like Interference. <em>Proc. of ICASSP</em>, Seattle, U.S.A., 3265-3268.</li>
+<li>Choi, H. I. and Williams, W. J. (1989) Improved Time-Frequency Representation of Multicomponent Signals using Exponential Kernels. <em>IEEE Trans. on Acoust., Speech and Signal Processing</em>, ASSP-37, 861-871.</li>
+<li>Claasen, T. A. C. M. and Mecklenbrauker, W. F. G. (1980a) The Wigner Distribution - A Tool for Time-Frequency Signal Analysis, Part II: Discrete Time Signals. <em>Philips J. Res.</em>, 35, 276-300.</li>
+<li>Claasen, T. A. C. M. and Mecklenbrauker, W. F. G. (1980b) The Aliasing Problem in Discrete-Time Wigner Distribution. <em>IEEE Trans. on Acoust., Speech and Signal Processing</em>, ASSP-31, 1067-1072.</li>
+<li>Coates, M. J., Fitzgerald, W. J. and Molina, C. (1998) Regionally Optimised Kernels for Time-Frequency Distributions. <em>Proc. of ICASSP</em>, Seattle, U.S.A., 1553-1556.</li>
+<li>Cohen, L. (1989) Time-Frequency Distributions: A Review. <em>Proc. of IEEE</em>, 77, 941-981.</li>
+<li>Cohen, L. <em>Time-Frequency Analysis</em>. Prentice-Hall, Englewood Cliffs, New Jersey (1995).</li>
+<li>Crochiere, R. E. (1980) A Weighted Overlap-Add Method of Short-Time Fourier Analysis/Synthesis. <em>IEEE Trans. on Acoust., Speech and Signal Processing</em>, ASSP-28, 99-102.</li>
+<li>Cunningham, G. S. and Williams, W. J. (1994a) Kernel Decomposition of Time-Frequency Distributions. <em>IEEE Trans. on Signal Processing</em>, 42, 1425-1442.</li>
+<li>Cunningham, G. S. and Williams, W. J. (1994b) Fast Implementation of Generalized Discrete Time-Frequency Distributions. <em>IEEE Trans. on Signal Processing</em>, 42, 1496-1508.</li>
+<li>Dembo, A. and Malah, D. (1988) Signal Synthesis from Modified Discrete Short-Time Transform. <em>IEEE Trans. on Acoust., Speech and Signal Processing</em>, ASSP-36, 168-181.</li>
+<li>Dempster, A. P., Laird, N. M. and Rubin, D. B. (1977) Maximum Likelihood from Incomplete Data via the EM Algorithm. <em>J. R. Stat. Soc. B.</em>, 39, 1-37.</li>
+<li>Devroye, L. <em>Non-Uniform Random Variate Generation</em>. Springer-Verlag 1986.</li>
+<li>Fessler, A. and Hero, A. O. (1994) Space Alternating Generalized Expectation Maximization Algorithm. <em>IEEE Trans. on Signal Processing</em>, 42, 2664-2667.</li>
+<li>Flandrin, P. and Martin, W. (1985) Wigner-Ville Spectral Analysis of Nonstationary Process. <em>IEEE Trans. on Acoust., Speech and Signal Processing</em>, ASSP-33, 1461-1470.</li>
+<li>Giridhar, J. (1998) Time-Frequency Distributions and Their Applications in Radar Signal Processing. M. S. Thesis. Indian Institute of Technology, Madras, May 1998.</li>
+<li>Hlawatsch, F. and Boudreaux-Bartles, G. F. (1992a) Linear and Quadratic Time-Frequency Signal Representations. <em>IEEE Signal Processing Magazine</em>, 21-67.</li>
+<li>Hlawatsch, F. and Kozek, W. (1993) The Wigner Distribution of a Linear Signal Space. <em>IEEE Trans. on Signal Processing</em>, 41, 1248-1258.</li>
+<li>Hlawatsch, F. and Kozek, W. (1994) Time-Frequency Projection Filters and Time-Frequency Signal Expansions. <em>IEEE Trans. on Signal Processing</em>, 42, 3321-3334.</li>
+<li>Hlawatsch, F. and Krattenthaler, W. (1992b) Bilinear Signal Synthesis. <em>IEEE Trans. on Signal Processing</em>, 40, 351-3363.</li>
+<li>Jeong, J. and Williams, W. J. (1992a) Kernel Design for Reduced Interference Distributions. <em>IEEE Trans. on Signal Processing</em>, 40, 402-412.</li>
+<li>Jeong, J. and Williams, W. J. (1992b) Alias-Free Generalized Discrete-Time Time-Frequency Distributions. <em>IEEE Trans. on Signal Processing</em>, 40, 2757-2765.</li>
+<li>Johnson, M. E. <em>Multivariate Statistical Simulation</em>. John-Wiley &amp; Sons, Inc 1987.</li>
+<li>Jones, D. L. and Baraniuk, R. G. (1993a) Shear Madness: New Orthonormal Bases and Frames using Chirp Functions. <em>IEEE Trans. on Signal Processing, Special Issue on Wavelets in Signal Processing</em>, 41, 12, 3543-3548.</li>
+<li>Jones, D. L. and Baraniuk, R. G. (1993b) A Signal-Dependent Time-Frequency Representation: Optimal Kernel Design. <em>IEEE Trans. on Signal Processing</em>, 41, 4, 1589-1602.</li>
+<li>Jones, D. L. and Baraniuk, R. G. (1993c) Signal-Dependent Time-Frequency Analysis Using a Radially Gaussian Kernel. <em>IEEE Trans. on Signal Processing</em>, 32, 263-284.</li>
+<li>Jones, D. L. and Baraniuk, R. G. (1994a) A Simple Scheme for Adapting Time-Frequency Representations. <em>IEEE Trans. on Signal Processing</em>, 42, 3530-3535.</li>
+<li>Jones, D. L. and Baraniuk, R. G. (1994b) A Signal-Dependent Time-Frequency Representation: Fast Algorithm for Optimal Kernel Design. <em>IEEE Trans. on Signal Processing</em>, 42, 1, 134-146.</li>
+<li>Jones, D. L. and Parks, T. W. (1992a) A Resolution Comparison of Several Time-Frequency Representations. <em>IEEE Trans. on Signal Processing</em>, 40, 413-420.</li>
+<li>Jones, D. L. and Parks, T. W. (1992b) A High Resolution Data-Adaptive Time-Frequency Representation. <em>IEEE Trans. on Acoust., Speech and Signal Processing</em>, ASSP-38, 2127-2135.</li>
+<li>Kay, S. M. <em>Fundamentals of Statistical Signal Processing, Estimation Theory</em>. Prentice-Hall, New Jersey, 1993.</li>
+<li>Krattenthaler, W. and Hlawatsch, F. (1991) Improved Signal Synthesis from Pseudo-Wigner Distribution. <em>IEEE Trans. on Signal Processing</em>, 39, 506-509.</li>
+<li>Lawrance, M. <em>Transformations in Optics</em>. John-Wiley &amp; Sons, 1965.</li>
+<li>Leon, S. <em>Linear Algebra with Applications</em>. McMillan, 1994.</li>
+<li>Liu, K. J. R. (1993) Novel Parallel Architectures for Short-Time Fourier Transform. <em>IEEE Trans. on Circuits and Systems</em>, 40, 786-789.</li>
+<li>Liu, K. J. R., Chui, C. T., Kolagata, R. K. and Jaja, J. F. (1994) Optimal Unified Architectures for Real-time Computation of Time-Recursive Discrete Sinusoidal Transforms. <em>IEEE Trans. on Circuits and Systems for Video Technology</em>, 4, 168-180.</li>
+<li>Mallat, S. G. and Zhang, Z. (1993) Matching Pursuits with Time-Frequency Dictionaries. <em>IEEE Trans. on Signal Processing</em>, 41, 3397-3415.</li>
+<li>Mann, S. and Haykin, S. (1995) The Chirplet Transform: Physical Considerations. <em>IEEE Trans. on Signal Processing</em>, 44, 2745-2761.</li>
+<li>McLachlan, G. J. and Basford, K. E. <em>Mixture Models</em>. Marcel Dekker, 1987.</li>
+<li>Mix, D. F. <em>Random Signal Processing</em>. Prentice-Hall, Englewood Cliffs, New Jersey, 1995.</li>
+<li>Morris, J. M. and Wu, D. (1996) On Alias-Free Formulations of Discrete-Time Cohen’s Class of Distributions. <em>IEEE Trans. on Signal Processing</em>, 44, 1335-1364.</li>
+<li>Nawab, S. H. and Quatieri, T. F. Short-time Fourier Transform, In Lim, J. S. and Oppenheim, A. V. (eds.) <em>Advanced Topics in Signal Processing</em>, Prentice-Hall, Englewood Cliffs, New Jersey, 1988.</li>
+<li>Nawab, S. H., Quatieri, T. F. and Lim, J. S. (1983) Signal Reconstruction from Short-Time Fourier Transform Magnitude. <em>IEEE Trans. on Acoust., Speech and Signal Processing</em>, ASSP-31, 986-998.</li>
+<li>Neal, R. M. and Hinton, G. E. (1993) A New View of the EM Algorithm that Justifies the Incremental and Other Variants, submitted to Biometrika 1993.</li>
+<li>O’Neill, J. C. (1997) Shift Covariant Time-Frequency Distributions of Discrete Signals. Ph. D. Thesis. University of Michigan, May 1997.</li>
+<li>O’Neill, J. C. and Flandrin, P. (1998) Chirp Hunting. <em>Proc. of the IEEE-SP International Symposium on Time-Frequency and Time-Scale Analysis</em>, 425-428.</li>
+<li>O’Neill, J. C. and Williams, W. J. (1999) A Function of Time, Frequency, Lag, and Doppler. <em>IEEE Trans. on Signal Processing</em>, 47, 789-799.</li>
+<li>Papandreou, A., Hlawatsch, F. and Boudreaux-Bartles, G. F. (1993) The Hyperbolic Class of QTFRs - Part I: Constant-Q Warping, Hyperbolic Paradigm, Properties, and Members. <em>IEEE Trans. on Signal Processing</em>, 41, 3425-3444.</li>
+<li>Papoulis, A. <em>Signal Analysis</em>. McGraw-Hill, 1984.</li>
+<li>Pei, S. C. and Yang, I. I. (1992) Computing Pseudo-Wigner Distribution by the Fast Hartley Transform. <em>IEEE Trans. on Signal Processing</em>, 40, 2346-2349.</li>
+<li>Prabhu, K. M. M. and Sundaram, R. S. (1996) Fast Algorithm for Pseudo-discrete Wigner-Ville Distribution using Moving Discrete Hartley Transform. <em>IEE Proc.-Vis. Image, Signal Processing</em>, 143, 383-386.</li>
+<li>Qian, S. E. and Morris, J. M. (1990) Fast Algorithm for Real Joint Time-Frequency Transformations of Time-Varying Signals. <em>Electronics Letters</em>, 26, 537-539.</li>
+<li>Rabiner, L. R. and Juang, B. H. <em>Fundamentals of Speech Recognition</em>. Prentice-Hall, New Jersey, 1993.</li>
+<li>Rao, R. M. and Bopardikar, A. S. <em>Wavelet Transforms, Introduction to Theory and Applications</em>. Addison Wesley Longman, Inc, 1998.</li>
+<li>Rau, J. G. <em>Optimization and Probability in Systems Engineering</em>. Van Nostrand Reinhold Company, 1970.</li>
+<li>Rihaczek, A. (1968) Signal Energy Distribution in Time and Frequencies. <em>IEEE Trans. on Information Theory</em>, 42, 3241-3244.</li>
+<li>Reily, A. and Boashash, B. (1994) Analytical Signal Generation - Tips and Traps. <em>IEEE Trans. on Signal Processing</em>, 42, 3241-3244.</li>
+<li>Shalvi, O. and Weinstein, E. (1996) System Identification using Nonstationary Signals. <em>IEEE Trans. on Signal Processing</em>, 44, 2055-2063.</li>
+<li>Smith, M. J. and Barnwell, T. P. (1987) A New Filter bank Theory for Time-Frequency Representation. <em>IEEE Trans. on Acoust., Speech and Signal Processing</em>, ASSP-35, 314-327.</li>
+<li>Stankovic, L. (1994b) A Multitime Definition of the Wigner Higher Order Distribution: L-Wigner Distribution. <em>IEEE Letters in Signal Processing</em>, 1, 106-109.</li>
+<li>Vaseghi, S. V. <em>Advanced Topics in Signal Processing and Digital Noise Reduction</em>. Wiley-Teubner, 1996.</li>
+<li>Xia, X. G. (1997) System Identification using Chirp Signals and Time-Variant Filters in the Joint Time-Frequency Domain. <em>IEEE Trans. on Signal Processing</em>, 45, 2072-2085.</li>
+<li>Yu, K. B. and Cheng, S. (1987) Signal Synthesis from Pseudo-Wigner Distribution and Its Applications. <em>IEEE Trans. on Acoust., Speech and Signal Processing</em>, ASSP-35, 1289-1302.</li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/dhavala\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Built with <a href="https://quarto.org">Quarto</a> and <a href="http://claude.ai/">Claude</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>© 2026 Soma S Dhavala</p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/dhavala">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/somasdhavala">
+      <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:soma.dhavala@iitjammu.ac.in">
+      <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

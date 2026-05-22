@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Soma S. Dhavala">
+
+<title>Generalized Digital Modulation and IF Modulation – Soma S Dhavala</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../../images/favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-63972d3e766282ea4d3afe8f863b15f1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Skip-to-content link as the first focusable body child.
+  var skip = document.createElement('a');
+  skip.href = '#quarto-document-content';
+  skip.className = 'skip-link';
+  skip.textContent = 'Skip to main content';
+  document.body.insertBefore(skip, document.body.firstChild);
+
+  // Helper: build a <li class="breadcrumb-item"><a>Home</a></li>
+  function makeHomeItem() {
+    var li = document.createElement('li');
+    li.className = 'breadcrumb-item';
+    var a = document.createElement('a');
+    a.href = '/';
+    a.textContent = 'Home';
+    li.appendChild(a);
+    return li;
+  }
+
+  // Build a <li><a href>text</a></li> crumb.
+  function crumbLink(text, href) {
+    var li = document.createElement('li');
+    li.className = 'breadcrumb-item';
+    var a = document.createElement('a');
+    a.href = href; a.textContent = text;
+    li.appendChild(a);
+    return li;
+  }
+  // Ancestor crumbs for content pages that are intentionally NOT listed
+  // in the sidebar (their landing page is the index). Keeps the banner
+  // anchor working: Home > Section > Subsection > <page>.
+  function ancestorCrumbs(p) {
+    if (p.indexOf('/research/docs/reports/') >= 0)
+      return [['Research', '/research/index.html'], ['Reports', '/research/reports.html']];
+    if (p.indexOf('/teaching/docs/archives/') >= 0)
+      return [['Teaching', '/teaching/index.html'], ['Archives', '/teaching/archives.html']];
+    if (p.indexOf('/research/projects/') >= 0)
+      return [['Research', '/research/index.html'], ['Projects', '/research/projects/index.html']];
+    return [];
+  }
+
+  // SUB-PAGES: prepend "Home" to Quarto's existing breadcrumb so
+  // every ribbon starts with Home for consistency.
+  var existingBcr = document.querySelector('.quarto-title-breadcrumbs .breadcrumb');
+  if (existingBcr) {
+    existingBcr.insertBefore(makeHomeItem(), existingBcr.firstChild);
+  }
+
+  // SECTION INDEX PAGES: inject a trail INSIDE #title-block-header
+  // so it has the exact same DOM context as Quarto's breadcrumb on
+  // sub-pages. Stamp it with Quarto's own classes so every existing
+  // .quarto-title-breadcrumbs CSS rule (ribbon styling, layout
+  // fixes, h1 hide, mobile plain-text override) applies to it
+  // identically — no parallel selectors needed, no size drift.
+  // SKIP on the actual home page (/) — "Home > Home" is meaningless.
+  var titleHeader = document.querySelector('#title-block-header');
+  var titleBcr = document.querySelector('.quarto-title-breadcrumbs');
+  var path = window.location.pathname.replace(/\/+$/, '');
+  var isHome = (path === '' || path.endsWith('/index') || /\/index\.html?$/.test(path));
+  if (titleHeader && !titleBcr && !isHome) {
+    var h1 = titleHeader.querySelector('.quarto-title h1.title');
+    if (h1) {
+      var trail = document.createElement('nav');
+      trail.className = 'quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block section-trail';
+      trail.setAttribute('aria-label', 'breadcrumb');
+      var ol = document.createElement('ol');
+      ol.className = 'breadcrumb';
+      ol.appendChild(makeHomeItem());
+      ancestorCrumbs(path).forEach(function (c) { ol.appendChild(crumbLink(c[0], c[1])); });
+      var currentLi = document.createElement('li');
+      currentLi.className = 'breadcrumb-item active';
+      currentLi.textContent = h1.textContent.trim();
+      ol.appendChild(currentLi);
+      trail.appendChild(ol);
+      titleHeader.insertBefore(trail, titleHeader.firstChild);
+    }
+  }
+});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Generalized Digital Modulation and IF Modulation – Soma S Dhavala">
+<meta property="og:description" content="A unified chirplet framework for digital modulation using instantaneous frequency">
+<meta property="og:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
+<meta property="og:site_name" content="Soma S Dhavala">
+<meta name="twitter:title" content="Generalized Digital Modulation and IF Modulation – Soma S Dhavala">
+<meta name="twitter:description" content="A unified chirplet framework for digital modulation using instantaneous frequency">
+<meta name="twitter:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Soma S Dhavala</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../about/index.html" aria-current="page"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../research/index.html"> 
+<span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../teaching/index.html"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../consulting/index.html"> 
+<span class="menu-text">Consulting</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../saddlepoint/index.html"> 
+<span class="menu-text">SaddlePoint</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text">SaddlePoint feed</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Generalized Digital Modulation and IF Modulation</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../about/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../about/bio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../about/contact.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Contact</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../research/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/patents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Patents</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../teaching/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Homeworks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/exams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exams</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/archives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Archives</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../consulting/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Consulting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../oss/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">OSS</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample tool</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../oss/another-tool.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Another tool</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../blogs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blogs</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SaddlePoint</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../asankhya/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Asankhya</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#generalized-digital-modulation-and-if-modulation" id="toc-generalized-digital-modulation-and-if-modulation" class="nav-link active" data-scroll-target="#generalized-digital-modulation-and-if-modulation">Generalized Digital Modulation and IF Modulation</a>
+  <ul class="collapse">
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#chirplets" id="toc-chirplets" class="nav-link" data-scroll-target="#chirplets">Chirplets</a></li>
+  <li><a href="#unified-modulation-techniques-with-illustrations" id="toc-unified-modulation-techniques-with-illustrations" class="nav-link" data-scroll-target="#unified-modulation-techniques-with-illustrations">Unified Modulation Techniques with Illustrations</a>
+  <ul class="collapse">
+  <li><a href="#time-center-location-t_mc" id="toc-time-center-location-t_mc" class="nav-link" data-scroll-target="#time-center-location-t_mc">Time-center (location) <span class="math inline">\(t_m^c\)</span></a></li>
+  <li><a href="#frequency-centers-omega_mc" id="toc-frequency-centers-omega_mc" class="nav-link" data-scroll-target="#frequency-centers-omega_mc">Frequency centers (<span class="math inline">\(\omega_m^c\)</span>)</a></li>
+  <li><a href="#spread-of-the-envelope-scale-alpha_m" id="toc-spread-of-the-envelope-scale-alpha_m" class="nav-link" data-scroll-target="#spread-of-the-envelope-scale-alpha_m">Spread of the envelope / scale (<span class="math inline">\(\alpha_m\)</span>)</a></li>
+  <li><a href="#chirp-rate-linear-if-beta_m" id="toc-chirp-rate-linear-if-beta_m" class="nav-link" data-scroll-target="#chirp-rate-linear-if-beta_m">Chirp-rate / linear-IF (<span class="math inline">\(\beta_m\)</span>)</a></li>
+  <li><a href="#how-they-look" id="toc-how-they-look" class="nav-link" data-scroll-target="#how-they-look">How they look?</a></li>
+  </ul></li>
+  <li><a href="#if-modulation" id="toc-if-modulation" class="nav-link" data-scroll-target="#if-modulation">IF Modulation</a></li>
+  <li><a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation">Simulation</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  <li><a href="#appendix-matlab-code-for-if-modulation-simulation" id="toc-appendix-matlab-code-for-if-modulation-simulation" class="nav-link" data-scroll-target="#appendix-matlab-code-for-if-modulation-simulation">Appendix: MATLAB Code for IF Modulation Simulation</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<div class="section-banner">
+  <img src="../../../images/banners/researchbw.jpg" alt="Research banner">
+</div>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Generalized Digital Modulation and IF Modulation</h1>
+<p class="subtitle lead">A unified chirplet framework for digital modulation using instantaneous frequency</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Soma S. Dhavala </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="generalized-digital-modulation-and-if-modulation" class="level1">
+<h1>Generalized Digital Modulation and IF Modulation</h1>
+<section id="abstract" class="level2">
+<h2 data-anchor-id="abstract">Abstract</h2>
+<p><strong>Objective:</strong> Propose a framework for generating various digital modulation techniques. This generalized modulation scheme should be useful in deriving new modulation schemes. We study, in brief, a particular modulation scheme based on “instantaneous frequency”.</p>
+<p><strong>Approach/Outline:</strong> While developing new digital modulation schemes, one aims at developing new waveforms that can be used to represent a message meeting certain criteria. In all the existing schemes, orthogonal or biorthogonal waveforms were used. By relaxing the orthogonality, we try to span the spectrum with more waveforms (redundant representations). However, while doing so, we have to ensure that these waveforms are decodable at the receiver.</p>
+<p>In particular, we will be interested in the signals of the form:</p>
+<p><span class="math display">\[
+g_{t_c,f_c,\beta,\alpha}(t) = \left(\frac{\alpha}{\pi}\right)^{\frac{1}{4}} e^{-\frac{\alpha(t-t_c)^2}{2}} e^{\,j\beta(t-t_c)^2/2 + j\omega_c(t-t_c) + j\phi}
+\]</span></p>
+<p>where the parameters <span class="math inline">\(t_c, f_c, \beta, \alpha\)</span> represent, respectively, the location in time, the location in frequency, the chirp rate and the amplitude modulation parameter and <span class="math inline">\(\phi\)</span> represents the phase off-set; and <span class="math inline">\(g\)</span> is defined such that</p>
+<p><span class="math display">\[
+\left\| g_{t_c,f_c,\beta,\alpha} \right\|^2 = \int \left| g(t; t_c, f_c, \beta, \alpha) \right|^2 dt = 1 .
+\]</span></p>
+<p>We can use <span class="math inline">\(\mathrm{Re}\{A_m g(t)\}\)</span> for modulating any message signal. Here, <span class="math inline">\(A_m\)</span> is a real number. We can map a symbol to many waveforms that can be obtained by a different parameter set. For example, we obtain FSK at <span class="math inline">\(\beta = 0\)</span> with different <span class="math inline">\(f_c\)</span>s and PSK by choosing different <span class="math inline">\(\phi\)</span>s for each of the symbols. The introduction of <span class="math inline">\(\beta\)</span> makes these waveforms lose orthogonality and this is what we want to exploit. If we were able to detect non-orthogonal waveforms at the receiver, why not use them! We can obtain different pulse shapes by varying the parameter <span class="math inline">\(\alpha\)</span>. The above waveforms are known as “chirplets”.</p>
+<p>We will discuss how various modulation schemes can be realized within the framework suggested above. In particular, we will use “instantaneous frequency (IF)” as the message carrier. We obtain, though with less rigorous simulations, the <span class="math inline">\(P_e\)</span> vs BER curves in this case.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 data-anchor-id="introduction">Introduction</h2>
+<p>The objective of a digital modulation technique is to allow reliable and efficient transmission of information under the given constraints. “Reliability” refers to how well the information can be recovered to the one that is transmitted when the information being transmitted is corrupted in some manner. Probability of error is such a measure of reliability. Efficiency does not have a strict definition as it is entirely dependent on the circumstances in which it is being considered. In other words, it is application specific. Nevertheless, power required to transmit a message, required bandwidth to accomplish the task of transmission, susceptibility to channel-induced errors and other distortions and even complexity of the transmitter/receiver can together contribute the factors describing the efficiency. In an ideal situation, we wish to have a scheme that requires minimum power, utilizes minimum bandwidth and achieves the lowest possible probability of error and of course all this at cheap computational complexity. As one can feel, such a system is not possible and often, as in most engineering applications, we trade off one quantity for the other. This leads to choosing different modulation schemes that have different characteristics like “power-efficient schemes” and “bandwidth-efficient schemes”. It is therefore, in this interest, that we study different modulation schemes.</p>
+<p>There exist many modulation schemes like Pulse-Amplitude Modulation (PAM), Pulse Position Modulation (PPM), Phase-Shift Keying (PSK), Frequency-Shift Keying (FSK), Quadrature-Amplitude Modulation (QAM), Pulse-Width Modulation (PWM) etc. However, their study is often dealt with in isolation and there is no general framework in studying their behavior. In this report, we present a viewpoint that can be considered as a unified representation of the above mentioned modulation schemes. It is also possible to include a new class of modulation based on “instantaneous frequency (IF)”. We present this viewpoint with illustrations and deal with the special case of modulation involving IF. We present the idea of modulating an information sequence with IF modulation, then demodulation and detection of the transmitted information sequence. However, the spectral properties, which are essential for complete analysis of any modulation scheme, are not studied due to cumbersome simulations as we don’t have a signal-space concept yet.</p>
+</section>
+<section id="chirplets" class="level2">
+<h2 data-anchor-id="chirplets">Chirplets</h2>
+<p>Chirplets are a class of non-stationary signals defined in a six-parameter space. A Gaussian chirplet is given by</p>
+<p><span class="math display">\[
+g_{t_c,f_c,\beta,\alpha}(t) = A_m \left(\frac{\alpha_m}{\pi}\right)^{\frac{1}{4}} e^{-\frac{\alpha_m(t-t_m^c)^2}{2}} e^{\,j\beta_m(t-t_m^c)^2/2 + j\omega_m^c(t-t_m^c) + j\phi_m} .
+\]</span></p>
+<p>The parameters represent:</p>
+<ul>
+<li><span class="math inline">\(A_m\)</span>: Amplitude</li>
+<li><span class="math inline">\(\alpha_m\)</span>: Spread of the envelope</li>
+<li><span class="math inline">\(t_m^c\)</span>: Time-center</li>
+<li><span class="math inline">\(\omega_m^c\)</span>: Frequency center</li>
+<li><span class="math inline">\(\beta_m\)</span>: Instantaneous frequency law (chirp-rate) and</li>
+<li><span class="math inline">\(\phi_m\)</span>: Phase.</li>
+</ul>
+<p>Some remarkable properties of the waveform described by the above parameters are that these chirplets</p>
+<ol type="a">
+<li>are covariant to</li>
+</ol>
+<ul>
+<li>Scale (<span class="math inline">\(\alpha_m\)</span>)</li>
+<li>Chirp (<span class="math inline">\(\beta_m\)</span>)</li>
+<li>Time (<span class="math inline">\(t_m^c\)</span>)</li>
+<li>Frequency (<span class="math inline">\(\omega_m^c\)</span>)</li>
+</ul>
+<p>(a very desirable property in the detection framework)</p>
+<ol start="2" type="a">
+<li><p>can model a variety of signals</p></li>
+<li><p>are the only signals which can satisfy the uncertainty principle with equality</p></li>
+<li><p>have a non-negative Wigner distribution (attains optimum resolution in both time and frequency)</p></li>
+<li><p>can be estimated using many techniques e.g.&nbsp;Atomic decomposition, Chirp-hunting, Mixture modeling etc. However, they are not real-time algorithms.</p></li>
+</ol>
+</section>
+<section id="unified-modulation-techniques-with-illustrations" class="level2">
+<h2 data-anchor-id="unified-modulation-techniques-with-illustrations">Unified Modulation Techniques with Illustrations</h2>
+<p>In this section, we will give some examples of the chirplets with different parameters.</p>
+<section id="time-center-location-t_mc" class="level3">
+<h3 data-anchor-id="time-center-location-t_mc">Time-center (location) <span class="math inline">\(t_m^c\)</span></h3>
+<p>On the left is a chirplet centered around <span class="math inline">\(N/4\)</span> and on the right is the one centered around <span class="math inline">\(3N/4\)</span> (Wigner distributions, with <span class="math inline">\(a=1\)</span>, <span class="math inline">\(f_c=0.25\)</span>, <span class="math inline">\(\mathrm{IF}=0^\circ\)</span>, spread <span class="math inline">\(=0.012272\)</span>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/if-modulation/if-modulation-fig2.png" class="img-fluid figure-img"></p>
+<figcaption>Wigner distribution of a chirplet with time-center at <span class="math inline">\(N/4\)</span> (<span class="math inline">\(t_c=32\)</span>, <span class="math inline">\(f_c=0.25\)</span>).</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/if-modulation/if-modulation-fig3.png" class="img-fluid figure-img"></p>
+<figcaption>Wigner distribution of a chirplet with time-center at <span class="math inline">\(3N/4\)</span> (<span class="math inline">\(t_c=96\)</span>, <span class="math inline">\(f_c=0.25\)</span>).</figcaption>
+</figure>
+</div>
+<p>This parameter can be used for PPM.</p>
+</section>
+<section id="frequency-centers-omega_mc" class="level3">
+<h3 data-anchor-id="frequency-centers-omega_mc">Frequency centers (<span class="math inline">\(\omega_m^c\)</span>)</h3>
+<p>On the left is a chirplet centered around <span class="math inline">\(0.125\)</span> and on the right is the one centered around <span class="math inline">\(0.375\)</span> (Wigner distributions, with <span class="math inline">\(a=1\)</span>, <span class="math inline">\(t_c=64\)</span>, spread <span class="math inline">\(=0.012272\)</span>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/if-modulation/if-modulation-fig4.png" class="img-fluid figure-img"></p>
+<figcaption>Wigner distribution of a chirplet with frequency-center at <span class="math inline">\(0.125\)</span> (<span class="math inline">\(f_c=0.13\)</span>, <span class="math inline">\(t_c=64\)</span>).</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/if-modulation/if-modulation-fig5.png" class="img-fluid figure-img"></p>
+<figcaption>Wigner distribution of a chirplet with frequency-center at <span class="math inline">\(0.375\)</span> (<span class="math inline">\(f_c=0.38\)</span>, <span class="math inline">\(t_c=64\)</span>).</figcaption>
+</figure>
+</div>
+<p>This parameter can be used for FSK.</p>
+</section>
+<section id="spread-of-the-envelope-scale-alpha_m" class="level3">
+<h3 data-anchor-id="spread-of-the-envelope-scale-alpha_m">Spread of the envelope / scale (<span class="math inline">\(\alpha_m\)</span>)</h3>
+<p>On the left is a chirplet that has a spread around <span class="math inline">\(0.0245\)</span> and on the right is the one having a spread around <span class="math inline">\(7.6699 \times 10^{-4}\)</span> (Wigner distributions, with <span class="math inline">\(a=1\)</span>, <span class="math inline">\(t_c=64\)</span>, <span class="math inline">\(f_c=0.38\)</span>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/if-modulation/if-modulation-fig6.png" class="img-fluid figure-img"></p>
+<figcaption>Wigner distribution of a chirplet with large envelope spread (<span class="math inline">\(\approx 0.0245\)</span>, <span class="math inline">\(t_c=64\)</span>, <span class="math inline">\(f_c=0.38\)</span>).</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/if-modulation/if-modulation-fig7.png" class="img-fluid figure-img"></p>
+<figcaption>Wigner distribution of a chirplet with small envelope spread (<span class="math inline">\(\approx 0.000767\)</span>, <span class="math inline">\(t_c=64\)</span>, <span class="math inline">\(f_c=0.38\)</span>).</figcaption>
+</figure>
+</div>
+<p>This parameter can be used for PWM.</p>
+</section>
+<section id="chirp-rate-linear-if-beta_m" class="level3">
+<h3 data-anchor-id="chirp-rate-linear-if-beta_m">Chirp-rate / linear-IF (<span class="math inline">\(\beta_m\)</span>)</h3>
+<p>On the left is a chirplet having <span class="math inline">\(\mathrm{IF}=450\)</span> (slope <span class="math inline">\(=1\)</span>) and on the right is the one having an IF of <span class="math inline">\(150\)</span> (slope <span class="math inline">\(=0.269\)</span>) (Wigner distributions, with <span class="math inline">\(a=1\)</span>, <span class="math inline">\(t_c=64\)</span>, <span class="math inline">\(f_c=0.25\)</span>, spread <span class="math inline">\(=0.000767\)</span>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/if-modulation/if-modulation-fig8.png" class="img-fluid figure-img"></p>
+<figcaption>Wigner distribution of a chirplet with <span class="math inline">\(\mathrm{IF}=45^\circ\)</span> (slope <span class="math inline">\(=1\)</span>), <span class="math inline">\(t_c=64\)</span>, <span class="math inline">\(f_c=0.25\)</span>.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/if-modulation/if-modulation-fig9.png" class="img-fluid figure-img"></p>
+<figcaption>Wigner distribution of a chirplet with <span class="math inline">\(\mathrm{IF}=15^\circ\)</span> (slope <span class="math inline">\(=0.269\)</span>), <span class="math inline">\(t_c=64\)</span>, <span class="math inline">\(f_c=0.25\)</span>.</figcaption>
+</figure>
+</div>
+<p>This parameter can be used for Instantaneous Frequency Modulation, which we will explore.</p>
+</section>
+<section id="how-they-look" class="level3">
+<h3 data-anchor-id="how-they-look">How they look?</h3>
+<p>Below, we show the real part of the chirplets shown above along with their envelopes. This gives us an idea for the instantaneous frequency. As we observe from the figures, the frequency is linearly increasing with time. However, this rate of increase is much slower in the chirplet shown on the right side.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/if-modulation/if-modulation-fig10.png" class="img-fluid figure-img"></p>
+<figcaption>Real part and envelope of the chirplet with the faster (slope <span class="math inline">\(=1\)</span>) instantaneous-frequency increase.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/if-modulation/if-modulation-fig11.png" class="img-fluid figure-img"></p>
+<figcaption>Real part and envelope of the chirplet with the slower instantaneous-frequency increase.</figcaption>
+</figure>
+</div>
+<p>With the above illustrations, it is clear that “chirplets” are capable of producing any desired modulation scheme. As there exist various methods to estimate the parameters of these chirplets, it should be possible to employ them as digital modulating waveforms.</p>
+</section>
+</section>
+<section id="if-modulation" class="level2">
+<h2 data-anchor-id="if-modulation">IF Modulation</h2>
+<p>We know that in the FSK case, we have a finite number of waveforms to choose from, given the bandwidth. This is particularly true because we are dealing with orthogonal waveforms. What happens if we relax the orthogonality for the sake of effective bandwidth? Chirplets having the same frequency center, time center and spread but different chirp-rates are not orthogonal, but they have quite a different signature in the time-frequency plane. So, if we define a time-dependent orthogonality, then these chirplets are not orthogonal only at their time-centers and their instantaneous frequencies do not cross at any other time. Hence, though they are not strictly orthogonal, we can still safely detect them by looking at their time-frequency overlappings. This has led us to consider IF as a modulation parameter.</p>
+<p>We can vary the IF anywhere from <span class="math inline">\([-0.5, 0)\)</span> and <span class="math inline">\((0, 0.5]\)</span> or <span class="math inline">\([-450, 0)\)</span>, <span class="math inline">\((0, 450]\)</span>. We do not want to consider IFs in the range because the scale parameter has to be appropriately chosen in order to be within the spectrum (i.e., not exceed <span class="math inline">\(F_i\)</span> and <span class="math inline">\(F_f\)</span>).</p>
+<p>The following figure illustrates IF as the modulation parameter (M-ary IF modulation, M-even; IF map).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/if-modulation/if-modulation-fig12.png" class="img-fluid figure-img"></p>
+<figcaption>IF map for M-ary IF modulation (M-even): <span class="math inline">\(F_i\)</span>, <span class="math inline">\(F_f\)</span> define the frequency support, bandwidth BW, time spread <span class="math inline">\(T_i\)</span> to <span class="math inline">\(T_f\)</span>, with IF lines at <span class="math inline">\(\theta=\pm 45^\circ\)</span>.</figcaption>
+</figure>
+</div>
+<p>In the above figure, <span class="math inline">\(F_f\)</span> and <span class="math inline">\(F_i\)</span> define the support in the frequency domain, <span class="math inline">\(T\)</span> is the symbol duration. The IF can be varied anywhere from <span class="math inline">\(-450\)</span> to <span class="math inline">\(450\)</span> excluding zero. This is the reason why we forced <span class="math inline">\(M\)</span> to be even. The reason for not including <span class="math inline">\(0^\circ\)</span> is that we wanted to exclusively study the IF modulation. At <span class="math inline">\(0^\circ\)</span>, we obtain frequency modulation i.e.&nbsp;we could have chirplets with different frequency centers ranging from <span class="math inline">\(F_i\)</span> to <span class="math inline">\(F_f\)</span>. Moreover, we wanted to have slopes with positive and negative magnitudes as well. This makes the total number of waveforms even and zero cannot be associated with either of them.</p>
+<p>The following figure illustrates mapping symbols to waveforms with different IFs (M-ary IF modulation, M-even).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/if-modulation/if-modulation-fig13.png" class="img-fluid figure-img"></p>
+<figcaption>Mapping symbols to waveforms with different IFs (M-ary IF modulation, M-even) for <span class="math inline">\(M=4\)</span>: symbols 1–4 at <span class="math inline">\(\theta = -45^\circ, -15^\circ, 15^\circ, 45^\circ\)</span>.</figcaption>
+</figure>
+</div>
+<p>We can interpret the IF in terms of degrees as follows. IF is nothing but the slope of the lines seen in the above figure and <span class="math inline">\(slope = \tan(\theta)\)</span>. We also know that</p>
+<p><span class="math display">\[
+\mathrm{IF} = (slope \cdot t) + f_c
+\]</span></p>
+<p>where <span class="math inline">\(f_c\)</span> is the <span class="math inline">\(y\)</span>-intercept of the IF line. So we can conveniently represent the IF in terms of <span class="math inline">\(\theta\)</span>. For example, as shown in the above figure, <span class="math inline">\(\theta = 45^\circ\)</span> corresponds to an IF of <span class="math inline">\((0, 0.5]\)</span> with full spread and <span class="math inline">\(t_c\)</span> and <span class="math inline">\(f_c\)</span> at <span class="math inline">\(N/2\)</span> and <span class="math inline">\(0.25\)</span> respectively.</p>
+<p>Effectively, we have to divide the region <span class="math inline">\([-450, 450]\)</span> into <span class="math inline">\(M-1\)</span> regions.</p>
+<p>Thus, a symbol <span class="math inline">\(m\)</span> (<span class="math inline">\(m = 1, 2, \dots, M\)</span>; <span class="math inline">\(M\)</span> even) can be assigned an angle as:</p>
+<p><span class="math display">\[
+\theta_m = \frac{360}{2\pi} \frac{\pi}{2} \frac{1}{M-1} (2m - M - 1)
+\]</span></p>
+<p>which gets translated to</p>
+<p><span class="math display">\[
+\beta_m = \frac{2\pi}{N} \tan\!\left(\frac{\theta_m \, 2\pi}{360}\right)
+\]</span></p>
+<p>where <span class="math inline">\(N\)</span> is the number of time-domain samples.</p>
+<p>Now, we give the detection regions corresponding to different <span class="math inline">\(\beta_m\)</span>s. In the following figure, we present the detection regions for the <span class="math inline">\(M=4\)</span> case.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/if-modulation/if-modulation-fig1.png" class="img-fluid figure-img"></p>
+<figcaption>Detection regions for M-ary IF modulation (M-even), shown for the M=4 case.</figcaption>
+</figure>
+</div>
+<p>Thus a symbol can be recovered with the following decision statistic:</p>
+<p>If <span class="math inline">\(\theta_{estimates} \geq \dfrac{\pi}{4}\)</span>,</p>
+<p><code>sym = M;</code></p>
+<p>else if <span class="math inline">\(\theta_{estimates} \leq -\dfrac{\pi}{4}\)</span>,</p>
+<p><code>sym = 1;</code></p>
+<p>else</p>
+<p><span class="math display">\[
+\mathrm{sym} = \left\lfloor \frac{\left(\dfrac{\pi}{4} + \theta_{estimates}\right)}{\theta} \right\rfloor + 1
+\]</span></p>
+<p>where <span class="math inline">\(\theta = \dfrac{\pi}{2(M-1)}\)</span> and <span class="math inline">\(\theta_{estimates}\)</span> is the estimated IF in terms of degrees.</p>
+</section>
+<section id="simulation" class="level2">
+<h2 data-anchor-id="simulation">Simulation</h2>
+<p>We have simulated the above algorithm in MATLAB. We have to sequentially process the samples i.e., we have to generate a symbol, map the symbol to a chirplet with the appropriate IF parameter, add noise, estimate the IF parameter in the presence of noise, then inverse-map the estimated IF parameter back to a symbol based on a decision statistic. This is inevitable because we don’t have a signal-space concept yet. Hence the brute-force approach.</p>
+<p>The chirp rate (IF parameter) is estimated based on a search over the time-frequency plane followed by quasi-Newton optimization techniques (downloadable code available).</p>
+<p>In order to obtain the performance characteristics, we have to generate at least <span class="math inline">\(3 \times 10^5\)</span> symbols and obtain the <span class="math inline">\(P_e\)</span> at different SNRs. A rough estimate of the computational complexity shows that it may take around 16 days to obtain <span class="math inline">\(P_{err}\)</span> for <span class="math inline">\(3 \times 10^5\)</span> realizations at the different SNRs.</p>
+<p>I tried compiling the MATLAB code (<code>mcc</code>) but the systems in ALC don’t have a C-compiler and also the systems are quite slow. So I ran the code only for <span class="math inline">\(3 \times 10^3\)</span> realizations at 11 different SNRs (<span class="math inline">\(-1\)</span> dB to <span class="math inline">\(5\)</span> dB) for <span class="math inline">\(M = 4\)</span>. I got no errors in detected symbols. I believe I should analyze this at low SNRs for a large number of realizations. I attached MATLAB code for the same.</p>
+</section>
+<section id="references" class="level2">
+<h2 data-anchor-id="references">References</h2>
+<ol type="1">
+<li><em>Chirp hunting</em>, O’Neill, J.C.; Flandrin, P.; Proceedings of the IEEE-SP International Symposium on Time-Frequency and Time-Scale Analysis, 6-9 Oct.&nbsp;1998, pp.&nbsp;425-428.</li>
+<li>Akan, A.; Yalcin, M.; Chaparro, L.F., “An iterative method for instantaneous frequency estimation,” Electronics, Circuits and Systems, 2001. ICECS 2001, Malta, Vol. 3, pp.&nbsp;1335-1338.</li>
+<li><em>A four-parameter atomic decomposition of chirplets</em>, Bultan, A.; IEEE Transactions on Signal Processing, Volume 47, Issue 3, March 1999, pp.&nbsp;731-745.</li>
+</ol>
+</section>
+<section id="software" class="level2">
+<h2 data-anchor-id="software">Software</h2>
+<ol type="1">
+<li>Time-frequency tool box: <a href="http://www-dsp.rice.edu/software/" class="uri">http://www-dsp.rice.edu/software/</a></li>
+<li>Chirplet parameter estimation: <a href="http://www.mathtools.net/MATLAB/Signal_processing/index.html" class="uri">http://www.mathtools.net/MATLAB/Signal_processing/index.html</a></li>
+</ol>
+</section>
+<section id="appendix-matlab-code-for-if-modulation-simulation" class="level2">
+<h2 data-anchor-id="appendix-matlab-code-for-if-modulation-simulation">Appendix: MATLAB Code for IF Modulation Simulation</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">% parameters are the following</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">% GO soma... Go...</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">%addpath 'u:\soma\tfrbox';</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="va">nN</span> <span class="op">=</span> <span class="fl">3e3</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="va">N</span> <span class="op">=</span> <span class="fl">128</span><span class="op">;</span>  <span class="co">% signal length. For simplicity it is chosen so!</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="va">snr</span> <span class="op">=</span> <span class="fl">0</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="va">M</span> <span class="op">=</span> <span class="fl">4</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="va">theta</span> <span class="op">=</span> <span class="fl">90</span><span class="op">/</span>(<span class="va">M</span><span class="op">-</span><span class="fl">1</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="va">a</span> <span class="op">=</span> <span class="fl">1</span><span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="va">tc</span> <span class="op">=</span> <span class="va">N</span><span class="op">/</span><span class="fl">2</span><span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="va">fc</span> <span class="op">=</span> <span class="fl">0.25</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="va">alp</span> <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="va">pi</span><span class="op">/</span><span class="va">N</span><span class="op">/</span><span class="fl">64</span><span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="va">th</span> <span class="op">=</span> <span class="fl">0</span><span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="va">t</span> <span class="op">=</span> <span class="va">tc</span><span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="va">f</span> <span class="op">=</span> <span class="va">fc</span><span class="op">*</span><span class="fl">2</span><span class="op">*</span><span class="va">pi</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="va">d</span> <span class="op">=</span> <span class="va">sqrt</span>(<span class="fl">0.5</span><span class="op">/</span><span class="va">alp</span>)<span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="va">cr</span> <span class="op">=</span> <span class="va">angle2cr</span>(<span class="va">th</span><span class="op">,</span><span class="va">N</span><span class="op">,</span><span class="fl">2</span><span class="op">*</span><span class="va">pi</span>)<span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="va">P</span> <span class="op">=</span> [<span class="va">a</span><span class="op">,</span><span class="va">t</span><span class="op">,</span><span class="va">f</span><span class="op">,</span><span class="va">cr</span><span class="op">,</span><span class="va">d</span>]<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">%bet = 0.25; %cr = bet*2*pi/N; if beta is specified in terms of slope and not</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">%angle -pi/4 to pi/4</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">% bet (slope) = tan (angle);</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="va">sym</span> <span class="op">=</span> <span class="va">randint</span>(<span class="fl">1</span><span class="op">,</span><span class="va">nN</span><span class="op">,</span><span class="va">M</span>)<span class="op">+</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">%sym = 3*ones(1,nN);</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">%sym(1)=2;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="va">th</span> <span class="op">=</span> <span class="fl">45</span><span class="op">*</span>((<span class="fl">2</span><span class="op">*</span><span class="va">sym</span>)<span class="op">-</span><span class="va">M</span><span class="op">-</span><span class="fl">1</span>)<span class="op">/</span>(<span class="va">M</span><span class="op">-</span><span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="va">cr</span> <span class="op">=</span> <span class="va">angle2cr</span>(<span class="va">th</span><span class="op">,</span><span class="va">N</span><span class="op">,</span><span class="fl">2</span><span class="op">*</span><span class="va">pi</span>)<span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="va">clear</span> <span class="va">th</span><span class="op">;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">% do sequential processing.</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">% map the symbol to the constellation just chirp-rate is the parameter to</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">% be used</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">p</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">7</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="va">snr</span> <span class="op">=</span> <span class="va">p</span><span class="op">-</span><span class="fl">2</span><span class="op">;</span>  <span class="co">% -1dB to 5dB;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="va">an</span> <span class="op">=</span> <span class="va">sqrt</span>( <span class="fl">10</span><span class="op">^</span>(<span class="op">-</span><span class="fl">0.1</span><span class="op">*</span><span class="va">snr</span>))<span class="op">;</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="va">time_start</span> <span class="op">=</span> <span class="va">cputime</span><span class="op">;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> <span class="va">q</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">nN</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="co">% map these parameters to jeffs parameters!</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        <span class="va">P</span>(<span class="fl">4</span>) <span class="op">=</span> <span class="va">cr</span>(<span class="va">q</span>)<span class="op">;</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        <span class="va">x</span> <span class="op">=</span> <span class="va">chirplets</span>(<span class="va">N</span><span class="op">,</span><span class="va">P</span>)<span class="op">;</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        <span class="va">n</span> <span class="op">=</span> <span class="va">randn</span>(<span class="fl">128</span><span class="op">,</span><span class="fl">1</span>)<span class="op">+</span><span class="va">j</span><span class="op">*</span><span class="va">rand</span>(<span class="fl">128</span><span class="op">,</span><span class="fl">1</span>)<span class="op">;</span> <span class="va">n</span> <span class="op">=</span> <span class="va">n</span><span class="op">/</span><span class="va">sqrt</span>(<span class="va">n</span><span class="op">'*</span><span class="va">n</span>)<span class="op">;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="va">r</span> <span class="op">=</span> <span class="va">x</span><span class="op">+</span><span class="va">an</span><span class="op">*</span><span class="va">n</span><span class="op">;</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="va">ecr</span> <span class="op">=</span> <span class="va">est_c</span>(<span class="va">r</span><span class="op">,</span><span class="va">t</span><span class="op">,</span><span class="va">f</span><span class="op">,</span><span class="fl">128</span>)<span class="op">;</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>        <span class="va">eP</span> <span class="op">=</span> <span class="va">best_chirplet</span>(<span class="va">r</span><span class="op">,</span><span class="fl">0</span><span class="op">,</span><span class="fl">128</span><span class="op">,</span><span class="fl">0</span><span class="op">,</span><span class="va">ecr</span><span class="op">,</span><span class="va">d</span><span class="op">,</span><span class="va">t</span><span class="op">,</span><span class="va">f</span>)<span class="op">;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>        <span class="va">rth</span> <span class="op">=</span> <span class="va">cr2angle</span>(<span class="va">eP</span>(<span class="fl">4</span>)<span class="op">,</span><span class="va">N</span><span class="op">,</span><span class="fl">2</span><span class="op">*</span><span class="va">pi</span>)<span class="op">;</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        <span class="co">% Now do the detection. Extreme boundaries;</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>        <span class="kw">if</span>(<span class="va">abs</span>(<span class="va">rth</span>)<span class="op">&gt;=</span><span class="fl">45</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>            <span class="kw">if</span>(<span class="va">rth</span><span class="op">&gt;</span><span class="fl">0</span>)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>                <span class="va">rsym</span> <span class="op">=</span> <span class="va">M</span><span class="op">;</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>            <span class="kw">else</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>                <span class="va">rsym</span> <span class="op">=</span> <span class="fl">1</span><span class="op">;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>            <span class="kw">end</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>        <span class="kw">else</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>            <span class="va">r_abs_sym</span> <span class="op">=</span> <span class="va">fix</span>(<span class="va">abs</span>(<span class="va">rth</span>)<span class="op">/</span><span class="va">theta</span>)<span class="op">+</span><span class="fl">1</span><span class="op">;</span>  <span class="co">% 0-theta is symbol 1.</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>            <span class="kw">if</span>(<span class="va">rth</span><span class="op">&gt;=</span><span class="fl">0</span>)</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>                <span class="va">rsym</span> <span class="op">=</span> <span class="va">r_abs_sym</span><span class="op">+</span>(<span class="va">M</span><span class="op">/</span><span class="fl">2</span>)<span class="op">;</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>            <span class="kw">else</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>                <span class="va">rsym</span> <span class="op">=</span> (<span class="va">M</span><span class="op">/</span><span class="fl">2</span>)<span class="op">-</span><span class="va">r_abs_sym</span><span class="op">+</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>            <span class="kw">end</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>        <span class="kw">end</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>        <span class="va">esym</span>(<span class="va">q</span>) <span class="op">=</span> <span class="va">rsym</span><span class="op">;</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="va">time_end</span> <span class="op">=</span> <span class="va">cputime</span><span class="op">;</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="va">Perr</span>(<span class="va">p</span>) <span class="op">=</span> <span class="va">length</span>(<span class="va">find</span>((<span class="va">sym</span><span class="op">-</span><span class="va">esym</span>)))<span class="op">/</span><span class="va">nN</span><span class="op">;</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>(<span class="va">time_end</span><span class="op">-</span><span class="va">time_start</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/dhavala\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Built with <a href="https://quarto.org">Quarto</a> and <a href="http://claude.ai/">Claude</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>© 2026 Soma S Dhavala</p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/dhavala">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/somasdhavala">
+      <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:soma.dhavala@iitjammu.ac.in">
+      <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

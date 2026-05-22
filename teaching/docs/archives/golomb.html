@@ -8,7 +8,7 @@
 
 <meta name="author" content="Soma S. Dhavala">
 
-<title>Generalized Digital Modulation Techniques – Soma S Dhavala</title>
+<title>Golomb–Rice Coding – Soma S Dhavala</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-10f4948e065e4e2a931233443de4b76e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-63972d3e766282ea4d3afe8f863b15f1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -76,6 +76,28 @@ document.addEventListener('DOMContentLoaded', function() {
     return li;
   }
 
+  // Build a <li><a href>text</a></li> crumb.
+  function crumbLink(text, href) {
+    var li = document.createElement('li');
+    li.className = 'breadcrumb-item';
+    var a = document.createElement('a');
+    a.href = href; a.textContent = text;
+    li.appendChild(a);
+    return li;
+  }
+  // Ancestor crumbs for content pages that are intentionally NOT listed
+  // in the sidebar (their landing page is the index). Keeps the banner
+  // anchor working: Home > Section > Subsection > <page>.
+  function ancestorCrumbs(p) {
+    if (p.indexOf('/research/docs/reports/') >= 0)
+      return [['Research', '/research/index.html'], ['Reports', '/research/reports.html']];
+    if (p.indexOf('/teaching/docs/archives/') >= 0)
+      return [['Teaching', '/teaching/index.html'], ['Archives', '/teaching/archives.html']];
+    if (p.indexOf('/research/projects/') >= 0)
+      return [['Research', '/research/index.html'], ['Projects', '/research/projects/index.html']];
+    return [];
+  }
+
   // SUB-PAGES: prepend "Home" to Quarto's existing breadcrumb so
   // every ribbon starts with Home for consistency.
   var existingBcr = document.querySelector('.quarto-title-breadcrumbs .breadcrumb');
@@ -103,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var ol = document.createElement('ol');
       ol.className = 'breadcrumb';
       ol.appendChild(makeHomeItem());
+      ancestorCrumbs(path).forEach(function (c) { ol.appendChild(crumbLink(c[0], c[1])); });
       var currentLi = document.createElement('li');
       currentLi.className = 'breadcrumb-item active';
       currentLi.textContent = h1.textContent.trim();
@@ -144,13 +167,13 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="Generalized Digital Modulation Techniques – Soma S Dhavala">
-<meta property="og:description" content="A unified chirplet-based framework, with emphasis on IF modulation">
-<meta property="og:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
+<meta property="og:title" content="Golomb–Rice Coding – Soma S Dhavala">
+<meta property="og:description" content="Golomb–Rice coding of positive integers and run-length coding using Golomb codes">
+<meta property="og:image" content="https://dhavala.github.io/teaching/docs/archives/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
-<meta name="twitter:title" content="Generalized Digital Modulation Techniques – Soma S Dhavala">
-<meta name="twitter:description" content="A unified chirplet-based framework, with emphasis on IF modulation">
-<meta name="twitter:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
+<meta name="twitter:title" content="Golomb–Rice Coding – Soma S Dhavala">
+<meta name="twitter:description" content="Golomb–Rice coding of positive integers and run-length coding using Golomb codes">
+<meta name="twitter:image" content="https://dhavala.github.io/teaching/docs/archives/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -212,7 +235,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../research/index.html">Research</a></li><li class="breadcrumb-item"><a href="../../../research/reports.html">Reports</a></li><li class="breadcrumb-item"><a href="../../../research/docs/reports/rpt521.html">Generalized Digital Modulation Techniques</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Golomb–Rice Coding</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -251,11 +274,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../../research/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Research</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../research/publications.html" class="sidebar-item-text sidebar-link">
@@ -268,93 +291,35 @@ window.Quarto = {
  <span class="menu-text">Patents</span></a>
   </div>
 </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../research/reports.html" class="sidebar-item-text sidebar-link">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/reports.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reports</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../research/docs/reports/rpt521.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Generalized Digital Modulation Techniques</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../research/docs/reports/rpt524.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Wavelet Packets and Signal-Adapted Filterbanks</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../research/docs/reports/rpt543x.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Architecture for Distributed Source Localization in Wireless Sensor Networks</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../research/docs/reports/rpt621.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Space-Frequency Coded OFDM</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../research/docs/reports/rpt632.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">An Empirical Bayesian Kernel Density Estimator</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../research/docs/reports/rpt689.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Joint Estimation in Dynamic State-Space Models</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../research/code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Code</span></a>
   </div>
 </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../research/projects/index.html" class="sidebar-item-text sidebar-link">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/projects/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../research/projects/sample-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sample project</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../research/projects/another-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Another project</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../teaching/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Teaching</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../teaching/notes.html" class="sidebar-item-text sidebar-link">
@@ -373,47 +338,12 @@ window.Quarto = {
  <span class="menu-text">Exams</span></a>
   </div>
 </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../teaching/archives.html" class="sidebar-item-text sidebar-link">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/archives.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Archives</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../teaching/docs/archives/tutLaplace.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Normal Approximation</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../teaching/docs/archives/tutGmm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Gaussian Mixture for Multi-modal Posteriors</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../teaching/docs/archives/tutEM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">EM Algorithm for Mixture Modeling</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../teaching/docs/archives/tutMCMC.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Numerical Methods for Bayesian Inference</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../teaching/docs/archives/tutChirp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Chirplet Decomposition</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -426,11 +356,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../../oss/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">OSS</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
@@ -449,11 +379,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../../blogs/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Blogs</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
@@ -478,19 +408,19 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#generalized-digital-modulation-techniques" id="toc-generalized-digital-modulation-techniques" class="nav-link active" data-scroll-target="#generalized-digital-modulation-techniques">Generalized Digital Modulation Techniques</a>
+  <li><a href="#golombrice-coding" id="toc-golombrice-coding" class="nav-link active" data-scroll-target="#golombrice-coding">Golomb–Rice Coding</a>
   <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#chirplets" id="toc-chirplets" class="nav-link" data-scroll-target="#chirplets">Chirplets</a></li>
-  <li><a href="#unified-modulation-techniques" id="toc-unified-modulation-techniques" class="nav-link" data-scroll-target="#unified-modulation-techniques">Unified modulation techniques</a>
+  <li><a href="#golomb-coding" id="toc-golomb-coding" class="nav-link" data-scroll-target="#golomb-coding">Golomb Coding</a>
   <ul class="collapse">
-  <li><a href="#a-time-center-location-t_mc" id="toc-a-time-center-location-t_mc" class="nav-link" data-scroll-target="#a-time-center-location-t_mc">(a) Time-center (location) <span class="math inline">\(t_m^c\)</span></a></li>
-  <li><a href="#b-frequency-centers-omega_mc" id="toc-b-frequency-centers-omega_mc" class="nav-link" data-scroll-target="#b-frequency-centers-omega_mc">(b) Frequency centers (<span class="math inline">\(\omega_m^c\)</span>)</a></li>
-  <li><a href="#c-spread-of-the-envelope-scale-alpha_m" id="toc-c-spread-of-the-envelope-scale-alpha_m" class="nav-link" data-scroll-target="#c-spread-of-the-envelope-scale-alpha_m">(c) Spread of the envelope / scale (<span class="math inline">\(\alpha_m\)</span>)</a></li>
-  <li><a href="#d-chirp-rate-linear-if-beta_m" id="toc-d-chirp-rate-linear-if-beta_m" class="nav-link" data-scroll-target="#d-chirp-rate-linear-if-beta_m">(d) Chirp-rate / linear-IF (<span class="math inline">\(\beta_m\)</span>)</a></li>
+  <li><a href="#algorithm" id="toc-algorithm" class="nav-link" data-scroll-target="#algorithm">Algorithm</a></li>
   </ul></li>
-  <li><a href="#if-modulation" id="toc-if-modulation" class="nav-link" data-scroll-target="#if-modulation">IF modulation</a></li>
+  <li><a href="#run-length-coding" id="toc-run-length-coding" class="nav-link" data-scroll-target="#run-length-coding">Run-length Coding</a>
+  <ul class="collapse">
+  <li><a href="#golomb-coding-revisited" id="toc-golomb-coding-revisited" class="nav-link" data-scroll-target="#golomb-coding-revisited">Golomb Coding Revisited</a></li>
+  <li><a href="#application-of-golomb-coding-in-run-length-coding" id="toc-application-of-golomb-coding-in-run-length-coding" class="nav-link" data-scroll-target="#application-of-golomb-coding-in-run-length-coding">Application of Golomb Coding in Run-length Coding</a></li>
+  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography">Bibliography</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -498,13 +428,13 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <div class="section-banner">
-  <img src="../../../images/banners/researchbw.jpg" alt="Research banner">
+  <img src="../../../images/banners/templebw.jpg" alt="Teaching banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../research/index.html">Research</a></li><li class="breadcrumb-item"><a href="../../../research/reports.html">Reports</a></li><li class="breadcrumb-item"><a href="../../../research/docs/reports/rpt521.html">Generalized Digital Modulation Techniques</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Generalized Digital Modulation Techniques</h1>
-<p class="subtitle lead">A unified chirplet-based framework, with emphasis on IF modulation</p>
+<h1 class="title">Golomb–Rice Coding</h1>
+<p class="subtitle lead">Golomb–Rice coding of positive integers and run-length coding using Golomb codes</p>
 </div>
 
 
@@ -527,124 +457,343 @@ window.Quarto = {
 </header>
 
 
-<section id="generalized-digital-modulation-techniques" class="level1">
-<h1>Generalized Digital Modulation Techniques</h1>
-<p>These notes propose a framework for generating various digital modulation techniques. The generalized modulation scheme is useful for deriving new modulation schemes, and we study, in brief, a particular scheme based on “instantaneous frequency”.</p>
-<p>When developing new digital modulation schemes, the aim is to construct new waveforms that can represent a message while meeting certain criteria. In all the existing schemes, orthogonal or biorthogonal waveforms are used. By relaxing the orthogonality, one can try to span the spectrum with a larger number of waveforms (redundant representations). However, in doing so, these waveforms must remain decodable at the receiver.</p>
-<p>The signals of interest have the form:</p>
+<section id="golombrice-coding" class="level1">
+<h1>Golomb–Rice Coding</h1>
+<section id="golomb-coding" class="level2">
+<h2 data-anchor-id="golomb-coding">Golomb Coding</h2>
+<p>This is a prefix code that can represent positive integers [1]. Given a positive integer parameter <span class="math inline">\(m\)</span>, Golomb code <span class="math inline">\(G_m\)</span> encodes an integer <span class="math inline">\(n \geq 0\)</span> in two parts: a binary representation of <span class="math inline">\(n \bmod m\)</span>, and a unary representation of <span class="math inline">\(\lfloor n/m \rfloor\)</span> where <span class="math inline">\(\lfloor x \rfloor\)</span> gives the largest integer smaller than <span class="math inline">\(x\)</span>.</p>
+<p>Golomb codes are optimal for exponentially decaying (geometric) probability distributions of non-negative integers, i.e., distributions of the form <span class="math inline">\(Q(n) = (1-\rho)\rho^n\)</span>, where <span class="math inline">\(0 &lt; \rho &lt; 1\)</span>. For every distribution of this form, there exists a value of the parameter <span class="math inline">\(m\)</span> such that <span class="math inline">\(G_m\)</span> yields the shortest possible average code length over all uniquely decipherable codes for the nonnegative integers. The optimal value of <span class="math inline">\(m\)</span> is given by</p>
 <p><span class="math display">\[
-g_{t_c,f_c,\beta,\alpha}(t) = \left(\frac{\alpha}{\pi}\right)^{\frac{1}{4}} e^{-\frac{\alpha(t-t_c)^2}{2}} e^{\,j\beta(t-t_c)^2/2 + j\omega_c(t-t_c) + j\phi}
+m = \left\lceil \frac{\log(1+\rho)}{\log(\rho^{-1})} \right\rceil
 \]</span></p>
-<p>where the parameters <span class="math inline">\(t_c, f_c, \beta, \alpha\)</span> represent, respectively, the location in time, the location in frequency, the chirp rate and the amplitude modulation parameter and <span class="math inline">\(\phi\)</span> represents phase off-set; and <span class="math inline">\(g\)</span> is defined such that</p>
+<p>where <span class="math inline">\(\lceil x \rceil\)</span> gives the smallest integer greater than <span class="math inline">\(x\)</span>.</p>
+<p>Rice emphasized the special case of Golomb code with <span class="math inline">\(m = 2^k\)</span>. Choosing <span class="math inline">\(m\)</span> to be a power of two leads to a very simple encoding/decoding procedure: the <span class="math inline">\(k\)</span> least significant bits are nothing but the least <span class="math inline">\(k\)</span> least significant bits of <span class="math inline">\(n\)</span> succeeding <span class="math inline">\(\lfloor n/m \rfloor\)</span> in unary representation. The length of the encoding is <span class="math inline">\(k + 1 + \lfloor n/2^k \rfloor\)</span>. The <span class="math inline">\(1 + \lfloor n/2^k \rfloor\)</span> bits are required to represent <span class="math inline">\(\lfloor n/2^k \rfloor\)</span> in unary format and <span class="math inline">\(k\)</span> bits are needed to code the remainder.</p>
+<p>We refer to codes <span class="math inline">\(G_{2^k}\)</span> as Golomb–Rice codes.</p>
+<p>Knowledge of unary codes is required to understand Golomb coding.</p>
+<p>Unary representation of an integer is nothing but a sequence of ones equal to the integer to be represented followed by a zero [2].</p>
+<p>Example of unary representation of some integers (always positive):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Integer</th>
+<th>Unary representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>1 0</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>11 0</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>111 0</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>1111 0</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>11111 0</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>111111 0</td>
+</tr>
+</tbody>
+</table>
+<section id="algorithm" class="level3">
+<h3 data-anchor-id="algorithm">Algorithm</h3>
+<section id="encoding-1-2" class="level4">
+<h4 data-anchor-id="encoding-1-2">Encoding [1-2]</h4>
+<p>Let us assume that the Golomb–Rice parameter is <span class="math inline">\(\log_2(m)\)</span>.</p>
+<p>The steps involved in representing a positive integer, given a Golomb parameter, are:</p>
+<ol type="1">
+<li>Divide the integer <span class="math inline">\(N\)</span> with <span class="math inline">\(m\)</span>.</li>
+<li>Take the nearest integer towards zero, call it the “divider”.</li>
+<li>Remainder = <span class="math inline">\(N - (\text{divider} \times m)\)</span>.</li>
+<li>Represent the divider in unary and code the remainder with <span class="math inline">\(\log_2(m)\)</span>.</li>
+<li>Append them.</li>
+</ol>
+<section id="example" class="level5">
+<h5 data-anchor-id="example">Example</h5>
+<p><span class="math inline">\(m = 4\)</span> and <span class="math inline">\(N = 15\)</span>.</p>
+<p>The remainder has to be represented now in 2 bits. The possible values the remainder can take are 0, 1, 2 and 3 with code as 00, 01, 10 and 11 respectively.</p>
+<ol type="1">
+<li>Divide the integer <span class="math inline">\(N\)</span> with <span class="math inline">\(m\)</span>.</li>
+<li>Take the nearest integer towards zero, call it the “divider”.</li>
+</ol>
 <p><span class="math display">\[
-\left\| g_{t_c,f_c,\beta,\alpha} \right\|^2 = \int \left| g(t; t_c, f_c, \beta, \alpha) \right|^2 dt = 1.
+\left\lfloor 15/4 \right\rfloor = 3
 \]</span></p>
-<p>We can use <span class="math inline">\(\text{Re}\{A_m\, g(t)\}\)</span> for modulating any message signal. Here, <span class="math inline">\(A_m\)</span> is a real number. We can map a symbol to many waveforms that can be obtained by different parameter set. For example, we obtain FSK at <span class="math inline">\(\beta = 0\)</span> with different <span class="math inline">\(f_c\)</span>s and PSK by choosing different <span class="math inline">\(\phi\)</span>s for each of the symbols. The introduction of <span class="math inline">\(\beta\)</span> makes these waveforms lose orthogonality and this is what we want to exploit. If we were able to detect non-orthogonal waveforms at the receiver, why not use them! We can obtain different pulse shapes by varying the parameter <span class="math inline">\(\alpha\)</span>. The above waveforms are known as “chirplets”.</p>
-<p>We then discuss how various modulation schemes can be realized within the framework suggested above. In particular, “instantaneous frequency (IF)” is used as the message carrier.</p>
-<section id="introduction" class="level2">
-<h2 data-anchor-id="introduction">Introduction</h2>
-<p>The objective of a digital modulation technique is to allow reliable and efficient transmission of information under the given constraints. “Reliability” refers to how well the information can be recovered to the one that is transmitted when the information being transmitted is corrupted in some manner. Probability of error is such a measure of reliability. Efficiency does not have a strict definition as it is entirely dependent on the circumstances in which it is being considered. In other words, it is application specific. Nevertheless, power required to transmit a message, required bandwidth to accomplish the task of transmission, susceptibility to channel induced errors and other distortions and even complexity of the transmitter/ receiver can together contribute the factors describing the efficiency. In an ideal situation, we wish to have a scheme that requires minimum power, utilizes minimum bandwidth and achieves the lowest possible probability of error and of course all this at cheap computational complexity. As one can feel, such system is not possible and often, as in most engineering applications, we trade-off one quantity to the other. This leads to choosing different modulation schemes that have different characteristics like “power-efficient schemes”, “bandwidth-efficient schemes”. It is therefore, in this interest, we study different modulation schemes.</p>
-<p>There exist many modulation schemes like Pulse-Amplitude modulation (PAM), Pulse Position Modulation (PPM), Phase-Shift Keying (PSK), Frequency-Shift Keying (FSK), Quadrature-Amplitude Modulation (QAM), Pulse-Width Modulation (PWM) etc.. However, their study is often dealt with in isolation and there is no general frame-work in studying their behavior. These notes present a view point that can be considered as a unified representation of the above mentioned modulation schemes. It is also possible to include a new class of modulation based on “instantaneous frequency (IF)”. This view point is presented with illustrations, treating the special case of modulation involving IF, the idea of modulating an information sequence with IF modulation, and the demodulation and detection of the transmitted information sequence. The spectral properties, which are essential for complete analysis of any modulation scheme, are not studied here as there is no signal space concept yet.</p>
+<ol start="3" type="1">
+<li>Remainder = <span class="math inline">\(N - (\text{divider} \times m)\)</span>.</li>
+</ol>
+<p><span class="math display">\[
+15 - (4 * 3) = 3.
+\]</span></p>
+<ol start="4" type="1">
+<li>Represent the divider in unary and code the remainder with <span class="math inline">\(\log_2(m)\)</span>.</li>
+</ol>
+<p>Divider: <span class="math inline">\(3 \overset{\text{unary}}{\Longleftrightarrow} 111\,0\)</span></p>
+<p>Remainder: <span class="math inline">\(3 \overset{\log_2(4)\ \text{bits}}{\Longleftrightarrow} 11\)</span></p>
+<ol start="5" type="1">
+<li>Append them.</li>
+</ol>
+<p>Code for 15 with <span class="math inline">\(m = 4\)</span> is <span class="math inline">\(111\,0\,11\)</span>.</p>
+<p>An example table is given for <span class="math inline">\(m = 4\)</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 23%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Integer</th>
+<th>Divider</th>
+<th>Remainder</th>
+<th>Divider code</th>
+<th>Remainder code</th>
+<th>Append</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>00</td>
+<td>000</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td>10</td>
+<td>010</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>1</td>
+<td>1</td>
+<td>10</td>
+<td>01</td>
+<td>1001</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>2</td>
+<td>0</td>
+<td>110</td>
+<td>00</td>
+<td>11000</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>2</td>
+<td>3</td>
+<td>110</td>
+<td>11</td>
+<td>11011</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>3</td>
+<td>2</td>
+<td>1110</td>
+<td>10</td>
+<td>111010</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="chirplets" class="level2">
-<h2 data-anchor-id="chirplets">Chirplets</h2>
-<p>Chirplets are a class of non-stationary signals defined in a six-parameter space. A Gaussian chirplet is given by</p>
-<p><span class="math display">\[
-g_{t_c,f_c,\beta,\alpha}(t) = A_m \left(\frac{\alpha_m}{\pi}\right)^{\frac{1}{4}} e^{-\frac{\alpha_m(t-t_m^c)^2}{2}} e^{\,j\beta_m(t-t_m^c)^2/2 + j\omega_m^c(t-t_m^c) + j\phi_m}.
-\]</span></p>
-<p>The parameters represent:</p>
+</section>
+<section id="decoding" class="level4">
+<h4 data-anchor-id="decoding">Decoding</h4>
+<p>The decoder knows the Golomb parameter. Given the Golomb parameter:</p>
 <ul>
-<li><span class="math inline">\(A_m\)</span> : Amplitude</li>
-<li><span class="math inline">\(\alpha_m\)</span> : Spread of the envelope</li>
-<li><span class="math inline">\(t_m^c\)</span> : Time-center</li>
-<li><span class="math inline">\(\omega_m^c\)</span> : Frequency center</li>
-<li><span class="math inline">\(\beta_m\)</span> : Instantaneous frequency Law (chirp-rate) and</li>
-<li><span class="math inline">\(\phi_m\)</span> : Phase.</li>
+<li><strong>Step 1:</strong> Parse off the leading ones until you come across a zero and count the number of ones and call it “count”.</li>
+<li><strong>Step 2:</strong> Ignoring the immediate zero after a run of ones, extract the next <span class="math inline">\(k\)</span> bits. Name the decimal equivalent of the <span class="math inline">\(k\)</span>-bit value as “remainder”.</li>
+<li><strong>Step 3:</strong> The positive integer can be decoded as <span class="math inline">\((m \times \text{count}) + \text{remainder}\)</span>.</li>
+<li><strong>Step 4:</strong> Go to Step 1 until you reach the end of the file.</li>
 </ul>
-<p>Some remarkable properties of the waveform described by the above parameters are that these chirplets</p>
-<ol type="a">
-<li>are Covariant to</li>
-</ol>
+</section>
+</section>
+</section>
+<section id="run-length-coding" class="level2">
+<h2 data-anchor-id="run-length-coding">Run-length Coding</h2>
+<p>A run-length code is a prefix code that encodes a distribution of non-negative integers whose distribution resembles the geometric distribution [3]. A run-length is defined as a number of successive occurrences of a selected symbol, or a statistical outcome chosen to be the run-event. For an alphabet of <span class="math inline">\(M\)</span>-ary outcomes, one (or more) of the outcomes can be chosen as the run-event and the remaining outcomes would belong to the stop event set.</p>
+<section id="golomb-coding-revisited" class="level3">
+<h3 data-anchor-id="golomb-coding-revisited">Golomb Coding Revisited</h3>
+<p>In the earlier paragraph, we have considered a special case of Golomb coding with the parameter being constrained as a power of two. In this section, the condition is relaxed.</p>
+<p>In Golomb’s algorithm, each codeword corresponds to a run-length. The binary coder receives a binary input sequence of symbols, or simply input. We can treat a sequence of 0s and 1s as binary events C and S, where C continues the run and S stops the run. The distribution of the run-length random variable value 0, 1, 2, …, etc., is a distribution characterized by the single parameter <span class="math inline">\(P_c\)</span>: the run-continue probability. The run-stop probability, <span class="math inline">\(P_s\)</span>, is calculated as <span class="math inline">\(1 - P_c\)</span>. A sequence of these binary events may be parsed into run-lengths of zero or more C (or continue) events followed by a single stop event.</p>
+<p>The key to Golomb’s parameterized family of codes is that Golomb converts ranges of probability value <span class="math inline">\(P_c \geq 1/2\)</span> to a single parameter characterized by a positive integer <span class="math inline">\(m \geq 1\)</span>, such that the following approximation holds, where <span class="math inline">\(m\)</span> is an integer that we can call as the Golomb parameter such that</p>
+<p><span class="math display">\[
+P_c^m = 0.5
+\]</span></p>
+<p>Golomb code for <span class="math inline">\(m = 2^k\)</span> has been discussed earlier. We will now describe Golomb coding for <span class="math inline">\(2^k &lt; m &lt; 2^{k+1}\)</span>.</p>
+<p>The unary representation of the divider is the same as for Golomb–Rice coding. The difficult part lies in representing the remainder. It is illustrated in the example below.</p>
+<section id="example-1" class="level4">
+<h4 data-anchor-id="example-1">Example</h4>
+<p>Let us take <span class="math inline">\(m = 5\)</span>.</p>
+<p>Since <span class="math inline">\(m = 5\)</span>, the remainder can take on the possible values 0, 1, 2, 3, and 4. If we represent the remainder with 3 bits, then some remainder values are coded with more bits than is actually required. It is not possible to represent them with 2 bits because one remainder value is not represented. However, consider the 2-bit code words for the remainder values from <span class="math inline">\(m = 4\)</span>: 0 is 00, 1 is 01, 2 is 10 and 3 is 11. Let <span class="math inline">\(h\)</span> denote the number of code words we need beyond the <span class="math inline">\(2^k\)</span>: <span class="math inline">\(h = m - 2^k\)</span>. In this example, <span class="math inline">\(5 - 4 = 1\)</span> more code word. So, to get the extra codeword, we have to extend the code word in the last bit position: 11 extends to 110 and 111. So, we represent all 5 remainder values for <span class="math inline">\(m = 5\)</span> as follows:</p>
+<pre><code>0: 00
+1: 01
+2: 10
+3: 110
+4: 111</code></pre>
+<p>Now consider <span class="math inline">\(m = 6\)</span>. Here <span class="math inline">\(h = 6 - 4 = 2\)</span>, so two of the <span class="math inline">\(k = 2\)</span> length code words have to be split. The two 2-bit length code words are: 10 and 11, which respectively become 100, 101, 110 and 111. Therefore 2-bit code words 00 and 10 continue to represent remainder values 0 and 1. In summary, of the longer code words, half will represent remainder values that were shorter code words in the <span class="math inline">\(2^k\)</span> Golomb code case; the other half will represent the <span class="math inline">\(h\)</span> code words for the <span class="math inline">\(h = m - 2^k\)</span> remainder values that exceed the remainder whose value is <span class="math inline">\(2^{k-1}\)</span>.</p>
+<p>For <span class="math inline">\(m = 13\)</span>, as <span class="math inline">\(8 &lt; 13 &lt; 16\)</span>, splitting the code words can be done as follows:</p>
+<p><span class="math inline">\(h = 13 - 8 = 5\)</span> code words have to be split.</p>
+<pre><code>0: 000             0
+1: 001             1
+2: 010             2
+3: 011 →  0110     3
+          0111     4
+4: 100 →  1000     5
+          1001     6
+5: 101 →  1010     7
+          1011     8
+6: 110 →  1100    10
+          1101    11
+7: 111 →  1110    12
+          1111    13</code></pre>
+<p>A complete example for coding a positive integer is given in the following table for <span class="math inline">\(m = 5\)</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 23%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Integer</th>
+<th>Divider</th>
+<th>Remainder</th>
+<th>Divider code</th>
+<th>Remainder code</th>
+<th>Append</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>00</td>
+<td>0 00</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>01</td>
+<td>0 01</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>1</td>
+<td>2</td>
+<td>10</td>
+<td>10</td>
+<td>10 10</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>1</td>
+<td>3</td>
+<td>10</td>
+<td>110</td>
+<td>10 110</td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td>2</td>
+<td>4</td>
+<td>110</td>
+<td>111</td>
+<td>110 110</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>3</td>
+<td>0</td>
+<td>1110</td>
+<td>00</td>
+<td>1110 00</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="application-of-golomb-coding-in-run-length-coding" class="level3">
+<h3 data-anchor-id="application-of-golomb-coding-in-run-length-coding">Application of Golomb Coding in Run-length Coding</h3>
+<p>Suppose that in run-length coding we discover it is optimal when <span class="math inline">\(m\)</span> successive C events should increase the code length by one bit. In other words, <span class="math inline">\(m\)</span> successive C events have a self-information of 1 bit. Converting the self-information to a probability, this means that <span class="math inline">\(m\)</span> successive C events should have a probability of ½. Golomb’s response has the insight of defining parameter <span class="math inline">\(m\)</span> to be such that <span class="math inline">\(P_c^m = 1/2\)</span>. Taking the log to the base 2 of each side, we get</p>
+<p><span class="math display">\[
+m \approx \frac{-1}{\log_2 P_c}
+\]</span></p>
+<p>A practical way to determine this parameter is to first estimate <span class="math inline">\(P_c\)</span>.</p>
+<p><span class="math display">\[
+P_c = 1 - \frac{\text{total number of stop symbol occurences}}{\text{total number of occurences of all events}}
+\]</span></p>
+<section id="encoding" class="level4">
+<h4 data-anchor-id="encoding">Encoding</h4>
 <ul>
-<li><ol type="a">
-<li>Scale (<span class="math inline">\(\alpha_m\)</span>)</li>
-</ol></li>
-<li><ol start="2" type="a">
-<li>Chirp (<span class="math inline">\(\beta_m\)</span>)</li>
-</ol></li>
-<li><ol start="3" type="a">
-<li>Time (<span class="math inline">\(t_m^c\)</span>)</li>
-</ol></li>
-<li><ol start="4" type="a">
-<li>Frequency (<span class="math inline">\(\omega_m^c\)</span>)</li>
-</ol>
-(very desirable property in the detection frame-work)</li>
+<li><strong>Step 1:</strong> Estimate the Golomb parameter from the given observations.</li>
+<li><strong>Step 2:</strong> Count the runs of zeros and code them with the Golomb prefix code described earlier.</li>
+<li><strong>Step 3:</strong> Continue till the end of the file.</li>
 </ul>
-<ol start="2" type="a">
-<li><p>can model variety of signals</p></li>
-<li><p>are the only signals which can satisfy the uncertainty principle with equality</p></li>
-<li><p>have a non-negative Wigner distribution (attains optimum resolution in both time and frequency)</p></li>
-<li><p>can be estimated using many techniques eg. Atomic decomposition, Chirp-hunting, Mixture modeling etc.. However, they are not real-time algorithms.</p></li>
+</section>
+<section id="example-of-run-length-coding" class="level4">
+<h4 data-anchor-id="example-of-run-length-coding">Example of Run-length Coding</h4>
+<p>Suppose we wish to encode run-lengths 7, 13, 8, 6 and 11. They look like</p>
+<pre><code>0000000 1 000000000000000 1 00000000 1 000000 1 000000000000</code></pre>
+<p>In this case, we have 5 run-stop events of the total 50 events that have occurred. So <span class="math inline">\(P_c = 45/50\)</span>, i.e., <span class="math inline">\(P_c = 0.9\)</span>. Hence, <span class="math inline">\(m = 7\)</span>. With the proper value of <span class="math inline">\(m\)</span>, we need to determine the codes for the seven remainder values of 0, 1, 2, 3, 4, 5 and 6. It turns out that, were there 8 remainder values, each would be of 3 bits (000, 001, 010, 011, 100, 101, 110 and 111). With seven values, it means that the first value can be of only two bits: 00 (the union of 000 and 001). So the next six values are 010 through 111.</p>
+<p>The encoding of runs 7, 13, 8, 6, 11 proceeds as follows. 7: 1000, 13: 10111, 8: 10010, 6: 0111, 11: 10101.</p>
+<p>Concatenating the individual runs onto a single code string, we have</p>
+<pre><code>10001011110010011110101</code></pre>
+<p>which is 23 coded bits instead of 50 uncoded bits.</p>
+</section>
+<section id="decoding-1" class="level4">
+<h4 data-anchor-id="decoding-1">Decoding</h4>
+<ol type="1">
+<li>Parse off the leading 1s (which may be none) up to and including the first delimiting 0 that ends the unary code used for “divider”.</li>
+<li>Set the “divider” equal to the number of leading 1s.</li>
+<li>The value of “remainder” can be determined by traversing the “tree” until you reach the leaf. (Huffman tree of <span class="math inline">\(m\)</span> equi-probable symbols.)</li>
+<li>Once “divider” and “remainder” are calculated from the code string, the number of runs of the zeros can be determined as (“divider” <span class="math inline">\(\times\)</span> <span class="math inline">\(m\)</span>) + “remainder”, and this code string is followed by “1”, the stop symbol.</li>
 </ol>
 </section>
-<section id="unified-modulation-techniques" class="level2">
-<h2 data-anchor-id="unified-modulation-techniques">Unified modulation techniques</h2>
-<p>Each chirplet parameter maps naturally onto a familiar modulation scheme.</p>
-<section id="a-time-center-location-t_mc" class="level3">
-<h3 data-anchor-id="a-time-center-location-t_mc">(a) Time-center (location) <span class="math inline">\(t_m^c\)</span></h3>
-<p>Varying the time-center, for example placing one chirplet around <span class="math inline">\(N/4\)</span> and another around <span class="math inline">\(3N/4\)</span>, moves the chirplet along the time axis. This parameter can be used for PPM.</p>
 </section>
-<section id="b-frequency-centers-omega_mc" class="level3">
-<h3 data-anchor-id="b-frequency-centers-omega_mc">(b) Frequency centers (<span class="math inline">\(\omega_m^c\)</span>)</h3>
-<p>Varying the frequency-center, for example centering one chirplet around <span class="math inline">\(0.125\)</span> and another around <span class="math inline">\(0.375\)</span>, moves the chirplet along the frequency axis. This parameter can be used for FSK.</p>
-</section>
-<section id="c-spread-of-the-envelope-scale-alpha_m" class="level3">
-<h3 data-anchor-id="c-spread-of-the-envelope-scale-alpha_m">(c) Spread of the envelope / scale (<span class="math inline">\(\alpha_m\)</span>)</h3>
-<p>Varying the spread, for example a wider envelope versus a much narrower one, changes the pulse width. This parameter can be used for PWM.</p>
-</section>
-<section id="d-chirp-rate-linear-if-beta_m" class="level3">
-<h3 data-anchor-id="d-chirp-rate-linear-if-beta_m">(d) Chirp-rate / linear-IF (<span class="math inline">\(\beta_m\)</span>)</h3>
-<p>Varying the chirp-rate changes the slope of the instantaneous frequency in the time-frequency plane, for example an IF of <span class="math inline">\(45^0\)</span> (slope <span class="math inline">\(= 1\)</span>) versus an IF of <span class="math inline">\(15^0\)</span> (slope <span class="math inline">\(= 0.269\)</span>). This parameter can be used for Instantaneous Frequency Modulation, which is explored next.</p>
-<p>With these illustrations, it is clear that “chirplets” are capable of producing any desired modulation scheme. As there exist various methods to estimate the parameters of these waveforms, it should be possible to employ them as digital modulating waveforms.</p>
-</section>
-</section>
-<section id="if-modulation" class="level2">
-<h2 data-anchor-id="if-modulation">IF modulation</h2>
-<p>We know that in the FSK case, we have finite number of waveforms to choose from, given the bandwidth. This is particularly true because we are dealing with orthogonal waveforms. What happens if we relax the orthogonality for the sake of effective bandwidth. Chirplets having same frequency center, time center, spread but different chirp-rate are not orthogonal but they have quite a different signature in the time-frequency plane. So, if we define time-dependent orthogonality, then these chirplets are not orthogonal only at their time-centers and their instantaneous frequencies do not cross at any other time. Hence, though they are not strictly orthogonal, we can still safely detect them by looking at their time-frequency overlappings. This has led us to consider IF as a modulation parameter.</p>
-<p>We can vary the IF from anywhere from [-0.5,0) and (0,0.5] or [-<span class="math inline">\(45^0\)</span>,<span class="math inline">\(0^0\)</span>), (<span class="math inline">\(0^0\)</span>, <span class="math inline">\(45^0\)</span>]. We do not want to consider IFs in the range because the scale parameter has to be appropriately chosen in order to be within the spectrum (i.e., not exceed the Fi and Ff).</p>
-<p>Consider an IF map drawn on a Time vs.&nbsp;IF plane, where <span class="math inline">\(F_f\)</span> and <span class="math inline">\(F_i\)</span> define the support in the frequency domain and <span class="math inline">\(T\)</span> is the symbol duration. The IF can be varied anywhere from <span class="math inline">\(-45^0\)</span> to <span class="math inline">\(45^0\)</span> excluding zero. This is the reason why <span class="math inline">\(M\)</span> is forced to be even. The reason for not including <span class="math inline">\(0^0\)</span> is to exclusively study the IF modulation. At <span class="math inline">\(0^0\)</span>, we obtain frequency modulation, i.e., chirplets with different frequency centers ranging from <span class="math inline">\(F_i\)</span> to <span class="math inline">\(F_f\)</span>. Moreover, we want to have slopes with positive and negative magnitudes as well. This makes the total number of waveforms even, and zero cannot be associated with either of them.</p>
-<p>We can interpret the IF in terms of degrees as follows. IF is nothing but the slope of lines seen in the above figure and <span class="math inline">\(\text{slope} = \tan(\theta)\)</span>. We also know that</p>
-<p><span class="math display">\[
-\text{IF} = (\text{slope} \cdot t) + fc
-\]</span></p>
-<p>Where fc is y-intercept of the IF line. So we can conveniently represent the IF in terms of <span class="math inline">\(\theta\)</span>. For example, as shown in the above figure, <span class="math inline">\(\theta = 45^0\)</span> corresponds to IF of (0,0.5] with full spread and tc and fc at N/2 and 0.25 respectively.</p>
-<p>Effectively, we have to divide the region [-<span class="math inline">\(45^0\)</span>, <span class="math inline">\(45^0\)</span>] into M-1 regions.</p>
-<p>Thus, a symbol m (m=1,2…M: M even) can be assigned an angle as:</p>
-<p><span class="math display">\[
-\theta_m = \frac{360}{2\pi}\,\frac{\pi}{2}\,\frac{1}{M-1}\,(2m - M - 1).
-\]</span></p>
-<p>which gets translated to</p>
-<p><span class="math display">\[
-\beta_m = \frac{2\pi}{N}\,\tan\!\left(\frac{\theta_m\, 2\pi}{360}\right)
-\]</span></p>
-<p>where N is the number of time-domain samples.</p>
-<p>Each <span class="math inline">\(\beta_m\)</span> then has an associated detection region, the plane being partitioned into sectors (one per symbol) bounded by the lines of constant slope. The symbol can be recovered with the following decision statistic:</p>
-<p>If <span class="math inline">\(\theta_{estimates} &gt;= \dfrac{\pi}{4}\)</span>,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;sym = M;</p>
-<p>else</p>
-<p>If <span class="math inline">\(\theta_{estimates} &lt;= -\dfrac{\pi}{4}\)</span>,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;sym = 1;</p>
-<p>else</p>
-<p><span class="math display">\[
-\text{sym} = \left\lfloor \frac{\left(\dfrac{\pi}{4} + \theta_{estimates}\right)}{\theta} \right\rfloor + 1
-\]</span></p>
-<p>where <span class="math inline">\(\theta = \dfrac{\pi}{2(M-1)}\)</span> and <span class="math inline">\(\theta_{estimates}\)</span> is the estimated IF in terms of degrees.</p>
 </section>
 <section id="references" class="level2">
 <h2 data-anchor-id="references">References</h2>
-<p>[1] Chirp hunting O’Neill, J.C.; Flandrin, P; Proceedings of the IEEE-SP International Symposium on Time-Frequency and Time-Scale Analysis, 6-9 Oct.&nbsp;1998 , pp: 425 - 428.</p>
-<p>[2] Akan, A. Yalcin, M. Chaparro, L.F., “An iterative method for instantaneous frequency estimation,” Electronics, Circuits and Systems, 2001. ICECS 2001, Malta, Vol.3, pp.&nbsp;1335-1338.</p>
-<p>[3] A four-parameter atomic decomposition of chirplets, Bultan, A.;, IEEE Transactions on Signal processing, Volume: 47 Issue: 3 , March 1999, pp.&nbsp;731 -745.</p>
+<p>[1] P. G. Howard and J. S. Vitter, “Fast and Efficient Lossless Image Compression,” <em>Proc. Data Compression Conference</em>, pp.&nbsp;351-360, Mar.&nbsp;1993.</p>
+<p>[2] M. J. Weinberger, G. Seroussi, and G. Sapiro, “LOCO-I: A Low Complexity, Context-Based, Lossless Image Compression Algorithm,” <em>Proc. of the Int. Data Compression Conference</em>, pp.&nbsp;140-149, March 1996.</p>
+<p>[3] Glen G. Langdon, Jr., “Data Compression,” CE108. W99, Department of Computer Engineering, University of California at Santa Cruz. <a href="http://www.cse.ucsc.edu/classes/cmpe263/Winter01/" class="uri">http://www.cse.ucsc.edu/classes/cmpe263/Winter01/</a></p>
+</section>
+<section id="bibliography" class="level2">
+<h2 data-anchor-id="bibliography">Bibliography</h2>
+<p>[1] E. M. Gabidulin, P. Z. Fan and M. Darnell, “Autocorrelation of Golomb sequences,” <em>IEE Proc. Comm.</em>, Vol. 142, No.&nbsp;5, October 1995.</p>
+<p>[2] Robert F. Rice, “Lossless Coding Standards for Space Data Systems,” Jet Propulsion Laboratory Technical Report, California Institute of Technology, Pasadena, California.</p>
 
 
 </section>

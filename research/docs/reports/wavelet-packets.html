@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Soma S. Dhavala">
+
+<title>Wavelet Packets and Signal-Adapted Filter Banks – Soma S Dhavala</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../../images/favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e19f81c97bc45f6835df6be9cce9fdc9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-63972d3e766282ea4d3afe8f863b15f1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Skip-to-content link as the first focusable body child.
+  var skip = document.createElement('a');
+  skip.href = '#quarto-document-content';
+  skip.className = 'skip-link';
+  skip.textContent = 'Skip to main content';
+  document.body.insertBefore(skip, document.body.firstChild);
+
+  // Helper: build a <li class="breadcrumb-item"><a>Home</a></li>
+  function makeHomeItem() {
+    var li = document.createElement('li');
+    li.className = 'breadcrumb-item';
+    var a = document.createElement('a');
+    a.href = '/';
+    a.textContent = 'Home';
+    li.appendChild(a);
+    return li;
+  }
+
+  // Build a <li><a href>text</a></li> crumb.
+  function crumbLink(text, href) {
+    var li = document.createElement('li');
+    li.className = 'breadcrumb-item';
+    var a = document.createElement('a');
+    a.href = href; a.textContent = text;
+    li.appendChild(a);
+    return li;
+  }
+  // Ancestor crumbs for content pages that are intentionally NOT listed
+  // in the sidebar (their landing page is the index). Keeps the banner
+  // anchor working: Home > Section > Subsection > <page>.
+  function ancestorCrumbs(p) {
+    if (p.indexOf('/research/docs/reports/') >= 0)
+      return [['Research', '/research/index.html'], ['Reports', '/research/reports.html']];
+    if (p.indexOf('/teaching/docs/archives/') >= 0)
+      return [['Teaching', '/teaching/index.html'], ['Archives', '/teaching/archives.html']];
+    if (p.indexOf('/research/projects/') >= 0)
+      return [['Research', '/research/index.html'], ['Projects', '/research/projects/index.html']];
+    return [];
+  }
+
+  // SUB-PAGES: prepend "Home" to Quarto's existing breadcrumb so
+  // every ribbon starts with Home for consistency.
+  var existingBcr = document.querySelector('.quarto-title-breadcrumbs .breadcrumb');
+  if (existingBcr) {
+    existingBcr.insertBefore(makeHomeItem(), existingBcr.firstChild);
+  }
+
+  // SECTION INDEX PAGES: inject a trail INSIDE #title-block-header
+  // so it has the exact same DOM context as Quarto's breadcrumb on
+  // sub-pages. Stamp it with Quarto's own classes so every existing
+  // .quarto-title-breadcrumbs CSS rule (ribbon styling, layout
+  // fixes, h1 hide, mobile plain-text override) applies to it
+  // identically — no parallel selectors needed, no size drift.
+  // SKIP on the actual home page (/) — "Home > Home" is meaningless.
+  var titleHeader = document.querySelector('#title-block-header');
+  var titleBcr = document.querySelector('.quarto-title-breadcrumbs');
+  var path = window.location.pathname.replace(/\/+$/, '');
+  var isHome = (path === '' || path.endsWith('/index') || /\/index\.html?$/.test(path));
+  if (titleHeader && !titleBcr && !isHome) {
+    var h1 = titleHeader.querySelector('.quarto-title h1.title');
+    if (h1) {
+      var trail = document.createElement('nav');
+      trail.className = 'quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block section-trail';
+      trail.setAttribute('aria-label', 'breadcrumb');
+      var ol = document.createElement('ol');
+      ol.className = 'breadcrumb';
+      ol.appendChild(makeHomeItem());
+      ancestorCrumbs(path).forEach(function (c) { ol.appendChild(crumbLink(c[0], c[1])); });
+      var currentLi = document.createElement('li');
+      currentLi.className = 'breadcrumb-item active';
+      currentLi.textContent = h1.textContent.trim();
+      ol.appendChild(currentLi);
+      trail.appendChild(ol);
+      titleHeader.insertBefore(trail, titleHeader.firstChild);
+    }
+  }
+});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Wavelet Packets and Signal-Adapted Filter Banks – Soma S Dhavala">
+<meta property="og:description" content="Designing signal-adapted bases by pruning wavelet packet trees for energy compaction">
+<meta property="og:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
+<meta property="og:site_name" content="Soma S Dhavala">
+<meta name="twitter:title" content="Wavelet Packets and Signal-Adapted Filter Banks – Soma S Dhavala">
+<meta name="twitter:description" content="Designing signal-adapted bases by pruning wavelet packet trees for energy compaction">
+<meta name="twitter:image" content="https://dhavala.github.io/research/docs/reports/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Soma S Dhavala</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../about/index.html" aria-current="page"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../research/index.html"> 
+<span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../teaching/index.html"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../consulting/index.html"> 
+<span class="menu-text">Consulting</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../saddlepoint/index.html"> 
+<span class="menu-text">SaddlePoint</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text">SaddlePoint feed</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Wavelet Packets and Signal-Adapted Filter Banks</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../about/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../about/bio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../about/contact.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Contact</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../research/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/patents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Patents</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../research/projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../teaching/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Homeworks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/exams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exams</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../teaching/archives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Archives</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../consulting/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Consulting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../oss/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">OSS</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../oss/sample-tool.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample tool</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../oss/another-tool.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Another tool</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../blogs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blogs</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SaddlePoint</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../asankhya/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Asankhya</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#wavelet-packets-and-signal-adapted-filter-banks" id="toc-wavelet-packets-and-signal-adapted-filter-banks" class="nav-link active" data-scroll-target="#wavelet-packets-and-signal-adapted-filter-banks">Wavelet Packets and Signal-Adapted Filter Banks</a>
+  <ul class="collapse">
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#filter-bank" id="toc-filter-bank" class="nav-link" data-scroll-target="#filter-bank">Filter Bank</a></li>
+  <li><a href="#principal-component-filter-banks-pcfbs" id="toc-principal-component-filter-banks-pcfbs" class="nav-link" data-scroll-target="#principal-component-filter-banks-pcfbs">Principal Component Filter Banks (PCFBs)</a></li>
+  <li><a href="#wavelet-packets" id="toc-wavelet-packets" class="nav-link" data-scroll-target="#wavelet-packets">Wavelet Packets</a></li>
+  <li><a href="#wavelet-packets-as-signal-adapted-fbs" id="toc-wavelet-packets-as-signal-adapted-fbs" class="nav-link" data-scroll-target="#wavelet-packets-as-signal-adapted-fbs">Wavelet Packets as Signal-Adapted FBs</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#matlab-code" id="toc-matlab-code" class="nav-link" data-scroll-target="#matlab-code">MATLAB Code</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<div class="section-banner">
+  <img src="../../../images/banners/researchbw.jpg" alt="Research banner">
+</div>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Wavelet Packets and Signal-Adapted Filter Banks</h1>
+<p class="subtitle lead">Designing signal-adapted bases by pruning wavelet packet trees for energy compaction</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Soma S. Dhavala </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="wavelet-packets-and-signal-adapted-filter-banks" class="level1">
+<h1>Wavelet Packets and Signal-Adapted Filter Banks</h1>
+<section id="objective" class="level2">
+<h2 data-anchor-id="objective">Objective</h2>
+<p>Investigate the methods for designing signal-adapted bases from filter banks, in particular, principal component filter banks, FIR compaction filters and wavelet packets. Study the performance of these methods in the context of discrete multitone modulation and/or subband coding.</p>
+<p>Signal-adapted filter banks, when viewed as a form of designing the best basis, find many applications in communication, source coding, feature detection, etc. There exist many ways of designing these filter banks which arise mainly due to various properties that can be attributed to these filters, like finite length, number of channels, smoothness, regularity, compactness, existence in all practical cases, etc. Quite naturally, choosing a design mechanism is not a simple task. In this project, we will study the design methods for adapting the filter banks and carry out an objective analysis of performance in the context of DMT modulation and/or subband coding.</p>
+<p>In particular, we will study principal component filter banks (PCFBs), FIR compaction filters (FIR-CFs) and wavelet packets (WPs) and the interplay among them. PCFBs are optimal in the sense of coding gain but may not exist always. On the other hand, FIR compaction filters are particularly suitable for implementation but are sub-optimal. Again, based on the number of channels and filter length, the possibilities vary and we try to understand their implication in each setting. As an alternative to designing filter banks for optimal energy compaction, one can consider wavelet packets. A fully grown wavelet tree is nothing but a uniform filter bank, the bandwidth of each band proportional to the depth of the tree. Pruning this fully blown tree can lead to a non-uniform filter bank or can lead to any structure as driven by the design criteria. Thus, WPs can be considered as an alternative to PCFBs and FIR-CFs.</p>
+<p>Recently, PCFBs have been applied in DMT and it is very well known that WPs are used in subband coding. Hence, we can take any of the applications and carry out an application-specific performance study.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 data-anchor-id="introduction">Introduction</h2>
+<p>Signal-adapted filter banks find numerous applications in signal representation, data compression, noise suppression, and progressive transmission. These filters are designed based on the input power spectral density subject to certain constraints on the number of channels, order of the filter lengths, bandwidth of the filters, etc. There exist numerous procedures to derive and design filters. Some of them include principal component filter banks and compaction filters [1-3].</p>
+<p>Based on the design criteria and input spectral density, the nature of these filters varies. For example, it turns out that an optimal transform coder is an optimal subband coder with a constant polyphase matrix.</p>
+<p>Due to the presence of many constraints in the design stage, one should be very careful in designing appropriate filters. For example, if the number of channels is more than two and the filter length is constrained, then PCFBs may not exist. These difficulties pose significant challenges to the designer.</p>
+<p>In this report, we will compare the alternatives to these signal-adapted filter banks and try to implement a class of filter banks derived from wavelet packets.</p>
+</section>
+<section id="filter-bank" class="level2">
+<h2 data-anchor-id="filter-bank">Filter Bank</h2>
+<p>A filter bank essentially decomposes the input spectrum into a certain number of sub-bands where the subbands may or may not overlap. The advantage of dividing the spectrum into smaller bands is that most of the energy might be present in only a few of the subbands while the remaining bands may not have any energy in them. This helps us in processing only the subband corresponding to the maximum energy. Applications of such a principle can be found in data compression and progressive transmission.</p>
+<p>A subband coder is optimal if it follows the following two properties (a necessary and sufficient condition for optimality). The coding gain is maximized if:</p>
+<ol type="a">
+<li><p>Total decorrelation (the subbands are decorrelated one from the other)</p></li>
+<li><p>The subbands majorize the spectrum</p></li>
+</ol>
+<p>where the coding gain is defined as:</p>
+<p><span class="math display">\[
+G_{SBC} = \frac{\frac{1}{N}\sum_{i=0}^{N-1} \sigma_i^2}{\left(\prod_{i=0}^{N-1} \sigma_i^2\right)^{1/N}}
+\]</span></p>
+<p>Here <span class="math inline">\(\sigma_i^2\)</span> is the variance of the <span class="math inline">\(i\)</span>th subband and <span class="math inline">\(\sigma_x^2\)</span> is the variance of the input.</p>
+</section>
+<section id="principal-component-filter-banks-pcfbs" class="level2">
+<h2 data-anchor-id="principal-component-filter-banks-pcfbs">Principal Component Filter Banks (PCFBs)</h2>
+<p><strong>Definition:</strong> Let <span class="math inline">\(C\)</span> be a class of FBs (like the transform coder class, the class of filters of infinite order, etc.), then for a given input spectral density, a PCFB is the FB whose variance vector majorizes all vectors in the subbands belonging to the class <span class="math inline">\(C\)</span>.</p>
+<p>PCFBs are optimal in the sense that they maximize the coding gain (<span class="math inline">\(G_{SBC}\)</span>). PCFBs have a strong connection with transform coders (in the case of FBs belonging to the class <span class="math inline">\(C\)</span>), with Wiener filters (when the objective is to estimate the signal in the presence of noise), and are also the filters which minimize the transmit power in discrete multi-tone modulation. In particular, when the filter order is less than the number of channels, the KLT maximizes the coding gain which in this case is the PCFB.</p>
+<p>Despite their many desirable properties, their existence is not always guaranteed. At least in the case of DFT filter banks and cosine-modulated filter banks, PCFBs cease to exist. However, in the two-channel case, FBs with unconstrained order, and in the transform coder case, they always exist. In other situations, one has to analyze case by case. This makes them less interesting despite their many desirable attributes.</p>
+<p>In the case when we don’t have PCFBs, we design compaction filters. An FIR compaction filter is said to be the one that compacts most of the energy into only one band. Then the remaining <span class="math inline">\(N-1\)</span> filters are completed by considering the complement of the power spectral density. A compaction filter is necessarily a Nyquist(<span class="math inline">\(M\)</span>) filter, i.e., <span class="math inline">\(h(Mn) = \delta(n)\)</span>, and the compaction gain is defined as:</p>
+<p><span class="math display">\[
+G_{comp} = \frac{1}{2\pi}\int_{-\pi}^{\pi} |H(e^{j\omega})|^2 S_{xx}(e^{j\omega})\, d\omega
+\]</span></p>
+<p>The method of designing compaction filters consists of designing a filter which maximizes the compaction gain subject to the constraints. Several methods were proposed for designing such filters in [4]. In the present context, we motivate ourselves to consider the following.</p>
+<p>We want to design filters that are easily computable and share the elegance of PCFBs. That is, we want to retain the existence of FIR compaction filters and yet try to maximize the coding gain. We try to solve this by resorting to wavelet packets.</p>
+</section>
+<section id="wavelet-packets" class="level2">
+<h2 data-anchor-id="wavelet-packets">Wavelet Packets</h2>
+<p>A wavelet packet is a completely grown wavelet tree. That is, in the dyadic wavelet transform, we only further filter the approximation coefficients and leave the detail coefficients unattended. If we think of the first analysis filter as an approximate low-pass filter, then we repeatedly filter this low-pass filtered signal. Thus, after <span class="math inline">\(M\)</span> levels of decomposition, we would have one approximate coefficient band and <span class="math inline">\(M-1\)</span> detail coefficient bands. We keep splitting the low-pass band repeatedly. In wavelet packets, we can process any of these low-pass or high-pass bands. If we selectively perform this operation of splitting, we can obtain a non-uniform filter bank. A fully grown wavelet packet up to <span class="math inline">\(M\)</span> levels would have <span class="math inline">\(M\)</span> bands each of width <span class="math inline">\(2\pi/M\)</span>. This is the central idea behind using WPs as signal-adapted FBs.</p>
+</section>
+<section id="wavelet-packets-as-signal-adapted-fbs" class="level2">
+<h2 data-anchor-id="wavelet-packets-as-signal-adapted-fbs">Wavelet Packets as Signal-Adapted FBs</h2>
+<p>We achieve this by pruning the WP tree based on a certain criterion. It is suggested that certain entropy-based techniques can be used to prune the tree. This problem was considered in the context of best-basis selection. Indeed, WPs offer a wide variety of bases over which the signal can be projected. Thus, it is very suitable for processing a large class of signals. As we increase the number of bands, or in other words if we increase the depth of the decomposition, we search for an even larger number of bases that can best approximate the signal under consideration.</p>
+<p>In the figure below are shown a wavelet packet and its equivalent subband decomposition:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/wavelet-packets/wavelet-packets-fig1.png" class="img-fluid figure-img"></p>
+<figcaption>Fig. 1. A wavelet packet and its equivalent subband (filter bank) decomposition of the input spectrum.</figcaption>
+</figure>
+</div>
+<p>The definition of the best tree (i.e., the best way to prune the tree) very much depends on the objective function being used. In the context of best-basis selection, [5] used entropy as the criterion. Those nodes are pruned which minimize the cost function specified in terms of entropy. For example, when “pruning” corresponds to merging, i.e., we first grow the wavelet tree to its fullest depth possible, then we try to merge those two nodes which result in minimum increase in the entropy. We repeat this process until a stopping criterion is met. This stopping criterion can be a given computational complexity or number of bands needed. On the other hand, it is also possible to prune the tree by merging. In this case, we start with an initial tree and try to find that node which results in maximum reduction in entropy. Like the earlier case, here also the stopping criterion can be the desired number of subbands or desired SNR. The entropy function used in this operation is:</p>
+<p><span class="math display">\[
+E = -\sum x^2 \ln(x^2)
+\]</span></p>
+<p>And this function is an additive function. However, as mentioned earlier, we want to prune the WP tree such that the coding gain is maximized. For simplicity in implementation, we start with just two bands in the tree and try to split the bands which result in maximum increase in coding gain.</p>
+</section>
+<section id="results" class="level2">
+<h2 data-anchor-id="results">Results</h2>
+<p><strong>Data:</strong> A speech signal resampled at 8 kHz was considered. A total of 1024 samples were taken. A WP of depth 4 was created using the “db1” wavelet. The pruned tree using the “entropy” criterion is shown below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/wavelet-packets/wavelet-packets-fig2.png" class="img-fluid figure-img"></p>
+<figcaption>Fig. 2. Wavelet packet decomposition pruned using the entropy criterion, with the tree decomposition (left) and data for the root node (right).</figcaption>
+</figure>
+</div>
+<p>The pruned tree using “coding gain” is shown below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/wavelet-packets/wavelet-packets-fig3.png" class="img-fluid figure-img"></p>
+<figcaption>Fig. 3. Wavelet packet decomposition pruned using the coding gain criterion.</figcaption>
+</figure>
+</div>
+<p>The PSD of the different subbands is shown in the figure below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/wavelet-packets/wavelet-packets-fig4.png" class="img-fluid figure-img"></p>
+<figcaption>Fig. 4. Power spectral densities of different subbands, illustrating majorization.</figcaption>
+</figure>
+</div>
+<p>We can observe from the figure that, roughly, the subband having higher variance has a PSD greater than the others, i.e.,</p>
+<p><span class="math display">\[
+S_{(1,0)}(e^{j\omega}) \geq S_{(2,3)}(e^{j\omega}) \geq S_{(5,20)}(e^{j\omega})
+\]</span></p>
+<p>which is nothing but the majorization theorem.</p>
+<p>In the frequency domain, the filter bank splits the bands as shown in the figure below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/wavelet-packets/wavelet-packets-fig5.png" class="img-fluid figure-img"></p>
+<figcaption>Fig. 5. Subband splitting in the frequency domain.</figcaption>
+</figure>
+</div>
+<p>The energy and entropy of the subbands in both cases are shown in the following figures, respectively.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/wavelet-packets/wavelet-packets-fig6.png" class="img-fluid figure-img"></p>
+<figcaption>Fig. 6. Energy of the subbands for the coding-gain, entropy, and complete-tree criteria, plotted against the node index.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/wavelet-packets/wavelet-packets-fig7.png" class="img-fluid figure-img"></p>
+<figcaption>Fig. 7. Entropy of the subbands for the coding-gain and entropy criteria, plotted against the node index.</figcaption>
+</figure>
+</div>
+<p>As expected, the energy of the subband (corresponding to higher energy within the tree) has more energy compared to the subband in the tree pruned based on entropy. Also, the entropy of the former is less than the latter’s.</p>
+</section>
+<section id="conclusions" class="level2">
+<h2 data-anchor-id="conclusions">Conclusions</h2>
+<ul>
+<li>The results are not very interesting; rather, they produce obvious bands.</li>
+<li>The criteria for pruning the tree play an important role in determining the structure.</li>
+<li>Wavelet packets are practically feasible; we note alternate criteria for speeding up the pruning.</li>
+<li>The entropy used in the current pruning is additive but not directly related to information.</li>
+</ul>
+</section>
+<section id="matlab-code" class="level2">
+<h2 data-anchor-id="matlab-code">MATLAB Code</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">%load sig.mat %loads data x (size 128);</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">load</span> <span class="va">x</span>.<span class="va">mat</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">x</span> <span class="op">=</span> <span class="va">x</span>(<span class="fl">1025</span><span class="op">:</span><span class="fl">1025</span><span class="op">+</span><span class="fl">1024</span>)<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="va">M</span> <span class="op">=</span> <span class="va">log2</span>(<span class="va">length</span>(<span class="va">x</span>))<span class="op">;</span> <span class="co">% max. of levels of decomposition</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="va">N</span> <span class="op">=</span> <span class="fl">8</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">%x=ones(128,1);</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="va">t</span> <span class="op">=</span> <span class="va">wpdec</span>(<span class="va">x</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="ss">'db1'</span>)<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="va">cN</span> <span class="op">=</span> <span class="fl">2</span><span class="op">;</span><span class="co">% current no of nodes</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="va">node</span> <span class="op">=</span> <span class="va">zeros</span>(<span class="va">cN</span><span class="op">,</span><span class="fl">3</span>)<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="va">code_gain</span> <span class="op">=</span> <span class="va">ones</span>(<span class="va">cN</span><span class="op">,</span><span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">p</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">cN</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">1</span>) <span class="op">=</span> <span class="va">var</span>(<span class="va">wpcoef</span>(<span class="va">t</span><span class="op">,</span>[<span class="fl">1</span><span class="op">,</span><span class="va">p</span><span class="op">-</span><span class="fl">1</span>]))<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">2</span>) <span class="op">=</span> <span class="fl">1</span><span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">3</span>) <span class="op">=</span> <span class="va">p</span><span class="op">-</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="va">code_gain_a</span>(<span class="fl">2</span>) <span class="op">=</span> <span class="va">mean</span>(<span class="va">node</span>(<span class="op">:,</span><span class="fl">1</span>))<span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="va">code_gain_b</span>(<span class="fl">2</span>) <span class="op">=</span> <span class="va">prod</span>(<span class="va">node</span>(<span class="op">:,</span><span class="fl">1</span>))<span class="op">^</span>(<span class="fl">1</span><span class="op">/</span><span class="va">cN</span>)<span class="op">;</span> <span class="co">% this is coding gain at Mth level with N bins</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="va">code_gain</span>(<span class="fl">2</span>) <span class="op">=</span> <span class="va">code_gain_a</span>(<span class="fl">2</span>)<span class="op">/</span><span class="va">code_gain_b</span>(<span class="fl">2</span>)<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">% try_splitting here...N greater than 2</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="va">dN</span> <span class="op">=</span> <span class="va">cN</span><span class="op">;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">q</span> <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="va">N</span><span class="op">-</span><span class="fl">1</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="va">gain_table</span> <span class="op">=</span> <span class="va">zeros</span>(<span class="va">dN</span><span class="op">,</span><span class="fl">1</span>)<span class="op">;</span><span class="co">% inefficient usage of previously computed gains</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> <span class="va">p</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">dN</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="co">% check whether the node can be split for this db1 wavelet</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="kw">if</span>(<span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">1</span>)<span class="op">==</span><span class="va">M</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            <span class="co">% stop splitting this node. it can not be split anymore</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            <span class="va">gain_table</span>(<span class="va">p</span>) <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">;</span> <span class="co">% set this to a value that can be detected easily;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="kw">else</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            <span class="va">mt</span> <span class="op">=</span> <span class="va">wpsplt</span>(<span class="va">t</span><span class="op">,</span>[<span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">2</span>)<span class="op">,</span><span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">3</span>)])<span class="op">;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            <span class="va">tx_a</span> <span class="op">=</span> <span class="va">wpcoef</span>(<span class="va">mt</span><span class="op">,</span>[<span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">2</span>)<span class="op">+</span><span class="fl">1</span><span class="op">,</span><span class="fl">2</span><span class="op">*</span><span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">3</span>)<span class="op">+</span><span class="fl">0</span>])<span class="op">;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="va">tx_b</span> <span class="op">=</span> <span class="va">wpcoef</span>(<span class="va">mt</span><span class="op">,</span>[<span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">2</span>)<span class="op">+</span><span class="fl">1</span><span class="op">,</span><span class="fl">2</span><span class="op">*</span><span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">3</span>)<span class="op">+</span><span class="fl">1</span>])<span class="op">;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>            <span class="va">var_a</span> <span class="op">=</span> <span class="va">var</span>(<span class="va">tx_a</span>)<span class="op">;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>            <span class="va">var_b</span> <span class="op">=</span> <span class="va">var</span>(<span class="va">tx_b</span>)<span class="op">;</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>            <span class="va">gain_table_a</span>(<span class="va">p</span>) <span class="op">=</span> ((<span class="va">code_gain_a</span>(<span class="va">q</span>)<span class="op">*</span><span class="va">dN</span>)<span class="op">-</span><span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">1</span>)<span class="op">+</span><span class="va">var_a</span><span class="op">+</span><span class="va">var_b</span>)<span class="op">/</span>(<span class="va">dN</span><span class="op">+</span><span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            <span class="va">gain_table_b</span>(<span class="va">p</span>) <span class="op">=</span> (<span class="va">code_gain_b</span>(<span class="va">q</span>))<span class="op">^</span>(<span class="va">dN</span><span class="op">/</span>(<span class="va">dN</span><span class="op">+</span><span class="fl">1</span>))<span class="op">*</span>(<span class="va">var_a</span><span class="op">*</span><span class="va">var_b</span><span class="op">/</span><span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">1</span>))<span class="op">^</span>(<span class="fl">1</span><span class="op">/</span>(<span class="va">dN</span><span class="op">+</span><span class="fl">1</span>))<span class="op">;</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>            <span class="va">gain_table</span>(<span class="va">p</span>) <span class="op">=</span> <span class="va">gain_table_a</span>(<span class="va">p</span>)<span class="op">/</span><span class="va">gain_table_b</span>(<span class="va">p</span>)<span class="op">;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="kw">end</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="co">%pick-up the maximum</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    [<span class="va">val</span><span class="op">,</span><span class="va">ind</span>] <span class="op">=</span> <span class="va">max</span>(<span class="va">gain_table</span>)<span class="op">;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span>(<span class="va">val</span><span class="op">&lt;</span><span class="fl">0</span>)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="va">q</span> <span class="op">=</span> <span class="va">q</span><span class="op">-</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>        <span class="co">% this should not go infinite loop as long as N&lt;2^M;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">else</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        <span class="co">% split the node with index "ind";</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>        <span class="va">dN</span> <span class="op">=</span> <span class="va">dN</span><span class="op">+</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>        <span class="va">new_node</span> <span class="op">=</span> <span class="va">zeros</span>(<span class="va">dN</span><span class="op">,</span><span class="fl">3</span>)<span class="op">;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>        <span class="va">new_node</span>(<span class="fl">1</span><span class="op">:</span><span class="va">ind</span><span class="op">-</span><span class="fl">1</span><span class="op">,:</span>) <span class="op">=</span> <span class="va">node</span>(<span class="fl">1</span><span class="op">:</span><span class="va">ind</span><span class="op">-</span><span class="fl">1</span><span class="op">,:</span>)<span class="op">;</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>        <span class="va">new_node</span>(<span class="va">ind</span><span class="op">+</span><span class="fl">2</span><span class="op">:</span><span class="va">dN</span><span class="op">,:</span>) <span class="op">=</span> <span class="va">node</span>(<span class="va">ind</span><span class="op">+</span><span class="fl">1</span><span class="op">:</span><span class="va">dN</span><span class="op">-</span><span class="fl">1</span><span class="op">,:</span>)<span class="op">;</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>        <span class="co">% repeat the step..update the table;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>        <span class="va">p</span> <span class="op">=</span> <span class="va">ind</span><span class="op">;</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>        <span class="va">t</span> <span class="op">=</span> <span class="va">wpsplt</span>(<span class="va">t</span><span class="op">,</span>[<span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">2</span>)<span class="op">,</span><span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">3</span>)])<span class="op">;</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>        <span class="va">tx_a</span> <span class="op">=</span> <span class="va">wpcoef</span>(<span class="va">t</span><span class="op">,</span>[<span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">2</span>)<span class="op">+</span><span class="fl">1</span><span class="op">,</span><span class="fl">2</span><span class="op">*</span><span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">3</span>)<span class="op">+</span><span class="fl">0</span>])<span class="op">;</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>        <span class="va">tx_b</span> <span class="op">=</span> <span class="va">wpcoef</span>(<span class="va">t</span><span class="op">,</span>[<span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">2</span>)<span class="op">+</span><span class="fl">1</span><span class="op">,</span><span class="fl">2</span><span class="op">*</span><span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">3</span>)<span class="op">+</span><span class="fl">1</span>])<span class="op">;</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>        <span class="va">new_node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">1</span>) <span class="op">=</span> <span class="va">var</span>(<span class="va">tx_a</span>)<span class="op">;</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>        <span class="va">new_node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">2</span>) <span class="op">=</span> <span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">2</span>)<span class="op">+</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>        <span class="va">new_node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">3</span>) <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">3</span>)<span class="op">+</span><span class="fl">0</span><span class="op">;</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>        <span class="va">new_node</span>(<span class="va">p</span><span class="op">+</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span>) <span class="op">=</span> <span class="va">var</span>(<span class="va">tx_b</span>)<span class="op">;</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>        <span class="va">new_node</span>(<span class="va">p</span><span class="op">+</span><span class="fl">1</span><span class="op">,</span><span class="fl">2</span>) <span class="op">=</span> <span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">2</span>)<span class="op">+</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>        <span class="va">new_node</span>(<span class="va">p</span><span class="op">+</span><span class="fl">1</span><span class="op">,</span><span class="fl">3</span>) <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">3</span>)<span class="op">+</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>        <span class="va">code_gain_a</span>(<span class="va">q</span><span class="op">+</span><span class="fl">1</span>) <span class="op">=</span> ((<span class="va">code_gain_a</span>(<span class="va">q</span>)<span class="op">*</span><span class="va">dN</span>)<span class="op">-</span><span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">1</span>)<span class="op">+</span><span class="va">new_node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">1</span>)<span class="op">+</span><span class="va">new_node</span>(<span class="va">p</span><span class="op">+</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span>))<span class="op">/</span>(<span class="va">dN</span><span class="op">+</span><span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>        <span class="va">code_gain_b</span>(<span class="va">q</span><span class="op">+</span><span class="fl">1</span>) <span class="op">=</span> (<span class="va">code_gain_b</span>(<span class="va">q</span>))<span class="op">^</span>(<span class="va">dN</span><span class="op">/</span>(<span class="va">dN</span><span class="op">+</span><span class="fl">1</span>))<span class="op">*</span>(<span class="va">new_node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">1</span>)<span class="op">*</span><span class="va">new_node</span>(<span class="va">p</span><span class="op">+</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span>)<span class="op">/</span><span class="va">node</span>(<span class="va">p</span><span class="op">,</span><span class="fl">1</span>))<span class="op">^</span>(<span class="fl">1</span><span class="op">/</span>(<span class="va">dN</span><span class="op">+</span><span class="fl">1</span>))<span class="op">;</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>        <span class="va">code_gain</span>(<span class="va">q</span><span class="op">+</span><span class="fl">1</span>) <span class="op">=</span> <span class="va">code_gain_a</span>(<span class="va">q</span>)<span class="op">/</span><span class="va">code_gain_b</span>(<span class="va">q</span>)<span class="op">;</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>        <span class="va">clear</span> <span class="va">node</span><span class="op">;</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        <span class="va">node</span> <span class="op">=</span> <span class="va">new_node</span><span class="op">;</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>        <span class="va">clear</span> <span class="va">new_node</span><span class="op">;</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="references" class="level2">
+<h2 data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Sony Akkarakaran, P. P. Vaidyanathan, “Principal component filter banks — Existence issues and applications to modulated filter banks,” IEEE ISCAS, May 2000, pp.&nbsp;I-523-526.</li>
+<li>P. P. Vaidyanathan, “Theory of optimal subband coders,” IEEE Trans. on Sig. Proc., Vol. 46, No.&nbsp;6, June 1998.</li>
+<li>P. P. Vaidyanathan, “The best basis problem, compaction filters and PCFB design problems,” IEEE ISCAS, Orlando, Florida, June 1999.</li>
+<li>A. Kirac, P. P. Vaidyanathan, “Efficient methods of optimal FIR compaction filters for M-channel FIR subband coders,” Proc. of 30th Asilomar Conf. on Signals, Systems and Computers, 1996.</li>
+<li>Ronald R. Coifman, M. V. Wickerhauser, “Entropy-based algorithms for best basis selection,” IEEE Trans. on Info. Th., Vol. 38, No.&nbsp;2, March 1992, pp.&nbsp;713-718.</li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/dhavala\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Built with <a href="https://quarto.org">Quarto</a> and <a href="http://claude.ai/">Claude</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>© 2026 Soma S Dhavala</p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/dhavala">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/somasdhavala">
+      <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:soma.dhavala@iitjammu.ac.in">
+      <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
