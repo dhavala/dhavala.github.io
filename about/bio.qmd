@@ -1,6 +1,0 @@
----
-title: "Bio"
-description: "Personal background and biography of Soma S Dhavala."
----
-
-*(Content to be added.)*

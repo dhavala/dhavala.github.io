@@ -1,6 +1,5 @@
 ---
 title: "Reports"
-description: "Technical reports on signal processing, communications, and Bayesian computation."
 ---
 
 Technical reports written during my graduate years, transcribed from their

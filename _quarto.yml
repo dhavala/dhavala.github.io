@@ -4,6 +4,7 @@ project:
   resources:
     - "images/**"
     - "files/**"
+    - "quotes.json"
 
 website:
   title: "Soma S Dhavala"
@@ -45,11 +46,8 @@ website:
     style: floating
     collapse-level: 1
     contents:
-      - section: "About"
+      - text: "About"
         href: about/index.qmd
-        contents:
-          - about/bio.qmd
-          - about/contact.qmd
       - section: "Research"
         href: research/index.qmd
         contents:

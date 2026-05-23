@@ -1,6 +1,12 @@
 ---
 title: "Teaching"
-description: "Course materials, lecture notes, and assignments."
 ---
+
+
+> I saw the angel in the marble. I carved until I set him free!
+> 
+> -- Michaelangelo
+
+<br>
 
 Use the sidebar at left to browse notes, homeworks, and exams.

@@ -27,6 +27,10 @@ $navbar-bg:                #222;
 $navbar-dark-color:        #ccc;
 $navbar-dark-hover-color:  #fff;
 $navbar-padding-y:         0.4rem;
+// Single source of truth for the fixed-navbar height. Used to (a) pin the
+// navbar so adding nav items can't change its height, and (b) reserve the
+// matching body offset — keeping them equal avoids the post-load CLS jerk.
+$navbar-height:            51px;
 
 // Layout — trim Quarto's defaults (sidebar 250px, gutter 1.5rem) so the
 // sidebar reads compact and the content gets more width.
@@ -43,6 +47,17 @@ body {
 // Hide the redundant brand text in the navbar — "Home" already takes its
 // place. Keep the site title in <title>/OG/SEO via _quarto.yml.
 .navbar-title { display: none; }
+
+// Fixed-navbar CLS fix. Quarto reserves a hardcoded `body.nav-fixed { padding-top: 64px }`,
+// then quarto-nav.js overwrites it post-load with the navbar's real clientHeight — so any
+// mismatch produces a per-page "content drops" jerk. We pin the navbar to $navbar-height
+// and reserve the same value, so they can never drift:
+//   - Adding/removing nav items keeps a single row (items horizontal-scroll, never wrap),
+//     so the height stays $navbar-height and the reservation stays correct.
+//   - If you change $navbar-padding-y or the nav font size, re-measure once and update
+//     $navbar-height to match (it's the only number to touch).
+.navbar { min-height: $navbar-height; }
+body.nav-fixed { padding-top: $navbar-height; }
 
 // Skip-to-content link (injected by a tiny script in _quarto.yml so it
 // becomes the first focusable element on the page). Hidden until focused.
@@ -260,13 +275,12 @@ main.content .listing-description a:hover {
 .section-banner img {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: 150px;
+  height: 150px;            // fixed height reserves space before load → no layout shift
   object-fit: cover;
   object-position: center;
 }
 @media (max-width: 600px) {
-  .section-banner img { max-height: 140px; }
+  .section-banner img { height: 140px; }
 }
 
 // Hide the per-section banner photos only on very narrow screens — phones
@@ -404,6 +418,7 @@ nav#quarto-sidebar .sidebar-item a.active {
 .profile-pic {
   width: 100%;
   height: auto;
+  aspect-ratio: 2518 / 2768;   // reserve height before load → no layout shift
   display: block;
   border-radius: 4px;
 }
@@ -438,6 +453,28 @@ nav#quarto-sidebar .sidebar-item a.active {
   color: #444;
 }
 .cta-row p { margin: 0; }
+
+.quote-carousel {
+  max-width: 36rem;
+  margin: 1.5rem auto 1rem;
+  min-height: 3.5rem;        // reserve ~2 lines so async fill doesn't shift layout
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.quote-carousel .qc-current {
+  margin: 0;
+  padding: 0;
+  border: 0;                       // drop Bootstrap's left rule
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #555;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.quote-carousel .qc-current.is-active { opacity: 1; }
 
 @media (max-width: 600px) {
   .intro-card { flex-direction: column-reverse; }  // photo above text on phone

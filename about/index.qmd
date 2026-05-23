@@ -5,9 +5,42 @@ description: ""
 
 I am an AI researcher, systems architect, and educator with over two decades of experience spanning Machine Learning, Artificial Intelligence, Bayesian Statistics, Signal Processing, Distributed Systems, and Scientific Computing. My work lies at the intersection of rigorous mathematical foundations and large-scale deployable AI systems, with applications across Agriculture, Healthcare, Education, Computational Biology, and Public-Interest Technology.
 
+
 My current focus is on Frontier Model Development, especially understanding why Deep Learning works and developing a unified theoretical framework connecting optimization, representation learning, probabilistic inference, dynamical systems, and information theory. I am also interested in scalable AI infrastructure for distributed training and inference of GPT-scale models, along with curriculum design for systems programmers and AI engineers working on large-scale AI systems.
 
 Over the years, I have worked across academia, industrial research, startups, open-source ecosystems, and public-sector AI initiatives, contributing both to foundational research and production-grade AI deployments.
+
+---
+
+```{=html}
+<div class="quote-carousel" aria-label="Unquotable quotes" aria-live="polite">
+  <blockquote class="qc-current"></blockquote>
+  <script>
+    (function () {
+      var el = document.querySelector(".quote-carousel .qc-current");
+      if (!el) return;
+      fetch("../quotes.json")
+        .then(function (r) { return r.json(); })
+        .then(function (quotes) {
+          if (!Array.isArray(quotes) || !quotes.length) return;
+          var i = Math.floor(Math.random() * quotes.length);
+          el.innerHTML = quotes[i];
+          el.classList.add("is-active");
+          if (quotes.length < 2) return;
+          setInterval(function () {
+            el.classList.remove("is-active");           // fade out
+            setTimeout(function () {
+              i = (i + 1) % quotes.length;
+              el.innerHTML = quotes[i];
+              el.classList.add("is-active");            // fade in
+            }, 600);
+          }, 6000);
+        })
+        .catch(function () {});
+    })();
+  </script>
+</div>
+```
 
 ---
 
@@ -116,11 +149,12 @@ Over the years, I have worked across academia, industrial research, startups, op
 5. Automatic Interpretation of Line Probe Assay Test for TB  
    AAAI 2024. [paper](https://ojs.aaai.org/index.php/AAAI/article/view/30191)
 
----
 
-# Selected Keywords
-
-Machine Learning, Generative AI, Frontier Models, Bayesian Statistics, Deep Learning, LLMs, Distributed AI Systems, AI Infrastructure, Signal Processing, Scientific Computing, Optimization, Computational Mathematics, NLP, Multimodal AI, AI for Social Impact
 
 ---
+
+# Reach Me
+
+Email: [soma.dhavala@iitjammu.ac.in](mailto:soma.dhavala@iitjammu.ac.in) &nbsp;·&nbsp; [GitHub](https://github.com/dhavala) &nbsp;·&nbsp; [LinkedIn](https://linkedin.com/in/somasdhavala)
+
 
