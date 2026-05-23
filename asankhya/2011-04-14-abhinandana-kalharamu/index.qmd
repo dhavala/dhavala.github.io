@@ -1,10 +1,9 @@
 ---
 title: "అభినందన కల్హారము"
-description: "Archived from karvepaku.blogspot.com."
+description: "వ్యాస పౌర్ణమి - శ్రీముఖ ఆషాఢం ఆధ్యాత్మిక జీవనులు - శంకరభావనులు, బ్రహ్మశ్రీ ధవళ శ్రీరామావధాని గారికి వారి సహస్రచంద్ర దర్శనోత్సవ శుభసమయంలో గురుపూజామహోత్సవంనాడు శ్రీ శంకర..."
 author: "Soma S Dhavala"
 date: "2011-04-14"
-categories: [telugu, archive]
-original-url: "https://karvepaku.blogspot.com/2011/04/blog-post_14.html"
+categories: ["telugu", "archive"]
 ---
 
 శ్రీః  

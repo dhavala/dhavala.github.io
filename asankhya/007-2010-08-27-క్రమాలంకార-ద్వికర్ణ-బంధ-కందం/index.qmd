@@ -1,0 +1,37 @@
+---
+title: "క్రమాలంకార ద్వికర్ణ బంధ కందం"
+description: "క్రమాలంకారం అంటే కొన్ని వస్తువులని ముందుగా చెప్పి, ఆ తర్వాత వానితో క్రమంగా అన్వయించునట్లు, మరికొన్ని వస్తువులను కూర్చడం. పద్యరచనకి సంబంధించినంతవరకు, పద్యంలోని కొన్నిపా..."
+author: "Soma S Dhavala"
+date: "2010-08-27"
+categories: ["telugu", "archive", "పద్యాలు"]
+---
+
+క్రమాలంకారం అంటే కొన్ని వస్తువులని ముందుగా చెప్పి, ఆ తర్వాత వానితో క్రమంగా అన్వయించునట్లు, మరికొన్ని వస్తువులను కూర్చడం. పద్యరచనకి సంబంధించినంతవరకు, పద్యంలోని కొన్నిపాదాల్లొ ప్రశ్నలకి సమాధానాలు అదే పద్యంలో (చివరిపాదం) లో లభ్యమయ్యేట్టుగా రాయడం (ఇంతకు మించి పరిధి ఉందని నా అభిప్రాయం).  
+ఇప్పుడు అదే ప్రయోగాన్ని, బంధ కవిత్వంగా మార్చాలని చిన్న ప్రయత్నం. ఇంతకుముందు, కర్ణబంధ కందాన్ని ప్రయత్నించాను. ఇప్పుడు అదే ప్రక్రియని 8 x 8 మాత్రిక లోనె రెండు ప్రధాన కర్ణాలకి వర్తింప జేస్తే, అది ద్వికర్ణ బంధకందం అవుతుంది. ఇప్పడు ఆ రెండు కర్ణాలలో, పద్యం లో అడిగిన ప్రశ్నలకి సమాధానాలుంటే, క్రమాలంకార ద్వికర్ణ బంధ కందం అవుతుందన్నమాట.  
+Imagine a chess board. Assume that the top-left corner square is numbered as (r1,c1). The first principal diagonal is now given by the squares (r1,c1), (r2,c2),..., (r8,c8) and the second principal diagonal is given by the squares (r1,c8), (r2,c7),..., (r8,c1) .  
+Let us try embedding the answer to the first question in the 1st half of the 1st diagonal, 2nd answer in the 1st of 2nd diagonal, 3rd answer in the 2nd half of the 1st diagonal and finally, the 4th answer in the 2nd half of the 2nd diagonal.  
+1st answer: బిలబిల  
+2nd answer: కిలకిల  
+3rd answer: విలవిల  
+4th answer: కలశం  
+1st principal diagonal is: బిలబిల కలశం  
+2nd principal diagonal is: కిలకిల విలవిల  
+Our job is to write a కంద పద్యం such that when all of its letters are arranged in the form of a an 8x8 matrix, its principal diagonals should contain the above answers. For the purpose of this puzzle, we group the two letters in the 2nd and 4th padams as a single letter, relaxing the సర్వలఘుకంద requirement.  
+That is, we want to solve the following న్యస్తాక్షరి:  
+కం||  
+బి . . . | . . . కి | . ల . . |  
+. . ల . | . . బి . | . కి . . | . . . ల | ల . . .|  
+. . . వి | క . . . | . . ల . |  
+. ల . . | . వి . . | . . శ . | ల . . . | . . ం|  
+Here is my poorana:  
+కం||  
+బిలమున చెదలకి గలరొద?  
+కలల అలల బిరుదుకి రవికయగు లలన వాం  
+జ్ఞ్మలము? వికలహృదయ కలము?  
+లలన జడవిరియగ కుశములవలెయది శభo?  
+Being more explicit,  
+బిలమున చెదలకి గలరొద? బిలబిల  
+కలల అలల బిరుదుకి రవికయగు లలన వాంజ్ఞ్మలము? కిలకిల  
+వికలహృదయ కలము? విలవిల  
+![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3IhxsSid6qjWnoftePGax-T7pnwRmDHStUEqeQCox-dWC7FrEe102z9DG-sXv7I3al4b0Kc9d_loZNgYM9hsa13w3WdUqkLNNm5w83PSL2VMjVVWV86bDX2nv7v3G_aFnSL6-9cxcQrY/s1600/ab.jpg){fig-alt="Image"}
+లలన జడవిరియగ కుశములవలెయది శుభం? కలశం [It requires a stretch of imagination :). ఒక స్త్రీ శరీరాకృతి పుటాకర దర్పణం వలె, లేక ఒక మఱ చెంబుని పోలి ఉంటుంది. కుశము అనేద ఒక రకమైన గడ్డి. దర్భలు మామిడాకులు, మీద ఏటవాలుగా కొబ్బరికాయ తో ఉన్న కలశమును పోలి ఉంటుంది. ఆ స్త్రీ శ్రావణలక్ష్మి అవ్వొచ్చు, లేదా కల్పనారాయ్ కావొచ్చు. :)]

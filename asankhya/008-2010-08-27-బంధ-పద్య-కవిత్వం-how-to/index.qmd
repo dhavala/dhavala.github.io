@@ -1,0 +1,92 @@
+---
+title: "బంధ పద్య కవిత్వం  - how to"
+description: "కర్ణబంధ కందం, చతురంగ బంధ కందం మొదలైవి బంధ పద్య కవిత్వ లోకొన్ని అంశాలు. మరి వీటిని ఎలా సాధన చెయ్యాలి. దీనకి సమాధానమే ఈ టపా. ఒక రెండు బంధ కంద పద్యాలని రాయడం ద్వారా, నేను..."
+author: "Soma S Dhavala"
+date: "2010-08-27"
+categories: ["telugu", "archive", "పద్యాలు"]
+---
+
+కర్ణబంధ కందం, చతురంగ బంధ కందం మొదలైవి బంధ పద్య కవిత్వ లోకొన్ని అంశాలు. మరి వీటిని ఎలా సాధన చెయ్యాలి. దీనకి సమాధానమే ఈ టపా. ఒక రెండు బంధ కంద పద్యాలని రాయడం ద్వారా, నేను అనుభవపూర్వకంగా తెలుసుకున్నవిషయాని చెప్పదలచకొన్నాను.  
+నేను వివరించబోయే ప్రయోగం కర్ణబంధ కంద పద్యానికి సంబంధించినదే అయినా, ఈ method మిగతా బంధ పద్యకవిత్వాలకి వర్తిస్తుందని అనుకొంటున్నాను. ఇక వివరాలలోకి పోతే,  
+కర్ణ బంధ కందం అనగా, ఒక సర్వలఘుకంద పద్యంలోని అక్షరాలని 8x8 మాత్రికలా అమర్చి, అమర్చగా వచ్చిన మాత్రిక ప్రధాన కర్ణం (principal diagonal) ఒక అర్ధవంతమైన వాక్యాన్నిస్తే, అప్పుడా పద్యం కర్ణ బంధ కందం అవుతుంది.  
+ఉదాహరణకి, కర్ణంలో ఇమడ్చదల్చుకున్న వాక్యం - రుధిరనిధి నలుపు (Black blood bank - ఈ మధ్య వార్తల్లో వస్తున్న రక్తనిధినుద్దేశిస్తూ) అనుకుందాం . పద్యానికి, ఈ వాక్యానికి ఎటువంటి సంబంధం ఉండకూడదు అన్నది, మరొక (optional) నిబంధన. ఒక విధంగా పరికిస్తే, బంధ కవిత్వం అనేది, న్యస్తాక్షరే. We adopt this line of thought.  
+Step-1:  
+Let us group four letters at a time, and separate those groups by "|". Place the required letters at the respective locations forming the "న్యస్తాక్షరి":  
+|. . . . | . . . రు | . . . . |  
+|. . ధి . | . . . . | . ర . . | . . . . | ని . . .|  
+|. . . ధి | . . . . | . . న . |  
+|. . . . | . లు . . | . . . . |పు . . . | . . . .  
+Step-2:  
+Difficult to fill are the 2nd and 3rd padams as we have ధి in them. The only words I can think of with ధి are, జలధి, అంబుధి, పెన్నిధి etc., and words that start with ధి are, ధిషణుడు (బృహస్పతి). So, let us fill the padams with what we know.  
+|. . . . | . . . రు | . . . . |  
+|జలధి . | . . . . | . ర . . | . . . . | ని . . .|  
+|. . . ధి |షణుడు . | . . న . |  
+|. . . . | . లు . . | . . . . |పు . . . | . . . .  
+Step-౩:  
+We have decided the ప్రాసాక్షరం - ల due to జలధి. పు in the 4th padam is the యతిస్థానం. Therefore, we also need to begin 4th padam with పుల/పులి, పెల/పెలు, బుల, బె, etc.. I chose to use పులకిత.  
+|. . . . | . . . రు | . . . . |  
+|జలధి . | . . . . | . ర . . | . . . . | ని . . .|  
+|. . . ధి |షణుడు . | . . న . |  
+|పులకిత| . లు . . | . . . . |పు . . . | . . . .  
+but the word పులకరములు fits exactly. Lesser the number of constraints, the better it is.  
+|. . . . | . . . రు | . . . . |  
+|జలధి . | . . . . | . ర . . | . . . . | ని . . .|  
+|. . . ధి |షణుడు . | . . న . |  
+|పులకర| ములు . . | . . . . |పు . . . | . . . .  
+Step-4:  
+Completing the fourth padam is much more difficult now, since we dont know yet what we want convey in the poem. I dont know about కవయిత్రులు, but for me, nature, women, God are easy describe (think about విష్ణుసహస్రనామాలు and లలితాసహస్రనామాలు). I choose to describe a woman, and the word వనరుహలోచన occured to me. See where it fits now,  
+|. . . . | . వనరు | హ. . . . |  
+|జలధి . | . . . . | . ర . . | . . . . | ని . . .|  
+|. . . ధి |షణుడు . | . . న . |  
+|పులకర| ములు . . | . . . . |పు . . . | . . . .  
+Step-5:  
+Instead of లోచన/లోచని, use నయని since we need to use లఘువులు only. I am not sure if it should be నయన instead of నయని.  
+|. . . . | . వనరు | హనయని|  
+|జలధి . | . . . . | . ర . . | . . . . | ని . . .|  
+|. . . ధి |షణుడు . | . . న . |  
+|పులకర| ములు . . | . . . . |పు . . . | . . . .  
+Step-6:  
+We need one more adjective to complete the first padam. It should have the ల/లి/లు... as its second letter. How about లలిత పద  
+|లలిత ప|ద వనరు | హనయని|  
+|జలధి . | . . . . | . ర . . | . . . . | ని . . .|  
+|. . . ధి |షణుడు . | . . న . |  
+|పులకర| ములు . . | . . . . |పు . . . | . . . .  
+Step-7:  
+How do we handle జలధి. In the first padam we are saying something about a flower floating on water and what it symbolizes. What lies beneath a deep lake? It is the darkness. While the visible part, the flower, signifies the outward beauty, its root, the darkness that does not have any impurities in it symbolizes the inner beauty. రజని is the darkness. What kind of darkness is it, and where do see it?  
+|లలిత ప|ద వనరు | హనయని|  
+|జలధి ని |సమకొను | . ర . ర|జని . . | ని . . .|  
+|. . . ధి |షణుడు . | . . న . |  
+|పులకర| ములు . . | . . . . |పు . . . | . . . .  
+Why did I place రజని such that జ occurs at the beginning of the 4th group in this padam. Because, that is the యతిస్థానం.  
+Step-8:  
+We need some వ్యర్ధపదాలు, the fillers, to complete the left-outs, to get  
+|లలిత ప|ద వనరు | హనయని|  
+|జలధి ని |సమకొను | సుర సర|జని . . | ని . . .|  
+|. . . ధి |షణుడు . | . . న . |  
+|పులకర| ములు . . | . . . . |పు . . . | . . . .  
+Step-9:  
+We have బృహస్పతి troubling in the 3rd padam. How do we connect the women being described with బృహస్పతి in the 3rd padam. We need the help of her man.  
+|లలిత ప|ద వనరు | హనయని|  
+|జలధి ని |సమకొను | సుర సర|జని విభు| ని . . .|  
+|. . . ధి |షణుడు . | . . న . |  
+|పులకర| ములు . . | . . . . |పు . . . | . . . .  
+Step-10:  
+She wins the heart of her man by her deeds, devotion, love  
+|లలిత ప|ద వనరు | హనయని|  
+|జలధి ని |సమకొను | సుర సర|జని విభు| ని తపం|  
+|బులను ధి |షణుడు . | . . న . |  
+|పులకర| ములు . . | . . . . |పు . . . | . . . .  
+Step-10:  
+She is so smart that she can please (పులకరములు) even బృహస్పతి with her arguments.  
+|లలిత ప|ద వనరు | హనయని|  
+|జలధి ని |సమకొను | సుర సర|జని విభు| ని తపం|  
+|బులను ధి |షణువ|చనమునను|  
+|పులకర| ములు బడ | యునటుల |పు . . . | . . . .  
+Step-11:  
+పురిగొలుపడం is the only word that I could think which completes the poem*.  
+|లలిత ప|ద వనరు | హనయని|  
+|జలధి ని |సమకొను | సుర సర|జని విభు| ని తపం|  
+|బులను ధి |షణువ|చనమునను|  
+|పులకర| ములు బడ | యునటుల |పురిగొలు |పుభువిన్  
+Before I followed the above approach, the న్యస్తాక్షరి approach, I tried the puzzle using the 8x8 matrix as the building block . But we are trained to solve a conventional padyam. So, just recast the బంధ కవిత్వం as a న్యస్తాక్షరి, and everything seems to fall in place. Without loss of generality, the above method is applicable to other బంధ పద్య కవిత్వాలు.  
+* there may be some mistakes in my poorana, but what the heck, I tried. I may have failed, though.
