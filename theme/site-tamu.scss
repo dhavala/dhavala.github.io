@@ -389,6 +389,32 @@ nav#quarto-sidebar .sidebar-item a.active {
   border-left-color: #000;
 }
 
+// Right-hand "Categories" widget on blog listing pages (asankhya / saddlepoint).
+// Quarto renders this as an <h5> title + .category items and sizes them larger
+// than the left sidebar; give it the same treatment as the TOC above so the two
+// margins read at one size. Same #quarto-margin-sidebar ID prefix for specificity.
+#quarto-margin-sidebar .quarto-listing-category {
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base * 0.9;
+}
+#quarto-margin-sidebar .quarto-listing-category-title {
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base * 0.9;
+  font-weight: 600;
+  color: #333;
+}
+#quarto-margin-sidebar .quarto-listing-category .category {
+  color: #555;
+}
+#quarto-margin-sidebar .quarto-listing-category .category:hover {
+  color: #000;
+}
+#quarto-margin-sidebar .quarto-listing-category .category.active {
+  color: #000;
+  font-weight: 700;
+}
+#quarto-margin-sidebar .quarto-category-count { color: #888; }
+
 // Footer
 .nav-footer {
   font-size: 0.7rem;
