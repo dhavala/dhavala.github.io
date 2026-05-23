@@ -176,6 +176,36 @@ document.addEventListener('DOMContentLoaded', function() {
       titleHeader.insertBefore(trail, titleHeader.firstChild);
     }
   }
+
+  // SIDEBAR CONTEXT: pages that aren't sidebar entries (blog posts,
+  // reports, archive tutorials, project pages) give Quarto nothing to
+  // expand or highlight, so their section collapses on open. Re-derive
+  // context from the same ancestorCrumbs(): its leaf crumb (SaddlePoint
+  // / Asankhya / Reports / …) IS a real sidebar link, so find that link,
+  // mark it active, and expand each collapsible section that wraps it.
+  var sidebar = document.querySelector('nav#quarto-sidebar');
+  // Skip pages Quarto already handles (they have an active link).
+  if (sidebar && !sidebar.querySelector('a.sidebar-link.active')) {
+    var anc = ancestorCrumbs(path);
+    if (anc.length) {
+      var leafTail = anc[anc.length - 1][1].replace(/^\/+/, '');   // e.g. saddlepoint/index.html
+      var link = null, links = sidebar.querySelectorAll('a.sidebar-link[href]');
+      for (var k = 0; k < links.length; k++) {
+        var h = links[k].getAttribute('href').replace(/^(\.\.\/)+/, '').replace(/^\/+/, '');
+        if (h === leafTail) { link = links[k]; break; }
+      }
+      if (link) {
+        link.classList.add('active');
+        for (var node = link.parentElement; node && node !== sidebar; node = node.parentElement) {
+          if (node.tagName === 'UL' && node.classList.contains('sidebar-section')) {
+            node.classList.add('show');
+            var toggle = node.id && sidebar.querySelector('[data-bs-target="#' + node.id + '"]');
+            if (toggle) { toggle.setAttribute('aria-expanded', 'true'); toggle.classList.remove('collapsed'); }
+          }
+        }
+      }
+    }
+  }
 });
 </script>
 
@@ -467,7 +497,7 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Z3JhcGhzJTJDbWwlMkNub3RlYm9vaw==" data-listing-date-sort="1778976000000" data-listing-file-modified-sort="1779508811211" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="quarto-post image-right" data-index="0" data-categories="Z3JhcGhzJTJDbWwlMkNub3RlYm9vaw==" data-listing-date-sort="1778976000000" data-listing-file-modified-sort="1779510651139" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/pagerank-knn/index.html" class="no-external">PageRank and KNN: an equivalence</a>
@@ -494,7 +524,7 @@ May 17, 2026
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="bWV0YSUyQ2ludHJv" data-listing-date-sort="1778976000000" data-listing-file-modified-sort="1779508811211" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="32">
+<div class="quarto-post image-right" data-index="1" data-categories="bWV0YSUyQ2ludHJv" data-listing-date-sort="1778976000000" data-listing-file-modified-sort="1779510651139" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="32">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/welcome/index.html" class="no-external">Welcome to the blog</a>

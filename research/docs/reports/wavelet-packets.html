@@ -180,6 +180,36 @@ document.addEventListener('DOMContentLoaded', function() {
       titleHeader.insertBefore(trail, titleHeader.firstChild);
     }
   }
+
+  // SIDEBAR CONTEXT: pages that aren't sidebar entries (blog posts,
+  // reports, archive tutorials, project pages) give Quarto nothing to
+  // expand or highlight, so their section collapses on open. Re-derive
+  // context from the same ancestorCrumbs(): its leaf crumb (SaddlePoint
+  // / Asankhya / Reports / …) IS a real sidebar link, so find that link,
+  // mark it active, and expand each collapsible section that wraps it.
+  var sidebar = document.querySelector('nav#quarto-sidebar');
+  // Skip pages Quarto already handles (they have an active link).
+  if (sidebar && !sidebar.querySelector('a.sidebar-link.active')) {
+    var anc = ancestorCrumbs(path);
+    if (anc.length) {
+      var leafTail = anc[anc.length - 1][1].replace(/^\/+/, '');   // e.g. saddlepoint/index.html
+      var link = null, links = sidebar.querySelectorAll('a.sidebar-link[href]');
+      for (var k = 0; k < links.length; k++) {
+        var h = links[k].getAttribute('href').replace(/^(\.\.\/)+/, '').replace(/^\/+/, '');
+        if (h === leafTail) { link = links[k]; break; }
+      }
+      if (link) {
+        link.classList.add('active');
+        for (var node = link.parentElement; node && node !== sidebar; node = node.parentElement) {
+          if (node.tagName === 'UL' && node.classList.contains('sidebar-section')) {
+            node.classList.add('show');
+            var toggle = node.id && sidebar.querySelector('[data-bs-target="#' + node.id + '"]');
+            if (toggle) { toggle.setAttribute('aria-expanded', 'true'); toggle.classList.remove('collapsed'); }
+          }
+        }
+      }
+    }
+  }
 });
 </script>
 

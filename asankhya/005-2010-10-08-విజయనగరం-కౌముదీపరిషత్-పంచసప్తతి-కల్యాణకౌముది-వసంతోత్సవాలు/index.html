@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Soma S Dhavala">
-<meta name="dcterms.date" content="2026-05-18">
-<meta name="description" content="First post on Asankhya — what this space is for.">
+<meta name="dcterms.date" content="2010-10-08">
+<meta name="description" content="విజయనగరం కౌముదీపరిషత్ పంచసప్తతి కల్యాణకౌముది వసంతోత్సవాలు - 10th Oct to 12th Oct, 2010. ఆనందగజపతి ఆడిటిరియంలో. కార్యక్రమ వివరాలు సంక్షిప్తంగా:">
 
-<title>Hello – Soma S Dhavala</title>
+<title>విజయనగరం కౌముదీపరిషత్ - పంచసప్తతి కల్యాణకౌముది వసంతోత్సవాలు – Soma S Dhavala</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -147,17 +147,47 @@ document.addEventListener('DOMContentLoaded', function() {
       titleHeader.insertBefore(trail, titleHeader.firstChild);
     }
   }
+
+  // SIDEBAR CONTEXT: pages that aren't sidebar entries (blog posts,
+  // reports, archive tutorials, project pages) give Quarto nothing to
+  // expand or highlight, so their section collapses on open. Re-derive
+  // context from the same ancestorCrumbs(): its leaf crumb (SaddlePoint
+  // / Asankhya / Reports / …) IS a real sidebar link, so find that link,
+  // mark it active, and expand each collapsible section that wraps it.
+  var sidebar = document.querySelector('nav#quarto-sidebar');
+  // Skip pages Quarto already handles (they have an active link).
+  if (sidebar && !sidebar.querySelector('a.sidebar-link.active')) {
+    var anc = ancestorCrumbs(path);
+    if (anc.length) {
+      var leafTail = anc[anc.length - 1][1].replace(/^\/+/, '');   // e.g. saddlepoint/index.html
+      var link = null, links = sidebar.querySelectorAll('a.sidebar-link[href]');
+      for (var k = 0; k < links.length; k++) {
+        var h = links[k].getAttribute('href').replace(/^(\.\.\/)+/, '').replace(/^\/+/, '');
+        if (h === leafTail) { link = links[k]; break; }
+      }
+      if (link) {
+        link.classList.add('active');
+        for (var node = link.parentElement; node && node !== sidebar; node = node.parentElement) {
+          if (node.tagName === 'UL' && node.classList.contains('sidebar-section')) {
+            node.classList.add('show');
+            var toggle = node.id && sidebar.querySelector('[data-bs-target="#' + node.id + '"]');
+            if (toggle) { toggle.setAttribute('aria-expanded', 'true'); toggle.classList.remove('collapsed'); }
+          }
+        }
+      }
+    }
+  }
 });
 </script>
 
 
-<meta property="og:title" content="Hello – Soma S Dhavala">
-<meta property="og:description" content="First post on Asankhya — what this space is for.">
-<meta property="og:image" content="https://dhavala.github.io/asankhya/hello/images/og-image.png">
+<meta property="og:title" content="విజయనగరం కౌముదీపరిషత్ - పంచసప్తతి కల్యాణకౌముది వసంతోత్సవాలు – Soma S Dhavala">
+<meta property="og:description" content="విజయనగరం కౌముదీపరిషత్ పంచసప్తతి కల్యాణకౌముది వసంతోత్సవాలు - 10th Oct to 12th Oct, 2010. ఆనందగజపతి ఆడిటిరియంలో. కార్యక్రమ వివరాలు సంక్షిప్తంగా:">
+<meta property="og:image" content="https://dhavala.github.io/asankhya/005-2010-10-08-విజయనగరం-కౌముదీపరిషత్-పంచసప్తతి-కల్యాణకౌముది-వసంతోత్సవాలు/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
-<meta name="twitter:title" content="Hello – Soma S Dhavala">
-<meta name="twitter:description" content="First post on Asankhya — what this space is for.">
-<meta name="twitter:image" content="https://dhavala.github.io/asankhya/hello/images/og-image.png">
+<meta name="twitter:title" content="విజయనగరం కౌముదీపరిషత్ - పంచసప్తతి కల్యాణకౌముది వసంతోత్సవాలు – Soma S Dhavala">
+<meta name="twitter:description" content="విజయనగరం కౌముదీపరిషత్ పంచసప్తతి కల్యాణకౌముది వసంతోత్సవాలు - 10th Oct to 12th Oct, 2010. ఆనందగజపతి ఆడిటిరియంలో. కార్యక్రమ వివరాలు సంక్షిప్తంగా:">
+<meta name="twitter:image" content="https://dhavala.github.io/asankhya/005-2010-10-08-విజయనగరం-కౌముదీపరిషత్-పంచసప్తతి-కల్యాణకౌముది-వసంతోత్సవాలు/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -219,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Hello</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">విజయనగరం కౌముదీపరిషత్ - పంచసప్తతి కల్యాణకౌముది వసంతోత్సవాలు</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -381,15 +411,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Hello</h1>
+<h1 class="title">విజయనగరం కౌముదీపరిషత్ - పంచసప్తతి కల్యాణకౌముది వసంతోత్సవాలు</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">meta</div>
+    <div class="quarto-category">telugu</div>
+    <div class="quarto-category">archive</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    First post on Asankhya — what this space is for.
+    విజయనగరం కౌముదీపరిషత్ పంచసప్తతి కల్యాణకౌముది వసంతోత్సవాలు - 10th Oct to 12th Oct, 2010. ఆనందగజపతి ఆడిటిరియంలో. కార్యక్రమ వివరాలు సంక్షిప్తంగా:
   </div>
 </div>
 
@@ -406,7 +437,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 18, 2026</p>
+      <p class="date">October 8, 2010</p>
     </div>
   </div>
   
@@ -418,9 +449,52 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 
-<p>This is <strong>Asankhya</strong> — a quieter space for personal writing. Distinct from <a href="../../saddlepoint/">SaddlePoint</a>, which is for academic and technical work.</p>
-<p>Expect essays, notes from books, observations, and slower thinking.</p>
-<p><em>(More to come.)</em></p>
+<p>విజయనగరం కౌముదీపరిషత్ పంచసప్తతి కల్యాణకౌముది వసంతోత్సవాలు - 10th Oct to 12th Oct, 2010. ఆనందగజపతి ఆడిటిరియంలో. కార్యక్రమ వివరాలు సంక్షిప్తంగా:<br>
+10-10-2010<br>
+1) ఉ. 9 గం|| నుండి<br>
+ఉదయరాగం<br>
+- సాహితీవేత్తలకి సత్కారాలు<br>
+- కొత్త చివుళ్ళు (యువకవులచే 12 భిన్న సాహిత్యప్రక్రియలు)<br>
+- కనాశుల్కం చెణుకులు (A. B. సుబ్బారావు)<br>
+- దేవీభాగవతం (డా|| కె. మలయవాసిని)<br>
+2) సా. ౫ గం|| నుండి<br>
+- అందెల సందడి (భరతనాట్య ప్రదర్శన)<br>
+- శ్రీమద్రామాయణ కల్పవృక్షం, శ్రీ విశ్వనాధకవితావైభవం (మల్లంపల్లి అమరేశ్వరప్రాద్)<br>
+-కవిబ్రహ్మ తిక్కనకవితావైదుష్యం (ఆచార్య కొంపెల్ల రామసూర్యనారాయణ)<br>
+-పట్టుతేనె పలుకులతీపి (డా|| శ్రీనివాస రామానుజం)<br>
+-పద్యనైవేద్యం (ఘంటశాల ఆరాధకులు - ధవళ విశ్వకుమార్)<br>
+11-10-2010<br>
+1) ఉ. 9 గం|| నుండి<br>
+-రసతరంగిణి (డా|| శ్రీమతి వి. వెంకటరాణి, AIR విశాఖపట్టణం)<br>
+-మహదేవ వర్మ (హిందీ) సాహితీ వైభవం (డా|| చాగంటి తులసి)<br>
+-కృష్ణశాస్త్రి కవితామాధుర్యం (కె. తిరువేంగళమ్మ)<br>
+-కల్పవృక్షం కాంతులు (డా|| M.V. రమణారెడ్డి)<br>
+-తీపి చూపులు (బాలలచే నేత్రావధానం)<br>
+2) మ. ౩ గం|| నుండి<br>
+-సంగీతజ్ఞులకు తాంబూల సమర్పణం<br>
+-సాలూరికి స్వరనీరాజనం (విజయతరంగిణి - భీష్మ ఆర్కెష్ట్రా)<br>
+౩) సా. 6 గం|| నుండి<br>
+-ఆనంద బృందావనం (DD సప్తగిరి డైరెక్టర్ డా|| పి. మధుసూధనరావు)<br>
+-భారతీయసాంప్రదాయ సౌందర్యం (రామకృష్ణానంద వారి ప్రసంగం)<br>
+12-10-2010<br>
+1) ఉ. 9 గం|| నుండి<br>
+వెన్నల తళుకులు (ప్రసంగాలు)<br>
+- కాళిదాసు కళావిలాసం (శ్రీమాన్ గుదిమెళ్ళ రంగాచార్యులు)<br>
+-వరూధినీ వయ్యారం (RMS శాస్త్రి)<br>
+-భాసుని హాసతరగం (వేడూరు సత్యన్నారాయణమూర్తి)<br>
+-పోతన భాగవతం (పి. ఢిల్లీస్)<br>
+2) సా. 5 గం|| నుండి<br>
+వసంత విలాసం<br>
+-శ్రీమద్రామాయణంలో శాస్త్రవిజ్ఞానం (కె. పాండురంగ విఠల్)<br>
+-భువన విజయం (కె. కోటారావు బృందం)<br>
+గౌరవాధ్యక్షులు - మానాప్రగడ శేషసాయి<br>
+సభాధ్యక్షులు - ధవళ సర్వేశ్వరరావు<br>
+కార్యదర్శి - అడిదం శారద<br>
+కార్యనిర్వహణాధ్యక్షులు - పి.వి. నరసింహరాజు<br>
+విశిష్ఠ అతిధులు - బొత్స ఝాన్సీ (M.P), పూసపాటి ఆశోక్ గజపతి (M.L.A), బొత్స సత్యనారాయణ (M.L.A), కోలగట్ల వీరభద్రస్వామి (Ex. M.L.A)<br>
+కౌముదీ పరిషత్ - స్థాపన 1935<br>
+వ్యవస్థాపక అధ్యక్షులు - పట్రాయని సీతారామ శాస్త్రిగారు<br>
+కౌముదీపరిషత్ గత కార్యవర్గ ప్రముఖులు - పంతుల లక్ష్మీనారాయణ శాస్త్రులు (సంస్కృత కాలేజి) , వసంతరావు వెంకటరావు (M.R. కాలేజి), డి.ఎల్. నారాయణ (M.R. కాలేజి), పేరీ సూర్యనారాయణశాస్త్రి (సంస్కృత కాలేజి), తుమరాణ సత్యన్నారాయణ.</p>
 
 
 

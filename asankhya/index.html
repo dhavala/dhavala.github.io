@@ -68,7 +68,8 @@ ul.task-list li input[type="checkbox"] {
 
     const options = {
       valueNames: ['listing-date','listing-title','listing-categories','listing-description','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
+      page: 25,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
       searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
@@ -174,6 +175,36 @@ document.addEventListener('DOMContentLoaded', function() {
       ol.appendChild(currentLi);
       trail.appendChild(ol);
       titleHeader.insertBefore(trail, titleHeader.firstChild);
+    }
+  }
+
+  // SIDEBAR CONTEXT: pages that aren't sidebar entries (blog posts,
+  // reports, archive tutorials, project pages) give Quarto nothing to
+  // expand or highlight, so their section collapses on open. Re-derive
+  // context from the same ancestorCrumbs(): its leaf crumb (SaddlePoint
+  // / Asankhya / Reports / …) IS a real sidebar link, so find that link,
+  // mark it active, and expand each collapsible section that wraps it.
+  var sidebar = document.querySelector('nav#quarto-sidebar');
+  // Skip pages Quarto already handles (they have an active link).
+  if (sidebar && !sidebar.querySelector('a.sidebar-link.active')) {
+    var anc = ancestorCrumbs(path);
+    if (anc.length) {
+      var leafTail = anc[anc.length - 1][1].replace(/^\/+/, '');   // e.g. saddlepoint/index.html
+      var link = null, links = sidebar.querySelectorAll('a.sidebar-link[href]');
+      for (var k = 0; k < links.length; k++) {
+        var h = links[k].getAttribute('href').replace(/^(\.\.\/)+/, '').replace(/^\/+/, '');
+        if (h === leafTail) { link = links[k]; break; }
+      }
+      if (link) {
+        link.classList.add('active');
+        for (var node = link.parentElement; node && node !== sidebar; node = node.parentElement) {
+          if (node.tagName === 'UL' && node.classList.contains('sidebar-section')) {
+            node.classList.add('show');
+            var toggle = node.id && sidebar.querySelector('[data-bs-target="#' + node.id + '"]');
+            if (toggle) { toggle.setAttribute('aria-expanded', 'true'); toggle.classList.remove('collapsed'); }
+          }
+        }
+      }
     }
   }
 });
@@ -430,7 +461,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="YXJjaGl2ZQ==">archive <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWV0YQ==">meta <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dGVsdWd1">telugu <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(49)</span></div><div class="category" data-category="YXJjaGl2ZQ==">archive <span class="quarto-category-count">(49)</span></div><div class="category" data-category="dGVsdWd1">telugu <span class="quarto-category-count">(49)</span></div><div class="category" data-category="JUUwJUIwJTg3JUUwJUIwJUE0JUUwJUIwJUIwJUUwJUIxJTgxJUUwJUIwJUIyJUUwJUIxJTgx">ఇతరులు <span class="quarto-category-count">(3)</span></div><div class="category" data-category="JUUwJUIwJTk1JUUwJUIwJUI1JUUwJUIwJUJGJUUwJUIwJUE0JUUwJUIwJUIyJUUwJUIxJTgx">కవితలు <span class="quarto-category-count">(3)</span></div><div class="category" data-category="JUUwJUIwJUE4JUUwJUIwJUJFJUUwJUIwJUE4JUUwJUIxJThEJUUwJUIwJUE4JTIwJUUwJUIwJUFBJUUwJUIwJUJFJUUwJUIwJTlGJTIwJUUwJUIwJUFFJUUwJUIwJUJFJUUwJUIwJTlGJTIwJUUwJUIwJTg2JUUwJUIwJTlG">నాన్న పాట మాట ఆట <span class="quarto-category-count">(1)</span></div><div class="category" data-category="JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx">పద్యాలు <span class="quarto-category-count">(23)</span></div><div class="category" data-category="JUUwJUIwJUIwJUUwJUIwJUJFJUUwJUIwJTlDJUUwJUIwJTk1JUUwJUIxJTgwJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx">రాజకీయాలు <span class="quarto-category-count">(3)</span></div><div class="category" data-category="JUUwJUIwJUI1JUUwJUIxJTgwJUUwJUIwJUExJUUwJUIwJUJGJUUwJUIwJUFGJUUwJUIxJThCJUUwJUIwJUIyJUUwJUIxJTgx">వీడియోలు <span class="quarto-category-count">(7)</span></div><div class="category" data-category="JUUwJUIwJUI4JUUwJUIwJUJGJUUwJUIwJUE4JUUwJUIxJTgwJUUwJUIwJUFFJUUwJUIwJUJF">సినీమా <span class="quarto-category-count">(5)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <div class="section-banner">
@@ -467,30 +498,32 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWV0YQ==" data-listing-date-sort="1779062400000" data-listing-file-modified-sort="1779508811193" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="28">
+<div class="quarto-post image-right" data-index="0" data-categories="dGVsdWd1JTJDYXJjaGl2ZQ==" data-listing-date-sort="1302739200000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="185">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="../asankhya/hello/index.html" class="no-external">Hello</a>
+<a href="../asankhya/002-2011-04-14-పద్యపుష్పోపహారము/index.html" class="no-external">పద్యపుష్పోపహారము</a>
 </h3>
 <div class="listing-categories">
 
-<div class="listing-category" onclick="window.quartoListingCategory('bWV0YQ=='); return false;">meta</div>
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
 
 </div>
-<div class="delink listing-description"><a href="../asankhya/hello/index.html" class="no-external">
-<p>First post on Asankhya — what this space is for.</p>
+<div class="delink listing-description"><a href="../asankhya/002-2011-04-14-పద్యపుష్పోపహారము/index.html" class="no-external">
+<p>శ్రీముఖ వ్యాసపౌర్ణమి శ్రీరస్తు, శ్రీమత్పరదేవతాయైనమః బ్రహ్మశ్రీ వేదమూర్తులు, బ్రహ్మనిష్ఠులు, తపస్సంపన్నులు, శ్రీ ధవళ శ్రీరామావధాని మహోదయులకు, వారి సహస్రచంద్ర దర్శన మహోత…</p>
 </a></div>
 </div>
 <div class="metadata">
-<a href="../asankhya/hello/index.html" class="no-external">
+<a href="../asankhya/002-2011-04-14-పద్యపుష్పోపహారము/index.html" class="no-external">
 <div class="listing-date">
-May 18, 2026
+Apr 14, 2011
 </div>
 <div class="listing-reading-time">1 min</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="dGVsdWd1JTJDYXJjaGl2ZQ==" data-listing-date-sort="1302739200000" data-listing-file-modified-sort="1779508811193" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="245">
+<div class="quarto-post image-right" data-index="1" data-categories="dGVsdWd1JTJDYXJjaGl2ZQ==" data-listing-date-sort="1302739200000" data-listing-file-modified-sort="1779510651118" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="245">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../asankhya/2011-04-14-abhinandana-kalharamu/index.html" class="no-external">అభినందన కల్హారము</a>
@@ -503,7 +536,7 @@ May 18, 2026
 
 </div>
 <div class="delink listing-description"><a href="../asankhya/2011-04-14-abhinandana-kalharamu/index.html" class="no-external">
-<p>Archived from karvepaku.blogspot.com.</p>
+<p>వ్యాస పౌర్ణమి - శ్రీముఖ ఆషాఢం ఆధ్యాత్మిక జీవనులు - శంకరభావనులు, బ్రహ్మశ్రీ ధవళ శ్రీరామావధాని గారికి వారి సహస్రచంద్ర దర్శనోత్సవ శుభసమయంలో గురుపూజామహోత్సవంనాడు శ్రీ శంకర…</p>
 </a></div>
 </div>
 <div class="metadata">
@@ -515,8 +548,1276 @@ Apr 14, 2011
 </a>
 </div>
 </div>
+<div class="quarto-post image-right" data-index="2" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBOCVFMCVCMCVCRSVFMCVCMCVBOCVFMCVCMSU4RCVFMCVCMCVBOCUyMCVFMCVCMCVBQSVFMCVCMCVCRSVFMCVCMCU5RiUyMCVFMCVCMCVBRSVFMCVCMCVCRSVFMCVCMCU5RiUyMCVFMCVCMCU4NiVFMCVCMCU5Rg==" data-listing-date-sort="1301788800000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="24">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/003-2011-04-03-సర్వేస్వరావళి-1-తెలుగదేల-(పద్యం)/index.html" class="no-external">సర్వేస్వరావళి-1: తెలుగదేల (పద్యం)</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUE4JUUwJUIwJUJFJUUwJUIwJUE4JUUwJUIxJThEJUUwJUIwJUE4JTIwJUUwJUIwJUFBJUUwJUIwJUJFJUUwJUIwJTlGJTIwJUUwJUIwJUFFJUUwJUIwJUJFJUUwJUIwJTlGJTIwJUUwJUIwJTg2JUUwJUIwJTlG'); return false;">నాన్న పాట మాట ఆట</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/003-2011-04-03-సర్వేస్వరావళి-1-తెలుగదేల-(పద్యం)/index.html" class="no-external">
+<p>Video post: సర్వేస్వరావళి-1: తెలుగదేల (పద్యం)</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/003-2011-04-03-సర్వేస్వరావళి-1-తెలుగదేల-(పద్యం)/index.html" class="no-external">
+<div class="listing-date">
+Apr 3, 2011
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="dGVsdWd1JTJDYXJjaGl2ZQ==" data-listing-date-sort="1286496000000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="302">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/005-2010-10-08-విజయనగరం-కౌముదీపరిషత్-పంచసప్తతి-కల్యాణకౌముది-వసంతోత్సవాలు/index.html" class="no-external">విజయనగరం కౌముదీపరిషత్ - పంచసప్తతి కల్యాణకౌముది వసంతోత్సవాలు</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/005-2010-10-08-విజయనగరం-కౌముదీపరిషత్-పంచసప్తతి-కల్యాణకౌముది-వసంతోత్సవాలు/index.html" class="no-external">
+<p>విజయనగరం కౌముదీపరిషత్ పంచసప్తతి కల్యాణకౌముది వసంతోత్సవాలు - 10th Oct to 12th Oct, 2010. ఆనందగజపతి ఆడిటిరియంలో. కార్యక్రమ వివరాలు సంక్షిప్తంగా:</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/005-2010-10-08-విజయనగరం-కౌముదీపరిషత్-పంచసప్తతి-కల్యాణకౌముది-వసంతోత్సవాలు/index.html" class="no-external">
+<div class="listing-date">
+Oct 8, 2010
+</div>
+<div class="listing-reading-time">2 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="dGVsdWd1JTJDYXJjaGl2ZQ==" data-listing-date-sort="1285545600000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2001">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/006-2010-09-27-134,217,726/index.html" class="no-external">134,217,726</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/006-2010-09-27-134,217,726/index.html" class="no-external">
+<p>The following article on chandassu was posted on telusA by Sri Prabhakar Vissavajjhala. The only changes</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/006-2010-09-27-134,217,726/index.html" class="no-external">
+<div class="listing-date">
+Sep 27, 2010
+</div>
+<div class="listing-reading-time">11 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1282867200000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1409">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/008-2010-08-27-బంధ-పద్య-కవిత్వం-how-to/index.html" class="no-external">బంధ పద్య కవిత్వం - how to</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/008-2010-08-27-బంధ-పద్య-కవిత్వం-how-to/index.html" class="no-external">
+<p>కర్ణబంధ కందం, చతురంగ బంధ కందం మొదలైవి బంధ పద్య కవిత్వ లోకొన్ని అంశాలు. మరి వీటిని ఎలా సాధన చెయ్యాలి. దీనకి సమాధానమే ఈ టపా. ఒక రెండు బంధ కంద పద్యాలని రాయడం ద్వారా, నేను…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/008-2010-08-27-బంధ-పద్య-కవిత్వం-how-to/index.html" class="no-external">
+<div class="listing-date">
+Aug 27, 2010
+</div>
+<div class="listing-reading-time">8 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1282867200000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="446">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/007-2010-08-27-క్రమాలంకార-ద్వికర్ణ-బంధ-కందం/index.html" class="no-external">క్రమాలంకార ద్వికర్ణ బంధ కందం</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/007-2010-08-27-క్రమాలంకార-ద్వికర్ణ-బంధ-కందం/index.html" class="no-external">
+<p>క్రమాలంకారం అంటే కొన్ని వస్తువులని ముందుగా చెప్పి, ఆ తర్వాత వానితో క్రమంగా అన్వయించునట్లు, మరికొన్ని వస్తువులను కూర్చడం. పద్యరచనకి సంబంధించినంతవరకు, పద్యంలోని కొన్నిపా…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/007-2010-08-27-క్రమాలంకార-ద్వికర్ణ-బంధ-కందం/index.html" class="no-external">
+<div class="listing-date">
+Aug 27, 2010
+</div>
+<div class="listing-reading-time">3 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="7" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1282694400000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="159">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/009-2010-08-25-కర్ణ-బంధ-కందం-(సెగటు-Bishop-move)/index.html" class="no-external">కర్ణ బంధ కందం - (సెగటు/Bishop move)</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/009-2010-08-25-కర్ణ-బంధ-కందం-(సెగటు-Bishop-move)/index.html" class="no-external">
+<p>చ‘తురంగ’గతి బంధ కందము ఇక్కడ. మరి వెరే ఏరకంగా ప్రయత్నంద్దాం అనుక్కుంటే, కర్ణం (main diagonal) తీసుకుంటే అనిపించింది.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/009-2010-08-25-కర్ణ-బంధ-కందం-(సెగటు-Bishop-move)/index.html" class="no-external">
+<div class="listing-date">
+Aug 25, 2010
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="8" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1282694400000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="229">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/010-2010-08-25-చ‘తురంగ’గతి-బంధ-కందము/index.html" class="no-external">చ‘తురంగ’గతి బంధ కందము</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/010-2010-08-25-చ‘తురంగ’గతి-బంధ-కందము/index.html" class="no-external">
+<p>చ‘తురంగ’గతి బంధ కందము రాయాలంటే, ముందు సర్వలఘుకందం ఒక్కటైనా రాయాలని, నిన్న ఒకటి రాసాను. ఆంధ్రామృతం బ్లాగులో మొదటగా చూసిన చ‘తురంగ’గతి బంధ కందము ప్రయత్నిద్దామని సంకల్పిచా…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/010-2010-08-25-చ‘తురంగ’గతి-బంధ-కందము/index.html" class="no-external">
+<div class="listing-date">
+Aug 25, 2010
+</div>
+<div class="listing-reading-time">2 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="9" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVCOCVFMCVCMCVCRiVFMCVCMCVBOCVFMCVCMSU4MCVFMCVCMCVBRSVFMCVCMCVCRQ==" data-listing-date-sort="1282435200000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="201">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/013-2010-08-22-ఇదేనండి-ఇదేనండి-భాగ్యనగరము-తెరవెనుక-పాట/index.html" class="no-external">ఇదేనండి ఇదేనండి భాగ్యనగరము - తెరవెనుక పాట</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUI4JUUwJUIwJUJGJUUwJUIwJUE4JUUwJUIxJTgwJUUwJUIwJUFFJUUwJUIwJUJF'); return false;">సినీమా</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/013-2010-08-22-ఇదేనండి-ఇదేనండి-భాగ్యనగరము-తెరవెనుక-పాట/index.html" class="no-external">
+<p>జె.వి. రమణమూర్తి గారు “కన్యాశుల్కం” నాటికాన్ని (ఇప్పటికీ) ఒక యజ్ఞం లా నిర్వహిస్తున్న సోమయాజి. రంగస్థలంపై ఆయన అనుభవం 64 సంవత్సరాలు. ఆయన్ని “హ్యూస్టన్ లో నెలనెలావెన్నెల”…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/013-2010-08-22-ఇదేనండి-ఇదేనండి-భాగ్యనగరము-తెరవెనుక-పాట/index.html" class="no-external">
+<div class="listing-date">
+Aug 22, 2010
+</div>
+<div class="listing-reading-time">2 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="10" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MSUyQyVFMCVCMCVCOCVFMCVCMCVCRiVFMCVCMCVBOCVFMCVCMSU4MCVFMCVCMCVBRSVFMCVCMCVCRQ==" data-listing-date-sort="1282435200000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="748">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/012-2010-08-22-నెలనెలా-వెన్నెల్లో-జె.వి.రమణమూర్తి-గారి-మెరుపు/index.html" class="no-external">నెలనెలా వెన్నెల్లో జె.వి.రమణమూర్తి గారి మెరుపు</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUI4JUUwJUIwJUJGJUUwJUIwJUE4JUUwJUIxJTgwJUUwJUIwJUFFJUUwJUIwJUJF'); return false;">సినీమా</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/012-2010-08-22-నెలనెలా-వెన్నెల్లో-జె.వి.రమణమూర్తి-గారి-మెరుపు/index.html" class="no-external">
+<p>ఈ నెల “హ్యూస్టన్ లో నెలనెలా వెన్నెల”లో జె.వి. రమణమూర్తి గారు ప్రత్యేక వక్తగా పాల్గొన్నారు. వింజమూరి అనసూయ గారు కూడా పాల్గొన్నారు.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/012-2010-08-22-నెలనెలా-వెన్నెల్లో-జె.వి.రమణమూర్తి-గారి-మెరుపు/index.html" class="no-external">
+<div class="listing-date">
+Aug 22, 2010
+</div>
+<div class="listing-reading-time">4 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="11" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1282262400000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="327">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/015-2010-08-20-బేరుమనేడ్వగలన్-కృపాకరో/index.html" class="no-external">బేరుమనేడ్వగలన్ కృపాకరో</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/015-2010-08-20-బేరుమనేడ్వగలన్-కృపాకరో/index.html" class="no-external">
+<p>వృత్తం రాయాలంటే, అమ్మో అంత పెద్ద పద్యం ఎలారాయగలం అని ఒక భయం ఉన్నాది (ఉండేది). అప్పుడొచ్చిన ప్రశ్నలు:</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/015-2010-08-20-బేరుమనేడ్వగలన్-కృపాకరో/index.html" class="no-external">
+<div class="listing-date">
+Aug 20, 2010
+</div>
+<div class="listing-reading-time">2 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="12" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1282262400000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="72">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/014-2010-08-20-రాముడు.-ముదమున-ఖురాను-చదివె/index.html" class="no-external">రాముడు. ముదమున ఖురాను చదివె</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/014-2010-08-20-రాముడు.-ముదమున-ఖురాను-చదివె/index.html" class="no-external">
+<p>శంకరాభరణం బ్లాగరి ఆచార్య కంది శంకరయ్య గారిచ్చిన సమస్యాపూరణం 1. రాముని జంపి హర్షమున రాక్షసు లెల్లరు నాట్యమాడరే</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/014-2010-08-20-రాముడు.-ముదమున-ఖురాను-చదివె/index.html" class="no-external">
+<div class="listing-date">
+Aug 20, 2010
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="13" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1282176000000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="143">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/016-2010-08-19-జయహో-సర్దార్/index.html" class="no-external">జయహో సర్దార్</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/016-2010-08-19-జయహో-సర్దార్/index.html" class="no-external">
+<p>నాకు సర్దార్జీలంటే చిన్నప్పట్నుంచీ ప్రత్యేక అభిమానం. కారణాలనేకం. మొదటగా, సైన్యంలో ఎక్కువ కనిపించేది ఈ జాతే వారేకదా. డీడీ-౧ లో అప్పట్లో పరమవీరచక్ర ధారావాహికం వచ్చేది. అ…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/016-2010-08-19-జయహో-సర్దార్/index.html" class="no-external">
+<div class="listing-date">
+Aug 19, 2010
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="14" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1282176000000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="435">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/017-2010-08-19-my-experiences-with-poetic-meter/index.html" class="no-external">my experiences with poetic meter</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/017-2010-08-19-my-experiences-with-poetic-meter/index.html" class="no-external">
+<p>In my view, there are two components to writing a poem with meter: technique and art. 1) Technique, the method of construction, can be learned and we need someone to t…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/017-2010-08-19-my-experiences-with-poetic-meter/index.html" class="no-external">
+<div class="listing-date">
+Aug 19, 2010
+</div>
+<div class="listing-reading-time">3 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="15" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVCNSVFMCVCMSU4MCVFMCVCMCVBMSVFMCVCMCVCRiVFMCVCMCVBRiVFMCVCMSU4QiVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1281744000000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="101">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/019-2010-08-14-జనగణమన-(కొత్త-సంకలనం)/index.html" class="no-external">జనగణమన (కొత్త సంకలనం)</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUI1JUUwJUIxJTgwJUUwJUIwJUExJUUwJUIwJUJGJUUwJUIwJUFGJUUwJUIxJThCJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">వీడియోలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/019-2010-08-14-జనగణమన-(కొత్త-సంకలనం)/index.html" class="no-external">
+<p>రెహ్మాన్ “జనగణమన” స్వరకల్పన అనేక రూపాల్లో శబ్దీకరించబడింది. వాయిద్యాలతో మాత్రమే, గాత్రంతో మాత్రమే ఇలా. వాటిని మూలంగా తీసుకొని, రూపొందించినదే ఈ క్రింది వీడియో. ఉదాహరణకి…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/019-2010-08-14-జనగణమన-(కొత్త-సంకలనం)/index.html" class="no-external">
+<div class="listing-date">
+Aug 14, 2010
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="16" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1281571200000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="21">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/020-2010-08-12-సత్సంపద-లొనగూరునె-సత్సంకల్పబలమున్న/index.html" class="no-external">సత్సంపద లొనగూరునె సత్సంకల్పబలమున్న</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/020-2010-08-12-సత్సంపద-లొనగూరునె-సత్సంకల్పబలమున్న/index.html" class="no-external">
+<p>సత్సంప్రదాయము నిలుపు, సత్సంఘము నెఱుపు, వెలయ సద్భావనముల్. సత్సంకల్పబలమున్న(ను. ఓ) సద్గుణరాశీ!</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/020-2010-08-12-సత్సంపద-లొనగూరునె-సత్సంకల్పబలమున్న/index.html" class="no-external">
+<div class="listing-date">
+Aug 12, 2010
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="17" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1281052800000" data-listing-file-modified-sort="1779510651115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="124">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/021-2010-08-06-సొగసరి-చిటుకున-కనుమరు-గయ్యెన్/index.html" class="no-external">సొగసరి చిటుకున కనుమరు గయ్యెన్</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/021-2010-08-06-సొగసరి-చిటుకున-కనుమరు-గయ్యెన్/index.html" class="no-external">
+<p>దాదాపు పది సంవత్సరాలు పాటు విజయనగరం - విజయవాడ -చెన్నయ్ - బెంగుళూరు రైలుమార్గం లో చదువు/ఉద్యోగరీత్యా శెలవులకీ, గట్రా తిరగడం మూలాన, ఆ ప్రయాణాల్లొ ఎన్నో అనుభవాలు ఎదురయ్యేవి.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/021-2010-08-06-సొగసరి-చిటుకున-కనుమరు-గయ్యెన్/index.html" class="no-external">
+<div class="listing-date">
+Aug 6, 2010
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="18" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1280966400000" data-listing-file-modified-sort="1779510651116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="369">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/022-2010-08-05-దేవుపల్లి-దేవునిపల్లే/index.html" class="no-external">దేవుపల్లి - దేవునిపల్లే</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/022-2010-08-05-దేవుపల్లి-దేవునిపల్లే/index.html" class="no-external">
+<p>కథలు, నవలలు, కవితలు, పుస్తకాలు - చదవడం పెద్దాగా ఇష్టపడని నేను పొరపాటున గొల్లపూడి మారుతీరావు గారి వెన్నెల కాటేసింది నవల(?) కొన్ని పేజీలు తిరగేస్తుంటే, “దేవుపల్లి” ప్రస్…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/022-2010-08-05-దేవుపల్లి-దేవునిపల్లే/index.html" class="no-external">
+<div class="listing-date">
+Aug 5, 2010
+</div>
+<div class="listing-reading-time">2 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="19" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MSUyQyVFMCVCMCVCNSVFMCVCMSU4MCVFMCVCMCVBMSVFMCVCMCVCRiVFMCVCMCVBRiVFMCVCMSU4QiVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1280793600000" data-listing-file-modified-sort="1779510651116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="667">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/023-2010-08-03-మరపురాని-మొదటి,-పెళ్ళివీడియో/index.html" class="no-external">మరపురాని మొదటి, “పెళ్ళివీడియో”</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUI1JUUwJUIxJTgwJUUwJUIwJUExJUUwJUIwJUJGJUUwJUIwJUFGJUUwJUIxJThCJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">వీడియోలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/023-2010-08-03-మరపురాని-మొదటి,-పెళ్ళివీడియో/index.html" class="no-external">
+<p>విరామాన్ని జాగ్రత్తగా గమనించండి. “మొదటి, పెళ్ళివీడియో”. “మొదటి పెళ్ళి” - వీడియో కాదు :). యూట్యూబ్ ఇంకా ప్రపంచానికి “పూర్తిగా” తెలియనప్పుడె మా వీడియో వికారం మొదలైంది. అ…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/023-2010-08-03-మరపురాని-మొదటి,-పెళ్ళివీడియో/index.html" class="no-external">
+<div class="listing-date">
+Aug 3, 2010
+</div>
+<div class="listing-reading-time">4 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="20" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1280534400000" data-listing-file-modified-sort="1779510651116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="163">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/024-2010-07-31-సమస్యా-పూరణ-కారు-నెక్క-బోయె-కలికి-యలిగి/index.html" class="no-external">సమస్యా పూరణ - కారు నెక్క బోయె కలికి యలిగి</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/024-2010-07-31-సమస్యా-పూరణ-కారు-నెక్క-బోయె-కలికి-యలిగి/index.html" class="no-external">
+<p>సత్యదేవ్ చిలుకూరి గారిచ్చిన సమస్య కారు నెక్క బోయె కలికి యలిగి ఆటవెలదిలో పూరించాలి నీవు కలివి. ఔను, నీవు నా కలివి నా</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/024-2010-07-31-సమస్యా-పూరణ-కారు-నెక్క-బోయె-కలికి-యలిగి/index.html" class="no-external">
+<div class="listing-date">
+Jul 31, 2010
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="21" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1280275200000" data-listing-file-modified-sort="1779510651116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="376">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/026-2010-07-28-వద్దిపర్తి-పద్మాకర్-గారి-అష్టావధానం-హ్యూస్టన్-విశేషాలు/index.html" class="no-external">వద్దిపర్తి పద్మాకర్ గారి అష్టావధానం - హ్యూస్టన్ విశేషాలు</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/026-2010-07-28-వద్దిపర్తి-పద్మాకర్-గారి-అష్టావధానం-హ్యూస్టన్-విశేషాలు/index.html" class="no-external">
+<p>అవధాని - వద్దిపర్తి పద్మాకర్ (ఏలూరు) నిర్వహణ - శాయి రాచకొండ సభాధ్యక్షుడు - జె.వి. రమణమూర్తి</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/026-2010-07-28-వద్దిపర్తి-పద్మాకర్-గారి-అష్టావధానం-హ్యూస్టన్-విశేషాలు/index.html" class="no-external">
+<div class="listing-date">
+Jul 28, 2010
+</div>
+<div class="listing-reading-time">2 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="22" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1280275200000" data-listing-file-modified-sort="1779510651116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="649">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/025-2010-07-28-మత్తేభ-ఘీంకారమా!-మూషికా-చుంచునాదమా!/index.html" class="no-external">మత్తేభ ఘీంకారమా! మూషికా చుంచునాదమా!</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/025-2010-07-28-మత్తేభ-ఘీంకారమా!-మూషికా-చుంచునాదమా!/index.html" class="no-external">
+<p>హ్యూస్టన్లో జరగబోయే అష్టావధంలో పృచ్ఛకుడిగా వ్యవహరించమని శాయి రాచకొండ ఆఙ్ఞాపించారు, నేనేదో పద్యాల్లో పిస్తా అనుకొని. ప్రయత్నించకుండా ఓడిపోవడం కన్నా, ప్రయత్నించి విఫలమవ్…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/025-2010-07-28-మత్తేభ-ఘీంకారమా!-మూషికా-చుంచునాదమా!/index.html" class="no-external">
+<div class="listing-date">
+Jul 28, 2010
+</div>
+<div class="listing-reading-time">4 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="23" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1279756800000" data-listing-file-modified-sort="1779510651116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="48">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/027-2010-07-22-Budlight-యిప్పసారా/index.html" class="no-external">Budlight - యిప్పసారా</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/027-2010-07-22-Budlight-యిప్పసారా/index.html" class="no-external">
+<p>కరములు మోడిచి పల్కవె ఖరముల్, బడ్లైటు పూటు కైపులు లైటూ! సురసాపానము గ్రోలిన కరకణు ధార్మికతలనిక కాంచవు రైటూ!</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/027-2010-07-22-Budlight-యిప్పసారా/index.html" class="no-external">
+<div class="listing-date">
+Jul 22, 2010
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="24" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1279238400000" data-listing-file-modified-sort="1779510651116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="50">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/028-2010-07-16-ముక్కుపుడక-అసూయ/index.html" class="no-external">ముక్కుపుడక - అసూయ</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/028-2010-07-16-ముక్కుపుడక-అసూయ/index.html" class="no-external">
+<p>చక్కగ చెక్కిన, పసిడి ముక్కెరనిడ, మక్కువ పద్మనాధుని కాంతులిడి, తళుక్కుమనెనె, అప్ప్రకాశంబునన్, మ్రుక్కునవ్రేలిడు అమ్మలక్కల</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/028-2010-07-16-ముక్కుపుడక-అసూయ/index.html" class="no-external">
+<div class="listing-date">
+Jul 16, 2010
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="25" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCU5NSVFMCVCMCVCNSVFMCVCMCVCRiVFMCVCMCVBNCVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1240099200000" data-listing-file-modified-sort="1779510651116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="146">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/041-2009-04-19-మల్లెల-మాలలూగక-మానునా,-మాయునా/index.html" class="no-external">మల్లెల మాలలూగక మానునా, మాయునా?</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJTk1JUUwJUIwJUI1JUUwJUIwJUJGJUUwJUIwJUE0JUUwJUIwJUIyJUUwJUIxJTgx'); return false;">కవితలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/041-2009-04-19-మల్లెల-మాలలూగక-మానునా,-మాయునా/index.html" class="no-external">
+<p>మల్లీశ్వరి సినిమాలో “మనసున మల్లెల మాలలూగెనే” పాట ఏమాత్రం అభిరుచి ఉన్న శ్రోతలకైనా తెలుస్తుంది. దేవులపల్లి కృష్ణశాస్త్రి గారి కలం నుంచి జాలువారిన తెలుగు సొగసుల సిరి మల్ల…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/041-2009-04-19-మల్లెల-మాలలూగక-మానునా,-మాయునా/index.html" class="no-external">
+<div class="listing-date">
+Apr 19, 2009
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="26" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1239321600000" data-listing-file-modified-sort="1779510651116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="449">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/044-2009-04-10-పద్యం-వృత్తాలు-అంకెలు/index.html" class="no-external">పద్యం - వృత్తాలు - అంకెలు</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/044-2009-04-10-పద్యం-వృత్తాలు-అంకెలు/index.html" class="no-external">
+<p>సాంప్రదాయకంగా మనం పద్యాల ఛందస్సుని నేర్చుకున్నప్పుడు ” ఈ పద్యానికి ఈ గణాలు ఫలానా వరుసక్రమంలో రావాలి”</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/044-2009-04-10-పద్యం-వృత్తాలు-అంకెలు/index.html" class="no-external">
+<div class="listing-date">
+Apr 10, 2009
+</div>
+<div class="listing-reading-time">3 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="27" data-categories="dGVsdWd1JTJDYXJjaGl2ZQ==" data-listing-date-sort="1239062400000" data-listing-file-modified-sort="1779510651116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="338">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/045-2009-04-07-BIG-EVENT-చిరు-సాయం/index.html" class="no-external">BIG EVENT - చిరు సాయం</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/045-2009-04-07-BIG-EVENT-చిరు-సాయం/index.html" class="no-external">
+<p>పన్నెండు వేల మంది సైనికులు చేతిలో చీల్చిచెండాడే మరతుపాకులు రణగొణధ్వనులు చేస్తూ చ్చక్కర్లు కొడుతున్న యుద్ధట్యాంకులు</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/045-2009-04-07-BIG-EVENT-చిరు-సాయం/index.html" class="no-external">
+<div class="listing-date">
+Apr 7, 2009
+</div>
+<div class="listing-reading-time">2 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="28" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1238544000000" data-listing-file-modified-sort="1779510651116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="157">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/046-2009-04-01-తెలుగు-పద్యానికి-compiler/index.html" class="no-external">తెలుగు పద్యానికి compiler?</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/046-2009-04-01-తెలుగు-పద్యానికి-compiler/index.html" class="no-external">
+<p>భైరవభట్ల గారు, పద్యం.నెట్ మీద టపా రాసినప్పుడు, పద్యం.నెట్లో, (నాలాంటి) ఔత్సాహికులు పద్యాలు రాయప్రయత్నిస్తే, వ్యాకరణ పరంగా అవి సరియైనవా, లేక, వాటిలో తప్పులు ఏమైనా ఉన్నా…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/046-2009-04-01-తెలుగు-పద్యానికి-compiler/index.html" class="no-external">
+<div class="listing-date">
+Apr 1, 2009
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="29" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVCNSVFMCVCMSU4MCVFMCVCMCVBMSVFMCVCMCVCRiVFMCVCMCVBRiVFMCVCMSU4QiVFMCVCMCVCMiVFMCVCMSU4MSUyQyVFMCVCMCVCOCVFMCVCMCVCRiVFMCVCMCVBOCVFMCVCMSU4MCVFMCVCMCVBRSVFMCVCMCVCRQ==" data-listing-date-sort="1237593600000" data-listing-file-modified-sort="1779510651117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="223">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/047-2009-03-21-రేయి-మించెనోయీ-రాజా-(పేరడీ-video)/index.html" class="no-external">రేయి మించెనోయీ రాజా (పేరడీ video)</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUI1JUUwJUIxJTgwJUUwJUIwJUExJUUwJUIwJUJGJUUwJUIwJUFGJUUwJUIxJThCJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">వీడియోలు</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUI4JUUwJUIwJUJGJUUwJUIwJUE4JUUwJUIxJTgwJUUwJUIwJUFFJUUwJUIwJUJF'); return false;">సినీమా</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/047-2009-03-21-రేయి-మించెనోయీ-రాజా-(పేరడీ-video)/index.html" class="no-external">
+<p>రేయి మించెనోయీ రాజా, హాయిగ నిదురించరా, ఆ …..హాయిగ నిదురించరా వెన్నెల్లు విరెసె, వెతలెల్ల వెలిసె</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/047-2009-03-21-రేయి-మించెనోయీ-రాజా-(పేరడీ-video)/index.html" class="no-external">
+<div class="listing-date">
+Mar 21, 2009
+</div>
+<div class="listing-reading-time">2 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="30" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVCMCVFMCVCMCVCRSVFMCVCMCU5QyVFMCVCMCU5NSVFMCVCMSU4MCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1237507200000" data-listing-file-modified-sort="1779510651117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="40">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/048-2009-03-20-మా-బాబె,-అచ్చం-రాజా-లాగె/index.html" class="no-external">మా బాబె, అచ్చం “రాజా” లాగె</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUIwJUUwJUIwJUJFJUUwJUIwJTlDJUUwJUIwJTk1JUUwJUIxJTgwJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">రాజకీయాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/048-2009-03-20-మా-బాబె,-అచ్చం-రాజా-లాగె/index.html" class="no-external">
+<p>మా బాబె, అచ్చం “రాజా” లాగే అన్న సాక్షి ప్రభుభక్తి పొరలు కమ్మిన కళ్ళు చిదిమి చూస్తే మా అసహాయత, అశక్తత, అనాశక్తతలే</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/048-2009-03-20-మా-బాబె,-అచ్చం-రాజా-లాగె/index.html" class="no-external">
+<div class="listing-date">
+Mar 20, 2009
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="31" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVCMCVFMCVCMCVCRSVFMCVCMCU5QyVFMCVCMCU5NSVFMCVCMSU4MCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1237420800000" data-listing-file-modified-sort="1779510651117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="11">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/049-2009-03-19-తకిట-తకిట-తథిమి-తందానా/index.html" class="no-external">తకిట తకిట తథిమి తందానా</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUIwJUUwJUIwJUJFJUUwJUIwJTlDJUUwJUIwJTk1JUUwJUIxJTgwJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">రాజకీయాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/049-2009-03-19-తకిట-తకిట-తథిమి-తందానా/index.html" class="no-external">
+<p>మా చేతిలో తైతక్కలాడే అమాయకపు కీలుబొమ్మలు అందుకే మీరు మా ఓటరు దేవుళ్ళు</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/049-2009-03-19-తకిట-తకిట-తథిమి-తందానా/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2009
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="32" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVCMCVFMCVCMCVCRSVFMCVCMCU5QyVFMCVCMCU5NSVFMCVCMSU4MCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1236124800000" data-listing-file-modified-sort="1779510651117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="10">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/050-2009-03-04-ధర్మం-చెయ్యండి-బాబూ!/index.html" class="no-external">ధర్మం చెయ్యండి బాబూ!</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUIwJUUwJUIwJUJFJUUwJUIwJTlDJUUwJUIwJTk1JUUwJUIxJTgwJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">రాజకీయాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/050-2009-03-04-ధర్మం-చెయ్యండి-బాబూ!/index.html" class="no-external">
+<p>మూరెడు “హస్తా”లతో బారెడు భూమిని కబ్జాచేసే టికెట్టు ధర్మం చెయ్యండి బాబూ!</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/050-2009-03-04-ధర్మం-చెయ్యండి-బాబూ!/index.html" class="no-external">
+<div class="listing-date">
+Mar 4, 2009
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="33" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVCNSVFMCVCMSU4MCVFMCVCMCVBMSVFMCVCMCVCRiVFMCVCMCVBRiVFMCVCMSU4QiVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1236038400000" data-listing-file-modified-sort="1779510651117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="86">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/051-2009-03-03-ఆలోచనల-కాలుష్యం/index.html" class="no-external">ఆలోచనల కాలుష్యం</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUI1JUUwJUIxJTgwJUUwJUIwJUExJUUwJUIwJUJGJUUwJUIwJUFGJUUwJUIxJThCJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">వీడియోలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/051-2009-03-03-ఆలోచనల-కాలుష్యం/index.html" class="no-external">
+<p>మనసు కలుషితమైతే సరైన నిర్ణయాలు తీసుకోలేదు. మరి పరిష్కారం: విచక్షణ, క్షమ, ఓర్పు, సహానుభూతి అనే వడపోత కాగితాలతో వడకట్టండి. ఈ భావాన్ని ప్రతిబింబింస్తూ స్ఫురింపజేస్తూ, తయా…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/051-2009-03-03-ఆలోచనల-కాలుష్యం/index.html" class="no-external">
+<div class="listing-date">
+Mar 3, 2009
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="34" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVCOCVFMCVCMCVCRiVFMCVCMCVBOCVFMCVCMSU4MCVFMCVCMCVBRSVFMCVCMCVCRQ==" data-listing-date-sort="1235779200000" data-listing-file-modified-sort="1779510651117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="992">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/052-2009-02-28-మన-గురివిందగింజ-నలుపే-సుమా!/index.html" class="no-external">మన గురివిందగింజ నలుపే సుమా!</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUI4JUUwJUIwJUJGJUUwJUIwJUE4JUUwJUIxJTgwJUUwJUIwJUFFJUUwJUIwJUJF'); return false;">సినీమా</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/052-2009-02-28-మన-గురివిందగింజ-నలుపే-సుమా!/index.html" class="no-external">
+<p>స్లమ్ డాగ్ మిలియనీర్ (SM). దీని మీద జరుగుతున్న చర్చ ఇంతా అంతా కాదు. మచ్చుకి కొన్ని కౌముదిలో గొల్లపూడిగారు</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/052-2009-02-28-మన-గురివిందగింజ-నలుపే-సుమా!/index.html" class="no-external">
+<div class="listing-date">
+Feb 28, 2009
+</div>
+<div class="listing-reading-time">5 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="35" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCU4NyVFMCVCMCVBNCVFMCVCMCVCMCVFMCVCMSU4MSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1235692800000" data-listing-file-modified-sort="1779510651117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="43">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/053-2009-02-27-గ్లోబలైజేషన్-అంటే/index.html" class="no-external">గ్లోబలైజేషన్ అంటే?</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJTg3JUUwJUIwJUE0JUUwJUIwJUIwJUUwJUIxJTgxJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">ఇతరులు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/053-2009-02-27-గ్లోబలైజేషన్-అంటే/index.html" class="no-external">
+<p>ఒక ప్రొటెస్టెంటు దేశం, ఒక ముస్లిమ్ దేశాధ్యక్షుణ్ణి వైకుంఠ ఏకాదసినాడు ఉరి తీయడం! భారత ఆర్ధిక వ్యవస్థకిపునాది మన గృహవ్యవస్థ, పట్టుకొమ్మలు మన ఆడపడుచులు …</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/053-2009-02-27-గ్లోబలైజేషన్-అంటే/index.html" class="no-external">
+<div class="listing-date">
+Feb 27, 2009
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="36" data-categories="dGVsdWd1JTJDYXJjaGl2ZQ==" data-listing-date-sort="1234137600000" data-listing-file-modified-sort="1779510651117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="227">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/054-2009-02-09-రెండవ-ప్రపంచ-తెలుగు-సాహితీ-సదస్సు-ఫిబ్రవరి-14-16,-హైదరాబాదు/index.html" class="no-external">రెండవ ప్రపంచ తెలుగు సాహితీ సదస్సు - ఫిబ్రవరి 14-16, హైదరాబాదు</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/054-2009-02-09-రెండవ-ప్రపంచ-తెలుగు-సాహితీ-సదస్సు-ఫిబ్రవరి-14-16,-హైదరాబాదు/index.html" class="no-external">
+<p>వంగూరి ఫౌండేషన్ ఆఫ్ అమెరికా వారు రెండవ ప్రపంచ తెలుగు సాహితీ సదస్సుని మధ్య శ్రీత్యాగరాయగానసభ, చిక్కడపల్లి, హైదరాబాదులో నిర్వహిస్తున్నారు. కొన్ని ముఖ్యవివరాలు:</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/054-2009-02-09-రెండవ-ప్రపంచ-తెలుగు-సాహితీ-సదస్సు-ఫిబ్రవరి-14-16,-హైదరాబాదు/index.html" class="no-external">
+<div class="listing-date">
+Feb 9, 2009
+</div>
+<div class="listing-reading-time">2 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="37" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVCNSVFMCVCMSU4MCVFMCVCMCVBMSVFMCVCMCVCRiVFMCVCMCVBRiVFMCVCMSU4QiVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1233273600000" data-listing-file-modified-sort="1779510651117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="335">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/055-2009-01-30-పరిపూర్ణ-పట్టభద్రుడు/index.html" class="no-external">పరిపూర్ణ పట్టభద్రుడు</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUI1JUUwJUIxJTgwJUUwJUIwJUExJUUwJUIwJUJGJUUwJUIwJUFGJUUwJUIxJThCJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">వీడియోలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/055-2009-01-30-పరిపూర్ణ-పట్టభద్రుడు/index.html" class="no-external">
+<p>లియోనార్డో డావిన్సీ బహుముఖప్రజ్ఞాశాలి. చిత్రకారుడి గా ఎక్కువమందికి తెలిసినా, గొప్ప ఇంజనీరని, మానవ అవయవ నిర్మాణాన్ని కూడా పరిశోధించాడని ఎక్కువమందికి తెలియకపోవచ్చు. అనేక…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/055-2009-01-30-పరిపూర్ణ-పట్టభద్రుడు/index.html" class="no-external">
+<div class="listing-date">
+Jan 30, 2009
+</div>
+<div class="listing-reading-time">2 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="38" data-categories="dGVsdWd1JTJDYXJjaGl2ZQ==" data-listing-date-sort="1232409600000" data-listing-file-modified-sort="1779510651117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="82">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/056-2009-01-20-ఆంధ్రామృతం-దత్తపూరణం/index.html" class="no-external">ఆంధ్రామృతం దత్తపూరణం</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/056-2009-01-20-ఆంధ్రామృతం-దత్తపూరణం/index.html" class="no-external">
+<p>ఆచార్యులు చింతా రామకృష్ణారావు గారిచ్చిన దత్తపూరణం “అక్క, చెల్లె, బావ, అన్న” అన్న పదాలతో “రామాయణానికి” సంభందించి ఒక పద్యం రాయాలి. నేను చేసిన ప్రయత్నం ఆటవెలది లో:</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/056-2009-01-20-ఆంధ్రామృతం-దత్తపూరణం/index.html" class="no-external">
+<div class="listing-date">
+Jan 20, 2009
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="39" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1232150400000" data-listing-file-modified-sort="1779510651117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="67">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/058-2009-01-17-సమోసా-వహ్-క్యా-బాత్-హై/index.html" class="no-external">సమోసా : వహ్ క్యా బాత్ హై</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/058-2009-01-17-సమోసా-వహ్-క్యా-బాత్-హై/index.html" class="no-external">
+<p>ఇది బహుళ జనాభిప్రాయమే కదా! మరి ఆటవెలది లో సమోసాపై పద్యం చూడండి: దట్టముగను, కట్టుదిట్టముగను పిండి</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/058-2009-01-17-సమోసా-వహ్-క్యా-బాత్-హై/index.html" class="no-external">
+<div class="listing-date">
+Jan 17, 2009
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="40" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1232150400000" data-listing-file-modified-sort="1779510651117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="64">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/057-2009-01-17-దద్దోజనం-మీద/index.html" class="no-external">దద్దోజనం మీద</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/057-2009-01-17-దద్దోజనం-మీద/index.html" class="no-external">
+<p>గుమ్మపాల పెరుగు, కమ్మని తాళింపు మేళవించినన్నమె గద, విందు లందు జిహ్వనాడులచెలి దద్దోజనం తన్నెఱగని జనము దద్దు జనమె!</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/057-2009-01-17-దద్దోజనం-మీద/index.html" class="no-external">
+<div class="listing-date">
+Jan 17, 2009
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="41" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVBQSVFMCVCMCVBNiVFMCVCMSU4RCVFMCVCMCVBRiVFMCVCMCVCRSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1231977600000" data-listing-file-modified-sort="1779510651117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="705">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/059-2009-01-15-ఆటవెలది-లో-మొదటిపద్యం/index.html" class="no-external">ఆటవెలది లో మొదటిపద్యం</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUFBJUUwJUIwJUE2JUUwJUIxJThEJUUwJUIwJUFGJUUwJUIwJUJFJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">పద్యాలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/059-2009-01-15-ఆటవెలది-లో-మొదటిపద్యం/index.html" class="no-external">
+<p>నేనింతవరకూ ఛందోబద్ధంగా ఎప్పుడూ రాయలేదు. నాకు ఎప్పటినుంచో ఈ కోరిక తీరని కోరికలాగే ఉండిపోయింది. ఆంధ్రామృతం వారు ఆశువుగా పద్యాలు చెప్పడం చూసి, స్ఫూర్తిపొంది ఈ ప్రయత్నం చే…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/059-2009-01-15-ఆటవెలది-లో-మొదటిపద్యం/index.html" class="no-external">
+<div class="listing-date">
+Jan 15, 2009
+</div>
+<div class="listing-reading-time">4 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="42" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVCNSVFMCVCMSU4MCVFMCVCMCVBMSVFMCVCMCVCRiVFMCVCMCVBRiVFMCVCMSU4QiVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1231804800000" data-listing-file-modified-sort="1779510651118" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="115">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/060-2009-01-13-ఈ-కాలం-కుర్రాళ్ళకి/index.html" class="no-external">ఈ కాలం కుర్రాళ్ళకి</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUI1JUUwJUIxJTgwJUUwJUIwJUExJUUwJUIwJUJGJUUwJUIwJUFGJUUwJUIxJThCJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">వీడియోలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/060-2009-01-13-ఈ-కాలం-కుర్రాళ్ళకి/index.html" class="no-external">
+<p>taste అంటూ ఒకటి ఏడ్చింది కదా! ఏంటి అలా గుర్రుగా చూస్తున్నారు? ఈ మాటలు నేనన్నవి కాదు. TV9 ఏంకరమ్మో, ఏంకరమ్మకి రాసిపెట్టిన రైటరుదో!</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/060-2009-01-13-ఈ-కాలం-కుర్రాళ్ళకి/index.html" class="no-external">
+<div class="listing-date">
+Jan 13, 2009
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="43" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVCNSVFMCVCMSU4MCVFMCVCMCVBMSVFMCVCMCVCRiVFMCVCMCVBRiVFMCVCMSU4QiVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1231632000000" data-listing-file-modified-sort="1779510651118" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="546">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/061-2009-01-11-బోటనీ-పాఠముంది-పపాజాను-పిజ్జ-ఉంది/index.html" class="no-external">బోటనీ పాఠముంది - పపాజాను పిజ్జ ఉంది</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUI1JUUwJUIxJTgwJUUwJUIwJUExJUUwJUIwJUJGJUUwJUIwJUFGJUUwJUIxJThCJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">వీడియోలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/061-2009-01-11-బోటనీ-పాఠముంది-పపాజాను-పిజ్జ-ఉంది/index.html" class="no-external">
+<p>“బోటనీ పాఠముంది, మేటనీ ఆట ఉంది, సోదరా ఏది బెస్టు రా!!!” ఈ పాట మీ అందరినోటా బాగానే నాని ఉంటుందని నా అభిప్రాయం. మరి దానికి ఈ “పేరడీ” పాట చూడండి</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/061-2009-01-11-బోటనీ-పాఠముంది-పపాజాను-పిజ్జ-ఉంది/index.html" class="no-external">
+<div class="listing-date">
+Jan 11, 2009
+</div>
+<div class="listing-reading-time">3 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="44" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCU4NyVFMCVCMCVBNCVFMCVCMCVCMCVFMCVCMSU4MSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1230854400000" data-listing-file-modified-sort="1779510651118" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="51">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/062-2009-01-02-పిల్లమారుతం/index.html" class="no-external">పిల్లమారుతం</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJTg3JUUwJUIwJUE0JUUwJUIwJUIwJUUwJUIxJTgxJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">ఇతరులు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/062-2009-01-02-పిల్లమారుతం/index.html" class="no-external">
+<p>వరాళి వీచిక. ఈ పేరు చాలా బావుంది కదూ. ఈ పేరు తో బ్లాగు రాస్తున్న శ్రావ్యవరాళి అనే ఎనిమిదో( లేక తొమ్మిదో) తరగతి చదువుతున్న చిన్నారి ఆలోచనలు అంతకంటే బావుంటాయి. గతసంవత్సర…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/062-2009-01-02-పిల్లమారుతం/index.html" class="no-external">
+<div class="listing-date">
+Jan 2, 2009
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="45" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCU4NyVFMCVCMCVBNCVFMCVCMCVCMCVFMCVCMSU4MSVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1230768000000" data-listing-file-modified-sort="1779510651118" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="18">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/065-2009-01-01-నూతనవత్సర-శుభాకాంక్షలు/index.html" class="no-external">నూతనవత్సర శుభాకాంక్షలు</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJTg3JUUwJUIwJUE0JUUwJUIwJUIwJUUwJUIxJTgxJUUwJUIwJUIyJUUwJUIxJTgx'); return false;">ఇతరులు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/065-2009-01-01-నూతనవత్సర-శుభాకాంక్షలు/index.html" class="no-external">
+<p>మిత్రులకు, హితులకు, సన్నిహితులకు, శ్రేయోభిలాషులకు, అందరికి: మీ అయ్యురారోగ్యాలకు, సుఖసంతోషాలకు, సకల ఐశ్వర్యాలకు</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/065-2009-01-01-నూతనవత్సర-శుభాకాంక్షలు/index.html" class="no-external">
+<div class="listing-date">
+Jan 1, 2009
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="46" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCVCOCVFMCVCMCVCRiVFMCVCMCVBOCVFMCVCMSU4MCVFMCVCMCVBRSVFMCVCMCVCRQ==" data-listing-date-sort="1230336000000" data-listing-file-modified-sort="1779510651118" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="40">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/066-2008-12-27-మహామంత్రి-తిమ్మరుసు-చిత్రసీమయందు-నీవె-లెస్స/index.html" class="no-external">మహామంత్రి తిమ్మరుసు : చిత్రసీమయందు నీవె లెస్స</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJUI4JUUwJUIwJUJGJUUwJUIwJUE4JUUwJUIxJTgwJUUwJUIwJUFFJUUwJUIwJUJF'); return false;">సినీమా</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/066-2008-12-27-మహామంత్రి-తిమ్మరుసు-చిత్రసీమయందు-నీవె-లెస్స/index.html" class="no-external">
+<p>“వీర రక్తమును ఉడుకెత్తించే విద్యానగర ప్రదాతకూ జై ధరణిని కావగ దనుజులనణచిన వరాహమూర్తికీ జై …”</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/066-2008-12-27-మహామంత్రి-తిమ్మరుసు-చిత్రసీమయందు-నీవె-లెస్స/index.html" class="no-external">
+<div class="listing-date">
+Dec 27, 2008
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="47" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCU5NSVFMCVCMCVCNSVFMCVCMCVCRiVFMCVCMCVBNCVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1228608000000" data-listing-file-modified-sort="1779510651118" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="30">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/067-2008-12-07-వెన్నెల/index.html" class="no-external">వెన్నెల</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJTk1JUUwJUIwJUI1JUUwJUIwJUJGJUUwJUIwJUE0JUUwJUIwJUIyJUUwJUIxJTgx'); return false;">కవితలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/067-2008-12-07-వెన్నెల/index.html" class="no-external">
+<p>ఆ నెలరేని వన్నెలే - వెన్నెల ఆ చిన్నెలు వర్ణింప, వర్ణములెల్ల తెల్లబోవా? ఆ అర్ధచందురిని ఆర్ద్రము</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/067-2008-12-07-వెన్నెల/index.html" class="no-external">
+<div class="listing-date">
+Dec 7, 2008
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="48" data-categories="dGVsdWd1JTJDYXJjaGl2ZSUyQyVFMCVCMCU5NSVFMCVCMCVCNSVFMCVCMCVCRiVFMCVCMCVBNCVFMCVCMCVCMiVFMCVCMSU4MQ==" data-listing-date-sort="1226620800000" data-listing-file-modified-sort="1779510651118" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="26">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../asankhya/068-2008-11-14-వర్షం/index.html" class="no-external">వర్షం</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVsdWd1'); return false;">telugu</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl2ZQ=='); return false;">archive</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUUwJUIwJTk1JUUwJUIwJUI1JUUwJUIwJUJGJUUwJUIwJUE0JUUwJUIwJUIyJUUwJUIxJTgx'); return false;">కవితలు</div>
+
+</div>
+<div class="delink listing-description"><a href="../asankhya/068-2008-11-14-వర్షం/index.html" class="no-external">
+<p>నేలని ముద్దెడదామని నింగి చేసిన ప్రయత్నం నీరుగారితే - వర్షం (ఒక నిరాశావాది నిట్టూర్పు) నింగిని చుంబిద్దామనే నేల ప్రయత్నానికి ముగ్ధులై, మేఘాలు ఆనందభాష్పాలు రాలిస్తే- వర్షం</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../asankhya/068-2008-11-14-వర్షం/index.html" class="no-external">
+<div class="listing-date">
+Nov 14, 2008
+</div>
+<div class="listing-reading-time">1 min</div>
+</a>
+</div>
+</div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
+<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
