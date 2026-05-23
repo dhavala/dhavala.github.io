@@ -130,6 +130,17 @@ document.addEventListener('DOMContentLoaded', function() {
       return [['Teaching', '/teaching/index.html'], ['Archives', '/teaching/archives.html']];
     if (p.indexOf('/research/projects/') >= 0)
       return [['Research', '/research/index.html'], ['Projects', '/research/projects/index.html']];
+    // Blog posts live one slug-level under saddlepoint/ or asankhya/ and
+    // aren't listed in the sidebar — give them the full Blogs > <stream>
+    // trail. The trailing slash means the stream landing pages themselves
+    // (/saddlepoint, /asankhya) fall through to the next check.
+    if (p.indexOf('/saddlepoint/') >= 0)
+      return [['Blogs', '/blogs/index.html'], ['SaddlePoint', '/saddlepoint/index.html']];
+    if (p.indexOf('/asankhya/') >= 0)
+      return [['Blogs', '/blogs/index.html'], ['Asankhya', '/asankhya/index.html']];
+    // Stream landing pages sit directly under Blogs.
+    if (/\/saddlepoint$/.test(p) || /\/asankhya$/.test(p))
+      return [['Blogs', '/blogs/index.html']];
     return [];
   }
 
