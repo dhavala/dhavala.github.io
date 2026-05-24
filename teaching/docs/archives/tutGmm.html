@@ -8,7 +8,7 @@
 
 <meta name="author" content="Soma S. Dhavala">
 
-<title>Gaussian Mixture for Multi-modal Posteriors – Soma S Dhavala</title>
+<title>Gaussian Mixture for Multimodal Posteriors – Soma S Dhavala</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -208,11 +208,11 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="Gaussian Mixture for Multi-modal Posteriors – Soma S Dhavala">
+<meta property="og:title" content="Gaussian Mixture for Multimodal Posteriors – Soma S Dhavala">
 <meta property="og:description" content="Approximating a multi-modal posterior by a mixture of normals">
 <meta property="og:image" content="https://dhavala.github.io/teaching/docs/archives/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
-<meta name="twitter:title" content="Gaussian Mixture for Multi-modal Posteriors – Soma S Dhavala">
+<meta name="twitter:title" content="Gaussian Mixture for Multimodal Posteriors – Soma S Dhavala">
 <meta name="twitter:description" content="Approximating a multi-modal posterior by a mixture of normals">
 <meta name="twitter:image" content="https://dhavala.github.io/teaching/docs/archives/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -276,7 +276,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Gaussian Mixture for Multi-modal Posteriors</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Gaussian Mixture for Multimodal Posteriors</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -426,7 +426,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#gaussian-mixture-for-multi-modal-posteriors" id="toc-gaussian-mixture-for-multi-modal-posteriors" class="nav-link active" data-scroll-target="#gaussian-mixture-for-multi-modal-posteriors">Gaussian Mixture for Multi-modal Posteriors</a>
+  <li><a href="#gaussian-mixture-for-multimodal-posteriors" id="toc-gaussian-mixture-for-multimodal-posteriors" class="nav-link active" data-scroll-target="#gaussian-mixture-for-multimodal-posteriors">Gaussian Mixture for Multimodal Posteriors</a>
   <ul class="collapse">
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
@@ -441,7 +441,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Gaussian Mixture for Multi-modal Posteriors</h1>
+<h1 class="title">Gaussian Mixture for Multimodal Posteriors</h1>
 <p class="subtitle lead">Approximating a multi-modal posterior by a mixture of normals</p>
 </div>
 
@@ -465,17 +465,17 @@ window.Quarto = {
 </header>
 
 
-<section id="gaussian-mixture-for-multi-modal-posteriors" class="level1">
-<h1>Gaussian Mixture for Multi-modal Posteriors</h1>
-<p>It might be the case that we want to draw samples from an arbitrary posterior pdf having more than one mode. In such cases, normal approximation might be too bad an approximation. We consider modeling this arbitrary pdf as a mixture of normal densities. Further, the number of modes (which in turn dictate the number of components in the mixture) in the posterior is also assumed unknown.</p>
-<p>The mixture model considered in [1] tries to estimate the model parameters based on data. However, in the present context, we have the pdf in semi-closed form and this becomes a special case of [1].</p>
-<p>Let <span class="math inline">\(f(\theta)\)</span> be the known arbitrary pdf which we want to approximate. For illustration purposes, we assume a bivariate density (<span class="math inline">\(\theta = [\theta_1, \theta_2]^T\)</span>) and discretize <span class="math inline">\(\theta\)</span> on a uniform <span class="math inline">\(N \times M\)</span> grid. Further let <span class="math inline">\(\theta_{mn}\)</span> represent the <span class="math inline">\((\theta_1(n), \theta_2(m))\)</span> sample in the grid. Also assume that the discretized pdf (<span class="math inline">\(f(\theta_{mn})\)</span>) is appropriately normalized.</p>
+<section id="gaussian-mixture-for-multimodal-posteriors" class="level1">
+<h1>Gaussian Mixture for Multimodal Posteriors</h1>
+<p>Sometimes we need to draw samples from a posterior density with more than one mode. In such cases, a single normal approximation may be inadequate. A more flexible approach is to approximate the posterior as a mixture of normal densities. The number of modes, and therefore the number of mixture components, is assumed unknown.</p>
+<p>The mixture model in [1] estimates model parameters from data. In the present setting, the posterior density is available in semi-closed form, so the problem becomes a special case of that framework.</p>
+<p>Let <span class="math inline">\(f(\theta)\)</span> be the known arbitrary PDF which we want to approximate. For illustration purposes, we assume a bivariate density (<span class="math inline">\(\theta = [\theta_1, \theta_2]^T\)</span>) and discretize <span class="math inline">\(\theta\)</span> on a uniform <span class="math inline">\(N \times M\)</span> grid. Further let <span class="math inline">\(\theta_{mn}\)</span> represent the <span class="math inline">\((\theta_1(n), \theta_2(m))\)</span> sample in the grid. Also assume that the discretized PDF (<span class="math inline">\(f(\theta_{mn})\)</span>) is appropriately normalized.</p>
 <p><span class="math display">\[
 f(\theta_{mn}; \Phi) = \sum_{k=1}^{K} \lambda_k f_k(\theta_{mn}; \phi_k) \tag{1}
 \]</span></p>
 <p>where</p>
 <ul>
-<li><span class="math inline">\(K\)</span> is the total number of densities (unknown)</li>
+<li><span class="math inline">\(K\)</span> is the total number of components (unknown)</li>
 <li><span class="math inline">\(\phi_k = [\mu_k, \Sigma_k]\)</span> represent the mean vector and covariance matrix of the <span class="math inline">\(k\)</span>th density</li>
 <li><span class="math inline">\(f_k \sim \mathcal{N}(\mu_k, \Sigma_k)\)</span></li>
 <li><span class="math inline">\(\{\lambda_k\}\)</span> represent the mixing weights with constraint <span class="math inline">\(\sum_{k=1}^{K} \lambda_k = 1\)</span></li>
@@ -495,7 +495,7 @@ f(\theta_{mn}; \Phi) = \sum_{k=1}^{K} \lambda_k f_k(\theta_{mn}; \phi_k) \tag{1}
 <p><span class="math display">\[
 \gamma_k(\theta_{mn}; \hat{\Phi}) = \frac{\hat{\lambda}_k f_k(\theta_{mn}; \hat{\theta}_k) f(\theta_{mn}; \Phi)}{f(\theta_{mn}; \hat{\Phi})} \tag{5}
 \]</span></p>
-<p>However, we need to know the number of components <span class="math inline">\(K\)</span> in the above equations. In order to circumvent this difficulty, we overestimate the number of components and estimate the model components. Later, we repeatedly: 1) merge any two distributions and 2) replace them with a new merged distribution (still a normal distribution) such that the distance between the newly formed distribution and the two distributions which got merged is minimized and this distance is above a certain threshold. Essentially, we overfit the posterior distribution and later prune the mixture until no further merging is possible. Based on the distance measure chosen, there could be different approaches. For a discussion please see [2, 3].</p>
+<p>The equations above require the number of components <span class="math inline">\(K\)</span>, which is unknown. To address this, we deliberately overestimate <span class="math inline">\(K\)</span>, estimate the mixture, and then repeatedly merge nearby components. Each merge replaces two normal components with a new normal component chosen to minimize the distance to the merged pair, subject to a threshold. In effect, we overfit the posterior first and then prune the mixture until no further merging is warranted. Different distance measures lead to different merging strategies; see [2, 3] for discussion.</p>
 <p>Now it becomes a trivial task to generate samples from the posterior. Instead of drawing the samples from <span class="math inline">\(p(\theta)\)</span>, we draw from the mixture. The algorithm is outlined below:</p>
 <ul>
 <li><span class="math inline">\(u \sim U[0, 1]\)</span></li>
@@ -505,7 +505,7 @@ f(\theta_{mn}; \Phi) = \sum_{k=1}^{K} \lambda_k f_k(\theta_{mn}; \phi_k) \tag{1}
 <p>Essentially, we have <span class="math inline">\(K\)</span> number of states and each state has a certain pdf. Based on this relationship, we can draw random numbers quite efficiently.</p>
 <section id="references" class="level2">
 <h2 data-anchor-id="references">References</h2>
-<p>[1] Soma S. Dhavala, “EM algorithm for Gaussian Mixture modeling,” report, ECpE Dept., Iowa State University.</p>
+<p>[1] Soma S. Dhavala, “EM algorithm for Gaussian mixture modeling,” report, ECpE Dept., Iowa State University.</p>
 <p>[2] Mark Coates, <em>Time-frequency modeling</em>, Ph. D, Univ. of Cambridge, Signal Processing and Communications Laboratory, Dept. of Engineering, August 1998.</p>
 <p>[3] M. Figueiredo, J. Leitao and A. K. Jain, “On fitting mixture models,” in <em>Energy Minimization Methods in Computer Vision and Pattern Recognition</em>, vol.&nbsp;1654, pp.&nbsp;54–69. Springer-Verlag, 1999.</p>
 

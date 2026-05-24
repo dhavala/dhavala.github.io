@@ -472,7 +472,7 @@ window.Quarto = {
 
 <section id="numerical-methods-for-bayesian-inference" class="level1">
 <h1>Numerical Methods for Bayesian Inference</h1>
-<p>We review several numerical methods for making inference from the posterior distribution if either the prior or the likelihood function (when viewed as a function of the parameter of interest and not as a function of the data) is a normal distribution. We consider the following techniques:</p>
+<p>This note reviews several numerical methods for posterior inference when either the prior or the likelihood, viewed as a function of the parameter, is normal. We consider the following techniques:</p>
 <ul>
 <li>quadrature methods</li>
 <li>adaptive quadrature methods</li>
@@ -480,7 +480,7 @@ window.Quarto = {
 <li>rejection sampling</li>
 <li>random-walk Metropolis</li>
 </ul>
-<p>One of the contentions of frequentists against the Bayesians is the need to calculate multidimensional integrals which are difficult to compute and analyze. However, with the advent of faster chips, computational power is no longer a scarce resource. Hence, there is a shift (in my view) in computational statistics from providing computationally feasible solutions to obtaining numerically accurate results.</p>
+<p>A common criticism of Bayesian inference is the need to compute multidimensional integrals that can be difficult to evaluate and analyze. With modern computational resources, the central concern has shifted from mere feasibility toward numerical accuracy, stability, and reproducibility.</p>
 <p><strong>Notation:</strong></p>
 <ul>
 <li><span class="math inline">\(y\)</span> data</li>
@@ -488,8 +488,8 @@ window.Quarto = {
 <li><span class="math inline">\(L(y; \theta)\)</span> Likelihood function, but will write <span class="math inline">\(L(\theta)\)</span> to emphasize that we are viewing it as a function of <span class="math inline">\(\theta\)</span> rather than of data</li>
 <li><span class="math inline">\(\pi \sim \mathcal{N}(\mu, \Sigma)\)</span> prior density normally distributed with mean <span class="math inline">\(\mu\)</span> and covariance <span class="math inline">\(\Sigma\)</span></li>
 <li><span class="math inline">\(p\)</span> posterior density</li>
-<li><span class="math inline">\(E\)</span> expectation w.r.t. the posterior distribution</li>
-<li><span class="math inline">\(E_\pi\)</span> expectation w.r.t. the prior distribution</li>
+<li><span class="math inline">\(E\)</span> expectation with respect to the posterior distribution</li>
+<li><span class="math inline">\(E_\pi\)</span> expectation with respect to the prior distribution</li>
 <li><span class="math inline">\(g(\theta)\)</span> a function of <span class="math inline">\(\theta\)</span> that is of interest for inference</li>
 </ul>
 <section id="quadrature-methods" class="level2">
@@ -570,7 +570,7 @@ E_\pi[g(\theta) L(\theta)] = \int (g(\theta) L(\theta))\, \pi(\theta)\, d\theta 
 \approx \frac{1}{N} \sum_{i=1}^{N} g\left(\theta^{(i)}\right) L\left(\theta^{(i)}\right) \tag{12b}
 \]</span></p>
 <p>where <span class="math inline">\(\theta^{(i)} \sim \pi\)</span>. The Monte Carlo error is inversely proportional to <span class="math inline">\(\sqrt{N}\)</span>. If we choose to visit certain points (the abscissa of a certain polynomial) only once, it reduces to a quadrature method and the convergence is a function of <span class="math inline">\(N\)</span> rather than that of <span class="math inline">\(\sqrt{N}\)</span>. Thus, we can consider quadrature methods as deterministic version of Monte Carlo. But these methods are more general than quadrature methods and would tend to produce accurate results as long as the proposal distribution (in this case the prior distribution) encompasses the target distribution (for example the posterior distribution) and <span class="math inline">\(N\)</span> is sufficiently large. In the case of posterior distribution, we don’t need to impose such a restriction because an unlikely event (with probability zero) is also unlikely in the posterior.</p>
-<p>The above two methods can be used to calculate (or approximate) a function of the parameter from the posterior distribution like the normalizing constant, posterior moments etc.. However, we can not obtain the posterior distribution as such. For example, we can not (as far as I know) calculate the mode or construct posterior confidence intervals. Whereas, if we draw samples from the posterior, not only we can evaluate functions of the parameter but also obtain summary statistics including confidence intervals or even construct an empirical cdf or pdf. We review rejection sampling and Markov chain Monte Carlo techniques in this light.</p>
+<p>The above two methods can be used to calculate (or approximate) a function of the parameter from the posterior distribution like the normalizing constant, posterior moments etc. However, we cannot obtain the posterior distribution as such. For example, we cannot (as far as I know) calculate the mode or construct posterior confidence intervals. Whereas, if we draw samples from the posterior, not only we can evaluate functions of the parameter but also obtain summary statistics including confidence intervals or even construct an empirical cdf or pdf. We review rejection sampling and Markov chain Monte Carlo techniques in this light.</p>
 </section>
 <section id="rejection-sampling" class="level2">
 <h2 data-anchor-id="rejection-sampling">Rejection sampling</h2>

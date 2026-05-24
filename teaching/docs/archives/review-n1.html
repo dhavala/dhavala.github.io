@@ -428,22 +428,22 @@ window.Quarto = {
   <ul>
   <li><a href="#a-study-of-quad-trees-ezw-and-spiht-codecs" id="toc-a-study-of-quad-trees-ezw-and-spiht-codecs" class="nav-link active" data-scroll-target="#a-study-of-quad-trees-ezw-and-spiht-codecs">A Study of Quad-Trees, EZW and SPIHT Codecs</a>
   <ul class="collapse">
-  <li><a href="#section-a" id="toc-section-a" class="nav-link" data-scroll-target="#section-a">Section A</a>
+  <li><a href="#quad-tree-image-representation" id="toc-quad-tree-image-representation" class="nav-link" data-scroll-target="#quad-tree-image-representation">Quad-tree image representation</a>
   <ul class="collapse">
   <li><a href="#trees" id="toc-trees" class="nav-link" data-scroll-target="#trees">Trees</a></li>
   <li><a href="#quad-tree-qt" id="toc-quad-tree-qt" class="nav-link" data-scroll-target="#quad-tree-qt">Quad-Tree (QT)</a></li>
-  <li><a href="#salient-points-of-qt-decomposition-qtd" id="toc-salient-points-of-qt-decomposition-qtd" class="nav-link" data-scroll-target="#salient-points-of-qt-decomposition-qtd">Salient Points of QT Decomposition (QTD)</a></li>
+  <li><a href="#salient-points-of-qt-decomposition-qtd" id="toc-salient-points-of-qt-decomposition-qtd" class="nav-link" data-scroll-target="#salient-points-of-qt-decomposition-qtd">Salient points of QT decomposition (QTD)</a></li>
   <li><a href="#improvements-to-qtd" id="toc-improvements-to-qtd" class="nav-link" data-scroll-target="#improvements-to-qtd">Improvements to QTD</a></li>
-  <li><a href="#comparable-to" id="toc-comparable-to" class="nav-link" data-scroll-target="#comparable-to">Comparable To</a></li>
+  <li><a href="#comparable-methods" id="toc-comparable-methods" class="nav-link" data-scroll-target="#comparable-methods">Comparable methods</a></li>
   <li><a href="#mapping-technology-to-ctqs" id="toc-mapping-technology-to-ctqs" class="nav-link" data-scroll-target="#mapping-technology-to-ctqs">Mapping Technology to CTQs</a></li>
-  <li><a href="#qt-representation-of-wavelet-coefficients-being-very-specific-to-dyadic-wavelet-transforms" id="toc-qt-representation-of-wavelet-coefficients-being-very-specific-to-dyadic-wavelet-transforms" class="nav-link" data-scroll-target="#qt-representation-of-wavelet-coefficients-being-very-specific-to-dyadic-wavelet-transforms">QT Representation of Wavelet Coefficients (Being Very Specific to Dyadic Wavelet Transforms)</a></li>
-  <li><a href="#qt-representation-of-wavelet-decomposition-structure" id="toc-qt-representation-of-wavelet-decomposition-structure" class="nav-link" data-scroll-target="#qt-representation-of-wavelet-decomposition-structure">QT Representation of Wavelet Decomposition Structure</a></li>
+  <li><a href="#qt-representation-of-wavelet-coefficients" id="toc-qt-representation-of-wavelet-coefficients" class="nav-link" data-scroll-target="#qt-representation-of-wavelet-coefficients">QT representation of wavelet coefficients</a></li>
+  <li><a href="#qt-representation-of-wavelet-decomposition-structure" id="toc-qt-representation-of-wavelet-decomposition-structure" class="nav-link" data-scroll-target="#qt-representation-of-wavelet-decomposition-structure">QT representation of wavelet decomposition structure</a></li>
   </ul></li>
-  <li><a href="#section-b" id="toc-section-b" class="nav-link" data-scroll-target="#section-b">Section B</a>
+  <li><a href="#embedded-zero-tree-coding" id="toc-embedded-zero-tree-coding" class="nav-link" data-scroll-target="#embedded-zero-tree-coding">Embedded zero-tree coding</a>
   <ul class="collapse">
-  <li><a href="#embedded-zero-tree-coding" id="toc-embedded-zero-tree-coding" class="nav-link" data-scroll-target="#embedded-zero-tree-coding">Embedded Zero-Tree Coding</a></li>
+  <li><a href="#ezw-overview" id="toc-ezw-overview" class="nav-link" data-scroll-target="#ezw-overview">EZW overview</a></li>
   </ul></li>
-  <li><a href="#section-c" id="toc-section-c" class="nav-link" data-scroll-target="#section-c">Section C</a>
+  <li><a href="#spiht-coding" id="toc-spiht-coding" class="nav-link" data-scroll-target="#spiht-coding">SPIHT coding</a>
   <ul class="collapse">
   <li><a href="#spiht" id="toc-spiht" class="nav-link" data-scroll-target="#spiht">SPIHT</a></li>
   </ul></li>
@@ -485,12 +485,12 @@ window.Quarto = {
 
 <section id="a-study-of-quad-trees-ezw-and-spiht-codecs" class="level1">
 <h1>A Study of Quad-Trees, EZW and SPIHT Codecs</h1>
-<section id="section-a" class="level2">
-<h2 data-anchor-id="section-a">Section A</h2>
+<section id="quad-tree-image-representation" class="level2">
+<h2 data-anchor-id="quad-tree-image-representation">Quad-tree image representation</h2>
 <section id="trees" class="level3">
 <h3 data-anchor-id="trees">Trees</h3>
 <p>A tree is a data structure that holds data in a hierarchical way. If you are familiar with Windows, the Windows Explorer shows the file structure in a tree structure.</p>
-<p>Terminology:</p>
+<p>The basic terminology is as follows:</p>
 <ul>
 <li><strong>Root:</strong> The branch of the tree from which one can traverse to any branch in the downward direction.</li>
 <li><strong>Node:</strong> It is the root of another subtree. A node holds another subtree. The root is the node of a tree.</li>
@@ -522,8 +522,8 @@ window.Quarto = {
 <p><strong>Figure 2.</strong> A Binary Tree.</p>
 </section>
 <section id="salient-points-of-qt-decomposition-qtd" class="level3">
-<h3 data-anchor-id="salient-points-of-qt-decomposition-qtd">Salient Points of QT Decomposition (QTD)</h3>
-<p>When QTs are used for representing images, the following can be observed:</p>
+<h3 data-anchor-id="salient-points-of-qt-decomposition-qtd">Salient points of QT decomposition (QTD)</h3>
+<p>When quad-trees are used to represent images, they provide the following properties:</p>
 <ul>
 <li>Linear indexing</li>
 <li>Simpler representation</li>
@@ -532,7 +532,7 @@ window.Quarto = {
 <li>Region-of-Interest</li>
 <li>Worst R-D performance</li>
 </ul>
-<p>Can also be used for:</p>
+<p>They can also be used for:</p>
 <ul>
 <li>Image segmentation</li>
 <li>Edge enhancement</li>
@@ -561,8 +561,8 @@ window.Quarto = {
 <li>Bit-allocation for leaves coding</li>
 </ul>
 </section>
-<section id="comparable-to" class="level3">
-<h3 data-anchor-id="comparable-to">Comparable To</h3>
+<section id="comparable-methods" class="level3">
+<h3 data-anchor-id="comparable-methods">Comparable methods</h3>
 <ul>
 <li>Modified QTD outperforms DCT with scalar quantization</li>
 <li>Competitive with DCT+VQ</li>
@@ -615,12 +615,12 @@ window.Quarto = {
 <p>N: Not possible.</p>
 <p>X: Don’t care or Don’t know (most likely).</p>
 </section>
-<section id="qt-representation-of-wavelet-coefficients-being-very-specific-to-dyadic-wavelet-transforms" class="level3">
-<h3 data-anchor-id="qt-representation-of-wavelet-coefficients-being-very-specific-to-dyadic-wavelet-transforms">QT Representation of Wavelet Coefficients (Being Very Specific to Dyadic Wavelet Transforms)</h3>
+<section id="qt-representation-of-wavelet-coefficients" class="level3">
+<h3 data-anchor-id="qt-representation-of-wavelet-coefficients">QT representation of wavelet coefficients</h3>
 <p>In general, the wavelet decomposition is performed on the LL band and thus it forms a dyadic tree, a complete asymmetric QT. After the application of the transform comes the coding part of the coefficients. It is necessary to have an efficient data-structure to represent these coefficients. For example, in the case of EZW or SPIHT the whole coding scheme works on magnitude comparison tests and magnitude refinement passes on the sets of data that are either nodes, children or descendants of a QT where QT represents the wavelet coefficients. In this context, QT doesn’t do anything extra but is only a means of performing the coding on a data-structure. Hence I feel, it doesn’t map to any CTQs. All the mappings of WT are propagated with QT. It is not an obstacle to any of the mappings of WT but it “may” offer computation-wise performance. QT is a natural data representation and hence the searching and sorting operations may be done in an efficient way.</p>
 </section>
 <section id="qt-representation-of-wavelet-decomposition-structure" class="level3">
-<h3 data-anchor-id="qt-representation-of-wavelet-decomposition-structure">QT Representation of Wavelet Decomposition Structure</h3>
+<h3 data-anchor-id="qt-representation-of-wavelet-decomposition-structure">QT representation of wavelet decomposition structure</h3>
 <p>We extend the boundaries put by the dyadic wavelet transform. The most interesting part of the dyadic wavelet transform is very regular. Hence, we cannot believe it all the time. There must be something wrong. Yes… it is not data adaptive. No, I am not saying it with respect to the type of wavelet you use or the type of coding you use… I am talking with respect to the levels of decomposition and the decomposition structure. In general there exist two kinds of decompositions, namely, wavelet-tree and wavelet-packet. Before we go further, we will ask a question. Where are the QTs? Wavelet-transform of a two-dimensional signal results in four frequency bands, better known in the literature as LL, LH, HL and HH bands. In a wavelet-tree every LL is sub-decomposed into another four bands and in a wavelet-packet every band is split into another four bands. It exactly looks like a QT and it is where QT is playing a role. In adaptive QT wavelet decomposition, the objective becomes whether to split the tree further or not. Essentially QT here represents the WT decomposition structure. An analogy -&gt; we have studied just now, QT representation of images. It is exactly the same with image replaced by wavelet coefficients, i.e., splitting a branch into four leaves leads to splitting a band into another four bands. Here the splitting of the branch may take place anywhere in the wavelet-packet. The tree structure can be passed to the decoder to let it know about the decomposition structure and perform the inverse WT accordingly. This has relevance in signal-adapted wavelet-packet where the wavelet-packet structure is not decomposed a priori. Based on a condition or cost function a decision is made whether to split (decompose) or not to split the branch. The cost function might be R-D performance or entropy-driven. In the present case each node represents a set of coefficients that has a relation to the level of decomposition. For example, let us take a 512 x 512 image. Then</p>
 <p><span class="math display">\[
 512 \;-\; 256 \;-\; 128 \;-\; 64 \;-\; 32 \;-\; 16 \;-\; 8 \;-\; 4 \;-\; 2
@@ -685,10 +685,10 @@ B_1 \ge B_2
 <p>where <span class="math inline">\(B_1\)</span> is the bit budget given by SPIHT and <span class="math inline">\(B_2\)</span> is the bit budget given by the generalized SPIHT that we are currently investigating.</p>
 </section>
 </section>
-<section id="section-b" class="level2">
-<h2 data-anchor-id="section-b">Section B</h2>
-<section id="embedded-zero-tree-coding" class="level3">
-<h3 data-anchor-id="embedded-zero-tree-coding">Embedded Zero-Tree Coding</h3>
+<section id="embedded-zero-tree-coding" class="level2">
+<h2 data-anchor-id="embedded-zero-tree-coding">Embedded zero-tree coding</h2>
+<section id="ezw-overview" class="level3">
+<h3 data-anchor-id="ezw-overview">EZW overview</h3>
 <p>E (embedded) means what?</p>
 <p>The output of the encoder can be stopped at any point of time and the so-far decoded stream can be used to reconstruct the image back, or the full stream contains the embedded bit-stream required to reconstruct the image, not at full resolution. A single image at a given code rate can be truncated at various points and decoded to give a series of reconstructed images at lower rates.</p>
 <p>Z (zero-tree) means what? This question is answered in the following questions.</p>
@@ -708,8 +708,8 @@ B_1 \ge B_2
 <p>The partial ordering is a result of comparison of transform element (coefficient) magnitudes to a set of octavely decreasing thresholds. An element becomes significant or insignificant with respect to a given threshold, depending on whether or not it exceeds that threshold.</p>
 </section>
 </section>
-<section id="section-c" class="level2">
-<h2 data-anchor-id="section-c">Section C</h2>
+<section id="spiht-coding" class="level2">
+<h2 data-anchor-id="spiht-coding">SPIHT coding</h2>
 <section id="spiht" class="level3">
 <h3 data-anchor-id="spiht">SPIHT</h3>
 <p>How are EZW and SPIHT different?</p>

@@ -428,32 +428,32 @@ window.Quarto = {
   <ul>
   <li><a href="#computational-complexity-of-the-wavelet-transform" id="toc-computational-complexity-of-the-wavelet-transform" class="nav-link active" data-scroll-target="#computational-complexity-of-the-wavelet-transform">Computational Complexity of the Wavelet Transform</a>
   <ul class="collapse">
-  <li><a href="#i.-introduction" id="toc-i.-introduction" class="nav-link" data-scroll-target="#i.-introduction">I. Introduction</a></li>
-  <li><a href="#ii.-complexity" id="toc-ii.-complexity" class="nav-link" data-scroll-target="#ii.-complexity">II. Complexity</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#complexity" id="toc-complexity" class="nav-link" data-scroll-target="#complexity">Complexity</a>
   <ul class="collapse">
-  <li><a href="#d-case" id="toc-d-case" class="nav-link" data-scroll-target="#d-case">1D Case</a></li>
-  <li><a href="#d-case-1" id="toc-d-case-1" class="nav-link" data-scroll-target="#d-case-1">2D Case</a></li>
-  <li><a href="#d-case-2" id="toc-d-case-2" class="nav-link" data-scroll-target="#d-case-2">3D Case</a></li>
-  <li><a href="#specific-case" id="toc-specific-case" class="nav-link" data-scroll-target="#specific-case">Specific Case</a></li>
+  <li><a href="#d-case" id="toc-d-case" class="nav-link" data-scroll-target="#d-case">1D case</a></li>
+  <li><a href="#d-case-1" id="toc-d-case-1" class="nav-link" data-scroll-target="#d-case-1">2D case</a></li>
+  <li><a href="#d-case-2" id="toc-d-case-2" class="nav-link" data-scroll-target="#d-case-2">3D case</a></li>
+  <li><a href="#specific-case" id="toc-specific-case" class="nav-link" data-scroll-target="#specific-case">Specific case</a></li>
   </ul></li>
-  <li><a href="#iii.-incomplete-3d" id="toc-iii.-incomplete-3d" class="nav-link" data-scroll-target="#iii.-incomplete-3d">III. Incomplete 3D</a>
+  <li><a href="#incomplete-3d" id="toc-incomplete-3d" class="nav-link" data-scroll-target="#incomplete-3d">Incomplete 3D</a>
   <ul class="collapse">
   <li><a href="#incomplete-3d-case" id="toc-incomplete-3d-case" class="nav-link" data-scroll-target="#incomplete-3d-case">Incomplete 3D case</a></li>
   <li><a href="#incomplete-3d-specific-case-same-wavelets-in-all-directions" id="toc-incomplete-3d-specific-case-same-wavelets-in-all-directions" class="nav-link" data-scroll-target="#incomplete-3d-specific-case-same-wavelets-in-all-directions">Incomplete 3D specific case (same wavelets in all directions)</a></li>
   </ul></li>
-  <li><a href="#iv.-computing-complexity-c" id="toc-iv.-computing-complexity-c" class="nav-link" data-scroll-target="#iv.-computing-complexity-c">IV. Computing Complexity (C)</a></li>
+  <li><a href="#computing-the-complexity-constant-c" id="toc-computing-the-complexity-constant-c" class="nav-link" data-scroll-target="#computing-the-complexity-constant-c">Computing the complexity constant <span class="math inline">\(C\)</span></a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   <li><a href="#appendix-a-different-wavelets" id="toc-appendix-a-different-wavelets" class="nav-link" data-scroll-target="#appendix-a-different-wavelets">Appendix A: Different Wavelets</a>
   <ul class="collapse">
-  <li><a href="#d-case-6" id="toc-d-case-6" class="nav-link" data-scroll-target="#d-case-6"><span class="math inline">\(1D\)</span> Case</a></li>
-  <li><a href="#d-case-7" id="toc-d-case-7" class="nav-link" data-scroll-target="#d-case-7"><span class="math inline">\(2D\)</span> Case</a></li>
-  <li><a href="#d-case-8" id="toc-d-case-8" class="nav-link" data-scroll-target="#d-case-8"><span class="math inline">\(3D\)</span> Case</a></li>
+  <li><a href="#d-case-6" id="toc-d-case-6" class="nav-link" data-scroll-target="#d-case-6">1D case</a></li>
+  <li><a href="#d-case-7" id="toc-d-case-7" class="nav-link" data-scroll-target="#d-case-7">2D case</a></li>
+  <li><a href="#d-case-8" id="toc-d-case-8" class="nav-link" data-scroll-target="#d-case-8">3D case</a></li>
   </ul></li>
   <li><a href="#appendix-b-same-wavelet" id="toc-appendix-b-same-wavelet" class="nav-link" data-scroll-target="#appendix-b-same-wavelet">Appendix B: Same Wavelet</a>
   <ul class="collapse">
-  <li><a href="#d-case-9" id="toc-d-case-9" class="nav-link" data-scroll-target="#d-case-9"><span class="math inline">\(1D\)</span> Case</a></li>
-  <li><a href="#d-case-10" id="toc-d-case-10" class="nav-link" data-scroll-target="#d-case-10"><span class="math inline">\(2D\)</span> Case</a></li>
-  <li><a href="#d-case-11" id="toc-d-case-11" class="nav-link" data-scroll-target="#d-case-11"><span class="math inline">\(3D\)</span> Case</a></li>
+  <li><a href="#d-case-9" id="toc-d-case-9" class="nav-link" data-scroll-target="#d-case-9">1D case</a></li>
+  <li><a href="#d-case-10" id="toc-d-case-10" class="nav-link" data-scroll-target="#d-case-10">2D case</a></li>
+  <li><a href="#d-case-11" id="toc-d-case-11" class="nav-link" data-scroll-target="#d-case-11">3D case</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -493,41 +493,41 @@ window.Quarto = {
 
 <section id="computational-complexity-of-the-wavelet-transform" class="level1">
 <h1>Computational Complexity of the Wavelet Transform</h1>
-<section id="i.-introduction" class="level2">
-<h2 data-anchor-id="i.-introduction">I. Introduction</h2>
-<p>Let P x Q x R be the size of the original image sequence (for 2D R=1). As we have to compare 2D, 3D and “incomplete 3D”, we will put the size of the volume as P x Q x R and L, M and N be the number of levels of decomposition on P x Q x R respectively.</p>
-<p>And let C be the complexity (of additions / multiplications / total complexity) per pixel pair. The complexity C depends on the wavelet transform under consideration. Let <span class="math inline">\(C_1\)</span>, <span class="math inline">\(C_2\)</span> and <span class="math inline">\(C_3\)</span> be the complexity of the wavelet used in P, Q and R dimensions. In the following discussion we will assume that, the order of the levels of decomposition is such that,</p>
+<section id="introduction" class="level2">
+<h2 data-anchor-id="introduction">Introduction</h2>
+<p>Let <span class="math inline">\(P  imes Q  imes R\)</span> be the size of the original image sequence; for a 2D image, take <span class="math inline">\(R = 1\)</span>. To compare 2D, 3D, and incomplete-3D transforms uniformly, we describe the volume as <span class="math inline">\(P   imes Q  imes R\)</span>. Let <span class="math inline">\(L\)</span>, <span class="math inline">\(M\)</span>, and <span class="math inline">\(N\)</span> be the numbers of decomposition levels along the <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span>, and <span class="math inline">\(R\)</span> dimensions, respectively.</p>
+<p>Let <span class="math inline">\(C\)</span> denote the complexity per pixel pair, whether measured in additions, multiplications, or total operations. This complexity depends on the wavelet transform being used. Let <span class="math inline">\(C_1\)</span>, <span class="math inline">\(C_2\)</span>, and <span class="math inline">\(C_3\)</span> denote the per-point complexities of the wavelets used along the <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span>, and <span class="math inline">\(R\)</span> dimensions. In the following discussion, assume the decomposition levels satisfy</p>
 <p><span class="math display">\[
-L \geq M \geq N .
+L \geq M \geq N.
 \]</span></p>
 </section>
-<section id="ii.-complexity" class="level2">
-<h2 data-anchor-id="ii.-complexity">II. Complexity</h2>
+<section id="complexity" class="level2">
+<h2 data-anchor-id="complexity">Complexity</h2>
 <p>If we are working with different wavelets in different directions, then, the complexity estimates are modified as:</p>
 <p>Let C1, C2 and C3 be the computations required per point for the wavelets used in x, y and z directions respectively.</p>
 <section id="d-case" class="level3">
-<h3 data-anchor-id="d-case">1D Case</h3>
+<h3 data-anchor-id="d-case">1D case</h3>
 <p>Expression:</p>
 <p><span class="math display">\[
 PC_1\left(1 - \frac{1}{2^L}\right)
 \]</span></p>
 </section>
 <section id="d-case-1" class="level3">
-<h3 data-anchor-id="d-case-1">2D Case</h3>
+<h3 data-anchor-id="d-case-1">2D case</h3>
 <p>Expression:</p>
 <p><span class="math display">\[
 \frac{2.PQ(C_1 + C_2)(4^M - 1)}{3.4^M} + \frac{PQC_1(2^{L-M} - 1)}{2^{L+M}}
 \]</span></p>
 </section>
 <section id="d-case-2" class="level3">
-<h3 data-anchor-id="d-case-2">3D Case</h3>
+<h3 data-anchor-id="d-case-2">3D case</h3>
 <p>Expression:</p>
 <p><span class="math display">\[
 \frac{4.PQR(C_1 + C_2 + C_3)(8^N - 1)}{7.8^N} + \frac{2.PQR(C_1 + C_2)(4^{M-N} - 1)}{3.2^{N+2M}} + \frac{PQRC_1(2^{L-M} - 1)}{2^{M+L+N}}
 \]</span></p>
 </section>
 <section id="specific-case" class="level3">
-<h3 data-anchor-id="specific-case">Specific Case</h3>
+<h3 data-anchor-id="specific-case">Specific case</h3>
 <p>Same wavelets are used in all directions, then the expressions presented above can be simplified as:</p>
 <section id="d-case-3" class="level4">
 <h4 data-anchor-id="d-case-3">1D case</h4>
@@ -537,29 +537,29 @@ PC_1\left(1 - \frac{1}{2^L}\right)
 \]</span></p>
 </section>
 <section id="d-case-4" class="level4">
-<h4 data-anchor-id="d-case-4">2D Case</h4>
+<h4 data-anchor-id="d-case-4">2D case</h4>
 <p>Expression:</p>
 <p><span class="math display">\[
 \frac{4.PQC_1(4^M - 1)}{3.4^M} + \frac{PQC_1(2^{L-M} - 1)}{2^{L+M}}
 \]</span></p>
 </section>
 <section id="d-case-5" class="level4">
-<h4 data-anchor-id="d-case-5">3D Case</h4>
+<h4 data-anchor-id="d-case-5">3D case</h4>
 <p>Expression:</p>
 <p><span class="math display">\[
 \frac{12.PQRC_1(8^N - 1)}{7.8^N} + \frac{4.PQRC_1(4^{M-N} - 1)}{3.2^{N+2M}} + \frac{PQRC_1(2^{L-M} - 1)}{2^{M+L+N}}
 \]</span></p>
 <p>For <span class="math inline">\((L = M = N = 1)\)</span>, the complexity estimate ratios would be,</p>
-<p><span class="math inline">\(1 : 2 : 3\)</span> for 1D, 2D and 3D.</p>
+<p><span class="math inline">\(1: 2: 3\)</span> for 1D, 2D and 3D.</p>
 <p>As <span class="math inline">\((L = M = N), N \to \infty\)</span>, the complexity estimate ratios would be,</p>
-<p><span class="math inline">\(1 : 1.33 : 1.71\)</span> for 1D, 2D and 3D.</p>
+<p><span class="math inline">\(1: 1.33: 1.71\)</span> for 1D, 2D and 3D.</p>
 </section>
 </section>
 </section>
-<section id="iii.-incomplete-3d" class="level2">
-<h2 data-anchor-id="iii.-incomplete-3d">III. Incomplete 3D</h2>
+<section id="incomplete-3d" class="level2">
+<h2 data-anchor-id="incomplete-3d">Incomplete 3D</h2>
 <p>In the incomplete 3D WT transform, the WT is decomposed in a incomplete dyadic fashion. For some image sequence the correlation in Z dimension is very high. If WT is performed in Z-dimension on such sequence, the high frequency sub-band is de-correlated and may not yield much benefit if we go for further decomposition in X and Y dimension. Hence the concept of incomplete WT transform came in to existence.</p>
-<p>The decision to decompose further is based on the case under consideration rather than any fixed set of rules. Hence, we can not derive a generalized formula for that. However, one can make use of the 1-D and 3-D formulae presented in the earlier sections. For example, we can consider, the whole 3D incomplete transform as a set of 1-D operations. In the 1-D formulae, we have to plug in the updated image dimensions and recursively do the process. One can derive the formula for any given structure by understanding the procedure described in the appendix. The reader is advised to go through the appendix to get an understanding of the derivation process. In the following section, we present a restricted class of incomplete 3D by imposing certain constraints.</p>
+<p>The decision to decompose further is based on the case under consideration rather than any fixed set of rules. Hence, we cannot derive a generalized formula for that. However, one can make use of the 1-D and 3-D formulae presented in the earlier sections. For example, we can consider, the whole 3D incomplete transform as a set of 1-D operations. In the 1-D formulae, we have to plug in the updated image dimensions and recursively do the process. One can derive the formula for any given structure by understanding the procedure described in the appendix. The reader is advised to go through the appendix to get an understanding of the derivation process. In the following section, we present a restricted class of incomplete 3D by imposing certain constraints.</p>
 <section id="incomplete-3d-case" class="level3">
 <h3 data-anchor-id="incomplete-3d-case">Incomplete 3D case</h3>
 <p>In this case, we decompose the volume in the Z-direction first. After splitting it into two (approximate and detail), we don’t do any operations on the detail ones. So, the size of image volume (for further processing) becomes halved, and from then onwards, we will treat them as 2D independent slices. That is, we do only 2D processing. The above explanation is a special case of incomplete 3DWT. In general, it can be applied any where in x-y-z direction. However, with such adaptive selection, we cannot arrive at a closed form expression for the complexity. So, we imposed certain conditions upon which the expressions will be derived. The levels of decomposition are divided into two parts as, “incomplete” and “complete”. So L, M, N levels are split as <span class="math inline">\(L_i, M_i, N_i \text{ and } L_c, M_c, N_c\)</span>. The conditions imposed are:</p>
@@ -587,8 +587,8 @@ PQRC\left[\frac{1}{2} + \frac{1}{2^{N_i}}\left(\frac{4.(4^{M_c} - 1)}{3.2^{2M_c}
 \]</span></p>
 </section>
 </section>
-<section id="iv.-computing-complexity-c" class="level2">
-<h2 data-anchor-id="iv.-computing-complexity-c">IV. Computing Complexity (C)</h2>
+<section id="computing-the-complexity-constant-c" class="level2">
+<h2 data-anchor-id="computing-the-complexity-constant-c">Computing the complexity constant <span class="math inline">\(C\)</span></h2>
 <p><span class="math inline">\(s_{add}\)</span> is the number of real additions/subtractions required to compute one approximate coefficient and <span class="math inline">\(s_{mul}\)</span> is the number of real multiplications/divisions required compute one approximate coefficient. Similarly <span class="math inline">\(d_{add}\)</span> is the number of real additions/subtractions required to compute one detailed coefficient and <span class="math inline">\(d_{mul}\)</span> is the number of real multiplications/divisions required compute one detailed coefficient.</p>
 <p>For (2,2) wavelet transform implemented using lifting scheme [1], <span class="math inline">\(s_{add}, s_{nul}, d_{add} \text{ and } d_{mul}\)</span> are given by</p>
 <p><span class="math display">\[
@@ -624,7 +624,7 @@ C_{add} &amp;= s_{add} + d_{add}
 <section id="appendix-a-different-wavelets" class="level2">
 <h2 data-anchor-id="appendix-a-different-wavelets">Appendix A: Different Wavelets</h2>
 <section id="d-case-6" class="level3">
-<h3 data-anchor-id="d-case-6"><span class="math inline">\(1D\)</span> Case</h3>
+<h3 data-anchor-id="d-case-6">1D case</h3>
 <p>P is the length of the signal or a row of the image and L is the number of levels of decomposition then, the complexity at one level the complexity is given by,</p>
 <p><span class="math inline">\(\frac{P}{2}C_1\)</span> where <span class="math inline">\(C_1\)</span> is the complexity for the wavelet employed. After the first level, the complexity can be estimated by reducing <span class="math inline">\(P\)</span> to <span class="math inline">\(\frac{P}{2}\)</span>.</p>
 <p>It becomes, <span class="math inline">\(\frac{P}{4}C_1\)</span>. On a whole, it can be represented as:</p>
@@ -633,7 +633,7 @@ C_{add} &amp;= s_{add} + d_{add}
 \]</span></p>
 </section>
 <section id="d-case-7" class="level3">
-<h3 data-anchor-id="d-case-7"><span class="math inline">\(2D\)</span> Case</h3>
+<h3 data-anchor-id="d-case-7">2D case</h3>
 <p>Here the 2D signal dimension is assumed to be a P x Q and let the levels of decomposition be L and M for P and Q respectively and with a condition <span class="math inline">\(M \leq L\)</span> and <span class="math inline">\(C_1 \text{ and } C_2\)</span> being the complexity of the wavelets employed in P and Q dimensions respectively.</p>
 <p>For a specific case, let M=2 and L=4, then</p>
 <p>At one level</p>
@@ -678,11 +678,11 @@ C_{add} &amp;= s_{add} + d_{add}
 \frac{PQ(C_1 + C_2)}{2}\left(1 + \frac{1}{4} + \frac{1}{16} + \ldots + \frac{1}{4^{M-1}}\right) + \frac{PQC_1}{2^{2M}}\left(\frac{1}{2} + \frac{1}{4} + \ldots + \frac{1}{2^{L-M}}\right)
 \]</span></p>
 <p><span class="math display">\[
-= \frac{2.PQ(C_1 + C_2)(4^M - 1)}{3.4^M} + \frac{PQC_1(2^{L-M} - 1)}{2^{L+M}} .
+= \frac{2.PQ(C_1 + C_2)(4^M - 1)}{3.4^M} + \frac{PQC_1(2^{L-M} - 1)}{2^{L+M}}.
 \]</span></p>
 </section>
 <section id="d-case-8" class="level3">
-<h3 data-anchor-id="d-case-8"><span class="math inline">\(3D\)</span> Case</h3>
+<h3 data-anchor-id="d-case-8">3D case</h3>
 <p>Here the 3D signal dimension is assumed to be a P x Q x R and let the levels of decomposition be L, M and N for P, Q and R respectively and with a condition <span class="math inline">\(N \leq M \leq L\)</span> and <span class="math inline">\(C_1, C_2 \text{ and } C_3\)</span> being the complexity of the wavelets employed in P and Q dimensions respectively.</p>
 <p>For a specific case, let N=2, M=4 and L=6, then</p>
 <p>At one level</p>
@@ -747,8 +747,8 @@ C_{add} &amp;= s_{add} + d_{add}
 <p><span class="math display">\[
 = \frac{4.PQR(C_1 + C_2 + C_3)(8^N - 1)}{7.8^N} + \frac{2.PQR(C_1 + C_2)(4^{M-N} - 1)}{3.2^{N+2M}} + \frac{PQRC_1(2^{L-M} - 1)}{2^{M+L+N}}
 \]</span></p>
-<section id="for-incomplete-3d" class="level4">
-<h4 data-anchor-id="for-incomplete-3d">For Incomplete 3D</h4>
+<section id="incomplete-3d-case-1" class="level4">
+<h4 data-anchor-id="incomplete-3d-case-1">Incomplete 3D case</h4>
 <p><span class="math inline">\(L_i, M_i, N_i \text{ and } L_c, M_c, N_c\)</span> as (4,2), (4,2) and (0,1).</p>
 <table class="caption-top table">
 <thead>
@@ -809,7 +809,7 @@ PQR\left[\frac{8C_3}{7.2}\left(1 - \frac{1}{8^{N_i}}\right) + \frac{8C_2}{7.4}\l
 C1 = C2 = C3 = C
 \]</span></p>
 <section id="d-case-9" class="level3">
-<h3 data-anchor-id="d-case-9"><span class="math inline">\(1D\)</span> Case</h3>
+<h3 data-anchor-id="d-case-9">1D case</h3>
 <p>P is the length of the signal or a row of the image and L is the number of levels of decomposition then, the complexity at one level the complexity is given by,</p>
 <p><span class="math inline">\(\frac{P}{2}C\)</span> and after the first level, the complexity can be estimated by reducing <span class="math inline">\(P\)</span> to <span class="math inline">\(\frac{P}{2}\)</span>.</p>
 <p>It becomes, <span class="math inline">\(\frac{P}{4}C\)</span>. On a whole, it can be represented as:</p>
@@ -818,7 +818,7 @@ C1 = C2 = C3 = C
 \]</span></p>
 </section>
 <section id="d-case-10" class="level3">
-<h3 data-anchor-id="d-case-10"><span class="math inline">\(2D\)</span> Case</h3>
+<h3 data-anchor-id="d-case-10">2D case</h3>
 <p>Here the 2D signal dimension is assumed to be a P x Q and let the levels of decomposition be L and M for P and Q respectively and with a condition <span class="math inline">\(M \leq L\)</span>.</p>
 <p>For a specific case, let M=2 and L=4, then</p>
 <p>At one level</p>
@@ -863,11 +863,11 @@ C1 = C2 = C3 = C
 2.\frac{PQC}{2}\left(1 + \frac{1}{4} + \frac{1}{16} + \ldots + \frac{1}{4^{M-1}}\right) + \frac{PQC}{2^{2M}}\left(\frac{1}{2} + \frac{1}{4} + \ldots + \frac{1}{2^{L-M}}\right)
 \]</span></p>
 <p><span class="math display">\[
-= \frac{4.PQC(4^M - 1)}{3.4^M} + \frac{PQC(2^{L-M} - 1)}{2^{L+M}} .
+= \frac{4.PQC(4^M - 1)}{3.4^M} + \frac{PQC(2^{L-M} - 1)}{2^{L+M}}.
 \]</span></p>
 </section>
 <section id="d-case-11" class="level3">
-<h3 data-anchor-id="d-case-11"><span class="math inline">\(3D\)</span> Case</h3>
+<h3 data-anchor-id="d-case-11">3D case</h3>
 <p>Here the 3D signal dimension is assumed to be a P x Q x R and let the levels of decomposition be L, M and N for P, Q and R respectively and with a condition <span class="math inline">\(N \leq M \leq L\)</span>.</p>
 <p>For a specific case, let N=2, M=4 and L=6, then</p>
 <p>At one level</p>
@@ -932,8 +932,8 @@ C1 = C2 = C3 = C
 <p><span class="math display">\[
 = \frac{12.PQRC(8^N - 1)}{7.8^N} + \frac{4.PQRC(4^{M-N} - 1)}{3.2^{N+2M}} + \frac{PQRC(2^{L-M} - 1)}{2^{M+L+N}}
 \]</span></p>
-<section id="for-incomplete-3d-1" class="level4">
-<h4 data-anchor-id="for-incomplete-3d-1">For Incomplete 3D</h4>
+<section id="incomplete-3d-case-2" class="level4">
+<h4 data-anchor-id="incomplete-3d-case-2">Incomplete 3D case</h4>
 <p><span class="math inline">\(L_i, M_i, N_i \text{ and } L_c, M_c, N_c\)</span> as (4,2), (4,2) and (0,1).</p>
 <table class="caption-top table">
 <thead>

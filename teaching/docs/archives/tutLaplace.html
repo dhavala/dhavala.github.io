@@ -467,12 +467,12 @@ window.Quarto = {
 
 <section id="normal-approximation" class="level1">
 <h1>Normal Approximation</h1>
-<p>Let the likelihood function be</p>
+<p>The goal of this note is to approximate a posterior density using a local normal approximation. Let the likelihood function be</p>
 <p><span class="math display">\[
 L(\theta; y) = c \exp(-f(\theta; y)) \tag{1}
 \]</span></p>
-<p>for some arbitrary bi-variate function <span class="math inline">\(f\)</span> and for some constant <span class="math inline">\(c\)</span>. It might be useful if we have a normal likelihood function, in which case it is possible to compute the posterior either analytically (e.g.&nbsp;if the prior is also normal) or by resorting to numerical integration techniques [1] (e.g.&nbsp;Gauss–Hermite quadrature). It can also be used to calculate moments and cumulants in an efficient way [2].</p>
-<p>In general, we can approximate the function <span class="math inline">\(f(\theta)\)</span> (in the neighborhood of <span class="math inline">\(\tau\)</span>) using a multi-variate Taylor series. In the present case, we will be considering the bi-variate case. We consider only terms up to order two since the log-likelihood of a normal density is quadratic,</p>
+<p>for some arbitrary bivariate function <span class="math inline">\(f\)</span> and for some constant <span class="math inline">\(c\)</span>. It might be useful if we have a normal likelihood function, in which case it is possible to compute the posterior either analytically (e.g.&nbsp;if the prior is also normal) or by resorting to numerical integration techniques [1] (e.g.&nbsp;Gauss–Hermite quadrature). It can also be used to calculate moments and cumulants in an efficient way [2].</p>
+<p>In general, we can approximate <span class="math inline">\(f(\theta)\)</span> near <span class="math inline">\(\tau\)</span> using a multivariate Taylor series. Here we consider the bivariate case. Terms beyond second order are dropped because the log-likelihood of a normal density is quadratic:</p>
 <p><span class="math display">\[
 f(\theta) \approx a_{00} + a_{10}(\theta_1 - \tau_1) + a_{01}(\theta_2 - \tau_2) + a_{11}(\theta_1 - \tau_1)(\theta_2 - \tau_2) + a_{20}(\theta_1 - \tau_1)^2 + a_{02}(\theta_2 - \tau_2)^2 \tag{2}
 \]</span></p>
@@ -498,7 +498,7 @@ L(\theta; y) \sim N(\mu_L, \Sigma_L) \tag{4a}
 -2a_{11} &amp; 1/a_{20}
 \end{bmatrix} \tag{4c}
 \]</span></p>
-<p>We can expand the Taylor series around the <em>mode</em> or <em>ML estimate</em>. Having approximated the likelihood as a bivariate normal, below we will provide a closed-form expression for calculating the posterior density for a given normal prior. If the prior <span class="math inline">\(\pi(\theta)\)</span> is of the form</p>
+<p>We can expand the Taylor series around the <em>mode</em> or maximum-likelihood estimate. Once the likelihood is approximated as a bivariate normal, the posterior under a normal prior has a closed form. If the prior <span class="math inline">\(\pi(\theta)\)</span> is of the form</p>
 <p><span class="math display">\[
 \pi(\theta) \sim N(\mu_\pi, \Sigma_\pi) \tag{5}
 \]</span></p>

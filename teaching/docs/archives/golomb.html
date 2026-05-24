@@ -438,7 +438,6 @@ window.Quarto = {
   <li><a href="#application-of-golomb-coding-in-run-length-coding" id="toc-application-of-golomb-coding-in-run-length-coding" class="nav-link" data-scroll-target="#application-of-golomb-coding-in-run-length-coding">Application of Golomb Coding in Run-length Coding</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography">Bibliography</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -479,7 +478,7 @@ window.Quarto = {
 <h1>Golomb–Rice Coding</h1>
 <section id="golomb-coding" class="level2">
 <h2 data-anchor-id="golomb-coding">Golomb Coding</h2>
-<p>This is a prefix code that can represent positive integers [1]. Given a positive integer parameter <span class="math inline">\(m\)</span>, Golomb code <span class="math inline">\(G_m\)</span> encodes an integer <span class="math inline">\(n \geq 0\)</span> in two parts: a binary representation of <span class="math inline">\(n \bmod m\)</span>, and a unary representation of <span class="math inline">\(\lfloor n/m \rfloor\)</span> where <span class="math inline">\(\lfloor x \rfloor\)</span> gives the largest integer smaller than <span class="math inline">\(x\)</span>.</p>
+<p>Golomb coding is a prefix code for representing non-negative integers [1]. Given a positive integer parameter <span class="math inline">\(m\)</span>, the Golomb code <span class="math inline">\(G_m\)</span> encodes an integer <span class="math inline">\(n \geq 0\)</span> in two parts: a binary representation of <span class="math inline">\(n \bmod m\)</span> and a unary representation of <span class="math inline">\(\lfloor n/m \rfloor\)</span>, where <span class="math inline">\(\lfloor x \rfloor\)</span> is the largest integer not greater than <span class="math inline">\(x\)</span>.</p>
 <p>Golomb codes are optimal for exponentially decaying (geometric) probability distributions of non-negative integers, i.e., distributions of the form <span class="math inline">\(Q(n) = (1-\rho)\rho^n\)</span>, where <span class="math inline">\(0 &lt; \rho &lt; 1\)</span>. For every distribution of this form, there exists a value of the parameter <span class="math inline">\(m\)</span> such that <span class="math inline">\(G_m\)</span> yields the shortest possible average code length over all uniquely decipherable codes for the nonnegative integers. The optimal value of <span class="math inline">\(m\)</span> is given by</p>
 <p><span class="math display">\[
 m = \left\lceil \frac{\log(1+\rho)}{\log(\rho^{-1})} \right\rceil
@@ -487,9 +486,8 @@ m = \left\lceil \frac{\log(1+\rho)}{\log(\rho^{-1})} \right\rceil
 <p>where <span class="math inline">\(\lceil x \rceil\)</span> gives the smallest integer greater than <span class="math inline">\(x\)</span>.</p>
 <p>Rice emphasized the special case of Golomb code with <span class="math inline">\(m = 2^k\)</span>. Choosing <span class="math inline">\(m\)</span> to be a power of two leads to a very simple encoding/decoding procedure: the <span class="math inline">\(k\)</span> least significant bits are nothing but the least <span class="math inline">\(k\)</span> least significant bits of <span class="math inline">\(n\)</span> succeeding <span class="math inline">\(\lfloor n/m \rfloor\)</span> in unary representation. The length of the encoding is <span class="math inline">\(k + 1 + \lfloor n/2^k \rfloor\)</span>. The <span class="math inline">\(1 + \lfloor n/2^k \rfloor\)</span> bits are required to represent <span class="math inline">\(\lfloor n/2^k \rfloor\)</span> in unary format and <span class="math inline">\(k\)</span> bits are needed to code the remainder.</p>
 <p>We refer to codes <span class="math inline">\(G_{2^k}\)</span> as Golomb–Rice codes.</p>
-<p>Knowledge of unary codes is required to understand Golomb coding.</p>
-<p>Unary representation of an integer is nothing but a sequence of ones equal to the integer to be represented followed by a zero [2].</p>
-<p>Example of unary representation of some integers (always positive):</p>
+<p>Unary codes are needed to understand Golomb coding. The unary representation of an integer is a sequence of ones equal to the integer being represented, followed by a zero [2].</p>
+<p>Examples of unary representations are shown below:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -533,27 +531,28 @@ m = \left\lceil \frac{\log(1+\rho)}{\log(\rho^{-1})} \right\rceil
 <section id="encoding-1-2" class="level4">
 <h4 data-anchor-id="encoding-1-2">Encoding [1-2]</h4>
 <p>Let us assume that the Golomb–Rice parameter is <span class="math inline">\(\log_2(m)\)</span>.</p>
-<p>The steps involved in representing a positive integer, given a Golomb parameter, are:</p>
+<p>Given a Golomb parameter <span class="math inline">\(m\)</span>, encode a non-negative integer <span class="math inline">\(N\)</span> as follows:</p>
 <ol type="1">
-<li>Divide the integer <span class="math inline">\(N\)</span> with <span class="math inline">\(m\)</span>.</li>
-<li>Take the nearest integer towards zero, call it the “divider”.</li>
-<li>Remainder = <span class="math inline">\(N - (\text{divider} \times m)\)</span>.</li>
-<li>Represent the divider in unary and code the remainder with <span class="math inline">\(\log_2(m)\)</span>.</li>
-<li>Append them.</li>
+<li>Divide <span class="math inline">\(N\)</span> by <span class="math inline">\(m\)</span>.</li>
+<li>Take the integer quotient and call it the divider.</li>
+<li>Compute the remainder as <span class="math inline">\(N - (\text{divider} \times m)\)</span>.</li>
+<li>Represent the divider in unary.</li>
+<li>Encode the remainder using <span class="math inline">\(\log_2(m)\)</span> bits.</li>
+<li>Append the unary quotient and binary remainder.</li>
 </ol>
 <section id="example" class="level5">
 <h5 data-anchor-id="example">Example</h5>
 <p><span class="math inline">\(m = 4\)</span> and <span class="math inline">\(N = 15\)</span>.</p>
 <p>The remainder has to be represented now in 2 bits. The possible values the remainder can take are 0, 1, 2 and 3 with code as 00, 01, 10 and 11 respectively.</p>
 <ol type="1">
-<li>Divide the integer <span class="math inline">\(N\)</span> with <span class="math inline">\(m\)</span>.</li>
-<li>Take the nearest integer towards zero, call it the “divider”.</li>
+<li>Divide <span class="math inline">\(N\)</span> by <span class="math inline">\(m\)</span>.</li>
+<li>Take the integer quotient and call it the divider.</li>
 </ol>
 <p><span class="math display">\[
 \left\lfloor 15/4 \right\rfloor = 3
 \]</span></p>
 <ol start="3" type="1">
-<li>Remainder = <span class="math inline">\(N - (\text{divider} \times m)\)</span>.</li>
+<li>Compute the remainder as <span class="math inline">\(N - (\text{divider} \times m)\)</span>.</li>
 </ol>
 <p><span class="math display">\[
 15 - (4 * 3) = 3.
@@ -807,11 +806,8 @@ P_c = 1 - \frac{\text{total number of stop symbol occurences}}{\text{total numbe
 <p>[1] P. G. Howard and J. S. Vitter, “Fast and Efficient Lossless Image Compression,” <em>Proc. Data Compression Conference</em>, pp.&nbsp;351-360, Mar.&nbsp;1993.</p>
 <p>[2] M. J. Weinberger, G. Seroussi, and G. Sapiro, “LOCO-I: A Low Complexity, Context-Based, Lossless Image Compression Algorithm,” <em>Proc. of the Int. Data Compression Conference</em>, pp.&nbsp;140-149, March 1996.</p>
 <p>[3] Glen G. Langdon, Jr., “Data Compression,” CE108. W99, Department of Computer Engineering, University of California at Santa Cruz. <a href="http://www.cse.ucsc.edu/classes/cmpe263/Winter01/" class="uri">http://www.cse.ucsc.edu/classes/cmpe263/Winter01/</a></p>
-</section>
-<section id="bibliography" class="level2">
-<h2 data-anchor-id="bibliography">Bibliography</h2>
-<p>[1] E. M. Gabidulin, P. Z. Fan and M. Darnell, “Autocorrelation of Golomb sequences,” <em>IEE Proc. Comm.</em>, Vol. 142, No.&nbsp;5, October 1995.</p>
-<p>[2] Robert F. Rice, “Lossless Coding Standards for Space Data Systems,” Jet Propulsion Laboratory Technical Report, California Institute of Technology, Pasadena, California.</p>
+<p>[4] E. M. Gabidulin, P. Z. Fan and M. Darnell, “Autocorrelation of Golomb sequences,” <em>IEE Proc. Comm.</em>, Vol. 142, No.&nbsp;5, October 1995.</p>
+<p>[5] Robert F. Rice, “Lossless Coding Standards for Space Data Systems,” Jet Propulsion Laboratory Technical Report, California Institute of Technology, Pasadena, California.</p>
 
 
 </section>

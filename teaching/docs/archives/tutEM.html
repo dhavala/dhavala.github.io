@@ -469,19 +469,20 @@ window.Quarto = {
 
 <section id="em-algorithm-for-mixture-modeling" class="level1">
 <h1>EM Algorithm for Mixture Modeling</h1>
-<p>We derive the Expectation-Maximization (EM) algorithm for Gaussian Mixture modeling (GMM). In general, any random space can be modeled by a mixture (weighed linear combination) of normal densities. Then, such an arbitrary density can be represented as:</p>
+<p>This note derives the Expectation-Maximization (EM) algorithm for Gaussian mixture models (GMMs). A broad class of random spaces can be approximated by a weighted linear combination of normal densities. Such a density can be written as:</p>
 <p><span class="math display">\[
 f(\phi; y) = \sum_{k=1}^{K} \lambda_k f_k(\theta_k; y) \tag{1}
 \]</span></p>
 <p>where</p>
 <ul>
-<li><span class="math inline">\(K\)</span> is the total number of densities</li>
+<li><span class="math inline">\(K\)</span> is the total number of components</li>
 <li><span class="math inline">\(y\)</span> is the data vector</li>
 <li><span class="math inline">\(\phi = [\lambda_1 \ldots \lambda_K, \theta_1 \ldots \theta_K]\)</span> and <span class="math inline">\(\theta_k = [\mu_k, \Sigma_k]\)</span> represent the mean vector and covariance matrix of the <span class="math inline">\(k\)</span>th density</li>
 <li><span class="math inline">\(f_k \sim N(\mu_k, \Sigma_k)\)</span></li>
 <li><span class="math inline">\(\{\lambda_k\}\)</span> represent the mixing weights with constraint <span class="math inline">\(\sum_{k=1}^{K} \lambda_k = 1\)</span></li>
 </ul>
-<p>From now onwards, we drop the bold face notation for vectors and matrices for convenience. To derive the EM algorithm, we need to identify the missing information. Often identifying this missing information can lead to different results affecting convergence. In the mixture modeling problem, if know the label of the data, i.e., if we know the density index that could have possibly produced the observation, we could easily estimate the mixture parameters by simply collecting all the data corresponding to that particular density. In other words, if we associate each observation to one of the <span class="math inline">\(K\)</span> densities, estimating each density parameters is trivial. Hence, we choose the label as the missing information.</p>
+<p>From this point onward, vector and matrix notation is simplified for readability. To derive the EM algorithm, we first identify the missing information. This choice matters because different definitions of missing information can lead to different convergence behavior.</p>
+<p>In mixture modeling, the missing information is the component label. If the label of each observation were known, meaning we knew which density produced each observation, estimating the mixture parameters would be straightforward: group observations by component and estimate each component separately. We therefore choose the labels as the missing information.</p>
 <p>Once we identify the missing information, we need to define the complete data likelihood and marginal unobserved data density conditional on the observed data. A very good explanation of the EM algorithm is given in [1, pp.&nbsp;66-87].</p>
 <p>Let <span class="math inline">\(u(n) \in \{1 \ldots K\}\)</span> be the missing label corresponding to the <span class="math inline">\(n\)</span>th observation <span class="math inline">\(y(n)\)</span>. The marginal density (in fact pmf) of this unobserved data is then given as:</p>
 <p><span class="math display">\[
