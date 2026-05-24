@@ -179,6 +179,12 @@ main.content .listing-description a:hover {
     margin: 0 0 0.75rem;
     border-radius: 0;
   }
+  // When a description band follows the ribbon, sit them flush (no gap);
+  // pages without a description keep the 0.75rem ribbon→content spacing above.
+  .quarto-title-breadcrumbs:has(~ div > .description),
+  .section-trail:has(~ div > .description) {
+    margin-bottom: 0;
+  }
   .quarto-title-breadcrumbs a,
   .quarto-title-breadcrumbs .breadcrumb-item.active,
   .section-trail a,
