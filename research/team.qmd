@@ -24,20 +24,8 @@ description: "Students and researchers I advise and mentor."
 
 ## Alumni
 
-### PhD Students
-
-- **Student Name** (2018 – 2024) *jointly with Prof. Co-Advisor (Dept.)*\
-  *Topic:* thesis topic\
-  *Current position:* role, organization
-
 ### Masters Students
 
-- **Student Name** (2021 – 2023)\
-  *Topic:* thesis topic\
-  *Current position:* role, organization
-
-### Undergraduates
-
-- **Student Name** (2022 – 2023)\
-  *Topic:* project topic\
-  *Current position:* role, organization
+- **Snehashish Ghosh** (2025 – 2026)\
+  *Topic:* Neural Operator Learning for PDEs, *jointly with [Prof. Jyothsna Rani Komaragiri](https://chep.iisc.ac.in/Personnel/pages/jyothsna/index.html) (Center for High Energy Physics, IISc)*\
+  *Current position:* AI/ML Engineer II, Astreya
