@@ -129,6 +129,23 @@ main.content .listing-description a:hover {
   margin-bottom: 0.75rem;
 }
 
+// Page description — render the frontmatter `description:` as a light-gray band
+// that mirrors the dark breadcrumb ribbon above it: same full width and
+// 0.5rem 2rem padding, just lighter and in muted gray text. The extra bottom
+// margin gives clear separation from the body content. !important on padding
+// beats the higher-specificity `body:has(...) .quarto-title-block > div
+// { padding: 0 2rem }` ribbon-layout rules further down.
+.quarto-title-block > div:has(> .description) {
+  background: #ececec;
+  padding: 0.5rem 2rem !important;
+  margin: 0 0 1.5rem;
+}
+.quarto-title-block .description {
+  margin: 0;
+  color: #666;
+  font-size: 0.82rem;
+}
+
 // DESKTOP (≥992px): show a dark ribbon directly under the banner. On sub-
 // pages it's Quarto's title-block breadcrumb (e.g. "Research > Patents").
 // On section index pages where Quarto omits that breadcrumb, style the
