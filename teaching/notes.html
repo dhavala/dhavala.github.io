@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Lecture notes and supplementary readings.">
+<meta name="description" content="Notes and tutorials on Bayesian computation and signal processing.">
 
 <title>Notes – Soma S Dhavala</title>
 <style>
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (p.indexOf('/research/docs/reports/') >= 0)
       return [['Research', '/research/index.html'], ['Reports', '/research/reports.html']];
     if (p.indexOf('/teaching/docs/archives/') >= 0)
-      return [['Teaching', '/teaching/index.html'], ['Archives', '/teaching/archives.html']];
+      return [['Teaching', '/teaching/index.html'], ['Notes', '/teaching/notes.html']];
     if (p.indexOf('/research/projects/') >= 0)
       return [['Research', '/research/index.html'], ['Projects', '/research/projects/index.html']];
     // Blog posts live one slug-level under saddlepoint/ or asankhya/ and
@@ -180,11 +180,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <meta property="og:title" content="Notes – Soma S Dhavala">
-<meta property="og:description" content="Lecture notes and supplementary readings.">
+<meta property="og:description" content="Notes and tutorials on Bayesian computation and signal processing.">
 <meta property="og:image" content="https://dhavala.github.io/teaching/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
 <meta name="twitter:title" content="Notes – Soma S Dhavala">
-<meta name="twitter:description" content="Lecture notes and supplementary readings.">
+<meta name="twitter:description" content="Notes and tutorials on Bayesian computation and signal processing.">
 <meta name="twitter:image" content="https://dhavala.github.io/teaching/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -317,26 +317,14 @@ document.addEventListener('DOMContentLoaded', function() {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../teaching/courses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Courses</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../teaching/notes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Notes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../teaching/homeworks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Homeworks</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../teaching/exams.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exams</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../teaching/archives.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Archives</span></a>
   </div>
 </li>
       </ul>
@@ -398,8 +386,16 @@ document.addEventListener('DOMContentLoaded', function() {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#bayesian-computation" id="toc-bayesian-computation" class="nav-link active" data-scroll-target="#bayesian-computation">Bayesian computation</a></li>
+  <li><a href="#time-frequency-signal-processing" id="toc-time-frequency-signal-processing" class="nav-link" data-scroll-target="#time-frequency-signal-processing">Time-frequency &amp; signal processing</a></li>
+  <li><a href="#coding-compression" id="toc-coding-compression" class="nav-link" data-scroll-target="#coding-compression">Coding &amp; compression</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -414,7 +410,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div>
   <div class="description">
-    Lecture notes and supplementary readings.
+    Notes and tutorials on Bayesian computation and signal processing.
   </div>
 </div>
 
@@ -431,9 +427,34 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 
-<p><em>(Content to be added.)</em></p>
+<p>A collection of self-contained notes and tutorials written during my graduate years, transcribed from their original sources with rendered LaTeX. They span Bayesian computation, time-frequency signal processing, and coding/compression. (Longer technical reports are collected under <a href="../research/reports.html">Research › Reports</a>.)</p>
+<section id="bayesian-computation" class="level2">
+<h2 data-anchor-id="bayesian-computation">Bayesian computation</h2>
+<ul>
+<li><a href="../teaching/docs/archives/tutLaplace.html">Normal Approximation</a> — Laplace (normal) approximation of a bivariate posterior, with a closed form for the posterior under a normal prior.</li>
+<li><a href="../teaching/docs/archives/tutGmm.html">Gaussian Mixture for Multi-modal Posteriors</a> — approximating a multi-modal posterior by a mixture of normals, with merging to select the number of components.</li>
+<li><a href="../teaching/docs/archives/tutEM.html">EM Algorithm for Mixture Modeling</a> — derivation of Expectation-Maximization for Gaussian mixture models.</li>
+<li><a href="../teaching/docs/archives/tutMCMC.html">Numerical Methods for Bayesian Inference</a> — quadrature, Monte Carlo integration, rejection sampling, and random-walk Metropolis with a normal prior or likelihood.</li>
+</ul>
+</section>
+<section id="time-frequency-signal-processing" class="level2">
+<h2 data-anchor-id="time-frequency-signal-processing">Time-frequency &amp; signal processing</h2>
+<ul>
+<li><a href="../teaching/docs/archives/intro2tfr.html">Introduction to Time-Frequency Analysis</a> — Cohen’s class, the Wigner–Ville and affine classes, and adaptive time-frequency representations.</li>
+<li><a href="../teaching/docs/archives/tutChirp.html">Chirplet Decomposition</a> — decomposing a signal into Gaussian chirplets via mixture modeling, method of moments, and nested Fisher scoring.</li>
+<li><a href="../teaching/docs/archives/wavelet-complexity.html">Computational Complexity of the Wavelet Transform</a> — operation counts for the 1-D, 2-D, 3-D, and incomplete-3-D wavelet transforms.</li>
+</ul>
+</section>
+<section id="coding-compression" class="level2">
+<h2 data-anchor-id="coding-compression">Coding &amp; compression</h2>
+<ul>
+<li><a href="../teaching/docs/archives/golomb.html">Golomb–Rice Coding</a> — prefix codes for geometrically distributed integers, and run-length coding with Golomb codes.</li>
+<li><a href="../teaching/docs/archives/arithmetic-coding.html">Arithmetic Coding</a> — interval-subdivision arithmetic coding, integer arithmetic, and adaptive models.</li>
+<li><a href="../teaching/docs/archives/review-n1.html">Quad-Trees, EZW and SPIHT Codecs</a> — quad-tree image partitioning and the EZW and SPIHT wavelet codecs.</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
