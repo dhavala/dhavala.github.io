@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Soma S Dhavala">
-<meta name="dcterms.date" content="2026-05-17">
-<meta name="description" content="A first post — what this space is for.">
+<meta name="dcterms.date" content="2017-10-22">
+<meta name="description" content="Machine learning apps need explicit guarantees: repeatability, auditability, recoverability, scalability, testability, security, responsiveness, and representation.">
 
-<title>Welcome to the blog – Soma S Dhavala</title>
+<title>Reliable ML Apps: Goals and Guarantees – Soma S Dhavala</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -181,13 +181,13 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
-<meta property="og:title" content="Welcome to the blog – Soma S Dhavala">
-<meta property="og:description" content="A first post — what this space is for.">
-<meta property="og:image" content="https://dhavala.github.io/saddlepoint/welcome/images/og-image.png">
+<meta property="og:title" content="Reliable ML Apps: Goals and Guarantees – Soma S Dhavala">
+<meta property="og:description" content="Machine learning apps need explicit guarantees: repeatability, auditability, recoverability, scalability, testability, security, responsiveness, and representation.">
+<meta property="og:image" content="https://dhavala.github.io/saddlepoint/2017-10-22-axiomatic-framework-ml-apps-1/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
-<meta name="twitter:title" content="Welcome to the blog – Soma S Dhavala">
-<meta name="twitter:description" content="A first post — what this space is for.">
-<meta name="twitter:image" content="https://dhavala.github.io/saddlepoint/welcome/images/og-image.png">
+<meta name="twitter:title" content="Reliable ML Apps: Goals and Guarantees – Soma S Dhavala">
+<meta name="twitter:description" content="Machine learning apps need explicit guarantees: repeatability, auditability, recoverability, scalability, testability, security, responsiveness, and representation.">
+<meta name="twitter:image" content="https://dhavala.github.io/saddlepoint/2017-10-22-axiomatic-framework-ml-apps-1/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Welcome to the blog</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Reliable ML Apps: Goals and Guarantees</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -400,8 +400,15 @@ document.addEventListener('DOMContentLoaded', function() {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#goals-for-a-durable-ml-app" id="toc-goals-for-a-durable-ml-app" class="nav-link active" data-scroll-target="#goals-for-a-durable-ml-app">Goals for a Durable ML App</a></li>
+  <li><a href="#why-a-framework-is-needed" id="toc-why-a-framework-is-needed" class="nav-link" data-scroll-target="#why-a-framework-is-needed">Why a Framework Is Needed</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -411,16 +418,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to the blog</h1>
+<h1 class="title">Reliable ML Apps: Goals and Guarantees</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">meta</div>
-    <div class="quarto-category">intro</div>
+    <div class="quarto-category">machine-learning</div>
+    <div class="quarto-category">ml-apps</div>
+    <div class="quarto-category">architecture</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    A first post — what this space is for.
+    Machine learning apps need explicit guarantees: repeatability, auditability, recoverability, scalability, testability, security, responsiveness, and representation.
   </div>
 </div>
 
@@ -437,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 17, 2026</p>
+      <p class="date">October 22, 2017</p>
     </div>
   </div>
   
@@ -449,10 +457,44 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 
-<p>This is the first post on the relaunched site. Expect notes on statistics, applied machine learning, teaching, and the occasional aside on tooling.</p>
-<p>The site is built with <a href="https://quarto.org">Quarto</a>. Comments are powered by <a href="https://giscus.app">giscus</a> (GitHub Discussions).</p>
+<p><img src="10-axion-fig.jpeg" class="img-fluid" alt="Axiomatic framework diagram for machine learning applications"></p>
+<p>Building machine learning applications is unlike building physical products such as refrigerators. Once delivered, a refrigerator rarely changes because of the environment in which it operates. Its operating conditions are relatively deterministic.</p>
+<p>An ML app is different. Data characteristics can drift. Model assumptions can become invalid. Business conditions may change. Startups, in particular, often face unavoidable shifts in data, usage, and product direction. ML apps are also unfinished by design: they can be tuned, improved, replaced, or reconfigured almost at will.</p>
+<p>That raises a basic question:</p>
+<blockquote class="blockquote">
+<p>What can a manufacturer meaningfully guarantee for an ML app?</p>
+</blockquote>
+<p>For a physical product, a manufacturer may provide installation instructions, operating instructions, warranties, insurance, and customer support. For an ML app or data product, we need a different set of guarantees.</p>
+<section id="goals-for-a-durable-ml-app" class="level2">
+<h2 data-anchor-id="goals-for-a-durable-ml-app">Goals for a Durable ML App</h2>
+<p>The following goals are not always directly measurable, but they can be supported through engineering proxies and architectural discipline.</p>
+<ol type="1">
+<li><strong>Repeatable:</strong> identical data and identical configuration should produce identical outcomes. This is primarily an engineering requirement.</li>
+<li><strong>Auditable:</strong> data trails, model versions, code versions, and transformations should be trackable and traceable.</li>
+<li><strong>Recoverable:</strong> the app should recover from computational failures and resume from a known state.</li>
+<li><strong>Scalable:</strong> the app should scale up or down as load changes.</li>
+<li><strong>Deliverable at speed:</strong> the path from idea to insight should be short enough to support rapid delivery.</li>
+<li><strong>Reconfigurable:</strong> the production floor should support derivative apps, much as a manufacturing floor can produce related product variants.</li>
+<li><strong>Testable:</strong> multiple app versions should be deployable, comparable, and measurable against business metrics.</li>
+<li><strong>Technology-agnostic:</strong> each functional job should use the best environment and toolset, without forcing all work into one monolithic bench.</li>
+<li><strong>Vendor-agnostic:</strong> the app should avoid unnecessary lock-in to a single infrastructure provider.</li>
+<li><strong>Secure:</strong> data is an asset and must be protected through access control, authentication, and governance.</li>
+<li><strong>Privacy-preserving:</strong> stakeholder rights and data privacy must be respected.</li>
+<li><strong>Reproducible:</strong> similar data should lead to similar outcomes when the underlying assumptions hold. This is more of a scientific requirement than a pure engineering one.</li>
+<li><strong>Diagnosable:</strong> the app should detect and report assumption violations, data-quality issues, and abnormal deployment conditions.</li>
+<li><strong>Responsive:</strong> the app should react to changing stimuli and adapt when appropriate.</li>
+<li><strong>Representable:</strong> the app should describe itself in a machine-readable form so that other agents can inspect, tune, compose, or patch it.</li>
+</ol>
+<p>The first seven goals are mostly addressable with tools from machine learning infrastructure and software engineering. Goals 8 through 15 require deeper statistical, modeling, governance, and scientific knowledge. They are harder to democratize, but they are essential if ML apps are to become durable products.</p>
+</section>
+<section id="why-a-framework-is-needed" class="level2">
+<h2 data-anchor-id="why-a-framework-is-needed">Why a Framework Is Needed</h2>
+<p>Without a principled architecture, these goals remain pleasant slogans. We need a framework that brings several solution spaces together: data versioning, code versioning, model execution, workflow orchestration, monitoring, testing, and deployment.</p>
+<p>The analogy is manufacturing. The automobile industry did not begin with modern standardization. It took time for parts, processes, patterns, and production systems to mature. ML app development is still closer to the early industrial stage than to the current state of manufacturing.</p>
+<p>In <a href="../2017-10-24-axiomatic-framework-ml-apps-2/">part 2</a>, I propose axioms and a reference architecture for moving toward that maturity.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -881,7 +923,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Built with <a href="https://quarto.org">Quarto</a> and <a href="http://claude.ai/">Claude</a></p>
+<p>Built with <a href="https://quarto.org">Quarto</a>, <a href="http://claude.ai/">Claude</a> and <a href="https://chatgpt.com/codex/">Codes</a></p>
 </div>   
     <div class="nav-footer-center">
 <p>© 2026 Soma S Dhavala</p>
