@@ -1,0 +1,63 @@
+---
+title: "Axioms for Reliable ML Apps, Part 2"
+description: "A concrete architecture for ML apps: versioned data, code, config, micro apps, DAG orchestration, and DataFrames as the default data interface."
+author: "Soma S Dhavala"
+date: "2017-10-24"
+categories: ["machine-learning", "ml-apps", "architecture"]
+---
+
+![](10-axion-fig.jpeg){fig-alt="Axiomatic framework diagram for machine learning applications"}
+
+In [part 1](../2017-10-22-axiomatic-framework-ml-apps-1/), I described the goals an ML app should satisfy if it is expected to have a useful shelf life. In this part, I propose a set of axioms that can help app developers focus on problem solving rather than data administration and operational plumbing.
+
+The architecture below is intentionally concrete but incomplete. It is a reference pattern, not a finished product.
+
+## Axioms
+
+1. **Data is a resource and must have a URI.** The URI may come from a physical file location, a commit identifier, or a lineage-aware reference that resolves to truth-on-disk.
+2. **Data must resolve to truth-on-disk.** Some data must be persistent and permanent; otherwise auditability is impossible.
+3. **There must be a default logical data container.** A DataFrame is a good choice. Structured and unstructured data, including text, spatial, temporal, and graph data, can often be represented as DataFrames.
+4. **Data drivers are part of executable code.** Drivers are the entry and exit points. They transform storage structures into computation structures and complain when data does not fit intent.
+5. **A micro app serves one reusable purpose well.** It may use primitive functions internally, but it should expose one clear functional objective.
+6. **A micro app is a host.** It has input ports for data, config, code, and optionally auth. It produces data as output.
+7. **An ML app is a composition of micro apps.** Larger apps emerge from smaller executable units.
+8. **Composition topology is a DAG.** Nodes are micro apps. Directed edges represent data flow.
+9. **Execution is event-driven.** A micro app runs only when upstream dependencies are available.
+
+## A Reference Pattern
+
+An ML app can be modeled as a **multi-container, event-driven microservice application**. Computational dependencies are specified as a DAG. Each micro app is a self-contained executable block with a well-defined purpose. Code, config, and data are all versioned and tagged.
+
+A concrete realization could look like this:
+
+- A micro app is a Docker container.
+- The app DAG is specified using Docker Compose or a similar orchestration layer.
+- Data endpoints are Docker volumes or follow a data-container pattern.
+- Git versions code.
+- A data-versioning tool versions data.
+
+This framework enables several useful properties:
+
+- **Scalability:** if each container can scale, the app can scale.
+- **Interoperability:** different micro apps can use different environments. Data crunching can happen in Spark/Scala while modeling happens in Python/scikit-learn.
+- **Fast delivery:** data scientists can ship production-ready code more directly.
+- **Repeatability:** code, data, image build configuration, and orchestration commits can be pinned.
+- **Auditability:** code, data, and config are tagged, versioned, and traceable.
+- **Recoverability:** DAG execution allows incremental recovery from failures.
+- **Reconfigurability:** a changed model is another DAG or a changed node in the DAG.
+- **Testability:** evaluation can itself be a micro app, enabling A/B testing and model comparison.
+
+## What Is Still Missing
+
+This architecture has gaps. Tooling is incomplete. Many operational details still need to be tried and refined. But the pattern is useful because it makes the moving parts explicit: data, code, config, auth, execution, lineage, and composition.
+
+Future topics naturally follow from this architecture:
+
+- the USB-for-ML metaphor;
+- DataFrame as the default data pin;
+- micro apps in more detail;
+- best practices for modularizing data science workflows;
+- data science grammar; and
+- productivity tools and services for ML app development.
+
+This article remains opinionated and provisional, but its purpose is to surface the design problems around building durable data products.

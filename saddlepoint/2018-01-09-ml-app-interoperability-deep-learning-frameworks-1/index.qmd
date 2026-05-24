@@ -1,0 +1,41 @@
+---
+title: "ML App Interoperability with PMML, Part 1"
+description: "PMML is a serious model-exchange effort, but weak importer support, inconsistent model interfaces, and XML-heavy design limit its role as a default."
+author: "Soma S Dhavala"
+date: "2018-01-09"
+categories: ["machine-learning", "ml-apps", "interoperability"]
+---
+
+![](xml.jpeg){fig-alt="XML document icon representing model interchange"}
+
+In earlier posts, I described several quality attributes of a **machine learning application**. One of the most important is **interoperability**: a model developed by one person should be usable by someone else, regardless of language, deployment environment, or supporting infrastructure.
+
+For model interoperability specifically, PMML is probably the most mature and well-intended model exchange format. It allows a trained model to be published as an XML file. In principle, a scoring system can read that file, launch a compatible scorer, and apply the model elsewhere.
+
+For example, I might train a decision tree in R, save it as PMML, load it in Spark/Scala, and score large or small datasets there. The idea is promising, and the technical problem is solvable. But adoption faces several barriers.
+
+## Where PMML Struggles
+
+**Adoption is asymmetric.** Many libraries can export PMML, but far fewer can import it well. Spark has supported limited PMML export, but importer support has been weak. Scikit-learn has exporters through projects such as `jpmml-sklearn`, including for pipelines. Exporters are useful, but without robust importers they do not complete the interoperability loop.
+
+**Model interfaces are not standardized.** Even for a familiar statistical model, libraries expose parameters differently. Interfaces may look similar while their semantics differ. Something as simple as drawing from a distribution can require careful inspection of parameterization. I have seen this pain when moving between MATLAB and WinBUGS, where probability distributions were often parameterized differently.
+
+**The model space changes too quickly.** New algorithms and variations appear constantly across computer science, statistics, operations research, psychology, and related fields. It is unrealistic to expect every inventor to provide readers for every platform, language, and framework. At best, a researcher may provide an exporter. That makes the importer problem even harder.
+
+**The specification is too broad.** PMML mixes preprocessing, standardization, and model specification. It tries to do too much at once, which makes the specification harder to reason about. Some tools go further and encode complete pipelines in PMML. That may be useful operationally, but it also makes the format less clean as a model specification layer.
+
+**XML is hard to inspect.** A model exchange format should allow a data scientist to inspect the structure quickly. XML moves in the opposite direction. It is machine-readable, but not pleasant for human review.
+
+**Structure and coefficients are mixed together.** Large models become painful to inspect when architecture and parameters live in one dense representation. In effect, the data scientist is pushed out of the loop.
+
+**Every model needs custom specification.** A linear SVM and a naive Bayes classifier may both predict class labels, but their model structures are fundamentally different. PMML must keep adding model-specific schemas.
+
+## Other Directions
+
+Newer platforms such as Julia and Spark suggest another path: write code once and run it at the right scale. Julia aims for C-like performance with MATLAB-like expressiveness. Spark supports Python, Scala, Java, and cluster execution. These platforms try to make the development environment and deployment environment converge.
+
+That is useful, but it is not a complete answer. Organizations choose tools based on more than performance. They also consider hiring, training, supply, demand, developer aspiration, and ecosystem stability.
+
+The tool should remain subordinate to the problem. Organizations and individuals will not all standardize on Spark, Julia, Python, or any single environment. At best, we can offer a good default that coexists with existing ecosystems.
+
+In [part 2](../2018-01-10-ml-app-interoperability-deep-learning-frameworks-2/), I argue that deep learning frameworks provide such a default for ML model interoperability.
