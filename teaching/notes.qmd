@@ -3,15 +3,14 @@ title: "Notes"
 description: "Notes and tutorials on Bayesian computation and signal processing."
 ---
 
-A collection of self-contained notes and tutorials written during my graduate
-years, transcribed from their original sources with rendered LaTeX. They span
-Bayesian computation, time-frequency signal processing, and coding/compression.
-(Longer technical reports are collected under [Research › Reports](../research/reports.qmd).)
+These self-contained notes and tutorials were written during my graduate years and later transcribed from the original sources with rendered LaTeX. They cover Bayesian computation, time-frequency signal processing, and coding and compression.
+
+Longer technical reports are collected under [Research › Reports](../research/reports.qmd).
 
 ## Bayesian computation
 
 - [Normal Approximation](docs/archives/tutLaplace.qmd) — Laplace (normal) approximation of a bivariate posterior, with a closed form for the posterior under a normal prior.
-- [Gaussian Mixture for Multi-modal Posteriors](docs/archives/tutGmm.qmd) — approximating a multi-modal posterior by a mixture of normals, with merging to select the number of components.
+- [Gaussian mixture for Multi-modal Posteriors](docs/archives/tutGmm.qmd) — approximating a multi-modal posterior by a mixture of normals, with merging to select the number of components.
 - [EM Algorithm for Mixture Modeling](docs/archives/tutEM.qmd) — derivation of Expectation-Maximization for Gaussian mixture models.
 - [Numerical Methods for Bayesian Inference](docs/archives/tutMCMC.qmd) — quadrature, Monte Carlo integration, rejection sampling, and random-walk Metropolis with a normal prior or likelihood.
 

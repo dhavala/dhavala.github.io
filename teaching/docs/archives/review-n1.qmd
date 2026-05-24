@@ -6,13 +6,13 @@ author: "Soma S. Dhavala"
 
 # A Study of Quad-Trees, EZW and SPIHT Codecs
 
-## Section A
+## Quad-tree image representation
 
 ### Trees
 
 A tree is a data structure that holds data in a hierarchical way. If you are familiar with Windows, the Windows Explorer shows the file structure in a tree structure.
 
-Terminology:
+The basic terminology is as follows:
 
 - **Root:** The branch of the tree from which one can traverse to any branch in the downward direction.
 - **Node:** It is the root of another subtree. A node holds another subtree. The root is the node of a tree.
@@ -35,9 +35,9 @@ To clarify the point (bullet), a node may have two children, but if all the node
 
 **Figure 2.** A Binary Tree.
 
-### Salient Points of QT Decomposition (QTD)
+### Salient points of QT decomposition (QTD)
 
-When QTs are used for representing images, the following can be observed:
+When quad-trees are used to represent images, they provide the following properties:
 
 - Linear indexing
 - Simpler representation
@@ -46,7 +46,7 @@ When QTs are used for representing images, the following can be observed:
 - Region-of-Interest
 - Worst R-D performance
 
-Can also be used for:
+They can also be used for:
 
 - Image segmentation
 - Edge enhancement
@@ -68,7 +68,7 @@ The following can be done to improve the performance:
 - Thresholding in the homogeneity test
 - Bit-allocation for leaves coding
 
-### Comparable To
+### Comparable methods
 
 - Modified QTD outperforms DCT with scalar quantization
 - Competitive with DCT+VQ
@@ -89,11 +89,11 @@ N: Not possible.
 
 X: Don't care or Don't know (most likely).
 
-### QT Representation of Wavelet Coefficients (Being Very Specific to Dyadic Wavelet Transforms)
+### QT representation of wavelet coefficients
 
 In general, the wavelet decomposition is performed on the LL band and thus it forms a dyadic tree, a complete asymmetric QT. After the application of the transform comes the coding part of the coefficients. It is necessary to have an efficient data-structure to represent these coefficients. For example, in the case of EZW or SPIHT the whole coding scheme works on magnitude comparison tests and magnitude refinement passes on the sets of data that are either nodes, children or descendants of a QT where QT represents the wavelet coefficients. In this context, QT doesn't do anything extra but is only a means of performing the coding on a data-structure. Hence I feel, it doesn't map to any CTQs. All the mappings of WT are propagated with QT. It is not an obstacle to any of the mappings of WT but it "may" offer computation-wise performance. QT is a natural data representation and hence the searching and sorting operations may be done in an efficient way.
 
-### QT Representation of Wavelet Decomposition Structure
+### QT representation of wavelet decomposition structure
 
 We extend the boundaries put by the dyadic wavelet transform. The most interesting part of the dyadic wavelet transform is very regular. Hence, we cannot believe it all the time. There must be something wrong. Yes... it is not data adaptive. No, I am not saying it with respect to the type of wavelet you use or the type of coding you use... I am talking with respect to the levels of decomposition and the decomposition structure. In general there exist two kinds of decompositions, namely, wavelet-tree and wavelet-packet. Before we go further, we will ask a question. Where are the QTs? Wavelet-transform of a two-dimensional signal results in four frequency bands, better known in the literature as LL, LH, HL and HH bands. In a wavelet-tree every LL is sub-decomposed into another four bands and in a wavelet-packet every band is split into another four bands. It exactly looks like a QT and it is where QT is playing a role. In adaptive QT wavelet decomposition, the objective becomes whether to split the tree further or not. Essentially QT here represents the WT decomposition structure. An analogy -> we have studied just now, QT representation of images. It is exactly the same with image replaced by wavelet coefficients, i.e., splitting a branch into four leaves leads to splitting a band into another four bands. Here the splitting of the branch may take place anywhere in the wavelet-packet. The tree structure can be passed to the decoder to let it know about the decomposition structure and perform the inverse WT accordingly. This has relevance in signal-adapted wavelet-packet where the wavelet-packet structure is not decomposed a priori. Based on a condition or cost function a decision is made whether to split (decompose) or not to split the branch. The cost function might be R-D performance or entropy-driven. In the present case each node represents a set of coefficients that has a relation to the level of decomposition. For example, let us take a 512 x 512 image. Then
 
@@ -135,9 +135,9 @@ $$
 
 where $B_1$ is the bit budget given by SPIHT and $B_2$ is the bit budget given by the generalized SPIHT that we are currently investigating.
 
-## Section B
+## Embedded zero-tree coding
 
-### Embedded Zero-Tree Coding
+### EZW overview
 
 E (embedded) means what?
 
@@ -169,7 +169,7 @@ iii) Exploitation of the self-similarity of the image wavelet transform across d
 
 The partial ordering is a result of comparison of transform element (coefficient) magnitudes to a set of octavely decreasing thresholds. An element becomes significant or insignificant with respect to a given threshold, depending on whether or not it exceeds that threshold.
 
-## Section C
+## SPIHT coding
 
 ### SPIHT
 

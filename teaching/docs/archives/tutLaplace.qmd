@@ -6,15 +6,15 @@ author: "Soma S. Dhavala"
 
 # Normal Approximation
 
-Let the likelihood function be
+The goal of this note is to approximate a posterior density using a local normal approximation. Let the likelihood function be
 
 $$
 L(\theta; y) = c \exp(-f(\theta; y)) \tag{1}
 $$
 
-for some arbitrary bi-variate function $f$ and for some constant $c$. It might be useful if we have a normal likelihood function, in which case it is possible to compute the posterior either analytically (e.g. if the prior is also normal) or by resorting to numerical integration techniques [1] (e.g. Gauss–Hermite quadrature). It can also be used to calculate moments and cumulants in an efficient way [2].
+for some arbitrary bivariate function $f$ and for some constant $c$. It might be useful if we have a normal likelihood function, in which case it is possible to compute the posterior either analytically (e.g. if the prior is also normal) or by resorting to numerical integration techniques [1] (e.g. Gauss–Hermite quadrature). It can also be used to calculate moments and cumulants in an efficient way [2].
 
-In general, we can approximate the function $f(\theta)$ (in the neighborhood of $\tau$) using a multi-variate Taylor series. In the present case, we will be considering the bi-variate case. We consider only terms up to order two since the log-likelihood of a normal density is quadratic,
+In general, we can approximate $f(\theta)$ near $\tau$ using a multivariate Taylor series. Here we consider the bivariate case. Terms beyond second order are dropped because the log-likelihood of a normal density is quadratic:
 
 $$
 f(\theta) \approx a_{00} + a_{10}(\theta_1 - \tau_1) + a_{01}(\theta_2 - \tau_2) + a_{11}(\theta_1 - \tau_1)(\theta_2 - \tau_2) + a_{20}(\theta_1 - \tau_1)^2 + a_{02}(\theta_2 - \tau_2)^2 \tag{2}
@@ -48,7 +48,7 @@ $$
 \end{bmatrix} \tag{4c}
 $$
 
-We can expand the Taylor series around the *mode* or *ML estimate*. Having approximated the likelihood as a bivariate normal, below we will provide a closed-form expression for calculating the posterior density for a given normal prior. If the prior $\pi(\theta)$ is of the form
+We can expand the Taylor series around the *mode* or maximum-likelihood estimate. Once the likelihood is approximated as a bivariate normal, the posterior under a normal prior has a closed form. If the prior $\pi(\theta)$ is of the form
 
 $$
 \pi(\theta) \sim N(\mu_\pi, \Sigma_\pi) \tag{5}

@@ -8,36 +8,38 @@ author: "Soma S. Dhavala"
 
 ## Introduction
 
-The objective of any compression technique or source coding technique is to remove the redundant information. All the entropy-coding techniques try to remove this redundancy in different ways.
+The objective of any compression or source-coding technique is to remove redundant information. Entropy-coding methods do this by assigning shorter representations to more likely events and longer representations to less likely events.
 
-Redundancy: A strange word indeed. Let us say that you are interested in the sweetness of a solution. And if you can estimate the sweetness of the solution completely, it is referring to losslessness of an image representation. Now, one ounce of sugar is added in one liter of water. Then, to test the amount of sweetness, you take one ml of water, measure the sweetness and then say that the sweetness is "quantity/ml x 1000". It is the crux of the story. All other information is not required to estimate the sweetness. Yah.. I sensed your question. What happens if the solution is not homogeneous? Evaporate all the water by heating and sugar must be left as a residue. This is what we mean by transformation. Another real-life example is: In olden days, we weren't having cookers or microwave ovens. We cook rice in a vessel with heat supplied by conventional resources like wood etc. To test whether rice is boiled (or eatable), you just take few rice grains and based upon that sample you come to a conclusion. In terms of redundancy, the whole pot need not be tested to know whether rice is boiled or not. Here, the information is "boiledness". We have taken a few samples and conveyed this information. The redundancy is removed. Here is an interesting phenomenon which is related to "biasing of the result". In general we say that "experience makes man perfect". In terms of probability we say that, as the number of samples of a random process (or the source which we are trying to estimate) increases, the better the estimate or the less biased. In the similar way, if we remove the redundancy, any improper sample may lead to a different conclusion, say, rice is half-boiled. This can be thought of as robustness or error-resilience. Another informal definition might be:
+A useful informal way to think about redundancy is through sampling. If a sugar solution is homogeneous, a small sample can tell us the sweetness of the whole container. We do not need to inspect every drop. Similarly, when cooking rice, a few grains are often enough to determine whether the whole pot is cooked. In both cases, a small amount of information stands in for a larger source because the source has regularity.
 
-Representing a source with fewer number of bits than required by the source such that the source can be generated without loss of information is another informal definition of less-redundant representation.
+Compression exploits the same idea. A representation is less redundant when it uses fewer bits while still allowing the original source to be reconstructed without loss. The risk is that removing redundancy can reduce robustness: if the source is not as regular as assumed, a small sample can mislead us. That tradeoff is closely related to bias, estimation, and error resilience.
 
-What are various ways of removing the redundancy?
+The natural question is: how can this redundancy be removed systematically?
 
-Arithmetic coding is another kind of entropy coding. Essentially, it works on the principle that the most probable symbol must be given a lesser number of bits. But, directly it doesn't seem to do so. However, it works on the estimated probabilities of the source symbols. The idea is: repetitive partitioning of the real line [0 1] (closed) based on the probabilities of the source symbols [1].
+Arithmetic coding is another form of entropy coding. It follows the same principle as other entropy coders: more probable symbols should receive shorter representations. It does this indirectly by repeatedly partitioning the closed interval $[0,1]$ according to the estimated probabilities of the source symbols [1].
 
-There are two types of arithmetic coders, namely
+There are two common types of arithmetic coders:
 
-1) Non-adaptive and
-2) Adaptive.
+1. **Non-adaptive coders**, which estimate symbol probabilities once and use them throughout the message.
+2. **Adaptive coders**, which update probability estimates as symbols are scanned.
 
-The adaptive arithmetic coder, each time estimates the "first-order" conditional probabilities and updates them with the previously scanned ones, whereas the non-adaptive arithmetic coder estimates the probabilities of the symbols and then uses these probabilities always while partitioning the real line. It is time to think about the implementation aspects now. According to our discussion so far, we are talking about partitioning of the real line repetitively. It is obvious that we are dealing with intervals confined to that region and all our operations are floating point operations. As the number of symbols increases, the partitioned segments become smaller and smaller. It may lead to computational instability because of the high precision required to store these intervals efficiently. To circumvent the problem, many methods were proposed that use integer-based arithmetic. One such method was given in [1].
+An adaptive arithmetic coder estimates first-order conditional probabilities and updates them as symbols are scanned. A non-adaptive coder estimates symbol probabilities once and uses the same probabilities throughout interval partitioning.
+
+This raises an implementation issue. The conceptual algorithm repeatedly partitions the real interval $[0,1]$, so a direct implementation uses floating-point interval arithmetic. As the number of symbols grows, the intervals become smaller and smaller, which can lead to numerical instability and high precision requirements. Integer-arithmetic implementations avoid this problem; one such method is described in [1].
 
 JPEG 2000 uses arithmetic coding [7]. It is binary-adaptive arithmetic coding with integer arithmetic. Here, it is adaptive in the sense that contexts are formulated using the eight neighboring bits and these contexts are used in coding the bit-planes. Let us say that we have only two symbols "0" and "1". Irrespective of the associated probabilities, we may fix a rule that "0" represents the left partition (we talk left and right because there are only two symbols) and "1" represents the right partition. The decoder also follows the same convention. In the case of JPEG2000, due to the implementation of the coder, the partitions are known as MPS (most probable symbol) and LPS (less probable symbol) but not "1" for right or so. The convention is used to facilitate the implementation of the coder but nothing else.
 
-Earlier we have just said what arithmetic coding is. Now we will look at its advantages.
+We now summarize the main advantages of arithmetic coding.
 
 The most important advantage of arithmetic coding is its flexibility: it can be used in conjunction with any model that can provide a sequence of event probabilities. This advantage is significant because large compression gains can be obtained only through the use of sophisticated models of the input data.
 
 Models used for arithmetic coding may be adaptive, and in fact a number of independent models may be used in succession in coding a file. This great flexibility results from sharp separation of the coder from the modeling process. There is a cost associated with this flexibility: the interface between the model and the coder, while simple, places considerable time and space demands on the model's structures, especially in the case of a multi-symbol input alphabet. Now, we try to define a model and a symbol.
 
-Symbol: It is one of the possible outcomes of an experiment, e.g., the set of symbols might be integers from 0 to 255 if the source of the symbols is an 8-bit depth gray valued image.
+**Symbol:** one possible outcome of an experiment. For example, in an 8-bit grayscale image, the symbols may be the integers from 0 to 255.
 
-Model: It represents the probabilities of the symbols that occur in that particular symbol set.
+**Model:** the probability assignment over the symbol set.
 
-Eg. Let us say that we have two coins with us. One of them is unbiased and the other is biased towards head. Then if you repeat the tossing experiment with these two coins, then the unbiased coin produces 1/2 and 1/2 probabilities for head and tail and the other coin may produce 3/4 and 1/4 for head and tail respectively. If we don't look at the source (model) of these experiments that have resulted in different probability mass functions (pmfs), we may wrongly conclude that the probabilities are 5/8 and 3/8 for head and tail respectively. In the two cases, we will get different entropies because the assumptions we made on the underlying distribution are different. Naturally the actual source should produce less entropy.
+For example, suppose we have two coins. One is unbiased; the other is biased toward heads. The unbiased coin produces probabilities $1/2$ and $1/2$ for heads and tails. The biased coin may produce probabilities $3/4$ and $1/4$. If we ignore the fact that the samples came from two different sources, we might combine the outcomes and incorrectly infer probabilities such as $5/8$ and $3/8$. The entropy changes because the modeling assumption changes. A better model of the actual source generally yields lower entropy.
 
 ### First advantage: clean separation of model and coding
 
@@ -45,7 +47,7 @@ To understand this "model" business, we need not actually know arithmetic coding
 
 Let there be a sequence like this "0000000011111111", eight zeros followed by eight ones.
 
-(1) Non-adaptive coder. In the first pass, it computes the probabilities of zero and one and they are 1/2 and 1/2 respectively. Hence, the entropy is 1 and the resulting bit stream is actually the source of the symbols itself. Let us parse it as eight ones and eight zeros. It is as though the first source is always producing zeros and the second source is always producing ones. Hence, the entropy is zero. Have we done some magic? No, we did not. In fact, here, we are so sure that the first model produced eight symbols and the second eight. We have used our knowledge of the source and arithmetic coding can give great results if we were able to do this efficiently.
+**Non-adaptive coder.** In the first pass, the coder estimates the probabilities of zero and one as $1/2$ and $1/2$. The entropy is therefore 1 bit per symbol, and the resulting bit stream is essentially the source sequence itself. If instead we parse the sequence as eight zeros followed by eight ones, it is as if the first source always produces zeros and the second always produces ones. The entropy within each segment is then zero. No magic is involved; we have simply used more accurate knowledge of the source structure. Arithmetic coding can give strong results when the model captures that structure efficiently.
 
 ### Second advantage: Optimality
 
@@ -57,11 +59,11 @@ The main disadvantage is that it tends to be slow. We shall see that the full pr
 
 The algorithm for encoding a file using arithmetic coding works conceptually as follows [5]:
 
-We illustrate with an example using a non-adaptive code, encoding the file containing the symbols BBB using arbitrary fixed probability estimates $p_a = 0.4$, $p_a = 0.5$ and $p_{EoF} = 0.1$ where EoF stands for End-of-File. Since we need some mechanism to indicate the end of the file. It is essential since a real line can be divided till you get a point that requires infinite subdivisions. In the above example, we have considered the end of file also as a symbol, which means that we need not explicitly send the information to the decoder on when to stop decoding.
+We illustrate the algorithm using a non-adaptive code for the file `BBB`, with arbitrary fixed probability estimates $p_A = 0.4$, $p_B = 0.5$, and $p_{EOF} = 0.1$, where `EOF` denotes end-of-file. Treating `EOF` as a symbol gives the decoder a stopping rule, so no separate message length needs to be transmitted.
 
-### Encoding process as follows
+### Encoding process
 
-(1) We begin with the "current interval" [L,H) initialized to [0,1). This notation [ , ) is called a half-open interval to denote that the interval does not contain the boundary specified in the open bracket.
+(1) We begin with the "current interval" [L,H) initialized to [0,1). This notation [, ) is called a half-open interval to denote that the interval does not contain the boundary specified in the open bracket.
 
 (2) For each symbol of the file, we perform two steps:
 
@@ -69,9 +71,7 @@ We illustrate with an example using a non-adaptive code, encoding the file conta
 
 (b) We select the subinterval corresponding to the symbol that actually occurs next in the file, and make it the new current interval.
 
-(3) We select the subinterval corresponding to the symbol that actually occurs next in the file, and make it the new current interval.
-
-The length of the subinterval is clearly equal to the product of the probabilities of the individual symbols, which is the probability P of the particular sequence of symbols in the file. The final step uses almost exactly $-\log P$ bits to distinguish the file from all other possible files. The graphical representation of the above procedure is shown below.
+The length of the final subinterval is the product of the probabilities of the individual symbols, which is the probability $P$ of the particular source sequence. The final code uses almost exactly $-\log P$ bits to distinguish that sequence from all other possible sequences. The graphical representation of the procedure is shown below.
 
 ### Tabular form of the division process
 

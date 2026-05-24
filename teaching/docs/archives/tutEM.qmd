@@ -6,7 +6,7 @@ author: "Soma S. Dhavala"
 
 # EM Algorithm for Mixture Modeling
 
-We derive the Expectation-Maximization (EM) algorithm for Gaussian Mixture modeling (GMM). In general, any random space can be modeled by a mixture (weighed linear combination) of normal densities. Then, such an arbitrary density can be represented as:
+This note derives the Expectation-Maximization (EM) algorithm for Gaussian mixture models (GMMs). A broad class of random spaces can be approximated by a weighted linear combination of normal densities. Such a density can be written as:
 
 $$
 f(\phi; y) = \sum_{k=1}^{K} \lambda_k f_k(\theta_k; y) \tag{1}
@@ -14,13 +14,15 @@ $$
 
 where
 
-- $K$ is the total number of densities
+- $K$ is the total number of components
 - $y$ is the data vector
 - $\phi = [\lambda_1 \ldots \lambda_K, \theta_1 \ldots \theta_K]$ and $\theta_k = [\mu_k, \Sigma_k]$ represent the mean vector and covariance matrix of the $k$th density
 - $f_k \sim N(\mu_k, \Sigma_k)$
 - $\{\lambda_k\}$ represent the mixing weights with constraint $\sum_{k=1}^{K} \lambda_k = 1$
 
-From now onwards, we drop the bold face notation for vectors and matrices for convenience. To derive the EM algorithm, we need to identify the missing information. Often identifying this missing information can lead to different results affecting convergence. In the mixture modeling problem, if know the label of the data, i.e., if we know the density index that could have possibly produced the observation, we could easily estimate the mixture parameters by simply collecting all the data corresponding to that particular density. In other words, if we associate each observation to one of the $K$ densities, estimating each density parameters is trivial. Hence, we choose the label as the missing information.
+From this point onward, vector and matrix notation is simplified for readability. To derive the EM algorithm, we first identify the missing information. This choice matters because different definitions of missing information can lead to different convergence behavior.
+
+In mixture modeling, the missing information is the component label. If the label of each observation were known, meaning we knew which density produced each observation, estimating the mixture parameters would be straightforward: group observations by component and estimate each component separately. We therefore choose the labels as the missing information.
 
 Once we identify the missing information, we need to define the complete data likelihood and marginal unobserved data density conditional on the observed data. A very good explanation of the EM algorithm is given in [1, pp. 66-87].
 

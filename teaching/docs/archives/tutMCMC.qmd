@@ -6,7 +6,7 @@ author: "Soma S. Dhavala"
 
 # Numerical Methods for Bayesian Inference
 
-We review several numerical methods for making inference from the posterior distribution if either the prior or the likelihood function (when viewed as a function of the parameter of interest and not as a function of the data) is a normal distribution. We consider the following techniques:
+This note reviews several numerical methods for posterior inference when either the prior or the likelihood, viewed as a function of the parameter, is normal. We consider the following techniques:
 
 - quadrature methods
 - adaptive quadrature methods
@@ -14,7 +14,7 @@ We review several numerical methods for making inference from the posterior dist
 - rejection sampling
 - random-walk Metropolis
 
-One of the contentions of frequentists against the Bayesians is the need to calculate multidimensional integrals which are difficult to compute and analyze. However, with the advent of faster chips, computational power is no longer a scarce resource. Hence, there is a shift (in my view) in computational statistics from providing computationally feasible solutions to obtaining numerically accurate results.
+A common criticism of Bayesian inference is the need to compute multidimensional integrals that can be difficult to evaluate and analyze. With modern computational resources, the central concern has shifted from mere feasibility toward numerical accuracy, stability, and reproducibility.
 
 **Notation:**
 
@@ -23,8 +23,8 @@ One of the contentions of frequentists against the Bayesians is the need to calc
 - $L(y; \theta)$ Likelihood function, but will write $L(\theta)$ to emphasize that we are viewing it as a function of $\theta$ rather than of data
 - $\pi \sim \mathcal{N}(\mu, \Sigma)$ prior density normally distributed with mean $\mu$ and covariance $\Sigma$
 - $p$ posterior density
-- $E$ expectation w.r.t. the posterior distribution
-- $E_\pi$ expectation w.r.t. the prior distribution
+- $E$ expectation with respect to the posterior distribution
+- $E_\pi$ expectation with respect to the prior distribution
 - $g(\theta)$ a function of $\theta$ that is of interest for inference
 
 ## Quadrature methods
@@ -132,7 +132,7 @@ $$
 
 where $\theta^{(i)} \sim \pi$. The Monte Carlo error is inversely proportional to $\sqrt{N}$. If we choose to visit certain points (the abscissa of a certain polynomial) only once, it reduces to a quadrature method and the convergence is a function of $N$ rather than that of $\sqrt{N}$. Thus, we can consider quadrature methods as deterministic version of Monte Carlo. But these methods are more general than quadrature methods and would tend to produce accurate results as long as the proposal distribution (in this case the prior distribution) encompasses the target distribution (for example the posterior distribution) and $N$ is sufficiently large. In the case of posterior distribution, we don't need to impose such a restriction because an unlikely event (with probability zero) is also unlikely in the posterior.
 
-The above two methods can be used to calculate (or approximate) a function of the parameter from the posterior distribution like the normalizing constant, posterior moments etc.. However, we can not obtain the posterior distribution as such. For example, we can not (as far as I know) calculate the mode or construct posterior confidence intervals. Whereas, if we draw samples from the posterior, not only we can evaluate functions of the parameter but also obtain summary statistics including confidence intervals or even construct an empirical cdf or pdf. We review rejection sampling and Markov chain Monte Carlo techniques in this light.
+The above two methods can be used to calculate (or approximate) a function of the parameter from the posterior distribution like the normalizing constant, posterior moments etc. However, we cannot obtain the posterior distribution as such. For example, we cannot (as far as I know) calculate the mode or construct posterior confidence intervals. Whereas, if we draw samples from the posterior, not only we can evaluate functions of the parameter but also obtain summary statistics including confidence intervals or even construct an empirical cdf or pdf. We review rejection sampling and Markov chain Monte Carlo techniques in this light.
 
 ## Rejection sampling
 

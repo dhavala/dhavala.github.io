@@ -8,7 +8,7 @@ author: "Soma S. Dhavala"
 
 ## Golomb Coding
 
-This is a prefix code that can represent positive integers [1]. Given a positive integer parameter $m$, Golomb code $G_m$ encodes an integer $n \geq 0$ in two parts: a binary representation of $n \bmod m$, and a unary representation of $\lfloor n/m \rfloor$ where $\lfloor x \rfloor$ gives the largest integer smaller than $x$.
+Golomb coding is a prefix code for representing non-negative integers [1]. Given a positive integer parameter $m$, the Golomb code $G_m$ encodes an integer $n \geq 0$ in two parts: a binary representation of $n \bmod m$ and a unary representation of $\lfloor n/m \rfloor$, where $\lfloor x \rfloor$ is the largest integer not greater than $x$.
 
 Golomb codes are optimal for exponentially decaying (geometric) probability distributions of non-negative integers, i.e., distributions of the form $Q(n) = (1-\rho)\rho^n$, where $0 < \rho < 1$. For every distribution of this form, there exists a value of the parameter $m$ such that $G_m$ yields the shortest possible average code length over all uniquely decipherable codes for the nonnegative integers. The optimal value of $m$ is given by
 
@@ -22,11 +22,9 @@ Rice emphasized the special case of Golomb code with $m = 2^k$. Choosing $m$ to 
 
 We refer to codes $G_{2^k}$ as Golomb–Rice codes.
 
-Knowledge of unary codes is required to understand Golomb coding.
+Unary codes are needed to understand Golomb coding. The unary representation of an integer is a sequence of ones equal to the integer being represented, followed by a zero [2].
 
-Unary representation of an integer is nothing but a sequence of ones equal to the integer to be represented followed by a zero [2].
-
-Example of unary representation of some integers (always positive):
+Examples of unary representations are shown below:
 
 | Integer | Unary representation |
 |---------|----------------------|
@@ -44,13 +42,14 @@ Example of unary representation of some integers (always positive):
 
 Let us assume that the Golomb–Rice parameter is $\log_2(m)$.
 
-The steps involved in representing a positive integer, given a Golomb parameter, are:
+Given a Golomb parameter $m$, encode a non-negative integer $N$ as follows:
 
-1. Divide the integer $N$ with $m$.
-2. Take the nearest integer towards zero, call it the "divider".
-3. Remainder = $N - (\text{divider} \times m)$.
-4. Represent the divider in unary and code the remainder with $\log_2(m)$.
-5. Append them.
+1. Divide $N$ by $m$.
+2. Take the integer quotient and call it the divider.
+3. Compute the remainder as $N - (\text{divider} \times m)$.
+4. Represent the divider in unary.
+5. Encode the remainder using $\log_2(m)$ bits.
+6. Append the unary quotient and binary remainder.
 
 ##### Example
 
@@ -58,14 +57,14 @@ $m = 4$ and $N = 15$.
 
 The remainder has to be represented now in 2 bits. The possible values the remainder can take are 0, 1, 2 and 3 with code as 00, 01, 10 and 11 respectively.
 
-1. Divide the integer $N$ with $m$.
-2. Take the nearest integer towards zero, call it the "divider".
+1. Divide $N$ by $m$.
+2. Take the integer quotient and call it the divider.
 
 $$
 \left\lfloor 15/4 \right\rfloor = 3
 $$
 
-3. Remainder = $N - (\text{divider} \times m)$.
+3. Compute the remainder as $N - (\text{divider} \times m)$.
 
 $$
 15 - (4 * 3) = 3.
@@ -223,8 +222,6 @@ which is 23 coded bits instead of 50 uncoded bits.
 
 [3] Glen G. Langdon, Jr., "Data Compression," CE108. W99, Department of Computer Engineering, University of California at Santa Cruz. <http://www.cse.ucsc.edu/classes/cmpe263/Winter01/>
 
-## Bibliography
+[4] E. M. Gabidulin, P. Z. Fan and M. Darnell, "Autocorrelation of Golomb sequences," *IEE Proc. Comm.*, Vol. 142, No. 5, October 1995.
 
-[1] E. M. Gabidulin, P. Z. Fan and M. Darnell, "Autocorrelation of Golomb sequences," *IEE Proc. Comm.*, Vol. 142, No. 5, October 1995.
-
-[2] Robert F. Rice, "Lossless Coding Standards for Space Data Systems," Jet Propulsion Laboratory Technical Report, California Institute of Technology, Pasadena, California.
+[5] Robert F. Rice, "Lossless Coding Standards for Space Data Systems," Jet Propulsion Laboratory Technical Report, California Institute of Technology, Pasadena, California.

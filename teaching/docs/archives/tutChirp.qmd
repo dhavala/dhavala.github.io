@@ -8,13 +8,17 @@ author: "Soma S. Dhavala"
 
 ## Introduction
 
-Many signals that exist in nature are inherently non-stationary or transient like Bat and Whale echoes, evoked-potentials, RADAR clutters. There exist many methods to analyze such signals including wavelet-transforms, short-time Fourier transform, adaptive time-frequency distributions, Matching Pursuits etc.. The signal representations which adapt the tilings in the time-frequency (t-f) plane perform prominently in terms of achieving higher resolution in time and frequency simultaneously. Atomic decompositions [1, 2, 3] is one such class of algorithms which attempt to approximate the signal as a weighed combination of the atoms from a chosen dictionary. The atoms in the dictionary should contain all possible tilings that best suit the inner structure of the signal under analysis. Hence, some a priori information about the signal under analysis is needed if one were working with a finite vocabulary. Another alternative is to use, if an efficient method for choosing an atom exists, an infinite size vocabulary. Chirplets, windowed linear frequency modulated signals, offer a very flexible set of tilings like shearing, translation and rotation. Gaussian chirplets are particularly attractive in terms of computational tractability in addition to offering optimum time-frequency resolution (attain minimum time-bandwidth product). Numerous algorithms have been proposed to decompose a signal as a weighed combination of chirplets. However, most of the methods proposed in the literature use a divide and conquer approach, i.e., repeatedly decompose the residue until the residue is of insignificant energy. It should be noted that chirplets are not orthogonal and hence such decompositions are not unique. Also, there is no formal mechanism to estimate the number of components in the model and efficiency of the estimator in terms of Cramer-Rao bounds were not provided (except in single component cases).
+Many natural signals are nonstationary or transient: bat and whale echoes, evoked potentials, and radar clutter are common examples. Such signals can be analyzed with wavelet transforms, short-time Fourier transforms, adaptive time-frequency distributions, matching pursuit, and related methods.
 
-In the present work, we jointly estimate the parameters of these chirplets. We assume that the number of components is unknown. We model the computed (specified) spectrogram of the signal to be analyzed (synthesized) as a mixture of normal densities (Gaussian Mixture model - GMM). The mixture model parameters are estimated using the Expectation-Maximization (EM) algorithm. Functional merging is used to estimate the number of components in the GMM. We obtain the chirplets parameters (except for the phase) by the method of moments. These parameters are refined by Fisher-Scoring method. We obtain the Cramer-Rao bounds for all the parameters. If the EM algorithms produces a closer-to-global maximum, the parameters estimated would be optimal.
+Representations that adapt their tiling of the time-frequency plane can achieve high resolution in time and frequency simultaneously. Atomic decomposition [1, 2, 3] is one such class of methods. It approximates a signal as a weighted combination of atoms chosen from a dictionary. If the dictionary is finite, some prior knowledge of the signal is needed so the dictionary contains atoms suited to the signal structure. If an efficient atom-selection method is available, an infinite dictionary is another possibility.
+
+Chirplets, which are windowed linear frequency-modulated signals, provide flexible tilings through shearing, translation, and rotation. Gaussian chirplets are especially attractive because they are computationally tractable and attain the minimum time-bandwidth product. Many algorithms decompose a signal as a weighted combination of chirplets, but most use a divide-and-conquer strategy: repeatedly decompose the residual until its energy is negligible. Since chirplets are not orthogonal, such decompositions are not unique. In addition, most methods do not formally estimate the number of components, and estimator efficiency is rarely characterized through Cramer-Rao bounds except in single-component cases.
+
+In this work, we jointly estimate chirplet parameters while treating the number of components as unknown. We model the spectrogram of the signal as a Gaussian mixture model (GMM), estimate the mixture parameters using the Expectation-Maximization (EM) algorithm, and use functional merging to estimate the number of components. Chirplet parameters, except phase, are obtained by the method of moments and refined using Fisher scoring. Cramer-Rao bounds are then derived for all parameters.
 
 ## Chirplet Decomposition
 
-Employing chirplets to decompose a signal unifies the t-f tilings such as rotation, shearing, scaling and shifting. Hence, we proceed with the following assumption that any signal can be represented as a weighed sum of Gaussian chirplets given by:
+Employing chirplets to decompose a signal unifies the time-frequency tilings such as rotation, shearing, scaling and shifting. Hence, we proceed with the following assumption that any signal can be represented as a weighted sum of Gaussian chirplets given by:
 
 $$
 y(t) = s(t) + w(t) \tag{1a}
@@ -40,7 +44,7 @@ to make them unit energy signals.
 
 ## Time-frequency modeling
 
-We model the t-f plane as a mixture of normal pdfs [4] and estimate the parameters of the chirplets. It requires interpreting the t-f representation as an arbitrary bivariate pdf which would be modeled as GMM. It may appear strange that we are trying to view the t-f space as a mixture of normal pdfs by applying a random process modeling technique to a deterministic problem. However, we are using it just as a means to accomplish the task of decomposing the signal into chirplets. The initial choice of the t-f representation affects the model parameter estimation. We observe that the spectrogram of a Gaussian chirplet and normal density have structural similarities. We will utilize this fact to derive a set of mapping rules. Let $T(t, f)$ be the spectrogram of the signal under consideration. Also assume that $t$ and $f$ axis, representing time and frequency respectively, are sampled sufficiently smoothly on an $N \times M$ grid and let $\theta_{mn} = [t(n), f(m)]^T$
+We model the time-frequency plane as a mixture of normal PDFs [4] and estimate the parameters of the chirplets. It requires interpreting the time-frequency representation as an arbitrary bivariate PDF which would be modeled as GMM. It may appear strange that we are trying to view the time-frequency space as a mixture of normal PDFs by applying a random process modeling technique to a deterministic problem. However, we are using it just as a means to accomplish the task of decomposing the signal into chirplets. The initial choice of the time-frequency representation affects the model parameter estimation. We observe that the spectrogram of a Gaussian chirplet and normal density have structural similarities. We will utilize this fact to derive a set of mapping rules. Let $T(t, f)$ be the spectrogram of the signal under consideration. Also assume that $t$ and $f$ axis, representing time and frequency respectively, are sampled sufficiently smoothly on an $N \times M$ grid and let $\theta_{mn} = [t(n), f(m)]^T$
 
 $$
 f(\theta_{mn}; \Phi) = \sum_{k=1}^{K} \lambda_k f_k(\theta_{mn}; \phi_k) \tag{4a}
@@ -52,7 +56,7 @@ $$
 
 where
 
-- $K$ is the total number of densities
+- $K$ is the total number of components
 - $\theta_{mn}$ is the $mn$th sample in the $N \times M$ grid
 - $\phi_k = [\mu_k, \Sigma_k]$ represent the mean vector and covariance matrix of the $k$th density
 - $f_k \sim \mathcal{N}(\mu_k, \Sigma_k)$
@@ -79,7 +83,7 @@ $$
 \gamma_k(\theta_{mn}; \hat{\Phi}) = \frac{\hat{\lambda}_k f_k(\theta_{mn}; \hat{\theta}_k) T(\theta_{mn}; \Phi)}{f(\theta_{mn}; \hat{\Phi})} \tag{8}
 $$
 
-In [4], time-frequency projection filters were used synthesize time-domain signals based on the regions identified by the individual densities in the mixture. However, we show that, if the initial t-f representation is chosen as spectrogram, one can immediately synthesize corresponding time-domain signals except for the phase. This is so because phase information is lost in the spectrogram decomposition. We map the parameters of a bivariate normal density to a chirplet by matching the moments. A Gaussian window with duration parameter $\alpha^2$ is chosen in computing the spectrogram. The spectrogram of a chirplet $g_k$ is given by [5]:
+In [4], time-frequency projection filters were used synthesize time domain signals based on the regions identified by the individual densities in the mixture. However, we show that, if the initial time-frequency representation is chosen as spectrogram, one can immediately synthesize corresponding time domain signals except for the phase. This is so because phase information is lost in the spectrogram decomposition. We map the parameters of a bivariate normal density to a chirplet by matching the moments. A Gaussian window with duration parameter $\alpha^2$ is chosen in computing the spectrogram. The spectrogram of a chirplet $g_k$ is given by [5]:
 
 $$
 T_{g_k}(t, f) = \frac{P(t - t_c)}{\sqrt{2\pi\sigma^2_{\omega/t}}} \exp\left(-\frac{(\omega - \omega_c - \langle \omega_t \rangle)^2}{2\sigma^2_{\langle \omega_t \rangle}}\right) \tag{9a}
@@ -139,7 +143,7 @@ $$
 \begin{bmatrix} \mu_{k1} \\ \mu_{k2} \end{bmatrix} = \begin{bmatrix} t_c \\ \omega_c \end{bmatrix} \tag{12c}
 $$
 
-where $r = \sigma_1/\sigma_2$. It should be noted that we can not estimate the complex weight $c_k$ since we lose phase information in the spectrogram. We consider using quasi-Newton optimization algorithms to refine the parameters and also to estimate the amplitudes of the individual components. We use the estimates provided by the EM algorithms as initial estimates to the quasi-Newton algorithms. Besides providing faster convergence, if the initial estimates are carefully chosen, they also provide error covariances which could be used in designing time-frequency detectors.
+where $r = \sigma_1/\sigma_2$. It should be noted that we cannot estimate the complex weight $c_k$ since we lose phase information in the spectrogram. We consider using quasi-Newton optimization algorithms to refine the parameters and also to estimate the amplitudes of the individual components. We use the estimates provided by the EM algorithms as initial estimates to the quasi-Newton algorithms. Besides providing faster convergence, if the initial estimates are carefully chosen, they also provide error covariances which could be used in designing time-frequency detectors.
 
 ## Nested Fisher scoring
 
@@ -159,7 +163,7 @@ $$
 
 where
 
-- $\mathbf{y}$ : $N \times 1$ vector of measurements
+- $\mathbf{y}$: $N \times 1$ vector of measurements
 - $\mathbf{w} \sim \mathcal{CN}(\mathbf{0}, \sigma^2 \mathbf{I})$ complex AWGN with unknown variance $\sigma^2$
 - $\boldsymbol{\theta}_k = [t_{ck}, f_{ck}, \alpha_k, \beta_k]^T$
 - $\boldsymbol{\theta} = [\boldsymbol{\theta}_1^T, \ldots, \boldsymbol{\theta}_K^T]^T$

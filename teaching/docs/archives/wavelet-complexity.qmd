@@ -6,23 +6,23 @@ author: "Soma S. Dhavala"
 
 # Computational Complexity of the Wavelet Transform
 
-## I. Introduction
+## Introduction
 
-Let P x Q x R be the size of the original image sequence (for 2D R=1). As we have to compare 2D, 3D and "incomplete 3D", we will put the size of the volume as P x Q x R and L, M and N be the number of levels of decomposition on P x Q x R respectively.
+Let $P 	imes Q 	imes R$ be the size of the original image sequence; for a 2D image, take $R = 1$. To compare 2D, 3D, and incomplete-3D transforms uniformly, we describe the volume as $P 	imes Q 	imes R$. Let $L$, $M$, and $N$ be the numbers of decomposition levels along the $P$, $Q$, and $R$ dimensions, respectively.
 
-And let C be the complexity (of additions / multiplications / total complexity) per pixel pair. The complexity C depends on the wavelet transform under consideration. Let $C_1$, $C_2$ and $C_3$ be the complexity of the wavelet used in P, Q and R dimensions. In the following discussion we will assume that, the order of the levels of decomposition is such that,
+Let $C$ denote the complexity per pixel pair, whether measured in additions, multiplications, or total operations. This complexity depends on the wavelet transform being used. Let $C_1$, $C_2$, and $C_3$ denote the per-point complexities of the wavelets used along the $P$, $Q$, and $R$ dimensions. In the following discussion, assume the decomposition levels satisfy
 
 $$
-L \geq M \geq N .
+L \geq M \geq N.
 $$
 
-## II. Complexity
+## Complexity
 
 If we are working with different wavelets in different directions, then, the complexity estimates are modified as:
 
 Let C1, C2 and C3 be the computations required per point for the wavelets used in x, y and z directions respectively.
 
-### 1D Case
+### 1D case
 
 Expression:
 
@@ -30,7 +30,7 @@ $$
 PC_1\left(1 - \frac{1}{2^L}\right)
 $$
 
-### 2D Case
+### 2D case
 
 Expression:
 
@@ -38,7 +38,7 @@ $$
 \frac{2.PQ(C_1 + C_2)(4^M - 1)}{3.4^M} + \frac{PQC_1(2^{L-M} - 1)}{2^{L+M}}
 $$
 
-### 3D Case
+### 3D case
 
 Expression:
 
@@ -46,7 +46,7 @@ $$
 \frac{4.PQR(C_1 + C_2 + C_3)(8^N - 1)}{7.8^N} + \frac{2.PQR(C_1 + C_2)(4^{M-N} - 1)}{3.2^{N+2M}} + \frac{PQRC_1(2^{L-M} - 1)}{2^{M+L+N}}
 $$
 
-### Specific Case
+### Specific case
 
 Same wavelets are used in all directions, then the expressions presented above can be simplified as:
 
@@ -58,7 +58,7 @@ $$
 PC_1\left(1 - \frac{1}{2^L}\right)
 $$
 
-#### 2D Case
+#### 2D case
 
 Expression:
 
@@ -66,7 +66,7 @@ $$
 \frac{4.PQC_1(4^M - 1)}{3.4^M} + \frac{PQC_1(2^{L-M} - 1)}{2^{L+M}}
 $$
 
-#### 3D Case
+#### 3D case
 
 Expression:
 
@@ -76,17 +76,17 @@ $$
 
 For $(L = M = N = 1)$, the complexity estimate ratios would be,
 
-$1 : 2 : 3$ for 1D, 2D and 3D.
+$1: 2: 3$ for 1D, 2D and 3D.
 
 As $(L = M = N), N \to \infty$, the complexity estimate ratios would be,
 
-$1 : 1.33 : 1.71$ for 1D, 2D and 3D.
+$1: 1.33: 1.71$ for 1D, 2D and 3D.
 
-## III. Incomplete 3D
+## Incomplete 3D
 
 In the incomplete 3D WT transform, the WT is decomposed in a incomplete dyadic fashion. For some image sequence the correlation in Z dimension is very high. If WT is performed in Z-dimension on such sequence, the high frequency sub-band is de-correlated and may not yield much benefit if we go for further decomposition in X and Y dimension. Hence the concept of incomplete WT transform came in to existence.
 
-The decision to decompose further is based on the case under consideration rather than any fixed set of rules. Hence, we can not derive a generalized formula for that. However, one can make use of the 1-D and 3-D formulae presented in the earlier sections. For example, we can consider, the whole 3D incomplete transform as a set of 1-D operations. In the 1-D formulae, we have to plug in the updated image dimensions and recursively do the process. One can derive the formula for any given structure by understanding the procedure described in the appendix. The reader is advised to go through the appendix to get an understanding of the derivation process. In the following section, we present a restricted class of incomplete 3D by imposing certain constraints.
+The decision to decompose further is based on the case under consideration rather than any fixed set of rules. Hence, we cannot derive a generalized formula for that. However, one can make use of the 1-D and 3-D formulae presented in the earlier sections. For example, we can consider, the whole 3D incomplete transform as a set of 1-D operations. In the 1-D formulae, we have to plug in the updated image dimensions and recursively do the process. One can derive the formula for any given structure by understanding the procedure described in the appendix. The reader is advised to go through the appendix to get an understanding of the derivation process. In the following section, we present a restricted class of incomplete 3D by imposing certain constraints.
 
 ### Incomplete 3D case
 
@@ -124,7 +124,7 @@ $$
 PQRC\left[\frac{1}{2} + \frac{1}{2^{N_i}}\left(\frac{4.(4^{M_c} - 1)}{3.2^{2M_c}} + \frac{(2^{L_c-M_c} - 1)}{2^{M_c+L_c}}\right)\right]
 $$
 
-## IV. Computing Complexity (C)
+## Computing the complexity constant $C$
 
 $s_{add}$ is the number of real additions/subtractions required to compute one approximate coefficient and $s_{mul}$ is the number of real multiplications/divisions required compute one approximate coefficient. Similarly $d_{add}$ is the number of real additions/subtractions required to compute one detailed coefficient and $d_{mul}$ is the number of real multiplications/divisions required compute one detailed coefficient.
 
@@ -165,7 +165,7 @@ The computational complexity is same for forward and inverse wavelet transform. 
 
 ## Appendix A: Different Wavelets
 
-### $1D$ Case
+### 1D case
 
 P is the length of the signal or a row of the image and L is the number of levels of decomposition then, the complexity at one level the complexity is given by,
 
@@ -177,7 +177,7 @@ $$
 \frac{PC_1}{2}\left(1 + \frac{1}{2} + \frac{1}{4} + \ldots + \frac{1}{2^{L-1}}\right) = \frac{PC_1}{2}\sum_{i=0}^{L-1}\frac{1}{2^i} = PC_1\left(1 - \frac{1}{2^L}\right)
 $$
 
-### $2D$ Case
+### 2D case
 
 Here the 2D signal dimension is assumed to be a P x Q and let the levels of decomposition be L and M for P and Q respectively and with a condition $M \leq L$ and $C_1 \text{ and } C_2$ being the complexity of the wavelets employed in P and Q dimensions respectively.
 
@@ -199,10 +199,10 @@ $$
 $$
 
 $$
-= \frac{2.PQ(C_1 + C_2)(4^M - 1)}{3.4^M} + \frac{PQC_1(2^{L-M} - 1)}{2^{L+M}} .
+= \frac{2.PQ(C_1 + C_2)(4^M - 1)}{3.4^M} + \frac{PQC_1(2^{L-M} - 1)}{2^{L+M}}.
 $$
 
-### $3D$ Case
+### 3D case
 
 Here the 3D signal dimension is assumed to be a P x Q x R and let the levels of decomposition be L, M and N for P, Q and R respectively and with a condition $N \leq M \leq L$ and $C_1, C_2 \text{ and } C_3$ being the complexity of the wavelets employed in P and Q dimensions respectively.
 
@@ -229,7 +229,7 @@ $$
 = \frac{4.PQR(C_1 + C_2 + C_3)(8^N - 1)}{7.8^N} + \frac{2.PQR(C_1 + C_2)(4^{M-N} - 1)}{3.2^{N+2M}} + \frac{PQRC_1(2^{L-M} - 1)}{2^{M+L+N}}
 $$
 
-#### For Incomplete 3D
+#### Incomplete 3D case
 
 $L_i, M_i, N_i \text{ and } L_c, M_c, N_c$ as (4,2), (4,2) and (0,1).
 
@@ -259,7 +259,7 @@ $$
 C1 = C2 = C3 = C
 $$
 
-### $1D$ Case
+### 1D case
 
 P is the length of the signal or a row of the image and L is the number of levels of decomposition then, the complexity at one level the complexity is given by,
 
@@ -271,7 +271,7 @@ $$
 \frac{PC}{2}\left(1 + \frac{1}{2} + \frac{1}{4} + \ldots + \frac{1}{2^{L-1}}\right) = \frac{PC}{2}\sum_{i=0}^{L-1}\frac{1}{2^i} = PC\left(1 - \frac{1}{2^L}\right)
 $$
 
-### $2D$ Case
+### 2D case
 
 Here the 2D signal dimension is assumed to be a P x Q and let the levels of decomposition be L and M for P and Q respectively and with a condition $M \leq L$.
 
@@ -293,10 +293,10 @@ $$
 $$
 
 $$
-= \frac{4.PQC(4^M - 1)}{3.4^M} + \frac{PQC(2^{L-M} - 1)}{2^{L+M}} .
+= \frac{4.PQC(4^M - 1)}{3.4^M} + \frac{PQC(2^{L-M} - 1)}{2^{L+M}}.
 $$
 
-### $3D$ Case
+### 3D case
 
 Here the 3D signal dimension is assumed to be a P x Q x R and let the levels of decomposition be L, M and N for P, Q and R respectively and with a condition $N \leq M \leq L$.
 
@@ -323,7 +323,7 @@ $$
 = \frac{12.PQRC(8^N - 1)}{7.8^N} + \frac{4.PQRC(4^{M-N} - 1)}{3.2^{N+2M}} + \frac{PQRC(2^{L-M} - 1)}{2^{M+L+N}}
 $$
 
-#### For Incomplete 3D
+#### Incomplete 3D case
 
 $L_i, M_i, N_i \text{ and } L_c, M_c, N_c$ as (4,2), (4,2) and (0,1).
 
