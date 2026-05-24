@@ -59,10 +59,8 @@ website:
       - section: "Teaching"
         href: teaching/index.qmd
         contents:
+          - teaching/courses.qmd
           - teaching/notes.qmd
-          - teaching/homeworks.qmd
-          - teaching/exams.qmd
-          - teaching/archives.qmd
       - text: "Consulting"
         href: consulting/index.qmd
       - section: "OSS"
@@ -145,7 +143,7 @@ format:
             if (p.indexOf('/research/docs/reports/') >= 0)
               return [['Research', '/research/index.html'], ['Reports', '/research/reports.html']];
             if (p.indexOf('/teaching/docs/archives/') >= 0)
-              return [['Teaching', '/teaching/index.html'], ['Archives', '/teaching/archives.html']];
+              return [['Teaching', '/teaching/index.html'], ['Notes', '/teaching/notes.html']];
             if (p.indexOf('/research/projects/') >= 0)
               return [['Research', '/research/index.html'], ['Projects', '/research/projects/index.html']];
             // Blog posts live one slug-level under saddlepoint/ or asankhya/ and

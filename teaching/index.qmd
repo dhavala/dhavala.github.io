@@ -9,4 +9,4 @@ title: "Teaching"
 
 <br>
 
-Use the sidebar at left to browse notes, homeworks, and exams.
+Use the sidebar at left to browse courses and notes.
