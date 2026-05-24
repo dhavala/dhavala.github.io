@@ -56,6 +56,7 @@ website:
           - research/reports.qmd
           - research/code.qmd
           - research/projects/index.qmd
+          - research/team.qmd
       - section: "Teaching"
         href: teaching/index.qmd
         contents:
@@ -79,7 +80,7 @@ website:
   page-footer:
     background: "#222"
     foreground: "#ccc"
-    left: "Built with [Quarto](https://quarto.org), [Claude](http://claude.ai/) and [Codes](https://chatgpt.com/codex/)"
+    left: "Built with [Quarto](https://quarto.org), [Claude](http://claude.ai/) and [Codex](https://chatgpt.com/codex/)"
     center: "&copy; 2026 Soma S Dhavala"
     right:
       - icon: github

@@ -8,4 +8,4 @@ title: "Research"
 
 <br>
 
-Research in Bayesian methods, semi-parametric modeling, and applied machine learning. Browse [Publications](publications.qmd), [Patents](patents.qmd), [Reports](reports.qmd), [Code](code.qmd), and [Projects](projects/index.qmd).
+Research in Bayesian methods, semi-parametric modeling, and applied machine learning. Browse [Publications](publications.qmd), [Patents](patents.qmd), [Reports](reports.qmd), [Code](code.qmd), [Projects](projects/index.qmd), and [Team](team.qmd).

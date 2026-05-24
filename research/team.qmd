@@ -1,0 +1,43 @@
+---
+title: "Team"
+description: "Students and researchers I advise and mentor."
+---
+
+## Current Members
+
+### PhD Students
+
+- **Student Name** (2024 – present) *jointly with Prof. Co-Advisor (Dept.)*\
+  *Topic:* research topic
+
+### Masters Students
+
+- **Student Name** (2025 – present)\
+  *Topic:* thesis topic
+
+### Undergraduates
+
+- **Student Name** (2025 – present)\
+  *Topic:* project topic
+
+---
+
+## Alumni
+
+### PhD Students
+
+- **Student Name** (2018 – 2024) *jointly with Prof. Co-Advisor (Dept.)*\
+  *Topic:* thesis topic\
+  *Current position:* role, organization
+
+### Masters Students
+
+- **Student Name** (2021 – 2023)\
+  *Topic:* thesis topic\
+  *Current position:* role, organization
+
+### Undergraduates
+
+- **Student Name** (2022 – 2023)\
+  *Topic:* project topic\
+  *Current position:* role, organization
