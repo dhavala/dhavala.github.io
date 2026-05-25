@@ -2,5 +2,29 @@
 title: "Patents"
 description: "Granted and pending patents."
 ---
+> Note: While I recognize the value of IP and patents for organizations, in an individual capacity, I am a proponent of free knowledge dissemination and don't personally care for IP or patents.
 
-*(Content to be added.)*
+
+[08] System and method to generate sets of similar assessment papers. *K. Faldu, S. Dhavala, A. Avasthi.*\
+Filed, 2021. USA.
+
+[07] System and method for generating diagnostic assessment question papers and evaluating their quality. *S. Dhavala, K. Faldu, A. Avasthi.*\
+Filed, 2021. USA.
+
+[06] Distributed system and method to monitor health parameters of a patient. *Soma S. Dhavala, Mehaboob Basha.*\
+Filed, 2018. India.
+
+[05] System and Method to remotely operate a Dental Chair. *Soma S. Dhavala, Mehaboob Basha.*\
+Filed, 2018. India.
+
+[04] Method and system for image compression and decompression using span of interest of an image sequence. *Sudipta Mukhopadhya, Soma S. Dhavala, E. M. Lalitha.*\
+Filed, 2002. USA, Japan.
+
+[03] System and Method for coding Data. *Soma S. Dhavala, Frederick Wheeler.*\
+Granted, 2006. USA, Japan.
+
+[02] Position Coding System and Method. *Soma S. Dhavala, Frederick Wheeler, Sudipta Mukhopadhya, Nithin Nagaraj.*\
+Filed, 2002. USA.
+
+[01] Progressive transmission and reception of image data using modified Hadamard transform. *John E. Hershey, Soma S. Dhavala.*\
+Filed, 2002. USA, Japan.
