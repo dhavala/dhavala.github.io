@@ -10,7 +10,6 @@ My current focus is on Frontier Model Development, especially understanding why 
 
 Over the years, I have worked across academia, industrial research, startups, open-source ecosystems, and public-sector AI initiatives, contributing both to foundational research and production-grade AI deployments.
 
----
 
 ```{=html}
 <div class="quote-carousel" aria-label="Unquotable quotes" aria-live="polite">
@@ -42,7 +41,6 @@ Over the years, I have worked across academia, industrial research, startups, op
 </div>
 ```
 
----
 
 # Educational Qualifications
 
@@ -134,15 +132,15 @@ Over the years, I have worked across academia, industrial research, startups, op
 
 # Selected Recent Publications
 
-1. Lattice-Based Vector Quantization for Low-Bit Quantization-Aware Training 
+1. Lattice-Based Vector Quantization for Low-Bit Quantization-Aware Training\
    [CPAL](https://cpal.cc/), 2026. [paper](https://openreview.net/forum?id=oTbUCHufvj)
-2. Health Sentinel: An AI Pipeline for Real-time Disease Outbreak Detection
+2. Health Sentinel: An AI Pipeline for Real-time Disease Outbreak Detection\
    NLP4PI Workshop, 2025. [paper](https://aclanthology.org/2025.nlp4pi-1.3/)
-3. Learning to Detect PII: Tabular vs Document Classification Models for Network Traffic Analysis
+3. Learning to Detect PII: Tabular vs Document Classification Models for Network Traffic Analysis\
    Journal of Information Security and Applications, 2025. [paper](https://doi.org/10.1016/j.jisa.2025.104196)
-4. QuantProb: Generalizing Probabilities along with Predictions for a Pre-trained Classifier
+4. QuantProb: Generalizing Probabilities along with Predictions for a Pre-trained Classifier\
    UAI 2024. [paper](https://proceedings.mlr.press/v244/challa24a.html)
-5. Automatic Interpretation of Line Probe Assay Test for TB  
+5. Automatic Interpretation of Line Probe Assay Test for TB\
    AAAI 2024. [paper](https://ojs.aaai.org/index.php/AAAI/article/view/30191)
 
 
