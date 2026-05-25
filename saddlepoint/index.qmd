@@ -21,26 +21,26 @@ listing:
   <div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_82b9a1ff5bc2e4c89a646fcea_c48700ad96" tabindex="-1" value=""></div>
   <button type="submit">Subscribe</button>
 </form>
-<p class="mc-thanks" hidden>✓ Thanks — please check your inbox to confirm your subscription.</p>
+<p class="mc-thanks" hidden>✓ Thanks for subscribing.</p>
 <script>
 (function(){
   var f = document.querySelector('.subscribe .mc-form');
+  var t = document.querySelector('.subscribe .mc-thanks');
   if (!f) return;
-  // Returning from a successful submit: show the thank-you, hide the form.
-  if (location.search.indexOf('subscribed=1') !== -1) {
-    var t = document.querySelector('.subscribe .mc-thanks');
-    f.style.display = 'none';
-    if (t) t.hidden = false;
-    return;
-  }
-  // Progressive enhancement: POST quietly to a hidden iframe, then redirect back here.
+  // Progressive enhancement: POST quietly to a hidden iframe, then swap the form
+  // for a persistent thank-you in place — no page reload, so it can't flash away.
   var ifr = document.createElement('iframe');
   ifr.name = 'mc-sink'; ifr.title = 'subscribe'; ifr.tabIndex = -1; ifr.style.display = 'none';
   document.body.appendChild(ifr);
   f.target = 'mc-sink';
-  var sent = false, go = function(){ if (sent) location.href = location.pathname + '?subscribed=1'; };
-  f.addEventListener('submit', function(){ sent = true; setTimeout(go, 2500); }); // fallback if iframe load is missed
-  ifr.addEventListener('load', go);
+  var sent = false, done = function(){
+    if (!sent) return;            // ignore the iframe's initial empty load
+    sent = false;                 // run once
+    f.style.display = 'none';
+    if (t) t.hidden = false;
+  };
+  f.addEventListener('submit', function(){ sent = true; setTimeout(done, 2500); }); // fallback if load is missed
+  ifr.addEventListener('load', done);
 })();
 </script>
 ```
