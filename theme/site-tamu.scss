@@ -503,23 +503,28 @@ nav#quarto-sidebar .sidebar-item a.active {
 }
 .cta-row p { margin: 0; }
 
+// Quote carousel — styled like the page-description band (gray #ececec strip,
+// 0.5rem 2rem padding, muted gray text). Fixed two-line height so the strip
+// never resizes as quotes (some one line, some two via <br>) rotate through.
 .quote-carousel {
-  max-width: 36rem;
-  margin: 1.5rem auto 1rem;
-  min-height: 3.5rem;        // reserve ~2 lines so async fill doesn't shift layout
+  background: #ececec;
+  padding: 0.5rem 2rem;
+  margin: 1.5rem 0;
+  height: 3.5rem;            // fixed: two lines + padding (box-sizing: border-box)
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  overflow: hidden;          // clip anything longer than two lines
 }
 .quote-carousel .qc-current {
   margin: 0;
   padding: 0;
   border: 0;                       // drop Bootstrap's left rule
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: 0.82rem;
   line-height: 1.5;
-  color: #555;
+  color: #666;
   opacity: 0;
   transition: opacity 0.6s ease;
 }
