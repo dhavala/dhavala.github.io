@@ -1,6 +1,6 @@
----
-title: "News"
-description: "News and announcements."
----
+<!-- News list (newest first). Title/description come from news/_metadata.yml so
+     this file has no frontmatter and can be {{< include >}}-ed into the Home
+     page without leaking a "News" heading. -->
 
-- **June 2026** — Snehashish Ghosh graduates (MS, IISc).
+- Jun'26 — Snehashish Ghosh graduates (MS, IISc)! Congratulations.
+- Mar'26 — Joined as Professor in EE (and CSE) at IIT Jammu.

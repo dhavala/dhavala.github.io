@@ -1,1 +1,3 @@
+title: "News"
+description: "News and announcements."
 include-before-body: ../_partials/banner-news.html
