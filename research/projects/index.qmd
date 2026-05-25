@@ -5,4 +5,5 @@ description: "Ongoing and past research projects."
 
 Selected research and engineering projects — one page each:
 
+- [MIRA](mira.qmd) — a sovereign AI model factory for multilingual, multimodal Indic AI at IIT Jammu.
 - [Sunbird ML Workbench (Daggit)](sunbird-ml-workbench.qmd) — a DAG-based ML pipeline framework built for Project Sunbird.

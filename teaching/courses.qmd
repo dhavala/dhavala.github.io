@@ -3,7 +3,12 @@ title: "Courses"
 description: "Courses taught and developed."
 ---
 
-Courses I teach and develop, spanning machine learning, statistics, and
-large-scale AI systems.
-
-*(Course listings coming soon.)*
+::: {.courses-table}
+| Course No. | Level | Institute | Role | Title | Years |
+|------------|-------|-----------|------|-------|-------|
+| AI 839 | Mixed | IIIT-B | Instructor | [AI in Production](https://mlsquare.github.io/ai-839/) | 2024 |
+| UE17CS325 | Undergrad | PESU | Instructor | Artificial Intelligence | 2020 |
+| STAT 689 | Grad | TAMU | Partial Instructor | Advanced Bayesian Methods | 2009 |
+| STAT 211 | Undergrad | TAMU | Instructor | Principles of Statistics I | 2009 |
+| STAT 201 | Undergrad | TAMU | Instructor | Elementary Statistical Inference | 2006, 07, 08 |
+:::

@@ -1,0 +1,10 @@
+---
+title: "MIRA"
+description: "Multilingual Multimodal Indic Resources for AI — a sovereign AI model factory at IIT Jammu."
+---
+
+Website: [iitjammu.ac.in/mira](https://iitjammu.ac.in/mira/)
+
+**MIRA** (Multilingual Multimodal Indic Resources for AI) is a sovereign model factory for frontier AI systems at IIT Jammu — building India's sovereign AI capability from data to deployment. It spans curated multilingual, multimodal (text, speech, vision) datasets, frontier-scale foundation models, reusable libraries, and scalable training and inference infrastructure, pairing production engineering with applied research across domains such as governance, agriculture, education, healthcare, and robotics.
+
+*(More details to come.)*

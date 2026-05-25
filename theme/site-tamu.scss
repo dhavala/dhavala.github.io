@@ -549,6 +549,27 @@ nav#quarto-sidebar .sidebar-item a.active {
   color: #888;
 }
 
+// Courses listing — a plain, borderless table: aligned columns, no grid
+// lines or row striping.
+.courses-table table { border: 0; margin: 0.4rem 0 1rem; width: 100%; }
+.courses-table tr { background: transparent !important; }
+.courses-table th,
+.courses-table td {
+  border: 0 !important;
+  background: transparent;
+  padding: 0.2rem 0.6rem 0.2rem 0;
+  vertical-align: top;
+}
+.courses-table th { font-weight: 600; }
+// Columns: Course No. | Level | Institute | Role | Title | Years.
+// Keep the metadata columns tight (they wrap if needed) so Title (col 5,
+// unset) keeps the bulk of the width.
+.courses-table th:nth-child(1), .courses-table td:nth-child(1) { width: 5.5rem; white-space: nowrap; }  // Course No.
+.courses-table th:nth-child(2), .courses-table td:nth-child(2) { width: 5rem; }                          // Level
+.courses-table th:nth-child(3), .courses-table td:nth-child(3) { width: 4rem; }                          // Institute
+.courses-table th:nth-child(4), .courses-table td:nth-child(4) { width: 6rem; }                          // Role
+.courses-table th:nth-child(6), .courses-table td:nth-child(6) { width: 6rem; }                          // Years
+
 // Quote carousel — styled like the page-description band (gray #ececec strip,
 // 0.5rem 2rem padding, muted gray text). Fixed two-line height so the strip
 // never resizes as quotes (some one line, some two via <br>) rotate through.
