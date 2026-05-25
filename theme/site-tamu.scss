@@ -517,6 +517,9 @@ nav#quarto-sidebar .sidebar-item a.active {
   color: #333;
   margin: 1rem 0 0.4rem;
 }
+// Home news feed: the full list is included from _partials/news-items.md;
+// show only the five most recent here (the News page shows them all).
+.news-feed li:nth-child(n+6) { display: none; }
 
 // Project cards — responsive grid of bordered cards (Projects page). White
 // cards sit slightly raised against the off-white content background.

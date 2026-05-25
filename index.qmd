@@ -29,7 +29,7 @@ Read more [about me](about/), or browse [recent publications](research/publicati
 :::
 
 ::::
-
+<!-- 
 :::: {.quick-stats}
 
 ::: {.stat}
@@ -48,14 +48,12 @@ EE · Math · Stats · CS
 :::
 
 ::::
-
-:::: {.cta-row}
-
-
-::::
+ -->
 
 [**Recent News**]{.news-heading}
 
-- **Jun 2026** — Snehashish Ghosh graduates (MS).
+::: {.news-feed}
+{{< include news/index.qmd >}}
+:::
 
 [All news →](news/index.qmd)
