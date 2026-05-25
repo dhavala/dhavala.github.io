@@ -128,23 +128,26 @@
     "text": "What Is Still Missing\nThis architecture has gaps. Tooling is incomplete. Many operational details still need to be tried and refined. But the pattern is useful because it makes the moving parts explicit: data, code, config, auth, execution, lineage, and composition.\nFuture topics naturally follow from this architecture:\n\nthe USB-for-ML metaphor;\nDataFrame as the default data pin;\nmicro apps in more detail;\nbest practices for modularizing data science workflows;\ndata science grammar; and\nproductivity tools and services for ML app development.\n\nThis article remains opinionated and provisional, but its purpose is to surface the design problems around building durable data products."
   },
   {
-    "objectID": "oss/another-tool.html",
-    "href": "oss/another-tool.html",
-    "title": "Another tool",
-    "section": "",
-    "text": "(Content to be added.)",
+    "objectID": "software/index.html#fedem",
+    "href": "software/index.html#fedem",
+    "title": "Software",
+    "section": "FedEm",
+    "text": "FedEm\nA decentralized framework for training foundational models. FedEm lowers the GPU barrier to entry by distributing training across a community: clients fine-tune locally and relay LoRA adapters to one another (Continuous Relay Finetuning), while a server-side hub continuously pretrains and redeploys refreshed models. It also includes Seshu, a compute-efficient multilingual model built on the Mamba state-space architecture.\n🏆 Winner of the hackathon organized by HasGeek and Meta.\nTeam · Yashwardhan Choudhary, Sai Nikhilesh Reddy\nFederated learning · Foundation models · Mamba · MIT",
     "crumbs": [
       "Home",
-      "OSS",
-      "Another tool"
+      "Software"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Soma S Dhavala",
-    "section": "",
-    "text": "Soma S. Dhavala, Professor, IIT Jammu\nAI Researcher | Systems Architect | Educator | Technologist\nTwo decades across machine learning, Bayesian statistics, signal processing, and large-scale AI systems. Current focus: frontier model development, deep learning theory, and scalable AI infrastructure for GPT-scale models, with applications across agriculture, healthcare, education, and computational biology.\nRead more about me, or browse recent publications or explore my research interests. Questions? Email me.\n\n\n\n\n\nSoma S Dhavala\n\n\n\n\n\n\n20+ years Across ML, AI, and Signal Processing\n\n\nPh.D. Statistics Texas A&M University\n\n\nCross-disciplinary EE · Math · Stats · CS"
+    "objectID": "software/index.html#sunbird-ml-workbench-daggit",
+    "href": "software/index.html#sunbird-ml-workbench-daggit",
+    "title": "Software",
+    "section": "Sunbird ML Workbench (Daggit)",
+    "text": "Sunbird ML Workbench (Daggit)\nAn open-source framework (a.k.a. daggit) that expresses a machine-learning application as a directed acyclic graph — vertices are data operations, edges are data flow — so pipelines can be built, shared, productionized, and scaled with minimal friction. Built for Project Sunbird (originally at EkStep), it powered content enrichment and automatic tagging of educational material against curriculum taxonomies; its pipeline tasks were later exposed as REST microservices (ML-as-a-Service).\nWriteups: ML Workbench, ML as a Service, and Text Tagging as a Service.\nDAG pipelines · ML platform · Python · MIT",
+    "crumbs": [
+      "Home",
+      "Software"
+    ]
   },
   {
     "objectID": "teaching/notes.html",
@@ -328,42 +331,46 @@
     "text": "References\n[1] P. G. Howard and J. S. Vitter, “Fast and Efficient Lossless Image Compression,” Proc. Data Compression Conference, pp. 351-360, Mar. 1993.\n[2] M. J. Weinberger, G. Seroussi, and G. Sapiro, “LOCO-I: A Low Complexity, Context-Based, Lossless Image Compression Algorithm,” Proc. of the Int. Data Compression Conference, pp. 140-149, March 1996.\n[3] Glen G. Langdon, Jr., “Data Compression,” CE108. W99, Department of Computer Engineering, University of California at Santa Cruz. http://www.cse.ucsc.edu/classes/cmpe263/Winter01/\n[4] E. M. Gabidulin, P. Z. Fan and M. Darnell, “Autocorrelation of Golomb sequences,” IEE Proc. Comm., Vol. 142, No. 5, October 1995.\n[5] Robert F. Rice, “Lossless Coding Standards for Space Data Systems,” Jet Propulsion Laboratory Technical Report, California Institute of Technology, Pasadena, California."
   },
   {
-    "objectID": "research/code.html",
-    "href": "research/code.html",
-    "title": "Code",
-    "section": "",
-    "text": "(Content to be added.)",
+    "objectID": "research/team.html#current-members",
+    "href": "research/team.html#current-members",
+    "title": "Team",
+    "section": "Current Members",
+    "text": "Current Members\n\nPhD Students\n\nRishika Kohli (2025 – present)  Topic: AI for Security, LLM Compression\nAdvised by Profs. Manoj S. Gaur and Shaifu Gupta (Dept. of CSE, IIT Jammu)\n\n\n\nUndergraduates\n\nApratim Mishra (2026 – present) Topic: Applications of Neural Tangent Kernel\nJointly with Prof. Manoj S. Gaur",
     "crumbs": [
       "Home",
       "Research",
-      "Code"
+      "Team"
     ]
   },
   {
-    "objectID": "research/reports.html",
-    "href": "research/reports.html",
-    "title": "Reports",
-    "section": "",
-    "text": "Technical reports written during my graduate years, transcribed from their original PDFs with rendered LaTeX and adapted as self-contained tutorials — figures and experimental results have largely been omitted so each stands on its own.\n\nGeneralized Digital Modulation and IF Modulation — a chirplet view of digital modulation, with emphasis on instantaneous-frequency (IF) modulation.\nWavelet Packets and Signal-Adapted Filter Banks — signal-adapted bases via principal component filter banks, compaction filters, and wavelet packets.\nArchitecture for Distributed Source Localization in Wireless Sensor Networks — a cross-layer ad-hoc protocol with a self-organizing MAC for collaborative source localization.\nSpace-Frequency Coded OFDM — Alamouti coding across OFDM sub-carriers for frequency-selective fading channels.\nAn Empirical Bayesian Kernel Density Estimator — a multiscale, rank-adapted kernel density estimator with hierarchical priors and Gibbs sampling.\nJoint Estimation in Dynamic State-Space Models — rolling-window Sequential Monte Carlo (FFBS) for jointly estimating states and static parameters in a dynamic state-space model.",
+    "objectID": "research/team.html#alumni",
+    "href": "research/team.html#alumni",
+    "title": "Team",
+    "section": "Alumni",
+    "text": "Alumni\n\nMasters Students\n\nSnehashish Ghosh (2025 – 2026)  Topic: Neural Operator Learning for PDEs\nJointly with Prof. Jyothsna Rani Komaragiri (Center for High Energy Physics, IISc)\nCurrent position: AI/ML Engineer II, Astreya",
     "crumbs": [
       "Home",
       "Research",
-      "Reports"
+      "Team"
     ]
   },
   {
-    "objectID": "research/projects/another-project.html",
-    "href": "research/projects/another-project.html",
-    "title": "Another project",
+    "objectID": "research/index.html",
+    "href": "research/index.html",
+    "title": "Research",
     "section": "",
-    "text": "(Content to be added.)"
+    "text": "Of course, it is the paradoxes and unusual results that lead to abandonment of ideas, adjustment of our intuition or the discovery of new ideas\n– Leon Cohen\n\n\nResearch in Bayesian methods, semi-parametric modeling, and applied machine learning. Browse Publications, Patents, Reports, Projects, and Team.",
+    "crumbs": [
+      "Home",
+      "Research"
+    ]
   },
   {
     "objectID": "research/projects/index.html",
     "href": "research/projects/index.html",
     "title": "Projects",
     "section": "",
-    "text": "Sample project\nAnother project",
+    "text": "Selected research and engineering projects — one page each:\n\nSunbird ML Workbench (Daggit) — a DAG-based ML pipeline framework built for Project Sunbird.",
     "crumbs": [
       "Home",
       "Research",
@@ -1102,45 +1109,29 @@
     "text": "References\n[1] S.M. Alamouti, “A simple transmitter diversity scheme for wireless communications,” IEEE JSAC, Vol. 16, No. 3, pp 1451-1458, 1998\n[2] http://www.nari.ee.ethz.ch/commth/pubs/files/proc03.pdf\n[3] http://www.tele.ntnu.no/projects/beats/Documents/GesbertMIMOlecture.pdf\n[4] D. Agarwal, V. Tarokh, A. Naguib, and Nambi Seshadri, “Space-time coded OFDM for High Data Rate Wireless Communication over wideband,” Proc. VTC, Ottawa, Canada, Vol. 3, pp. 2232-2236, 1998\n[5] M, Torabi, M.R. Soleymani, “Adaptive bit allocation for space-time block coded OFDM system,” Acoustics, Speech, and Signal Processing, 2003. Proceedings. (ICASSP ’03). 2003 IEEE International Conference on, Volume: 4 , 6-10 April 2003, Pages: IV - 409-12 vol.4\n[6] Lee, K.F.; Williams, D.B., “A space-frequency transmitter diversity technique for OFDM systems,” Global Telecommunications Conference, 2000. GLOBECOM ’00. IEEE, Volume: 3 , 27 Nov.-1 Dec. 2000, Pages: 1473 - 1477 vol.3"
   },
   {
-    "objectID": "research/projects/sample-project.html",
-    "href": "research/projects/sample-project.html",
-    "title": "Sample project",
+    "objectID": "research/projects/sunbird-ml-workbench.html",
+    "href": "research/projects/sunbird-ml-workbench.html",
+    "title": "Sunbird ML Workbench (Daggit)",
     "section": "",
-    "text": "(Content to be added.)"
+    "text": "Repository: github.com/project-sunbird/sunbird-ml-workbench\nAn open-source framework (a.k.a. daggit) that expresses a machine-learning application as a directed acyclic graph — vertices are data operations, edges are data flow — so pipelines can be built, shared, productionized, and scaled with minimal friction. Built for Project Sunbird (originally at EkStep), it powered content enrichment and automatic tagging of educational material against curriculum taxonomies; its pipeline tasks were later exposed as REST microservices (ML-as-a-Service).\nDAG pipelines · ML platform · Python · MIT"
   },
   {
-    "objectID": "research/index.html",
-    "href": "research/index.html",
-    "title": "Research",
-    "section": "",
-    "text": "Of course, it is the paradoxes and unusual results that lead to abandonment of ideas, adjustment of our intuition or the discovery of new ideas\n– Leon Cohen\n\n\nResearch in Bayesian methods, semi-parametric modeling, and applied machine learning. Browse Publications, Patents, Reports, Code, Projects, and Team.",
-    "crumbs": [
-      "Home",
-      "Research"
-    ]
+    "objectID": "research/projects/sunbird-ml-workbench.html#writeups",
+    "href": "research/projects/sunbird-ml-workbench.html#writeups",
+    "title": "Sunbird ML Workbench (Daggit)",
+    "section": "Writeups",
+    "text": "Writeups\n\nML Workbench — design of the workbench and its DAG abstraction.\nML as a Service — bundling Daggit pipelines into reusable REST microservices.\nText Tagging as a Service — auto-tagging Sunbird content against curriculum taxonomies."
   },
   {
-    "objectID": "research/team.html#current-members",
-    "href": "research/team.html#current-members",
-    "title": "Team",
-    "section": "Current Members",
-    "text": "Current Members\n\nPhD Students\n\nRishika Kohli (2025 – present)  Topic: AI for Security, LLM Compression\nAdvised by Profs. Manoj S. Gaur and Shaifu Gupta (Dept. of CSE, IIT Jammu)\n\n\n\nUndergraduates\n\nApratim Mishra (2026 – present) Topic: Applications of Neural Tangent Kernel\nJointly with Prof. Manoj S. Gaur",
+    "objectID": "research/reports.html",
+    "href": "research/reports.html",
+    "title": "Reports",
+    "section": "",
+    "text": "Technical reports written during my graduate years, transcribed from their original PDFs with rendered LaTeX and adapted as self-contained tutorials — figures and experimental results have largely been omitted so each stands on its own.\n\nGeneralized Digital Modulation and IF Modulation — a chirplet view of digital modulation, with emphasis on instantaneous-frequency (IF) modulation.\nWavelet Packets and Signal-Adapted Filter Banks — signal-adapted bases via principal component filter banks, compaction filters, and wavelet packets.\nArchitecture for Distributed Source Localization in Wireless Sensor Networks — a cross-layer ad-hoc protocol with a self-organizing MAC for collaborative source localization.\nSpace-Frequency Coded OFDM — Alamouti coding across OFDM sub-carriers for frequency-selective fading channels.\nAn Empirical Bayesian Kernel Density Estimator — a multiscale, rank-adapted kernel density estimator with hierarchical priors and Gibbs sampling.\nJoint Estimation in Dynamic State-Space Models — rolling-window Sequential Monte Carlo (FFBS) for jointly estimating states and static parameters in a dynamic state-space model.",
     "crumbs": [
       "Home",
       "Research",
-      "Team"
-    ]
-  },
-  {
-    "objectID": "research/team.html#alumni",
-    "href": "research/team.html#alumni",
-    "title": "Team",
-    "section": "Alumni",
-    "text": "Alumni\n\nMasters Students\n\nSnehashish Ghosh (2025 – 2026)  Topic: Neural Operator Learning for PDEs\nJointly with Prof. Jyothsna Rani Komaragiri (Center for High Energy Physics, IISc)\nCurrent position: AI/ML Engineer II, Astreya",
-    "crumbs": [
-      "Home",
-      "Research",
-      "Team"
+      "Reports"
     ]
   },
   {
@@ -1328,27 +1319,11 @@
     ]
   },
   {
-    "objectID": "oss/index.html",
-    "href": "oss/index.html",
-    "title": "Open Source",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Soma S Dhavala",
     "section": "",
-    "text": "Use the sidebar at left to browse individual projects.",
-    "crumbs": [
-      "Home",
-      "OSS"
-    ]
-  },
-  {
-    "objectID": "oss/sample-tool.html",
-    "href": "oss/sample-tool.html",
-    "title": "Sample tool",
-    "section": "",
-    "text": "(Content to be added.)",
-    "crumbs": [
-      "Home",
-      "OSS",
-      "Sample tool"
-    ]
+    "text": "Soma S. Dhavala, Professor, IIT Jammu\nAI Researcher | Systems Architect | Educator | Technologist\nTwo decades across machine learning, Bayesian statistics, signal processing, and large-scale AI systems. Current focus: frontier model development, deep learning theory, and scalable AI infrastructure for GPT-scale models, with applications across agriculture, healthcare, education, and computational biology.\nRead more about me, or browse recent publications or explore my research interests. Questions? Email me.\n\n\n\n\n\nSoma S Dhavala\n\n\n\n\n\n\n20+ years Across ML, AI, and Signal Processing\n\n\nPh.D. Statistics Texas A&M University\n\n\nCross-disciplinary EE · Math · Stats · CS"
   },
   {
     "objectID": "saddlepoint/2017-10-26-usb-for-connecting-ml-apps/index.html",
