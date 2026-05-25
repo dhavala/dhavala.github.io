@@ -54,7 +54,6 @@ website:
           - research/publications.qmd
           - research/patents.qmd
           - research/reports.qmd
-          - research/code.qmd
           - research/projects/index.qmd
           - research/team.qmd
       - section: "Teaching"
@@ -64,11 +63,8 @@ website:
           - teaching/notes.qmd
       - text: "Consulting"
         href: consulting/index.qmd
-      - section: "OSS"
-        href: oss/index.qmd
-        contents:
-          - oss/sample-tool.qmd
-          - oss/another-tool.qmd
+      - text: "Software"
+        href: software/index.qmd
       - section: "Blogs"
         href: blogs/index.qmd
         contents:

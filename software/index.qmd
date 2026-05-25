@@ -1,0 +1,26 @@
+---
+title: "Software"
+description: "Software and tools I build and maintain; each item's license indicates whether it's open source."
+---
+
+::: {.project-card}
+## [FedEm](https://github.com/mlsquare/fedem)
+
+A decentralized framework for training foundational models. FedEm lowers the GPU barrier to entry by distributing training across a community: clients fine-tune locally and relay LoRA adapters to one another (Continuous Relay Finetuning), while a server-side hub continuously pretrains and redeploys refreshed models. It also includes *Seshu*, a compute-efficient multilingual model built on the Mamba state-space architecture.
+
+🏆 **Winner** of the hackathon organized by HasGeek and Meta.
+
+[**Team** · Yashwardhan Choudhary, Sai Nikhilesh Reddy]{.project-team}
+
+[Federated learning · Foundation models · Mamba · MIT]{.project-tags}
+:::
+
+::: {.project-card}
+## [Sunbird ML Workbench (Daggit)](https://github.com/project-sunbird/sunbird-ml-workbench)
+
+An open-source framework (a.k.a. *daggit*) that expresses a machine-learning application as a directed acyclic graph — vertices are data operations, edges are data flow — so pipelines can be built, shared, productionized, and scaled with minimal friction. Built for Project Sunbird (originally at EkStep), it powered content enrichment and automatic tagging of educational material against curriculum taxonomies; its pipeline tasks were later exposed as REST microservices (ML-as-a-Service).
+
+Writeups: [ML Workbench](https://adarsa.github.io/projects/ML_Workbench/), [ML as a Service](https://adarsa.github.io/projects/ML_as_Service/), and [Text Tagging as a Service](https://adarsa.github.io/python/2019/06/16/Text-tagging-as-a-Service.html).
+
+[DAG pipelines · ML platform · Python · MIT]{.project-tags}
+:::

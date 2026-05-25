@@ -39,6 +39,11 @@ $grid-column-gutter-width: 1rem;
 
 /*-- scss:rules --*/
 
+// Always reserve the vertical-scrollbar gutter, so navigating between a long
+// page (scrollbar present) and a short one (no scrollbar) doesn't widen the
+// viewport and shift the centered sidebar + content sideways.
+html { scrollbar-gutter: stable; }
+
 // Surround: gradient JPG on dark fallback, repeating horizontally
 body {
   background: $body-bg url("images/banners/bggrad2.jpg") repeat-x top center;
@@ -502,6 +507,47 @@ nav#quarto-sidebar .sidebar-item a.active {
   color: #444;
 }
 .cta-row p { margin: 0; }
+
+// Project cards — responsive grid of bordered cards (Projects page). White
+// cards sit slightly raised against the off-white content background.
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;   // one full-width card per row, stacked
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.project-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.9rem 1.1rem;
+  margin: 1.25rem 0;         // stacked full-width cards (no grid wrapper)
+  background: #fff;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.project-card:hover {
+  border-color: #bbb;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+.project-card > :first-child { margin-top: 0; }
+.project-card > :last-child { margin-bottom: 0; }
+.project-card h2 {
+  font-size: 0.98rem;
+  margin-bottom: 0.4rem;
+  border-bottom: 0;          // drop Quarto's default h2 underline inside cards
+}
+.project-card h2 a { text-decoration: none; }
+.project-team {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: #555;
+}
+.project-tags {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.72rem;
+  color: #888;
+}
 
 // Quote carousel — styled like the page-description band (gray #ececec strip,
 // 0.5rem 2rem padding, muted gray text). Fixed two-line height so the strip

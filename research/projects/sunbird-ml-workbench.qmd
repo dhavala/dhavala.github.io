@@ -1,0 +1,16 @@
+---
+title: "Sunbird ML Workbench (Daggit)"
+description: "DAG-based ML pipeline framework built for Project Sunbird."
+---
+
+Repository: [github.com/project-sunbird/sunbird-ml-workbench](https://github.com/project-sunbird/sunbird-ml-workbench)
+
+An open-source framework (a.k.a. *daggit*) that expresses a machine-learning application as a directed acyclic graph — vertices are data operations, edges are data flow — so pipelines can be built, shared, productionized, and scaled with minimal friction. Built for Project Sunbird (originally at EkStep), it powered content enrichment and automatic tagging of educational material against curriculum taxonomies; its pipeline tasks were later exposed as REST microservices (ML-as-a-Service).
+
+[DAG pipelines · ML platform · Python · MIT]{.project-tags}
+
+## Writeups
+
+- [ML Workbench](https://adarsa.github.io/projects/ML_Workbench/) — design of the workbench and its DAG abstraction.
+- [ML as a Service](https://adarsa.github.io/projects/ML_as_Service/) — bundling Daggit pipelines into reusable REST microservices.
+- [Text Tagging as a Service](https://adarsa.github.io/python/2019/06/16/Text-tagging-as-a-Service.html) — auto-tagging Sunbird content against curriculum taxonomies.

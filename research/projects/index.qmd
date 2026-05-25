@@ -3,5 +3,6 @@ title: "Projects"
 description: "Ongoing and past research projects."
 ---
 
-- [Sample project](sample-project.qmd)
-- [Another project](another-project.qmd)
+Selected research and engineering projects — one page each:
+
+- [Sunbird ML Workbench (Daggit)](sunbird-ml-workbench.qmd) — a DAG-based ML pipeline framework built for Project Sunbird.
