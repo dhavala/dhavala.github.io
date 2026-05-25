@@ -444,9 +444,15 @@ nav#quarto-sidebar .sidebar-item a.active {
 }
 #quarto-margin-sidebar .quarto-category-count { color: #888; }
 
-// Email subscribe — centered: a small label over one joined pill (email +
-// Subscribe button).
-.subscribe { margin: 1.75rem 0 0.5rem; text-align: center; }
+// Email subscribe — a centered gray ribbon (label over one joined email +
+// Subscribe pill), with clear space below before the blog post list.
+.subscribe {
+  background: #ececec;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 1rem 0 2.5rem;     // small gap above (under the description band), big gap below (from posts)
+  text-align: center;
+}
 .subscribe-label {
   margin: 0 0 0.5rem;
   font-weight: 600;

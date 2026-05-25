@@ -3,6 +3,7 @@ title: "SaddlePoint"
 description: "Academic and technical blog — statistics, machine learning, and adjacent topics."
 comments: false
 listing:
+  id: sp-posts
   contents: .
   type: default
   sort: "date desc"
@@ -12,3 +13,8 @@ listing:
     description: "Academic and technical writing on statistics, ML, and adjacent topics."
   fields: [date, title, categories, description, reading-time]
 ---
+
+{{< include ../_partials/subscribe-saddlepoint.html >}}
+
+::: {#sp-posts}
+:::

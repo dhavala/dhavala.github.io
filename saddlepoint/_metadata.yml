@@ -1,5 +1,4 @@
 include-before-body: ../_partials/banner-saddlepoint.html
-include-after-body: ../_partials/subscribe-saddlepoint.html
 
 # Comments enabled for all SaddlePoint posts.
 comments:
