@@ -1,21 +1,10 @@
 [
   {
-    "objectID": "consulting/index.html#industry",
-    "href": "consulting/index.html#industry",
+    "objectID": "consulting/index.html",
+    "href": "consulting/index.html",
     "title": "Consulting",
-    "section": "Industry",
-    "text": "Industry\n(To be added.)",
-    "crumbs": [
-      "Home",
-      "Consulting"
-    ]
-  },
-  {
-    "objectID": "consulting/index.html#academic-pro-bono",
-    "href": "consulting/index.html#academic-pro-bono",
-    "title": "Consulting",
-    "section": "Academic & Pro-bono",
-    "text": "Academic & Pro-bono\n(To be added.)",
+    "section": "",
+    "text": "The job of a consultant is make his or her job redundant, eventually!\n– Soma S. Dhavala\n\n\n\nAdvisor HyperNorm",
     "crumbs": [
       "Home",
       "Consulting"
@@ -171,9 +160,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "News",
+    "title": "Soma S Dhavala",
     "section": "",
-    "text": "Soma S. Dhavala, Professor, IIT Jammu\nAI Researcher | Systems Architect | Educator | Technologist\nTwo decades across machine learning, Bayesian statistics, signal processing, and large-scale AI systems. Current focus: frontier model development, deep learning theory, and scalable AI infrastructure for GPT-scale models, with applications across agriculture, healthcare, education, and computational biology.\nRead more about me, or browse recent publications or explore my research interests. Questions? Email me.\n\n\n\n\n\nSoma S Dhavala\n\n\n\n\n\nRecent News\n\n\nJune 2026 — Snehashish Ghosh graduates (MS, IISc).\n\n\nAll news →"
+    "text": "Soma S. Dhavala, Professor, IIT Jammu\nAI Researcher | Systems Architect | Educator | Technologist\nTwo decades across machine learning, Bayesian statistics, signal processing, and large-scale AI systems. Current focus: frontier model development, deep learning theory, and scalable AI infrastructure for GPT-scale models, with applications across agriculture, healthcare, education, and computational biology.\nRead more about me, or browse recent publications or explore my research interests. Questions? Email me.\n\n\n\n\n\nSoma S Dhavala\n\n\n\n\n\nRecent News\n\n\n\nJun’26 — Snehashish Ghosh graduates (MS, IISc)! Congratulations.\nMar’26 — Joined as Professor in EE (and CSE) at IIT Jammu.\n\n\nAll news →"
   },
   {
     "objectID": "teaching/courses.html",
@@ -1550,7 +1539,7 @@
     "href": "news/index.html",
     "title": "News",
     "section": "",
-    "text": "June 2026 — Snehashish Ghosh graduates (MS, IISc).",
+    "text": "Jun’26 — Snehashish Ghosh graduates (MS, IISc)! Congratulations.\nMar’26 — Joined as Professor in EE (and CSE) at IIT Jammu.",
     "crumbs": [
       "Home",
       "News"
