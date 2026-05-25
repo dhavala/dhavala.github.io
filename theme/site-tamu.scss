@@ -529,8 +529,8 @@ nav#quarto-sidebar .sidebar-item a.active {
 .project-card {
   border: 1px solid #ddd;
   border-radius: 6px;
-  padding: 0.9rem 1.1rem;
-  margin: 1.25rem 0;         // stacked full-width cards (no grid wrapper)
+  padding: 1.4rem 1.3rem 1.2rem;   // generous top cushion so the title isn't cramped
+  margin: 1.25rem 0;               // stacked full-width cards (no grid wrapper)
   background: #fff;
   transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
