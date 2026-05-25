@@ -1,0 +1,6 @@
+---
+title: "News"
+description: "News and announcements."
+---
+
+- **June 2026** — Snehashish Ghosh graduates (MS, IISc).

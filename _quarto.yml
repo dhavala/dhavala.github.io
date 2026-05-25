@@ -48,6 +48,8 @@ website:
     contents:
       - text: "About"
         href: about/index.qmd
+      - text: "News"
+        href: news/index.qmd
       - section: "Research"
         href: research/index.qmd
         contents:
@@ -61,10 +63,12 @@ website:
         contents:
           - teaching/courses.qmd
           - teaching/notes.qmd
-      - text: "Consulting"
-        href: consulting/index.qmd
       - text: "Software"
         href: software/index.qmd
+      - text: "Consulting"
+        href: consulting/index.qmd
+      - text: "Service"
+        href: service/index.qmd
       - section: "Blogs"
         href: blogs/index.qmd
         contents:

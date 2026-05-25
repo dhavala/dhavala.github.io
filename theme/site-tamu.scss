@@ -508,6 +508,15 @@ nav#quarto-sidebar .sidebar-item a.active {
 }
 .cta-row p { margin: 0; }
 
+// Home-page "Recent News" label — a heading-like cue that isn't an actual
+// <h2>/<h3>, so it doesn't add a TOC entry or flip the landing page layout.
+.news-heading {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin: 1rem 0 0.4rem;
+}
+
 // Project cards — responsive grid of bordered cards (Projects page). White
 // cards sit slightly raised against the off-white content background.
 .project-grid {

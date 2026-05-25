@@ -53,3 +53,9 @@ EE · Math · Stats · CS
 
 
 ::::
+
+[**Recent News**]{.news-heading}
+
+- **Jun 2026** — Snehashish Ghosh graduates (MS).
+
+[All news →](news/index.qmd)
