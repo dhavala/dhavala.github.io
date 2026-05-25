@@ -9,10 +9,4 @@ description: "Consulting engagements, services, and how to work with me."
 
 <br>
 
-## Industry
-
-*(To be added.)*
-
-## Academic & Pro-bono
-
-*(To be added.)*
+- Advisor [HyperNorm](https://www.hypernorm.ai/)
