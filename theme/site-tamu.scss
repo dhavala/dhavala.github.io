@@ -529,21 +529,26 @@ nav#quarto-sidebar .sidebar-item a.active {
 .project-card {
   border: 1px solid #ddd;
   border-radius: 6px;
-  padding: 1.4rem 1.3rem 1.2rem;   // generous top cushion so the title isn't cramped
+  padding: 0 1.3rem 1.2rem;        // no top padding — the title header band fills it
   margin: 1.25rem 0;               // stacked full-width cards (no grid wrapper)
   background: #fff;
+  overflow: hidden;                // clip the header band to the rounded corners
   transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 .project-card:hover {
   border-color: #bbb;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
-.project-card > :first-child { margin-top: 0; }
 .project-card > :last-child { margin-bottom: 0; }
+// Card title as a gray header ribbon spanning the full card width (like the
+// page-description band). Negative side margins cancel the card's side padding
+// so the band runs edge to edge; the card's `overflow: hidden` rounds its top.
 .project-card h2 {
+  background: #ececec;
+  margin: 0 -1.3rem 1.1rem;
+  padding: 0.5rem 1.3rem;
   font-size: 0.98rem;
-  margin-bottom: 0.4rem;
-  border-bottom: 0;          // drop Quarto's default h2 underline inside cards
+  border-bottom: 1px solid #e0e0e0;
 }
 .project-card h2 a { text-decoration: none; }
 .project-team {
