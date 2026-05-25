@@ -135,15 +135,16 @@ main.content .listing-description a:hover {
 }
 
 // Page description — render the frontmatter `description:` as a light-gray band
-// that mirrors the dark breadcrumb ribbon above it: same full width and
-// 0.5rem 2rem padding, just lighter and in muted gray text. The extra bottom
-// margin gives clear separation from the body content. !important on padding
-// beats the higher-specificity `body:has(...) .quarto-title-block > div
+// that mirrors the dark breadcrumb ribbon above it (same full width and
+// 0.5rem 2rem padding, lighter, muted gray text), with a bottom margin for a
+// buffer before the content. The band is the bare wrapper div Quarto puts the
+// `.description` in; target it with :not() (not :has) so it styles reliably in
+// every browser. !important on padding beats the `body:has(...) > div
 // { padding: 0 2rem }` ribbon-layout rules further down.
-.quarto-title-block > div:has(> .description) {
+.quarto-title-block > div:not(.quarto-title):not(.quarto-title-meta):not(.quarto-title-breadcrumbs):not(nav) {
   background: #ececec;
   padding: 0.5rem 2rem !important;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.25rem;
 }
 .quarto-title-block .description {
   margin: 0;
