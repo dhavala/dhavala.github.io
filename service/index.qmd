@@ -8,7 +8,7 @@ description: "Service to the institute and to the wider research community."
 *(To be added.)*
 
 ## Impact Sector
-- Techncal Expert, on Open Source AI, for _Digital Futures Lab_, 2025, [report](https://cdn.sanity.io/files/cfrp3y1m/production/aa01f2df2c804bbf462e58e9df763d86281a278b.pdf), [article](https://www.digitalfutureslab.in/publications/advancing-open-source-ai-in-india-recommendations-for-governments-and-technology-developers)
+- Technical Expert, on Open Source AI, for _Digital Futures Lab_, 2025, [report](https://cdn.sanity.io/files/cfrp3y1m/production/aa01f2df2c804bbf462e58e9df763d86281a278b.pdf), [article](https://www.digitalfutureslab.in/publications/advancing-open-source-ai-in-india-recommendations-for-governments-and-technology-developers)
 - Member, Working Group on Indic Voice Technologies for an Inclusive India, for _Digital Futures Lab_, 2026, [report](https://cdn.sanity.io/files/cfrp3y1m/production/5372f0e7d143fbaecf43ea107e428acad6d9add7.pdf), [article](https://www.digitalfutureslab.in/publications/publication-voice-technologies-for-indian-languages-best-practices-and-recommendations-for-responsible-and-open-ai)
 - Mentor, Impact Fellowship Programme, _[ISDM](https://www.isdm.org.in/centre-for-data-science) Center for Data Science and Social Impact_, 2024-25
 
@@ -32,7 +32,7 @@ description: "Service to the institute and to the wider research community."
 
 ## Community
 
-- Partime Tutor — Purna Pramati, Bengaluru, 2018–2019\
+- Part-time Tutor — Purna Pramati, Bengaluru, 2018–2019
 - Treasurer — Carnatic Music Association of Indianapolis, 2013–14\
   Coordinated fundraising and music-event management, ran newsletter campaigns, and managed budgets and balance sheets.
 - Student Advisor — CRY, TAMU chapter, 2007–08\
