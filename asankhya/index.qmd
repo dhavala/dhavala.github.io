@@ -3,7 +3,6 @@ title: "Asankhya"
 description: "Personal blog — essays, notes, and slow thinking."
 comments: false
 listing:
-  id: ak-posts
   contents: .
   type: default
   sort: "date desc"
@@ -13,38 +12,3 @@ listing:
     description: "Personal essays, notes, and slow thinking."
   fields: [date, title, categories, description, reading-time]
 ---
-
-::: {.subscribe}
-```{=html}
-<form class="mc-form" action="https://github.us2.list-manage.com/subscribe/post?u=5efa41ab55aaad4b221191d92&amp;id=5f51fab4af&amp;f_id=007f61e0f0" method="post" target="_blank">
-  <input type="email" name="EMAIL" placeholder="Type your email…" aria-label="Email address" required>
-  <div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_5efa41ab55aaad4b221191d92_5f51fab4af" tabindex="-1" value=""></div>
-  <button type="submit">Subscribe</button>
-</form>
-<p class="mc-thanks" hidden>✓ Thanks for subscribing.</p>
-<script>
-(function(){
-  var f = document.querySelector('.subscribe .mc-form');
-  var t = document.querySelector('.subscribe .mc-thanks');
-  if (!f) return;
-  // Progressive enhancement: POST quietly to a hidden iframe, then swap the form
-  // for a persistent thank-you in place — no page reload, so it can't flash away.
-  var ifr = document.createElement('iframe');
-  ifr.name = 'mc-sink'; ifr.title = 'subscribe'; ifr.tabIndex = -1; ifr.style.display = 'none';
-  document.body.appendChild(ifr);
-  f.target = 'mc-sink';
-  var sent = false, done = function(){
-    if (!sent) return;            // ignore the iframe's initial empty load
-    sent = false;                 // run once
-    f.style.display = 'none';
-    if (t) t.hidden = false;
-  };
-  f.addEventListener('submit', function(){ sent = true; setTimeout(done, 2500); }); // fallback if load is missed
-  ifr.addEventListener('load', done);
-})();
-</script>
-```
-:::
-
-::: {#ak-posts}
-:::
