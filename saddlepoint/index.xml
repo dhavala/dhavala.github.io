@@ -17,7 +17,74 @@
 <width>144</width>
 </image>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Tue, 15 Dec 2020 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 13 Jun 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Science Moves. Engineering Compounds.</title>
+  <dc:creator>Soma S Dhavala</dc:creator>
+  <link>https://dhavala.github.io/saddlepoint/2026-06-13-science-moves-engineering-compounds/</link>
+  <description><![CDATA[ 
+<div class="section-banner">
+  <img style="display:block;width:100%;height:150px;object-fit:cover;object-position:center" src="https://dhavala.github.io/images/banners/horsesskybw.jpg" alt="Blog banner">
+</div>
+
+
+
+
+<p>One of the recurring assumptions in AI is that the companies at the frontier are protected by superior science.</p>
+<p>That may have been true for periods of time. It is becoming less true with every passing year. The reason is simple: <strong>scientific advantage diffuses.</strong></p>
+<blockquote class="blockquote">
+<p>A breakthrough that appears novel today often becomes common knowledge surprisingly quickly. New papers, open-source implementations, replications, benchmarks, and tutorials compress the time between discovery and adoption. The half-life of a scientific advantage is shrinking.</p>
+</blockquote>
+<p>Consider a few examples.</p>
+<p>A few years ago, large-scale model training was itself a specialized capability. Today, much of the knowledge around transformer architectures, distributed training, optimization techniques, and scaling laws is widely available.</p>
+<p>Fine-tuning techniques tell a similar story. Full-parameter fine-tuning gave way to parameter-efficient methods such as LoRA, and newer approaches keep reducing computational requirements, memory footprint, and deployment complexity. What was once expensive and specialized gradually becomes routine.</p>
+<p>The same pattern holds across the research frontier — alternatives and extensions to standard backpropagation, new optimization schemes, efficient architectures, sparsity methods, retrieval-based systems, and novel training paradigms. Not all of these will succeed, but the broader trend is unmistakable: the science is moving rapidly, and scientific capabilities that once required enormous resources eventually become accessible to a much larger set of organizations.</p>
+<blockquote class="blockquote">
+<p>Diffusion may even be outrunning publication. In an experiment I ran recently, I had Claude Fable 5 reconstruct the likely theory behind an unpublished result — <em>“Killing LoRA: An NTK Mirror Duality Theorem for Pretrained Transformers”</em> — from its open-source implementation alone, before the paper was released. The reverse-engineered write-up is <a href="https://lnkd.in/ggVbnpJQ">here</a>. If the theory behind a result can be inferred straight from the code, then even <em>unpublished</em> science begins to diffuse the moment the implementation ships.</p>
+</blockquote>
+<section id="science-is-not-becoming-less-important" class="level2">
+<h2 data-anchor-id="science-is-not-becoming-less-important">Science is not becoming less important</h2>
+<p>None of this means science matters less. On the contrary, scientific progress is accelerating.</p>
+<p>The implication is different: <strong>scientific leadership alone is becoming a less durable moat.</strong> The frontier keeps moving, and standing on it is no longer the same as owning it.</p>
+<p>What, then, becomes the source of enduring advantage?</p>
+</section>
+<section id="engineering" class="level2">
+<h2 data-anchor-id="engineering">Engineering</h2>
+<p>Not engineering as coding — engineering as organizational capability.</p>
+<p>The ability to train systems reliably across thousands of accelerators. The ability to recover from failures. The ability to optimize infrastructure costs. The ability to manage data pipelines, evaluation systems, deployment platforms, observability stacks, safety guardrails, and production workflows. The ability to operate complex systems repeatedly and predictably.</p>
+<p>These capabilities are difficult to acquire from papers. They are learned through execution.</p>
+<p>Every large-scale deployment leaves scars. Every outage teaches a lesson. Every scaling bottleneck forces a new architectural decision. Every production incident contributes to a body of institutional knowledge that is difficult to replicate.</p>
+<p>This accumulated experience creates what might be called <strong>engineering muscle memory</strong> — and unlike scientific discoveries, it does not diffuse quickly. It is embedded in teams, processes, infrastructure, tooling, and culture, built through years of operating systems under real-world constraints.</p>
+<p>The history of technology offers many examples of this asymmetry. Scientific ideas spread rapidly across an industry; operational excellence does not. Many organizations can understand an idea. Far fewer can execute it at scale.</p>
+</section>
+<section id="but-doesnt-ai-write-the-code-now" class="level2">
+<h2 data-anchor-id="but-doesnt-ai-write-the-code-now">But doesn’t AI write the code now?</h2>
+<p>There is an obvious objection. Tools like Claude Opus now write code faster than ever, turning hours of implementation into minutes. If producing software is becoming cheap and fast, isn’t engineering diffusing just as quickly as the science?</p>
+<p>The objection is worth taking seriously — and once you separate the two things the word “engineering” quietly bundles together, it points the other way.</p>
+<p>AI compresses the <em>writing</em> of code: translating a known design into working software, filling in boilerplate, navigating an unfamiliar API, standing up a prototype. That part is genuinely getting cheaper.</p>
+<p>What it does not hand you is the design. What to build. Which tradeoffs to accept. How the components fit together at scale. Where the system will buckle under real load, and what to do when it does. Those decisions still depend on knowing the problem deeply and having operated systems like it before.</p>
+<blockquote class="blockquote">
+<p>If anything, cheap implementation raises the premium on judgment. When a working prototype is minutes away for everyone, the bottleneck moves up the stack — to choosing the right problem, architecting for scale, and running the result reliably. The scarce skill is no longer typing the code; it is knowing which code is worth writing.</p>
+</blockquote>
+<p>And that is exactly the knowledge that does not diffuse. A model can suggest how to implement an idea; it cannot give an organization the accumulated experience of having built and operated frontier systems before. Faster code generation lowers the cost of <em>building</em>. It does not lower the cost of <em>knowing what to build</em> — and at the frontier, that institutional knowledge remains the harder thing to acquire.</p>
+</section>
+<section id="what-endures" class="level2">
+<h2 data-anchor-id="what-endures">What endures</h2>
+<p>As foundation models mature, this distinction may become increasingly important.</p>
+<p>Scientific breakthroughs will keep emerging from universities, startups, research labs, and open-source communities. New techniques will keep lowering costs and expanding access. But converting those advances into reliable, scalable, and economically viable systems will remain an engineering challenge.</p>
+<p>The companies that endure may not be the ones that discover every breakthrough first. They may be the ones that consistently know what to build and how to make those breakthroughs work.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>ai</category>
+  <category>machine-learning</category>
+  <category>engineering</category>
+  <category>moats</category>
+  <guid>https://dhavala.github.io/saddlepoint/2026-06-13-science-moves-engineering-compounds/</guid>
+  <pubDate>Sat, 13 Jun 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>PageRank and KNN: an equivalence</title>
   <dc:creator>Soma S Dhavala</dc:creator>
