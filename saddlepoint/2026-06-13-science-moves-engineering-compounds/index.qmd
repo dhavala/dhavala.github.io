@@ -1,0 +1,67 @@
+---
+title: "Science Moves. Engineering Compounds."
+description: "Scientific advantage diffuses faster every year; what endures is engineering muscle memory — operational capability earned through execution, not read from papers."
+author: "Soma S Dhavala"
+date: "2026-06-13"
+categories: ["ai", "machine-learning", "engineering", "moats"]
+---
+
+One of the recurring assumptions in AI is that the companies at the frontier are protected by superior science.
+
+That may have been true for periods of time. It is becoming less true with every passing year. The reason is simple: **scientific advantage diffuses.**
+
+> A breakthrough that appears novel today often becomes common knowledge surprisingly quickly. New papers, open-source implementations, replications, benchmarks, and tutorials compress the time between discovery and adoption. The half-life of a scientific advantage is shrinking.
+
+Consider a few examples.
+
+A few years ago, large-scale model training was itself a specialized capability. Today, much of the knowledge around transformer architectures, distributed training, optimization techniques, and scaling laws is widely available.
+
+Fine-tuning techniques tell a similar story. Full-parameter fine-tuning gave way to parameter-efficient methods such as LoRA, and newer approaches keep reducing computational requirements, memory footprint, and deployment complexity. What was once expensive and specialized gradually becomes routine.
+
+The same pattern holds across the research frontier — alternatives and extensions to standard backpropagation, new optimization schemes, efficient architectures, sparsity methods, retrieval-based systems, and novel training paradigms. Not all of these will succeed, but the broader trend is unmistakable: the science is moving rapidly, and scientific capabilities that once required enormous resources eventually become accessible to a much larger set of organizations.
+
+> Diffusion may even be outrunning publication. In an experiment I ran recently, I had Claude Fable 5 reconstruct the likely theory behind an unpublished result — *"Killing LoRA: An NTK Mirror Duality Theorem for Pretrained Transformers"* — from its open-source implementation alone, before the paper was released. The reverse-engineered write-up is [here](https://lnkd.in/ggVbnpJQ). If the theory behind a result can be inferred straight from the code, then even *unpublished* science begins to diffuse the moment the implementation ships.
+
+## Science is not becoming less important
+
+None of this means science matters less. On the contrary, scientific progress is accelerating.
+
+The implication is different: **scientific leadership alone is becoming a less durable moat.** The frontier keeps moving, and standing on it is no longer the same as owning it.
+
+What, then, becomes the source of enduring advantage?
+
+## Engineering
+
+Not engineering as coding — engineering as organizational capability.
+
+The ability to train systems reliably across thousands of accelerators. The ability to recover from failures. The ability to optimize infrastructure costs. The ability to manage data pipelines, evaluation systems, deployment platforms, observability stacks, safety guardrails, and production workflows. The ability to operate complex systems repeatedly and predictably.
+
+These capabilities are difficult to acquire from papers. They are learned through execution.
+
+Every large-scale deployment leaves scars. Every outage teaches a lesson. Every scaling bottleneck forces a new architectural decision. Every production incident contributes to a body of institutional knowledge that is difficult to replicate.
+
+This accumulated experience creates what might be called **engineering muscle memory** — and unlike scientific discoveries, it does not diffuse quickly. It is embedded in teams, processes, infrastructure, tooling, and culture, built through years of operating systems under real-world constraints.
+
+The history of technology offers many examples of this asymmetry. Scientific ideas spread rapidly across an industry; operational excellence does not. Many organizations can understand an idea. Far fewer can execute it at scale.
+
+## But doesn't AI write the code now?
+
+There is an obvious objection. Tools like Claude Opus now write code faster than ever, turning hours of implementation into minutes. If producing software is becoming cheap and fast, isn't engineering diffusing just as quickly as the science?
+
+The objection is worth taking seriously — and once you separate the two things the word "engineering" quietly bundles together, it points the other way.
+
+AI compresses the *writing* of code: translating a known design into working software, filling in boilerplate, navigating an unfamiliar API, standing up a prototype. That part is genuinely getting cheaper.
+
+What it does not hand you is the design. What to build. Which tradeoffs to accept. How the components fit together at scale. Where the system will buckle under real load, and what to do when it does. Those decisions still depend on knowing the problem deeply and having operated systems like it before.
+
+> If anything, cheap implementation raises the premium on judgment. When a working prototype is minutes away for everyone, the bottleneck moves up the stack — to choosing the right problem, architecting for scale, and running the result reliably. The scarce skill is no longer typing the code; it is knowing which code is worth writing.
+
+And that is exactly the knowledge that does not diffuse. A model can suggest how to implement an idea; it cannot give an organization the accumulated experience of having built and operated frontier systems before. Faster code generation lowers the cost of *building*. It does not lower the cost of *knowing what to build* — and at the frontier, that institutional knowledge remains the harder thing to acquire.
+
+## What endures
+
+As foundation models mature, this distinction may become increasingly important.
+
+Scientific breakthroughs will keep emerging from universities, startups, research labs, and open-source communities. New techniques will keep lowering costs and expanding access. But converting those advances into reliable, scalable, and economically viable systems will remain an engineering challenge.
+
+The companies that endure may not be the ones that discover every breakthrough first. They may be the ones that consistently know what to build and how to make those breakthroughs work.
