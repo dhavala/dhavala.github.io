@@ -1,0 +1,17 @@
+# Python dependencies for executable blog notebooks (SaddlePoint and others).
+# Canonical env: the conda env `hypernorm` (/opt/miniconda3/envs/hypernorm).
+#   conda activate hypernorm
+#   pip install -r requirements-notebooks.txt
+# Quarto picks up this kernel when `hypernorm` is the active env at render time.
+# This file documents the deps; it is not a fresh-venv recipe.
+
+numpy
+scikit-learn
+matplotlib
+jupyter
+nbclient
+
+# Heavier deps, used by the "real transformer layer" probe (Part D) in
+# saddlepoint/_drafts/theory-of-emergence-experiments.ipynb
+torch
+transformers

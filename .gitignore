@@ -3,3 +3,6 @@
 /tmp/
 /asankhya/tmp/
 .DS_Store
+/.venv-notebooks/
+/saddlepoint/_drafts/
+_backup/
