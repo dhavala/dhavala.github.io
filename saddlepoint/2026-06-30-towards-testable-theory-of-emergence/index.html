@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Soma S Dhavala">
+<meta name="dcterms.date" content="2026-06-30">
+<meta name="description" content="A proposal for testing emergence as heldout but reachable coherence under recursive retrieval.">
+
+<title>Towards a Testable Theory of Emergence – Soma S Dhavala</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../images/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-9de9f6925d305bcf5b7eb9351f368d06.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ed19a013fafa102e6b1fc8e23540551c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Skip-to-content link as the first focusable body child.
+  var skip = document.createElement('a');
+  skip.href = '#quarto-document-content';
+  skip.className = 'skip-link';
+  skip.textContent = 'Skip to main content';
+  document.body.insertBefore(skip, document.body.firstChild);
+
+  // Helper: build a <li class="breadcrumb-item"><a>Home</a></li>
+  function makeHomeItem() {
+    var li = document.createElement('li');
+    li.className = 'breadcrumb-item';
+    var a = document.createElement('a');
+    a.href = '/';
+    a.textContent = 'Home';
+    li.appendChild(a);
+    return li;
+  }
+
+  // Build a <li><a href>text</a></li> crumb.
+  function crumbLink(text, href) {
+    var li = document.createElement('li');
+    li.className = 'breadcrumb-item';
+    var a = document.createElement('a');
+    a.href = href; a.textContent = text;
+    li.appendChild(a);
+    return li;
+  }
+  // Ancestor crumbs for content pages that are intentionally NOT listed
+  // in the sidebar (their landing page is the index). Keeps the banner
+  // anchor working: Home > Section > Subsection > <page>.
+  function ancestorCrumbs(p) {
+    if (p.indexOf('/research/docs/reports/') >= 0)
+      return [['Research', '/research/index.html'], ['Reports', '/research/reports.html']];
+    if (p.indexOf('/teaching/docs/archives/') >= 0)
+      return [['Teaching', '/teaching/index.html'], ['Notes', '/teaching/notes.html']];
+    if (p.indexOf('/research/projects/') >= 0)
+      return [['Research', '/research/index.html'], ['Projects', '/research/projects/index.html']];
+    // Blog posts live one slug-level under saddlepoint/ or asankhya/ and
+    // aren't listed in the sidebar — give them the full Blogs > <stream>
+    // trail. The trailing slash means the stream landing pages themselves
+    // (/saddlepoint, /asankhya) fall through to the next check.
+    if (p.indexOf('/saddlepoint/') >= 0)
+      return [['Blogs', '/blogs/index.html'], ['SaddlePoint', '/saddlepoint/index.html']];
+    if (p.indexOf('/asankhya/') >= 0)
+      return [['Blogs', '/blogs/index.html'], ['Asankhya', '/asankhya/index.html']];
+    // Stream landing pages sit directly under Blogs.
+    if (/\/saddlepoint$/.test(p) || /\/asankhya$/.test(p))
+      return [['Blogs', '/blogs/index.html']];
+    return [];
+  }
+
+  // SUB-PAGES: prepend "Home" to Quarto's existing breadcrumb so
+  // every ribbon starts with Home for consistency.
+  var existingBcr = document.querySelector('.quarto-title-breadcrumbs .breadcrumb');
+  if (existingBcr) {
+    existingBcr.insertBefore(makeHomeItem(), existingBcr.firstChild);
+  }
+
+  // SECTION INDEX PAGES: inject a trail INSIDE #title-block-header
+  // so it has the exact same DOM context as Quarto's breadcrumb on
+  // sub-pages. Stamp it with Quarto's own classes so every existing
+  // .quarto-title-breadcrumbs CSS rule (ribbon styling, layout
+  // fixes, h1 hide, mobile plain-text override) applies to it
+  // identically — no parallel selectors needed, no size drift.
+  // SKIP on the actual home page (/) — "Home > Home" is meaningless.
+  var titleHeader = document.querySelector('#title-block-header');
+  var titleBcr = document.querySelector('.quarto-title-breadcrumbs');
+  var path = window.location.pathname.replace(/\/+$/, '');
+  var isHome = (path === '' || path.endsWith('/index') || /\/index\.html?$/.test(path));
+  if (titleHeader && !titleBcr && !isHome) {
+    var h1 = titleHeader.querySelector('.quarto-title h1.title');
+    if (h1) {
+      var trail = document.createElement('nav');
+      trail.className = 'quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block section-trail';
+      trail.setAttribute('aria-label', 'breadcrumb');
+      var ol = document.createElement('ol');
+      ol.className = 'breadcrumb';
+      ol.appendChild(makeHomeItem());
+      ancestorCrumbs(path).forEach(function (c) { ol.appendChild(crumbLink(c[0], c[1])); });
+      var currentLi = document.createElement('li');
+      currentLi.className = 'breadcrumb-item active';
+      currentLi.textContent = h1.textContent.trim();
+      ol.appendChild(currentLi);
+      trail.appendChild(ol);
+      titleHeader.insertBefore(trail, titleHeader.firstChild);
+    }
+  }
+
+  // SIDEBAR CONTEXT: pages that aren't sidebar entries (blog posts,
+  // reports, archive tutorials, project pages) give Quarto nothing to
+  // expand or highlight, so their section collapses on open. Re-derive
+  // context from the same ancestorCrumbs(): its leaf crumb (SaddlePoint
+  // / Asankhya / Reports / …) IS a real sidebar link, so find that link,
+  // mark it active, and expand each collapsible section that wraps it.
+  var sidebar = document.querySelector('nav#quarto-sidebar');
+  // Skip pages Quarto already handles (they have an active link).
+  if (sidebar && !sidebar.querySelector('a.sidebar-link.active')) {
+    var anc = ancestorCrumbs(path);
+    if (anc.length) {
+      var leafTail = anc[anc.length - 1][1].replace(/^\/+/, '');   // e.g. saddlepoint/index.html
+      var link = null, links = sidebar.querySelectorAll('a.sidebar-link[href]');
+      for (var k = 0; k < links.length; k++) {
+        var h = links[k].getAttribute('href').replace(/^(\.\.\/)+/, '').replace(/^\/+/, '');
+        if (h === leafTail) { link = links[k]; break; }
+      }
+      if (link) {
+        link.classList.add('active');
+        for (var node = link.parentElement; node && node !== sidebar; node = node.parentElement) {
+          if (node.tagName === 'UL' && node.classList.contains('sidebar-section')) {
+            node.classList.add('show');
+            var toggle = node.id && sidebar.querySelector('[data-bs-target="#' + node.id + '"]');
+            if (toggle) { toggle.setAttribute('aria-expanded', 'true'); toggle.classList.remove('collapsed'); }
+          }
+        }
+      }
+    }
+  }
+});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Towards a Testable Theory of Emergence – Soma S Dhavala">
+<meta property="og:description" content="A proposal for testing emergence as heldout but reachable coherence under recursive retrieval.">
+<meta property="og:image" content="https://dhavala.github.io/saddlepoint/2026-06-30-towards-testable-theory-of-emergence/images/og-image.png">
+<meta property="og:site_name" content="Soma S Dhavala">
+<meta name="twitter:title" content="Towards a Testable Theory of Emergence – Soma S Dhavala">
+<meta name="twitter:description" content="A proposal for testing emergence as heldout but reachable coherence under recursive retrieval.">
+<meta name="twitter:image" content="https://dhavala.github.io/saddlepoint/2026-06-30-towards-testable-theory-of-emergence/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Soma S Dhavala</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../about/index.html" aria-current="page"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../research/index.html"> 
+<span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../teaching/index.html"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../consulting/index.html"> 
+<span class="menu-text">Consulting</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../saddlepoint/index.html"> 
+<span class="menu-text">SaddlePoint</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text">SaddlePoint feed</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Towards a Testable Theory of Emergence</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../about/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../news/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">News</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../research/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../research/publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../research/patents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Patents</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../research/reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../research/projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../research/team.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Team</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../teaching/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../teaching/courses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Courses</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../teaching/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../software/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../consulting/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Consulting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../service/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Service</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../blogs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blogs</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SaddlePoint</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../asankhya/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Asankhya</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-puzzle" id="toc-the-puzzle" class="nav-link active" data-scroll-target="#the-puzzle">The puzzle</a></li>
+  <li><a href="#what-emergence-means-here" id="toc-what-emergence-means-here" class="nav-link" data-scroll-target="#what-emergence-means-here">What emergence means here</a></li>
+  <li><a href="#the-proposal" id="toc-the-proposal" class="nav-link" data-scroll-target="#the-proposal">The Proposal</a></li>
+  <li><a href="#scale-is-a-symptom-not-a-definition" id="toc-scale-is-a-symptom-not-a-definition" class="nav-link" data-scroll-target="#scale-is-a-symptom-not-a-definition">Scale is a symptom, not a definition</a></li>
+  <li><a href="#a-small-analytical-result" id="toc-a-small-analytical-result" class="nav-link" data-scroll-target="#a-small-analytical-result">A small analytical result</a></li>
+  <li><a href="#related-work-and-positioning" id="toc-related-work-and-positioning" class="nav-link" data-scroll-target="#related-work-and-positioning">Related work and positioning</a></li>
+  <li><a href="#why-transformers-are-plausible-retrieval-engines" id="toc-why-transformers-are-plausible-retrieval-engines" class="nav-link" data-scroll-target="#why-transformers-are-plausible-retrieval-engines">Why transformers are plausible retrieval engines</a>
+  <ul class="collapse">
+  <li><a href="#matrix-multiplication-scores-similarity" id="toc-matrix-multiplication-scores-similarity" class="nav-link" data-scroll-target="#matrix-multiplication-scores-similarity">Matrix multiplication scores similarity</a></li>
+  <li><a href="#attention-is-kernel-regression" id="toc-attention-is-kernel-regression" class="nav-link" data-scroll-target="#attention-is-kernel-regression">Attention is kernel regression</a></li>
+  <li><a href="#mlp-blocks-are-key-value-memories" id="toc-mlp-blocks-are-key-value-memories" class="nav-link" data-scroll-target="#mlp-blocks-are-key-value-memories">MLP blocks are key-value memories</a></li>
+  </ul></li>
+  <li><a href="#a-small-intuition-the-red-triangle" id="toc-a-small-intuition-the-red-triangle" class="nav-link" data-scroll-target="#a-small-intuition-the-red-triangle">A small intuition: the red triangle</a></li>
+  <li><a href="#what-the-experiments-show" id="toc-what-the-experiments-show" class="nav-link" data-scroll-target="#what-the-experiments-show">What the experiments show</a>
+  <ul class="collapse">
+  <li><a href="#proof-sanity-check" id="toc-proof-sanity-check" class="nav-link" data-scroll-target="#proof-sanity-check">1. Proof sanity check</a></li>
+  <li><a href="#learned-integer-alien-symbol-routing-baseline" id="toc-learned-integer-alien-symbol-routing-baseline" class="nav-link" data-scroll-target="#learned-integer-alien-symbol-routing-baseline">2. Learned integer alien-symbol routing baseline</a></li>
+  <li><a href="#fixed-functional-composition" id="toc-fixed-functional-composition" class="nav-link" data-scroll-target="#fixed-functional-composition">3. Fixed-functional composition</a></li>
+  <li><a href="#constituent-modulated-composition" id="toc-constituent-modulated-composition" class="nav-link" data-scroll-target="#constituent-modulated-composition">4. Constituent-modulated composition</a></li>
+  </ul></li>
+  <li><a href="#what-the-definition-asks-us-to-test" id="toc-what-the-definition-asks-us-to-test" class="nav-link" data-scroll-target="#what-the-definition-asks-us-to-test">What the definition asks us to test</a></li>
+  <li><a href="#falsifiable-predictions" id="toc-falsifiable-predictions" class="nav-link" data-scroll-target="#falsifiable-predictions">Falsifiable Predictions</a></li>
+  <li><a href="#stronger-tests" id="toc-stronger-tests" class="nav-link" data-scroll-target="#stronger-tests">Stronger Tests</a></li>
+  <li><a href="#is-this-just-generalization" id="toc-is-this-just-generalization" class="nav-link" data-scroll-target="#is-this-just-generalization">Is this just generalization?</a></li>
+  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility">Reproducibility</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<div class="section-banner">
+  <img style="display:block;width:100%;height:150px;object-fit:cover;object-position:center" src="../../images/banners/horsesskybw.jpg" alt="Blog banner">
+</div>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Towards a Testable Theory of Emergence</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">ai</div>
+    <div class="quarto-category">machine-learning</div>
+    <div class="quarto-category">transformers</div>
+    <div class="quarto-category">emergence</div>
+    <div class="quarto-category">theory</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A proposal for testing emergence as heldout but reachable coherence under recursive retrieval.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Soma S Dhavala </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 30, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Abstract.</strong> What exactly are large language models doing? One answer says they are memory devices: vast compressors of their training data, retrieving and remixing what they have already seen. That answer is partly right, but it creates a puzzle. If these systems are “just” memory and compression, why do they generalize to new compositions, concepts, and tasks that were not stored as exact training examples? This essay works toward a testable theory of emergence, but not emergence defined merely by model size. A capability is <strong>retrieval-emergent</strong> when a target behavior was not stored as a joint point, but is nevertheless reachable from dense constituent neighborhoods through context-sensitive retrieval. Model size matters because it can supply enough memory, dimension, and depth for those neighborhoods to become dense and separable; size is a precondition, not the definition. The argument has three parts. First, a simple analytical result shows what would be required for a heldout composite to be recovered from constituent coverage when the composition map is smooth enough. Second, the core operations of transformers can be read as retrieval or regression: matrix multiplication scores similarities, attention is Nadaraya-Watson kernel regression, and MLP blocks are key-value memories. Third, integer-only alien-symbol experiments test the definition in a controlled setting: a proof sanity check calibrates the geometry, a routing baseline marks what does not count as composition, and two single-label tasks show heldout composition when constituent support is dense. These experiments are supportive, not decisive. The conclusion is deliberately middle-ground: these systems are not classical symbolic reasoners, but they are not merely stochastic parrots either. They may be geometry-shaped retrieval engines whose reach can, in principle, be measured.</p>
+<section id="the-puzzle" class="level2">
+<h2 data-anchor-id="the-puzzle">The puzzle</h2>
+<p>The question motivating this essay is simple: <strong>what exactly are LLMs doing?</strong></p>
+<p>One plausible answer is that they are memory systems. They compress a huge training corpus into weights and activations, then answer new prompts by retrieving, interpolating, and recombining patterns from that compressed store. Much of the transformer supports this interpretation: dot products score similarity, attention retrieves values from context, and feed-forward layers behave like key-value memories.</p>
+<p>The compression view is not just a metaphor. Shannon’s source-coding theory ties probability, prediction, and optimal code length together (Shannon, 1948). The minimum-description-length tradition treats learning regularities in data as finding shorter descriptions of that data (Rissanen, 1978). More recently, Delétang et al.&nbsp;(2023) argue directly that language modeling is compression: a good next-token predictor can be turned into a lossless compressor, and strong language models are therefore strong general-purpose predictors/compressors. Cheng et al.&nbsp;(2023) add the geometric side of the same story, connecting information-theoretic compression in language models to low-dimensional structure in representation space. So the starting point of this essay is not to deny the compression view. It is to ask why compression can be productive.</p>
+<p>But if that is all we say, we inherit a harder question. If LLMs are memory devices and compressors of the training data, why do they appear to generalize? Why can they respond to new compositions, solve variants of tasks, follow unfamiliar instructions, or produce useful behavior in regions that were not stored as exact examples?</p>
+<p>There are two bad answers. One is to say the models must therefore be classical reasoners, manipulating explicit symbols and rules behind the scenes. The other is to say there is no real generalization at all, only stochastic parroting over memorized text (Bender et al., 2021). The first answer overstates the mechanism. The second understates the consequence of learning a rich high-dimensional geometry.</p>
+<p>The proposal here is the middle answer: <strong>generalization can arise when retrieval reaches a coherent region that was not itself stored as a point.</strong> The model is still a retrieval engine, but retrieval over a learned geometry can do more than copy. It can interpolate into new but reachable regions.</p>
+<p>That is the phenomenon this essay tries to make testable.</p>
+</section>
+<section id="what-emergence-means-here" class="level2">
+<h2 data-anchor-id="what-emergence-means-here">What emergence means here</h2>
+<p>In this essay, <strong>emergence</strong> is not used to mean magic, consciousness, irreducibility, or a sudden jump in a benchmark curve. It is used in a narrower, task-relative sense.</p>
+<p>A behavior is emergent when it appears at the level of a composite system even though it is not present as an explicitly stored joint item in the parts. For LLMs, the relevant “parts” are not clean symbolic atoms. They are distributed regions, directions, memories, and activations shaped by many contexts. A new behavior is therefore emergent, in the sense used here, when a query reaches a coherent target region that was not stored as a single point, but that becomes reachable because the constituent regions are sufficiently dense, separable, and contextually aligned.</p>
+<p>This notion has three important consequences.</p>
+<ol type="1">
+<li><strong>Emergence is relative to a decomposition.</strong> We must say what the constituents are, what the context is, and what target behavior counts as success.</li>
+<li><strong>Emergence is not the same as scale.</strong> Scale may supply enough memory and representational dimension for the behavior to become reachable, but the scale threshold is evidence, not the definition.</li>
+<li><strong>Emergence should be testable.</strong> If the claimed behavior is genuinely emergent in this sense, then exact joint examples should be absent, constituent support should matter, correct context should help, and wrong-context or random-label controls should fail.</li>
+</ol>
+<p>So the blog’s working notion is deliberately modest: emergence is <strong>heldout but reachable coherence</strong>. The rest of the essay tries to make that phrase precise.</p>
+</section>
+<section id="the-proposal" class="level2">
+<h2 data-anchor-id="the-proposal">The Proposal</h2>
+<p>The central proposal is:</p>
+<blockquote class="blockquote">
+<p><strong>Some emergence is recursive, context-gated retrieval reaching a coherent region that was not explicitly stored as a point.</strong></p>
+</blockquote>
+<p>This is a candidate theory of emergence first and a theory of approximate retrieval second. Approximate retrieval is the proposed mechanism. Emergence is the phenomenon to be explained: coherent novelty produced by retrieval over a learned representation space.</p>
+<p>The distinction matters because “retrieval” can sound deflationary. If a model retrieves, perhaps nothing new is happening. The claim here is different. Memorization is retrieval of a stored point. Retrieval-emergence is retrieval into a region that was not stored as a point, but that becomes reachable because the learned geometry contains enough support for the parts.</p>
+<p>The running example is deliberately small: <strong>red triangle</strong>. A model may treat it literally, as a triangle with red bound as an attribute, or symbolically, as a sign-like object in the neighborhood of road signs and warnings. In a controlled setting, the exact phrase could be held out while “red” and “triangle” remain well represented. If the model still reaches a coherent representation of the combination, the important question is not whether it has “reasoned” in a classical sense. The question is whether its geometry makes the heldout composition reachable.</p>
+</section>
+<section id="scale-is-a-symptom-not-a-definition" class="level2">
+<h2 data-anchor-id="scale-is-a-symptom-not-a-definition">Scale is a symptom, not a definition</h2>
+<p>Wei et al.&nbsp;(2022) define an emergent ability as one that is “not present in smaller models but is present in larger models.” That definition was useful because it made scale plots operational. But it names a behavioral pattern, not the underlying phenomenon.</p>
+<p>Model size can be necessary. A small model may lack the capacity to store enough neighborhoods, separate the relevant directions, or run enough retrieval refinements. A larger model may cross a threshold where the same query suddenly lands in a coherent region. But the threshold is evidence that something in the geometry changed. It is not, by itself, the definition of emergence. Some reported jumps may even be artifacts of harsh, discontinuous metrics rather than discontinuities in the model, since smoother metrics can turn the same curve gradual (Schaeffer et al., 2023) — which is consistent with the present view, in which the underlying quantity (geometric reachability) changes smoothly while a thresholded score snaps.</p>
+<p>Here is the definition I want to test instead.</p>
+<p>Let <span class="math inline">\(h(x) \in \mathbb{R}^d\)</span> be the representation of an input. Let</p>
+<p><span class="math display">\[
+S = \{(k_i, v_i)\}_{i=1}^n
+\]</span></p>
+<p>be an implicit memory: keys and values supplied by weights, context tokens, cached representations, or some combination of these. For a context <span class="math inline">\(c\)</span>, define a retrieval operator</p>
+<p><span class="math display">\[
+R_c(q;S)=\sum_i w_i(q,c)v_i,
+\qquad
+w_i(q,c)=\frac{\kappa_c(q,k_i)}{\sum_j \kappa_c(q,k_j)} .
+\]</span></p>
+<p>The kernel <span class="math inline">\(\kappa_c\)</span> is allowed to depend on context. That dependence is important: the same phrase can retrieve from different neighborhoods in a geometry of shapes, road signs, mathematics, or metaphors.</p>
+<p>For the rest of the definition, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> denote the constituent concepts being composed, and <span class="math inline">\(c\)</span> denotes the context that gates the retrieval neighborhood. In the running example, <span class="math inline">\(a\)</span> could be <em>red</em>, <span class="math inline">\(b\)</span> could be <em>triangle</em>, and <span class="math inline">\(c\)</span> could be a visual-attribute context or a road-sign context. The notation <span class="math inline">\(T_{a,b,c} \subset \mathbb{R}^d\)</span> denotes the acceptable target region for that composite under that context: not one exact vector, but the region of representations that decode to the intended behavior.</p>
+<p>A capability for a composite query <span class="math inline">\(q=(a,b,c)\)</span> is <strong>retrieval-emergent</strong> when four conditions hold:</p>
+<ol type="1">
+<li><p><strong>Joint holdout.</strong> The target composite is not stored as a point. There is no memory item within radius <span class="math inline">\(\epsilon\)</span> of the target region <span class="math inline">\(T_{a,b,c}\)</span>.</p></li>
+<li><p><strong>Constituent support.</strong> The constituents <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are well represented. Their neighborhoods are dense, stable, and separable enough to retrieve from.</p></li>
+<li><p><strong>Reachability.</strong> Recursive retrieval under context <span class="math inline">\(c\)</span> lands inside, or close to, the acceptable target region:</p>
+<p><span class="math display">\[
+\operatorname{dist}(R_c^{(m)}(q;S), T_{a,b,c}) \le \delta .
+\]</span></p></li>
+<li><p><strong>Coherence.</strong> The decoded behavior is usable and stable under controls. Correct constituent and context interventions move it predictably; wrong-constituent and random controls do not.</p></li>
+</ol>
+<p>This definition does not mention parameter count. Parameter count enters indirectly: it can reduce retrieval error, increase representational dimension, improve separation, and allow more retrieval steps. Those are mechanisms by which an emergent capability can become possible.</p>
+</section>
+<section id="a-small-analytical-result" class="level2">
+<h2 data-anchor-id="a-small-analytical-result">A small analytical result</h2>
+<p>The definition above is not merely metaphorical. In a simplified setting, we can show that emergence by retrieval is possible.</p>
+<p>Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be compact metric spaces of constituents. Let <span class="math inline">\(C\)</span> be a context space. Suppose the desired composite representation is generated by a Lipschitz map</p>
+<p><span class="math display">\[
+\phi: A \times B \times C \to \mathbb{R}^d .
+\]</span></p>
+<p>For a fixed context <span class="math inline">\(c\)</span>, assume</p>
+<p><span class="math display">\[
+\|\phi(a,b,c)-\phi(a',b',c)\|
+\le L_A d_A(a,a') + L_B d_B(b,b') .
+\]</span></p>
+<p>Here <span class="math inline">\(d_A\)</span> and <span class="math inline">\(d_B\)</span> are the metrics on the constituent spaces, and <span class="math inline">\(L_A\)</span> and <span class="math inline">\(L_B\)</span> are the corresponding Lipschitz constants. They measure how sensitive the composite representation is to perturbing the first constituent versus the second while holding the context fixed.</p>
+<p>Assume the model’s memory contains <span class="math inline">\(\epsilon_A\)</span>- and <span class="math inline">\(\epsilon_B\)</span>-nets for the constituent spaces. That is, for every <span class="math inline">\(a \in A\)</span> there is a stored <span class="math inline">\(\hat a\)</span> with <span class="math inline">\(d_A(a,\hat a) \le \epsilon_A\)</span>, and for every <span class="math inline">\(b \in B\)</span> there is a stored <span class="math inline">\(\hat b\)</span> with <span class="math inline">\(d_B(b,\hat b) \le \epsilon_B\)</span>. Also assume that the memory contains no stored examples of the joint composite <span class="math inline">\(\phi(a,b,c)\)</span>.</p>
+<p>If retrieval recovers the nearest constituent representatives <span class="math inline">\(\hat a\)</span> and <span class="math inline">\(\hat b\)</span>, then</p>
+<p><span class="math display">\[
+\|\phi(\hat a,\hat b,c)-\phi(a,b,c)\|
+\le L_A d_A(a,\hat a) + L_B d_B(b,\hat b)
+\le L_A\epsilon_A + L_B\epsilon_B .
+\]</span></p>
+<p>Therefore, if the task accepts any representation within margin</p>
+<p><span class="math display">\[
+\delta &gt; L_A\epsilon_A + L_B\epsilon_B ,
+\]</span></p>
+<p>then the heldout composite succeeds even though the composite itself was never stored.</p>
+<p>This establishes a narrow but useful possibility: a retrieval engine can produce a coherent heldout composition when constituent coverage is dense enough and the composition map is smooth enough. The role of scale is now explicit. More memory and more capacity can shrink <span class="math inline">\(\epsilon_A\)</span> and <span class="math inline">\(\epsilon_B\)</span> and can create enough dimension to keep the relevant neighborhoods separated. A scale threshold occurs when the retrieval error crosses the task margin <span class="math inline">\(\delta\)</span>.</p>
+<p>The proof does not show that every large-model ability works this way. It does not prove that transformers learn the required <span class="math inline">\(\phi\)</span>. It shows something more basic: the proposed mechanism is analytically possible, and it gives measurable quantities to look for.</p>
+</section>
+<section id="related-work-and-positioning" class="level2">
+<h2 data-anchor-id="related-work-and-positioning">Related work and positioning</h2>
+<p>The compression and retrieval views are both old enough that this essay should not pretend to invent either one. The compression lineage begins with Shannon’s connection between probability and code length, and runs through minimum-description-length learning to modern claims that language modeling itself is compression (Shannon, 1948; Rissanen, 1978; Delétang et al., 2023). Cheng et al.&nbsp;(2023) make the bridge to representation geometry explicit: information-theoretic compression in language models is tied to low-dimensional structure in activation space. This essay accepts that premise. The question is what compression <em>buys</em>: why a compressed model can do more than reproduce the surface of its corpus.</p>
+<p>There is also a long associative-memory lineage behind the retrieval part of the story. Hopfield’s original network was a content-addressable memory with emergent collective computation (Hopfield, 1982). Dense associative memories sharpened this into high-capacity retrieval, with a duality to feed-forward neural networks (Krotov &amp; Hopfield, 2016). Modern Hopfield networks then made the connection to transformers explicit: the modern Hopfield update is equivalent to attention, with fixed points ranging from global averaging to single-pattern retrieval (Ramsauer et al., 2021). So if the claim were only “attention is memory,” it would be old news.</p>
+<p>The transformer-specific literature pushes in the same direction. kNN-LMs show that an explicit nearest-neighbor datastore over language-model representations can improve prediction, especially for rare patterns and factual tails (Khandelwal et al., 2020). Feed-forward layers have been analyzed as key-value memories whose keys match textual patterns and whose values induce next-token distributions (Geva et al., 2021). ROME-style model editing localizes factual association recall to middle-layer MLP computations and shows that those associations can be edited by weight interventions (Meng et al., 2022). Induction heads implement a match-and-copy circuit, and their appearance coincides with a phase change in in-context learning (Olsson et al., 2022). Recent work on context-gated associative retrieval is especially close to the present argument: Choraria et al.&nbsp;(2026) argue that context reshapes the retrieval energy landscape and report evidence in Llama-3 that in-context learning behaves like context-gated retrieval.</p>
+<p>There is a nearby representation-geometry literature as well. The linear representation hypothesis asks when high-level concepts can be treated as directions and how probes or steering vectors follow from that geometry (Park et al., 2024). Representation engineering and truth-geometry work provide causal evidence that population-level directions can monitor and steer model behavior (Zou et al., 2023; Marks &amp; Tegmark, 2024). Sparse autoencoders and superposition work explain why the apparent “database” is not a clean table of neurons but an overcomplete, distributed feature basis whose entries interfere and compose (Elhage et al., 2022; Cunningham et al., 2023). This is the technical background for saying that a concept is a region or direction rather than a dictionary entry.</p>
+<p>Finally, the argument sits inside the older systematicity debate. Fodor and Pylyshyn (1988) objected that connectionist systems do not naturally explain productive compositional structure. Lake and Baroni (2018) later showed that neural sequence models can generalize locally by mix-and-match while failing when true systematic composition is required. The retrieval-emergence definition above is a way to make that challenge measurable: can a model assemble a coherent combination from separately learned constituents, and can we predict when it will fail?</p>
+<p>The positioning is therefore modest. This essay does not invent compression, retrieval, associative memory, linear representations, activation steering, or emergence metrics. Its proposed contribution is the synthesis: <strong>some emergence is recursive, context-gated retrieval reaching a coherent region that was not explicitly stored as a point.</strong> That differs from explicit retrieval systems such as kNN-LMs or RAG because the datastore is mostly implicit and distributed across weights, activations, and context. It differs from the purely deflationary approximate-retrieval critiques associated with Prof.&nbsp;Kambhampati (Kambhampati, 2024a; Kambhampati et al., 2024b) because it treats retrieval over a rich learned geometry as productive enough to generate coherent novelty. And it differs from broad claims that LLMs reason in the classical sense because it does not posit a separate symbolic reasoning faculty; it asks whether the model’s geometric reach can be measured.</p>
+</section>
+<section id="why-transformers-are-plausible-retrieval-engines" class="level2">
+<h2 data-anchor-id="why-transformers-are-plausible-retrieval-engines">Why transformers are plausible retrieval engines</h2>
+<p>With that positioning in place, the mechanism can be stated more directly. Transformers supply three concrete retrieval mechanisms.</p>
+<section id="matrix-multiplication-scores-similarity" class="level3">
+<h3 data-anchor-id="matrix-multiplication-scores-similarity">Matrix multiplication scores similarity</h3>
+<p>For a matrix multiplication <span class="math inline">\(y = Wx\)</span>, each coordinate is</p>
+<p><span class="math display">\[
+y_i = \langle w_i, x\rangle .
+\]</span></p>
+<p>The rows of <span class="math inline">\(W\)</span> score the query <span class="math inline">\(x\)</span> by inner product. If we only care about the largest scores, this is maximum inner-product search, a standard retrieval problem (Shrivastava &amp; Li, 2014). If we use the scores to form a weighted sum of values, it becomes regression over a memory.</p>
+<p>There are two sharper readings.</p>
+<p>First, ridge regression has a dual form. The learned weight vector can be written as</p>
+<p><span class="math display">\[
+w = \sum_i \alpha_i x_i ,
+\]</span></p>
+<p>so prediction is</p>
+<p><span class="math display">\[
+\hat y = \langle w,x\rangle = \sum_i \alpha_i \langle x_i,x\rangle .
+\]</span></p>
+<p>That is a similarity-weighted sum over stored training inputs. This is exact for kernel and linear ridge settings (Schölkopf et al., 2001), and suggestive for learned layers.</p>
+<p>Second, every matrix has an SVD:</p>
+<p><span class="math display">\[
+Wx = \sum_r \sigma_r u_r \langle v_r,x\rangle .
+\]</span></p>
+<p>The right singular vectors behave like keys, the left singular vectors like values, and the singular values like gains. This is not a high-capacity associative memory, because the SVD basis is orthogonal and rank-limited, but it shows that even a plain linear map has a key-value reading.</p>
+</section>
+<section id="attention-is-kernel-regression" class="level3">
+<h3 data-anchor-id="attention-is-kernel-regression">Attention is kernel regression</h3>
+<p>A single attention head (Vaswani et al., 2017) computes</p>
+<p><span class="math display">\[
+\operatorname{attn}(q;K,V)
+= \sum_j
+\frac{\exp(\langle q,k_j\rangle/\sqrt d)}
+{\sum_\ell \exp(\langle q,k_\ell\rangle/\sqrt d)}
+v_j .
+\]</span></p>
+<p>This is the Nadaraya-Watson kernel regression estimator with an exponential kernel (Nadaraya, 1964; Watson, 1964; Tsai et al., 2019). In a sharp, low-temperature limit, it approaches nearest-neighbor lookup. In a smooth, high-temperature limit, it averages over a neighborhood. Attention therefore lives on a dial between retrieval and interpolation.</p>
+</section>
+<section id="mlp-blocks-are-key-value-memories" class="level3">
+<h3 data-anchor-id="mlp-blocks-are-key-value-memories">MLP blocks are key-value memories</h3>
+<p>A transformer MLP has the form</p>
+<p><span class="math display">\[
+f(x)=W_{\text{out}}\sigma(W_{\text{in}}x).
+\]</span></p>
+<p>The rows of <span class="math inline">\(W_{\text{in}}\)</span> act as keys. The activation vector gives match strengths. The columns of <span class="math inline">\(W_{\text{out}}\)</span> supply values. Geva et al.&nbsp;(2021) analyze feed-forward layers in exactly this key-value-memory language, and model-editing work such as ROME locates factual associations in related middle-layer MLP computations (Meng et al., 2022).</p>
+<p>These readings are not isolated curiosities; several independent derivations converge on the same conclusion. Prof.&nbsp;Richard Baraniuk and collaborators show that deep networks with piecewise-linear nonlinearities are max-affine spline operators that partition the input space and act affinely on each region (Balestriero &amp; Baraniuk, 2018), and separately derive self-attention as the support-vector expansion of a support-vector <em>regression</em> problem (Nguyen et al., 2024). Prof.&nbsp;Yi Ma and collaborators derive attention- and projection-like operators from a principle of compression toward parsimonious, low-dimensional structure (Chan et al., 2022; Yu et al., 2023). That spline, regression, and compression arguments all land on the same retrieval-and-regression reading is part of why I treat it as more than analogy.</p>
+<p>Together these mechanisms justify the phrase <strong>approximate retrieval engine</strong>. But a testable theory of emergence needs one further step: composition across depth. Each layer retrieves, transforms, and passes a new query upward. The strong conjecture is that depth performs recursive retrieval over intermediate representations. Emergence occurs when that recursion lands in a coherent region that no single stored point occupied.</p>
+</section>
+</section>
+<section id="a-small-intuition-the-red-triangle" class="level2">
+<h2 data-anchor-id="a-small-intuition-the-red-triangle">A small intuition: the red triangle</h2>
+<p>“Red” is not a single coordinate. It is a region shaped by apples, roses, carpets, warning lights, red tape, red lines, and many other contexts. “Triangle” is another region, shaped by geometry, diagrams, signs, pyramids, and mathematical language.</p>
+<p>The phrase “red triangle” can be literal or symbolic:</p>
+<ol type="1">
+<li>In a shapes-and-colors context, it should retrieve a visual-attribute composition: triangle plus red.</li>
+<li>In a roads-and-signs context, it should retrieve a conventional sign region: warning, yield, hazard, give way.</li>
+</ol>
+<p>In a pretrained model, the phrase was almost certainly seen. So this example is not evidence of holdout by itself. It is a small, inspectable intuition for what the theory means: a query can land in different coherent regions depending on constituent support and context.</p>
+<p>The controlled experiments below replace human-language words with alien integer symbols so that the holdout condition is real. The same logic suggests four controls:</p>
+<ol type="1">
+<li>heldout joint composites should be absent from training,</li>
+<li>constituents should be well supported in other contexts and combinations,</li>
+<li>correct context should improve reachability,</li>
+<li>wrong-context and random-label controls should fail.</li>
+</ol>
+</section>
+<section id="what-the-experiments-show" class="level2">
+<h2 data-anchor-id="what-the-experiments-show">What the experiments show</h2>
+<p>The experiments below are organized as an evidence ladder:</p>
+<ol type="1">
+<li>a deterministic proof sanity check,</li>
+<li>a learned context-dependent routing baseline,</li>
+<li>a fixed-functional composition experiment,</li>
+<li>a constituent-modulated composition experiment.</li>
+</ol>
+<p>The distinction matters. The first check only calibrates the proof. The routing baseline removes language confounds but does not establish composition. The last two experiments use a single output label that depends jointly on both constituents, so they are the relevant evidence for the emergence claim.</p>
+<p>The abstraction is intentional. If the question is whether a model can produce a new composite behavior without storing that composite as a training example, then natural language is a dangerous first test bed: familiar words, pretrained tokenizers, and hidden corpus facts all make it hard to know what was actually new. The experiments therefore strip the problem down to its ingredients. There are constituents, a context, a heldout joint input, and a target behavior. Composition means that the target behavior depends on the constituents separately and on the context that binds them.</p>
+<p>This makes the experimental objective narrower but cleaner. The experiments do not try to show that a toy model is an LLM. They ask whether the proposed definition has operational content: can we hold out a joint behavior, keep its parts well supported, and then recover the correct behavior only when the context and constituent structure are coherent?</p>
+<section id="proof-sanity-check" class="level3">
+<h3 data-anchor-id="proof-sanity-check">1. Proof sanity check</h3>
+<p>This check builds two continuous constituent spaces, <span class="math inline">\(A = B = [0,1]\)</span>, and a binary context <span class="math inline">\(c \in \{0,1\}\)</span>. It should be read as a sanity check for the analytical proof, not as evidence that anything has been learned. The composite representation is the deterministic, context-gated map <span class="math inline">\(\phi:[0,1]^2\times\{0,1\}\to\mathbb{R}^4\)</span>,</p>
+<p><span class="math display">\[
+\phi(a,b,c) = \Big(\,a,\;\; b,\;\; \mathbb{1}[c=0]\,(a+b),\;\; \mathbb{1}[c=1]\,(a\,b)\,\Big),
+\]</span></p>
+<p>so context <span class="math inline">\(0\)</span> composes the constituents additively and context <span class="math inline">\(1\)</span> multiplicatively. Both branches are Lipschitz on <span class="math inline">\([0,1]^2\)</span> with constants <span class="math inline">\(L_A = L_B = \sqrt{2}\)</span>. The experiment does not learn addition or multiplication, and it does not establish emergence in a model; it only checks the geometry the proof assumes.</p>
+<p>The memory is an <span class="math inline">\(\varepsilon\)</span>-net over the constituents: a uniform grid <span class="math inline">\(G_m = \{0,\tfrac{1}{m-1},\dots,1\}\)</span> of <span class="math inline">\(m\)</span> points per space, with covering radius <span class="math inline">\(\varepsilon = \tfrac{1}{2(m-1)}\)</span>. Crucially it stores constituent representatives only – no joint composite <span class="math inline">\(\phi(a,b,c)\)</span> is ever stored. Retrieval snaps a query to its nearest grid points and applies the known map, and we score the reconstruction against the analytically generated truth:</p>
+<p><span class="math display">\[
+\hat a = \arg\min_{g\in G_m}|a-g|,\qquad
+\hat b = \arg\min_{g\in G_m}|b-g|,\qquad
+e = \big\lVert\,\phi(\hat a,\hat b,c)-\phi(a,b,c)\,\big\rVert .
+\]</span></p>
+<p>The bound the proof predicts is then</p>
+<p><span class="math display">\[
+e \;\le\; L_A\,\varepsilon + L_B\,\varepsilon \;=\; \frac{\sqrt{2}}{m-1},
+\]</span></p>
+<p>and a query counts as solved when <span class="math inline">\(e \le \delta\)</span> for the task margin <span class="math inline">\(\delta = 0.12\)</span>. Two controls mirror the later experiments: a wrong-context reconstruction <span class="math inline">\(\phi(\hat a,\hat b,\,1-c)\)</span> and random-constituent draws, both of which should fail.</p>
+<p>The result is intentionally unsurprising. With a coarse grid, the nearest stored representatives <span class="math inline">\(\hat a\)</span> and <span class="math inline">\(\hat b\)</span> can be far from the true constituents <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, so even exact addition or multiplication can produce <span class="math inline">\(\phi(\hat a,\hat b,c)\)</span> outside the task margin around <span class="math inline">\(\phi(a,b,c)\)</span>. As the grid becomes finer, the covering radius shrinks, the approximation error falls, and the deterministic map produces outputs closer to the true composite. That is just the Lipschitz-style argument in numerical form.</p>
+<p>This check remains useful only as calibration. It verifies that the experiments implement the definitions consistently: constituent support density is varied, reachability is measured as distance to the target representation, and wrong-context/random-constituent controls fail. It should not be treated as a substantive finding. The substantive question starts when the composition rule is not supplied at evaluation time, but must be learned from data.</p>
+<div id="adce73ff" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-30T13:53:59.222292Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-30T13:53:59.222154Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-30T13:53:59.242770Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-30T13:53:59.242574Z&quot;}}" data-execution_count="2">
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><em>Proof calibration - task margin delta = 0.12</em></p>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">eps</th>
+<th data-quarto-table-cell-role="th">bound</th>
+<th data-quarto-table-cell-role="th">mean err</th>
+<th data-quarto-table-cell-role="th">p95 err</th>
+<th data-quarto-table-cell-role="th">success</th>
+<th data-quarto-table-cell-role="th">wrong ctx</th>
+<th data-quarto-table-cell-role="th">random</th>
+<th data-quarto-table-cell-role="th">guaranteed</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">support</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">3</th>
+<td>0.250</td>
+<td>0.707</td>
+<td>0.246</td>
+<td>0.432</td>
+<td>0.115</td>
+<td>0.007</td>
+<td>0.013</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">4</th>
+<td>0.167</td>
+<td>0.471</td>
+<td>0.160</td>
+<td>0.288</td>
+<td>0.289</td>
+<td>0.007</td>
+<td>0.018</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>0.100</td>
+<td>0.283</td>
+<td>0.098</td>
+<td>0.174</td>
+<td>0.733</td>
+<td>0.007</td>
+<td>0.018</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">8</th>
+<td>0.071</td>
+<td>0.202</td>
+<td>0.070</td>
+<td>0.124</td>
+<td>0.940</td>
+<td>0.005</td>
+<td>0.025</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>0.045</td>
+<td>0.129</td>
+<td>0.044</td>
+<td>0.077</td>
+<td>1.000</td>
+<td>0.009</td>
+<td>0.031</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">16</th>
+<td>0.033</td>
+<td>0.094</td>
+<td>0.032</td>
+<td>0.058</td>
+<td>1.000</td>
+<td>0.007</td>
+<td>0.028</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">24</th>
+<td>0.022</td>
+<td>0.061</td>
+<td>0.021</td>
+<td>0.037</td>
+<td>1.000</td>
+<td>0.007</td>
+<td>0.022</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">32</th>
+<td>0.016</td>
+<td>0.046</td>
+<td>0.016</td>
+<td>0.028</td>
+<td>1.000</td>
+<td>0.008</td>
+<td>0.025</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">48</th>
+<td>0.011</td>
+<td>0.030</td>
+<td>0.010</td>
+<td>0.018</td>
+<td>1.000</td>
+<td>0.008</td>
+<td>0.032</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="learned-integer-alien-symbol-routing-baseline" class="level3">
+<h3 data-anchor-id="learned-integer-alien-symbol-routing-baseline">2. Learned integer alien-symbol routing baseline</h3>
+<p>The second experiment removes the remaining language confound. The model sees only integer token IDs. The input format is <code>[context, A-token, B-token]</code>, where the two constituent families and two contexts are all synthetic. A deterministic set of joint <code>(A-token, B-token)</code> pairs is held out from training for both contexts. In the dense condition, every heldout constituent still appears in many other non-heldout combinations: the audit reports 438 dense training examples, 74 heldout examples, full constituent support coverage, and 13-14 examples per constituent/context cell.</p>
+<p>Concretely, there are <span class="math inline">\(N_A = N_B = 16\)</span> alien constituents and two contexts <span class="math inline">\(c\in\{0,1\}\)</span>. Each input is a triple of integer token IDs</p>
+<p><span class="math display">\[
+x = \big(c,\;\; \tau_A(a),\;\; \tau_B(b)\big),\qquad \tau_A(a)=2+a,\;\; \tau_B(b)=18+b,\;\; a,b\in\{0,\dots,15\}.
+\]</span></p>
+<p>A joint pair is held out, in <strong>both</strong> contexts, by a deterministic predicate</p>
+<p><span class="math display">\[
+H(a,b) = \big[\,(3a+5b)\bmod 7 = 0\,\big],
+\]</span></p>
+<p>which removes the exact triples while leaving every constituent supported elsewhere. The target has two output slots, and context gates each one independently:</p>
+<p><span class="math display">\[
+y_1(a,c)=\begin{cases} a, &amp; c=0,\\[2pt] 16+\pi_A(a), &amp; c=1,\end{cases}
+\qquad
+y_2(b,c)=\begin{cases} b, &amp; c=0,\\[2pt] 16+\pi_B(b), &amp; c=1,\end{cases}
+\]</span></p>
+<p>with <span class="math inline">\(\pi_A,\pi_B\)</span> fixed random permutations of <span class="math inline">\(\{0,\dots,15\}\)</span>.</p>
+<p>This is the crucial caveat. Because <span class="math inline">\(y_1\)</span> depends only on <span class="math inline">\((a,c)\)</span> and <span class="math inline">\(y_2\)</span> only on <span class="math inline">\((b,c)\)</span>, the target <strong>factorizes</strong>: context <span class="math inline">\(0\)</span> is the identity on each constituent index, and context <span class="math inline">\(1\)</span> is an independent permutation of each. That is context-gated <em>routing</em>, not composition.</p>
+<p>That means the current experiment does not establish nontrivial composition between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. If there were only a single identity context, the heldout pair would not matter much: the model could succeed by learning to copy or classify each constituent independently. With two contexts, the task is stronger because the interpretation is context-gated, but it is still separable. Success shows that a model can learn two context-dependent constituent lookups and apply them simultaneously to a jointly heldout input. It does not show that the model has learned an interaction between the constituents.</p>
+<p>The baseline is still useful, but only in a limited way. It verifies that the no-language routing setup works: the symbols are made up, the model starts from random weights, the exact joint triples are absent from training, sparse support fails, wrong-context evaluation fails, and random labels fail. This is a necessary control before a stronger experiment, not the stronger experiment itself.</p>
+<p>The model is tiny and trained from scratch. It has an embedding table and two context-gated constituent paths: one path reads <code>(context, A-token)</code> and predicts the first output slot; the other reads <code>(context, B-token)</code> and predicts the second output slot. This architecture is intentionally aligned with the routing baseline. That alignment is useful for checking the support story, but it also explains why this is not yet a strong composition test.</p>
+<p>The main results are:</p>
+<div id="49ab49f9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-30T13:53:59.243995Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-30T13:53:59.243883Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-30T13:53:59.251077Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-30T13:53:59.250859Z&quot;}}" data-execution_count="3">
+<div class="cell-output cell-output-display cell-output-markdown">
+<p>Vocabulary = 34, classes = 32. Dense train = 438, heldout = 74, coverage = 1.000, mean support = 13.69. A/B support per context ranges 13-14 / 13-14. Holdout audit passed: no heldout joint triple appears in training, and every constituent is supported.</p>
+</div>
+</div>
+<div id="a238c3a4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-30T13:53:59.259773Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-30T13:53:59.259704Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-30T13:54:02.091004Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-30T13:54:02.090762Z&quot;}}" data-execution_count="5">
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><em>Routing baseline - heldout performance by regime</em></p>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">train</th>
+<th data-quarto-table-cell-role="th">coverage</th>
+<th data-quarto-table-cell-role="th">mean sup</th>
+<th data-quarto-table-cell-role="th">seen</th>
+<th data-quarto-table-cell-role="th">heldout</th>
+<th data-quarto-table-cell-role="th">margin</th>
+<th data-quarto-table-cell-role="th">wrong ctx</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">regime</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">untrained</th>
+<td>0</td>
+<td>0.000</td>
+<td>0.000</td>
+<td></td>
+<td>0.000</td>
+<td>-0.329</td>
+<td></td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">sparse support</th>
+<td>32</td>
+<td>0.688</td>
+<td>1.455</td>
+<td>1.000</td>
+<td>0.446</td>
+<td>-8.934</td>
+<td></td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">dense support</th>
+<td>438</td>
+<td>1.000</td>
+<td>13.688</td>
+<td>1.000</td>
+<td>1.000</td>
+<td>11.826</td>
+<td>0.000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">random labels</th>
+<td>438</td>
+<td>1.000</td>
+<td>13.688</td>
+<td>0.032</td>
+<td>0.000</td>
+<td>-6.000</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>This is the pattern the routing baseline predicts. The untrained model has no heldout competence. Sparse support can fit its small training set but has negative heldout margin and only partial heldout accuracy. Dense support reaches perfect heldout performance, although the exact joint triples were never seen. Wrong-context evaluation collapses, showing that context gates the lookup. Random labels collapse despite identical input density, showing that density alone is not enough; there must be compressible constituent structure.</p>
+<p>The sparse condition matters because it separates training fit from support. The model can memorize its small training set, but many constituent/context cells are weakly supported, so heldout performance is unreliable. The dense condition supplies the missing constituent support without adding the heldout joint triples. The random-label condition then checks that support alone is not magic: when the labels do not share constituent structure, dense exposure does not produce heldout performance.</p>
+</section>
+<section id="fixed-functional-composition" class="level3">
+<h3 data-anchor-id="fixed-functional-composition">3. Fixed-functional composition</h3>
+<p>The first nontrivial composition experiment removes the factorization. There are <span class="math inline">\(N_A = N_B = 64\)</span> constituents over the field <span class="math inline">\(\mathbb{F}_{17}\)</span>. Each alien <span class="math inline">\(A\)</span> token carries a hidden value <span class="math inline">\(u_A(a) \in \mathbb{F}_{17}\)</span> and each alien <span class="math inline">\(B\)</span> token a hidden value <span class="math inline">\(v_B(b) \in \mathbb{F}_{17}\)</span>; the model never sees these values, only the permuted integer token IDs <span class="math inline">\(\tau_A(a),\tau_B(b)\)</span> – a fixed random relabelling that carries no arithmetic. The single output label is the interaction passed through a fixed label permutation <span class="math inline">\(\sigma\)</span> of <span class="math inline">\(\mathbb{F}_{17}\)</span>,</p>
+<p><span class="math display">\[
+y(a,b,c) = \sigma\big(F_c(u_A(a),\,v_B(b))\big),
+\]</span></p>
+<p>with the context selecting the interaction <span class="math inline">\(F_c\)</span>:</p>
+<p><span class="math display">\[
+F_0(u,v)=uv \pmod {17},
+\]</span></p>
+<p><span class="math display">\[
+F_1(u,v)=u(2v+3)+5 \pmod {17}.
+\]</span></p>
+<p>The joint holdout is again deterministic, now also gated by context,</p>
+<p><span class="math display">\[
+H(a,b,c) = \big[\,(7a+11b+3c)\bmod 10 = 0\,\big],
+\]</span></p>
+<p>so the tested triples never appear in training. Now the target cannot be decomposed into one prediction for <span class="math inline">\(A\)</span> and one prediction for <span class="math inline">\(B\)</span>. <span class="math inline">\(A\)</span> alone is insufficient, <span class="math inline">\(B\)</span> alone is insufficient, and the heldout pair is absent from training. Dense support means that each constituent appears in many other joint combinations, not that the tested composite was seen.</p>
+<p>The main results are:</p>
+<div id="000c5cf7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-30T13:54:02.092393Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-30T13:54:02.092259Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-30T13:54:22.744197Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-30T13:54:22.743898Z&quot;}}" data-execution_count="6">
+<div class="cell-output cell-output-display cell-output-markdown">
+<p>Output classes = 17, chance = 0.059. Dense train = 7372, heldout = 820, coverage = 1.000, mean support = 57.59. One-sided controls: A-only = 0.063, B-only = 0.061.</p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><em>Heldout performance by regime</em></p>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">train</th>
+<th data-quarto-table-cell-role="th">coverage</th>
+<th data-quarto-table-cell-role="th">mean sup</th>
+<th data-quarto-table-cell-role="th">seen</th>
+<th data-quarto-table-cell-role="th">heldout</th>
+<th data-quarto-table-cell-role="th">margin</th>
+<th data-quarto-table-cell-role="th">wrong ctx</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">regime</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">untrained</th>
+<td>0</td>
+<td>0.000</td>
+<td>0.000</td>
+<td></td>
+<td>0.057</td>
+<td>-0.120</td>
+<td></td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">sparse density</th>
+<td>368</td>
+<td>0.973</td>
+<td>2.956</td>
+<td>1.000</td>
+<td>0.126</td>
+<td>-13.111</td>
+<td></td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">dense support</th>
+<td>7372</td>
+<td>1.000</td>
+<td>57.594</td>
+<td>1.000</td>
+<td>1.000</td>
+<td>12.235</td>
+<td>0.063</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">random labels</th>
+<td>7372</td>
+<td>1.000</td>
+<td>57.594</td>
+<td>1.000</td>
+<td>0.061</td>
+<td>-12.923</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><em>Support sweep</em></p>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">train</th>
+<th data-quarto-table-cell-role="th">coverage</th>
+<th data-quarto-table-cell-role="th">mean sup</th>
+<th data-quarto-table-cell-role="th">heldout</th>
+<th data-quarto-table-cell-role="th">margin</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">frac</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0.050</th>
+<td>368</td>
+<td>0.973</td>
+<td>2.956</td>
+<td>0.126</td>
+<td>-13.111</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">0.100</th>
+<td>737</td>
+<td>1.000</td>
+<td>5.758</td>
+<td>0.133</td>
+<td>-12.054</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0.200</th>
+<td>1474</td>
+<td>1.000</td>
+<td>11.516</td>
+<td>0.143</td>
+<td>-10.056</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">0.400</th>
+<td>2948</td>
+<td>1.000</td>
+<td>23.031</td>
+<td>0.323</td>
+<td>-3.356</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0.700</th>
+<td>5160</td>
+<td>1.000</td>
+<td>40.312</td>
+<td>0.896</td>
+<td>7.061</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1.000</th>
+<td>7372</td>
+<td>1.000</td>
+<td>57.594</td>
+<td>1.000</td>
+<td>12.235</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>One-sided controls fail: the <span class="math inline">\(A\)</span>-only majority baseline reaches 0.063 heldout accuracy and the <span class="math inline">\(B\)</span>-only baseline reaches 0.061, both near the chance rate of <span class="math inline">\(1/17 \approx 0.059\)</span>. The support sweep shows the threshold pattern:</p>
+<p>This is the cleanest version of the weak claim: a global interaction law can be learned from dense constituent support and applied to heldout joint inputs.</p>
+</section>
+<section id="constituent-modulated-composition" class="level3">
+<h3 data-anchor-id="constituent-modulated-composition">4. Constituent-modulated composition</h3>
+<p>The stronger experiment keeps the same protocol – permuted token IDs <span class="math inline">\(\tau_A,\tau_B\)</span>, a permuted output label <span class="math inline">\(y=\sigma\big(F_c(\cdot)\big)\)</span>, and the same context-gated joint holdout <span class="math inline">\(H(a,b,c)=\big[(7a+11b+3c)\bmod 10=0\big]\)</span> – but makes the functional itself depend on a constituent. Each <span class="math inline">\(A_i\)</span> is operator-like, carrying hidden parameters <span class="math inline">\((\alpha_i,\beta_i,\gamma_i)\in\mathbb{F}_{17}^3\)</span>; each <span class="math inline">\(B_j\)</span> carries a hidden value <span class="math inline">\(x_j \in \mathbb{F}_{17}\)</span>. Context selects the family of interpretation:</p>
+<p><span class="math display">\[
+F_0(A_i,B_j)=\alpha_i x_j+\beta_i \pmod {17},
+\]</span></p>
+<p><span class="math display">\[
+F_1(A_i,B_j)=\alpha_i x_j^2+\beta_i x_j+\gamma_i \pmod {17}.
+\]</span></p>
+<p>The model receives only integer token IDs and predicts a single permuted output label. This is closer to the intended theory: a constituent is not merely an argument to a fixed function; it helps parameterize the functional applied to the other constituent.</p>
+<p>The results are:</p>
+<div id="564087df" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-30T13:54:22.745496Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-30T13:54:22.745405Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-30T13:54:43.634580Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-30T13:54:43.634322Z&quot;}}" data-execution_count="7">
+<div class="cell-output cell-output-display cell-output-markdown">
+<p>Output classes = 17, chance = 0.059. Dense train = 7372, heldout = 820, coverage = 1.000, mean support = 57.59. One-sided controls: A-only = 0.005, B-only = 0.070.</p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><em>Heldout performance by regime</em></p>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">train</th>
+<th data-quarto-table-cell-role="th">coverage</th>
+<th data-quarto-table-cell-role="th">mean sup</th>
+<th data-quarto-table-cell-role="th">seen</th>
+<th data-quarto-table-cell-role="th">heldout</th>
+<th data-quarto-table-cell-role="th">margin</th>
+<th data-quarto-table-cell-role="th">wrong ctx</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">regime</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">untrained</th>
+<td>0</td>
+<td>0.000</td>
+<td>0.000</td>
+<td></td>
+<td>0.038</td>
+<td>-0.126</td>
+<td></td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">sparse density</th>
+<td>368</td>
+<td>0.973</td>
+<td>2.956</td>
+<td>1.000</td>
+<td>0.070</td>
+<td>-13.478</td>
+<td></td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">dense support</th>
+<td>7372</td>
+<td>1.000</td>
+<td>57.594</td>
+<td>1.000</td>
+<td>0.923</td>
+<td>5.092</td>
+<td>0.054</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">random labels</th>
+<td>7372</td>
+<td>1.000</td>
+<td>57.594</td>
+<td>1.000</td>
+<td>0.062</td>
+<td>-13.062</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><em>Support sweep</em></p>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">train</th>
+<th data-quarto-table-cell-role="th">coverage</th>
+<th data-quarto-table-cell-role="th">mean sup</th>
+<th data-quarto-table-cell-role="th">heldout</th>
+<th data-quarto-table-cell-role="th">margin</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">frac</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0.050</th>
+<td>368</td>
+<td>0.973</td>
+<td>2.956</td>
+<td>0.070</td>
+<td>-13.478</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">0.100</th>
+<td>737</td>
+<td>1.000</td>
+<td>5.758</td>
+<td>0.076</td>
+<td>-13.430</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0.200</th>
+<td>1474</td>
+<td>1.000</td>
+<td>11.516</td>
+<td>0.071</td>
+<td>-12.742</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">0.400</th>
+<td>2948</td>
+<td>1.000</td>
+<td>23.031</td>
+<td>0.159</td>
+<td>-8.693</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0.700</th>
+<td>5160</td>
+<td>1.000</td>
+<td>40.312</td>
+<td>0.428</td>
+<td>-2.185</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1.000</th>
+<td>7372</td>
+<td>1.000</td>
+<td>57.594</td>
+<td>0.923</td>
+<td>5.092</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The one-sided controls again fail: <span class="math inline">\(A\)</span>-only reaches 0.005 and <span class="math inline">\(B\)</span>-only reaches 0.070. The support sweep is more demanding than in the fixed-functional case:</p>
+<p>This is the strongest result of the four experiments. The exact joint triples are absent, the target is non-factorized, one-sided predictors fail, wrong context fails, random labels fail, and the heldout margin becomes positive only when constituent support is dense. That is the definition’s empirical signature in a small controlled setting.</p>
+<p>But this should still be read conservatively. These experiments do not falsify the theory; they show that the definition can be satisfied in small, controlled systems without relying on language priors or memorized joint examples. That is useful, but it is not irrefutable evidence for the theory in general. The final task is also deliberately simple: the constituent-dependent functional is low-degree and its parameters enter in a structured way. It is closer to an affine or polynomial operator family than to the open-ended functional modulation seen in natural language. So the correct claim is modest: the experiments find no contradiction yet, and they establish a clean foothold for stronger tests.</p>
+<p>The next evidence should come from harder ablations: less factorized architectures, harder operator families, more random seeds, adversarial holdouts, explicit capacity sweeps, and internal reachability measurements. A convincing case would show the same threshold pattern when the model has fewer architectural hints and the functional family is richer.</p>
+</section>
+</section>
+<section id="what-the-definition-asks-us-to-test" class="level2">
+<h2 data-anchor-id="what-the-definition-asks-us-to-test">What the definition asks us to test</h2>
+<p>The related work establishes that compression, memory, retrieval, and geometry are all legitimate lenses on transformers. The proposed definition adds a test: look for heldout but reachable coherence.</p>
+<ol type="1">
+<li>Is the joint behavior absent as a stored point?</li>
+<li>Are the constituents densely represented?</li>
+<li>Does recursive retrieval land near the right target region?</li>
+<li>Do causal interventions move the behavior in the predicted directions?</li>
+<li>Does the geometric signal improve smoothly before the thresholded behavior appears?</li>
+<li>Does the result survive a non-factorized target, where the answer cannot be decomposed into independent predictions for <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>?</li>
+</ol>
+<p>This framing also sits between two unhelpful extremes.</p>
+<p>It is weaker than saying LLMs are classical reasoning systems. No symbolic planner is being posited. The mechanism is retrieval, interpolation, and recursive refinement over learned representations.</p>
+<p>It is stronger than saying LLMs are merely stochastic parrots. A model that can retrieve into a jointly-heldout but coherent region is doing more than copying a stored phrase. It is using a geometry built from many stored contexts to reach a new, usable combination.</p>
+</section>
+<section id="falsifiable-predictions" class="level2">
+<h2 data-anchor-id="falsifiable-predictions">Falsifiable Predictions</h2>
+<p>A testable theory needs predictions that can fail. This proposal makes the following ones.</p>
+<ol type="1">
+<li><strong>Constituent density.</strong> Performance on a novel composite should track the density and separation of its constituents, not merely exposure to the composite itself.</li>
+<li><strong>Reachability.</strong> A geometric distance-to-target measure should predict success before a discrete task metric flips from failure to success.</li>
+<li><strong>Context gating.</strong> Context and activation steering should move the query toward different neighborhoods and produce different readings.</li>
+<li><strong>Coherence controls.</strong> Wrong-context, random-label, and one-sided controls should fail even when the dense-support condition succeeds.</li>
+<li><strong>Scale as error reduction.</strong> Increasing capacity or support density should shrink retrieval error. Behavioral emergence should appear when that error crosses the task margin.</li>
+</ol>
+<p>These predictions can fail. If novel-composite performance is independent of constituent density, the definition is wrong or incomplete. If reachability margin does not track heldout success, the mechanism is weak. If wrong-context and random-label controls succeed as well as the dense-support condition, the theory is not isolating emergence.</p>
+</section>
+<section id="stronger-tests" class="level2">
+<h2 data-anchor-id="stronger-tests">Stronger Tests</h2>
+<p>The current alien-symbol experiments are deliberately small and structured. That is useful for isolating the definition, but it is not yet a claim about arbitrary transformers. The next stronger experiment is architectural: replace the compact MLP with a tiny transformer, keep the same integer-only non-factorized tasks, sweep model capacity and constituent density, and inspect whether an internal reachability margin predicts heldout success.</p>
+<p>A later bridge back to LLMs should keep the same discipline: invented tokens, explicit joint holdouts, constituent-density sweeps, wrong-context controls, random-label controls, one-sided controls, and a pre-registered reachability metric. Without those controls, it is too easy to confuse memorized corpus facts with emergence.</p>
+</section>
+<section id="is-this-just-generalization" class="level2">
+<h2 data-anchor-id="is-this-just-generalization">Is this just generalization?</h2>
+<p>Perhaps yes. But then the interesting question becomes: what kind of generalization?</p>
+<p>In traditional machine learning, generalization already means success on inputs not seen exactly during training. In that sense, the emergence described here is not a separate miracle. It is a structured form of generalization: interpolation over a learned geometry, constrained by constituent support and context.</p>
+<p>The reason it feels like emergence is that this particular form of generalization cannot happen immediately. The interpolated region may exist only weakly at first. The constituents may not be dense enough, the relevant neighborhoods may not be separable enough, the context may not gate retrieval sharply enough, or the recursive computation may not have enough depth to land inside the coherent target region. As scale, data, capacity, or depth increase, the underlying geometric quantity may improve gradually. But the behavior becomes visible only when the retrieval error crosses the task margin.</p>
+<p>That is why it can look like an “emergent capability.” The model may be changing smoothly underneath, while the measured behavior snaps from failure to success because the metric only notices whether the output is coherent enough.</p>
+<p>So perhaps emergence and generalization are not two different things. Perhaps emergence is what generalization looks like when the unseen input is a meaningful composite, the parts are richly represented, and the metric only notices success after the model crosses a coherence threshold.</p>
+<p>The open question is then not whether LLMs generalize or retrieve. They do both. The sharper question is: <strong>when does interpolation over compressed memory become a new capability?</strong></p>
+</section>
+<section id="reproducibility" class="level2">
+<h2 data-anchor-id="reproducibility">Reproducibility</h2>
+<p>The continuous retrieval check uses <code>numpy</code>; the learned alien-symbol experiments use <code>torch</code>. No pretrained model, tokenizer, or external corpus is used. The code cells (hidden in the rendered view) run end-to-end on CPU in roughly a minute with fixed random seeds; re-running regenerates the tables above.</p>
+</section>
+<section id="references" class="level2">
+<h2 data-anchor-id="references">References</h2>
+<ul>
+<li>Balestriero, R., &amp; Baraniuk, R. G. (2018). A Spline Theory of Deep Networks. <em>ICML 2018</em>, PMLR 80, 374-383. <a href="https://proceedings.mlr.press/v80/balestriero18b.html" class="uri">https://proceedings.mlr.press/v80/balestriero18b.html</a></li>
+<li>Bender, E. M., Gebru, T., McMillan-Major, A., &amp; Shmitchell, S. (2021). On the Dangers of Stochastic Parrots: Can Language Models Be Too Big? <em>FAccT 2021</em>, 610-623. <a href="https://doi.org/10.1145/3442188.3445922" class="uri">https://doi.org/10.1145/3442188.3445922</a></li>
+<li>Chan, K. H. R., Yu, Y., You, C., Qi, H., Wright, J., &amp; Ma, Y. (2022). ReduNet: A White-Box Deep Network from the Principle of Maximizing Rate Reduction. <em>Journal of Machine Learning Research</em>, 23(114), 1-103. <a href="https://jmlr.org/papers/v23/21-0631.html" class="uri">https://jmlr.org/papers/v23/21-0631.html</a></li>
+<li>Cheng, E., Kervadec, C., &amp; Baroni, M. (2023). Bridging Information-Theoretic and Geometric Compression in Language Models. <em>arXiv:2310.13620</em>. <a href="https://arxiv.org/abs/2310.13620" class="uri">https://arxiv.org/abs/2310.13620</a></li>
+<li>Choraria, M., Gerogiannis, A., Jayaraman, V., Mani, A., &amp; Varshney, L. R. (2026). Context-Gated Associative Retrieval: From Theory to Transformers. <em>arXiv:2605.10970</em>. <a href="https://arxiv.org/abs/2605.10970" class="uri">https://arxiv.org/abs/2605.10970</a></li>
+<li>Cunningham, H., Ewart, A., Riggs, L., Huben, R., &amp; Sharkey, L. (2023). Sparse Autoencoders Find Highly Interpretable Features in Language Models. <em>arXiv:2309.08600</em>. <a href="https://arxiv.org/abs/2309.08600" class="uri">https://arxiv.org/abs/2309.08600</a></li>
+<li>Delétang, G., Ruoss, A., Duquenne, P.-A., Catt, E., Genewein, T., Mattern, C., Grau-Moya, J., Wenliang, L. K., Aitchison, M., Orseau, L., Hutter, M., &amp; Veness, J. (2023). Language Modeling Is Compression. <em>arXiv:2309.10668</em>. <a href="https://arxiv.org/abs/2309.10668" class="uri">https://arxiv.org/abs/2309.10668</a></li>
+<li>Elhage, N., Hume, T., Olsson, C., Schiebinger, N., Henighan, T., Kravec, S., Hatfield-Dodds, Z., Lasenby, R., Drain, D., Chen, C., Grosse, R., McCandlish, S., Kaplan, J., Amodei, D., Wattenberg, M., &amp; Olah, C. (2022). Toy Models of Superposition. <em>Transformer Circuits Thread</em>. <a href="https://transformer-circuits.pub/2022/toy_model/index.html" class="uri">https://transformer-circuits.pub/2022/toy_model/index.html</a></li>
+<li>Fodor, J. A., &amp; Pylyshyn, Z. W. (1988). Connectionism and Cognitive Architecture: A Critical Analysis. <em>Cognition</em>, 28(1-2), 3-71. <a href="https://doi.org/10.1016/0010-0277(88)90031-5" class="uri">https://doi.org/10.1016/0010-0277(88)90031-5</a></li>
+<li>Geva, M., Schuster, R., Berant, J., &amp; Levy, O. (2021). Transformer Feed-Forward Layers Are Key-Value Memories. <em>EMNLP 2021</em>, 5484-5495. <a href="https://aclanthology.org/2021.emnlp-main.446/" class="uri">https://aclanthology.org/2021.emnlp-main.446/</a></li>
+<li>Hopfield, J. J. (1982). Neural Networks and Physical Systems with Emergent Collective Computational Abilities. <em>Proceedings of the National Academy of Sciences</em>, 79(8), 2554-2558. <a href="https://doi.org/10.1073/pnas.79.8.2554" class="uri">https://doi.org/10.1073/pnas.79.8.2554</a></li>
+<li>Kambhampati, S. (2024a). Can Large Language Models Reason and Plan? <em>Annals of the New York Academy of Sciences</em>, 1534(1), 15-18. <a href="https://doi.org/10.1111/nyas.15125" class="uri">https://doi.org/10.1111/nyas.15125</a></li>
+<li>Kambhampati, S., Valmeekam, K., Guan, L., Verma, M., Stechly, K., Bhambri, S., Saldyt, L., &amp; Murthy, A. (2024b). Position: LLMs Can’t Plan, But Can Help Planning in LLM-Modulo Frameworks. <em>ICML 2024</em>, PMLR 235, 22895-22907. <a href="https://proceedings.mlr.press/v235/kambhampati24a.html" class="uri">https://proceedings.mlr.press/v235/kambhampati24a.html</a></li>
+<li>Khandelwal, U., Levy, O., Jurafsky, D., Zettlemoyer, L., &amp; Lewis, M. (2020). Generalization through Memorization: Nearest Neighbor Language Models. <em>ICLR 2020</em>. <a href="https://arxiv.org/abs/1911.00172" class="uri">https://arxiv.org/abs/1911.00172</a></li>
+<li>Krotov, D., &amp; Hopfield, J. J. (2016). Dense Associative Memory for Pattern Recognition. <em>NIPS 2016</em>. <a href="https://arxiv.org/abs/1606.01164" class="uri">https://arxiv.org/abs/1606.01164</a></li>
+<li>Lake, B. M., &amp; Baroni, M. (2018). Generalization without Systematicity: On the Compositional Skills of Sequence-to-Sequence Recurrent Networks. <em>ICML 2018</em>. <a href="https://arxiv.org/abs/1711.00350" class="uri">https://arxiv.org/abs/1711.00350</a></li>
+<li>Marks, S., &amp; Tegmark, M. (2024). The Geometry of Truth: Emergent Linear Structure in Large Language Model Representations of True/False Datasets. <em>COLM 2024</em>. <a href="https://arxiv.org/abs/2310.06824" class="uri">https://arxiv.org/abs/2310.06824</a></li>
+<li>Meng, K., Bau, D., Andonian, A., &amp; Belinkov, Y. (2022). Locating and Editing Factual Associations in GPT. <em>NeurIPS 2022</em>. <a href="https://arxiv.org/abs/2202.05262" class="uri">https://arxiv.org/abs/2202.05262</a></li>
+<li>Nadaraya, E. A. (1964). On Estimating Regression. <em>Theory of Probability &amp; Its Applications</em>, 9(1), 141-142. <a href="https://doi.org/10.1137/1109020" class="uri">https://doi.org/10.1137/1109020</a></li>
+<li>Nguyen, T. M., Nguyen, T., Ho, N., Bertozzi, A. L., Baraniuk, R. G., &amp; Osher, S. J. (2024). A Primal-Dual Framework for Transformers and Neural Networks. <em>arXiv:2406.13781</em>. <a href="https://arxiv.org/abs/2406.13781" class="uri">https://arxiv.org/abs/2406.13781</a></li>
+<li>Olsson, C., Elhage, N., Nanda, N., Joseph, N., DasSarma, N., Henighan, T., et al.&nbsp;(2022). In-Context Learning and Induction Heads. <em>arXiv:2209.11895</em>. <a href="https://arxiv.org/abs/2209.11895" class="uri">https://arxiv.org/abs/2209.11895</a></li>
+<li>Park, K., Choe, Y. J., &amp; Veitch, V. (2024). The Linear Representation Hypothesis and the Geometry of Large Language Models. <em>ICML 2024</em>. <a href="https://arxiv.org/abs/2311.03658" class="uri">https://arxiv.org/abs/2311.03658</a></li>
+<li>Ramsauer, H., Schäfl, B., Lehner, J., Seidl, P., Widrich, M., Adler, T., et al., &amp; Hochreiter, S. (2021). Hopfield Networks is All You Need. <em>ICLR 2021</em>. <a href="https://arxiv.org/abs/2008.02217" class="uri">https://arxiv.org/abs/2008.02217</a></li>
+<li>Rissanen, J. (1978). Modeling by Shortest Data Description. <em>Automatica</em>, 14(5), 465-471.</li>
+<li>Schaeffer, R., Miranda, B., &amp; Koyejo, S. (2023). Are Emergent Abilities of Large Language Models a Mirage? <em>NeurIPS 2023</em>. <a href="https://arxiv.org/abs/2304.15004" class="uri">https://arxiv.org/abs/2304.15004</a></li>
+<li>Schölkopf, B., Herbrich, R., &amp; Smola, A. J. (2001). A Generalized Representer Theorem. <em>COLT/EuroCOLT 2001</em>, LNCS 2111, 416-426. <a href="https://doi.org/10.1007/3-540-44581-1_27" class="uri">https://doi.org/10.1007/3-540-44581-1_27</a></li>
+<li>Shannon, C. E. (1948). A Mathematical Theory of Communication. <em>Bell System Technical Journal</em>, 27(3), 379-423; 27(4), 623-656. <a href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf" class="uri">https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf</a></li>
+<li>Shrivastava, A., &amp; Li, P. (2014). Asymmetric LSH (ALSH) for Sublinear Time Maximum Inner Product Search (MIPS). <em>NIPS 2014</em>. <a href="https://papers.neurips.cc/paper_files/paper/2014/hash/c98e7c4b8f20d384e3ad857d0ee226cc-Abstract.html" class="uri">https://papers.neurips.cc/paper_files/paper/2014/hash/c98e7c4b8f20d384e3ad857d0ee226cc-Abstract.html</a></li>
+<li>Tsai, Y.-H. H., Bai, S., Yamada, M., Morency, L.-P., &amp; Salakhutdinov, R. (2019). Transformer Dissection: An Unified Understanding for Transformer’s Attention via the Lens of Kernel. <em>EMNLP-IJCNLP 2019</em>, 4344-4353. <a href="https://aclanthology.org/D19-1443/" class="uri">https://aclanthology.org/D19-1443/</a></li>
+<li>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., &amp; Polosukhin, I. (2017). Attention Is All You Need. <em>NIPS 2017</em>. <a href="https://arxiv.org/abs/1706.03762" class="uri">https://arxiv.org/abs/1706.03762</a></li>
+<li>Watson, G. S. (1964). Smooth Regression Analysis. <em>Sankhya: The Indian Journal of Statistics, Series A</em>, 26(4), 359-372. <a href="https://www.jstor.org/stable/25049340" class="uri">https://www.jstor.org/stable/25049340</a></li>
+<li>Wei, J., Tay, Y., Bommasani, R., Raffel, C., Zoph, B., Borgeaud, S., et al., &amp; Fedus, W. (2022). Emergent Abilities of Large Language Models. <em>Transactions on Machine Learning Research</em>. <a href="https://arxiv.org/abs/2206.07682" class="uri">https://arxiv.org/abs/2206.07682</a></li>
+<li>Yu, Y., Buchanan, S., Pai, D., Chu, T., Wu, Z., Tong, S., Haeffele, B., &amp; Ma, Y. (2023). White-Box Transformers via Sparse Rate Reduction. <em>NeurIPS 2023</em>. <a href="https://arxiv.org/abs/2306.01129" class="uri">https://arxiv.org/abs/2306.01129</a></li>
+<li>Zou, A., Phan, L., Chen, S., Campbell, J., Guo, P., Ren, R., et al.&nbsp;(2023). Representation Engineering: A Top-Down Approach to AI Transparency. <em>arXiv:2310.01405</em>. <a href="https://arxiv.org/abs/2310.01405" class="uri">https://arxiv.org/abs/2310.01405</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/dhavala\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "dhavala/dhavala.github.io";
+    script.dataset.repoId = "MDEwOlJlcG9zaXRvcnk0MzYwMTM3MA==";
+    script.dataset.category = "Blog Comments";
+    script.dataset.categoryId = "DIC_kwDOAplN2s4C9QQP";
+    script.dataset.mapping = "pathname";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Built with <a href="https://quarto.org">Quarto</a>, <a href="http://claude.ai/">Claude</a> and <a href="https://chatgpt.com/codex/">Codex</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>© 2026 Soma S Dhavala</p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/dhavala">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/somasdhavala">
+      <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:soma.dhavala@iitjammu.ac.in">
+      <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
