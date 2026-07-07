@@ -6,9 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Academic and technical blog — statistics, machine learning, and adjacent topics.">
+<meta name="author" content="Soma S Dhavala">
+<meta name="dcterms.date" content="2026-07-07">
+<meta name="description" content="Interdisciplinary knowledge is siloed, slow to publish, and quick to fragment into disconnected chapters. Software workflows and generative AI collapse the first two costs — leaving the author as editor-in-chief, whose real job is the spine that carries one problem through.">
 
-<title>SaddlePoint – Soma S Dhavala</title>
+<title>Writing Books for Interdisciplinary Fields in the Age of AI – Soma S Dhavala</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,21 +29,19 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../images/favicon.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-9de9f6925d305bcf5b7eb9351f368d06.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ed19a013fafa102e6b1fc8e23540551c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../images/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-9de9f6925d305bcf5b7eb9351f368d06.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ed19a013fafa102e6b1fc8e23540551c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -57,35 +57,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-sp-posts .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-categories','listing-description','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-sp-posts'] = new List('listing-sp-posts', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <style>html{ scroll-behavior: smooth; }</style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -209,43 +180,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="alternate" type="application/rss+xml" title="SaddlePoint — Soma S Dhavala" href="index.xml" data-external="1"><meta property="og:title" content="SaddlePoint – Soma S Dhavala">
-<meta property="og:description" content="Academic and technical blog — statistics, machine learning, and adjacent topics.">
-<meta property="og:image" content="https://dhavala.github.io/saddlepoint/images/og-image.png">
+<meta property="og:title" content="Writing Books for Interdisciplinary Fields in the Age of AI – Soma S Dhavala">
+<meta property="og:description" content="Interdisciplinary knowledge is siloed, slow to publish, and quick to fragment into disconnected chapters. Software workflows and generative AI collapse the first two costs — leaving the author as editor-in-chief, whose real job is the spine that carries one problem through.">
+<meta property="og:image" content="https://dhavala.github.io/saddlepoint/2026-07-07-writing-books-like-code/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
-<meta name="twitter:title" content="SaddlePoint – Soma S Dhavala">
-<meta name="twitter:description" content="Academic and technical blog — statistics, machine learning, and adjacent topics.">
-<meta name="twitter:image" content="https://dhavala.github.io/saddlepoint/images/og-image.png">
+<meta name="twitter:title" content="Writing Books for Interdisciplinary Fields in the Age of AI – Soma S Dhavala">
+<meta name="twitter:description" content="Interdisciplinary knowledge is siloed, slow to publish, and quick to fragment into disconnected chapters. Software workflows and generative AI collapse the first two costs — leaving the author as editor-in-chief, whose real job is the spine that carries one problem through.">
+<meta name="twitter:image" content="https://dhavala.github.io/saddlepoint/2026-07-07-writing-books-like-code/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -256,7 +198,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Soma S Dhavala</span>
     </a>
   </div>
@@ -266,33 +208,33 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../about/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../about/index.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../research/index.html"> 
+    <a class="nav-link" href="../../research/index.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../teaching/index.html"> 
+    <a class="nav-link" href="../../teaching/index.html"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../consulting/index.html"> 
+    <a class="nav-link" href="../../consulting/index.html"> 
 <span class="menu-text">Consulting</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../saddlepoint/index.html"> 
+    <a class="nav-link" href="../../saddlepoint/index.html"> 
 <span class="menu-text">SaddlePoint</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../saddlepoint/index.xml"> <i class="bi bi-rss" role="img">
 </i> 
 <span class="menu-text">SaddlePoint feed</span></a>
   </li>  
@@ -307,7 +249,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../blogs/index.html">Blogs</a></li><li class="breadcrumb-item"><a href="../saddlepoint/index.html">SaddlePoint</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Writing Books for Interdisciplinary Fields in the Age of AI</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -321,19 +263,19 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../about/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../news/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../news/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">News</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../research/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../research/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Research</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -342,31 +284,31 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/publications.html" class="sidebar-item-text sidebar-link">
+  <a href="../../research/publications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Publications</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/patents.html" class="sidebar-item-text sidebar-link">
+  <a href="../../research/patents.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Patents</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/reports.html" class="sidebar-item-text sidebar-link">
+  <a href="../../research/reports.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reports</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/projects/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../research/projects/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Projects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../research/team.html" class="sidebar-item-text sidebar-link">
+  <a href="../../research/team.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Team</span></a>
   </div>
 </li>
@@ -374,7 +316,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../teaching/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../teaching/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Teaching</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -383,13 +325,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/courses.html" class="sidebar-item-text sidebar-link">
+  <a href="../../teaching/courses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Courses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../teaching/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../teaching/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -397,40 +339,40 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../software/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../software/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Software</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../consulting/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../consulting/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Consulting</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../service/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../service/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Service</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../blogs/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../blogs/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Blogs</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../saddlepoint/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../saddlepoint/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SaddlePoint</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../asankhya/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../asankhya/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Asankhya</span></a>
   </div>
 </li>
@@ -442,29 +384,69 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(11)</span></div><div class="category" data-category="YWk=">ai <span class="quarto-category-count">(3)</span></div><div class="category" data-category="YXJjaGl0ZWN0dXJl">architecture <span class="quarto-category-count">(3)</span></div><div class="category" data-category="YXV0b21hdGlvbg==">automation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YS1lbmdpbmVlcmluZw==">data-engineering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YS1zY2llbmNl">data-science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YWZyYW1l">dataframe <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGVlcC1sZWFybmluZw==">deep-learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZW1lcmdlbmNl">emergence <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZW5naW5lZXJpbmc=">engineering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z3JhcGhz">graphs <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aW50ZXJvcGVyYWJpbGl0eQ==">interoperability <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bWFjaGluZS1sZWFybmluZw==">machine-learning <span class="quarto-category-count">(9)</span></div><div class="category" data-category="bWw=">ml <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWwtYXBwcw==">ml-apps <span class="quarto-category-count">(5)</span></div><div class="category" data-category="bW9hdHM=">moats <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bm90ZWJvb2s=">notebook <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGVkYWdvZ3k=">pedagogy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHVibGlzaGluZw==">publishing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cXVhcnRv">quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVwcm9kdWNpYmlsaXR5">reproducibility <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dGhlb3J5">theory <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dHJhbnNmb3JtZXJz">transformers <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem">The problem</a>
+  <ul class="collapse">
+  <li><a href="#knowledge-is-siloed" id="toc-knowledge-is-siloed" class="nav-link" data-scroll-target="#knowledge-is-siloed">Knowledge is siloed</a></li>
+  <li><a href="#publishing-it-is-slow" id="toc-publishing-it-is-slow" class="nav-link" data-scroll-target="#publishing-it-is-slow">Publishing it is slow</a></li>
+  <li><a href="#the-pedagogy-needs-a-spine" id="toc-the-pedagogy-needs-a-spine" class="nav-link" data-scroll-target="#the-pedagogy-needs-a-spine">The pedagogy needs a spine</a></li>
+  </ul></li>
+  <li><a href="#the-response" id="toc-the-response" class="nav-link" data-scroll-target="#the-response">The response</a>
+  <ul class="collapse">
+  <li><a href="#build-and-publish-books-like-software" id="toc-build-and-publish-books-like-software" class="nav-link" data-scroll-target="#build-and-publish-books-like-software">Build and publish books like software</a></li>
+  <li><a href="#draft-the-bridges-with-generative-ai" id="toc-draft-the-bridges-with-generative-ai" class="nav-link" data-scroll-target="#draft-the-bridges-with-generative-ai">Draft the bridges with generative AI</a></li>
+  <li><a href="#the-author-becomes-editor-in-chief" id="toc-the-author-becomes-editor-in-chief" class="nav-link" data-scroll-target="#the-author-becomes-editor-in-chief">The author becomes editor-in-chief</a></li>
+  </ul></li>
+  <li><a href="#a-case-study-lattice-vector-quantization-for-neural-networks" id="toc-a-case-study-lattice-vector-quantization-for-neural-networks" class="nav-link" data-scroll-target="#a-case-study-lattice-vector-quantization-for-neural-networks">A case study: Lattice Vector Quantization for Neural Networks</a></li>
+  <li><a href="#the-book-as-a-reproducible-artifact" id="toc-the-book-as-a-reproducible-artifact" class="nav-link" data-scroll-target="#the-book-as-a-reproducible-artifact">The book as a reproducible artifact</a></li>
+  <li><a href="#what-this-suggests" id="toc-what-this-suggests" class="nav-link" data-scroll-target="#what-this-suggests">What this suggests</a></li>
+  <li><a href="#closing-thought" id="toc-closing-thought" class="nav-link" data-scroll-target="#closing-thought">Closing thought</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <div class="section-banner">
-  <img style="display:block;width:100%;height:150px;object-fit:cover;object-position:center" src="../images/banners/horsesskybw.jpg" alt="Blog banner">
+  <img style="display:block;width:100%;height:150px;object-fit:cover;object-position:center" src="../../images/banners/horsesskybw.jpg" alt="Blog banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../blogs/index.html">Blogs</a></li><li class="breadcrumb-item"><a href="../saddlepoint/index.html">SaddlePoint</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">SaddlePoint</h1>
-</div>
+<h1 class="title">Writing Books for Interdisciplinary Fields in the Age of AI</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">ai</div>
+    <div class="quarto-category">pedagogy</div>
+    <div class="quarto-category">publishing</div>
+    <div class="quarto-category">reproducibility</div>
+    <div class="quarto-category">quarto</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    Academic and technical blog — statistics, machine learning, and adjacent topics.
+    Interdisciplinary knowledge is siloed, slow to publish, and quick to fragment into disconnected chapters. Software workflows and generative AI collapse the first two costs — leaving the author as editor-in-chief, whose real job is the spine that carries one problem through.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Soma S Dhavala </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 7, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -474,352 +456,146 @@ window.Quarto = {
 </header>
 
 
-<div class="subscribe">
-<form class="mc-form" action="https://github.us18.list-manage.com/subscribe/post?u=82b9a1ff5bc2e4c89a646fcea&amp;id=c48700ad96&amp;f_id=004bade6f0" method="post" target="_blank">
-  <input type="email" name="EMAIL" placeholder="Type your email…" aria-label="Email address" required="">
-  <div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_82b9a1ff5bc2e4c89a646fcea_c48700ad96" tabindex="-1" value=""></div>
-  <button type="submit">Subscribe</button>
-</form>
-<p class="mc-thanks" hidden="">✓ Thanks for subscribing.</p>
-<script>
-(function(){
-  var f = document.querySelector('.subscribe .mc-form');
-  var t = document.querySelector('.subscribe .mc-thanks');
-  if (!f) return;
-  // Progressive enhancement: POST quietly to a hidden iframe, then swap the form
-  // for a persistent thank-you in place — no page reload, so it can't flash away.
-  var ifr = document.createElement('iframe');
-  ifr.name = 'mc-sink'; ifr.title = 'subscribe'; ifr.tabIndex = -1; ifr.style.display = 'none';
-  document.body.appendChild(ifr);
-  f.target = 'mc-sink';
-  var sent = false, done = function(){
-    if (!sent) return;            // ignore the iframe's initial empty load
-    sent = false;                 // run once
-    f.style.display = 'none';
-    if (t) t.hidden = false;
-  };
-  f.addEventListener('submit', function(){ sent = true; setTimeout(done, 2500); }); // fallback if load is missed
-  ifr.addEventListener('load', done);
-})();
-</script>
-</div>
-<div id="listing-sp-posts" class="quarto-listing quarto-listing-container-default">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="YWklMkNwZWRhZ29neSUyQ3B1Ymxpc2hpbmclMkNyZXByb2R1Y2liaWxpdHklMkNxdWFydG8=" data-listing-date-sort="1783382400000" data-listing-file-modified-sort="1783389849573" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2616">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../saddlepoint/2026-07-07-writing-books-like-code/index.html" class="no-external">Writing Books for Interdisciplinary Fields in the Age of AI</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWk='); return false;">ai</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGVkYWdvZ3k='); return false;">pedagogy</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHVibGlzaGluZw=='); return false;">publishing</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cmVwcm9kdWNpYmlsaXR5'); return false;">reproducibility</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cXVhcnRv'); return false;">quarto</div>
-
-</div>
-<div class="delink listing-description"><a href="../saddlepoint/2026-07-07-writing-books-like-code/index.html" class="no-external">
-<p>Interdisciplinary knowledge is siloed, slow to publish, and quick to fragment into disconnected chapters. Software workflows and generative AI collapse the first two costs — leaving the author as editor-in-chief, whose real job is the spine that carries one problem through.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../saddlepoint/2026-07-07-writing-books-like-code/index.html" class="no-external">
-<div class="listing-date">
-Jul 7, 2026
-</div>
-<div class="listing-reading-time">14 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="YWklMkNtYWNoaW5lLWxlYXJuaW5nJTJDdHJhbnNmb3JtZXJzJTJDZW1lcmdlbmNlJTJDdGhlb3J5" data-listing-date-sort="1782777600000" data-listing-file-modified-sort="1783389849573" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="33" data-listing-word-count-sort="6497">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../saddlepoint/2026-06-30-towards-testable-theory-of-emergence/index.html" class="no-external">Towards a Testable Theory of Emergence</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWk='); return false;">ai</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZS1sZWFybmluZw=='); return false;">machine-learning</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dHJhbnNmb3JtZXJz'); return false;">transformers</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZW1lcmdlbmNl'); return false;">emergence</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGhlb3J5'); return false;">theory</div>
-
-</div>
-<div class="delink listing-description"><a href="../saddlepoint/2026-06-30-towards-testable-theory-of-emergence/index.html" class="no-external">
-<p>A proposal for testing emergence as heldout but reachable coherence under recursive retrieval.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../saddlepoint/2026-06-30-towards-testable-theory-of-emergence/index.html" class="no-external">
-<div class="listing-date">
-Jun 30, 2026
-</div>
-<div class="listing-reading-time">33 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="YWklMkNtYWNoaW5lLWxlYXJuaW5nJTJDZW5naW5lZXJpbmclMkNtb2F0cw==" data-listing-date-sort="1781308800000" data-listing-file-modified-sort="1783389849573" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="856">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../saddlepoint/2026-06-13-science-moves-engineering-compounds/index.html" class="no-external">Science Moves. Engineering Compounds.</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWk='); return false;">ai</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZS1sZWFybmluZw=='); return false;">machine-learning</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZW5naW5lZXJpbmc='); return false;">engineering</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bW9hdHM='); return false;">moats</div>
-
-</div>
-<div class="delink listing-description"><a href="../saddlepoint/2026-06-13-science-moves-engineering-compounds/index.html" class="no-external">
-<p>Scientific advantage diffuses faster every year; what endures is engineering muscle memory — operational capability earned through execution, not read from papers.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../saddlepoint/2026-06-13-science-moves-engineering-compounds/index.html" class="no-external">
-<div class="listing-date">
-Jun 13, 2026
-</div>
-<div class="listing-reading-time">5 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="Z3JhcGhzJTJDbWwlMkNub3RlYm9vaw==" data-listing-date-sort="1607990400000" data-listing-file-modified-sort="1783389849576" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="828">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../saddlepoint/pagerank-knn/index.html" class="no-external">PageRank and KNN: an equivalence</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Z3JhcGhz'); return false;">graphs</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWw='); return false;">ml</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bm90ZWJvb2s='); return false;">notebook</div>
-
-</div>
-<div class="delink listing-description"><a href="../saddlepoint/pagerank-knn/index.html" class="no-external">
-<p>A tutorial-style notebook showing how PageRank on a weighted similarity graph relates to KNN-style neighborhood scores.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../saddlepoint/pagerank-knn/index.html" class="no-external">
-<div class="listing-date">
-Dec 15, 2020
-</div>
-<div class="listing-reading-time">5 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNpbnRlcm9wZXJhYmlsaXR5JTJDZGVlcC1sZWFybmluZw==" data-listing-date-sort="1515542400000" data-listing-file-modified-sort="1783389849573" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="695">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../saddlepoint/2018-01-10-ml-app-interoperability-deep-learning-frameworks-2/index.html" class="no-external">ML App Interoperability with Deep Learning, Part 2</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZS1sZWFybmluZw=='); return false;">machine-learning</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWwtYXBwcw=='); return false;">ml-apps</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('aW50ZXJvcGVyYWJpbGl0eQ=='); return false;">interoperability</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZGVlcC1sZWFybmluZw=='); return false;">deep-learning</div>
-
-</div>
-<div class="delink listing-description"><a href="../saddlepoint/2018-01-10-ml-app-interoperability-deep-learning-frameworks-2/index.html" class="no-external">
-<p>Deep learning frameworks provide a practical default for model interchange: readable specifications, scalable execution, and broad commercial adoption.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../saddlepoint/2018-01-10-ml-app-interoperability-deep-learning-frameworks-2/index.html" class="no-external">
-<div class="listing-date">
-Jan 10, 2018
-</div>
-<div class="listing-reading-time">4 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNpbnRlcm9wZXJhYmlsaXR5" data-listing-date-sort="1515456000000" data-listing-file-modified-sort="1783389849573" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="563">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../saddlepoint/2018-01-09-ml-app-interoperability-deep-learning-frameworks-1/index.html" class="no-external">ML App Interoperability with PMML, Part 1</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZS1sZWFybmluZw=='); return false;">machine-learning</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWwtYXBwcw=='); return false;">ml-apps</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('aW50ZXJvcGVyYWJpbGl0eQ=='); return false;">interoperability</div>
-
-</div>
-<div class="delink listing-description"><a href="../saddlepoint/2018-01-09-ml-app-interoperability-deep-learning-frameworks-1/index.html" class="no-external">
-<p>PMML is a serious model-exchange effort, but weak importer support, inconsistent model interfaces, and XML-heavy design limit its role as a default.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../saddlepoint/2018-01-09-ml-app-interoperability-deep-learning-frameworks-1/index.html" class="no-external">
-<div class="listing-date">
-Jan 9, 2018
-</div>
-<div class="listing-reading-time">3 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="bWFjaGluZS1sZWFybmluZyUyQ2F1dG9tYXRpb24lMkNkYXRhLXNjaWVuY2U=" data-listing-date-sort="1510099200000" data-listing-file-modified-sort="1783389849573" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="447">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../saddlepoint/2017-11-08-data-science-automation-baby-step/index.html" class="no-external">A Small Step Toward Data Science Automation</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZS1sZWFybmluZw=='); return false;">machine-learning</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YXV0b21hdGlvbg=='); return false;">automation</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YS1zY2llbmNl'); return false;">data-science</div>
-
-</div>
-<div class="delink listing-description"><a href="../saddlepoint/2017-11-08-data-science-automation-baby-step/index.html" class="no-external">
-<p>Model selection can be treated as a decision problem: learn rules from data characteristics, then use those rules to guide downstream modeling.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../saddlepoint/2017-11-08-data-science-automation-baby-step/index.html" class="no-external">
-<div class="listing-date">
-Nov 8, 2017
-</div>
-<div class="listing-reading-time">3 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="bWFjaGluZS1sZWFybmluZyUyQ2RhdGFmcmFtZSUyQ2RhdGEtZW5naW5lZXJpbmc=" data-listing-date-sort="1509062400000" data-listing-file-modified-sort="1783389849572" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="476">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../saddlepoint/2017-10-27-dataframe-new-json-machine-learning/index.html" class="no-external">DataFrame as the ML Data Interface</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZS1sZWFybmluZw=='); return false;">machine-learning</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YWZyYW1l'); return false;">dataframe</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YS1lbmdpbmVlcmluZw=='); return false;">data-engineering</div>
-
-</div>
-<div class="delink listing-description"><a href="../saddlepoint/2017-10-27-dataframe-new-json-machine-learning/index.html" class="no-external">
-<p>Even when data originates in flexible NoSQL systems, ML workflows need structured responses. The DataFrame is a practical default container.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../saddlepoint/2017-10-27-dataframe-new-json-machine-learning/index.html" class="no-external">
-<div class="listing-date">
-Oct 27, 2017
-</div>
-<div class="listing-reading-time">3 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNhcmNoaXRlY3R1cmU=" data-listing-date-sort="1508976000000" data-listing-file-modified-sort="1783389849572" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="416">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../saddlepoint/2017-10-26-usb-for-connecting-ml-apps/index.html" class="no-external">A USB Interface for ML Apps</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZS1sZWFybmluZw=='); return false;">machine-learning</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWwtYXBwcw=='); return false;">ml-apps</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl0ZWN0dXJl'); return false;">architecture</div>
-
-</div>
-<div class="delink listing-description"><a href="../saddlepoint/2017-10-26-usb-for-connecting-ml-apps/index.html" class="no-external">
-<p>A USB metaphor for machine learning apps: separate data, code, config, and authentication so components can connect cleanly across environments.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../saddlepoint/2017-10-26-usb-for-connecting-ml-apps/index.html" class="no-external">
-<div class="listing-date">
-Oct 26, 2017
-</div>
-<div class="listing-reading-time">3 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNhcmNoaXRlY3R1cmU=" data-listing-date-sort="1508803200000" data-listing-file-modified-sort="1783389849572" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="547">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../saddlepoint/2017-10-24-axiomatic-framework-ml-apps-2/index.html" class="no-external">Axioms for Reliable ML Apps, Part 2</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZS1sZWFybmluZw=='); return false;">machine-learning</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWwtYXBwcw=='); return false;">ml-apps</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl0ZWN0dXJl'); return false;">architecture</div>
-
-</div>
-<div class="delink listing-description"><a href="../saddlepoint/2017-10-24-axiomatic-framework-ml-apps-2/index.html" class="no-external">
-<p>A concrete architecture for ML apps: versioned data, code, config, micro apps, DAG orchestration, and DataFrames as the default data interface.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../saddlepoint/2017-10-24-axiomatic-framework-ml-apps-2/index.html" class="no-external">
-<div class="listing-date">
-Oct 24, 2017
-</div>
-<div class="listing-reading-time">3 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNhcmNoaXRlY3R1cmU=" data-listing-date-sort="1508630400000" data-listing-file-modified-sort="1783389849572" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="514">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../saddlepoint/2017-10-22-axiomatic-framework-ml-apps-1/index.html" class="no-external">Reliable ML Apps: Goals and Guarantees</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZS1sZWFybmluZw=='); return false;">machine-learning</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWwtYXBwcw=='); return false;">ml-apps</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YXJjaGl0ZWN0dXJl'); return false;">architecture</div>
-
-</div>
-<div class="delink listing-description"><a href="../saddlepoint/2017-10-22-axiomatic-framework-ml-apps-1/index.html" class="no-external">
-<p>Machine learning apps need explicit guarantees: repeatability, auditability, recoverability, scalability, testability, security, responsiveness, and representation.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../saddlepoint/2017-10-22-axiomatic-framework-ml-apps-1/index.html" class="no-external">
-<div class="listing-date">
-Oct 22, 2017
-</div>
-<div class="listing-reading-time">3 min</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div>
+<p>For most of their history, writing a book and writing software were different crafts. Code lived in repositories — with versions, tests, builds, reviews, and automatic deployment. Books lived in manuscripts — moving through editors, typesetters, and long production cycles. A technical book that crossed disciplinary boundaries was among the slowest and most expensive artifacts to produce.</p>
+<p>That gap is closing. A modern technical book can now be built much like a software system: it lives in a Git repository, is built from source, carries reproducible figures and executable examples, has its numerical claims tested, and deploys automatically when the source changes. The book stops being a static manuscript and becomes a versioned, reviewable, runnable knowledge artifact — and in the age of AI, much of its first-draft content can be generated rather than typed.</p>
+<p>That combination matters most where books are hardest to write: at the boundaries between fields. <strong>Creating and teaching genuinely interdisciplinary material has been hard for three reasons:</strong></p>
+<ul>
+<li><strong>Knowledge is siloed.</strong> Each field guards its own assumptions and notation. The barrier to entry is high and the learning curve is steep, so crossing fields is far harder than it should be.</li>
+<li><strong>Publishing it is slow.</strong> Interdisciplinary work has usually needed several specialists to collaborate, and traditional publishing adds a long production cycle on top.</li>
+<li><strong>The pedagogy needs a spine.</strong> Correct chapters are not a path. Something has to weave one problem through all of them, or the book fragments into disconnected topics.</li>
+</ul>
+<p>Two recent shifts attack the first two problems, and one unchanged responsibility governs the third. Books can now be built and published like software. Generative AI can draft much of the connective material. And the author — freed from typing every first draft — becomes something closer to an editor-in-chief. The rest of this essay works through the three problems and then that response.</p>
+<section id="the-problem" class="level2">
+<h2 data-anchor-id="the-problem">The problem</h2>
+<section id="knowledge-is-siloed" class="level3">
+<h3 data-anchor-id="knowledge-is-siloed">Knowledge is siloed</h3>
+<p>Specialist knowledge is layered. Each field develops its own assumptions, notation, examples, vocabulary, and preferred abstractions. Within the field, these layers are efficient: they let experts communicate quickly. But for someone entering from another field, the same layers become barriers. The cost of entry is high, and the learning curve is steep.</p>
+<p>This is especially visible in interdisciplinary work.</p>
+<p>A machine-learning researcher may understand neural-network inference, quantization pressure, matrix multiplication, and memory bandwidth. But the same researcher may not know abstract algebra, quotient groups, lattice theory, coding theory, or the specific way those ideas appear in communication systems. A coding theorist may understand Reed-Muller codes and Barnes-Wall lattices, but may not know how quantization error propagates through a neural-network layer. A systems researcher may understand GPU tiling and lookup tables, but may not know why a particular lattice has useful geometric structure.</p>
+<p>The knowledge exists, but it is not arranged for crossing.</p>
+<p>A specialist text usually assumes the reader has already crossed the bridge. It does not always explain why the bridge is needed. It may introduce a definition before the reader has felt the problem that requires it. It may use notation that is standard in one community but opaque in another. It may move too quickly from foundations to formal statements because the intended audience has already internalized the background. For disciplinary work, this is acceptable. For interdisciplinary work, it is a bottleneck — and for a student crossing from one field to another, it is often a wall.</p>
+</section>
+<section id="publishing-it-is-slow" class="level3">
+<h3 data-anchor-id="publishing-it-is-slow">Publishing it is slow</h3>
+<p>Even when someone <em>can</em> cross the fields, turning that synthesis into a finished, teachable artifact has been expensive.</p>
+<p>Traditional publishing — the <em>how</em> of it — is time-consuming. Interdisciplinary material has usually required several specialists to collaborate, an editor to hold the whole together, typesetting and copyediting, and a production cycle measured in months. The cost is not only time; it is coordination. The people who understand each layer are rarely the same people, and assembling them is itself a project.</p>
+<p>The result is that many good bridges are never built. The idea that would connect two fields stays a talk, a paper, or a private set of notes, because the effort of turning it into a coherent book for newcomers is too high relative to the reward.</p>
+</section>
+<section id="the-pedagogy-needs-a-spine" class="level3">
+<h3 data-anchor-id="the-pedagogy-needs-a-spine">The pedagogy needs a spine</h3>
+<p>Suppose the fields are crossed and the production cost is paid. There is still a subtler failure: chapters can be individually correct and collectively disconnected.</p>
+<p>A chapter on algebra may be clear. A chapter on lattices may be clear. A chapter on quantization may be clear. A chapter on inference kernels may be clear. But unless the reader feels that one problem is being carried forward, the book becomes a collection of topics rather than a path.</p>
+<p>The pedagogy I wanted to preserve here I owe to one book in particular: Steven M. Kay’s <a href="https://www.amazon.com/Fundamentals-Statistical-Signal-Processing-Estimation/dp/0133457117"><em>Fundamentals of Statistical Signal Processing</em></a>. Its style — take one problem seriously, keep returning to it, and let each new idea appear because the previous tool has reached its limit — is distinctively Kay’s; I have not found it in other signal-processing texts.</p>
+<p>That pattern is powerful because it does not ask the reader to restart in every chapter. The same example accumulates meaning. First it is simple enough to compute by hand. Then it fails in a revealing way. Then a new idea repairs that failure. Then the repaired version exposes a deeper limitation. The reader is not merely told that a new abstraction exists; the reader feels why it has become necessary.</p>
+<p>This is especially important for students. When several specialist fields are involved, the burden on the reader is already high. If the examples also change constantly, the reader must solve two problems at once: understand the new field and decode the new example. A stable running example reduces that burden. It lets each new concept attach to something already familiar.</p>
+<p>In that sense, the example is not decorative. It is the spine of the book — and choosing it well is not something a workflow or a model can do for you.</p>
+</section>
+</section>
+<section id="the-response" class="level2">
+<h2 data-anchor-id="the-response">The response</h2>
+<p>Two of these three problems are, at bottom, problems of cost: the cost of <em>publishing</em> the artifact, and the cost of <em>creating</em> the connective material. Both costs have dropped sharply. The third — the spine — remains the author’s, and arguably becomes the author’s main job.</p>
+<section id="build-and-publish-books-like-software" class="level3">
+<h3 data-anchor-id="build-and-publish-books-like-software">Build and publish books like software</h3>
+<p>Software engineering has developed a powerful workflow for making complex things reliable:</p>
+<ul>
+<li>write source files;</li>
+<li>keep them under version control;</li>
+<li>build them repeatedly;</li>
+<li>test the parts that can be tested;</li>
+<li>review changes;</li>
+<li>publish artifacts automatically;</li>
+<li>keep a record of how the artifact evolved.</li>
+</ul>
+<p>This workflow is not specific to software. It is a general method for managing structured intellectual work.</p>
+<p>When a book is written in a system such as Quarto, many of the same ideas apply. Chapters are source files. Mathematical notation, diagrams, code examples, references, and tests can all live in the same repository. A rendered book is not the primary object; it is the build output. The source is the durable object.</p>
+<p>This matters because technical books are not static. A good technical book accumulates corrections, clarifications, examples, and changes in emphasis. If it contains code or mathematical examples, those examples can drift unless they are checked. If it contains figures, those figures should ideally be regenerated from source rather than manually redrawn. If it is intended for students, the same material may need to be reshaped several times before the pedagogy becomes clear.</p>
+<p>In a software-like workflow, all of this becomes normal. A chapter can be edited like a module. A figure can be regenerated like a build artifact. A numerical example can be tested like a function. A public website can be published through a continuous deployment pipeline. The book can have versions, releases, and a visible history.</p>
+<p>Publishing is also no longer controlled only by large publishing houses. Formal publishing still has value — for distribution, copyediting, certification, and prestige. But the old pattern of waiting months for a production cycle is no longer the only path. The ability to create and publish a serious technical book online has moved much closer to the individual researcher, teacher, or small group. A book can begin as a living research and teaching document, not a manuscript waiting for permission to become public.</p>
+</section>
+<section id="draft-the-bridges-with-generative-ai" class="level3">
+<h3 data-anchor-id="draft-the-bridges-with-generative-ai">Draft the bridges with generative AI</h3>
+<p>The workflow lowers the cost of <em>publishing</em>. Generative AI lowers the cost of <em>creating</em>.</p>
+<p>Models such as Codex, Claude, and similar systems are now quite good at connecting nearby concepts, drafting explanations, writing code examples, translating notation into prose, and turning a rough pedagogical plan into a readable first version. They can help produce notebooks, diagrams, tests, examples, and scaffolded chapters. They can also rewrite the same material for different levels of assumed background.</p>
+<p>This is important because the hardest part of interdisciplinary teaching is often not knowing one fact. It is arranging many facts from different fields into an order a learner can follow. That arrangement work — the drafting, the re-drafting, the alternate explanations for different backgrounds — is exactly what used to require a team or an unusually broad single author. It is now much cheaper.</p>
+<p>Generative AI does not remove the need for scientific judgment. It changes the cost structure of producing explanatory material.</p>
+</section>
+<section id="the-author-becomes-editor-in-chief" class="level3">
+<h3 data-anchor-id="the-author-becomes-editor-in-chief">The author becomes editor-in-chief</h3>
+<p>That leaves the part no shift removes: responsibility for the whole. The human is still responsible for correctness, taste, emphasis, scope, and intellectual honesty — and for the spine. But the human no longer has to type every first draft, every example, every explanatory bridge, and every alternate formulation from scratch.</p>
+<p>The role looks less like sole author and more like principal investigator, editor, and pedagogy designer:</p>
+<ul>
+<li>define the intellectual goal;</li>
+<li>choose the audience;</li>
+<li>decide what background may be assumed;</li>
+<li>specify the sequence of ideas;</li>
+<li>demand executable examples;</li>
+<li>check mathematical and experimental claims;</li>
+<li>revise explanations until the path is clear;</li>
+<li>label speculation as speculation;</li>
+<li>publish the result in a reproducible form.</li>
+</ul>
+<p>The AI system becomes a drafting and implementation collaborator: it generates candidate explanations, code, figures, tests, and chapter scaffolds. The human then edits, rejects, corrects, tightens, and verifies. The better description of that human is <strong>editor-in-chief of a knowledge workflow</strong> — the person who defines the path, inspects the output, and decides what is pedagogically and scientifically acceptable.</p>
+<p>This is not a small change. Material that previously required a team of authors, a long production cycle, or unusual breadth in a single person can now be attempted more quickly by a domain expert with strong editorial control.</p>
+</section>
+</section>
+<section id="a-case-study-lattice-vector-quantization-for-neural-networks" class="level2">
+<h2 data-anchor-id="a-case-study-lattice-vector-quantization-for-neural-networks">A case study: Lattice Vector Quantization for Neural Networks</h2>
+<p>These three problems and this response are not abstract to me. I recently tested them through an online book: <a href="https://dhavala-iitjmu.github.io/lattice-vq-for-deep-learning/"><em>Lattice Vector Quantization for Neural Networks</em></a>.</p>
+<p>The topic is a good stress test because it sits at the intersection of several areas:</p>
+<ul>
+<li>neural-network quantization;</li>
+<li>vector quantization;</li>
+<li>lattice geometry;</li>
+<li>modular arithmetic and quotient groups;</li>
+<li>coding theory;</li>
+<li>hierarchical lattice constructions;</li>
+<li>lookup-table inference;</li>
+<li>matrix multiplication and systems constraints;</li>
+<li>possible links to binary-domain computation.</li>
+</ul>
+<p>A reader trained only in machine learning may know why quantization matters: large models are often constrained by memory movement, bandwidth, and deployment cost. But that does not automatically explain why lattices are useful. To understand that path, the reader needs to move from scalar quantization to vector quantization, from unstructured codebooks to structured codebooks, from structured codebooks to lattices, from infinite lattices to finite quotient codebooks, and from finite codebooks to inference algorithms that can run efficiently.</p>
+<p>That is a long bridge — exactly the kind that stays unbuilt because no single specialist owns all of it.</p>
+<p>The pedagogical choice in the book was to assume very little. The exposition starts from basic foundations and introduces mathematics only when the engineering problem demands it. The intended reader should not need prior training in abstract algebra, coding theory, or lattice theory. The goal is not to dilute those subjects, but to stage them.</p>
+<p>For example, instead of beginning with a formal definition of quotient groups, the book first asks why an infinite lattice is not directly usable as a finite neural-network codebook. That engineering problem creates the need for a finite set of representatives. Only then does the algebraic language become useful. Similarly, lattices are not introduced as isolated mathematical objects. They appear after ordinary vector quantization reveals the cost of storing and searching an arbitrary codebook.</p>
+<p>The book uses a repeated running example: dimension <code>d = 4</code>, the <code>D4</code> lattice, radix <code>q = 2</code>, hierarchy depth <code>M = 4</code>, an eight-value weight vector, and an eight-value activation vector. The same example is revisited as scalar quantization, vector quantization, lattice quantization, quotient coding, hierarchical nested lattice quantization, lookup-table inference, and bit-plane representation.</p>
+<p>That repetition is deliberate. It is the spine — the carried-example pedagogy: keep the object fixed, surface its limitations, and introduce each new tool as a response to a concrete failure. When the example stays fixed, the reader can spend their effort on the new concept rather than on decoding a new situation in every chapter.</p>
+</section>
+<section id="the-book-as-a-reproducible-artifact" class="level2">
+<h2 data-anchor-id="the-book-as-a-reproducible-artifact">The book as a reproducible artifact</h2>
+<p>The book was developed as a Quarto project, not a static document. That matters.</p>
+<p>The source lives in a Git repository. The chapters are written as source files. The figures are generated from scripts. The numerical examples have tests. The rendered website is produced by a build command. Publication happens through a GitHub Actions workflow that renders the book and deploys the generated site.</p>
+<p>This makes the book closer to software than to a traditional manuscript. It can be revised, rendered, tested, and released. Errors can be corrected in small commits. The public version can track the source version. The work can grow over time without requiring the entire artifact to be rebuilt manually.</p>
+<p>The same workflow also disciplines the AI collaboration. If an AI system writes an example, that example should run. If it claims a numerical result, that result should be checked. If it generates a figure, the figure should be reproducible. If it drafts a chapter, the chapter should be reviewed for pedagogy, notation, and claims. In other words, the workflow gives the human editor leverage: it turns AI output into something that can be inspected, tested, versioned, and corrected.</p>
+</section>
+<section id="what-this-suggests" class="level2">
+<h2 data-anchor-id="what-this-suggests">What this suggests</h2>
+<p>The broader point is not only about this particular book.</p>
+<p>We may be entering a period in which researchers can create much better introductory material for interdisciplinary topics — not because AI replaces expertise, but because it lowers the cost of building the explanatory scaffolding around expertise.</p>
+<p>A specialist can now say:</p>
+<blockquote class="blockquote">
+<p>I want to explain this field-crossing idea from first principles. Assume high-school mathematics and science where possible. Introduce each new concept only when the problem requires it. Keep one running example across chapters. Show where the simple approach fails. Provide code. Test the examples. Generate the figures. Publish the result online.</p>
+</blockquote>
+<p>That instruction is now actionable in a way it was not before.</p>
+<p>The bottleneck moves from typing to judgment. The hard questions become:</p>
+<ul>
+<li>What is the right sequence?</li>
+<li>What should be assumed?</li>
+<li>What should be derived?</li>
+<li>What should be left out?</li>
+<li>Which claims are established and which are speculative?</li>
+<li>What examples make the abstraction inevitable?</li>
+<li>What tests or computations can keep the exposition honest?</li>
+</ul>
+<p>These are exactly the questions teachers and scientists should be answering.</p>
+</section>
+<section id="closing-thought" class="level2">
+<h2 data-anchor-id="closing-thought">Closing thought</h2>
+<p>Writing books and writing code are converging because both are ways of building structured, inspectable systems. In software, the system executes. In a book, the system is pedagogical: it carries a reader from one state of understanding to another.</p>
+<p>Software workflows make it easier to verify, revise, and publish that system. Generative AI makes it easier to draft, connect, and reshape it. Neither, though, chooses the problem or carries it through — that spine is still the author’s to build. Together they make it possible to construct bridges across specialized knowledge layers that were previously too slow or too expensive to attempt.</p>
+<p>That is the real promise: not faster text, but more teachable knowledge.</p>
 
 
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1215,6 +991,35 @@ Oct 22, 2017
     }
   });
   </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "dhavala/dhavala.github.io";
+    script.dataset.repoId = "MDEwOlJlcG9zaXRvcnk0MzYwMTM3MA==";
+    script.dataset.category = "Blog Comments";
+    script.dataset.categoryId = "DIC_kwDOAplN2s4C9QQP";
+    script.dataset.mapping = "pathname";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1252,5 +1057,5 @@ Oct 22, 2017
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
