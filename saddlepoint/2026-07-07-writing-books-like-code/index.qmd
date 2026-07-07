@@ -1,0 +1,181 @@
+---
+title: "Writing Books for Interdisciplinary Fields in the Age of AI"
+description: "Interdisciplinary knowledge is siloed, slow to publish, and quick to fragment into disconnected chapters. Software workflows and generative AI collapse the first two costs — leaving the author as editor-in-chief, whose real job is the spine that carries one problem through."
+author: "Soma S Dhavala"
+date: "2026-07-07"
+categories: ["ai", "pedagogy", "publishing", "reproducibility", "quarto"]
+---
+
+For most of their history, writing a book and writing software were different crafts. Code lived in repositories — with versions, tests, builds, reviews, and automatic deployment. Books lived in manuscripts — moving through editors, typesetters, and long production cycles. A technical book that crossed disciplinary boundaries was among the slowest and most expensive artifacts to produce.
+
+That gap is closing. A modern technical book can now be built much like a software system: it lives in a Git repository, is built from source, carries reproducible figures and executable examples, has its numerical claims tested, and deploys automatically when the source changes. The book stops being a static manuscript and becomes a versioned, reviewable, runnable knowledge artifact — and in the age of AI, much of its first-draft content can be generated rather than typed.
+
+That combination matters most where books are hardest to write: at the boundaries between fields. **Creating and teaching genuinely interdisciplinary material has been hard for three reasons:**
+
+- **Knowledge is siloed.** Each field guards its own assumptions and notation. The barrier to entry is high and the learning curve is steep, so crossing fields is far harder than it should be.
+- **Publishing it is slow.** Interdisciplinary work has usually needed several specialists to collaborate, and traditional publishing adds a long production cycle on top.
+- **The pedagogy needs a spine.** Correct chapters are not a path. Something has to weave one problem through all of them, or the book fragments into disconnected topics.
+
+Two recent shifts attack the first two problems, and one unchanged responsibility governs the third. Books can now be built and published like software. Generative AI can draft much of the connective material. And the author — freed from typing every first draft — becomes something closer to an editor-in-chief. The rest of this essay works through the three problems and then that response.
+
+## The problem
+
+### Knowledge is siloed
+
+Specialist knowledge is layered. Each field develops its own assumptions, notation, examples, vocabulary, and preferred abstractions. Within the field, these layers are efficient: they let experts communicate quickly. But for someone entering from another field, the same layers become barriers. The cost of entry is high, and the learning curve is steep.
+
+This is especially visible in interdisciplinary work.
+
+A machine-learning researcher may understand neural-network inference, quantization pressure, matrix multiplication, and memory bandwidth. But the same researcher may not know abstract algebra, quotient groups, lattice theory, coding theory, or the specific way those ideas appear in communication systems. A coding theorist may understand Reed-Muller codes and Barnes-Wall lattices, but may not know how quantization error propagates through a neural-network layer. A systems researcher may understand GPU tiling and lookup tables, but may not know why a particular lattice has useful geometric structure.
+
+The knowledge exists, but it is not arranged for crossing.
+
+A specialist text usually assumes the reader has already crossed the bridge. It does not always explain why the bridge is needed. It may introduce a definition before the reader has felt the problem that requires it. It may use notation that is standard in one community but opaque in another. It may move too quickly from foundations to formal statements because the intended audience has already internalized the background. For disciplinary work, this is acceptable. For interdisciplinary work, it is a bottleneck — and for a student crossing from one field to another, it is often a wall.
+
+### Publishing it is slow
+
+Even when someone *can* cross the fields, turning that synthesis into a finished, teachable artifact has been expensive.
+
+Traditional publishing — the *how* of it — is time-consuming. Interdisciplinary material has usually required several specialists to collaborate, an editor to hold the whole together, typesetting and copyediting, and a production cycle measured in months. The cost is not only time; it is coordination. The people who understand each layer are rarely the same people, and assembling them is itself a project.
+
+The result is that many good bridges are never built. The idea that would connect two fields stays a talk, a paper, or a private set of notes, because the effort of turning it into a coherent book for newcomers is too high relative to the reward.
+
+### The pedagogy needs a spine
+
+Suppose the fields are crossed and the production cost is paid. There is still a subtler failure: chapters can be individually correct and collectively disconnected.
+
+A chapter on algebra may be clear. A chapter on lattices may be clear. A chapter on quantization may be clear. A chapter on inference kernels may be clear. But unless the reader feels that one problem is being carried forward, the book becomes a collection of topics rather than a path.
+
+The pedagogy I wanted to preserve here I owe to one book in particular: Steven M. Kay's [*Fundamentals of Statistical Signal Processing*](https://www.amazon.com/Fundamentals-Statistical-Signal-Processing-Estimation/dp/0133457117). Its style — take one problem seriously, keep returning to it, and let each new idea appear because the previous tool has reached its limit — is distinctively Kay's; I have not found it in other signal-processing texts.
+
+That pattern is powerful because it does not ask the reader to restart in every chapter. The same example accumulates meaning. First it is simple enough to compute by hand. Then it fails in a revealing way. Then a new idea repairs that failure. Then the repaired version exposes a deeper limitation. The reader is not merely told that a new abstraction exists; the reader feels why it has become necessary.
+
+This is especially important for students. When several specialist fields are involved, the burden on the reader is already high. If the examples also change constantly, the reader must solve two problems at once: understand the new field and decode the new example. A stable running example reduces that burden. It lets each new concept attach to something already familiar.
+
+In that sense, the example is not decorative. It is the spine of the book — and choosing it well is not something a workflow or a model can do for you.
+
+## The response
+
+Two of these three problems are, at bottom, problems of cost: the cost of *publishing* the artifact, and the cost of *creating* the connective material. Both costs have dropped sharply. The third — the spine — remains the author's, and arguably becomes the author's main job.
+
+### Build and publish books like software
+
+Software engineering has developed a powerful workflow for making complex things reliable:
+
+- write source files;
+- keep them under version control;
+- build them repeatedly;
+- test the parts that can be tested;
+- review changes;
+- publish artifacts automatically;
+- keep a record of how the artifact evolved.
+
+This workflow is not specific to software. It is a general method for managing structured intellectual work.
+
+When a book is written in a system such as Quarto, many of the same ideas apply. Chapters are source files. Mathematical notation, diagrams, code examples, references, and tests can all live in the same repository. A rendered book is not the primary object; it is the build output. The source is the durable object.
+
+This matters because technical books are not static. A good technical book accumulates corrections, clarifications, examples, and changes in emphasis. If it contains code or mathematical examples, those examples can drift unless they are checked. If it contains figures, those figures should ideally be regenerated from source rather than manually redrawn. If it is intended for students, the same material may need to be reshaped several times before the pedagogy becomes clear.
+
+In a software-like workflow, all of this becomes normal. A chapter can be edited like a module. A figure can be regenerated like a build artifact. A numerical example can be tested like a function. A public website can be published through a continuous deployment pipeline. The book can have versions, releases, and a visible history.
+
+Publishing is also no longer controlled only by large publishing houses. Formal publishing still has value — for distribution, copyediting, certification, and prestige. But the old pattern of waiting months for a production cycle is no longer the only path. The ability to create and publish a serious technical book online has moved much closer to the individual researcher, teacher, or small group. A book can begin as a living research and teaching document, not a manuscript waiting for permission to become public.
+
+### Draft the bridges with generative AI
+
+The workflow lowers the cost of *publishing*. Generative AI lowers the cost of *creating*.
+
+Models such as Codex, Claude, and similar systems are now quite good at connecting nearby concepts, drafting explanations, writing code examples, translating notation into prose, and turning a rough pedagogical plan into a readable first version. They can help produce notebooks, diagrams, tests, examples, and scaffolded chapters. They can also rewrite the same material for different levels of assumed background.
+
+This is important because the hardest part of interdisciplinary teaching is often not knowing one fact. It is arranging many facts from different fields into an order a learner can follow. That arrangement work — the drafting, the re-drafting, the alternate explanations for different backgrounds — is exactly what used to require a team or an unusually broad single author. It is now much cheaper.
+
+Generative AI does not remove the need for scientific judgment. It changes the cost structure of producing explanatory material.
+
+### The author becomes editor-in-chief
+
+That leaves the part no shift removes: responsibility for the whole. The human is still responsible for correctness, taste, emphasis, scope, and intellectual honesty — and for the spine. But the human no longer has to type every first draft, every example, every explanatory bridge, and every alternate formulation from scratch.
+
+The role looks less like sole author and more like principal investigator, editor, and pedagogy designer:
+
+- define the intellectual goal;
+- choose the audience;
+- decide what background may be assumed;
+- specify the sequence of ideas;
+- demand executable examples;
+- check mathematical and experimental claims;
+- revise explanations until the path is clear;
+- label speculation as speculation;
+- publish the result in a reproducible form.
+
+The AI system becomes a drafting and implementation collaborator: it generates candidate explanations, code, figures, tests, and chapter scaffolds. The human then edits, rejects, corrects, tightens, and verifies. The better description of that human is **editor-in-chief of a knowledge workflow** — the person who defines the path, inspects the output, and decides what is pedagogically and scientifically acceptable.
+
+This is not a small change. Material that previously required a team of authors, a long production cycle, or unusual breadth in a single person can now be attempted more quickly by a domain expert with strong editorial control.
+
+## A case study: Lattice Vector Quantization for Neural Networks
+
+These three problems and this response are not abstract to me. I recently tested them through an online book: [*Lattice Vector Quantization for Neural Networks*](https://dhavala-iitjmu.github.io/lattice-vq-for-deep-learning/).
+
+The topic is a good stress test because it sits at the intersection of several areas:
+
+- neural-network quantization;
+- vector quantization;
+- lattice geometry;
+- modular arithmetic and quotient groups;
+- coding theory;
+- hierarchical lattice constructions;
+- lookup-table inference;
+- matrix multiplication and systems constraints;
+- possible links to binary-domain computation.
+
+A reader trained only in machine learning may know why quantization matters: large models are often constrained by memory movement, bandwidth, and deployment cost. But that does not automatically explain why lattices are useful. To understand that path, the reader needs to move from scalar quantization to vector quantization, from unstructured codebooks to structured codebooks, from structured codebooks to lattices, from infinite lattices to finite quotient codebooks, and from finite codebooks to inference algorithms that can run efficiently.
+
+That is a long bridge — exactly the kind that stays unbuilt because no single specialist owns all of it.
+
+The pedagogical choice in the book was to assume very little. The exposition starts from basic foundations and introduces mathematics only when the engineering problem demands it. The intended reader should not need prior training in abstract algebra, coding theory, or lattice theory. The goal is not to dilute those subjects, but to stage them.
+
+For example, instead of beginning with a formal definition of quotient groups, the book first asks why an infinite lattice is not directly usable as a finite neural-network codebook. That engineering problem creates the need for a finite set of representatives. Only then does the algebraic language become useful. Similarly, lattices are not introduced as isolated mathematical objects. They appear after ordinary vector quantization reveals the cost of storing and searching an arbitrary codebook.
+
+The book uses a repeated running example: dimension `d = 4`, the `D4` lattice, radix `q = 2`, hierarchy depth `M = 4`, an eight-value weight vector, and an eight-value activation vector. The same example is revisited as scalar quantization, vector quantization, lattice quantization, quotient coding, hierarchical nested lattice quantization, lookup-table inference, and bit-plane representation.
+
+That repetition is deliberate. It is the spine — the carried-example pedagogy: keep the object fixed, surface its limitations, and introduce each new tool as a response to a concrete failure. When the example stays fixed, the reader can spend their effort on the new concept rather than on decoding a new situation in every chapter.
+
+## The book as a reproducible artifact
+
+The book was developed as a Quarto project, not a static document. That matters.
+
+The source lives in a Git repository. The chapters are written as source files. The figures are generated from scripts. The numerical examples have tests. The rendered website is produced by a build command. Publication happens through a GitHub Actions workflow that renders the book and deploys the generated site.
+
+This makes the book closer to software than to a traditional manuscript. It can be revised, rendered, tested, and released. Errors can be corrected in small commits. The public version can track the source version. The work can grow over time without requiring the entire artifact to be rebuilt manually.
+
+The same workflow also disciplines the AI collaboration. If an AI system writes an example, that example should run. If it claims a numerical result, that result should be checked. If it generates a figure, the figure should be reproducible. If it drafts a chapter, the chapter should be reviewed for pedagogy, notation, and claims. In other words, the workflow gives the human editor leverage: it turns AI output into something that can be inspected, tested, versioned, and corrected.
+
+## What this suggests
+
+The broader point is not only about this particular book.
+
+We may be entering a period in which researchers can create much better introductory material for interdisciplinary topics — not because AI replaces expertise, but because it lowers the cost of building the explanatory scaffolding around expertise.
+
+A specialist can now say:
+
+> I want to explain this field-crossing idea from first principles. Assume high-school mathematics and science where possible. Introduce each new concept only when the problem requires it. Keep one running example across chapters. Show where the simple approach fails. Provide code. Test the examples. Generate the figures. Publish the result online.
+
+That instruction is now actionable in a way it was not before.
+
+The bottleneck moves from typing to judgment. The hard questions become:
+
+- What is the right sequence?
+- What should be assumed?
+- What should be derived?
+- What should be left out?
+- Which claims are established and which are speculative?
+- What examples make the abstraction inevitable?
+- What tests or computations can keep the exposition honest?
+
+These are exactly the questions teachers and scientists should be answering.
+
+## Closing thought
+
+Writing books and writing code are converging because both are ways of building structured, inspectable systems. In software, the system executes. In a book, the system is pedagogical: it carries a reader from one state of understanding to another.
+
+Software workflows make it easier to verify, revise, and publish that system. Generative AI makes it easier to draft, connect, and reshape it. Neither, though, chooses the problem or carries it through — that spine is still the author's to build. Together they make it possible to construct bridges across specialized knowledge layers that were previously too slow or too expensive to attempt.
+
+That is the real promise: not faster text, but more teachable knowledge.
