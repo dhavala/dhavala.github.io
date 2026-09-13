@@ -848,30 +848,55 @@ nav#quarto-sidebar .sidebar-item a.active {
 
 .essay-portrait-quote {
   display: grid;
-  grid-template-columns: 92px minmax(0, 1fr);
-  gap: 1rem;
-  align-items: center;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 0;
+  align-items: stretch;
   margin: 1.15rem 0;
+  overflow: hidden;
+  border-left: 4px solid $iitjmu-blue-sky;
+  border-radius: 3px;
+  background: #f7fbff;
 }
 
 .essay-portrait-quote > p { margin: 0; }
-.essay-portrait-quote .figure { margin: 0; }
+.essay-portrait-quote .quarto-figure,
+.essay-portrait-quote .figure {
+  height: 100%;
+  margin: 0;
+}
+.essay-portrait-quote .figure {
+  display: flex;
+  flex-direction: column;
+  background: #e7f0f9;
+}
+.essay-portrait-quote .figure > p { margin: 0; }
 .essay-portrait-quote .figure-caption {
-  margin-top: 0.35rem;
+  margin: 0;
+  padding: 0.35rem 0.3rem 0.4rem;
   font-size: 0.7rem;
   line-height: 1.25;
   text-align: center;
 }
 .essay-portrait {
-  width: 92px;
-  height: 108px;
+  display: block;
+  width: 112px;
+  height: 126px;
+  margin: 0;
   object-fit: cover;
   object-position: center top;
-  border: 1px solid #cfdcec;
-  border-radius: 3px;
+  border: 0;
+  border-radius: 0;
   filter: grayscale(100%);
 }
-.essay-portrait-quote blockquote { margin: 0; }
+.essay-portrait-quote blockquote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 0.85rem 1.1rem;
+  border: 0;
+  background: transparent;
+}
 
 .essay-paper-scan {
   display: block;
@@ -887,8 +912,9 @@ nav#quarto-sidebar .sidebar-item a.active {
   .essay-visual-pair { grid-template-columns: 1fr; }
   .essay-visual-card img,
   .essay-visual-card svg { height: auto; max-height: 260px; }
-  .essay-portrait-quote { grid-template-columns: 72px minmax(0, 1fr); gap: 0.7rem; }
-  .essay-portrait { width: 72px; height: 88px; }
+  .essay-portrait-quote { grid-template-columns: 82px minmax(0, 1fr); }
+  .essay-portrait { width: 82px; height: 96px; }
+  .essay-portrait-quote blockquote { padding: 0.65rem 0.75rem; }
 }
 
 // Code blocks — Quarto's highlight-style: monokai handles colors;
