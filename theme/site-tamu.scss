@@ -813,6 +813,84 @@ nav#quarto-sidebar .sidebar-item a.active {
   main.content h2 { font-size: 0.86rem; }
 }
 
+// Essay figures reused from the accompanying lecture deck.
+.essay-visual-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.15rem 0 1.35rem;
+}
+
+.essay-visual-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #cfdcec;
+  border-radius: 4px;
+  background: #f7fafe;
+  color: $iitjmu-blue-dark;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.essay-visual-card p { margin: 0; }
+.essay-visual-card p:last-child { padding: 0.65rem 0.75rem 0.75rem; }
+.essay-visual-card img,
+.essay-visual-card svg {
+  display: block;
+  width: 100%;
+  height: 230px;
+  margin: 0;
+  object-fit: cover;
+}
+
+.essay-portrait-quote {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  margin: 1.15rem 0;
+}
+
+.essay-portrait-quote > p { margin: 0; }
+.essay-portrait-quote .figure { margin: 0; }
+.essay-portrait-quote .figure-caption {
+  margin-top: 0.35rem;
+  font-size: 0.7rem;
+  line-height: 1.25;
+  text-align: center;
+}
+.essay-portrait {
+  width: 92px;
+  height: 108px;
+  object-fit: cover;
+  object-position: center top;
+  border: 1px solid #cfdcec;
+  border-radius: 3px;
+  filter: grayscale(100%);
+}
+.essay-portrait-quote blockquote { margin: 0; }
+
+.essay-paper-scan {
+  display: block;
+  width: 100%;
+  max-height: 190px;
+  object-fit: cover;
+  object-position: top;
+  border: 1px solid #cfdcec;
+  background: #fff;
+}
+
+@media (max-width: 600px) {
+  .essay-visual-pair { grid-template-columns: 1fr; }
+  .essay-visual-card img,
+  .essay-visual-card svg { height: auto; max-height: 260px; }
+  .essay-portrait-quote { grid-template-columns: 72px minmax(0, 1fr); gap: 0.7rem; }
+  .essay-portrait { width: 72px; height: 88px; }
+}
+
 // Code blocks — Quarto's highlight-style: monokai handles colors;
 // we just give the dark <pre> some breathing room.
 pre, code { font-size: 0.85rem; }
