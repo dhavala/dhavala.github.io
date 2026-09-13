@@ -38,10 +38,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c4e1171eb4281116019c604a711c5128.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e877e45b962261234aaf1816e93d360a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-41063b48543d442bc7bc1fd94cd1bfc6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-83c0bbca7585326f13ab8c09871ab887.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -424,33 +424,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>I am an AI researcher, systems architect, and educator with over two decades of experience spanning Machine Learning, Artificial Intelligence, Bayesian Statistics, Signal Processing, Distributed Systems, and Scientific Computing. My work lies at the intersection of rigorous mathematical foundations and large-scale deployable AI systems, with applications across Agriculture, Healthcare, Education, Computational Biology, and Public-Interest Technology.</p>
 <p>My current focus is on Frontier Model Development, especially understanding why Deep Learning works and developing a unified theoretical framework connecting optimization, representation learning, probabilistic inference, dynamical systems, and information theory. I am also interested in scalable AI infrastructure for distributed training and inference of GPT-scale models, along with curriculum design for systems programmers and AI engineers working on large-scale AI systems.</p>
 <p>Over the years, I have worked across academia, industrial research, startups, open-source ecosystems, and public-sector AI initiatives, contributing both to foundational research and production-grade AI deployments.</p>
-<div class="quote-carousel" aria-label="Unquotable quotes" aria-live="polite">
-  <blockquote class="qc-current blockquote"></blockquote>
-  <script>
-    (function () {
-      var el = document.querySelector(".quote-carousel .qc-current");
-      if (!el) return;
-      fetch("../quotes.json")
-        .then(function (r) { return r.json(); })
-        .then(function (quotes) {
-          if (!Array.isArray(quotes) || !quotes.length) return;
-          var i = Math.floor(Math.random() * quotes.length);
-          el.innerHTML = quotes[i];
-          el.classList.add("is-active");
-          if (quotes.length < 2) return;
-          setInterval(function () {
-            el.classList.remove("is-active");           // fade out
-            setTimeout(function () {
-              i = (i + 1) % quotes.length;
-              el.innerHTML = quotes[i];
-              el.classList.add("is-active");            // fade in
-            }, 600);
-          }, 6000);
-        })
-        .catch(function () {});
-    })();
-  </script>
-</div>
 <section id="educational-qualifications" class="level1">
 <h1>Educational Qualifications</h1>
 <ul>
