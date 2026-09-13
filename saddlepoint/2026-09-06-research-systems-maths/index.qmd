@@ -348,6 +348,37 @@ In 1781, [Gaspard Monge](https://mathshistory.st-andrews.ac.uk/Biographies/Monge
 
 The title of his paper translates as “Memoir on the theory of cuttings and embankments.” A general solution remained unavailable until [Leonid Kantorovich](https://www.nobelprize.org/prizes/economic-sciences/1975/kantorovich/biographical/) changed the formulation in 1942. Monge required a map in which each unit of material has one destination. Kantorovich allowed a transport plan that could split material across destinations, turning the problem into a linear programme with a dual. He later shared the [1975 Nobel Memorial Prize in Economics](https://www.nobelprize.org/prizes/economic-sciences/1975/press-release/) with Tjalling Koopmans for the theory of optimum allocation of resources.
 
+```{=html}
+<figure>
+<svg viewBox="0 0 900 400" role="img" aria-label="A transport plan connecting available material to required destinations" style="width:100%;height:auto">
+<style>
+.ot-heading{font:600 20px Roboto,system-ui,sans-serif;fill:#002d63}
+.ot-edge{stroke:#cfdcec;stroke-width:1.5}
+.ot-plan{stroke:#c0392b;stroke-width:4;opacity:.85}
+.ot-node{fill:#003f87}
+.ot-supply{fill:#8db7df}
+.ot-demand{fill:#b7d1ea}
+.ot-note{font:15px Roboto,system-ui,sans-serif;fill:#5f6b78}
+.ot-cost{font:14px Roboto,system-ui,sans-serif;fill:#7a8794}
+</style>
+<text class="ot-heading" x="120" y="36">available material</text>
+<text class="ot-heading" x="604" y="36">required at destination</text>
+<line class="ot-edge" x1="300" y1="78" x2="604" y2="78"/><line class="ot-edge" x1="300" y1="78" x2="604" y2="156"/><line class="ot-edge" x1="300" y1="78" x2="604" y2="234"/><line class="ot-edge" x1="300" y1="78" x2="604" y2="312"/>
+<line class="ot-edge" x1="300" y1="156" x2="604" y2="78"/><line class="ot-edge" x1="300" y1="156" x2="604" y2="156"/><line class="ot-edge" x1="300" y1="156" x2="604" y2="234"/><line class="ot-edge" x1="300" y1="156" x2="604" y2="312"/>
+<line class="ot-edge" x1="300" y1="234" x2="604" y2="78"/><line class="ot-edge" x1="300" y1="234" x2="604" y2="156"/><line class="ot-edge" x1="300" y1="234" x2="604" y2="234"/><line class="ot-edge" x1="300" y1="234" x2="604" y2="312"/>
+<line class="ot-edge" x1="300" y1="312" x2="604" y2="78"/><line class="ot-edge" x1="300" y1="312" x2="604" y2="156"/><line class="ot-edge" x1="300" y1="312" x2="604" y2="234"/><line class="ot-edge" x1="300" y1="312" x2="604" y2="312"/>
+<line class="ot-plan" x1="300" y1="78" x2="604" y2="78"/><line class="ot-plan" x1="300" y1="156" x2="604" y2="156"/><line class="ot-plan" x1="300" y1="234" x2="604" y2="156"/><line class="ot-plan" x1="300" y1="234" x2="604" y2="234"/><line class="ot-plan" x1="300" y1="312" x2="604" y2="312"/>
+<rect class="ot-supply" x="182" y="61" width="118" height="34"/><rect class="ot-supply" x="226" y="139" width="74" height="34"/><rect class="ot-supply" x="166" y="217" width="134" height="34"/><rect class="ot-supply" x="242" y="295" width="58" height="34"/>
+<rect class="ot-demand" x="604" y="61" width="88" height="34"/><rect class="ot-demand" x="604" y="139" width="126" height="34"/><rect class="ot-demand" x="604" y="217" width="62" height="34"/><rect class="ot-demand" x="604" y="295" width="104" height="34"/>
+<circle class="ot-node" cx="300" cy="78" r="7"/><circle class="ot-node" cx="300" cy="156" r="7"/><circle class="ot-node" cx="300" cy="234" r="7"/><circle class="ot-node" cx="300" cy="312" r="7"/>
+<circle class="ot-node" cx="604" cy="78" r="7"/><circle class="ot-node" cx="604" cy="156" r="7"/><circle class="ot-node" cx="604" cy="234" r="7"/><circle class="ot-node" cx="604" cy="312" r="7"/>
+<text class="ot-cost" x="452" y="112" text-anchor="middle">cost</text><text class="ot-cost" x="452" y="212" text-anchor="middle">cost</text><text class="ot-cost" x="452" y="300" text-anchor="middle">cost</text>
+<text class="ot-note" x="120" y="368">bar length = amount available</text><text class="ot-note" x="604" y="368">bar length = amount required</text>
+</svg>
+<figcaption>Every possible source–destination pair has a cost. A transport plan selects how much material to send along each connection.</figcaption>
+</figure>
+```
+
 The same structure then appeared again under new names:
 
 - **1998–2000** — Rubner, Tomasi and Guibas introduce the *Earth Mover's Distance* for comparing images ([ICCV 1998](https://doi.org/10.1109/ICCV.1998.710701); [IJCV 40(2), 2000, 99–121](https://doi.org/10.1023/A:1026543900054)). Two colour histograms; what does it cost to turn one into the other?
