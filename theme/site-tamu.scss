@@ -1,20 +1,28 @@
 /*-- scss:defaults --*/
 
-// Palette — site-tamu's identity mapped into Bootstrap's variable namespace
-$body-bg:                  #464646;
-$body-color:               #444;
-$content-bg:               #F7F7F7;
-$primary:                  #555;
-$link-color:               #222;
-$link-hover-color:         #000;
+// Public research identity: the IIT Jammu blues used in the course sites and
+// lecture decks, with a warm-white reading surface.
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Roboto+Slab:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
 
-// Typography — Verdana stack, small base size
-$font-family-sans-serif:   Verdana, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$iitjmu-blue:              #003f87;
+$iitjmu-blue-dark:         #002d63;
+$iitjmu-blue-mid:          #0056b8;
+$iitjmu-blue-sky:          #4da3ff;
+$iitjmu-blue-pale:         #eaf3ff;
+$body-bg:                  #eef3f8;
+$body-color:               #263442;
+$content-bg:               #fff;
+$primary:                  $iitjmu-blue;
+$link-color:               $iitjmu-blue-mid;
+$link-hover-color:         $iitjmu-blue-dark;
+
+$font-family-sans-serif:   "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+$font-family-monospace:    "Roboto Mono", SFMono-Regular, Menlo, Consolas, monospace;
+$headings-font-family:     "Roboto Slab", Georgia, serif;
 $font-size-base:           0.78rem;
 $line-height-base:         1.5;
-$headings-font-weight:     700;
-// Headings sit just above the 0.78rem body text — small, monotonic scale.
-// (Bootstrap leaves h4–h6 at 1.25/1.1/1rem, i.e. larger than h1, unless pinned.)
+$headings-font-weight:     600;
+$headings-color:           $iitjmu-blue-dark;
 $h1-font-size:             0.95rem;
 $h2-font-size:             0.86rem;
 $h3-font-size:             0.80rem;
@@ -23,8 +31,8 @@ $h5-font-size:             0.78rem;
 $h6-font-size:             0.78rem;
 
 // Navbar
-$navbar-bg:                #222;
-$navbar-dark-color:        #ccc;
+$navbar-bg:                $iitjmu-blue;
+$navbar-dark-color:        #dbeafe;
 $navbar-dark-hover-color:  #fff;
 $navbar-padding-y:         0.4rem;
 // Single source of truth for the fixed-navbar height. Used to (a) pin the
@@ -34,8 +42,8 @@ $navbar-height:            51px;
 
 // Layout — trim Quarto's defaults (sidebar 250px, gutter 1.5rem) so the
 // sidebar reads compact and the content gets more width.
-$grid-sidebar-width:       180px;
-$grid-column-gutter-width: 1rem;
+$grid-sidebar-width:       220px;
+$grid-column-gutter-width: 1.5rem;
 
 /*-- scss:rules --*/
 
@@ -44,9 +52,8 @@ $grid-column-gutter-width: 1rem;
 // viewport and shift the centered sidebar + content sideways.
 html { scrollbar-gutter: stable; }
 
-// Surround: gradient JPG on dark fallback, repeating horizontally
 body {
-  background: $body-bg url("images/banners/bggrad2.jpg") repeat-x top center;
+  background: $body-bg;
 }
 
 // Hide the redundant brand text in the navbar — "Home" already takes its
@@ -109,9 +116,136 @@ main.content > *:last-child { padding-bottom: 2rem; }
 }
 main.content p,
 main.content li { line-height: 1.55; }
+main.content p {
+  hyphens: auto;
+}
 main.content h1 { margin-top: 0; }
+main.content h1,
+main.content h2,
+main.content h3,
+main.content h4,
+main.content h5,
+main.content h6,
+main.content figcaption,
+main.content .quarto-title-meta,
+main.content .listing-title,
+main.content .listing-description {
+  text-align: left;
+}
 main.content a { text-decoration: underline; }
 main.content a:hover { text-decoration: underline; }
+
+main.content h1,
+main.content h2,
+main.content h3,
+main.content h4 {
+  font-family: $headings-font-family;
+  color: $iitjmu-blue-dark;
+  letter-spacing: -0.015em;
+}
+main.content h2 {
+  margin-top: 2.6rem;
+  padding-bottom: 0.42rem;
+  border-bottom: 2px solid $iitjmu-blue-pale;
+}
+main.content h3 { margin-top: 2rem; }
+
+// Editorial hierarchy for long pages and essays. Keep the compact type scale,
+// but make the three structural levels unmistakable through color and shape.
+main.content section.level1 > h1 {
+  margin: 3.4rem 0 1.5rem;
+  padding: 0.72rem 1rem;
+  border-left: 4px solid $iitjmu-blue-sky;
+  background: $iitjmu-blue-dark;
+  color: #fff;
+  font-size: 1.08rem;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+main.content section.level2 > h2 {
+  margin-top: 2.6rem;
+  padding-bottom: 0.42rem;
+  border-bottom: 2px solid $iitjmu-blue-pale;
+  color: $iitjmu-blue-dark;
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+main.content section.level3 > h3 {
+  margin-top: 2rem;
+  padding-left: 0.6rem;
+  border-left: 3px solid $iitjmu-blue-sky;
+  color: $iitjmu-blue-mid;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0.35rem 1.25rem;
+  color: #405b76;
+  border-left: 4px solid $iitjmu-blue-sky;
+  background: #f7fbff;
+}
+
+// Quarto callouts as one continuous surface: the icon/title row and body
+// belong to the same component rather than appearing as nested boxes.
+div.callout.callout-style-default {
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #cddff1;
+  border-left: 4px solid $iitjmu-blue-sky;
+  border-radius: 4px;
+  background: #f7fbff;
+}
+div.callout.callout-style-default .callout-header {
+  margin: 0;
+  padding: 0.6rem 0.9rem 0.15rem;
+  border: 0;
+  background: transparent;
+  color: $iitjmu-blue-dark;
+}
+div.callout.callout-style-default .callout-icon-container {
+  padding-right: 0.45rem;
+}
+div.callout.callout-style-default .callout-body-container {
+  margin: 0;
+  padding: 0.15rem 0.9rem 0.65rem 2.35rem;
+  border: 0;
+  background: transparent;
+}
+
+div.callout.callout-style-default .callout-body-container > :last-child {
+  margin-bottom: 0;
+}
+
+thead {
+  background: $iitjmu-blue-pale;
+  color: $iitjmu-blue-dark;
+}
+
+pre {
+  border-left: 3px solid $iitjmu-blue-sky;
+  border-radius: 4px;
+}
+
+.quarto-category,
+.listing-category {
+  color: $iitjmu-blue-mid;
+  border-color: #b8d7f5 !important;
+  background: #f4f9fe;
+}
+
+.quarto-listing-default .quarto-post {
+  border-bottom-color: #dce8f3;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+}
+.quarto-listing-default .listing-title {
+  font-family: $headings-font-family;
+  color: $iitjmu-blue-dark;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
 
 // Listing (blog) items wrap title / description in anchors — don't
 // underline those (only inline prose links should be underlined).
@@ -129,9 +263,10 @@ main.content .listing-description a:hover {
 // Title block above content — minimal, integrated with banner above
 .quarto-title-block .quarto-title h1.title {
   font-size: 1.05rem;
-  color: #222;
-  padding-bottom: 0.25rem;
-  margin-bottom: 0.75rem;
+  line-height: 1.16;
+  color: $iitjmu-blue-dark;
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.6rem;
 }
 
 // Page description — render the frontmatter `description:` as a light-gray band
@@ -142,14 +277,17 @@ main.content .listing-description a:hover {
 // every browser. !important on padding beats the `body:has(...) > div
 // { padding: 0 2rem }` ribbon-layout rules further down.
 .quarto-title-block > div:not(.quarto-title):not(.quarto-title-meta):not(.quarto-title-breadcrumbs):not(nav) {
-  background: #ececec;
-  padding: 0.5rem 2rem !important;
-  margin: 0 0 1.25rem;
+  background: $iitjmu-blue-pale;
+  border-left: 4px solid $iitjmu-blue-sky;
+  padding: 0.8rem 2rem !important;
+  margin: 0 0 1.75rem;
 }
 .quarto-title-block .description {
   margin: 0;
-  color: #666;
+  color: #405b76;
   font-size: 0.82rem;
+  line-height: 1.55;
+  max-width: 78ch;
 }
 
 // DESKTOP (≥992px): show a dark ribbon directly under the banner. On sub-
@@ -179,9 +317,9 @@ main.content .listing-description a:hover {
   // section-trail. Same selectors → guaranteed identical dimensions.
   .quarto-title-breadcrumbs,
   .section-trail {
-    background: #222;
-    color: #ccc;
-    padding: 0.5rem 2rem;
+    background: $iitjmu-blue-dark;
+    color: #dbeafe;
+    padding: 0.6rem 2rem;
     margin: 0 0 0.75rem;
     border-radius: 0;
   }
@@ -195,7 +333,7 @@ main.content .listing-description a:hover {
   .quarto-title-breadcrumbs .breadcrumb-item.active,
   .section-trail a,
   .section-trail .breadcrumb-item.active {
-    color: #ccc;
+    color: #dbeafe;
     text-decoration: none;
   }
   .quarto-title-breadcrumbs a:hover,
@@ -204,7 +342,7 @@ main.content .listing-description a:hover {
   .section-trail .breadcrumb {
     margin: 0;
     background: transparent;
-    font-size: 0.78rem;
+    font-size: $font-size-base;
   }
   .quarto-title-breadcrumbs .breadcrumb-item + .breadcrumb-item::before,
   .section-trail .breadcrumb-item + .breadcrumb-item::before {
@@ -233,13 +371,13 @@ main.content .listing-description a:hover {
     main.content > .section-banner { margin-bottom: 0; }
     main.content > #title-block-header { padding: 0; margin: 0; }
     .quarto-title-block > .quarto-title {
-      background: #222;
-      padding: 0.5rem 2rem;
+      background: $iitjmu-blue-dark;
+      padding: 0.6rem 2rem;
       margin: 0 0 0.75rem;
     }
     .quarto-title-block > .quarto-title h1.title {
-      color: #ccc;
-      font-size: 0.78rem;
+      color: #dbeafe;
+      font-size: $font-size-base;
       font-weight: normal;
       margin: 0;
       padding: 0;
@@ -296,10 +434,20 @@ main.content .listing-description a:hover {
 // Sits flush at the top of main.content because main.content has 0 padding
 // and the banner has its own 0 padding (set above).
 .section-banner {
+  position: relative;
   width: 100%;
   margin: 0 0 1.25rem 0;
   overflow: hidden;
   border-radius: 0;
+  background: $iitjmu-blue-dark;
+}
+.section-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 63, 135, 0.16);
+  mix-blend-mode: multiply;
+  pointer-events: none;
 }
 .section-banner img {
   display: block;
@@ -307,6 +455,7 @@ main.content .listing-description a:hover {
   height: 150px;            // fixed height reserves space before load → no layout shift
   object-fit: cover;
   object-position: center;
+  filter: saturate(0.72) contrast(1.04);
 }
 @media (max-width: 600px) {
   .section-banner img { height: 140px; }
@@ -319,7 +468,7 @@ main.content .listing-description a:hover {
   .section-banner { display: none; }
 }
 
-// Sidebar — Verdana sans-serif (same stack as the navbar), minimal. Solid
+// Sidebar — compact Roboto navigation. Solid
 // $content-bg so desktop visually merges with the .page-columns parent (same
 // color) AND mobile overlay has its own readable backing.
 .sidebar.sidebar-navigation,
@@ -352,13 +501,13 @@ nav#quarto-sidebar ul.sidebar-section.depth1 .sidebar-section-item {
 }
 .sidebar-item-text.sidebar-link,
 nav#quarto-sidebar .sidebar-item a {
-  color: #555;
+  color: #526577;
   background: $content-bg;
   display: block;
   padding: 3px 6px;
   margin: 0;
   border-radius: 0;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e5edf5;
   text-decoration: none;
   font-style: normal;
 }
@@ -368,8 +517,8 @@ nav#quarto-sidebar .sidebar-item a {
 // 'Blogs' is a parent group vs SaddlePoint/Asankhya being its children.
 nav#quarto-sidebar .sidebar-item-text[data-bs-toggle="collapse"] {
   font-weight: 600;
-  color: #333;
-  background: #ececec;
+  color: $iitjmu-blue-dark;
+  background: $iitjmu-blue-pale;
 }
 
 // Indent nested items so the hierarchy is visible but compact (kept shallow so
@@ -379,19 +528,19 @@ nav#quarto-sidebar .sidebar-section.depth2 .sidebar-link { padding-left: 1rem; }
 nav#quarto-sidebar .sidebar-section.depth3 .sidebar-link { padding-left: 1.4rem; }
 .sidebar-item-text.sidebar-link:hover,
 nav#quarto-sidebar .sidebar-item a:hover {
-  color: #000;
-  background: #efefef;
+  color: $iitjmu-blue-mid;
+  background: #f2f7fc;
   text-decoration: none;
 }
 .sidebar-item-text.sidebar-link.active,
 nav#quarto-sidebar .sidebar-item a.active {
-  color: #000;
-  background: #f7f7f7;
+  color: $iitjmu-blue-dark;
+  background: #fff;
   font-weight: 700;
+  border-left: 3px solid $iitjmu-blue-sky;
 }
 
-// Right-hand TOC ("On this page") — match the left sidebar: Verdana, the same
-// $font-size-base * 0.9 (≈0.702rem) size, and the same muted color scheme.
+// Right-hand TOC ("On this page") — match the left sidebar in type and color.
 // The #quarto-margin-sidebar ID prefix beats Quarto's defaults (incl. !important).
 #quarto-margin-sidebar nav[role="doc-toc"] {
   font-family: $font-family-sans-serif;
@@ -400,22 +549,22 @@ nav#quarto-sidebar .sidebar-item a.active {
 #quarto-margin-sidebar nav[role="doc-toc"] > .h2 {
   font-size: $font-size-base * 0.9;
   font-weight: 600;
-  color: #333;
+  color: $iitjmu-blue-dark;
 }
 #quarto-margin-sidebar nav[role="doc-toc"] > ul {
   font-size: $font-size-base * 0.9;
 }
 #quarto-margin-sidebar nav[role="doc-toc"] ul li a {
-  color: #555;
+  color: #60758a;
 }
 #quarto-margin-sidebar nav[role="doc-toc"] ul > li > a:hover,
 #quarto-margin-sidebar nav[role="doc-toc"] ul > li > ul > li > a:hover {
-  color: #000 !important;
+  color: $iitjmu-blue-mid !important;
 }
 #quarto-margin-sidebar nav[role="doc-toc"] ul > li > a.active,
 #quarto-margin-sidebar nav[role="doc-toc"] ul > li > ul > li > a.active {
-  color: #000 !important;
-  border-left-color: #000;
+  color: $iitjmu-blue-dark !important;
+  border-left-color: $iitjmu-blue-sky;
 }
 
 // Right-hand "Categories" widget on blog listing pages (asankhya / saddlepoint).
@@ -430,16 +579,16 @@ nav#quarto-sidebar .sidebar-item a.active {
   font-family: $font-family-sans-serif;
   font-size: $font-size-base * 0.9;
   font-weight: 600;
-  color: #333;
+  color: $iitjmu-blue-dark;
 }
 #quarto-margin-sidebar .quarto-listing-category .category {
-  color: #555;
+  color: #60758a;
 }
 #quarto-margin-sidebar .quarto-listing-category .category:hover {
-  color: #000;
+  color: $iitjmu-blue-dark;
 }
 #quarto-margin-sidebar .quarto-listing-category .category.active {
-  color: #000;
+  color: $iitjmu-blue-dark;
   font-weight: 700;
 }
 #quarto-margin-sidebar .quarto-category-count { color: #888; }
@@ -447,7 +596,9 @@ nav#quarto-sidebar .sidebar-item a.active {
 // Email subscribe — a centered gray ribbon (label over one joined email +
 // Subscribe pill), with clear space below before the blog post list.
 .subscribe {
-  background: #ececec;
+  background: linear-gradient(135deg, $iitjmu-blue-pale, #f7fbff);
+  border-top: 1px solid #d6e7f8;
+  border-bottom: 1px solid #d6e7f8;
   padding: 1.75rem 1rem;       // taller ribbon around the (smaller) pill
   margin: -1.25rem 0 2.5rem;   // flush under the description band (cancel its
                                // bottom margin); keep a gap below before posts
@@ -457,20 +608,20 @@ nav#quarto-sidebar .sidebar-item a.active {
   margin: 0 0 0.5rem;
   font-weight: 600;
   font-size: 0.9rem;
-  color: #333;
+  color: $iitjmu-blue-dark;
 }
 .subscribe form {
   display: inline-flex;       // inline-flex + parent text-align:center → centered
   width: 26rem;
   max-width: 100%;
   margin: 0;
-  border: 1px solid #888;
+  border: 1px solid #94bce6;
   border-radius: 8px;
   overflow: hidden;           // clip input/button corners to the pill
   background: #fff;
   text-align: left;
 }
-.subscribe form:focus-within { border-color: #222; }
+.subscribe form:focus-within { border-color: $iitjmu-blue-mid; box-shadow: 0 0 0 3px rgba(77, 163, 255, .16); }
 .subscribe input[type="email"] {
   flex: 1;
   min-width: 0;
@@ -484,19 +635,19 @@ nav#quarto-sidebar .sidebar-item a.active {
 .subscribe button {
   border: 0;
   padding: 0.4rem 1.1rem;
-  background: #222;
+  background: $iitjmu-blue;
   color: #fff;
   font-family: inherit;
   font-size: 0.75rem;
   cursor: pointer;
   white-space: nowrap;
 }
-.subscribe button:hover { background: #000; }
+.subscribe button:hover { background: $iitjmu-blue-mid; }
 .subscribe .mc-thanks {        // inline confirmation shown after a successful subscribe
   margin: 0;
   font-size: 0.75rem;
   font-weight: 400;
-  color: #333;
+  color: $iitjmu-blue-dark;
 }
 
 // Footer
@@ -506,15 +657,17 @@ nav#quarto-sidebar .sidebar-item a.active {
 
 // ----- Home page intro card -----
 .intro-card {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px;
   gap: 1.5rem;
   align-items: flex-start;
   margin: 1rem 0 1.5rem;
-  flex-wrap: wrap;
 }
-.intro-text { flex: 1 1 320px; }
+.intro-text { min-width: 0; }
 .intro-text p:first-of-type {
+  font-family: $headings-font-family;
   font-size: 1.05rem;
+  color: $iitjmu-blue-dark;
   margin-bottom: 0.4rem;
   text-align: left;
 }
@@ -530,7 +683,8 @@ nav#quarto-sidebar .sidebar-item a.active {
   height: auto;
   aspect-ratio: 2518 / 2768;   // reserve height before load → no layout shift
   display: block;
-  border-radius: 4px;
+  border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(0, 45, 99, .14);
 }
 
 .quick-stats {
@@ -538,7 +692,7 @@ nav#quarto-sidebar .sidebar-item a.active {
   gap: 0.5rem;
   margin: 0.5rem 0 1.25rem;
   flex-wrap: wrap;
-  background: #ececec;
+  background: $iitjmu-blue-pale;
   border-radius: 4px;
   padding: 0.75rem 1rem;
 }
@@ -547,12 +701,12 @@ nav#quarto-sidebar .sidebar-item a.active {
   text-align: center;
   font-size: 0.82rem;
   line-height: 1.3;
-  color: #444;
+  color: #405b76;
 }
 .quick-stats .stat strong {
   display: block;
   font-size: $font-size-base;   // match main body bold, not enlarged
-  color: #222;
+  color: $iitjmu-blue-dark;
   margin-bottom: 0.15rem;
 }
 
@@ -569,7 +723,9 @@ nav#quarto-sidebar .sidebar-item a.active {
 .news-heading {
   display: block;
   font-weight: 600;
-  color: #333;
+  color: $iitjmu-blue-dark;
+  font-family: $headings-font-family;
+  font-size: 0.9rem;
   margin: 1rem 0 0.4rem;
 }
 // Home news feed: the full list is included from _partials/news-items.md;
@@ -585,8 +741,8 @@ nav#quarto-sidebar .sidebar-item a.active {
   margin: 1.5rem 0;
 }
 .project-card {
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: 1px solid #d6e4f2;
+  border-radius: 10px;
   padding: 0 0 1.2rem;             // no side/top padding — the header band runs
   margin: 1.25rem 0;               // edge to edge; body elements add their own
   background: #fff;                // side padding (below). bottom pad for the body.
@@ -594,19 +750,19 @@ nav#quarto-sidebar .sidebar-item a.active {
   transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 .project-card:hover {
-  border-color: #bbb;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  border-color: #9fc5eb;
+  box-shadow: 0 8px 24px rgba(0, 63, 135, 0.09);
 }
 .project-card > :last-child { margin-bottom: 0; }
 // Card title as a gray header ribbon flush with the card's left/right/top edges
 // (like the page-description band). The card has no side padding, so the h2
 // spans full width on its own; body elements get the side padding instead.
 .project-card h2 {
-  background: #ececec;
+  background: $iitjmu-blue-pale;
   margin: 0 0 1.1rem;
   padding: 0.5rem 1.3rem;
   font-size: 0.98rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #d6e4f2;
 }
 .project-card > :not(h2) { padding-left: 1.3rem; padding-right: 1.3rem; }
 .project-card h2 a { text-decoration: none; }
@@ -614,13 +770,13 @@ nav#quarto-sidebar .sidebar-item a.active {
   display: block;
   margin-top: 0.6rem;
   font-size: 0.8rem;
-  color: #555;
+  color: #526b83;
 }
 .project-tags {
   display: block;
   margin-top: 0.6rem;
   font-size: 0.72rem;
-  color: #888;
+  color: #75899c;
 }
 
 // Courses listing — a plain, borderless table: aligned columns, no grid
@@ -635,6 +791,7 @@ nav#quarto-sidebar .sidebar-item a.active {
   vertical-align: top;
 }
 .courses-table th { font-weight: 600; }
+.courses-table th { color: $iitjmu-blue-dark; border-bottom: 2px solid $iitjmu-blue-pale !important; }
 // Columns: Course No. | Level | Institute | Role | Title | Years.
 // Keep the metadata columns tight (they wrap if needed) so Title (col 5,
 // unset) keeps the bulk of the width.
@@ -644,37 +801,16 @@ nav#quarto-sidebar .sidebar-item a.active {
 .courses-table th:nth-child(4), .courses-table td:nth-child(4) { width: 6rem; }                          // Role
 .courses-table th:nth-child(6), .courses-table td:nth-child(6) { width: 6rem; }                          // Years
 
-// Quote carousel — styled like the page-description band (gray #ececec strip,
-// 0.5rem 2rem padding, muted gray text). Fixed two-line height so the strip
-// never resizes as quotes (some one line, some two via <br>) rotate through.
-.quote-carousel {
-  background: #ececec;
-  padding: 0.5rem 2rem;
-  margin: 1.5rem 0;
-  height: 3.5rem;            // fixed: two lines + padding (box-sizing: border-box)
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden;          // clip anything longer than two lines
-}
-.quote-carousel .qc-current {
-  margin: 0;
-  padding: 0;
-  border: 0;                       // drop Bootstrap's left rule
-  font-style: italic;
-  font-size: 0.82rem;
-  line-height: 1.5;
-  color: #666;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-.quote-carousel .qc-current.is-active { opacity: 1; }
-
 @media (max-width: 600px) {
-  .intro-card { flex-direction: column-reverse; }  // photo above text on phone
+  .intro-card { display: flex; flex-direction: column-reverse; }  // photo above text on phone
   .intro-photo { flex: 0 0 auto; max-width: 140px; margin: 0 auto; }
   .quick-stats .stat { flex: 1 1 100%; }
+}
+
+@media (max-width: 767.98px) {
+  .quarto-title-block .quarto-title h1.title { font-size: 1.05rem; }
+  main.content > * { padding-left: 1.1rem; padding-right: 1.1rem; }
+  main.content h2 { font-size: 0.86rem; }
 }
 
 // Code blocks — Quarto's highlight-style: monokai handles colors;
@@ -706,7 +842,7 @@ div.sourceCode {
 // don't visually bleed into the page content underneath.
 @media (max-width: 991.98px) {
   .navbar-collapse {
-    background: #222;
+    background: $iitjmu-blue-dark;
     padding: 0.5rem 1rem 0.75rem;
     margin-top: 0.4rem;
     border-radius: 4px;
@@ -731,7 +867,7 @@ div.sourceCode {
   .sidebar-menu-container {
     background: $content-bg;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #c9d9e8;
     position: relative;
     z-index: 5;
   }
