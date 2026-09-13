@@ -1,0 +1,544 @@
+---
+title: "Maths, Systems and Research in the Age of AI"
+description: "A cup of tea that has to cool fast and cool slowly, a conjecture of mine that turned out to be false, and one equation that keeps appearing under different names. An argument that a good problem needs a conflict, that conflicts sit at system boundaries, and that mathematics is how you cross one."
+author: "Soma S Dhavala"
+date: "2026-09-06"
+categories: ["research", "mathematics", "systems", "ai", "pedagogy"]
+---
+
+Artificial intelligence is changing what it means to learn, solve problems and do research. A machine can now search a literature, explain an unfamiliar method, write code, test an argument and produce a plausible answer in minutes. Work that once demanded scarce knowledge, specialist access or weeks of calculation is becoming available to almost anyone.
+
+But that does not make the important questions disappear. It makes them more visible. When answers become cheap, the difficult part moves upstream: **What is the problem? What belongs inside its boundary? What would count as a good solution? And which apparently different ideas are really instances of the same thing?** AI can help us work through a question, but it cannot relieve us of responsibility for deciding which question deserves to be asked—or for judging what comes back.
+
+That is the topic of this essay: the relationship between **research, systems and mathematics in the age of AI**. Research is how we turn an unclear situation into a question worth answering. Systems thinking reveals the interactions that disappear when we examine components one at a time. Mathematics lets an idea travel across those boundaries by exposing a shared structure beneath different names.
+
+I have been doing research for about twenty years. In that time the ground moved under this profession in a specific way: the *working out* got cheap, while *knowing what to work out* did not. This essay asks what follows from that change—for students learning to solve problems, and for researchers trying to find problems worth solving.
+
+A good film needs a strong villain. Without one there is no tension, and without tension there is no story—only a sequence of events. A good research problem works the same way. “We should improve X” is a wish, and a wish has no plot.
+
+The argument unfolds in three parts, in the order its logic requires rather than the order in which these subjects are usually taught: **a good problem needs a conflict; conflicts sit at the boundaries between systems; and mathematics is how you cross a boundary.** Along the way, one equation keeps appearing in places that have never met—which is the whole point.
+
+::: {.callout-note title="The lecture"}
+This essay grew from a lecture for undergraduates at IIT Jammu. You can [view the standalone presentation](deck.html) alongside the essay.
+:::
+
+## A cup of tea, going cold
+
+Start with something on the table in front of you.
+
+A cup of tea is going cold. There are three different questions you can ask about it, and telling them apart is most of what follows.
+
+- **How long until it reaches 40&nbsp;°C?** This is an exam question. It has one answer, the method is known, and someone has already marked a version of it.
+- **Why does the office coffee machine produce undrinkable tea at 3pm?** This is a system question. The answer involves the machine, the queue, the milk, and the person who last cleaned it.
+- **Can we design a better cup?** This is a research question, and it is the only one of the three that is not yet well posed.
+
+The trouble is the word *better*.
+
+Hot for longer means undrinkable when it arrives. Cools quickly means cold by the third sip. The cup has to **cool fast and cool slowly** — one property, temperature, pulled in two opposite directions, each with a reason behind it.
+
+That sentence sounds like nonsense, and the fact that it sounds like nonsense is exactly why it is the research problem. We will come back to it.
+
+## Not every cup is a mug
+
+Before designing anything, look at what already exists.
+
+Kumbakonam coffee does not come in a ceramic mug. It comes in a **davara and tumbler** — thin metal, no handle, and far too hot to pick up. And having poured the coffee into the tumbler, you then pour it back and forth between tumbler and davara, raising a froth, exposing a thin sheet of liquid to air on both sides.
+
+Now score that vessel the way a sensible engineer would score a cup. Take the objective almost anybody would write down first: **lose as little heat as possible.**
+
+- Thin metal, and metal conducts. It sheds heat about as fast as anything you could design.
+- The pouring makes that worse, deliberately, by maximising the surface exposed to air.
+- And as a thing to hold, it fails plainly. **It scalds your fingers.** You take it by the rim, or you hold the davara instead.
+
+Poor on heat retention. Poor on comfort. And in daily use, by millions of people, for as long as anyone can remember.
+
+So either everyone is wrong — or the two things we just measured were not what the object is for. What it demonstrably *does* is bring very hot coffee down to drinkable in well under a minute, and aerate it on the way. Whether that is *why* it came to be shaped this way, I do not know; I have not seen the history and I am not going to invent it. But I can say what it is good at, and it is not the thing we scored it on.
+
+A ceramic mug is for a drink you return to over an hour. This is for a drink finished in three minutes. Neither is a better cup in the abstract, because there is no such thing.
+
+## One equation, which I will show you once
+
+$$\frac{\partial u}{\partial t} = \alpha \nabla^2 u$$
+
+You are not required to read it. It says that heat flows from where there is more of it to where there is less, at a rate set by how uneven things are. [Fourier](https://archive.org/details/thorieanalytiqu00fourgoog) wrote it down in 1822 to describe heat in a solid.
+
+We will meet it again in a city, in the age of the Earth, and in a photograph — and it will not look like itself on any of them.
+
+## What changed, and what did not
+
+### One building in New Jersey
+
+Between the 1940s and the 1970s, one industrial laboratory produced the three things modern computing rests on.
+
+- **Information.** Claude Shannon's *A Mathematical Theory of Communication* ([Bell System Technical Journal, 1948](https://ieeexplore.ieee.org/document/6773024), 27:379–423 and 623–656) created the field that tells us what a message is and how much of it can survive a noisy channel.
+- **Compute.** The transistor, demonstrated by John Bardeen and Walter Brattain in December 1947, with Shockley's junction transistor following — the device every chip since is made of.
+- **Programming.** Unix and C, from Dennis Ritchie and Ken Thompson, with Brian Kernighan — the substrate almost everything else was written on.
+
+Richard Hamming was in the same building, working on error-correcting codes. He used to change tables in the canteen — mathematicians, then physicists, then chemists — asking each of them what the important problems in their field were. **That was the best available technology for finding out what other people knew.** We come back to him shortly.
+
+Then the people moved. Shockley took the transistor west, his team left to found Fairchild Semiconductor, and Fairchild's alumni founded much of what followed. That became one of Silicon Valley's [defining origin stories](https://computerhistory.org/stories/spinoff-fairchild/) — not the only beginning, since Stanford's electronics ecosystem and Hewlett-Packard predate it, but the one people tell.
+
+### What has changed since I was where you are
+
+Twenty years ago, knowledge lived in three places: **books, papers, and people.** All three were rationed.
+
+Books cost money and arrived slowly. Papers sat behind subscriptions your institution might not hold. And people — the ones who had already thought about your problem — were reachable only if you were near them, or knew their name, or had somebody to make an introduction.
+
+Talent and knowledge were concentrated, and the concentration was geographic. Hamming changing tables in the Bell Labs canteen is a story about proximity.
+
+Two of those three have changed beyond recognition. The books and the papers are largely a search away. And the third — the specialist who can explain why your idea does not work — is now, in a limited but real sense, available to anyone with a connection, at two in the morning, without an introduction.
+
+**What has not changed is the machinery.** Compute, instruments, laboratories, and the time to use them remain unequal and expensive. Knowing is close to solved. *Having* is not.
+
+That distinction matters for everything that follows: the working out got cheap, and choosing what to work out did not.
+
+---
+
+# Part one · Research as inquiry
+
+> It is foolish to answer a question that you do not understand.
+>
+> — George Pólya, *How to Solve It* (1945)
+
+Pólya's line and the cup are the same observation. Before you can answer *can we design a better cup*, you have to know what *better* means, and finding that out is not the same activity as answering.
+
+## What makes a problem good
+
+Richard Hamming gave a talk at Bellcore on 7 March 1986 called ["You and Your Research"](https://pages.cs.wisc.edu/~markhill/hamming_86_03_07.pdf), later reprinted in *The Art of Doing Science and Engineering* (1997). One line from it does more work than the rest:
+
+> It's not the consequence that makes a problem important, it is that you have a reasonable attack.
+
+Which is a relief, because it means an important problem is not one with a big payoff. It is one **you have a way into**. Time travel would be worth a Nobel Prize and is not an important problem, because nobody has a way in.
+
+But notice who was saying it. Hamming was at Bell Labs, with a computer, a machine shop, a budget, and Shannon down the corridor. **What counted as a reasonable attack for him is not what counts for you.** For somebody with a company and a few billion dollars, a reasonable attack on reusable rockets is to build a rocket company. For a student this term, it is something you can get somewhere with using a laptop, a supervisor, and whatever is in the building.
+
+Same test, different answer — because the test is about reach, and reach is not equal. Which is what makes it useful rather than discouraging. It does not ask you to find something important. It asks you to find **the overlap between what matters and what you can actually get your hands on.**
+
+## What shape a problem takes
+
+A problem will have a conflict in it.
+
+- **Engineering** is solving the known.
+- **Science** is dealing with the unknown.
+- **Research** is converting the unknown into the known.
+
+And as a rule rather than as an exception, that conversion is about resolving the tension in a conflict.
+
+So, three tests, and they go in this order:
+
+1. **It has a conflict** — one thing pulled two ways, each side with a reason.
+2. **It has a reasonable attack surface** — a way in, at *your* reach.
+3. **It has a consequence** — somebody is different if you turn out to be right.
+
+That is the order you *apply* them in, not the order they matter in. Consequence is checked last because it is the hardest to judge in advance — **last to check, not least to matter.** Hamming's own error-correcting codes came out of a weekend when the machine dropped his job.
+
+And notice where the first test is easiest to satisfy. A boundary between two fields is already a conflict: two ways of doing things, each with a reason, meeting at a line nobody has drawn. That is Part two, and it hands you the first test for free.
+
+**Inquiry is the tool for applying all three.** *Is there a conflict here?* — keep asking until two things you believe turn out to disagree. *Can I get in?* — not can the field get in, can *you*, with what you have. *Does it matter?* — who is different if this turns out to be true.
+
+You do not find a good problem first and then start asking. The asking is what turns a topic into a problem.
+
+## One of my own
+
+I have a story that runs from the noticing all the way to the end, and it does not end where I expected.
+
+Some years ago I came across a four-page paper in a Russian journal: Freimer and Mudholkar, ["An analogue of the Chernoff–Borovkov–Utev inequality and related characterization"](https://epubs.siam.org/doi/10.1137/1136069) (*Teoriya Veroyatnostei i ee Primeneniya* 36(3), 1991; English translation, *Theory of Probability & Its Applications* 36(3), 1992, 589–592).
+
+I came across it by accident. I was not working on this. I had no question about quantiles, no programme, nothing I was trying to prove. I read it because it was in front of me.
+
+The background is a small, elegant line of results. [Chernoff (1981)](https://doi.org/10.1214/aop/1176994428) proved an inequality bounding the variance of a function of a normal random variable; [Borovkov and Utev](https://epubs.siam.org/doi/10.1137/1128019) (*Theory Probab. Appl.* 28, 1984, 219–228) showed the inequality *characterizes* normality — it holds for all smooth functions if and only if the underlying variable is normal. Freimer and Mudholkar produced the analogue for **mean deviation from the median**, and showed it characterizes the Laplace distribution.
+
+Reading it, I saw an opening straight away. Their result is about the median, and the median is only one quantile among many. People who work with quantiles do not measure distance with the absolute value; they use a lopsided version, the pinball loss. So: swap the median for **any** quantile, swap absolute distance for the pinball loss, and the same thing ought to happen, with the asymmetric Laplace distribution taking the Laplace's place.
+
+That is worth saying plainly, because it is the only honest part of the story. **The question came out of reading something I had no business reading, on a subject I was not working on.** That is what people mean by serendipity, and it is not luck. It is what happens to somebody who reads outside the thing in front of them — and it is the first casualty when you only ever ask for exactly what you need.
+
+I wrote the conjecture down. The forward inequality I could do. The **converse** — the arrow that makes it a characterization rather than a bound — was the one that mattered, and it was the one that stopped me. It sat there for years.
+
+And I could not ask anyone either. I showed it to a few people, and that is not a figure of speech: **a few people was the entire expertise available to me.** Somebody, somewhere, could have looked at it in an afternoon — there are people who spend careers on characterization theorems. I did not know who they were, they did not know I existed, and there was no corridor between us. This is the Bell Labs problem again, from the other side. The knowledge was in people, and I was not near them.
+
+So it sat. Not because it was wrong to ask, and not because it was hard to state. Because I had run out of both the working out and the people.
+
+## The same loop, running on my own work
+
+Then it came unstuck, and not in the way I wanted.
+
+I used large language models as mathematical co-pilots — I tried it because I had watched them work through olympiad problems, and thought: if that, then perhaps this. It was not one question and one answer. It took a great many iterations. Some of what came back was wrong, and confidently wrong, and deciding which was which was mine to do. The shape of the work was: propose, read what came back, find where it broke, adjust, again.
+
+Two things changed, and they are the two this essay has been about. **The working out** — the argument I could never take on my own, I could finally try, in an afternoon instead of never. And **the asking** — I no longer needed to already know which specialist to find.
+
+And then the checking answered back.
+
+- **Hypothesise.** The median result should carry over to any quantile. I wrote it down and believed it.
+- **Experiment.** Years later I could finally push on it, with something that would not get tired.
+- **Observe.** It produced **a counterexample.** One example, and the thing I had written down was false.
+- **Deduce.** Not a slip. **I had misread how the original proof worked** — and built years on the misreading.
+- **Loop.** A revised version, which is where it stands now.
+
+Not unproved. **False** — after years of trying to prove it. The conjecture as I stated it is dead, a corrected version is under revision, and what I originally wanted is not closed so much as unexamined: Freimer and Mudholkar reached their result by a route nobody has yet tried on the general case.
+
+The guess was mine. The checking was mine. Only the middle got faster.
+
+**The result did not answer my question. It changed which question was worth asking.** That is not a consolation prize; it is most of what research actually consists of.
+
+## Which is the loop, drawn
+
+```{=html}
+<figure>
+<svg viewBox="0 0 820 210" role="img" aria-label="hypothesise, experiment, observe, deduce, loop" style="width:100%;height:auto">
+<style>
+.nn{fill:#eaf3ff;stroke:#003f87;stroke-width:2}
+.tt{font:500 20px Roboto,system-ui,sans-serif;fill:#002d63}
+.ee{stroke:#0056b8;stroke-width:2.5;fill:none;marker-end:url(#aa)}
+.mm{font:16px ui-monospace,Menlo,monospace;fill:#5f6b78}
+</style>
+<defs><marker id="aa" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#0056b8"/></marker></defs>
+<rect class="nn" x="14" y="52" width="152" height="50" rx="3"/><text class="tt" x="90" y="83" text-anchor="middle">hypothesise</text>
+<rect class="nn" x="210" y="52" width="152" height="50" rx="3"/><text class="tt" x="286" y="83" text-anchor="middle">experiment</text>
+<rect class="nn" x="406" y="52" width="152" height="50" rx="3"/><text class="tt" x="482" y="83" text-anchor="middle">observe</text>
+<rect class="nn" x="602" y="52" width="152" height="50" rx="3"/><text class="tt" x="678" y="83" text-anchor="middle">deduce</text>
+<path class="ee" d="M166,77 L202,77"/><path class="ee" d="M362,77 L398,77"/><path class="ee" d="M558,77 L594,77"/>
+<path class="ee" d="M678,104 C678,168 90,168 90,104"/>
+<text class="mm" x="384" y="196" text-anchor="middle">loop — and the size of the error is the direction you move</text>
+</svg>
+<figcaption>The loop. It is the only way intuition gets built, and it does not care whose work it is running on.</figcaption>
+</figure>
+```
+
+Intuition is not granted. It has to be earned, and it comes from failure. Predict, then correct. Leon Cohen puts the same thing from the other side, in *Time-Frequency Analysis* (Prentice Hall, 1995):
+
+> Of course, it is the paradoxes and unusual results that lead to abandonment of ideas, adjustment of our intuition or the discovery of new ideas.
+
+## Back to the cup
+
+The conflict we left at the start: the cup must **cool fast and cool slowly** — fast from 90&nbsp;°C so you can drink it, slowly from 60&nbsp;°C so it stays drinkable. One property, two opposite demands, each with a reason. That is the shape.
+
+Now the resolution. Put a material in the wall that melts at about 60&nbsp;°C. Above that temperature it absorbs heat, and the tea falls quickly. Below it, the material gives the heat back. The conflict is not split down the middle; it is *arranged* so both sides get what they asked for.
+
+And notice what turning a wish into a conflict actually cost. **Nothing was invented.** The physics did not change and the cup did not change. The only thing that changed was the sentence.
+
+## Persisting, and what separates it from stubbornness
+
+Two things in this essay sat unfinished for a long time. Mine sat for years, written down and unproved. And in Part three you will meet one that sat for a hundred and sixty years before anybody could solve it in general.
+
+Neither survived because somebody believed in it hard enough. They survived because each was **stated precisely enough to still be there when the tools arrived.**
+
+Which needs one condition attached, because belief on its own does not separate persistence from stubbornness, and the room always knows the difference. Hold on to a **preference** and you are being stubborn. Hold on to a **structure you can state** — one you could hand to somebody else, that could be shown wrong — and you are being persistent.
+
+Mine was shown wrong. That is the point: it was the kind of thing that *could* be.
+
+---
+
+# Part two · Systems as the opportunity gap
+
+We know *where* to look now — at a boundary. What we have not seen is what is actually sitting there, or why those problems get left alone. So go and look at three of them.
+
+## Somebody actually did this
+
+Same cup. Part one named the conflict and resolved it by hand. Now put the research question aside and take the **easy** engineering objective instead — the one almost anybody would write down first: *lose as little heat as possible.*
+
+Paras Chopra took exactly that goal, wrote the physics down, added the two constraints that stop it cheating — hold enough tea, mouth wide enough to drink from — and let a program search over shapes. The code is [on GitHub](https://github.com/paraschopra/diff-cup).
+
+What the search produced does not look like a cup. It looks like a cooling tower: a tall, narrow-waisted vessel, because for the objective it was given, the shape that loses least heat per unit of tea held is not the shape you want to drink from.
+
+**The program was not wrong.** It answered precisely the question it was asked. It is the question that was wrong — and there is no line of code you can inspect to discover that, because the error is not in the program.
+
+Russell Ackoff put it as sharply as anyone, in ["The Art and Science of Mess Management"](https://doi.org/10.1287/inte.11.1.20) (*Interfaces* 11(1), 1981, 20–26):
+
+> We fail more often because we solve the wrong problem than because we get the wrong solution to the right problem.
+
+Optimisation is very good at the second failure and completely blind to the first. The better your solver, the more efficiently it will carry you to a correct answer to a badly posed question.
+
+## Two air conditioners
+
+Now a system that is not a cup.
+
+Put two rooms side by side, each with its own air conditioner, and arrange them so that each unit's hot exhaust blows into the other unit's intake. Nothing about either machine is faulty. Each one is doing exactly what it was designed to do: move heat out of its room.
+
+But the temperature its compressor has to work against is no longer the outdoor temperature — it is the other machine's exhaust. So each unit works harder, which makes its exhaust hotter, which raises the other unit's working temperature, which makes *that* unit work harder.
+
+```{=html}
+<figure>
+<svg viewBox="0 0 760 250" role="img" aria-label="two air conditioners feeding each other's exhaust" style="width:100%;height:auto">
+<style>
+.rm{fill:#eaf3ff;stroke:#003f87;stroke-width:2.5}
+.lb{font:500 19px Roboto,system-ui,sans-serif;fill:#002d63}
+.sm{font:15px Roboto,system-ui,sans-serif;fill:#5f6b78}
+.hot{stroke:#c0392b;stroke-width:3.5;fill:none;marker-end:url(#hh)}
+</style>
+<defs><marker id="hh" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#c0392b"/></marker></defs>
+<rect class="rm" x="40" y="70" width="240" height="110" rx="4"/>
+<text class="lb" x="160" y="118" text-anchor="middle">Room A</text>
+<text class="sm" x="160" y="146" text-anchor="middle">its AC dumps heat out</text>
+<rect class="rm" x="480" y="70" width="240" height="110" rx="4"/>
+<text class="lb" x="600" y="118" text-anchor="middle">Room B</text>
+<text class="sm" x="600" y="146" text-anchor="middle">its AC dumps heat out</text>
+<path class="hot" d="M282,100 C380,60 400,60 476,100"/>
+<path class="hot" d="M478,152 C400,192 380,192 284,152"/>
+<text class="sm" x="380" y="52" text-anchor="middle">A's exhaust → B's intake</text>
+<text class="sm" x="380" y="216" text-anchor="middle">B's exhaust → A's intake</text>
+</svg>
+<figcaption>Neither machine is faulty. The failure is in the arrangement, and it lives in the arrows.</figcaption>
+</figure>
+```
+
+There is no equilibrium here that anyone wants. Power draw climbs, both rooms lose ground, and eventually something trips. And the entire failure lives in the arrows — in a relationship that neither unit's specification mentions, because neither unit's designer was told the other one existed.
+
+**You have already done this.** Not with two rooms, but with a street: every outdoor unit in a city is exhausting into air that every other outdoor unit is drawing from. It is the same diagram at a different scale, and it is a real and well-studied effect — [urban waste heat from air conditioning](https://journals.ametsoc.org/view/journals/apme/46/1/jam2441.1.xml) measurably raises street temperature, which raises the load on every machine on that street.
+
+And the same equation from the opening is doing the work: heat spreading from where there is more of it to where there is less.
+
+## Kelvin drew one too
+
+In the 1860s, William Thomson — Lord Kelvin — calculated the age of the Earth. He treated the planet as a body that started molten and has been cooling by conduction ever since, applied Fourier's equation, and got an answer: something in the range of twenty to a hundred million years.
+
+The mathematics was correct. The answer was wrong by a factor of about fifty, and it was wrong for a reason that no amount of care inside the calculation could have caught. Kelvin's model had no radioactivity in it, because radioactivity had not been discovered; and it assumed heat moves through the Earth only by conduction, when the mantle also convects.
+
+What makes this a *systems* story rather than a cautionary tale about missing data is what happened next. In 1895 the engineer John Perry published two notes in *Nature* ([51:341–342](https://www.nature.com/articles/051341c0) and 51:582–585) objecting precisely on the convection point, and showing that a partly fluid interior could stretch Kelvin's estimate by an order of magnitude or more. He reached across from engineering into geophysics, and he was substantially right.
+
+He was not heeded. The [modern reassessment](https://www.geosociety.org/gsatoday/archive/17/1/article/i1052-5173-17-1-4.htm) makes the point plainly: the failure was not that nobody crossed the boundary. **It was that the correction did not travel.**
+
+## What those three had in common
+
+Not one of them was hard physics. Look at what each one actually needed:
+
+| The failure | What it sat between |
+|---|---|
+| **The cup** | thermodynamics + what a person is willing to hold |
+| **The street** | heat transfer + how a city is built + what electricity costs |
+| **Kelvin** | conduction + geology + a phenomenon not yet discovered |
+
+A component problem sits **inside** one field. A system problem sits **between** several. That is why these were left alone — not because they were deep, but because no one person could easily reach across, and when somebody did, the crossing did not carry.
+
+## And reaching across is what I could not do
+
+Years ago I built a method for compressing images. It worked, I published it, and I moved on.
+
+Five years later somebody showed me the CART algorithm — classification and regression trees, from Breiman, Friedman, Olshen and Stone (*Classification and Regression Trees*, Wadsworth, 1984) — and I recognised my own method looking back at me. The pruning step in a decision tree and the design of my compressor were the same optimisation wearing different clothes.
+
+Not because it was secret. CART is one of the most influential algorithms in the field. And the structural identity was already published: Chou, Lookabaugh and Gray, ["Optimal pruning with applications to tree-structured source coding and modeling"](https://doi.org/10.1109/18.32124) (*IEEE Transactions on Information Theory* 35(2), 1989, 299–315), had shown that pruning a classification tree and designing a tree-structured compressor are the same problem.
+
+It was in the literature before I started. I was in one of those two fields, and I simply had **no way to find out about the other.**
+
+One crossing, entirely by accident. **Five years.** That is the price the old arrangement charged, and it is why system problems stayed shut.
+
+## So here is the whole argument
+
+- Deep expertise **inside** one field is now available to anybody — so component-level work is **crowded**.
+- Reaching **across** several fields is now available to one person — so the thing that made system work hard **stopped being hard**.
+- And the system problems are still sitting there untouched, because nobody owns them and nobody sees the line.
+
+Now that specialist explanation is a question away, the innovation frontier moves from the individual component to the system. That is where the opportunity is.
+
+Which is worth stating as a general rule. When a boundary is tight and the environment is constrained because the bar is high — when an area is saturated — that is a bottleneck, and any discovery in that space must be a breakthrough and fundamentally refreshing. A mature component is not a dead end; **it is the sign.** Everything easy has been taken. Meanwhile the street outside has had comparatively few people working on it, and the arrows between things have had almost none.
+
+But access only gets you to the expert on the other side. It does not tell you that the two sides are the same thing — and until you see that, there is nothing to go and ask about.
+
+So what lets you *recognise* it?
+
+---
+
+# Part three · Maths as foundation
+
+> Mathematics is the art of giving the same name to different things.
+>
+> — Henri Poincaré, *Science et méthode* (1908); *Science and Method*, trans. Francis Maitland (1914)
+
+That sentence is the answer to the question Part two ended on. You cross a boundary by discovering that the thing on this side and the thing on that side are **the same thing under two names**. And that is not a metaphor for what mathematics does — it is a literal description.
+
+By *foundation* I do not mean computation. Arithmetic is not the point and never was. I mean three habits, and each one has an example you have already met or are about to.
+
+## Abstraction — throw away everything that does not matter
+
+How do you find a word in a dictionary?
+
+You do not start at page one. You open somewhere near the middle, look at the word at the top, and decide: earlier or later. Then you do it again in the half you kept.
+
+Now strip that of everything incidental. Not words. Not pages. Not alphabetical order, not paper, not English. What is left is: **an ordered collection, a way to halve it, and a comparison.** That is all the method ever needed. And the moment you have thrown the dictionary away, the same procedure finds a value in a sorted array, locates a root of a monotone function, and answers any question that can be phrased as "where does this predicate flip from false to true".
+
+Sortedness is the discrete analogue of the intermediate value theorem, and bisection is what both of them license.
+
+**And it is not as easy as it looks.** The binary search shipped in the Java standard library was broken for nine years. Computing the midpoint as `(low + high) / 2` overflows a 32-bit integer once the array exceeds about 2^30 elements, producing a negative index. Joshua Bloch [wrote it up in 2006](https://research.google/blog/extra-extra-read-all-about-it-nearly-all-binary-searches-and-mergesorts-are-broken/); the same overflow-prone version had been printed in Jon Bentley's *Programming Pearls*. A defect that small tests never exercise, in nine lines of code that everyone believes they understand.
+
+## Generalization — solve the whole family, not the one case
+
+In 1781, Gaspard Monge asked a question about moving earth: given a pile of soil here and a hole to fill there, what is the cheapest way to move it, if moving a unit of earth a certain distance costs a certain amount?
+
+*Mémoire sur la théorie des déblais et des remblais.* Soil and carts.
+
+Nobody could solve it in general for a hundred and sixty years. In 1942 Leonid Kantorovich — a mathematician and economist — found the way through, and the way through was to **change the problem**. Monge insisted on a *map*: each grain of soil goes to one destination. Kantorovich relaxed this to a *plan*, allowing a pile to be split across destinations, which turns a brutal combinatorial question into a linear programme with a dual. He later shared the [1975 Nobel Memorial Prize in Economics](https://www.nobelprize.org/prizes/economic-sciences/1975/press-release/) with Tjalling Koopmans for the theory of optimum allocation of resources.
+
+And then it kept being found again, by people who had not heard of Monge:
+
+- **1998–2000** — Rubner, Tomasi and Guibas introduce the *Earth Mover's Distance* for comparing images ([ICCV 1998](https://doi.org/10.1109/ICCV.1998.710701); [IJCV 40(2), 2000, 99–121](https://doi.org/10.1023/A:1026543900054)). Two colour histograms; what does it cost to turn one into the other?
+- **2015** — Kusner, Sun, Kolkin and Weinberger introduce the *Word Mover's Distance* for comparing documents ([ICML 2015](https://proceedings.mlr.press/v37/kusnerb15.html)). Two bags of word vectors; same question.
+- **2017** — Arjovsky, Chintala and Bottou build the *Wasserstein GAN* ([arXiv:1701.07875](https://arxiv.org/abs/1701.07875)). Two probability distributions, one real and one generated; same question again.
+
+Images, text, generative models. Not soil, and not carts. Every one of them is Monge's heap of earth, in a formulation he would not recognise but would understand.
+
+Which gives you a rule, and I would hand this one to any student: **if a solution is elegant — stripped down to its bare minimum — it has almost always been solved before.** Elegance is a sign that somebody has already been here, not that you were clever. So when it gets clean, stop admiring it and go and look. That search used to be expensive. It is not any more.
+
+And rediscovering something independently is not wasted time. It is evidence your instinct was sound.
+
+## Structure — the same shape, in two places that never met
+
+This is the one that pays immediately, and it happened to me twice.
+
+**Time-frequency distributions and probability densities.** In signal processing, a time-frequency distribution describes how a signal's energy is spread across time and frequency. In statistics, a probability density describes how mass is spread over outcomes. I noticed the two were the same fitting problem — you are estimating a non-negative function on a plane subject to marginal constraints, and the machinery for one transfers to the other. That observation is what drew me to statistics in the first place. Leon Cohen's *Time-Frequency Analysis* (1995) is where the signal-processing side of that lives.
+
+**My compression method and CART.** Described above: same optimisation, two literatures, five years, and a 1989 paper I had never seen.
+
+Two fields that were not talking to each other. In both cases the structure was the same and the names were different.
+
+This is not a talent so much as a habit, and habits can be practised.
+
+## Which was which
+
+Three words, and you have now seen one of each:
+
+| | What it means | The one you just saw |
+|---|---|---|
+| **Abstraction** | throw away everything that does not matter | the dictionary — only *ordered, halve, compare* |
+| **Generalization** | solve the whole family, not the one case | Monge's earth — any two heaps, any cost |
+| **Structure** | the same shape, in two places that never met | time-frequency and densities; compression and CART |
+
+The third is the one that pays immediately. When two things share a structure, the technique carries across — once you have checked that its assumptions still hold.
+
+**And none of these are facts.** You cannot look up *this is the same as that*; nobody has written that list and nobody can. Abstraction, generalization and structure are things you **notice**, not things you know. I noticed those two were the same fitting problem long before I could do anything useful with it. The noticing came first.
+
+So the question is not what to learn. It is **how you get better at noticing** — and that is the only part of this essay that is really about you.
+
+## Two tools for getting better at noticing
+
+**Extreme cases.** When you cannot picture a thing, shrink it until you can. Take the setting to a limit — zero, one, two, infinity — whatever is simplest while still recognisably the same object. Then you can guess, and be wrong, and learn something. You cannot make a prediction about a thing you cannot picture, and most of what you meet in a new subject is exactly that.
+
+Here is the trick working. The universal approximation theorem says a neural network with one hidden layer can approximate any reasonable function to any accuracy you like ([Cybenko, 1989](https://doi.org/10.1007/BF02551274); [Hornik, 1991](https://doi.org/10.1016/0893-6080(91)90009-T)). Stated that way it is a piece of analysis, and it is opaque.
+
+Now take the extreme case. Discretize everything — inputs to bits, outputs to bits. What is left is a Boolean function from *M* bits to one bit. And every Boolean function can be written as a sum of products: an OR over the input patterns that make it true, each one an AND. That is disjunctive normal form, and it is *exactly* one hidden unit per satisfying pattern, feeding one output unit that ORs them.
+
+So in the discrete case the theorem is not analysis at all. It is a fact about Boolean logic you already knew, and it comes with the price attached: the construction needs up to 2^M hidden units. Approximation is guaranteed; efficiency is not, and that gap is where the entire subject lives.
+
+The order matters here — you meet the theorem, you shrink it, and only then does it mean something.
+
+**Counter-examples.** Go looking for the case that does not fit. The davara is one. My conjecture died of one. If your idea is any good it will survive the search, and if it is not, you would rather find out from an example than from a referee.
+
+Alongside those: debate and self-dialogue, an inner voice that argues back, intellectual solitude combined with collective working — form your own view first, then go and get argued with. And serendipity, which is the explore/exploit balance, and which is the first thing to disappear when you only ever fetch exactly what you asked for.
+
+## The last thing, which is the first thing
+
+Three pictures: stripes, checks, specks. Nobody would confuse them. Now let each one spread — the same equation, on pixels instead of tea.
+
+```{=html}
+<figure>
+<svg viewBox="0 0 760 200" role="img" aria-label="three patterns blurring toward the same grey" style="width:100%;height:auto">
+<defs>
+  <filter id="b1"><feGaussianBlur stdDeviation="1.2"/></filter>
+  <filter id="b2"><feGaussianBlur stdDeviation="5"/></filter>
+  <filter id="b3"><feGaussianBlur stdDeviation="14"/></filter>
+  <pattern id="stripes" width="16" height="16" patternUnits="userSpaceOnUse">
+    <rect width="16" height="16" fill="#fff"/><rect width="8" height="16" fill="#123"/></pattern>
+  <pattern id="checks" width="20" height="20" patternUnits="userSpaceOnUse">
+    <rect width="20" height="20" fill="#fff"/><rect width="10" height="10" fill="#123"/><rect x="10" y="10" width="10" height="10" fill="#123"/></pattern>
+  <pattern id="specks" width="12" height="12" patternUnits="userSpaceOnUse">
+    <rect width="12" height="12" fill="#fff"/><circle cx="3" cy="3" r="3.4" fill="#123"/><circle cx="9" cy="9" r="3.4" fill="#123"/></pattern>
+  <clipPath id="cp"><rect x="0" y="0" width="170" height="130"/></clipPath>
+</defs>
+<style>.cap{font:15px Roboto,system-ui,sans-serif;fill:#5f6b78}</style>
+<g transform="translate(10,14)"><g clip-path="url(#cp)"><rect width="170" height="130" fill="url(#stripes)" filter="url(#b1)"/></g>
+  <rect width="170" height="130" fill="none" stroke="#cfdcec"/><text class="cap" x="85" y="152" text-anchor="middle">stripes</text></g>
+<g transform="translate(200,14)"><g clip-path="url(#cp)"><rect width="170" height="130" fill="url(#checks)" filter="url(#b1)"/></g>
+  <rect width="170" height="130" fill="none" stroke="#cfdcec"/><text class="cap" x="85" y="152" text-anchor="middle">checks</text></g>
+<g transform="translate(390,14)"><g clip-path="url(#cp)"><rect width="170" height="130" fill="url(#specks)" filter="url(#b2)"/></g>
+  <rect width="170" height="130" fill="none" stroke="#cfdcec"/><text class="cap" x="85" y="152" text-anchor="middle">specks, spreading</text></g>
+<g transform="translate(580,14)"><g clip-path="url(#cp)"><rect width="170" height="130" fill="url(#checks)" filter="url(#b3)"/></g>
+  <rect width="170" height="130" fill="none" stroke="#cfdcec"/><text class="cap" x="85" y="152" text-anchor="middle">and then, nothing</text></g>
+</svg>
+<figcaption>Let it run far enough and you cannot tell which square came from which pattern.</figcaption>
+</figure>
+```
+
+Handed the grey square at the end, **which one did it come from?**
+
+On paper the spreading is one-to-one, so an exact answer exists. It is of no use to anybody. To recover the original you would have to measure that square to an accuracy no instrument has, and any real measurement — with any real noise in it — is consistent with all three. That is what irreversible means in practice: not that the information was destroyed by magic, but that **it is now buried below the noise**. Hadamard made the point precisely in 1902, distinguishing problems that are well posed from those that are not.
+
+Now the turn. If you cannot undo it, **learn it instead.**
+
+Take a single point and knock it a little, at random, over and over. After enough steps you have a fuzzy cloud and the point is gone — and that cloud spreads exactly the way heat spreads. Same equation. Which means the same problem: you cannot run it backwards, because you threw the information away.
+
+So do not. Show a machine a great many examples of a point being nudged, and let it learn which way things came from. Nobody inverts the equation. **They change the question** — from *undo this* to *learn the way back* — and the second one has an answer.
+
+That is what a diffusion model is: noise added on the way in, a learned path back out. The idea is in [Sohl-Dickstein, Weiss, Maheswaranathan and Ganguli (2015)](https://arxiv.org/abs/1503.03585) and became practical with [Ho, Jain and Abbeel (2020)](https://arxiv.org/abs/2006.11239). It is not the only way to build an image model, but it is behind a great many of the ones you have used.
+
+Which is what this whole essay has been about. Not answering harder. **Asking something else.**
+
+## One equation
+
+$$\frac{\partial u}{\partial t} = \alpha \nabla^2 u$$
+
+It cooled your tea. It runs the feedback between two air conditioners and down a street of them. It gave Kelvin the wrong age of the Earth. And it generates photographs of things that never existed.
+
+The same equation, playing out all along, under four different names — which is the third habit from Part three, demonstrated on itself.
+
+---
+
+## What the three parts come to
+
+1. **Research — the inquiry**
+    - Research is not producing answers. Research is inquiry, which comes down to asking good questions.
+    - A good problem has **a conflict, then a way in that is yours, then a consequence** — checked in that order.
+    - And that takes intuition: seeing what is worth asking before you can prove it.
+
+2. **Systems — the opportunity**
+    - A component problem sits *inside* one field. A system problem sits *between* several.
+    - That boundary is where the tension and the conflict sit naturally — it hands you the first test for free.
+    - And they are still sitting there, because no single field owns them and nobody has drawn the line.
+
+3. **Maths — the foundation**
+    - Mathematics is how you cross a boundary. Give the two sides the same name and the technique carries over, once you have checked its assumptions.
+    - And the intuition to see that is **learnt, not given**: hypothesise, experiment, observe, deduce, loop.
+
+Underneath all three: expertise is accessible now — the books, the papers, the people, the working out. The *knowing* half, to anybody. **The machines are still unequal.**
+
+## So, four things
+
+**Be curious.** Nobody arrives curious about the right things. It is cultivated, and it is cultivated on purpose.
+
+**Get genuinely good at one subject.** Exploit. Go deep enough in something that you have real judgment about it — you cannot reach across from nowhere.
+
+**Explore the periphery.** Where your subject stops and somebody else's begins. That is where the questions sit that nobody owns and nobody has drawn a line around.
+
+**Actively pursue gradient ascent over your own knowledge.** Predict. Be wrong. Adjust. Not once, when it happens to you — deliberately, as a habit, for years.
+
+That last one is not advice I am giving from a safe distance. The conjecture I carried for years turned out to be false, and I found out by finally being able to push hard enough on it to break it. The loop does not care whose work it is running on.
+
+Go. Climb. Redefine the boundaries.
+
+---
+
+## References
+
+- Ackoff, R. L. (1981). "The Art and Science of Mess Management." *Interfaces* 11(1), 20–26. [doi:10.1287/inte.11.1.20](https://doi.org/10.1287/inte.11.1.20)
+- Arjovsky, M., Chintala, S., & Bottou, L. (2017). "Wasserstein GAN." [arXiv:1701.07875](https://arxiv.org/abs/1701.07875)
+- Bloch, J. (2006). ["Nearly All Binary Searches and Mergesorts are Broken."](https://research.google/blog/extra-extra-read-all-about-it-nearly-all-binary-searches-and-mergesorts-are-broken/) Google Research Blog.
+- Borovkov, A. A., & Utev, S. A. (1984). "On an inequality and a related characterization of the normal distribution." *Theory of Probability & Its Applications* 28, 219–228. (Russian original 1983.)
+- Breiman, L., Friedman, J., Olshen, R., & Stone, C. (1984). *Classification and Regression Trees.* Wadsworth.
+- Chernoff, H. (1981). "A note on an inequality involving the normal distribution." *Annals of Probability* 9, 533–535. [doi:10.1214/aop/1176994428](https://doi.org/10.1214/aop/1176994428)
+- Chou, P. A., Lookabaugh, T., & Gray, R. M. (1989). "Optimal pruning with applications to tree-structured source coding and modeling." *IEEE Transactions on Information Theory* 35(2), 299–315. [doi:10.1109/18.32124](https://doi.org/10.1109/18.32124)
+- Cohen, L. (1995). *Time-Frequency Analysis.* Prentice Hall.
+- Cybenko, G. (1989). "Approximation by superpositions of a sigmoidal function." *Mathematics of Control, Signals and Systems* 2, 303–314. [doi:10.1007/BF02551274](https://doi.org/10.1007/BF02551274)
+- Fourier, J. (1822). *Théorie analytique de la chaleur.*
+- Freimer, M., & Mudholkar, G. S. (1992). "An analogue of the Chernoff–Borovkov–Utev inequality and related characterization." *Theory of Probability & Its Applications* 36(3), 589–592. (Russian original 1991.)
+- Hadamard, J. (1902). "Sur les problèmes aux dérivées partielles et leur signification physique." *Princeton University Bulletin* 13, 49–52.
+- Hamming, R. W. (1986). ["You and Your Research."](https://pages.cs.wisc.edu/~markhill/hamming_86_03_07.pdf) Bellcore colloquium, 7 March 1986; reprinted in *The Art of Doing Science and Engineering* (1997).
+- Ho, J., Jain, A., & Abbeel, P. (2020). "Denoising Diffusion Probabilistic Models." [arXiv:2006.11239](https://arxiv.org/abs/2006.11239)
+- Hornik, K. (1991). "Approximation capabilities of multilayer feedforward networks." *Neural Networks* 4, 251–257. [doi:10.1016/0893-6080(91)90009-T](https://doi.org/10.1016/0893-6080(91)90009-T)
+- Kantorovich, L. V. (1942). "On the translocation of masses." *Doklady Akademii Nauk SSSR* 37, 199–201.
+- Kusner, M., Sun, Y., Kolkin, N., & Weinberger, K. (2015). ["From Word Embeddings To Document Distances."](https://proceedings.mlr.press/v37/kusnerb15.html) *ICML 2015*, PMLR 37, 957–966.
+- Monge, G. (1781). *Mémoire sur la théorie des déblais et des remblais.* Histoire de l'Académie Royale des Sciences.
+- Ohashi, Y., et al. (2007). ["Influence of air-conditioning waste heat on air temperature in Tokyo."](https://journals.ametsoc.org/view/journals/apme/46/1/jam2441.1.xml) *Journal of Applied Meteorology and Climatology* 46(1).
+- Perry, J. (1895). "On the Age of the Earth." *Nature* 51, 341–342; and 51, 582–585.
+- Poincaré, H. (1908). *Science et méthode.* English: *Science and Method*, trans. F. Maitland (1914).
+- Pólya, G. (1945). *How to Solve It.* Princeton University Press.
+- Rubner, Y., Tomasi, C., & Guibas, L. (1998/2000). "A metric for distributions with applications to image databases," *ICCV 1998*, 59–66; "The Earth Mover's Distance as a Metric for Image Retrieval," *IJCV* 40(2), 99–121.
+- Shannon, C. E. (1948). "A Mathematical Theory of Communication." *Bell System Technical Journal* 27, 379–423 and 623–656.
+- Sohl-Dickstein, J., Weiss, E., Maheswaranathan, N., & Ganguli, S. (2015). "Deep Unsupervised Learning using Nonequilibrium Thermodynamics." [arXiv:1503.03585](https://arxiv.org/abs/1503.03585)
+- England, P., Molnar, P., & Richter, F. (2007). ["John Perry's neglected critique of Kelvin's age for the Earth."](https://www.geosociety.org/gsatoday/archive/17/1/article/i1052-5173-17-1-4.htm) *GSA Today* 17(1).

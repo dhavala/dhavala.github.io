@@ -5,6 +5,7 @@ project:
     - "images/**"
     - "files/**"
     - "quotes.json"
+    - "saddlepoint/2026-09-06-research-systems-maths/deck.html"
 
 website:
   title: "Soma S Dhavala"

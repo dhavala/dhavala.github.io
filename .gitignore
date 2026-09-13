@@ -6,3 +6,5 @@
 /.venv-notebooks/
 /saddlepoint/_drafts/
 _backup/
+
+**/*.quarto_ipynb
