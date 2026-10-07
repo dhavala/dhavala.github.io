@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -41,10 +41,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e877e45b962261234aaf1816e93d360a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-81df9304e8762abf7ea45a3562872c5c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ddfe62cd6fe0c157460e914ae9afde24.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-81d02194b5d27f0e9e526613bc8c1174.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-date','listing-title','listing-categories','listing-description','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -446,7 +446,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(12)</span></div><div class="category" data-category="YWk=">ai <span class="quarto-category-count">(4)</span></div><div class="category" data-category="YXJjaGl0ZWN0dXJl">architecture <span class="quarto-category-count">(3)</span></div><div class="category" data-category="YXV0b21hdGlvbg==">automation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YS1lbmdpbmVlcmluZw==">data-engineering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YS1zY2llbmNl">data-science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YWZyYW1l">dataframe <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGVlcC1sZWFybmluZw==">deep-learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZW1lcmdlbmNl">emergence <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZW5naW5lZXJpbmc=">engineering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z3JhcGhz">graphs <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aW50ZXJvcGVyYWJpbGl0eQ==">interoperability <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bWFjaGluZS1sZWFybmluZw==">machine-learning <span class="quarto-category-count">(9)</span></div><div class="category" data-category="bWF0aGVtYXRpY3M=">mathematics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWw=">ml <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWwtYXBwcw==">ml-apps <span class="quarto-category-count">(5)</span></div><div class="category" data-category="bW9hdHM=">moats <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bm90ZWJvb2s=">notebook <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGVkYWdvZ3k=">pedagogy <span class="quarto-category-count">(2)</span></div><div class="category" data-category="cHVibGlzaGluZw==">publishing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cXVhcnRv">quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVwcm9kdWNpYmlsaXR5">reproducibility <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVzZWFyY2g=">research <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3lzdGVtcw==">systems <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dGhlb3J5">theory <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dHJhbnNmb3JtZXJz">transformers <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(13)</span></div><div class="category" data-category="YWk=">ai <span class="quarto-category-count">(4)</span></div><div class="category" data-category="YXJjaGl0ZWN0dXJl">architecture <span class="quarto-category-count">(3)</span></div><div class="category" data-category="YXV0b21hdGlvbg==">automation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YS1lbmdpbmVlcmluZw==">data-engineering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YS1zY2llbmNl">data-science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YWZyYW1l">dataframe <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGVlcC1sZWFybmluZw==">deep-learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZW1lcmdlbmNl">emergence <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZW5naW5lZXJpbmc=">engineering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z3JhcGhz">graphs <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aW50ZXJvcGVyYWJpbGl0eQ==">interoperability <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bWFjaGluZSUyMGxlYXJuaW5n">machine learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWFjaGluZS1sZWFybmluZw==">machine-learning <span class="quarto-category-count">(9)</span></div><div class="category" data-category="bWF0aGVtYXRpY3M=">mathematics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bWw=">ml <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWwtYXBwcw==">ml-apps <span class="quarto-category-count">(5)</span></div><div class="category" data-category="bW9hdHM=">moats <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bW9kZWwlMjBldmFsdWF0aW9u">model evaluation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bm90ZWJvb2s=">notebook <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGVkYWdvZ3k=">pedagogy <span class="quarto-category-count">(2)</span></div><div class="category" data-category="cHVibGlzaGluZw==">publishing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cXVhcnRv">quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVwcm9kdWNpYmlsaXR5">reproducibility <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVzZWFyY2g=">research <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3lzdGVtcw==">systems <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dGhlb3J5">theory <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dHJhbnNmb3JtZXJz">transformers <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <div class="section-banner">
@@ -508,7 +508,34 @@ window.Quarto = {
 </div>
 <div id="listing-sp-posts" class="quarto-listing quarto-listing-container-default">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="cmVzZWFyY2glMkNtYXRoZW1hdGljcyUyQ3N5c3RlbXMlMkNhaSUyQ3BlZGFnb2d5" data-listing-date-sort="1788652800000" data-listing-file-modified-sort="1789344685311" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="30" data-listing-word-count-sort="5813">
+<div class="quarto-post image-right" data-index="0" data-categories="bWFjaGluZSUyMGxlYXJuaW5nJTJDbWF0aGVtYXRpY3MlMkNtb2RlbCUyMGV2YWx1YXRpb24=" data-listing-date-sort="1791331200000" data-listing-file-modified-sort="1791346027441" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="22" data-listing-word-count-sort="4225">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../saddlepoint/2026-10-07-conservation-of-distance/index.html" class="no-external">Conservation of Distance</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZSUyMGxlYXJuaW5n'); return false;">machine learning</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWF0aGVtYXRpY3M='); return false;">mathematics</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('bW9kZWwlMjBldmFsdWF0aW9u'); return false;">model evaluation</div>
+
+</div>
+<div class="delink listing-description"><a href="../saddlepoint/2026-10-07-conservation-of-distance/index.html" class="no-external">
+<p>Conservation of Distance as a working principle for building and debugging supervised learning models: task-relevant similarity, stability, and independent evaluation.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../saddlepoint/2026-10-07-conservation-of-distance/index.html" class="no-external">
+<div class="listing-date">
+Oct 7, 2026
+</div>
+<div class="listing-reading-time">22 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="cmVzZWFyY2glMkNtYXRoZW1hdGljcyUyQ3N5c3RlbXMlMkNhaSUyQ3BlZGFnb2d5" data-listing-date-sort="1788652800000" data-listing-file-modified-sort="1791346027440" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="30" data-listing-word-count-sort="5813">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/2026-09-06-research-systems-maths/index.html" class="no-external">Maths, Systems and Research in the Age of AI</a>
@@ -539,7 +566,7 @@ Sep 6, 2026
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="YWklMkNwZWRhZ29neSUyQ3B1Ymxpc2hpbmclMkNyZXByb2R1Y2liaWxpdHklMkNxdWFydG8=" data-listing-date-sort="1783382400000" data-listing-file-modified-sort="1789344685273" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2616">
+<div class="quarto-post image-right" data-index="2" data-categories="YWklMkNwZWRhZ29neSUyQ3B1Ymxpc2hpbmclMkNyZXByb2R1Y2liaWxpdHklMkNxdWFydG8=" data-listing-date-sort="1783382400000" data-listing-file-modified-sort="1791346027403" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2616">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/2026-07-07-writing-books-like-code/index.html" class="no-external">Writing Books for Interdisciplinary Fields in the Age of AI</a>
@@ -570,7 +597,7 @@ Jul 7, 2026
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="YWklMkNtYWNoaW5lLWxlYXJuaW5nJTJDdHJhbnNmb3JtZXJzJTJDZW1lcmdlbmNlJTJDdGhlb3J5" data-listing-date-sort="1782777600000" data-listing-file-modified-sort="1789344685273" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="33" data-listing-word-count-sort="6497">
+<div class="quarto-post image-right" data-index="3" data-categories="YWklMkNtYWNoaW5lLWxlYXJuaW5nJTJDdHJhbnNmb3JtZXJzJTJDZW1lcmdlbmNlJTJDdGhlb3J5" data-listing-date-sort="1782777600000" data-listing-file-modified-sort="1791346027403" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="33" data-listing-word-count-sort="6497">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/2026-06-30-towards-testable-theory-of-emergence/index.html" class="no-external">Towards a Testable Theory of Emergence</a>
@@ -601,7 +628,7 @@ Jun 30, 2026
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="YWklMkNtYWNoaW5lLWxlYXJuaW5nJTJDZW5naW5lZXJpbmclMkNtb2F0cw==" data-listing-date-sort="1781308800000" data-listing-file-modified-sort="1789344685273" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="856">
+<div class="quarto-post image-right" data-index="4" data-categories="YWklMkNtYWNoaW5lLWxlYXJuaW5nJTJDZW5naW5lZXJpbmclMkNtb2F0cw==" data-listing-date-sort="1781308800000" data-listing-file-modified-sort="1791346027403" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="856">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/2026-06-13-science-moves-engineering-compounds/index.html" class="no-external">Science Moves. Engineering Compounds.</a>
@@ -630,7 +657,7 @@ Jun 13, 2026
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="Z3JhcGhzJTJDbWwlMkNub3RlYm9vaw==" data-listing-date-sort="1607990400000" data-listing-file-modified-sort="1789344685314" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="828">
+<div class="quarto-post image-right" data-index="5" data-categories="Z3JhcGhzJTJDbWwlMkNub3RlYm9vaw==" data-listing-date-sort="1607990400000" data-listing-file-modified-sort="1791346027443" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="828">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/pagerank-knn/index.html" class="no-external">PageRank and KNN: an equivalence</a>
@@ -657,7 +684,7 @@ Dec 15, 2020
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNpbnRlcm9wZXJhYmlsaXR5JTJDZGVlcC1sZWFybmluZw==" data-listing-date-sort="1515542400000" data-listing-file-modified-sort="1789344685273" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="695">
+<div class="quarto-post image-right" data-index="6" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNpbnRlcm9wZXJhYmlsaXR5JTJDZGVlcC1sZWFybmluZw==" data-listing-date-sort="1515542400000" data-listing-file-modified-sort="1791346027403" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="695">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/2018-01-10-ml-app-interoperability-deep-learning-frameworks-2/index.html" class="no-external">ML App Interoperability with Deep Learning, Part 2</a>
@@ -686,7 +713,7 @@ Jan 10, 2018
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNpbnRlcm9wZXJhYmlsaXR5" data-listing-date-sort="1515456000000" data-listing-file-modified-sort="1789344685273" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="563">
+<div class="quarto-post image-right" data-index="7" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNpbnRlcm9wZXJhYmlsaXR5" data-listing-date-sort="1515456000000" data-listing-file-modified-sort="1791346027402" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="563">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/2018-01-09-ml-app-interoperability-deep-learning-frameworks-1/index.html" class="no-external">ML App Interoperability with PMML, Part 1</a>
@@ -713,7 +740,7 @@ Jan 9, 2018
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="bWFjaGluZS1sZWFybmluZyUyQ2F1dG9tYXRpb24lMkNkYXRhLXNjaWVuY2U=" data-listing-date-sort="1510099200000" data-listing-file-modified-sort="1789344685273" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="447">
+<div class="quarto-post image-right" data-index="8" data-categories="bWFjaGluZS1sZWFybmluZyUyQ2F1dG9tYXRpb24lMkNkYXRhLXNjaWVuY2U=" data-listing-date-sort="1510099200000" data-listing-file-modified-sort="1791346027402" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="447">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/2017-11-08-data-science-automation-baby-step/index.html" class="no-external">A Small Step Toward Data Science Automation</a>
@@ -740,7 +767,7 @@ Nov 8, 2017
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="bWFjaGluZS1sZWFybmluZyUyQ2RhdGFmcmFtZSUyQ2RhdGEtZW5naW5lZXJpbmc=" data-listing-date-sort="1509062400000" data-listing-file-modified-sort="1789344685272" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="476">
+<div class="quarto-post image-right" data-index="9" data-categories="bWFjaGluZS1sZWFybmluZyUyQ2RhdGFmcmFtZSUyQ2RhdGEtZW5naW5lZXJpbmc=" data-listing-date-sort="1509062400000" data-listing-file-modified-sort="1791346027402" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="476">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/2017-10-27-dataframe-new-json-machine-learning/index.html" class="no-external">DataFrame as the ML Data Interface</a>
@@ -767,7 +794,7 @@ Oct 27, 2017
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNhcmNoaXRlY3R1cmU=" data-listing-date-sort="1508976000000" data-listing-file-modified-sort="1789344685272" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="416">
+<div class="quarto-post image-right" data-index="10" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNhcmNoaXRlY3R1cmU=" data-listing-date-sort="1508976000000" data-listing-file-modified-sort="1791346027402" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="416">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/2017-10-26-usb-for-connecting-ml-apps/index.html" class="no-external">A USB Interface for ML Apps</a>
@@ -794,7 +821,7 @@ Oct 26, 2017
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNhcmNoaXRlY3R1cmU=" data-listing-date-sort="1508803200000" data-listing-file-modified-sort="1789344685272" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="547">
+<div class="quarto-post image-right" data-index="11" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNhcmNoaXRlY3R1cmU=" data-listing-date-sort="1508803200000" data-listing-file-modified-sort="1791346027402" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="547">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/2017-10-24-axiomatic-framework-ml-apps-2/index.html" class="no-external">Axioms for Reliable ML Apps, Part 2</a>
@@ -821,7 +848,7 @@ Oct 24, 2017
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNhcmNoaXRlY3R1cmU=" data-listing-date-sort="1508630400000" data-listing-file-modified-sort="1789344685272" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="514">
+<div class="quarto-post image-right" data-index="12" data-categories="bWFjaGluZS1sZWFybmluZyUyQ21sLWFwcHMlMkNhcmNoaXRlY3R1cmU=" data-listing-date-sort="1508630400000" data-listing-file-modified-sort="1791346027401" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="514">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="../saddlepoint/2017-10-22-axiomatic-framework-ml-apps-1/index.html" class="no-external">Reliable ML Apps: Goals and Guarantees</a>

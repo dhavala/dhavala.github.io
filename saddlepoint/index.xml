@@ -16,8 +16,280 @@
 <height>76</height>
 <width>144</width>
 </image>
-<generator>quarto-1.10.18</generator>
-<lastBuildDate>Sun, 06 Sep 2026 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.10.19</generator>
+<lastBuildDate>Wed, 07 Oct 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Conservation of Distance</title>
+  <dc:creator>Soma S Dhavala</dc:creator>
+  <link>https://dhavala.github.io/saddlepoint/2026-10-07-conservation-of-distance/</link>
+  <description><![CDATA[ 
+<div class="section-banner">
+  <img style="display:block;width:100%;height:150px;object-fit:cover;object-position:center" src="https://dhavala.github.io/images/banners/horsesskybw.jpg" alt="Blog banner">
+</div>
+
+
+
+
+<p>Conservation laws provide a common basis for modelling physical systems. For a closed material system in classical mechanics, mass, momentum and energy balances take the form</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7BdM%7D%7Bdt%7D=0,%0A%5Cqquad%0A%5Cfrac%7Bd%5Cmathbf%20P%7D%7Bdt%7D=%5Cmathbf%20F_%7B%5Cmathrm%7Bext%7D%7D,%0A%5Cqquad%0A%5Cfrac%7BdE%7D%7Bdt%7D=%5Cdot%20Q-%5Cdot%20W.%0A"></p>
+<p>Here <img src="https://latex.codecogs.com/png.latex?M"> is mass, <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%20P"> is momentum, <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%20F_%7B%5Cmathrm%7Bext%7D%7D"> is net external force, <img src="https://latex.codecogs.com/png.latex?E"> is total energy, <img src="https://latex.codecogs.com/png.latex?%5Cdot%20Q"> is heat supplied, and <img src="https://latex.codecogs.com/png.latex?%5Cdot%20W"> is work done by the system. These balances underlie calculations of fluid flow, motion and heat transfer. Constitutive laws and initial and boundary conditions complete the specification of a particular problem. <a href="https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/navier-strokes-equation/">NASA: Navier–Stokes Equations</a></p>
+<p>The same balance structure applies to probability mass. For a probability density <img src="https://latex.codecogs.com/png.latex?p_t"> and probability flux <img src="https://latex.codecogs.com/png.latex?J_t">, the continuity equation is</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7B%5Cpartial%20p_t%7D%7B%5Cpartial%20t%7D+%5Cnabla%5Ccdot%20J_t=0.%0A"></p>
+<p>With zero net boundary flux, or sufficient decay at infinity, it preserves total probability. In continuous-time diffusion models, the Fokker–Planck equation has this form; the corresponding probability-flow ODE provides a deterministic evolution with the same time-marginal distributions under suitable conditions. <a href="https://arxiv.org/abs/2011.13456">Song et al.: Score-Based Generative Modeling through Stochastic Differential Equations</a></p>
+<p><strong>Can a comparable principle help us build and assess supervised learning models?</strong></p>
+<p>In an <a href="https://www.linkedin.com/posts/somasdhavala_we-all-know-and-use-laws-such-as-newtons-share-7200395909690503168-y-6x/">earlier LinkedIn post</a>, I proposed the following informal statement and asked whether it had exceptions:</p>
+<blockquote class="blockquote">
+<p>Any two examples closer in the input space must also be closer in the output space.</p>
+</blockquote>
+<p>The statement leaves the meaning of closeness and the choice of input and output spaces unspecified. This article develops those choices and examines when the resulting condition is useful for building and diagnosing models.</p>
+<p>In supervised learning, we use observed input–output pairs to predict outcomes for new inputs. This requires assumptions about which relationships extend beyond the training data. One assumption is that inputs which are similar in ways relevant to the task should have related expected outputs or output distributions. Making this assumption explicit provides both a constraint for model construction and a criterion for checking predictions.</p>
+<p>The proposed connection is through this role as a constraint. Physical conservation equations constrain changes in quantities through time and space. For supervised learning, the condition considered here constrains differences between predictions relative to differences between inputs. This motivates <strong>Conservation of Distance</strong> as a working principle.</p>
+<section id="conservation-of-distance-a-working-principle-for-supervised-learning" class="level2">
+<h2 data-anchor-id="conservation-of-distance-a-working-principle-for-supervised-learning">Conservation of Distance: A working principle for supervised learning</h2>
+<p><strong>Conservation of Distance</strong> directs attention to whether differences in predictions are consistent with differences that matter to the task. This applies across nearest neighbours, regression, decision trees, support vector machines and neural networks, although each method represents those relationships differently.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Conservation of Distance">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Conservation of Distance
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Inputs which are close under a task-relevant distance should have correspondingly close expected outputs or output distributions.</p>
+<p>Let <img src="https://latex.codecogs.com/png.latex?D_T"> be a justified task-reference distance and <img src="https://latex.codecogs.com/png.latex?m(x)"> the target conditional mean or probability vector. For a finite nonnegative constant <img src="https://latex.codecogs.com/png.latex?L_m">, assume</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AD_Y(m(x),m(x'))%5Cleq%20L_m%20D_T(x,x').%0A"></p>
+<p>If <img src="https://latex.codecogs.com/png.latex?D_Y(f(x),m(x))%5Cleq%5Cvarepsilon"> at both inputs being compared, then</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AD_Y(f(x),f(x'))%5Cleq%20L_m%20D_T(x,x')+2%5Cvarepsilon.%0A"></p>
+<p>Here <img src="https://latex.codecogs.com/png.latex?D_Y"> is a metric or pseudometric on outputs. The first inequality is an assumption about the target; the second is a necessary consequence of that assumption and the stated accuracy. Satisfaction does not establish predictive usefulness. The distance choices and the derivation are developed below.</p>
+</div>
+</div>
+<p>The qualification “task-relevant” is essential. Learning involves identifying relevant differences, expressing them in a representation, and testing whether the resulting relationships help predict unseen outcomes.</p>
+<p>As a working principle, <strong>Conservation of Distance</strong> requires the modeller to specify which input changes should leave predictions approximately stable. As a diagnostic, it tests whether a model meets that requirement. The necessary-condition argument follows from assumed target stability and prediction accuracy: together they bound the difference between predictions. A violation calls at least one of those assumptions into question. The distance, domain and acceptable output variation must therefore be justified independently. Unlike physical conservation, the condition does not assert an invariant total.</p>
+</section>
+<section id="task-dependent-similarity" class="level2">
+<h2 data-anchor-id="task-dependent-similarity">Task-dependent similarity</h2>
+<p>In the original discussion, <a href="https://www.linkedin.com/in/jigarkdoshi/">Jigar Doshi</a> used the word “bank” to illustrate dependence on context. <a href="https://www.linkedin.com/in/manikantan2001/">Mani Srinivasan</a> raised negation in sentiment analysis. Both comments identify information that a suitable representation must retain.</p>
+<p>Consider three messages sent to a subscription service:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Message</th>
+<th>Requested action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A: “Please renew my subscription.”</td>
+<td>Renew</td>
+</tr>
+<tr class="even">
+<td>B: “Please do not renew my subscription.”</td>
+<td>Do not renew</td>
+</tr>
+<tr class="odd">
+<td>C: “Keep my membership active for another year.”</td>
+<td>Renew</td>
+</tr>
+</tbody>
+</table>
+<p>By word overlap, A and B are close. For predicting the requested action, A and C belong together. Word overlap does not capture the action requested in these examples.</p>
+<p>Even this grouping depends on the task. If we are routing messages to departments, all three may belong to subscriptions. If we are deciding what action to take, the negation is essential. If we are identifying the language, all three again have the same target.</p>
+<p>Similarity must therefore be defined with respect to a task. There is no reason to expect a single distance to serve all three predictions equally well.</p>
+<p>The same issue appears in numerical data. Adjacent customer identifiers do not imply similar customers. Two houses on the same street may differ greatly in size and condition. Standardising a feature changes its scale; it cannot establish its relevance.</p>
+</section>
+<section id="representation-and-prediction" class="level2">
+<h2 data-anchor-id="representation-and-prediction">Representation and prediction</h2>
+<p>Write a predictor as</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af(x)=g(%5Cphi(x)).%0A"></p>
+<p>The map <img src="https://latex.codecogs.com/png.latex?%5Cphi"> constructs a representation. The map <img src="https://latex.codecogs.com/png.latex?g"> makes a prediction from it. These components need not be trained separately: the decomposition is a way to examine their roles.</p>
+<p>For the subscription messages, a useful representation for action prediction would suppress some differences in wording while retaining the distinction introduced by “not.” In a house-price model, it might express size, condition and location in a form from which price is easier to estimate.</p>
+<p>One possible distance is then</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AD_%5Cphi(x,x')=%5ClVert%5Cphi(x)-%5Cphi(x')%5CrVert_2.%0A"></p>
+<p>This is always a <em>pseudometric</em> on the original input space; it is a metric when <img src="https://latex.codecogs.com/png.latex?%5Cphi"> is injective. Distinct observations may have zero distance if their representations coincide.</p>
+<p>Learning a useful representation often requires changing distances. We may want paraphrases to move together and opposite requests to move apart. The intended consistency is between task-relevant proximity and predictive behaviour. Preservation of the original geometry is not required.</p>
+<p>Representation learning develops this idea systematically. A representation is useful insofar as it makes the subsequent task easier, and its properties depend on that task and the predictor that follows it. Ordinary supervised training can produce such representations without explicitly optimising a distance objective. <a href="https://www.deeplearningbook.org/contents/representation.html">Goodfellow, Bengio and Courville, Chapter 15</a></p>
+<p>The model-internal distance <img src="https://latex.codecogs.com/png.latex?D_%5Cphi"> and task-reference distance <img src="https://latex.codecogs.com/png.latex?D_T"> have different roles. The former describes relationships within the fitted model; the latter specifies the relationships against which its behaviour is assessed. For example, <img src="https://latex.codecogs.com/png.latex?D_T"> may come from scaled physical measurements or independently judged equivalence classes of requests. It must be fixed before final evaluation and justified through task evidence rather than defined from the predictions being tested.</p>
+<p>A learned distance can serve as <img src="https://latex.codecogs.com/png.latex?D_T"> if it is frozen and independently validated. The distinction concerns its evidential role, not whether it was learned. The two distances may coincide, but that agreement is a modelling choice. Defining <img src="https://latex.codecogs.com/png.latex?D_T"> from the predictor’s outputs would make the strict predictor bound true by construction; defining it from the target <img src="https://latex.codecogs.com/png.latex?m"> would do the same for the target-stability assumption.</p>
+<section id="separating-representation-distance-and-prediction" class="level3">
+<h3 data-anchor-id="separating-representation-distance-and-prediction">Separating representation, distance and prediction</h3>
+<p>Supervised methods specify how observations share predictive information. The representation, comparison rule and predictor may be fixed, learned separately or learned jointly. It would be too strong to say that every supervised method learns a representation or a metric: nearest-neighbour prediction can use fixed features and a prescribed distance while retaining labelled examples.</p>
+<p>Separating these components helps identify where a stability assumption enters the model. A learned tree partition defines which observations share a leaf. A neural representation determines the inputs to its output layer. Neither construction alone establishes that the resulting proximity is appropriate for the target.</p>
+<p>The separation is also not unique. For an invertible linear transformation <img src="https://latex.codecogs.com/png.latex?A"> of the representation,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af=g%5Ccirc%5Cphi%0A%20%20=(g%5Ccirc%20A%5E%7B-1%7D)%5Ccirc(A%5Ccirc%5Cphi).%0A"></p>
+<p>Predictions remain unchanged, while Euclidean distances in the transformed representation can change substantially. Representation constraints, distance scales and the prediction rule must therefore be examined together. Separating them makes their roles inspectable; it does not automatically establish conservation.</p>
+</section>
+</section>
+<section id="a-mathematical-formulation" class="level2">
+<h2 data-anchor-id="a-mathematical-formulation">A mathematical formulation</h2>
+<p>Physical conservation equations describe changes through time or space. The proposed stability condition instead compares pairs of inputs. In the LinkedIn discussion, <a href="https://www.linkedin.com/in/bastyajayshenoy/">Ajay Shenoy</a> identified Lipschitz continuity as the condition that supplies such a bound.</p>
+<p>A strict design requirement on the predictor can be written as</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AD_Y(f(x),f(x'))%5Cleq%20L_f%5C,D_T(x,x').%0A"></p>
+<p>Here <img src="https://latex.codecogs.com/png.latex?L_f"> is a chosen predictor sensitivity bound. This strict design requirement differs from the error-aware bound derived from target stability with constant <img src="https://latex.codecogs.com/png.latex?L_m">. With metric or pseudometric input and output distances, the strict condition is Lipschitz continuity. The necessity proof below uses metric properties only on the output side; its input comparison can be any specified nonnegative dissimilarity.</p>
+<p>For regression, <img src="https://latex.codecogs.com/png.latex?D_Y"> might be absolute difference between predicted means. For classification, it might compare probability vectors. Numeric differences between arbitrary class identifiers have no corresponding meaning.</p>
+<p>The inequality allows contraction. Very different inputs may have the same prediction. It also allows expansion up to the factor <img src="https://latex.codecogs.com/png.latex?L_f">, and says nothing about a converse: similar outputs need not imply similar inputs. Input and output distances can have different units. In my reply to Ajay, I suggested bi-Lipschitz behaviour as desirable. That stronger requirement also bounds contraction and needs a narrower scope: classification and other many-to-one tasks must allow distinct inputs to share an output.</p>
+<p>Exact preservation up to scale would require <img src="https://latex.codecogs.com/png.latex?D_Y(f(x),f(x'))=c%20D_T(x,x')"> for a fixed positive scale <img src="https://latex.codecogs.com/png.latex?c">. The upper bound does not require this equality.</p>
+<p>The conventional connection is to the <em>smoothness</em> or <em>local constancy</em> prior: nearby inputs are expected to have related outputs. This is an established and useful inductive bias, with limitations, especially when learning depends only on local neighbourhoods in high-dimensional spaces. <a href="https://www.deeplearningbook.org/contents/ml.html">Goodfellow, Bengio and Courville, Chapter 5</a></p>
+<p>Observed targets need additional care. Two customers with identical recorded features can behave differently. The relevant regularity may concern <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20E%5BY%5Cmid%20X=x%5D"> or <img src="https://latex.codecogs.com/png.latex?P(Y%5Cmid%20X=x)"> rather than each realised outcome. Even these quantities need not be smooth in the chosen coordinates. A real eligibility threshold can introduce a discontinuity, and thresholding a smoothly varying class probability can create a hard decision boundary.</p>
+</section>
+<section id="design-choices-left-unspecified" class="level2">
+<h2 data-anchor-id="design-choices-left-unspecified">Design choices left unspecified</h2>
+<p>The principle does not specify a complete model. It leaves the representation <img src="https://latex.codecogs.com/png.latex?%5Cphi">, prediction rule <img src="https://latex.codecogs.com/png.latex?g">, input distance, output discrepancy, domain of application and acceptable sensitivity bounds open for design. Some choices are fixed using domain knowledge; others are estimated from training data and selected through validation. Representations and distances need not all be learned, but their suitability must be assessed.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Examples of design choices</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Input representation</td>
+<td>Standardised measurements, selected physical variables, text embeddings, learned neural features</td>
+</tr>
+<tr class="even">
+<td>Input distance or dissimilarity</td>
+<td>Euclidean distance, a weighted distance, a learned Mahalanobis distance, cosine dissimilarity</td>
+</tr>
+<tr class="odd">
+<td>Prediction rule</td>
+<td>Linear regression, neighbour averaging, a tree, a neural output layer</td>
+</tr>
+<tr class="even">
+<td>Output discrepancy</td>
+<td>Absolute error for scalar predictions, a weighted norm for multiple outputs, a divergence between predicted class distributions</td>
+</tr>
+<tr class="odd">
+<td>Scope and sensitivity</td>
+<td>A specified neighbourhood, operating range or family of transformations; an acceptable bound on output variation</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.linkedin.com/in/rajeshstat/">Rajesh Talluri</a> emphasised that input and output spaces can have different notions of proximity and suggested considering transformed spaces. These choices remain part of the model specification.</p>
+<p>For example, a house-price model may weight differences in floor area and location differently. A multi-output model may require separate scales for temperature and pressure. A classifier requires a comparison between probability distributions, rather than subtraction of category identifiers. Each choice changes what the stability requirement means.</p>
+<section id="metrics-pseudometrics-and-divergences" class="level3">
+<h3 data-anchor-id="metrics-pseudometrics-and-divergences">Metrics, pseudometrics and divergences</h3>
+<p>Here, “distance” is used broadly for a task-specific measure of discrepancy. Its precise mathematical properties must be stated when specifying a model or diagnostic.</p>
+<p>A <strong>metric</strong> is nonnegative, symmetric, satisfies the triangle inequality, and is zero exactly when its arguments are identical. A <strong>pseudometric</strong> retains the other properties but permits distinct observations to have zero distance. The representation distance <img src="https://latex.codecogs.com/png.latex?%5ClVert%5Cphi(x)-%5Cphi(x')%5CrVert_2"> is an example when <img src="https://latex.codecogs.com/png.latex?%5Cphi"> maps distinct inputs to the same representation. This can be appropriate when their differences are irrelevant to the task.</p>
+<p>A <strong>divergence</strong> need not be symmetric or satisfy the triangle inequality. For class-probability vectors <img src="https://latex.codecogs.com/png.latex?p"> and <img src="https://latex.codecogs.com/png.latex?q">, one option is</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AD_%7B%5Cmathrm%7BKL%7D%7D(p%5CVert%20q)=%5Csum_i%20p_i%5Clog%5Cfrac%7Bp_i%7D%7Bq_i%7D.%0A"></p>
+<p>Its direction matters, and it can be infinite when <img src="https://latex.codecogs.com/png.latex?q_i=0"> for a class with <img src="https://latex.codecogs.com/png.latex?p_i%3E0">. A bound using such a divergence is a discrepancy bound; it is not a standard metric Lipschitz condition. Properties that depend on symmetry or the triangle inequality cannot be assumed.</p>
+</section>
+<section id="cross-entropy-as-an-output-discrepancy" class="level3">
+<h3 data-anchor-id="cross-entropy-as-an-output-discrepancy">Cross-entropy as an output discrepancy</h3>
+<p>Cross-entropy is another common choice for assessing outputs:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AH(p,q)=-%5Csum_i%20p_i%5Clog%20q_i%0A=H(p)+D_%7B%5Cmathrm%7BKL%7D%7D(p%5CVert%20q).%0A"></p>
+<p>When <img src="https://latex.codecogs.com/png.latex?p"> is a fixed target distribution and <img src="https://latex.codecogs.com/png.latex?q"> is the prediction, minimising cross-entropy is equivalent to minimising KL divergence. For a one-hot target with class <img src="https://latex.codecogs.com/png.latex?y">, it reduces to <img src="https://latex.codecogs.com/png.latex?-%5Clog%20q_y">. This makes cross-entropy a suitable prediction loss, although it is not a metric or a pseudometric. <a href="https://statproofbook.github.io/P/kl-ent">Relation between cross-entropy, entropy and KL divergence</a></p>
+<p>Its use in the pairwise conservation condition needs an adjustment. If <img src="https://latex.codecogs.com/png.latex?p=f(x)"> and <img src="https://latex.codecogs.com/png.latex?q=f(x')">, then even identical distributions have <img src="https://latex.codecogs.com/png.latex?H(p,p)=H(p)">, which is generally positive. Directly substituting cross-entropy into the zero-baseline bound would therefore fail at <img src="https://latex.codecogs.com/png.latex?x=x'"> for a non-degenerate probability vector.</p>
+<p>The corresponding excess cross-entropy condition is</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AH(f(x),f(x'))-H(f(x))%0A=D_%7B%5Cmathrm%7BKL%7D%7D(f(x)%5CVert%20f(x'))%0A%5Cleq%20C_%7B%5Cmathrm%7BKL%7D%7D%5C,D_T(x,x').%0A"></p>
+<p>Equivalently, cross-entropy can be bounded by <img src="https://latex.codecogs.com/png.latex?H(f(x))+C_%7B%5Cmathrm%7BKL%7D%7DD_T(x,x')">. The entropy term accounts for the reference distribution’s uncertainty. Thus cross-entropy can be used in the output comparison, but its baseline must be included. This is a separate design condition, not a consequence of the metric necessity result.</p>
+<p>Pairs are ordered for KL; imposing the bound in both directions requires checking both orders. For classification, total variation <img src="https://latex.codecogs.com/png.latex?D_Y(p,q)=%5Ctfrac12%5Csum_i%7Cp_i-q_i%7C"> provides a metric alternative, while cross-entropy can remain the training loss. Low average cross-entropy does not itself establish a pointwise accuracy allowance.</p>
+</section>
+</section>
+<section id="comparison-across-algorithms" class="level2">
+<h2 data-anchor-id="comparison-across-algorithms">Comparison across algorithms</h2>
+<p><strong>Conservation of Distance</strong> offers a common set of questions without erasing the differences between algorithms.</p>
+<p><strong>Nearest neighbours</strong> makes the choice explicit. Select a representation and distance, find nearby training examples, and combine their targets. The method depends directly on whether those neighbours are informative for the query. Feature selection and scaling affect which examples are retrieved. Hard neighbour selection can produce jumps when the neighbour set changes, so it does not generally guarantee a Lipschitz predictor in the original coordinates.</p>
+<p><strong>Linear regression</strong> describes a global relationship. For <img src="https://latex.codecogs.com/png.latex?f(x)=w%5E%5Ctop%20x+b">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%7Cf(x)-f(x')%7C%5Cleq%5ClVert%20w%5CrVert_2%5C,%5ClVert%20x-x'%5CrVert_2.%0A"></p>
+<p>The coefficient norm bounds sensitivity in these coordinates. Movement perpendicular to <img src="https://latex.codecogs.com/png.latex?w"> leaves the prediction unchanged; movement along <img src="https://latex.codecogs.com/png.latex?w"> changes it. Regression can extrapolate through this global structure without retrieving nearby observations.</p>
+<p><strong>Decision trees</strong> learn a partition. A regression tree gives observations in the same leaf the same fitted mean. Its splits determine which distinctions affect the prediction. Across a leaf boundary, however, an arbitrarily small input change can produce a jump. Tree predictions therefore need not be smooth in the original coordinates.</p>
+<p><strong>An RBF-kernel support vector machine</strong> uses a similarity that decays exponentially with squared distance. Its decision score combines kernel evaluations against support vectors with fitted signed coefficients. This connects prediction to geometry, but the computation is not an average of neighbouring labels: margins, coefficients and the intercept matter.</p>
+<p><strong>Neural networks</strong> can learn the representation and prediction rule together. Hidden layers change the coordinates available to later layers. Whether ordinary Euclidean distance in one of those layers is useful for a particular task remains something to assess; a trained network does not automatically make every hidden-space distance meaningful.</p>
+<p>These methods give us several ways to specify which observations share predictive information: explicit neighbourhoods, global directions, learned regions, kernel similarities and learned features. Their assumptions and mechanisms remain distinct.</p>
+</section>
+<section id="necessity-sufficiency-and-testability" class="level2">
+<h2 data-anchor-id="necessity-sufficiency-and-testability">Necessity, sufficiency and testability</h2>
+<p>The necessity of <strong>Conservation of Distance</strong> depends on the target relationship and the independently justified task-reference comparison <img src="https://latex.codecogs.com/png.latex?D_T">. Let <img src="https://latex.codecogs.com/png.latex?m(x)"> denote the target conditional mean or conditional probability vector. Suppose that, on the domain under consideration,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AD_Y(m(x),m(x'))%5Cleq%20L_m%20D_T(x,x').%0A"></p>
+<p>If a predictor approximates this target within <img src="https://latex.codecogs.com/png.latex?%5Cvarepsilon"> at both inputs, then</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AD_Y(f(x),m(x))%5Cleq%5Cvarepsilon,%0A%5Cqquad%0AD_Y(f(x'),m(x'))%5Cleq%5Cvarepsilon.%0A"></p>
+<p>For a metric or pseudometric output distance, the triangle inequality gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0AD_Y(f(x),f(x'))%0A&amp;%5Cleq%20D_Y(f(x),m(x))%0A+D_Y(m(x),m(x'))%0A+D_Y(m(x'),f(x'))%5C%5C%0A&amp;%5Cleq%20L_m%20D_T(x,x')+2%5Cvarepsilon.%0A%5Cend%7Baligned%7D%0A"></p>
+<p>Thus, stability of the target and accuracy at both inputs imply a corresponding stability bound for the predictions, with an allowance for approximation error. A violation means that the assumed target stability or the claimed accuracy fails. It identifies an inconsistency without determining its cause. Low average test error does not establish the required accuracy at every input. This argument also does not transfer directly to divergences that lack the triangle inequality.</p>
+<section id="why-satisfaction-is-insufficient" class="level3">
+<h3 data-anchor-id="why-satisfaction-is-insufficient">Why satisfaction is insufficient</h3>
+<p>A constant predictor satisfies the strict design inequality with <img src="https://latex.codecogs.com/png.latex?L_f=0">, even when it fails to represent variation in the target. Stability therefore cannot establish predictive usefulness. Accuracy and appropriate responses to meaningful changes remain separate requirements.</p>
+<p>This does not remove the condition’s diagnostic value. If independently checked paraphrases receive substantially different renewal probabilities, their predictions may be inconsistent with the assumed target stability and accuracy. Aggregate metrics can conceal such behaviour. A condition can be necessary under stated assumptions without being sufficient for the full task.</p>
+</section>
+<section id="why-necessity-is-conditional" class="level3">
+<h3 data-anchor-id="why-necessity-is-conditional">Why necessity is conditional</h3>
+<p><a href="https://www.linkedin.com/posts/somasdhavala_we-all-know-and-use-laws-such-as-newtons-share-7200395909690503168-y-6x/">Gabriel Chua</a> noted that neighbouring inputs can receive different class labels across a decision boundary. A deterministic threshold gives a direct example. Consider the target</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Am(x)=%5Cmathbf%201%5C%7Bx%5Cgeq0%5C%7D.%0A"></p>
+<p>An exact predictor has zero error. With ordinary absolute distance on inputs and outputs, however, it cannot satisfy any finite global Lipschitz bound. Inputs on opposite sides of zero can be arbitrarily close while their outputs differ by one. Successful supervised prediction therefore does not universally require this bound in the original coordinates. Here the target-stability premise fails for every finite <img src="https://latex.codecogs.com/png.latex?L_m">, so the necessity result does not apply.</p>
+<p><a href="https://www.linkedin.com/in/lkv-42719417/">Lalit Verma</a> also raised changes in output behaviour, using the term “inflection points.” For the bound, the relevant cases are discontinuities or unbounded local sensitivity; a change in curvature alone need not violate it.</p>
+<p>A representation that separates the two regions can restore a finite bound. This makes the representation important, but does not establish a universal law: if unrestricted representations are allowed, choose <img src="https://latex.codecogs.com/png.latex?%5Cphi(x)=f(x)"> and define the induced distance</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AD_f(x,x')=D_Y(f(x),f(x')).%0A"></p>
+<p>Every predictor then satisfies a bound in its own induced distance with constant one, including an inaccurate predictor. The existence of some representation satisfying the condition cannot distinguish successful learning from failed learning.</p>
+</section>
+<section id="sensitivity-to-initial-conditions" class="level3">
+<h3 data-anchor-id="sensitivity-to-initial-conditions">Sensitivity to initial conditions</h3>
+<p>Responding to the earlier post, <a href="https://www.linkedin.com/in/nithin-nagaraj-14b07934/">Nithin Nagaraj</a> raised chaotic nonlinear systems as an objection: small differences in initial conditions can grow substantially, and nearby states on opposite sides of a separatrix can lead to different outcomes. This identifies two distinct limitations of the informal claim.</p>
+<p>First, sensitivity depends on the prediction horizon. For an ODE <img src="https://latex.codecogs.com/png.latex?%5Cdot%20z=b(z)"> whose vector field is Lipschitz with constant <img src="https://latex.codecogs.com/png.latex?K"> on a region containing both trajectories over <img src="https://latex.codecogs.com/png.latex?%5B0,t%5D">, the flow <img src="https://latex.codecogs.com/png.latex?%5CPhi_t"> satisfies, for <img src="https://latex.codecogs.com/png.latex?t%5Cgeq0">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5ClVert%5CPhi_t(x)-%5CPhi_t(x')%5CrVert%0A%5Cleq%20e%5E%7BKt%7D%5ClVert%20x-x'%5CrVert.%0A"></p>
+<p>A finite-time bound can therefore coexist with rapid separation. In chaotic dynamics, positive Lyapunov exponents describe exponential growth of infinitesimal perturbations along unstable directions; they are not themselves uniform bounds for all pairs. <a href="https://www.scholarpedia.org/article/Lyapunov_exponent">Politi: Lyapunov Exponent</a></p>
+<p>For forecasting, a bound that grows rapidly with time may permit output differences too large to be useful. The existence of a finite Lipschitz constant alone therefore says little about practical predictability. The horizon, measurement precision and acceptable error must be specified.</p>
+<p>Second, predicting an eventual outcome is different from predicting the state at a finite time. If the target identifies which basin of attraction contains an initial condition, arbitrarily close inputs across a separatrix forming a basin boundary can receive different labels. The target can be discontinuous in the original coordinates, even when the underlying flow is smooth. Such boundaries can occur without chaos.</p>
+<p>The objection thus limits a universal reading of the original statement. A model should reproduce genuine sensitivity or a genuine outcome boundary when the task requires it. A violation of an assumed stability bound can reveal that the bound is unsuitable for the target, rather than that the model is defective.</p>
+</section>
+<section id="a-testable-formulation" class="level3">
+<h3 data-anchor-id="a-testable-formulation">A testable formulation</h3>
+<p>A specified instance of the principle is falsifiable. <a href="https://www.linkedin.com/in/rishabh-bhardwaj-nlp/">Rishabh Bhardwaj</a> distinguished a guiding principle from a universal law in the original discussion. The conditional formulation here makes the assumptions that can be tested explicit. Freeze the task-reference distance <img src="https://latex.codecogs.com/png.latex?D_T">, the output distance, the domain, the bound and any approximation-error allowance before evaluation. A pair that violates the resulting inequality is a counterexample to that instance. Independently assessed targets help determine whether the failure concerns prediction accuracy or the assumed target stability.</p>
+<p>For subscription messages, humans can identify paraphrases and action reversals without consulting the model’s embeddings. Training labels may legitimately shape the representation, but evaluation must assess its relevance on unseen cases. Choosing a new reference distance or increasing the bound after every failure would remove the test’s ability to reject the specification.</p>
+<p>For noisy outcomes, a single observed label does not reveal the conditional mean or probability vector <img src="https://latex.codecogs.com/png.latex?m(x)">. The error allowance therefore needs separate evidence, such as a known synthetic target, repeated observations with uncertainty estimates, or a justified accuracy guarantee. Without that evidence, pairwise violations remain diagnostics of a proposed specification; they do not by themselves establish that the target-stability assumption is false.</p>
+</section>
+</section>
+<section id="building-models-with-the-principle" class="level2">
+<h2 data-anchor-id="building-models-with-the-principle">Building models with the principle</h2>
+<p>The principle can guide feature selection, representation learning and the training objective. If units or irrelevant identifiers dominate the distance, the representation needs revision. If valid paraphrases should receive similar predictions, independently checked paraphrase pairs can provide training examples or consistency constraints. Meaningful changes, such as negation, must retain the distinctions needed for prediction.</p>
+<p>For a specified collection of training pairs <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20P">, one possible consistency penalty is</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathcal%20L_%7B%5Cmathrm%7Bcons%7D%7D%0A=%5Cfrac%7B1%7D%7B%7C%5Cmathcal%20P%7C%7D%5Csum_%7B(x,x')%5Cin%5Cmathcal%20P%7D%0A%5Cleft%5B%5Cmax%5Cleft%5C%7B0,%0AD_Y(f(x),f(x'))-L_f%20D_T(x,x')%0A%5Cright%5C%7D%5Cright%5D%5E2.%0A"></p>
+<p>It can be combined with the supervised prediction loss as <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20L_%7B%5Cmathrm%7Bpred%7D%7D+%5Clambda%5Cmathcal%20L_%7B%5Cmathrm%7Bcons%7D%7D">, where <img src="https://latex.codecogs.com/png.latex?%5Clambda%5Cgeq0"> controls the penalty’s contribution. This is one possible implementation of the principle, not a requirement for every model. Enforcing it on sampled pairs does not establish a global Lipschitz bound.</p>
+<p>This penalty uses a fixed task-reference distance and chosen design bound <img src="https://latex.codecogs.com/png.latex?L_f">. If an internal learned distance is used instead, its scale must be constrained: enlarging it could reduce the penalty without improving predictions. Pair construction and the prediction loss remain essential. The penalty controls excessive output variation; it supplies no requirement that distinct targets receive distinct predictions.</p>
+</section>
+<section id="debugging-and-empirical-evaluation" class="level2">
+<h2 data-anchor-id="debugging-and-empirical-evaluation">Debugging and empirical evaluation</h2>
+<p><a href="https://www.linkedin.com/in/pramod-kompalli/">Pramod Kompalli</a> connected the original statement to robustness under small input perturbations. The subscription example makes the required checks concrete. An independently verified paraphrase should produce similar class-probability vectors under the specified bound. A negation that changes the target calls for an appropriate probability change; that is an additional accuracy test, not a consequence of the upper stability bound. Near a decision threshold, a small permissible probability change can flip the selected action, so an action flip alone is not a violation.</p>
+<p>This pairing is useful beyond text. We can specify changes that should preserve a target and changes that should alter it, then examine both prediction quality and sensitivity. Those expectations must come from the application; even a seemingly harmless image transformation can change the label in some tasks.</p>
+<p>A practical study can proceed through four steps:</p>
+<ol type="1">
+<li><strong>Specify the target.</strong> Department routing and requested-action prediction require different notions of similarity.</li>
+<li><strong>Specify the relevant relationships.</strong> Fix the reference distance, output distance, bound and error allowance, with examples of irrelevant variation and meaningful change, before inspecting test results.</li>
+<li><strong>Fit and select the representation.</strong> Fit preprocessing, features and model parameters using the permitted training data; select choices using validation data.</li>
+<li><strong>Evaluate generalisation.</strong> Evaluate accuracy and the specified consistency tests on untouched cases, with splits that reflect deployment. Closely related templates or customers may need to stay in the same split.</li>
+</ol>
+<p>A failure can reveal an omitted variable, a poor representation, an unsuitable model, or a change in the data-generating process. <strong>Conservation of Distance</strong> helps formulate the diagnosis; it does not determine the cause by itself.</p>
+<p>For each evaluation pair, a direct diagnostic is the excess output variation</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ae(x,x')=%5Cmax%5Cleft%5C%7B0,%0AD_Y(f(x),f(x'))-L_m%20D_T(x,x')-2%5Cvarepsilon%0A%5Cright%5C%7D.%0A"></p>
+<p>This checks the error-aware necessary bound. To test a strict predictor design requirement instead, use <img src="https://latex.codecogs.com/png.latex?L_f"> and omit the error allowance. Positive values can be grouped by transformation, data source or operating condition. The reference distance, bound and allowance must be fixed before examining these results.</p>
+<p>Inspection can then follow the prediction pipeline. Equivalent raw inputs that become distant after preprocessing suggest a problem with parsing, units, scaling or feature construction. Inputs that remain close in the selected representation but produce excessive output differences point towards the prediction rule’s sensitivity. Inputs that are close only because a relevant variable was omitted indicate that the distance is unsuitable. A genuine target discontinuity calls for revising the assumed neighbourhood or bound.</p>
+<p>Passing a finite set of these checks provides evidence about the cases examined. A violation is evidence of a failed stability requirement when that requirement is justified; it is not automatically evidence that every discontinuity or sharp prediction change is an error.</p>
+</section>
+<section id="scope-of-the-principle" class="level2">
+<h2 data-anchor-id="scope-of-the-principle">Scope of the principle</h2>
+<p><strong>Conservation of Distance</strong> connects model specification to model assessment. During construction, it makes assumptions about relevant similarity explicit. During debugging, it identifies prediction changes that exceed the variation allowed by those assumptions.</p>
+<p>Its reach has limits. Successful learning can exploit global algebraic or compositional structure that raw local distance obscures. For example, parity changes whenever one bit flips. With unnormalised Hamming distance on bit strings and absolute distance on binary outputs, every binary-valued function is nevertheless 1-Lipschitz: distinct strings are at distance at least one. The bound holds, but supplies no useful preference for parity over other functions. A finite bound must therefore be assessed for its practical restrictiveness, not merely its existence.</p>
+<p>The principle is grounded in smoothness and representation, with a scope determined by the task. If the target relationship is stable and the predictor is accurate, the predictions must satisfy the corresponding bound with an approximation-error allowance. A violation shows that at least one of these assumptions fails. Satisfaction does not establish accuracy or generalisation. Finite evaluation pairs provide a partial check, while a counterexample can reject the specified bound.</p>
+<p>Applied to a new problem, this viewpoint requires specifying which input differences should affect the prediction, how the representation expresses those differences, and how the resulting behaviour will be evaluated on unseen data.</p>
+<hr>
+<p><em>A companion post will examine query–key–value formulations as a way to compare prediction and retrieval computations.</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>machine learning</category>
+  <category>mathematics</category>
+  <category>model evaluation</category>
+  <guid>https://dhavala.github.io/saddlepoint/2026-10-07-conservation-of-distance/</guid>
+  <pubDate>Wed, 07 Oct 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Maths, Systems and Research in the Age of AI</title>
   <dc:creator>Soma S Dhavala</dc:creator>
