@@ -17,7 +17,333 @@
 <width>144</width>
 </image>
 <generator>quarto-1.10.19</generator>
-<lastBuildDate>Wed, 07 Oct 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 21 Oct 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>k-NN as a Binding Algorithm</title>
+  <dc:creator>Soma S Dhavala</dc:creator>
+  <link>https://dhavala.github.io/saddlepoint/2026-10-21-knn-binding-algorithm/</link>
+  <description><![CDATA[ 
+<div class="section-banner">
+  <img style="display:block;width:100%;height:150px;object-fit:cover;object-position:center" src="https://dhavala.github.io/images/banners/horsesskybw.jpg" alt="Blog banner">
+</div>
+
+
+
+
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Overview">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Overview
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This post develops a unified view of methods spanning supervised learning, unsupervised learning, Transformer models and search. Starting with k-NN, it shows how changing the representation, reference keys, associated values and comparison rule connects regression, trees, SVMs, neural networks, attention, clustering and retrieval. The equations establish where these are exact reformulations and where the shared operation is one part of a larger method.</p>
+<p>The benefit is a common framework for understanding a wide range of algorithms and reasoning about their differences. It also supplies practical questions for model design and diagnosis: what information is stored, what determines a match, and how does the retrieved information contribute to the output? The memory interpretation connects explicit reference entries with learned associations stored in model parameters.</p>
+</div>
+</div>
+<p>My reading of S. R. Kulkarni and Gilbert Harman’s <em>An Elementary Introduction to Statistical Learning Theory</em> first led me to consider nearest-neighbour methods as a way to connect apparently different learning algorithms, including neural networks. Their treatment of nearest neighbours, kernel rules and neural networks prompted a question that has remained useful to me: how much of a predictor can be understood by identifying what it compares an input against and what it returns from that comparison? <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781118023471">Kulkarni and Harman, 2011</a></p>
+<p>This extends <a href="../../saddlepoint/2026-06-30-towards-testable-theory-of-emergence/index.html">Towards a Testable Theory of Emergence</a>, which introduced retrieval interpretations of regression and Transformer computations. It also complements <a href="../../saddlepoint/2026-10-07-conservation-of-distance/index.html">Conservation of Distance</a>: that post concerns the relationships predictions should respect; this one examines how models represent and use them.</p>
+<p>I considered this approach for an executive programme: begin with one accessible construction, then develop each method by showing which components change. It offers a common framework across supervised learning, unsupervised learning, Transformer models and search, while retaining the distinctions needed to choose and assess models.</p>
+<p><strong>Can k-NN serve as a binding algorithm across these methods?</strong></p>
+<p>By <em>binding algorithm</em>, I mean a concrete starting construction whose components can be identified, replaced and learned in other methods. Ordinary k-NN compares a query with reference inputs, selects neighbours and combines their targets. The broader construction compares a query with keys and retrieves or combines associated values. The keys, values and comparison rule need not retain their original meaning.</p>
+<p>These areas overlap: a Transformer is an architecture that can be trained under different learning objectives, and search can use representations learned with or without labels. The unification concerns their comparison and retrieval operations.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="k-NN as a Binding Algorithm">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>k-NN as a Binding Algorithm
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use k-NN to identify four components: the query representation, the reference keys, the associated values, and the selection or weighting rule.</p>
+<p>Let <img src="https://latex.codecogs.com/png.latex?q"> denote the <strong>query</strong>, <img src="https://latex.codecogs.com/png.latex?k_i"> the <strong>key</strong> of reference entry <img src="https://latex.codecogs.com/png.latex?i">, and <img src="https://latex.codecogs.com/png.latex?v_i"> the <strong>value</strong> associated with that key. Write <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20K=(k_1,%5Cldots,k_N)"> for the collection of <img src="https://latex.codecogs.com/png.latex?N"> keys. The weight <img src="https://latex.codecogs.com/png.latex?a_i(q;%5Cmathcal%20K)"> specifies how much value <img src="https://latex.codecogs.com/png.latex?v_i"> contributes for query <img src="https://latex.codecogs.com/png.latex?q">.</p>
+<p>For numerical values, let <img src="https://latex.codecogs.com/png.latex?r(q)"> denote the aggregated value. The two operations have the common form</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cunderbrace%7B(q,%5Cmathcal%20K)%5Clongmapsto%20(a_1,%5Cldots,a_N)%7D_%7B%5Ctext%7Bcomparison:%20query%20against%20keys%7D%7D%0A%5Cqquad%0A%5Cunderbrace%7Br(q)=%5Csum_%7Bi=1%7D%5E%7BN%7Da_i%5C,v_i%7D_%7B%5Ctext%7Baggregation:%20weighted%20values%7D%7D.%0A"></p>
+<p>This is a <strong>comparison-and-aggregation construction</strong>: compare the query with the keys to determine weights, then aggregate the associated values. When the weights are nonnegative and sum to one, aggregation is a weighted average, as in ordinary k-NN regression and softmax attention. More generally, it is a weighted sum, as in the ridge and SVM expansions below.</p>
+<p>The aggregate can be the prediction itself, <img src="https://latex.codecogs.com/png.latex?%5Chat%20y(q)=r(q)">, or feed a further output rule. An SVM adds an intercept and takes the sign; an MLP block adds an output bias. Search shares the comparison and selection operation but returns the selected values as a ranked list. The common construction identifies these operations within a model without requiring every output to be a weighted sum.</p>
+<p>Ordinary k-NN selects the nearest <img src="https://latex.codecogs.com/png.latex?k"> keys and gives each weight <img src="https://latex.codecogs.com/png.latex?1/k">. Other methods learn the keys, change the weights, replace targets with fitted coefficients, or construct the reference set from the current input.</p>
+<p>Some connections below are exact identities; others describe one stage of a larger algorithm. A similarity expansion need not select the nearest <img src="https://latex.codecogs.com/png.latex?k"> points.</p>
+</div>
+</div>
+<p>A weighted-sum representation alone is insufficient: any scalar function can be written trivially as <img src="https://latex.codecogs.com/png.latex?f(q)=a_1(q)v_1"> by setting <img src="https://latex.codecogs.com/png.latex?a_1=f"> and <img src="https://latex.codecogs.com/png.latex?v_1=1">. The connections developed here identify keys, values and comparison rules from the model’s training procedure or prediction computation. Their usefulness lies in exposing those components and how they differ across methods.</p>
+<section id="the-starting-construction" class="level2">
+<h2 data-anchor-id="the-starting-construction">The starting construction</h2>
+<p>Suppose we have labelled observations <img src="https://latex.codecogs.com/png.latex?(x_i,y_i)">, where <img src="https://latex.codecogs.com/png.latex?x_i"> is an input and <img src="https://latex.codecogs.com/png.latex?y_i"> its target, and a representation map <img src="https://latex.codecogs.com/png.latex?%5Cphi">. For a new input <img src="https://latex.codecogs.com/png.latex?x">, define the query <img src="https://latex.codecogs.com/png.latex?q">, reference key <img src="https://latex.codecogs.com/png.latex?k_i"> and associated value <img src="https://latex.codecogs.com/png.latex?v_i"> by</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aq=%5Cphi(x),%5Cqquad%20k_i=%5Cphi(x_i),%5Cqquad%20v_i=y_i.%0A"></p>
+<p>Let <img src="https://latex.codecogs.com/png.latex?N_k(q)"> contain the indices of its <img src="https://latex.codecogs.com/png.latex?k"> nearest keys under a specified distance, with a fixed rule for ties. Regression predicts</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%20y(x)=%5Cfrac1k%5Csum_%7Bi%5Cin%20N_k(q)%7Dy_i.%0A"></p>
+<p>For classification, use one-hot label vectors as values. Their average gives the neighbour class proportions; a decision rule then chooses a class. The comparison of inputs and the aggregation of outputs are separate operations.</p>
+<p>The <strong>query</strong> is what we are processing. The <strong>keys</strong> determine which stored entries are relevant. The <strong>values</strong> determine what those entries contribute. Keys and values can have different dimensions and need not have the same units.</p>
+</section>
+<section id="from-neighbour-selection-to-kernel-weighting" class="level2">
+<h2 data-anchor-id="from-neighbour-selection-to-kernel-weighting">From neighbour selection to kernel weighting</h2>
+<p>Hard selection gives the <img src="https://latex.codecogs.com/png.latex?k"> nearest observations equal weight and all others zero. A nonnegative similarity function can instead assign graded weights:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%20y(q)=%5Csum_i%0A%5Cfrac%7B%5Ckappa(q,k_i)%7D%7B%5Csum_j%5Ckappa(q,k_j)%7D%5C,v_i,%0A"></p>
+<p>provided the denominator is positive. This is the normalized kernel-smoothing form associated with Nadaraya–Watson regression. A Gaussian choice,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ckappa(q,k_i)=%5Cexp%5Cleft(-%5Cfrac%7B%5ClVert%20q-k_i%5CrVert%5E2%7D%7B2h%5E2%7D%5Cright),%0A"></p>
+<p>replaces the neighbour count with a bandwidth <img src="https://latex.codecogs.com/png.latex?h"> controlling how widely observations contribute. The regression estimator originates in <a href="https://doi.org/10.1137/1109020">Nadaraya</a> and <a href="https://www.jstor.org/stable/25049340">Watson</a>.</p>
+<p>Kulkarni and Harman develop the corresponding classification construction in the <strong>Kernel Rules</strong> section of their <a href="https://www.princeton.edu/~kulkarni/Papers/Journals/j077_2011_KulHar_WileyTutorial.pdf#page=4">tutorial</a>. They first replace a fixed neighbour count with a fixed-radius window, then replace equal votes with kernel weights. The bandwidth controls locality much as the neighbour count does in k-NN. With one-hot labels as values, normalizing these weighted votes gives the form above; a common positive denominator leaves the winning class unchanged. This supplies a concrete connection between neighbour voting and kernel smoothing.</p>
+<p>There are two uses of <em>kernel</em> to distinguish. A smoothing kernel supplies weights. A positive-semidefinite kernel supplies inner products in a feature space. The Gaussian has both properties. An arbitrary matching score need not be a positive-semidefinite kernel, and a valid inner-product kernel need not be nonnegative. These distinctions become relevant when we move from averaging observed targets to combining fitted coefficients.</p>
+</section>
+<section id="ridge-regression-in-its-dual-form" class="level2">
+<h2 data-anchor-id="ridge-regression-in-its-dual-form">Ridge regression in its dual form</h2>
+<p>Ridge regression is usually presented as fitting a weight vector. It can also be written as a similarity expansion over training inputs.</p>
+<p>For clarity, consider scalar targets, no intercept, and the objective</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmin_w%5C%20%5ClVert%20y-Xw%5CrVert%5E2+%5Clambda%5ClVert%20w%5CrVert%5E2,%0A%5Cqquad%20%5Clambda%3E0,%0A"></p>
+<p>where row <img src="https://latex.codecogs.com/png.latex?i"> of <img src="https://latex.codecogs.com/png.latex?X"> is <img src="https://latex.codecogs.com/png.latex?x_i%5E%5Ctop">. Its solution has two equivalent forms:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aw=(X%5E%5Ctop%20X+%5Clambda%20I)%5E%7B-1%7DX%5E%5Ctop%20y%0A%20%20=X%5E%5Ctop(XX%5E%5Ctop+%5Clambda%20I)%5E%7B-1%7Dy.%0A"></p>
+<p>Define <img src="https://latex.codecogs.com/png.latex?%5Calpha=(XX%5E%5Ctop+%5Clambda%20I)%5E%7B-1%7Dy">. Prediction becomes</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%20y(x)=x%5E%5Ctop%20w%0A=%5Csum_i%20%5Cunderbrace%7Bx%5E%5Ctop%20x_i%7D_%7B%5Ctext%7Bcomparison%7D%7D%0A%5Cunderbrace%7B%5Calpha_i%7D_%7B%5Ctext%7Bvalue%7D%7D.%0A"></p>
+<p>The query is <img src="https://latex.codecogs.com/png.latex?x">, keys are <img src="https://latex.codecogs.com/png.latex?x_i">, and values are fitted coefficients <img src="https://latex.codecogs.com/png.latex?%5Calpha_i">. This equality is exact. It changes our description of the fitted model without changing its predictions.</p>
+<p>The training data enter prediction in two ways. First, fitting produces the values <img src="https://latex.codecogs.com/png.latex?v_i=%5Calpha_i">. Each value depends on the targets and on relationships among all training inputs through <img src="https://latex.codecogs.com/png.latex?(XX%5E%5Ctop+%5Clambda%20I)%5E%7B-1%7D">. Second, each training input supplies a key <img src="https://latex.codecogs.com/png.latex?k_i=x_i">. At prediction time, the query assigns that key the weight <img src="https://latex.codecogs.com/png.latex?a_i(x)=x%5E%5Ctop%20x_i">. The stored value is fixed after training; its contribution changes with the query. Here <img src="https://latex.codecogs.com/png.latex?%5Calpha_i"> plays the value role occupied by <img src="https://latex.codecogs.com/png.latex?y_i"> in ordinary k-NN.</p>
+<p>This gives ridge regression an associative-memory interpretation. In the dual representation, prediction retrieves fitted values through comparisons with training keys. In the primal representation, those key–value associations have already been combined into</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aw=%5Csum_i%20x_i%5Calpha_i=%5Csum_i%20k_i%20v_i,%0A%5Cqquad%0A%5Chat%20y(x)=x%5E%5Ctop%20w.%0A"></p>
+<p>The learned weight vector therefore stores an aggregate of the training-derived associations. It does not generally preserve recoverable copies of the observations: different datasets can produce the same <img src="https://latex.codecogs.com/png.latex?w">. Nevertheless, evaluating <img src="https://latex.codecogs.com/png.latex?x%5E%5Ctop%20w"> gives exactly the same result as the dual retrieval sum. Explicit reference entries and a parameter vector are two representations of the same fitted predictor.</p>
+<p>The usual statistical presentation emphasizes coefficient estimation, regularisation and prediction error. The associative-memory perspective asks what information fitting stores and how a query accesses it. Nearest-neighbour and approximate-retrieval methods make that question explicit, providing another way to interpret the familiar ridge identity. The identity itself is exact; using approximate search to truncate its sum would introduce an additional approximation.</p>
+<p>There is also an exact target-valued description. Put <img src="https://latex.codecogs.com/png.latex?G=XX%5E%5Ctop"> and <img src="https://latex.codecogs.com/png.latex?g(x)=Xx">. Then</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%20y(x)=s(x)%5E%5Ctop%20y,%0A%5Cqquad%20s(x)=(G+%5Clambda%20I)%5E%7B-1%7Dg(x).%0A"></p>
+<p>Here the values are the original targets, while the weights account for the geometry of the entire training set and regularisation. Unlike ordinary k-NN weights, these weights can be negative and need not sum to one. Ridge can extrapolate beyond the observed target range. A dot product also reflects vector magnitude, so its ordering is not generally Euclidean nearest-neighbour ordering.</p>
+<p>These representations need not be unique. The coefficient-valued form exposes fitted associations; the target-valued form exposes how observed targets enter the prediction. Each is an exact account of the same predictor. Neither decomposition alone establishes the causal influence of a training observation, which can also affect the fitting of other components.</p>
+<p>With an unpenalised intercept, centre inputs and targets using training means, apply the derivation, and restore the target mean. Replacing the linear inner product with a positive-semidefinite kernel gives kernel ridge regression. Its expansion is supported by the <a href="https://doi.org/10.1007/3-540-44581-1_27">representer theorem</a>.</p>
+<p>This makes the connection to k-NN precise: both admit a sum over reference entries, but ridge learns a global combination rather than averaging a fixed number of nearby labels. The dual expression does not require a deployed linear model to retain or search its training data; the weight vector is sufficient for its usual implementation.</p>
+</section>
+<section id="decision-trees-learn-the-neighbourhood" class="level2">
+<h2 data-anchor-id="decision-trees-learn-the-neighbourhood">Decision trees learn the neighbourhood</h2>
+<p>A fitted tree partitions input space using supervised splits. Let <img src="https://latex.codecogs.com/png.latex?%5Cell_T(x)"> be the leaf reached by <img src="https://latex.codecogs.com/png.latex?x">, and let <img src="https://latex.codecogs.com/png.latex?%5Cphi_T(x)"> be its one-hot leaf vector. Define</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ckappa_T(x,x')=%5Cphi_T(x)%5E%5Ctop%5Cphi_T(x')%0A=%5Cmathbf1%5C%7B%5Cell_T(x)=%5Cell_T(x')%5C%7D.%0A"></p>
+<p>This is a positive-semidefinite kernel because it is an inner product of explicit features. For an unweighted squared-error regression tree with nonempty leaves,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%20y_T(x)=%0A%5Cfrac%7B%5Csum_i%5Ckappa_T(x,x_i)y_i%7D%0A%20%20%20%20%20%7B%5Csum_i%5Ckappa_T(x,x_i)%7D.%0A"></p>
+<p>The expression is exactly the leaf mean. For classification, substituting one-hot class labels yields the leaf class proportions.</p>
+<p>The neighbourhood is learned through the partition rather than prescribed by raw Euclidean distance. Its size varies from leaf to leaf. A tree thus implements a particular form of neighbourhood averaging, even though prediction follows split decisions rather than running a nearest-neighbour search.</p>
+<p>A regression forest averages its tree predictions. A classification forest that averages leaf class proportions has the corresponding probability-averaging form; a forest that votes over hard tree decisions applies a class decision within each tree before voting. The all-tree average of same-leaf indicators also defines a kernel. Same-leaf proximity and hard-label voting are described by <a href="https://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm">Breiman and Cutler</a>. Recovering regression or probability-averaged predictions requires averaging the separately normalized tree weights; normalizing the average proximity once is generally different because leaf sizes vary. Bootstrap multiplicities and sample weights must also be retained when present.</p>
+</section>
+<section id="support-vector-machines-select-the-reference-keys" class="level2">
+<h2 data-anchor-id="support-vector-machines-select-the-reference-keys">Support vector machines select the reference keys</h2>
+<p>A binary support vector machine gives another direct connection. Let <img src="https://latex.codecogs.com/png.latex?y_i%5Cin%5C%7B-1,+1%5C%7D"> be the class labels, <img src="https://latex.codecogs.com/png.latex?%5Ckappa"> a positive-semidefinite kernel, <img src="https://latex.codecogs.com/png.latex?%5Cbeta_i%5Cgeq0"> the fitted dual coefficients, and <img src="https://latex.codecogs.com/png.latex?b"> the fitted intercept. Define the support-vector index set <img src="https://latex.codecogs.com/png.latex?S=%5C%7Bi:%5Cbeta_i%3E0%5C%7D">. Its decision score and predicted class are</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af(x)=b+%5Csum_%7Bi%5Cin%20S%7D%5Cbeta_i%20y_i%5C,%5Ckappa(x,x_i),%0A%5Cqquad%20%5Chat%20y(x)=%5Coperatorname%7Bsign%7D(f(x)),%0A"></p>
+<p>with a fixed convention at zero. This is the standard <a href="https://scikit-learn.org/stable/modules/svm.html#mathematical-formulation">SVM dual prediction rule</a>.</p>
+<p>In query–key–value notation,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aq=x,%5Cqquad%20k_i=x_i,%5Cqquad%20v_i=%5Cbeta_i%20y_i,%0A%5Cqquad%20a_i(q)=%5Ckappa(q,k_i),%5Cquad%20i%5Cin%20S.%0A"></p>
+<p>Training determines which keys remain and their signed values. The query determines their contributions through kernel comparisons. With a Gaussian kernel, nearby support vectors receive larger comparison weights, but the score also depends on the learned values and intercept.</p>
+<p>Unlike k-NN, the support set is selected during training by the margin objective, rather than by proximity to each new query. Its size is learned and can include every training observation. Prediction combines all support-vector contributions without normalizing them into a neighbour average.</p>
+<p>In the memory interpretation, the dual model retains support-vector keys and fitted values. For a linear kernel, these associations can again be combined into <img src="https://latex.codecogs.com/png.latex?w=%5Csum_%7Bi%5Cin%20S%7Dk_i%20v_i">, giving <img src="https://latex.codecogs.com/png.latex?f(x)=x%5E%5Ctop%20w+b">. Ridge and SVMs share this retrieval form while learning their stored values through different objectives.</p>
+</section>
+<section id="neural-networks-learned-keys-and-values" class="level2">
+<h2 data-anchor-id="neural-networks-learned-keys-and-values">Neural networks: learned keys and values</h2>
+<p>The statement that neural networks are k-NN needs an explicit choice of what counts as a key and a value. There are several informative choices.</p>
+<section id="a-feed-forward-layer-as-a-keyvalue-computation" class="level3">
+<h3 data-anchor-id="a-feed-forward-layer-as-a-keyvalue-computation">A feed-forward layer as a key–value computation</h3>
+<p>Consider an MLP block with one hidden layer:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af(x)=W_2%5C,%5Csigma(W_1x+b_1)+b_2.%0A"></p>
+<p>Write row <img src="https://latex.codecogs.com/png.latex?j"> of <img src="https://latex.codecogs.com/png.latex?W_1"> as <img src="https://latex.codecogs.com/png.latex?k_j%5E%5Ctop">, column <img src="https://latex.codecogs.com/png.latex?j"> of <img src="https://latex.codecogs.com/png.latex?W_2"> as <img src="https://latex.codecogs.com/png.latex?v_j">, and component <img src="https://latex.codecogs.com/png.latex?j"> of <img src="https://latex.codecogs.com/png.latex?b_1"> as <img src="https://latex.codecogs.com/png.latex?b_j">. Then</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af(x)=b_2+%5Csum_j%5Csigma(k_j%5E%5Ctop%20x+b_j)%5C,v_j.%0A"></p>
+<p>This is an exact decomposition. The query is the incoming activation; keys and values are learned parameter vectors. The activation function determines how strongly each value contributes. These keys are not necessarily training examples, and a large activation is not necessarily a small metric distance. No top-<img src="https://latex.codecogs.com/png.latex?k"> selection or normalization is required.</p>
+<p>Kulkarni and Harman’s <strong>Multilayer Perceptrons</strong> section describes units of the form <img src="https://latex.codecogs.com/png.latex?%5Csigma(w%5E%5Ctop%20x)"> and learning their weights through backpropagation. It treats these separately from kernel voting and does not derive a Nadaraya–Watson representation of an MLP. The connection developed here is the weighted-sum structure: an MLP learns both its activation-based weights and its values, whereas ordinary Nadaraya–Watson regression averages observed targets using normalized nonnegative kernel weights. Imposing such normalization on nonnegative hidden activations would give a related normalized construction, but would change the ordinary MLP computation.</p>
+<p><a href="https://aclanthology.org/2021.emnlp-main.446/">Geva and colleagues</a> examine Transformer feed-forward layers as key–value memories and provide empirical evidence about the patterns matched by keys and the effects of their values. The algebra identifies the computational roles; evidence is needed to assign a semantic interpretation to a particular learned key.</p>
+<p>A deep network composes such operations. The query at one layer is produced by earlier layers, so the comparison changes with depth. Residual connections, normalization and gated MLP variants add operations that must be included when analysing a complete architecture.</p>
+</section>
+<section id="learned-features-followed-by-ridge-regression" class="level3">
+<h3 data-anchor-id="learned-features-followed-by-ridge-regression">Learned features followed by ridge regression</h3>
+<p>A second connection uses training observations as the keys. Freeze a learned representation <img src="https://latex.codecogs.com/png.latex?%5Cphi_%5Ctheta"> and fit a ridge output layer to it. The ridge derivation gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%20y(x)=%5Csum_i%5Calpha_i%5C,%0A%5Cunderbrace%7B%5Cphi_%5Ctheta(x)%5E%5Ctop%5Cphi_%5Ctheta(x_i)%7D_%7B%5Ckappa_%5Ctheta(x,x_i)%7D.%0A"></p>
+<p>The representation now determines a learned kernel. This identity applies to the ridge head on the fixed features. It does not automatically describe a head trained with cross-entropy or establish that an entire jointly trained network is a fixed-kernel method.</p>
+<p>There is a further training-history connection. For a linear layer updated by plain single-example stochastic gradient descent, write its input at step <img src="https://latex.codecogs.com/png.latex?t"> as <img src="https://latex.codecogs.com/png.latex?h_t"> and its output-loss gradient as <img src="https://latex.codecogs.com/png.latex?%5Cdelta_t">. Ignoring bias, momentum and weight decay,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7Bt+1%7D=W_t-%5Ceta_t%5Cdelta_t%20h_t%5E%5Ctop%0A%5Cquad%5CLongrightarrow%5Cquad%0AW_Tq=W_0q-%5Csum_%7Bt%3CT%7D%5Ceta_t%5Cdelta_t(h_t%5E%5Ctop%20q).%0A"></p>
+<p>The layer’s output after training can be expressed through comparisons with historical activations and gradient-derived values. For minibatch updates, each update contains a sum of these outer products, scaled according to the batch loss reduction. It is not a vote over labels. <a href="https://arxiv.org/abs/2202.05798">Irie, Csordás and Schmidhuber</a> develop this dual view of neural layers. This explains how a parametric computation can admit an example-related expansion even when those examples are no longer explicitly stored at inference.</p>
+</section>
+</section>
+<section id="self-attention-constructs-its-reference-set-from-context" class="level2">
+<h2 data-anchor-id="self-attention-constructs-its-reference-set-from-context">Self-attention constructs its reference set from context</h2>
+<p>For hidden states <img src="https://latex.codecogs.com/png.latex?h_1,%5Cldots,h_N">, one self-attention head constructs</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aq_i=W_Qh_i,%5Cqquad%20k_j=W_Kh_j,%5Cqquad%20v_j=W_Vh_j,%0A"></p>
+<p>and computes the head output <img src="https://latex.codecogs.com/png.latex?%5Chat%7By%7D_i">, over the permitted positions <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A_i">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7By%7D_i=%5Csum_%7Bj%5Cin%5Cmathcal%20A_i%7D%0A%5Cfrac%7B%5Cexp(q_i%5E%5Ctop%20k_j/%5Csqrt%7Bd_k%7D)%7D%0A%20%20%20%20%20%7B%5Csum_%7Br%5Cin%5Cmathcal%20A_i%7D%5Cexp(q_i%5E%5Ctop%20k_r/%5Csqrt%7Bd_k%7D)%7D%5C,v_j.%0A"></p>
+<p>This is a normalized similarity-weighted sum. In causal self-attention, the permitted positions exclude future tokens. Queries, keys and values come from the same sequence, but through different projections. Cross-attention takes queries from one sequence and keys and values from another. <a href="https://arxiv.org/abs/1706.03762">Vaswani et al.</a></p>
+<p>There is an exact relation to Gaussian neighbour weighting when the keys have equal norm. For a fixed query,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aq%5E%5Ctop%20k_j=%5Cfrac%7B%5ClVert%20q%5CrVert%5E2+%5ClVert%20k_j%5CrVert%5E2-%5ClVert%20q-k_j%5CrVert%5E2%7D%7B2%7D.%0A"></p>
+<p>Consequently,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Coperatorname%7Bsoftmax%7D_j(q%5E%5Ctop%20k_j/%5Ctau)%0A=%5Coperatorname%7Bsoftmax%7D_j(-%5ClVert%20q-k_j%5CrVert%5E2/(2%5Ctau)),%0A%5Cqquad%20%5Ctau%3E0,%0A"></p>
+<p>under that equal-key-norm condition. As <img src="https://latex.codecogs.com/png.latex?%5Ctau%5Cto0">, the weights concentrate on a unique maximum-score key, if one exists. With ties they average over the maximizers. Without equal key norms, maximum inner product need not select the Euclidean nearest key.</p>
+<p>Ordinary dense attention uses all permitted keys, rather than exactly <img src="https://latex.codecogs.com/png.latex?k"> neighbours. Its connection to k-NN is through soft selection and value aggregation. The separate query and key projections can also make matching asymmetric in the original hidden states. Calling the operation a kernel smoother does not make its normalized attention matrix a symmetric positive-semidefinite Gram matrix.</p>
+</section>
+<section id="the-primaldual-connection-for-attention" class="level2">
+<h2 data-anchor-id="the-primaldual-connection-for-attention">The primal–dual connection for attention</h2>
+<p><a href="https://arxiv.org/abs/2406.13781">A Primal-Dual Framework for Transformers and Neural Networks</a>, by Tan M. Nguyen, Tam Nguyen, Nhat Ho, Andrea Bertozzi, Richard Baraniuk and Stanley Osher, supplies a formal link. It derives an attention-form expansion from support-vector regression with normalized features.</p>
+<p>Schematically, its primal map and dual expansion are</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af(q)=W%5Cfrac%7B%5CPhi(q)%7D%7Bh(q)%7D+b%0A=%5Csum_j%5Cfrac%7B%5CPhi(q)%5E%5Ctop%5CPhi(k_j)%7D%7Bh(q)%7D%5C,v_j+b.%0A"></p>
+<p>The values incorporate dual coefficients and key-side normalization. Choosing the exponential dot-product kernel and its sum over keys as <img src="https://latex.codecogs.com/png.latex?h(q)"> recovers softmax weights; zero bias gives the usual attention aggregation.</p>
+<p>This is a structural derivation from a specified optimization problem. The paper’s Appendix F obtains separate learned query, key and value projections by a relaxation. Ordinary Transformer training need not solve that SVR problem at each layer, and its context keys need not be pretraining examples. The result strengthens the connection between neural layers, kernel expansions and attention without making them literal top-<img src="https://latex.codecogs.com/png.latex?k"> neighbour algorithms.</p>
+</section>
+<section id="explicit-context-memory-and-memory-in-weights" class="level2">
+<h2 data-anchor-id="explicit-context-memory-and-memory-in-weights">Explicit context memory and memory in weights</h2>
+<p>Alex Wang’s <a href="https://alexwang.ai/posts/associative-memory/">You could have invented transformers from memory</a> develops a related progression through linear associative memory, nonlinear MLP recall and self-attention. It also distinguishes memory held in learned weights from keys and values supplied by the current context. Its capacity estimates depend on assumptions about random keys, values and the recall criterion; they should not be read as general capacities of trained language models.</p>
+<p>That distinction helps locate the reference set in the present account. An MLP uses parameter vectors that persist across requests. Self-attention constructs explicit key–value vectors from the current sequence. In autoregressive inference, a KV cache can retain those vectors to avoid recomputing earlier positions. The cache is contextual state, not a table containing the training corpus.</p>
+<p>A Transformer therefore combines learned parameters with context-dependent memory. The query, keys and values can all change across layers. A retrieval interpretation must specify which of these stores it describes.</p>
+</section>
+<section id="search-changes-the-values-and-the-indexing-problem" class="level2">
+<h2 data-anchor-id="search-changes-the-values-and-the-indexing-problem">Search changes the values and the indexing problem</h2>
+<p>Vector search makes the original neighbour operation explicit. The query is a search embedding, keys are indexed document or item embeddings, and values are identifiers or content. A search system returns selected values rather than necessarily averaging them.</p>
+<p>Let <img src="https://latex.codecogs.com/png.latex?u"> be a search request and <img src="https://latex.codecogs.com/png.latex?d_1,%5Cldots,d_N"> the indexed documents. Define</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aq=%5Cphi_Q(u),%5Cqquad%20k_i=%5Cphi_K(d_i),%5Cqquad%20v_i=%5Coperatorname%7Bpayload%7D(d_i),%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Cphi_Q"> and <img src="https://latex.codecogs.com/png.latex?%5Cphi_K"> map requests and documents into a common comparison space, and <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Bpayload%7D(d_i)"> is the document identifier, text or other content to return. The two representation maps may differ. For a specified distance <img src="https://latex.codecogs.com/png.latex?D">, exact search selects</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AN_k(q)=%5Cunderset%7B%5Csubstack%7BS%5Csubseteq%5C%7B1,%5Cldots,N%5C%7D%5C%5C%7CS%7C=k%7D%7D%7B%5Coperatorname%7Barg%5C,min%7D%7D%0A%5C%20%5Csum_%7Bi%5Cin%20S%7DD(q,k_i),%0A%5Cqquad%201%5Cleq%20k%5Cleq%20N,%0A"></p>
+<p>with a fixed rule for ties. Order the selected indices as <img src="https://latex.codecogs.com/png.latex?i_1,%5Cldots,i_k"> by increasing distance. The search output is the ranked list</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathcal%20R_k(u)=(v_%7Bi_1%7D,%5Cldots,v_%7Bi_k%7D).%0A"></p>
+<p>This is the same neighbour-selection problem as k-NN prediction. The output operation changes: regression averages the selected values, while search returns them as a list. For a similarity score <img src="https://latex.codecogs.com/png.latex?s">, replace distance minimization with score maximization and rank in descending order. With unit-normalized embeddings, <img src="https://latex.codecogs.com/png.latex?%5ClVert%20q-k_i%5CrVert%5E2=2-2q%5E%5Ctop%20k_i">, so Euclidean nearest neighbours and highest cosine similarities give the same ranking.</p>
+<p>Approximate nearest-neighbour methods reduce the cost of finding candidates, accepting some disagreement with exact search. <a href="https://faiss.ai/">Faiss</a> provides implementations of such similarity-search methods. Here “ANN” means approximate nearest-neighbour search, not artificial neural network.</p>
+<p>Formally, an approximate index returns a candidate set <img src="https://latex.codecogs.com/png.latex?%5Cwidetilde%20N_k(q)"> in place of <img src="https://latex.codecogs.com/png.latex?N_k(q)">. When both contain <img src="https://latex.codecogs.com/png.latex?k"> indices, agreement with exact search can be measured by</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Coperatorname%7Brecall@%7Dk(q)=%5Cfrac%7B%7C%5Cwidetilde%20N_k(q)%5Ccap%20N_k(q)%7C%7D%7Bk%7D.%0A"></p>
+<p>This measures recovery of the exact neighbours under the chosen representation and comparison rule.</p>
+<p>This is directly related to k-NN lookup, but the index is only one component of a search system. High agreement with exact vector neighbours establishes index quality under the chosen similarity. It does not establish relevance to a user. Representation quality, filtering and reranking require their own evaluation.</p>
+<p>A model can combine both operations: retrieve documents from an external index, then use self-attention over the supplied context. External document keys and internal attention keys have different origins and serve different computations.</p>
+</section>
+<section id="clustering-changes-where-the-values-come-from" class="level2">
+<h2 data-anchor-id="clustering-changes-where-the-values-come-from">Clustering changes where the values come from</h2>
+<p>Clustering has no supplied target labels, but several clustering procedures use the same comparison operations.</p>
+<p>In the assignment step of k-means, the query is an observation, the keys are current centroids <img src="https://latex.codecogs.com/png.latex?c_j">, and the values are cluster identifiers:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%20j(x)=%5Carg%5Cmin_j%5ClVert%20x-c_j%5CrVert%5E2.%0A"></p>
+<p>This is a nearest-prototype lookup. The centroid-update step then changes the keys using current assignments. The number of clusters is not the neighbour count in k-NN, and lookup alone is not the complete clustering algorithm.</p>
+<p>Neighbour-graph clustering uses observations as both queries and keys. Retrieved neighbour identifiers define graph edges; a further operation determines groups. Spectral clustering, for example, uses a graph Laplacian and its eigenvectors before assigning clusters. <a href="https://arxiv.org/abs/0711.0189">von Luxburg’s tutorial</a> explains these stages. Radius-neighbour methods such as DBSCAN use a different selection rule and additional density-connectivity logic.</p>
+<p>The connection therefore extends beyond supervised prediction. Labels are one possible type of value. Identifiers, fitted coefficients, learned vectors and generated cluster assignments can occupy the same computational role.</p>
+</section>
+<section id="what-changes-across-the-methods" class="level2">
+<h2 data-anchor-id="what-changes-across-the-methods">What changes across the methods</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method or operation</th>
+<th>Query</th>
+<th>Keys</th>
+<th>Values</th>
+<th>Comparison and aggregation</th>
+<th>Scope of connection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>k-NN regression</td>
+<td>New input representation</td>
+<td>Training representations</td>
+<td>Targets</td>
+<td>Nearest <img src="https://latex.codecogs.com/png.latex?k">; average</td>
+<td>Complete prediction rule</td>
+</tr>
+<tr class="even">
+<td>Ridge, coefficient-valued dual</td>
+<td>New input</td>
+<td>Training inputs</td>
+<td>Fitted <img src="https://latex.codecogs.com/png.latex?%5Calpha_i"></td>
+<td>Inner products; signed sum</td>
+<td>Complete prediction rule</td>
+</tr>
+<tr class="odd">
+<td>Regression tree</td>
+<td>Query leaf representation</td>
+<td>Training leaf representations</td>
+<td>Targets</td>
+<td>Same leaf; average</td>
+<td>Complete prediction rule</td>
+</tr>
+<tr class="even">
+<td>Binary kernel SVM</td>
+<td>New input</td>
+<td>Support vectors</td>
+<td>Signed coefficients <img src="https://latex.codecogs.com/png.latex?%5Cbeta_i%20y_i"></td>
+<td>Kernel-weighted sum plus bias; sign</td>
+<td>Complete prediction rule</td>
+</tr>
+<tr class="odd">
+<td>MLP block</td>
+<td>Incoming activation</td>
+<td>Rows of input weight matrix</td>
+<td>Columns of output weight matrix</td>
+<td>Activated dot products; sum, plus bias</td>
+<td>Computational block</td>
+</tr>
+<tr class="even">
+<td>Ridge on frozen neural features</td>
+<td>Learned query features</td>
+<td>Learned training features</td>
+<td>Fitted coefficients</td>
+<td>Learned-kernel expansion</td>
+<td>Prediction rule for fitted head</td>
+</tr>
+<tr class="odd">
+<td>Self-attention head</td>
+<td>Projected token state</td>
+<td>Projected context states</td>
+<td>Projected context values</td>
+<td>Masked softmax scores; weighted sum</td>
+<td>Computational block</td>
+</tr>
+<tr class="even">
+<td>Approximate vector search</td>
+<td>Search embedding</td>
+<td>Indexed embeddings</td>
+<td>IDs or content</td>
+<td>Approximate neighbour retrieval</td>
+<td>Retrieval operation</td>
+</tr>
+<tr class="odd">
+<td>k-means assignment</td>
+<td>Observation</td>
+<td>Current centroids</td>
+<td>Cluster IDs</td>
+<td>Nearest prototype</td>
+<td>Assignment stage</td>
+</tr>
+<tr class="even">
+<td>Neighbour-graph construction</td>
+<td>Observation</td>
+<td>Other observations</td>
+<td>Observation IDs</td>
+<td>Neighbours become graph edges</td>
+<td>Graph-construction stage</td>
+</tr>
+</tbody>
+</table>
+<p>These descriptions do not impose identical learning objectives or computational costs. They identify how reference information enters an output, and whether that information is observed, fitted, compressed into parameters or constructed from context.</p>
+</section>
+<section id="a-diagnostic-consequence-similarity-and-contribution-differ" class="level2">
+<h2 data-anchor-id="a-diagnostic-consequence-similarity-and-contribution-differ">A diagnostic consequence: similarity and contribution differ</h2>
+<p>The distinction between keys and values matters when approximating a predictor by retrieving only some entries. In a scalar similarity expansion, entry <img src="https://latex.codecogs.com/png.latex?i"> contributes</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ac_i(q)=a_i(q)v_i.%0A"></p>
+<p>For example, comparison weights <img src="https://latex.codecogs.com/png.latex?a_1=0.9"> and <img src="https://latex.codecogs.com/png.latex?a_2=0.2">, with stored values <img src="https://latex.codecogs.com/png.latex?v_1=0.1"> and <img src="https://latex.codecogs.com/png.latex?v_2=5">, give contributions <img src="https://latex.codecogs.com/png.latex?c_1=0.09"> and <img src="https://latex.codecogs.com/png.latex?c_2=1">. The less similar key contributes more. Signed values can also cause contributions to cancel.</p>
+<p>Suppose a ridge or SVM score is approximated by retaining a set <img src="https://latex.codecogs.com/png.latex?R"> of entries, with the original coefficients and intercept unchanged. The omitted contribution is exactly</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af(q)-f_R(q)=%5Csum_%7Bi%5Cnotin%20R%7Da_i(q)v_i,%0A%5Cqquad%0A%7Cf(q)-f_R(q)%7C%5Cleq%5Csum_%7Bi%5Cnotin%20R%7D%7Ca_i(q)v_i%7C.%0A"></p>
+<p>High recall of the nearest keys alone therefore gives no bound on prediction error without control of the omitted values and weights. For an SVM, a score error smaller than <img src="https://latex.codecogs.com/png.latex?%7Cf(q)%7C"> preserves the predicted sign. This gives a concrete diagnostic: evaluate the approximation of the model’s score as well as neighbour recall. The query–key–value account makes clear why index accuracy and prediction accuracy are different quantities.</p>
+</section>
+<section id="what-this-adds-to-the-emergence-argument" class="level2">
+<h2 data-anchor-id="what-this-adds-to-the-emergence-argument">What this adds to the emergence argument</h2>
+<p>The earlier emergence post considered whether successive retrieval operations could support a composition absent as a stored joint example. This comparison supplies a more explicit account of those operations. Some retain examples; some learn prototypes or partitions; some combine coefficients; others construct contextual memories and new queries at each layer.</p>
+<p>An aggregation can produce a vector that is not one of its stored values. A sequence of transformations can then change the query for the next operation. Those facts make a retrieval-based account of composition plausible, but do not establish that the resulting output is correct or that a trained model generalizes systematically. The joint-holdout and intervention tests in the earlier post provide ways to assess that claim.</p>
+<p>For model building and diagnosis, the binding role of k-NN is practical. We can ask where the reference information resides, whether the query matches the appropriate keys, what the values represent, and whether the aggregation preserves the information the task needs. A poor result may reflect unsuitable representations, missing references, incorrect values, an inappropriate comparison rule or a mismatch between training and deployment.</p>
+<p>The useful generalization of k-NN is a family of <strong>comparison-and-aggregation constructions</strong>: query–key comparisons determine how values contribute to the output. Primal–dual identities, supervised partitions and learned key–value maps make several of these connections exact. Keeping their components explicit allows us to compare algorithms without treating their different training procedures and prediction rules as interchangeable.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>machine learning</category>
+  <category>transformers</category>
+  <category>kernels</category>
+  <category>retrieval</category>
+  <guid>https://dhavala.github.io/saddlepoint/2026-10-21-knn-binding-algorithm/</guid>
+  <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Conservation of Distance</title>
   <dc:creator>Soma S Dhavala</dc:creator>
