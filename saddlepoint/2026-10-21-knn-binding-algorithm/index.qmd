@@ -1,0 +1,403 @@
+---
+title: "k-NN as a Binding Algorithm"
+subtitle: "A unified view of learning and search through queries, keys and values"
+description: "How neighbour prediction connects ridge regression, decision trees, SVMs, neural networks, self-attention, search and clustering through changing representations, similarities and values."
+author: "Soma S Dhavala"
+date: "2026-10-21"
+categories: ["machine learning", "transformers", "kernels", "retrieval"]
+---
+
+::: {.callout-note appearance="default" icon="false" title="Overview"}
+This post develops a unified view of methods spanning supervised learning, unsupervised learning, Transformer models and search. Starting with k-NN, it shows how changing the representation, reference keys, associated values and comparison rule connects regression, trees, SVMs, neural networks, attention, clustering and retrieval. The equations establish where these are exact reformulations and where the shared operation is one part of a larger method.
+
+The benefit is a common framework for understanding a wide range of algorithms and reasoning about their differences. It also supplies practical questions for model design and diagnosis: what information is stored, what determines a match, and how does the retrieved information contribute to the output? The memory interpretation connects explicit reference entries with learned associations stored in model parameters.
+:::
+
+My reading of S. R. Kulkarni and Gilbert Harman's *An Elementary Introduction to Statistical Learning Theory* first led me to consider nearest-neighbour methods as a way to connect apparently different learning algorithms, including neural networks. Their treatment of nearest neighbours, kernel rules and neural networks prompted a question that has remained useful to me: how much of a predictor can be understood by identifying what it compares an input against and what it returns from that comparison? [Kulkarni and Harman, 2011](https://onlinelibrary.wiley.com/doi/book/10.1002/9781118023471)
+
+This extends [Towards a Testable Theory of Emergence](../2026-06-30-towards-testable-theory-of-emergence/index.ipynb), which introduced retrieval interpretations of regression and Transformer computations. It also complements [Conservation of Distance](../2026-10-07-conservation-of-distance/index.qmd): that post concerns the relationships predictions should respect; this one examines how models represent and use them.
+
+I considered this approach for an executive programme: begin with one accessible construction, then develop each method by showing which components change. It offers a common framework across supervised learning, unsupervised learning, Transformer models and search, while retaining the distinctions needed to choose and assess models.
+
+**Can k-NN serve as a binding algorithm across these methods?**
+
+By *binding algorithm*, I mean a concrete starting construction whose components can be identified, replaced and learned in other methods. Ordinary k-NN compares a query with reference inputs, selects neighbours and combines their targets. The broader construction compares a query with keys and retrieves or combines associated values. The keys, values and comparison rule need not retain their original meaning.
+
+These areas overlap: a Transformer is an architecture that can be trained under different learning objectives, and search can use representations learned with or without labels. The unification concerns their comparison and retrieval operations.
+
+::: {.callout-note appearance="default" icon="false" title="k-NN as a Binding Algorithm"}
+Use k-NN to identify four components: the query representation, the reference keys, the associated values, and the selection or weighting rule.
+
+Let $q$ denote the **query**, $k_i$ the **key** of reference entry $i$, and $v_i$ the **value** associated with that key. Write $\mathcal K=(k_1,\ldots,k_N)$ for the collection of $N$ keys. The weight $a_i(q;\mathcal K)$ specifies how much value $v_i$ contributes for query $q$.
+
+For numerical values, let $r(q)$ denote the aggregated value. The two operations have the common form
+
+$$
+\underbrace{(q,\mathcal K)\longmapsto (a_1,\ldots,a_N)}_{\text{comparison: query against keys}}
+\qquad
+\underbrace{r(q)=\sum_{i=1}^{N}a_i\,v_i}_{\text{aggregation: weighted values}}.
+$$
+
+This is a **comparison-and-aggregation construction**: compare the query with the keys to determine weights, then aggregate the associated values. When the weights are nonnegative and sum to one, aggregation is a weighted average, as in ordinary k-NN regression and softmax attention. More generally, it is a weighted sum, as in the ridge and SVM expansions below.
+
+The aggregate can be the prediction itself, $\hat y(q)=r(q)$, or feed a further output rule. An SVM adds an intercept and takes the sign; an MLP block adds an output bias. Search shares the comparison and selection operation but returns the selected values as a ranked list. The common construction identifies these operations within a model without requiring every output to be a weighted sum.
+
+Ordinary k-NN selects the nearest $k$ keys and gives each weight $1/k$. Other methods learn the keys, change the weights, replace targets with fitted coefficients, or construct the reference set from the current input.
+
+Some connections below are exact identities; others describe one stage of a larger algorithm. A similarity expansion need not select the nearest $k$ points.
+:::
+
+A weighted-sum representation alone is insufficient: any scalar function can be written trivially as $f(q)=a_1(q)v_1$ by setting $a_1=f$ and $v_1=1$. The connections developed here identify keys, values and comparison rules from the model's training procedure or prediction computation. Their usefulness lies in exposing those components and how they differ across methods.
+
+
+## The starting construction
+
+Suppose we have labelled observations $(x_i,y_i)$, where $x_i$ is an input and $y_i$ its target, and a representation map $\phi$. For a new input $x$, define the query $q$, reference key $k_i$ and associated value $v_i$ by
+
+$$
+q=\phi(x),\qquad k_i=\phi(x_i),\qquad v_i=y_i.
+$$
+
+Let $N_k(q)$ contain the indices of its $k$ nearest keys under a specified distance, with a fixed rule for ties. Regression predicts
+
+$$
+\hat y(x)=\frac1k\sum_{i\in N_k(q)}y_i.
+$$
+
+For classification, use one-hot label vectors as values. Their average gives the neighbour class proportions; a decision rule then chooses a class. The comparison of inputs and the aggregation of outputs are separate operations.
+
+The **query** is what we are processing. The **keys** determine which stored entries are relevant. The **values** determine what those entries contribute. Keys and values can have different dimensions and need not have the same units.
+
+## From neighbour selection to kernel weighting
+
+Hard selection gives the $k$ nearest observations equal weight and all others zero. A nonnegative similarity function can instead assign graded weights:
+
+$$
+\hat y(q)=\sum_i
+\frac{\kappa(q,k_i)}{\sum_j\kappa(q,k_j)}\,v_i,
+$$
+
+provided the denominator is positive. This is the normalized kernel-smoothing form associated with Nadaraya–Watson regression. A Gaussian choice,
+
+$$
+\kappa(q,k_i)=\exp\left(-\frac{\lVert q-k_i\rVert^2}{2h^2}\right),
+$$
+
+replaces the neighbour count with a bandwidth $h$ controlling how widely observations contribute. The regression estimator originates in [Nadaraya](https://doi.org/10.1137/1109020) and [Watson](https://www.jstor.org/stable/25049340).
+
+Kulkarni and Harman develop the corresponding classification construction in the **Kernel Rules** section of their [tutorial](https://www.princeton.edu/~kulkarni/Papers/Journals/j077_2011_KulHar_WileyTutorial.pdf#page=4). They first replace a fixed neighbour count with a fixed-radius window, then replace equal votes with kernel weights. The bandwidth controls locality much as the neighbour count does in k-NN. With one-hot labels as values, normalizing these weighted votes gives the form above; a common positive denominator leaves the winning class unchanged. This supplies a concrete connection between neighbour voting and kernel smoothing.
+
+There are two uses of *kernel* to distinguish. A smoothing kernel supplies weights. A positive-semidefinite kernel supplies inner products in a feature space. The Gaussian has both properties. An arbitrary matching score need not be a positive-semidefinite kernel, and a valid inner-product kernel need not be nonnegative. These distinctions become relevant when we move from averaging observed targets to combining fitted coefficients.
+
+## Ridge regression in its dual form
+
+Ridge regression is usually presented as fitting a weight vector. It can also be written as a similarity expansion over training inputs.
+
+For clarity, consider scalar targets, no intercept, and the objective
+
+$$
+\min_w\ \lVert y-Xw\rVert^2+\lambda\lVert w\rVert^2,
+\qquad \lambda>0,
+$$
+
+where row $i$ of $X$ is $x_i^\top$. Its solution has two equivalent forms:
+
+$$
+w=(X^\top X+\lambda I)^{-1}X^\top y
+  =X^\top(XX^\top+\lambda I)^{-1}y.
+$$
+
+Define $\alpha=(XX^\top+\lambda I)^{-1}y$. Prediction becomes
+
+$$
+\hat y(x)=x^\top w
+=\sum_i \underbrace{x^\top x_i}_{\text{comparison}}
+\underbrace{\alpha_i}_{\text{value}}.
+$$
+
+The query is $x$, keys are $x_i$, and values are fitted coefficients $\alpha_i$. This equality is exact. It changes our description of the fitted model without changing its predictions.
+
+The training data enter prediction in two ways. First, fitting produces the values $v_i=\alpha_i$. Each value depends on the targets and on relationships among all training inputs through $(XX^\top+\lambda I)^{-1}$. Second, each training input supplies a key $k_i=x_i$. At prediction time, the query assigns that key the weight $a_i(x)=x^\top x_i$. The stored value is fixed after training; its contribution changes with the query. Here $\alpha_i$ plays the value role occupied by $y_i$ in ordinary k-NN.
+
+This gives ridge regression an associative-memory interpretation. In the dual representation, prediction retrieves fitted values through comparisons with training keys. In the primal representation, those key–value associations have already been combined into
+
+$$
+w=\sum_i x_i\alpha_i=\sum_i k_i v_i,
+\qquad
+\hat y(x)=x^\top w.
+$$
+
+The learned weight vector therefore stores an aggregate of the training-derived associations. It does not generally preserve recoverable copies of the observations: different datasets can produce the same $w$. Nevertheless, evaluating $x^\top w$ gives exactly the same result as the dual retrieval sum. Explicit reference entries and a parameter vector are two representations of the same fitted predictor.
+
+The usual statistical presentation emphasizes coefficient estimation, regularisation and prediction error. The associative-memory perspective asks what information fitting stores and how a query accesses it. Nearest-neighbour and approximate-retrieval methods make that question explicit, providing another way to interpret the familiar ridge identity. The identity itself is exact; using approximate search to truncate its sum would introduce an additional approximation.
+
+There is also an exact target-valued description. Put $G=XX^\top$ and $g(x)=Xx$. Then
+
+$$
+\hat y(x)=s(x)^\top y,
+\qquad s(x)=(G+\lambda I)^{-1}g(x).
+$$
+
+Here the values are the original targets, while the weights account for the geometry of the entire training set and regularisation. Unlike ordinary k-NN weights, these weights can be negative and need not sum to one. Ridge can extrapolate beyond the observed target range. A dot product also reflects vector magnitude, so its ordering is not generally Euclidean nearest-neighbour ordering.
+
+These representations need not be unique. The coefficient-valued form exposes fitted associations; the target-valued form exposes how observed targets enter the prediction. Each is an exact account of the same predictor. Neither decomposition alone establishes the causal influence of a training observation, which can also affect the fitting of other components.
+
+With an unpenalised intercept, centre inputs and targets using training means, apply the derivation, and restore the target mean. Replacing the linear inner product with a positive-semidefinite kernel gives kernel ridge regression. Its expansion is supported by the [representer theorem](https://doi.org/10.1007/3-540-44581-1_27).
+
+This makes the connection to k-NN precise: both admit a sum over reference entries, but ridge learns a global combination rather than averaging a fixed number of nearby labels. The dual expression does not require a deployed linear model to retain or search its training data; the weight vector is sufficient for its usual implementation.
+
+## Decision trees learn the neighbourhood
+
+A fitted tree partitions input space using supervised splits. Let $\ell_T(x)$ be the leaf reached by $x$, and let $\phi_T(x)$ be its one-hot leaf vector. Define
+
+$$
+\kappa_T(x,x')=\phi_T(x)^\top\phi_T(x')
+=\mathbf1\{\ell_T(x)=\ell_T(x')\}.
+$$
+
+This is a positive-semidefinite kernel because it is an inner product of explicit features. For an unweighted squared-error regression tree with nonempty leaves,
+
+$$
+\hat y_T(x)=
+\frac{\sum_i\kappa_T(x,x_i)y_i}
+     {\sum_i\kappa_T(x,x_i)}.
+$$
+
+The expression is exactly the leaf mean. For classification, substituting one-hot class labels yields the leaf class proportions.
+
+The neighbourhood is learned through the partition rather than prescribed by raw Euclidean distance. Its size varies from leaf to leaf. A tree thus implements a particular form of neighbourhood averaging, even though prediction follows split decisions rather than running a nearest-neighbour search.
+
+A regression forest averages its tree predictions. A classification forest that averages leaf class proportions has the corresponding probability-averaging form; a forest that votes over hard tree decisions applies a class decision within each tree before voting. The all-tree average of same-leaf indicators also defines a kernel. Same-leaf proximity and hard-label voting are described by [Breiman and Cutler](https://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm). Recovering regression or probability-averaged predictions requires averaging the separately normalized tree weights; normalizing the average proximity once is generally different because leaf sizes vary. Bootstrap multiplicities and sample weights must also be retained when present.
+
+## Support vector machines select the reference keys
+
+A binary support vector machine gives another direct connection. Let $y_i\in\{-1,+1\}$ be the class labels, $\kappa$ a positive-semidefinite kernel, $\beta_i\geq0$ the fitted dual coefficients, and $b$ the fitted intercept. Define the support-vector index set $S=\{i:\beta_i>0\}$. Its decision score and predicted class are
+
+$$
+f(x)=b+\sum_{i\in S}\beta_i y_i\,\kappa(x,x_i),
+\qquad \hat y(x)=\operatorname{sign}(f(x)),
+$$
+
+with a fixed convention at zero. This is the standard [SVM dual prediction rule](https://scikit-learn.org/stable/modules/svm.html#mathematical-formulation).
+
+In query–key–value notation,
+
+$$
+q=x,\qquad k_i=x_i,\qquad v_i=\beta_i y_i,
+\qquad a_i(q)=\kappa(q,k_i),\quad i\in S.
+$$
+
+Training determines which keys remain and their signed values. The query determines their contributions through kernel comparisons. With a Gaussian kernel, nearby support vectors receive larger comparison weights, but the score also depends on the learned values and intercept.
+
+Unlike k-NN, the support set is selected during training by the margin objective, rather than by proximity to each new query. Its size is learned and can include every training observation. Prediction combines all support-vector contributions without normalizing them into a neighbour average.
+
+In the memory interpretation, the dual model retains support-vector keys and fitted values. For a linear kernel, these associations can again be combined into $w=\sum_{i\in S}k_i v_i$, giving $f(x)=x^\top w+b$. Ridge and SVMs share this retrieval form while learning their stored values through different objectives.
+
+## Neural networks: learned keys and values
+
+The statement that neural networks are k-NN needs an explicit choice of what counts as a key and a value. There are several informative choices.
+
+### A feed-forward layer as a key–value computation
+
+Consider an MLP block with one hidden layer:
+
+$$
+f(x)=W_2\,\sigma(W_1x+b_1)+b_2.
+$$
+
+Write row $j$ of $W_1$ as $k_j^\top$, column $j$ of $W_2$ as $v_j$, and component $j$ of $b_1$ as $b_j$. Then
+
+$$
+f(x)=b_2+\sum_j\sigma(k_j^\top x+b_j)\,v_j.
+$$
+
+This is an exact decomposition. The query is the incoming activation; keys and values are learned parameter vectors. The activation function determines how strongly each value contributes. These keys are not necessarily training examples, and a large activation is not necessarily a small metric distance. No top-$k$ selection or normalization is required.
+
+Kulkarni and Harman's **Multilayer Perceptrons** section describes units of the form $\sigma(w^\top x)$ and learning their weights through backpropagation. It treats these separately from kernel voting and does not derive a Nadaraya–Watson representation of an MLP. The connection developed here is the weighted-sum structure: an MLP learns both its activation-based weights and its values, whereas ordinary Nadaraya–Watson regression averages observed targets using normalized nonnegative kernel weights. Imposing such normalization on nonnegative hidden activations would give a related normalized construction, but would change the ordinary MLP computation.
+
+[Geva and colleagues](https://aclanthology.org/2021.emnlp-main.446/) examine Transformer feed-forward layers as key–value memories and provide empirical evidence about the patterns matched by keys and the effects of their values. The algebra identifies the computational roles; evidence is needed to assign a semantic interpretation to a particular learned key.
+
+A deep network composes such operations. The query at one layer is produced by earlier layers, so the comparison changes with depth. Residual connections, normalization and gated MLP variants add operations that must be included when analysing a complete architecture.
+
+### Learned features followed by ridge regression
+
+A second connection uses training observations as the keys. Freeze a learned representation $\phi_\theta$ and fit a ridge output layer to it. The ridge derivation gives
+
+$$
+\hat y(x)=\sum_i\alpha_i\,
+\underbrace{\phi_\theta(x)^\top\phi_\theta(x_i)}_{\kappa_\theta(x,x_i)}.
+$$
+
+The representation now determines a learned kernel. This identity applies to the ridge head on the fixed features. It does not automatically describe a head trained with cross-entropy or establish that an entire jointly trained network is a fixed-kernel method.
+
+There is a further training-history connection. For a linear layer updated by plain single-example stochastic gradient descent, write its input at step $t$ as $h_t$ and its output-loss gradient as $\delta_t$. Ignoring bias, momentum and weight decay,
+
+$$
+W_{t+1}=W_t-\eta_t\delta_t h_t^\top
+\quad\Longrightarrow\quad
+W_Tq=W_0q-\sum_{t<T}\eta_t\delta_t(h_t^\top q).
+$$
+
+The layer's output after training can be expressed through comparisons with historical activations and gradient-derived values. For minibatch updates, each update contains a sum of these outer products, scaled according to the batch loss reduction. It is not a vote over labels. [Irie, Csordás and Schmidhuber](https://arxiv.org/abs/2202.05798) develop this dual view of neural layers. This explains how a parametric computation can admit an example-related expansion even when those examples are no longer explicitly stored at inference.
+
+## Self-attention constructs its reference set from context
+
+For hidden states $h_1,\ldots,h_N$, one self-attention head constructs
+
+$$
+q_i=W_Qh_i,\qquad k_j=W_Kh_j,\qquad v_j=W_Vh_j,
+$$
+
+and computes the head output $\hat{y}_i$, over the permitted positions $\mathcal A_i$,
+
+$$
+\hat{y}_i=\sum_{j\in\mathcal A_i}
+\frac{\exp(q_i^\top k_j/\sqrt{d_k})}
+     {\sum_{r\in\mathcal A_i}\exp(q_i^\top k_r/\sqrt{d_k})}\,v_j.
+$$
+
+This is a normalized similarity-weighted sum. In causal self-attention, the permitted positions exclude future tokens. Queries, keys and values come from the same sequence, but through different projections. Cross-attention takes queries from one sequence and keys and values from another. [Vaswani et al.](https://arxiv.org/abs/1706.03762)
+
+There is an exact relation to Gaussian neighbour weighting when the keys have equal norm. For a fixed query,
+
+$$
+q^\top k_j=\frac{\lVert q\rVert^2+\lVert k_j\rVert^2-\lVert q-k_j\rVert^2}{2}.
+$$
+
+Consequently,
+
+$$
+\operatorname{softmax}_j(q^\top k_j/\tau)
+=\operatorname{softmax}_j(-\lVert q-k_j\rVert^2/(2\tau)),
+\qquad \tau>0,
+$$
+
+under that equal-key-norm condition. As $\tau\to0$, the weights concentrate on a unique maximum-score key, if one exists. With ties they average over the maximizers. Without equal key norms, maximum inner product need not select the Euclidean nearest key.
+
+Ordinary dense attention uses all permitted keys, rather than exactly $k$ neighbours. Its connection to k-NN is through soft selection and value aggregation. The separate query and key projections can also make matching asymmetric in the original hidden states. Calling the operation a kernel smoother does not make its normalized attention matrix a symmetric positive-semidefinite Gram matrix.
+
+## The primal–dual connection for attention
+
+[A Primal-Dual Framework for Transformers and Neural Networks](https://arxiv.org/abs/2406.13781), by Tan M. Nguyen, Tam Nguyen, Nhat Ho, Andrea Bertozzi, Richard Baraniuk and Stanley Osher, supplies a formal link. It derives an attention-form expansion from support-vector regression with normalized features.
+
+Schematically, its primal map and dual expansion are
+
+$$
+f(q)=W\frac{\Phi(q)}{h(q)}+b
+=\sum_j\frac{\Phi(q)^\top\Phi(k_j)}{h(q)}\,v_j+b.
+$$
+
+The values incorporate dual coefficients and key-side normalization. Choosing the exponential dot-product kernel and its sum over keys as $h(q)$ recovers softmax weights; zero bias gives the usual attention aggregation.
+
+This is a structural derivation from a specified optimization problem. The paper's Appendix F obtains separate learned query, key and value projections by a relaxation. Ordinary Transformer training need not solve that SVR problem at each layer, and its context keys need not be pretraining examples. The result strengthens the connection between neural layers, kernel expansions and attention without making them literal top-$k$ neighbour algorithms.
+
+## Explicit context memory and memory in weights
+
+Alex Wang's [You could have invented transformers from memory](https://alexwang.ai/posts/associative-memory/) develops a related progression through linear associative memory, nonlinear MLP recall and self-attention. It also distinguishes memory held in learned weights from keys and values supplied by the current context. Its capacity estimates depend on assumptions about random keys, values and the recall criterion; they should not be read as general capacities of trained language models.
+
+That distinction helps locate the reference set in the present account. An MLP uses parameter vectors that persist across requests. Self-attention constructs explicit key–value vectors from the current sequence. In autoregressive inference, a KV cache can retain those vectors to avoid recomputing earlier positions. The cache is contextual state, not a table containing the training corpus.
+
+A Transformer therefore combines learned parameters with context-dependent memory. The query, keys and values can all change across layers. A retrieval interpretation must specify which of these stores it describes.
+
+## Search changes the values and the indexing problem
+
+Vector search makes the original neighbour operation explicit. The query is a search embedding, keys are indexed document or item embeddings, and values are identifiers or content. A search system returns selected values rather than necessarily averaging them.
+
+Let $u$ be a search request and $d_1,\ldots,d_N$ the indexed documents. Define
+
+$$
+q=\phi_Q(u),\qquad k_i=\phi_K(d_i),\qquad v_i=\operatorname{payload}(d_i),
+$$
+
+where $\phi_Q$ and $\phi_K$ map requests and documents into a common comparison space, and $\operatorname{payload}(d_i)$ is the document identifier, text or other content to return. The two representation maps may differ. For a specified distance $D$, exact search selects
+
+$$
+N_k(q)=\underset{\substack{S\subseteq\{1,\ldots,N\}\\|S|=k}}{\operatorname{arg\,min}}
+\ \sum_{i\in S}D(q,k_i),
+\qquad 1\leq k\leq N,
+$$
+
+with a fixed rule for ties. Order the selected indices as $i_1,\ldots,i_k$ by increasing distance. The search output is the ranked list
+
+$$
+\mathcal R_k(u)=(v_{i_1},\ldots,v_{i_k}).
+$$
+
+This is the same neighbour-selection problem as k-NN prediction. The output operation changes: regression averages the selected values, while search returns them as a list. For a similarity score $s$, replace distance minimization with score maximization and rank in descending order. With unit-normalized embeddings, $\lVert q-k_i\rVert^2=2-2q^\top k_i$, so Euclidean nearest neighbours and highest cosine similarities give the same ranking.
+
+Approximate nearest-neighbour methods reduce the cost of finding candidates, accepting some disagreement with exact search. [Faiss](https://faiss.ai/) provides implementations of such similarity-search methods. Here “ANN” means approximate nearest-neighbour search, not artificial neural network.
+
+Formally, an approximate index returns a candidate set $\widetilde N_k(q)$ in place of $N_k(q)$. When both contain $k$ indices, agreement with exact search can be measured by
+
+$$
+\operatorname{recall@}k(q)=\frac{|\widetilde N_k(q)\cap N_k(q)|}{k}.
+$$
+
+This measures recovery of the exact neighbours under the chosen representation and comparison rule.
+
+This is directly related to k-NN lookup, but the index is only one component of a search system. High agreement with exact vector neighbours establishes index quality under the chosen similarity. It does not establish relevance to a user. Representation quality, filtering and reranking require their own evaluation.
+
+A model can combine both operations: retrieve documents from an external index, then use self-attention over the supplied context. External document keys and internal attention keys have different origins and serve different computations.
+
+## Clustering changes where the values come from
+
+Clustering has no supplied target labels, but several clustering procedures use the same comparison operations.
+
+In the assignment step of k-means, the query is an observation, the keys are current centroids $c_j$, and the values are cluster identifiers:
+
+$$
+\hat j(x)=\arg\min_j\lVert x-c_j\rVert^2.
+$$
+
+This is a nearest-prototype lookup. The centroid-update step then changes the keys using current assignments. The number of clusters is not the neighbour count in k-NN, and lookup alone is not the complete clustering algorithm.
+
+Neighbour-graph clustering uses observations as both queries and keys. Retrieved neighbour identifiers define graph edges; a further operation determines groups. Spectral clustering, for example, uses a graph Laplacian and its eigenvectors before assigning clusters. [von Luxburg's tutorial](https://arxiv.org/abs/0711.0189) explains these stages. Radius-neighbour methods such as DBSCAN use a different selection rule and additional density-connectivity logic.
+
+The connection therefore extends beyond supervised prediction. Labels are one possible type of value. Identifiers, fitted coefficients, learned vectors and generated cluster assignments can occupy the same computational role.
+
+## What changes across the methods
+
+| Method or operation | Query | Keys | Values | Comparison and aggregation | Scope of connection |
+|---|---|---|---|---|---|
+| k-NN regression | New input representation | Training representations | Targets | Nearest $k$; average | Complete prediction rule |
+| Ridge, coefficient-valued dual | New input | Training inputs | Fitted $\alpha_i$ | Inner products; signed sum | Complete prediction rule |
+| Regression tree | Query leaf representation | Training leaf representations | Targets | Same leaf; average | Complete prediction rule |
+| Binary kernel SVM | New input | Support vectors | Signed coefficients $\beta_i y_i$ | Kernel-weighted sum plus bias; sign | Complete prediction rule |
+| MLP block | Incoming activation | Rows of input weight matrix | Columns of output weight matrix | Activated dot products; sum, plus bias | Computational block |
+| Ridge on frozen neural features | Learned query features | Learned training features | Fitted coefficients | Learned-kernel expansion | Prediction rule for fitted head |
+| Self-attention head | Projected token state | Projected context states | Projected context values | Masked softmax scores; weighted sum | Computational block |
+| Approximate vector search | Search embedding | Indexed embeddings | IDs or content | Approximate neighbour retrieval | Retrieval operation |
+| k-means assignment | Observation | Current centroids | Cluster IDs | Nearest prototype | Assignment stage |
+| Neighbour-graph construction | Observation | Other observations | Observation IDs | Neighbours become graph edges | Graph-construction stage |
+
+These descriptions do not impose identical learning objectives or computational costs. They identify how reference information enters an output, and whether that information is observed, fitted, compressed into parameters or constructed from context.
+
+## A diagnostic consequence: similarity and contribution differ
+
+The distinction between keys and values matters when approximating a predictor by retrieving only some entries. In a scalar similarity expansion, entry $i$ contributes
+
+$$
+c_i(q)=a_i(q)v_i.
+$$
+
+For example, comparison weights $a_1=0.9$ and $a_2=0.2$, with stored values $v_1=0.1$ and $v_2=5$, give contributions $c_1=0.09$ and $c_2=1$. The less similar key contributes more. Signed values can also cause contributions to cancel.
+
+Suppose a ridge or SVM score is approximated by retaining a set $R$ of entries, with the original coefficients and intercept unchanged. The omitted contribution is exactly
+
+$$
+f(q)-f_R(q)=\sum_{i\notin R}a_i(q)v_i,
+\qquad
+|f(q)-f_R(q)|\leq\sum_{i\notin R}|a_i(q)v_i|.
+$$
+
+High recall of the nearest keys alone therefore gives no bound on prediction error without control of the omitted values and weights. For an SVM, a score error smaller than $|f(q)|$ preserves the predicted sign. This gives a concrete diagnostic: evaluate the approximation of the model's score as well as neighbour recall. The query–key–value account makes clear why index accuracy and prediction accuracy are different quantities.
+
+## What this adds to the emergence argument
+
+The earlier emergence post considered whether successive retrieval operations could support a composition absent as a stored joint example. This comparison supplies a more explicit account of those operations. Some retain examples; some learn prototypes or partitions; some combine coefficients; others construct contextual memories and new queries at each layer.
+
+An aggregation can produce a vector that is not one of its stored values. A sequence of transformations can then change the query for the next operation. Those facts make a retrieval-based account of composition plausible, but do not establish that the resulting output is correct or that a trained model generalizes systematically. The joint-holdout and intervention tests in the earlier post provide ways to assess that claim.
+
+For model building and diagnosis, the binding role of k-NN is practical. We can ask where the reference information resides, whether the query matches the appropriate keys, what the values represent, and whether the aggregation preserves the information the task needs. A poor result may reflect unsuitable representations, missing references, incorrect values, an inappropriate comparison rule or a mismatch between training and deployment.
+
+The useful generalization of k-NN is a family of **comparison-and-aggregation constructions**: query–key comparisons determine how values contribute to the output. Primal–dual identities, supervised partitions and learned key–value maps make several of these connections exact. Keeping their components explicit allows us to compare algorithms without treating their different training procedures and prediction rules as interchangeable.
