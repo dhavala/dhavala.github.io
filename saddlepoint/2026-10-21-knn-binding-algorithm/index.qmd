@@ -293,9 +293,17 @@ This is a structural derivation from a specified optimization problem. The paper
 
 ## Explicit context memory and memory in weights
 
-Alex Wang's [You could have invented transformers from memory](https://alexwang.ai/posts/associative-memory/) develops a related progression through linear associative memory, nonlinear MLP recall and self-attention. It also distinguishes memory held in learned weights from keys and values supplied by the current context. Its capacity estimates depend on assumptions about random keys, values and the recall criterion; they should not be read as general capacities of trained language models.
+In [Towards a Testable Theory of Emergence](../2026-06-30-towards-testable-theory-of-emergence/index.ipynb#matrix-multiplication-scores-similarity), I also presented matrix multiplication as a key–value memory computation. Besides the dual ridge interpretation, that post used the singular value decomposition
 
-That distinction helps locate the reference set in the present account. An MLP uses parameter vectors that persist across requests. Self-attention constructs explicit key–value vectors from the current sequence. In autoregressive inference, a KV cache can retain those vectors to avoid recomputing earlier positions. The cache is contextual state, not a table containing the training corpus.
+$$
+Wx=\sum_{r=1}^{\operatorname{rank}(W)}\sigma_r u_r\,\langle z_r,x\rangle,
+$$
+
+where $z_r$ and $u_r$ are the right and left singular vectors, and $\sigma_r$ is the corresponding singular value. The input $x$ is the query, $z_r$ is a key, and $\sigma_r u_r$ is its associated value. Matrix multiplication compares the query with these keys and aggregates the values. This is an exact representation of the linear map; the singular-vector keys need not correspond to individual training observations.
+
+Alex Wang's [You could have invented transformers from memory](https://alexwang.ai/posts/associative-memory/) provides a complementary quantitative treatment. It calculates how contributions from other stored associations interfere with recall, comparing outer-product storage, least-squares storage and nonlinear retrieval under random-key and random-value assumptions. My earlier post developed the matrix-as-memory interpretation; Wang's calculations quantify interference for specified storage and retrieval rules. His capacity estimates use a signal–interference threshold, which should be distinguished from a specified probability of correctly retrieving an item. They are not general capacities of trained language models.
+
+Both accounts distinguish memory in parameters from memory supplied by context. An MLP uses parameter vectors that persist across requests. Self-attention constructs explicit key–value vectors from the current sequence. In autoregressive inference, a KV cache can retain those vectors to avoid recomputing earlier positions. The cache is contextual state, not a table containing the training corpus.
 
 A Transformer therefore combines learned parameters with context-dependent memory. The query, keys and values can all change across layers. A retrieval interpretation must specify which of these stores it describes.
 
