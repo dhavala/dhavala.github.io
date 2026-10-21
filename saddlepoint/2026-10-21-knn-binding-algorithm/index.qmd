@@ -5,7 +5,6 @@ description: "How neighbour prediction connects ridge regression, decision trees
 author: "Soma S Dhavala"
 date: "2026-10-21"
 categories: ["machine learning", "transformers", "kernels", "retrieval"]
-draft: true
 ---
 
 ::: {.callout-note appearance="default" icon="false" title="Overview"}
