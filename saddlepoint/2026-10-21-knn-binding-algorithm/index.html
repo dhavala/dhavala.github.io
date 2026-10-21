@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-81df9304e8762abf7ea45a3562872c5c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-841ef00cee7094426e13c1bd3853259c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-81d02194b5d27f0e9e526613bc8c1174.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -710,8 +710,13 @@ f(q)=W\frac{\Phi(q)}{h(q)}+b
 </section>
 <section id="explicit-context-memory-and-memory-in-weights" class="level2">
 <h2 data-anchor-id="explicit-context-memory-and-memory-in-weights">Explicit context memory and memory in weights</h2>
-<p>Alex Wang’s <a href="https://alexwang.ai/posts/associative-memory/">You could have invented transformers from memory</a> develops a related progression through linear associative memory, nonlinear MLP recall and self-attention. It also distinguishes memory held in learned weights from keys and values supplied by the current context. Its capacity estimates depend on assumptions about random keys, values and the recall criterion; they should not be read as general capacities of trained language models.</p>
-<p>That distinction helps locate the reference set in the present account. An MLP uses parameter vectors that persist across requests. Self-attention constructs explicit key–value vectors from the current sequence. In autoregressive inference, a KV cache can retain those vectors to avoid recomputing earlier positions. The cache is contextual state, not a table containing the training corpus.</p>
+<p>In <a href="../../saddlepoint/2026-06-30-towards-testable-theory-of-emergence/index.html#matrix-multiplication-scores-similarity">Towards a Testable Theory of Emergence</a>, I also presented matrix multiplication as a key–value memory computation. Besides the dual ridge interpretation, that post used the singular value decomposition</p>
+<p><span class="math display">\[
+Wx=\sum_{r=1}^{\operatorname{rank}(W)}\sigma_r u_r\,\langle z_r,x\rangle,
+\]</span></p>
+<p>where <span class="math inline">\(z_r\)</span> and <span class="math inline">\(u_r\)</span> are the right and left singular vectors, and <span class="math inline">\(\sigma_r\)</span> is the corresponding singular value. The input <span class="math inline">\(x\)</span> is the query, <span class="math inline">\(z_r\)</span> is a key, and <span class="math inline">\(\sigma_r u_r\)</span> is its associated value. Matrix multiplication compares the query with these keys and aggregates the values. This is an exact representation of the linear map; the singular-vector keys need not correspond to individual training observations.</p>
+<p>Alex Wang’s <a href="https://alexwang.ai/posts/associative-memory/">You could have invented transformers from memory</a> provides a complementary quantitative treatment. It calculates how contributions from other stored associations interfere with recall, comparing outer-product storage, least-squares storage and nonlinear retrieval under random-key and random-value assumptions. My earlier post developed the matrix-as-memory interpretation; Wang’s calculations quantify interference for specified storage and retrieval rules. His capacity estimates use a signal–interference threshold, which should be distinguished from a specified probability of correctly retrieving an item. They are not general capacities of trained language models.</p>
+<p>Both accounts distinguish memory in parameters from memory supplied by context. An MLP uses parameter vectors that persist across requests. Self-attention constructs explicit key–value vectors from the current sequence. In autoregressive inference, a KV cache can retain those vectors to avoid recomputing earlier positions. The cache is contextual state, not a table containing the training corpus.</p>
 <p>A Transformer therefore combines learned parameters with context-dependent memory. The query, keys and values can all change across layers. A retrieval interpretation must specify which of these stores it describes.</p>
 </section>
 <section id="search-changes-the-values-and-the-indexing-problem" class="level2">
