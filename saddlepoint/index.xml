@@ -17,7 +17,362 @@
 <width>144</width>
 </image>
 <generator>quarto-1.10.19</generator>
-<lastBuildDate>Wed, 21 Oct 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 24 Oct 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Linear Memory, Reconstruction and Recall</title>
+  <dc:creator>Soma S Dhavala</dc:creator>
+  <link>https://dhavala.github.io/saddlepoint/2026-10-24-linear-memory-recall/</link>
+  <description><![CDATA[ 
+<div class="section-banner">
+  <img style="display:block;width:100%;height:150px;object-fit:cover;object-position:center" src="https://dhavala.github.io/images/banners/horsesskybw.jpg" alt="Blog banner">
+</div>
+
+
+
+
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="The argument">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The argument
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>The interpretation of a matrix as a <em>key–value</em> store can be developed quantitatively: how many supplied <em>values</em> can it reproduce from their <em>keys</em>, and with what error?</strong></p>
+<p>We use Wang’s memory-capacity argument to develop this interpretation through SVD. Two explicit constructions let us relate reconstruction error and power SNR to the number of stored pairs <img src="https://latex.codecogs.com/png.latex?M">, the <em>key</em> dimension <img src="https://latex.codecogs.com/png.latex?d">, and the relationships among the <em>keys</em>. The result explains the assumptions behind the estimate <img src="https://latex.codecogs.com/png.latex?M%5Capprox2d"> and what to examine beyond that estimate.</p>
+</div>
+</div>
+<p>In <a href="../../saddlepoint/2026-06-30-towards-testable-theory-of-emergence/index.html#matrix-multiplication-scores-similarity">Towards a Testable Theory of Emergence</a>, I interpreted matrix multiplication as a <em>key–value</em> memory computation through its singular value decomposition. <a href="../../saddlepoint/2026-10-21-knn-binding-algorithm/index.html">k-NN as a Binding Algorithm</a> extends that interpretation across learning methods. The purpose here is to strengthen it with a quantitative account of storage and recall.</p>
+<p>Alex Wang’s <a href="https://alexwang.ai/posts/associative-memory/">You could have invented transformers from memory</a> asks how many memories a store can hold before interference becomes comparable to the desired signal. We use that question to develop the earlier SVD viewpoint: <strong>with <em>keys</em> in <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20R%5Ed">, how accurately can a matrix return the intended <em>values</em> as the number <img src="https://latex.codecogs.com/png.latex?M"> of stored pairs grows?</strong></p>
+<p>SVD gives a memory representation of any linear map. To quantify recall, we then specify the pairs to be stored and how the matrix is fitted. These constructions provide an analysable model of the memory interpretation; their capacity estimates apply under the assumptions stated below. Here <em>recall</em> means reconstructing the intended output vector, rather than identifying an item from a list of candidates.</p>
+<p>Vectors are columns, and <img src="https://latex.codecogs.com/png.latex?A%5E%5Ctop"> denotes transpose. Appendix A defines the notation and dimensions; the subsequent appendices give the derivations.</p>
+<section id="a-matrix-as-a-keyvalue-store" class="level2">
+<h2 data-anchor-id="a-matrix-as-a-keyvalue-store">A matrix as a <em>key–value</em> store</h2>
+<p>Let <img src="https://latex.codecogs.com/png.latex?W%5Cin%5Cmathbb%20R%5E%7Bp%5Ctimes%20d%7D"> have rank <img src="https://latex.codecogs.com/png.latex?r_W"> and compact singular value decomposition (SVD)</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW=U%5CSigma%20Z%5E%5Ctop%0A=%5Csum_%7B%5Cell=1%7D%5E%7Br_W%7D%5Csigma_%5Cell%20u_%5Cell%20z_%5Cell%5E%5Ctop.%0A"></p>
+<p>For a <em>query</em> <img src="https://latex.codecogs.com/png.latex?q">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AWq=%5Csum_%7B%5Cell=1%7D%5E%7Br_W%7D%0A%5Cunderbrace%7B%5Csigma_%5Cell%20u_%5Cell%7D_%7B%5Ctext%7Bvalue%7D%7D%0A%5Cunderbrace%7Bz_%5Cell%5E%5Ctop%20q%7D_%7B%5Ctext%7Bquery%E2%80%93key%20comparison%7D%7D.%0A"></p>
+<p>The right singular vectors <img src="https://latex.codecogs.com/png.latex?z_%5Cell"> are orthonormal <em>keys</em>; <img src="https://latex.codecogs.com/png.latex?%5Csigma_%5Cell%20u_%5Cell"> are their associated <em>values</em>. Querying with <img src="https://latex.codecogs.com/png.latex?z_j"> returns its <em>value</em> exactly. Components of a <em>query</em> orthogonal to these <em>keys</em> lie in the null space <img src="https://latex.codecogs.com/png.latex?%5Cker(W)=%5C%7Bq:Wq=0%5C%7D"> and contribute zero.</p>
+<p>These SVD-derived pairs describe the action of the learned map; they do not identify its original training pairs. To develop the memory interpretation quantitatively, we now supply a collection of intended <em>key–value pairs</em> and examine two rules for constructing a matrix that reproduces them. Rank counts independent directions, not independently specified memories: one linear rule can generate arbitrarily many consistent input–output pairs.</p>
+</section>
+<section id="two-ways-to-construct-the-memory-matrix" class="level2">
+<h2 data-anchor-id="two-ways-to-construct-the-memory-matrix">Two ways to construct the memory matrix</h2>
+<p>Suppose we want to store <img src="https://latex.codecogs.com/png.latex?M"> <em>key–value pairs</em> <img src="https://latex.codecogs.com/png.latex?(k_i,v_i)">. Each pair specifies one requirement: querying with <img src="https://latex.codecogs.com/png.latex?k_i"> should return <img src="https://latex.codecogs.com/png.latex?v_i">. Thus <img src="https://latex.codecogs.com/png.latex?M"> counts supplied pairs, with one intended <em>value</em> per <em>key</em>; it does not count SVD components. Put the <em>keys</em> and <em>values</em> into columns:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AK=%5Bk_1,%5Cldots,k_M%5D%5Cin%5Cmathbb%20R%5E%7Bd%5Ctimes%20M%7D,%0A%5Cqquad%0AV=%5Bv_1,%5Cldots,v_M%5D%5Cin%5Cmathbb%20R%5E%7Bp%5Ctimes%20M%7D.%0A"></p>
+<p>Assume <img src="https://latex.codecogs.com/png.latex?%5C%7Ck_i%5C%7C=1">. We want a single matrix <img src="https://latex.codecogs.com/png.latex?W"> that returns <img src="https://latex.codecogs.com/png.latex?v_i"> when multiplied by <img src="https://latex.codecogs.com/png.latex?k_i">. We examine two ways to construct it. The word “store” describes the role of the resulting matrix; it is not a separate statistical estimator.</p>
+<p><strong>First, construct one matrix per <em>key–value pair</em> and add them.</strong> For each pair <img src="https://latex.codecogs.com/png.latex?(k_i,v_i)">, find a matrix <img src="https://latex.codecogs.com/png.latex?A_i"> using only that pair. Choose the smallest Frobenius norm, <img src="https://latex.codecogs.com/png.latex?%5C%7CA%5C%7C_F=(%5Csum_%7Bab%7DA_%7Bab%7D%5E2)%5E%7B1/2%7D">, among matrices that return <img src="https://latex.codecogs.com/png.latex?v_i"> exactly:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AA_i=%5Cunderset%7BA%7D%7B%5Coperatorname%7Barg%5C,min%7D%7D%5C%20%5Cfrac12%5C%7CA%5C%7C_F%5E2%0A%5Cquad%5Ctext%7Bsubject%20to%7D%5Cquad%20Ak_i=v_i.%0A"></p>
+<p>For a unit <em>key</em>, the solution is <img src="https://latex.codecogs.com/png.latex?A_i=v_i%20k_i%5E%5Ctop">. This is an outer product: a column vector multiplied by a row vector. Summing the matrices gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BOP%7D%7D=%5Csum_i%20v_i%20k_i%5E%5Ctop=VK%5E%5Ctop.%0A"></p>
+<p>We call the sum the <strong>outer-product store</strong>, abbreviated OP. Each <img src="https://latex.codecogs.com/png.latex?A_i"> is constructed using only its own <em>key–value</em> pair. This construction requires no assumption that the pairs are statistically independent. The sum generally does not minimize total recall error because each matrix also acts on other <em>keys</em>. Appendix B derives the single-pair solution.</p>
+<p><strong>Second, fit one matrix using all <em>key–value pairs</em> together.</strong> Choose <img src="https://latex.codecogs.com/png.latex?W"> to minimize the sum of squared output errors, equivalently the squared Frobenius norm of the residual matrix:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmin_W%5C%20%5Cfrac12%5Csum_%7Bi=1%7D%5E%7BM%7D%5C%7CWk_i-v_i%5C%7C%5E2%0A=%5Cmin_W%5C%20%5Cfrac12%5C%7CWK-V%5C%7C_F%5E2.%0A"></p>
+<p>This is ordinary multivariate linear least squares without an intercept. We call its fitted matrix the <strong>least-squares store</strong>, abbreviated LS. If several matrices minimize the error, choose the one with smallest Frobenius norm:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BLS%7D%7D=VK%5E%5Cdagger.%0A"></p>
+<p>The symbol <img src="https://latex.codecogs.com/png.latex?K%5E%5Cdagger"> denotes the Moore–Penrose pseudoinverse, defined through the SVD below. The minimum-norm choice is a tie-break among least-squares solutions, not a ridge penalty. Appendix C proves the formula.</p>
+<p>Now take the compact SVD of the <em>key</em> matrix:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AK=U_K%5CSigma_K%20Z_K%5E%5Ctop,%0A%5Cqquad%20r_K=%5Coperatorname%7Brank%7D(K).%0A"></p>
+<p>The columns of <img src="https://latex.codecogs.com/png.latex?U_K"> are orthonormal directions in the <strong>input-<em>key</em> subspace</strong> in <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20R%5Ed">. The columns of <img src="https://latex.codecogs.com/png.latex?Z_K"> are orthonormal directions in the <strong>space of coefficients over the <img src="https://latex.codecogs.com/png.latex?M"> stored pairs</strong>, <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20R%5EM">. Each <img src="https://latex.codecogs.com/png.latex?z_%7BK,%5Cell%7D"> specifies how to combine the columns of <img src="https://latex.codecogs.com/png.latex?K">; applying those same coefficients to <img src="https://latex.codecogs.com/png.latex?V"> gives the combination of <em>values</em> <img src="https://latex.codecogs.com/png.latex?Vz_%7BK,%5Cell%7D">. The diagonal entries of <img src="https://latex.codecogs.com/png.latex?%5CSigma_K"> are singular values: they describe the scaling of these directions, not the intended <em>values</em> <img src="https://latex.codecogs.com/png.latex?v_i">. The <em>key</em> rank <img src="https://latex.codecogs.com/png.latex?r_K"> need not equal the store rank <img src="https://latex.codecogs.com/png.latex?r_W">.</p>
+<p>The two stores become</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BOP%7D%7D=VZ_K%5CSigma_K%20U_K%5E%5Ctop,%0A%5Cqquad%0AW_%7B%5Cmathrm%7BLS%7D%7D=VZ_K%5CSigma_K%5E%7B-1%7DU_K%5E%5Ctop.%0A"></p>
+<p>They use the same input directions with different gains. Least squares compensates for the nonzero singular gains of the <em>key</em> matrix. Written one direction at a time,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BLS%7D%7D=%5Csum_%7B%5Cell=1%7D%5E%7Br_K%7D%0A%5Cunderbrace%7B%5Cfrac%7BVz_%7BK,%5Cell%7D%7D%7B%5Csigma_%7BK,%5Cell%7D%7D%7D_%7B%5Ctext%7Beffective%20value%7D%7D%0A%5Cunderbrace%7Bu_%7BK,%5Cell%7D%5E%7B%5Ctop%7D%7D_%7B%5Ctext%7Beffective%20key%7D%7D.%0A"></p>
+<p>This connects the supplied pairs to the memory interpretation: the fitted matrix uses orthonormal <em>keys</em> <img src="https://latex.codecogs.com/png.latex?u_%7BK,%5Cell%7D"> and associated <em>values</em> <img src="https://latex.codecogs.com/png.latex?Vz_%7BK,%5Cell%7D/%5Csigma_%7BK,%5Cell%7D">. Each effective <em>value</em> combines the supplied <em>values</em> using coefficients determined by the supplied <em>keys</em>. Querying with <img src="https://latex.codecogs.com/png.latex?u_%7BK,%5Cell%7D"> returns that effective <em>value</em> exactly. This expansion comes from the SVD of <img src="https://latex.codecogs.com/png.latex?K">; it need not be the SVD of <img src="https://latex.codecogs.com/png.latex?W">, because the effective <em>values</em> need not be orthogonal.</p>
+<p>At the supplied <em>keys</em>,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BLS%7D%7DK=VZ_KZ_K%5E%5Ctop=VP,%0A%5Cqquad%20P=K%5E%5Cdagger%20K.%0A"></p>
+<p>Write <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Bcol%7D(B)"> for the column space of <img src="https://latex.codecogs.com/png.latex?B">, the span of its columns. Here <img src="https://latex.codecogs.com/png.latex?P=Z_KZ_K%5E%5Ctop"> is an orthogonal projector: <img src="https://latex.codecogs.com/png.latex?P%5E%5Ctop=P"> and <img src="https://latex.codecogs.com/png.latex?P%5E2=P">. It projects coefficients over the stored pairs in <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20R%5EM"> onto <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Bcol%7D(Z_K)">, the row space of <img src="https://latex.codecogs.com/png.latex?K">. It differs from <img src="https://latex.codecogs.com/png.latex?Q=KK%5E%5Cdagger=U_KU_K%5E%5Ctop">, which projects inputs in <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20R%5Ed"> onto <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Bcol%7D(K)">. Appendix C derives both projectors.</p>
+</section>
+<section id="measure-the-strength-of-recall" class="level2">
+<h2 data-anchor-id="measure-the-strength-of-recall">Measure the strength of recall</h2>
+<p>The identity <img src="https://latex.codecogs.com/png.latex?W_%7B%5Cmathrm%7BLS%7D%7DK=VP"> tells us what the fitted matrix returns. To assess it as memory, we must ask how much of each response comes from the requested <em>value</em> and how much comes from other stored <em>values</em>. Comparing these contributions lets us quantify how recall changes as we increase the number of stored pairs.</p>
+<p>We use power signal-to-noise ratio (SNR) to compare the intended contribution with cross-talk from other <em>key–value pairs</em>:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathrm%7BSNR%7D=%5Cfrac%7B%5Ctext%7Bpower%20of%20the%20intended%20contribution%7D%7D%7B%5Ctext%7Bexpected%20power%20of%20cross-talk%7D%7D.%0A"></p>
+<p>Here cross-talk is generated by the other stored <em>key–value pairs</em>; it is not measurement noise added to the <em>query</em>. SNR measures their relative strength. We also calculate squared reconstruction error because a response can have little cross-talk and still return the intended <em>value</em> at the wrong magnitude.</p>
+<p>For the calculation, assume that the <em>values</em> are independent, zero-mean random unit vectors, independent of the <em>keys</em>. Expectations below are over these <em>values</em>, conditional on <img src="https://latex.codecogs.com/png.latex?K">. These assumptions let us measure interference when the <em>values</em> have no systematic relation to one another. They also make the cross terms vanish in the expected noise power. This is a baseline for unrelated outputs. In a learned representation, <em>keys</em> and <em>values</em> may instead be dependent or learned together. We later examine a shared linear rule to show how such structure changes what can be stored.</p>
+<p>Let <img src="https://latex.codecogs.com/png.latex?h_j=P_%7Bjj%7D=%5C%7CZ_K%5E%5Ctop%20e_j%5C%7C%5E2">, the <strong>leverage score</strong> of <em>key</em> <img src="https://latex.codecogs.com/png.latex?j">, where <img src="https://latex.codecogs.com/png.latex?e_j"> is the coordinate vector with a one in position <img src="https://latex.codecogs.com/png.latex?j">. It measures how much of the coordinate direction for pair <img src="https://latex.codecogs.com/png.latex?j"> survives projection by <img src="https://latex.codecogs.com/png.latex?P">. Recall decomposes into</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BLS%7D%7Dk_j%0A=%5Cunderbrace%7Bh_jv_j%7D_%7B%5Ctext%7Bsignal%7D%7D%0A+%5Cunderbrace%7B%5Csum_%7Bi%5Cne%20j%7DP_%7Bij%7Dv_i%7D_%7Bn_j:%5C%20%5Ctext%7Bcross-talk%20noise%7D%7D.%0A"></p>
+<p>Since <img src="https://latex.codecogs.com/png.latex?P%5E2=P"> and independent zero-mean <em>values</em> eliminate cross terms,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7Bsignal%20power%7D=h_j%5E2,%0A%5Cqquad%0A%5Cmathbb%20E_V%5C%7Cn_j%5C%7C%5E2%0A=%5Csum_%7Bi%5Cne%20j%7DP_%7Bij%7D%5E2=h_j-h_j%5E2.%0A"></p>
+<p>Thus, for <img src="https://latex.codecogs.com/png.latex?0%3Ch_j%3C1">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cboxed%7B%5Cmathrm%7BSNR%7D_j=%5Cfrac%7Bh_j%7D%7B1-h_j%7D.%7D%0A"></p>
+<p><strong>With unit signal power, SNR is the reciprocal of total zero-mean noise variance.</strong> Here the signal is attenuated by <img src="https://latex.codecogs.com/png.latex?h_j">. Dividing the recalled output by <img src="https://latex.codecogs.com/png.latex?h_j"> restores unit signal power and gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%20E_V%5Cleft%5C%7C%5Cfrac%7Bn_j%7D%7Bh_j%7D%5Cright%5C%7C%5E2%0A=%5Cfrac%7B1-h_j%7D%7Bh_j%7D%0A=%5Cfrac1%7B%5Cmathrm%7BSNR%7D_j%7D.%0A"></p>
+<p>For vector noise, total variance means <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Btr%7D%5Coperatorname%7BCov%7D(n)">. SNR is a ratio of powers, not the expectation of a random ratio. Wang expresses interference relative to signal amplitude. Using root-mean-square interference gives the equivalent power convention</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathrm%7BSNR%7D=%5Cleft(%5Cfrac%7B%5Ctext%7BRMS%20interference%20amplitude%7D%7D%7B%5Ctext%7Bsignal%20amplitude%7D%7D%5Cright)%5E%7B-2%7D.%0A"></p>
+<p>Both conventions therefore give the same threshold when interference and signal have equal strength.</p>
+<p>Reconstruction error compares the unnormalized output with <img src="https://latex.codecogs.com/png.latex?v_j">, so it includes attenuation as well as noise:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%20E_V%5C%7CW_%7B%5Cmathrm%7BLS%7D%7Dk_j-v_j%5C%7C%5E2%0A=(1-h_j)%5E2+(h_j-h_j%5E2)%0A=1-h_j.%0A"></p>
+<p>Because <img src="https://latex.codecogs.com/png.latex?%5Csum_jh_j=%5Coperatorname%7Btr%7D(P)=r_K">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cboxed%7B%5Cfrac1M%5Cmathbb%20E_V%5C%7CW_%7B%5Cmathrm%7BLS%7D%7DK-V%5C%7C_F%5E2%0A=1-%5Cfrac%7Br_K%7D%7BM%7D.%7D%0A"></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exact result: recall at stored keys">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Exact result: recall at stored keys
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Under independent zero-mean unit <em>values</em>, conditional on the <em>keys</em>, <em>key–value pair</em> <img src="https://latex.codecogs.com/png.latex?j"> has expected squared error <img src="https://latex.codecogs.com/png.latex?1-h_j"> and power SNR <img src="https://latex.codecogs.com/png.latex?h_j/(1-h_j)">. The average expected error is <img src="https://latex.codecogs.com/png.latex?1-r_K/M">. These identities do not require random <em>keys</em>. If <img src="https://latex.codecogs.com/png.latex?P=I">, every <em>key–value pair</em> is recalled exactly.</p>
+</div>
+</div>
+<p>Appendix D shows each expectation and explains the boundary cases.</p>
+</section>
+<section id="recover-wangs-capacity-estimate" class="level2">
+<h2 data-anchor-id="recover-wangs-capacity-estimate">Recover Wang’s capacity estimate</h2>
+<p>If the supplied <em>keys</em> are linearly independent, least squares fits every supplied <em>value</em> exactly. There can be at most <img src="https://latex.codecogs.com/png.latex?d"> such <em>keys</em>. Beyond this, arbitrary prescribed <em>values</em> cannot in general all be fitted exactly: they must respect the linear dependencies among the <em>keys</em>. The capacity calculation below concerns approximate recall of independent random <em>values</em>, not exact storage of <img src="https://latex.codecogs.com/png.latex?2d"> arbitrary pairs.</p>
+<p>We can now connect recall quality to memory count. The exact SNR depends on each <em>key</em> through <img src="https://latex.codecogs.com/png.latex?h_j">. To obtain an estimate using only <img src="https://latex.codecogs.com/png.latex?M"> and <img src="https://latex.codecogs.com/png.latex?d">, suppose <img src="https://latex.codecogs.com/png.latex?M%3Ed">, the <em>keys</em> have full row rank, and leverage scores are approximately uniform. Then</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ah_j%5Capprox%5Cfrac%20dM%0A%5Cquad%5CLongrightarrow%5Cquad%0A%5Cmathrm%7BSNR%7D_j%5Capprox%5Cfrac%7Bd%7D%7BM-d%7D.%0A"></p>
+<p>A numerical capacity requires a chosen recall criterion. For a required power SNR of at least <img src="https://latex.codecogs.com/png.latex?%5Cgamma%3E0">, the approximation gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7Bd%7D%7BM-d%7D%5Cgtrsim%5Cgamma%0A%5Cquad%5CLongrightarrow%5Cquad%0AM%5Clesssim%20d%5Cleft(1+%5Cfrac1%5Cgamma%5Cright).%0A"></p>
+<p>Wang’s criterion takes equal signal and cross-talk strength as the threshold. Setting <img src="https://latex.codecogs.com/png.latex?%5Cgamma=1"> therefore gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cboxed%7BM%5Capprox2d.%7D%0A"></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Conditional estimate: the unit-SNR operating point">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Conditional estimate: the unit-SNR operating point
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>This recovers Wang’s capacity estimate for the least-squares construction.</strong> The fitted matrix minimizes total squared reconstruction error; this does not establish that it maximizes each pair’s SNR. “Capacity” here uses the threshold where signal and cross-talk have equal strength. At <img src="https://latex.codecogs.com/png.latex?M=2d">, average expected squared reconstruction error is exactly <img src="https://latex.codecogs.com/png.latex?1/2">. The threshold is not a probability of correctly identifying a stored item.</p>
+</div>
+</div>
+<p>Does fitting all <em>key–value pairs</em> together improve this threshold over simply adding their individual matrices? To make that comparison, the outer-product store gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BOP%7D%7Dk_j=v_j+%5Csum_%7Bi%5Cne%20j%7D(k_i%5E%5Ctop%20k_j)v_i.%0A"></p>
+<p>For this comparison, average the cross-talk power over independent uniform spherical <em>keys</em> as well as the random <em>values</em>. Then</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%20E%5C%7CW_%7B%5Cmathrm%7BOP%7D%7Dk_j-v_j%5C%7C%5E2=%5Cfrac%7BM-1%7D%7Bd%7D,%0A%5Cqquad%0A%5Cmathrm%7BSNR%7D_%7B%5Cmathrm%7BOP%7D%7D=%5Cfrac%7Bd%7D%7BM-1%7D.%0A"></p>
+<p>Its signal already has unit power, so SNR is directly reciprocal noise variance. Unit SNR occurs at <img src="https://latex.codecogs.com/png.latex?M=d+1">, approximately <img src="https://latex.codecogs.com/png.latex?d"> for large dimension. This compares an averaged-power result for the outer-product construction with the approximately uniform-leverage result for least squares; it is not a per-dataset guarantee of twice the capacity. Joint fitting accounts for relationships among the <em>keys</em>. Appendix E derives the spherical-<em>key</em> moments and distinguishes exact identities from the uniform-leverage approximation.</p>
+</section>
+<section id="what-the-dimension-only-estimate-leaves-out" class="level2">
+<h2 data-anchor-id="what-the-dimension-only-estimate-leaves-out">What the dimension-only estimate leaves out</h2>
+<p>The count <img src="https://latex.codecogs.com/png.latex?M"> and dimension <img src="https://latex.codecogs.com/png.latex?d"> give an approximate operating point. To assess a particular learned matrix, we also need to know whether recall is uneven across <em>keys</em>, whether it tolerates perturbed <em>queries</em>, and whether the <em>values</em> share structure.</p>
+<p><strong>Unequal recall across <em>keys</em>.</strong> Uniform leverage is an assumption, not a consequence of unit norms. Consider</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AK=%5Be_1,e_1,e_1,e_2%5D,%5Cqquad%20d=2,%5Cquad%20M=4=2d.%0A"></p>
+<p>Here <img src="https://latex.codecogs.com/png.latex?e_1=(1,0)%5E%5Ctop"> and <img src="https://latex.codecogs.com/png.latex?e_2=(0,1)%5E%5Ctop">. The same input <img src="https://latex.codecogs.com/png.latex?e_1"> is asked to return three independently specified <em>values</em>. Least squares returns their average, while it can fit the <em>value</em> at <img src="https://latex.codecogs.com/png.latex?e_2"> exactly. The leverage scores are <img src="https://latex.codecogs.com/png.latex?(1/3,1/3,1/3,1)">; Appendix F gives the full projector. The first three <em>key–value pairs</em> have SNR <img src="https://latex.codecogs.com/png.latex?1/2">; the fourth is recalled exactly. No <em>key–value pair</em> has SNR one, although the average expected squared error is <img src="https://latex.codecogs.com/png.latex?1/2">.</p>
+<p>Random spherical <em>keys</em> have zero expected pairwise inner products and squared inner products of expectation <img src="https://latex.codecogs.com/png.latex?1/d">. Their distances concentrate near equality in high dimension. Exchangeability gives <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20E%5Bh_j%5D=d/M"> at full row rank, but using <img src="https://latex.codecogs.com/png.latex?h_j%5Capprox%20d/M"> for individual <em>keys</em> additionally requires concentration. The exact SNR formula retains the <em>key</em> geometry through <img src="https://latex.codecogs.com/png.latex?h_j">.</p>
+<p><strong>Sensitivity to <em>query</em> perturbations.</strong> Recall at an exact stored <em>key</em> does not establish that nearby <em>queries</em> return accurate <em>values</em>. To test this, let <img src="https://latex.codecogs.com/png.latex?q=k_j+%5Ceta">, with zero-mean noise independent of the <em>keys</em> and <em>values</em> and covariance <img src="https://latex.codecogs.com/png.latex?%5Ctau%5E2I_d">. Here <img src="https://latex.codecogs.com/png.latex?I_d"> is the <img src="https://latex.codecogs.com/png.latex?d%5Ctimes%20d"> identity and <img src="https://latex.codecogs.com/png.latex?%5Ctau%5E2"> is noise variance per input coordinate. For a fixed store,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%20E_%5Ceta%5C%7CWq-v_j%5C%7C%5E2%0A=%5C%7CWk_j-v_j%5C%7C%5E2+%5Ctau%5E2%5C%7CW%5C%7C_F%5E2.%0A"></p>
+<p>Under the same random-<em>value</em> assumptions, the <em>key</em> SVD yields</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cboxed%7B%0A%5Cmathbb%20E_%7BV,%5Ceta%7D%5C%7CW_%7B%5Cmathrm%7BLS%7D%7D(k_j+%5Ceta)-v_j%5C%7C%5E2%0A=1-h_j+%5Ctau%5E2%5Csum_%7B%5Cell=1%7D%5E%7Br_K%7D%5Csigma_%7BK,%5Cell%7D%5E%7B-2%7D.%0A%7D%0A"></p>
+<p>This assumes additive noise without subsequent <em>query</em> normalization. The first term measures reconstruction error at the stored <em>key</em>. The second measures noise amplification. Small singular values can make recall unstable even when fitting is exact. Appendix G derives the formula step by step.</p>
+<p><strong>Shared structure permits more exact pairs.</strong> A learned matrix may represent a shared rule across many examples. We therefore need to distinguish recalling unrelated <em>values</em> from reproducing <em>values</em> that follow that rule. The capacity calculation assumes independent random <em>values</em>. If instead <img src="https://latex.codecogs.com/png.latex?V=AK"> for a fixed linear map <img src="https://latex.codecogs.com/png.latex?A%5Cin%5Cmathbb%20R%5E%7Bp%5Ctimes%20d%7D">, then</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BLS%7D%7D=AKK%5E%5Cdagger=A%20P_%7B%5Coperatorname%7Bcol%7D(K)%7D.%0A"></p>
+<p>Every <em>query</em> in the <em>key</em> span has its intended output recovered exactly. There can be more than <img src="https://latex.codecogs.com/png.latex?d"> such <em>key–value pairs</em> because their <em>values</em> respect the dependencies among <em>keys</em>. The capacity estimate for independent random <em>values</em> does not limit how many consistent pairs a linear rule can represent. Here <img src="https://latex.codecogs.com/png.latex?P_%7B%5Coperatorname%7Bcol%7D(K)%7D=Q=KK%5E%5Cdagger"> is the input-space projector. Appendix H proves exact recall on this span and gives the general consistency condition.</p>
+</section>
+<section id="what-to-assess-in-a-learned-store" class="level2">
+<h2 data-anchor-id="what-to-assess-in-a-learned-store">What to assess in a learned store</h2>
+<p>The storage calculation gives quantitative content to the earlier interpretation of matrix multiplication as memory. SVD describes the map in terms of <em>keys</em> and <em>values</em>; specifying intended pairs and a fitting rule lets us assess how well that memory works. Does the store reproduce its intended <em>key–value pairs</em>? Are errors concentrated on particular <em>keys</em>? Does recall remain accurate when <em>queries</em> are perturbed?</p>
+<p>For the least-squares model analysed here, leverage scores determine expected reconstruction error and SNR at stored <em>keys</em>. The <em>key</em> singular spectrum determines additional sensitivity to isotropic <em>query</em> noise. Wang’s <img src="https://latex.codecogs.com/png.latex?M=2d"> estimate follows when these results are reduced to approximately uniform leverage and a unit-SNR threshold.</p>
+<p>For a particular learned matrix, measure the residuals <img src="https://latex.codecogs.com/png.latex?%5C%7CWk_j-v_j%5C%7C%5E2"> directly. The formula <img src="https://latex.codecogs.com/png.latex?1-h_j"> is an expectation under the least-squares random-<em>value</em> model, not the measured error for arbitrary fixed <em>values</em>. For independent isotropic additive <em>query</em> noise, the additional expected error is <img src="https://latex.codecogs.com/png.latex?%5Ctau%5E2%5C%7CW%5C%7C_F%5E2">; expressing it through the singular values of <img src="https://latex.codecogs.com/png.latex?K"> additionally uses that model.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Main takeaway">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Main takeaway
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>The memory interpretation supports quantitative questions about reconstruction, interference, and robustness.</strong> Assess <em>key</em> geometry as well as memory count and dimension. Under the least-squares random-<em>value</em> model, leverage scores determine expected error at stored <em>keys</em>, and the nonzero singular values of <img src="https://latex.codecogs.com/png.latex?K"> determine additional expected error from isotropic <em>query</em> noise. The estimate <img src="https://latex.codecogs.com/png.latex?M=2d"> is a particular operating point under approximately uniform leverage, not a universal limit on what a learned matrix can represent.</p>
+</div>
+</div>
+</section>
+<section id="appendix-a-notation" class="level2">
+<h2 data-anchor-id="appendix-a-notation">Appendix A: notation and assumptions</h2>
+<p>All spaces are real and finite-dimensional. Vectors are columns. Unless an expectation includes the <em>keys</em> explicitly, <img src="https://latex.codecogs.com/png.latex?K"> is held fixed.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning and dimensions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="https://latex.codecogs.com/png.latex?M,d,p"></td>
+<td>Number of <em>key–value pairs</em>, input dimension, and output dimension.</td>
+</tr>
+<tr class="even">
+<td><img src="https://latex.codecogs.com/png.latex?k_i%5Cin%5Cmathbb%20R%5Ed">, <img src="https://latex.codecogs.com/png.latex?v_i%5Cin%5Cmathbb%20R%5Ep"></td>
+<td><em>Key</em> and intended <em>value</em> of <em>key–value pair</em> <img src="https://latex.codecogs.com/png.latex?i">.</td>
+</tr>
+<tr class="odd">
+<td><img src="https://latex.codecogs.com/png.latex?K%5Cin%5Cmathbb%20R%5E%7Bd%5Ctimes%20M%7D">, <img src="https://latex.codecogs.com/png.latex?V%5Cin%5Cmathbb%20R%5E%7Bp%5Ctimes%20M%7D"></td>
+<td>Matrices whose columns are the <em>keys</em> and <em>values</em>.</td>
+</tr>
+<tr class="even">
+<td><img src="https://latex.codecogs.com/png.latex?W%5Cin%5Cmathbb%20R%5E%7Bp%5Ctimes%20d%7D"></td>
+<td>Linear memory map; its response to <img src="https://latex.codecogs.com/png.latex?q%5Cin%5Cmathbb%20R%5Ed"> is <img src="https://latex.codecogs.com/png.latex?Wq">.</td>
+</tr>
+<tr class="odd">
+<td><img src="https://latex.codecogs.com/png.latex?r_W,r_K"></td>
+<td>Ranks of <img src="https://latex.codecogs.com/png.latex?W"> and <img src="https://latex.codecogs.com/png.latex?K">, which need not be equal.</td>
+</tr>
+<tr class="even">
+<td><img src="https://latex.codecogs.com/png.latex?U,%5CSigma,Z"></td>
+<td>Compact SVD factors of <img src="https://latex.codecogs.com/png.latex?W">: dimensions <img src="https://latex.codecogs.com/png.latex?p%5Ctimes%20r_W">, <img src="https://latex.codecogs.com/png.latex?r_W%5Ctimes%20r_W">, <img src="https://latex.codecogs.com/png.latex?d%5Ctimes%20r_W">.</td>
+</tr>
+<tr class="odd">
+<td><img src="https://latex.codecogs.com/png.latex?U_K,%5CSigma_K,Z_K"></td>
+<td>Compact SVD factors of <img src="https://latex.codecogs.com/png.latex?K">: dimensions <img src="https://latex.codecogs.com/png.latex?d%5Ctimes%20r_K">, <img src="https://latex.codecogs.com/png.latex?r_K%5Ctimes%20r_K">, <img src="https://latex.codecogs.com/png.latex?M%5Ctimes%20r_K">.</td>
+</tr>
+<tr class="even">
+<td><img src="https://latex.codecogs.com/png.latex?K%5E%5Cdagger%5Cin%5Cmathbb%20R%5E%7BM%5Ctimes%20d%7D"></td>
+<td>Pseudoinverse <img src="https://latex.codecogs.com/png.latex?Z_K%5CSigma_K%5E%7B-1%7DU_K%5E%5Ctop">. Only positive singular values occur in <img src="https://latex.codecogs.com/png.latex?%5CSigma_K">.</td>
+</tr>
+<tr class="odd">
+<td><img src="https://latex.codecogs.com/png.latex?P%5Cin%5Cmathbb%20R%5E%7BM%5Ctimes%20M%7D"></td>
+<td>Projector on the coefficient space of stored pairs <img src="https://latex.codecogs.com/png.latex?K%5E%5Cdagger%20K=Z_KZ_K%5E%5Ctop">.</td>
+</tr>
+<tr class="even">
+<td><img src="https://latex.codecogs.com/png.latex?Q%5Cin%5Cmathbb%20R%5E%7Bd%5Ctimes%20d%7D"></td>
+<td>Input-space projector <img src="https://latex.codecogs.com/png.latex?KK%5E%5Cdagger=U_KU_K%5E%5Ctop">.</td>
+</tr>
+<tr class="odd">
+<td><img src="https://latex.codecogs.com/png.latex?h_j"></td>
+<td>Diagonal entry <img src="https://latex.codecogs.com/png.latex?P_%7Bjj%7D">, the leverage score of <em>key–value pair</em> <img src="https://latex.codecogs.com/png.latex?j">.</td>
+</tr>
+<tr class="even">
+<td><img src="https://latex.codecogs.com/png.latex?e_j">, <img src="https://latex.codecogs.com/png.latex?I_n"></td>
+<td>Coordinate vector of the indicated space; identity matrix of size <img src="https://latex.codecogs.com/png.latex?n">.</td>
+</tr>
+<tr class="odd">
+<td><img src="https://latex.codecogs.com/png.latex?%5Ceta">, <img src="https://latex.codecogs.com/png.latex?%5Ctau%5E2"></td>
+<td>Additive input noise and its variance per coordinate when <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BCov%7D(%5Ceta)=%5Ctau%5E2I_d">.</td>
+</tr>
+</tbody>
+</table>
+<p>For a matrix <img src="https://latex.codecogs.com/png.latex?A%5Cin%5Cmathbb%20R%5E%7Ba%5Ctimes%20b%7D">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Coperatorname%7Bcol%7D(A)=%5C%7BAx:x%5Cin%5Cmathbb%20R%5Eb%5C%7D%5Csubseteq%5Cmathbb%20R%5Ea,%0A%5Cqquad%0A%5Cker(A)=%5C%7Bx%5Cin%5Cmathbb%20R%5Eb:Ax=0%5C%7D.%0A"></p>
+<p>The row space is <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Brow%7D(A)=%5Coperatorname%7Bcol%7D(A%5E%5Ctop)%5Csubseteq%5Cmathbb%20R%5Eb">. The span of vectors is the set of their linear combinations. For a subspace <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20S">, its orthogonal complement is <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20S%5E%5Cperp=%5C%7Bx:x%5E%5Ctop%20s=0%5Ctext%7B%20for%20every%20%7Ds%5Cin%5Cmathcal%20S%5C%7D">. In particular,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cker(A)=%5Coperatorname%7Brow%7D(A)%5E%5Cperp.%0A"></p>
+<p>An orthogonal projector onto <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20S"> maps each vector to its component in <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20S">; its matrix is symmetric and idempotent. If <img src="https://latex.codecogs.com/png.latex?B"> has orthonormal columns spanning <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20S">, that matrix is <img src="https://latex.codecogs.com/png.latex?BB%5E%5Ctop">.</p>
+<p>The vector inner product is <img src="https://latex.codecogs.com/png.latex?x%5E%5Ctop%20y">. The Frobenius inner product is <img src="https://latex.codecogs.com/png.latex?%5Clangle%20A,B%5Crangle_F=%5Coperatorname%7Btr%7D(A%5E%5Ctop%20B)">, with <img src="https://latex.codecogs.com/png.latex?%5C%7CA%5C%7C_F%5E2=%5Clangle%20A,A%5Crangle_F">. The trace <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Btr%7D(A)"> is the sum of a square matrix’s diagonal entries. We use <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Btr%7D(AB)=%5Coperatorname%7Btr%7D(BA)"> whenever both products are defined. The notation <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Barg%5C,min%7D"> denotes a minimizing argument, or the set of minimizers if it is not unique.</p>
+<p>For a random vector <img src="https://latex.codecogs.com/png.latex?x">, its covariance is</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Coperatorname%7BCov%7D(x)=%5Cmathbb%20E%5B(x-%5Cmathbb%20Ex)(x-%5Cmathbb%20Ex)%5E%5Ctop%5D.%0A"></p>
+<p>Thus <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20E%5C%7Cx%5C%7C%5E2=%5Coperatorname%7Btr%7D%5Coperatorname%7BCov%7D(x)"> when <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20Ex=0">. For the recall calculations we assume mutually independent <em>values</em> with <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20Ev_i=0"> and <img src="https://latex.codecogs.com/png.latex?%5C%7Cv_i%5C%7C=1"> almost surely, independent of <img src="https://latex.codecogs.com/png.latex?K">. Their directions need not be uniformly distributed. These conditions imply</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%20E_V%5Bv_i%5E%5Ctop%20v_j%5D=%5Cbegin%7Bcases%7D1&amp;i=j,%5C%5C0&amp;i%5Cne%20j,%5Cend%7Bcases%7D%0A%5Cqquad%20%5Cmathbb%20E_V%5BV%5E%5Ctop%20V%5D=I_M.%0A"></p>
+<p><em>Keys</em> have unit norm. Only the spherical-<em>key</em> calculation additionally assumes that they are independent and uniform on the unit sphere.</p>
+</section>
+<section id="appendix-b-outer-product" class="level2">
+<h2 data-anchor-id="appendix-b-outer-product">Appendix B: the matrix for a single <em>key–value pair</em> and its sum</h2>
+<p>For a unit <em>key</em> <img src="https://latex.codecogs.com/png.latex?k">, the matrix <img src="https://latex.codecogs.com/png.latex?A_0=vk%5E%5Ctop"> is feasible because <img src="https://latex.codecogs.com/png.latex?A_0k=v(k%5E%5Ctop%20k)=v">. Any other feasible <img src="https://latex.codecogs.com/png.latex?A"> can be written <img src="https://latex.codecogs.com/png.latex?A=A_0+B">, where <img src="https://latex.codecogs.com/png.latex?Bk=0">. Their Frobenius inner product is</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Clangle%20A_0,B%5Crangle_F%0A=%5Coperatorname%7Btr%7D(kv%5E%5Ctop%20B)%0A=v%5E%5Ctop%20Bk=0.%0A"></p>
+<p>Consequently,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5C%7CA%5C%7C_F%5E2=%5C%7CA_0%5C%7C_F%5E2+%5C%7CB%5C%7C_F%5E2%5Cgeq%5C%7CA_0%5C%7C_F%5E2,%0A"></p>
+<p>with equality only at <img src="https://latex.codecogs.com/png.latex?B=0">. Hence <img src="https://latex.codecogs.com/png.latex?A_0"> is the unique minimum-norm solution. For a nonunit, nonzero <em>key</em>, the corresponding solution is <img src="https://latex.codecogs.com/png.latex?vk%5E%5Ctop/%5C%7Ck%5C%7C%5E2">; the unit-<em>key</em> assumption removes this denominator.</p>
+<p>Adding the single-pair solutions yields</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BOP%7D%7D=%5Csum_i%20v_i%20k_i%5E%5Ctop=VK%5E%5Ctop.%0A"></p>
+<p>For <em>key</em> <img src="https://latex.codecogs.com/png.latex?k_j">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BOP%7D%7Dk_j%0A=%5Csum_i%20v_i(k_i%5E%5Ctop%20k_j)%0A=v_j+%5Csum_%7Bi%5Cne%20j%7Dv_i(k_i%5E%5Ctop%20k_j).%0A"></p>
+<p>Orthogonal <em>keys</em> make the extra terms zero. For general <em>keys</em>, the summation rule contains no joint correction for them.</p>
+</section>
+<section id="appendix-c-least-squares" class="level2">
+<h2 data-anchor-id="appendix-c-least-squares">Appendix C: least squares, the pseudoinverse and the two projectors</h2>
+<p>Write <img src="https://latex.codecogs.com/png.latex?K=U_K%5CSigma_KZ_K%5E%5Ctop"> with positive diagonal singular values and orthonormal columns in <img src="https://latex.codecogs.com/png.latex?U_K"> and <img src="https://latex.codecogs.com/png.latex?Z_K">. Define</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP=Z_KZ_K%5E%5Ctop,%5Cqquad%20Q=U_KU_K%5E%5Ctop.%0A"></p>
+<p>Decompose the residual as</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AWK-V=(WU_K%5CSigma_K-VZ_K)Z_K%5E%5Ctop-V(I_M-P).%0A"></p>
+<p>The first term has each row in <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Bcol%7D(Z_K)">; the second has each row in its orthogonal complement. Therefore their Frobenius inner product is zero. Orthonormality of <img src="https://latex.codecogs.com/png.latex?Z_K"> gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5C%7CWK-V%5C%7C_F%5E2%0A=%5C%7CWU_K%5CSigma_K-VZ_K%5C%7C_F%5E2%0A+%5C%7CV(I_M-P)%5C%7C_F%5E2.%0A"></p>
+<p>The second term cannot be changed by choosing <img src="https://latex.codecogs.com/png.latex?W">. The first can be made zero, so every minimizer satisfies</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AWU_K=VZ_K%5CSigma_K%5E%7B-1%7D.%0A"></p>
+<p>The action of <img src="https://latex.codecogs.com/png.latex?W"> on the orthogonal complement of <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Bcol%7D(K)"> is unconstrained. All minimizers have the form</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW=VZ_K%5CSigma_K%5E%7B-1%7DU_K%5E%5Ctop+B(I_d-Q),%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?B%5Cin%5Cmathbb%20R%5E%7Bp%5Ctimes%20d%7D"> is arbitrary. The two terms act on orthogonal input subspaces, so</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5C%7CW%5C%7C_F%5E2%0A=%5C%7CVZ_K%5CSigma_K%5E%7B-1%7DU_K%5E%5Ctop%5C%7C_F%5E2%0A+%5C%7CB(I_d-Q)%5C%7C_F%5E2.%0A"></p>
+<p>The unique minimum-norm fitted matrix sets the unconstrained action to zero:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BLS%7D%7D=VZ_K%5CSigma_K%5E%7B-1%7DU_K%5E%5Ctop=VK%5E%5Cdagger.%0A"></p>
+<p>Multiplication verifies</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AK%5E%5Cdagger%20K=P,%5Cqquad%20KK%5E%5Cdagger=Q,%5Cqquad%0AW_%7B%5Cmathrm%7BLS%7D%7DK=VP.%0A"></p>
+<p>Both <img src="https://latex.codecogs.com/png.latex?P"> and <img src="https://latex.codecogs.com/png.latex?Q"> are symmetric and idempotent, but act in different spaces. The SVD of the store itself has the analogous decomposition: <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Brow%7D(W)=%5Coperatorname%7Bcol%7D(Z)"> and <img src="https://latex.codecogs.com/png.latex?%5Cker(W)=%5Coperatorname%7Bcol%7D(Z)%5E%5Cperp">. Thus <img src="https://latex.codecogs.com/png.latex?Wq=WZZ%5E%5Ctop%20q"> for every <em>query</em>, proving the full-SVD recall identity in the main text.</p>
+</section>
+<section id="appendix-d-snr" class="level2">
+<h2 data-anchor-id="appendix-d-snr">Appendix D: leverage, cross-talk variance and reconstruction error</h2>
+<p>Since <img src="https://latex.codecogs.com/png.latex?P=P%5E%5Ctop=P%5E2">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ah_j=e_j%5E%5Ctop%20Pe_j=%5C%7CPe_j%5C%7C%5E2%0A=%5C%7CZ_K%5E%5Ctop%20e_j%5C%7C%5E2,%5Cqquad%200%5Cleq%20h_j%5Cleq1.%0A"></p>
+<p>Also,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csum_iP_%7Bij%7D%5E2=(P%5E%5Ctop%20P)_%7Bjj%7D=P_%7Bjj%7D=h_j,%0A%5Cqquad%0A%5Csum_%7Bi%5Cne%20j%7DP_%7Bij%7D%5E2=h_j-h_j%5E2.%0A"></p>
+<p>Column <img src="https://latex.codecogs.com/png.latex?j"> of <img src="https://latex.codecogs.com/png.latex?W_%7B%5Cmathrm%7BLS%7D%7DK=VP"> gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BLS%7D%7Dk_j=h_jv_j+n_j,%0A%5Cqquad%20n_j=%5Csum_%7Bi%5Cne%20j%7DP_%7Bij%7Dv_i.%0A"></p>
+<p>The coefficients are fixed conditional on <img src="https://latex.codecogs.com/png.latex?K">. Independence and zero means yield <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20E_Vn_j=0"> and</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Cmathbb%20E_V%5C%7Cn_j%5C%7C%5E2%0A&amp;=%5Csum_%7Bi%5Cne%20j%7D%5Csum_%7B%5Cell%5Cne%20j%7D%0AP_%7Bij%7DP_%7B%5Cell%20j%7D%5C,%5Cmathbb%20E_V%5Bv_i%5E%5Ctop%20v_%5Cell%5D%5C%5C%0A&amp;=%5Csum_%7Bi%5Cne%20j%7DP_%7Bij%7D%5E2=h_j-h_j%5E2.%0A%5Cend%7Baligned%7D%0A"></p>
+<p>Desired signal power is <img src="https://latex.codecogs.com/png.latex?%5C%7Ch_jv_j%5C%7C%5E2=h_j%5E2">. Its ratio to expected cross-talk power is <img src="https://latex.codecogs.com/png.latex?h_j/(1-h_j)"> when <img src="https://latex.codecogs.com/png.latex?0%3Ch_j%3C1">. Dividing the output by <img src="https://latex.codecogs.com/png.latex?h_j"> gives unit desired signal power and noise variance <img src="https://latex.codecogs.com/png.latex?(1-h_j)/h_j">, the reciprocal SNR.</p>
+<p>For reconstruction error, the desired <em>value</em> is <img src="https://latex.codecogs.com/png.latex?v_j">, not <img src="https://latex.codecogs.com/png.latex?h_jv_j">. Because <img src="https://latex.codecogs.com/png.latex?v_j"> is independent of <img src="https://latex.codecogs.com/png.latex?n_j"> and both have zero mean,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Cmathbb%20E_V%5C%7CW_%7B%5Cmathrm%7BLS%7D%7Dk_j-v_j%5C%7C%5E2%0A&amp;=%5Cmathbb%20E_V%5C%7C(h_j-1)v_j+n_j%5C%7C%5E2%5C%5C%0A&amp;=(h_j-1)%5E2+%5Cmathbb%20E_V%5C%7Cn_j%5C%7C%5E2%5C%5C%0A&amp;=(h_j-1)%5E2+h_j-h_j%5E2=1-h_j.%0A%5Cend%7Baligned%7D%0A"></p>
+<p>Finally,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csum_jh_j=%5Coperatorname%7Btr%7D(Z_KZ_K%5E%5Ctop)%0A=%5Coperatorname%7Btr%7D(Z_K%5E%5Ctop%20Z_K)=r_K,%0A"></p>
+<p>so averaging the preceding error gives <img src="https://latex.codecogs.com/png.latex?1-r_K/M">. At <img src="https://latex.codecogs.com/png.latex?h_j=1">, the off-diagonal coefficients in column <img src="https://latex.codecogs.com/png.latex?j"> vanish and recall is exact, with zero noise. A leverage score of zero would imply <img src="https://latex.codecogs.com/png.latex?Pe_j=0"> and hence <img src="https://latex.codecogs.com/png.latex?k_j=KPe_j=0">; unit <em>keys</em> exclude this case. If all <em>keys</em> are linearly independent, <img src="https://latex.codecogs.com/png.latex?r_K=M"> and <img src="https://latex.codecogs.com/png.latex?P=I_M">.</p>
+</section>
+<section id="appendix-e-dimension" class="level2">
+<h2 data-anchor-id="appendix-e-dimension">Appendix E: random <em>keys</em> and the dimension-only estimates</h2>
+<p>For a uniformly distributed unit vector <img src="https://latex.codecogs.com/png.latex?k%5Cin%5Cmathbb%20R%5Ed">, sign symmetry gives <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20Ek=0">. Rotational symmetry implies <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20E%5Bkk%5E%5Ctop%5D=cI_d">. Taking traces gives <img src="https://latex.codecogs.com/png.latex?1=cd">, hence</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%20E%5Bkk%5E%5Ctop%5D=%5Cfrac1dI_d.%0A"></p>
+<p>For two independent spherical <em>keys</em>, conditional on the unit vector <img src="https://latex.codecogs.com/png.latex?k_j">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%20E%5Bk_i%5E%5Ctop%20k_j%5Cmid%20k_j%5D=0,%0A%5Cqquad%0A%5Cmathbb%20E%5B(k_i%5E%5Ctop%20k_j)%5E2%5Cmid%20k_j%5D%0A=k_j%5E%5Ctop%5Cfrac%7BI_d%7D%7Bd%7Dk_j=%5Cfrac1d.%0A"></p>
+<p>For any fixed pair, Chebyshev’s inequality therefore gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5CPr(%7Ck_i%5E%5Ctop%20k_j%7C%5Cgeq%20t)%5Cleq%5Cfrac%7B1%7D%7Bdt%5E2%7D,%5Cqquad%20t%3E0.%0A"></p>
+<p>This establishes pairwise concentration near orthogonality as dimension grows. Since <img src="https://latex.codecogs.com/png.latex?%5C%7Ck_i-k_j%5C%7C%5E2=2-2k_i%5E%5Ctop%20k_j">, squared distances concentrate near two. Uniform control over a growing collection of pairs requires accounting for their number.</p>
+<p>For outer-product recall, the same <em>value</em> calculation as in Appendix D gives, conditional on <img src="https://latex.codecogs.com/png.latex?K">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%20E_V%5C%7CW_%7B%5Cmathrm%7BOP%7D%7Dk_j-v_j%5C%7C%5E2%0A=%5Csum_%7Bi%5Cne%20j%7D(k_i%5E%5Ctop%20k_j)%5E2.%0A"></p>
+<p>Averaging over spherical <em>keys</em> yields <img src="https://latex.codecogs.com/png.latex?(M-1)/d">. Unit signal power divided by this expected noise power gives <img src="https://latex.codecogs.com/png.latex?d/(M-1)">. This is not the expectation over <em>keys</em> of the conditional SNR, which involves a reciprocal inside the expectation.</p>
+<p>For least squares, the exact conditional formula remains <img src="https://latex.codecogs.com/png.latex?h_j/(1-h_j)">. Exchangeable <em>keys</em> make the leverage scores identically distributed. If their rank is fixed at <img src="https://latex.codecogs.com/png.latex?r_K">, the trace identity implies</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AM%5Cmathbb%20E%5Bh_j%5D=%5Cmathbb%20E%5Csum_i%20h_i=r_K.%0A"></p>
+<p>This establishes <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20E%5Bh_j%5D=r_K/M">, not that every <img src="https://latex.codecogs.com/png.latex?h_j"> equals its mean, nor that <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20E%5Bh_j/(1-h_j)%5D"> equals the ratio evaluated at that mean. The dimension-only estimate additionally assumes approximately uniform leverage. For <img src="https://latex.codecogs.com/png.latex?r_K=d%3CM">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7Bh_j%7D%7B1-h_j%7D%5Capprox%5Cfrac%7Bd/M%7D%7B1-d/M%7D%0A=%5Cfrac%7Bd%7D%7BM-d%7D.%0A"></p>
+<p>Equating this approximation to one gives <img src="https://latex.codecogs.com/png.latex?M%5Capprox2d">. At precisely <img src="https://latex.codecogs.com/png.latex?M=2d">, the average expected reconstruction error is nevertheless exactly <img src="https://latex.codecogs.com/png.latex?1/2"> whenever rank is <img src="https://latex.codecogs.com/png.latex?d">, irrespective of leverage uniformity. A chosen SNR threshold is an operating criterion, not a theorem about successful item identification.</p>
+</section>
+<section id="appendix-f-unequal" class="level2">
+<h2 data-anchor-id="appendix-f-unequal">Appendix F: a nonuniform-<em>key</em> counterexample</h2>
+<p>For <img src="https://latex.codecogs.com/png.latex?K=%5Be_1,e_1,e_1,e_2%5D%5Cin%5Cmathbb%20R%5E%7B2%5Ctimes4%7D">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AKK%5E%5Ctop=%5Cbegin%7Bpmatrix%7D3&amp;0%5C%5C0&amp;1%5Cend%7Bpmatrix%7D,%0A%5Cqquad%0AP=K%5E%5Ctop(KK%5E%5Ctop)%5E%7B-1%7DK%0A=%5Cbegin%7Bpmatrix%7D%0A1/3&amp;1/3&amp;1/3&amp;0%5C%5C%0A1/3&amp;1/3&amp;1/3&amp;0%5C%5C%0A1/3&amp;1/3&amp;1/3&amp;0%5C%5C%0A0&amp;0&amp;0&amp;1%0A%5Cend%7Bpmatrix%7D.%0A"></p>
+<p>The leverage scores are its diagonal entries. For the first three <em>key–value pairs</em>, signal power is <img src="https://latex.codecogs.com/png.latex?1/9"> and expected cross-talk power is <img src="https://latex.codecogs.com/png.latex?2/9">, so SNR is <img src="https://latex.codecogs.com/png.latex?1/2">. For the fourth, signal power is one and cross-talk is zero. The expected errors are <img src="https://latex.codecogs.com/png.latex?(2/3,2/3,2/3,0)">, whose mean is <img src="https://latex.codecogs.com/png.latex?1/2">. This verifies that the average error can obey the dimension-only identity while individual SNRs differ substantially.</p>
+</section>
+<section id="appendix-g-query-noise" class="level2">
+<h2 data-anchor-id="appendix-g-query-noise">Appendix G: recall with additive <em>query</em> noise</h2>
+<p>Fix <img src="https://latex.codecogs.com/png.latex?K,V,W"> and let <img src="https://latex.codecogs.com/png.latex?a_j=Wk_j-v_j">. Assume <img src="https://latex.codecogs.com/png.latex?%5Ceta"> is independent, has zero mean and covariance <img src="https://latex.codecogs.com/png.latex?%5Ctau%5E2I_d">. Expanding the squared error gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%20E_%5Ceta%5C%7Ca_j+W%5Ceta%5C%7C%5E2%0A=%5C%7Ca_j%5C%7C%5E2+2a_j%5E%5Ctop%20W%5Cmathbb%20E%5Ceta%0A+%5Cmathbb%20E_%5Ceta%5B%5Ceta%5E%5Ctop%20W%5E%5Ctop%20W%5Ceta%5D.%0A"></p>
+<p>The middle term is zero. Using the trace identity,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%20E_%5Ceta%5B%5Ceta%5E%5Ctop%20W%5E%5Ctop%20W%5Ceta%5D%0A=%5Coperatorname%7Btr%7D(W%5E%5Ctop%20W%5C,%5Cmathbb%20E%5B%5Ceta%5Ceta%5E%5Ctop%5D)%0A=%5Ctau%5E2%5C%7CW%5C%7C_F%5E2.%0A"></p>
+<p>For <img src="https://latex.codecogs.com/png.latex?W=VK%5E%5Cdagger">, conditional on <img src="https://latex.codecogs.com/png.latex?K">, the random-<em>value</em> assumptions give</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Cmathbb%20E_V%5C%7CVK%5E%5Cdagger%5C%7C_F%5E2%0A&amp;=%5Coperatorname%7Btr%7D%5Cbigl((K%5E%5Cdagger)%5E%5Ctop%5Cmathbb%20E_V%5BV%5E%5Ctop%20V%5DK%5E%5Cdagger%5Cbigr)%5C%5C%0A&amp;=%5C%7CK%5E%5Cdagger%5C%7C_F%5E2%0A=%5Csum_%7B%5Cell=1%7D%5E%7Br_K%7D%5Csigma_%7BK,%5Cell%7D%5E%7B-2%7D.%0A%5Cend%7Baligned%7D%0A"></p>
+<p>Adding the stored-<em>key</em> reconstruction error from Appendix D establishes</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%20E_%7BV,%5Ceta%7D%5C%7CW_%7B%5Cmathrm%7BLS%7D%7D(k_j+%5Ceta)-v_j%5C%7C%5E2%0A=1-h_j+%5Ctau%5E2%5Csum_%7B%5Cell=1%7D%5E%7Br_K%7D%5Csigma_%7BK,%5Cell%7D%5E%7B-2%7D.%0A"></p>
+<p>No Gaussian assumption is needed for <img src="https://latex.codecogs.com/png.latex?%5Ceta">; its independence and stated first two moments suffice. The intended <em>value</em> remains <img src="https://latex.codecogs.com/png.latex?v_j"> for the noisy <em>query</em>. A model in which the intended output also changes with the <em>query</em> is a different task. Renormalizing <img src="https://latex.codecogs.com/png.latex?k_j+%5Ceta"> would also change the calculation.</p>
+</section>
+<section id="appendix-h-consistency" class="level2">
+<h2 data-anchor-id="appendix-h-consistency">Appendix H: consistent <em>values</em> and exact recall on the <em>key</em> span</h2>
+<p>Suppose <img src="https://latex.codecogs.com/png.latex?V=AK"> for a fixed linear map <img src="https://latex.codecogs.com/png.latex?A">. Then</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BLS%7D%7D=AKK%5E%5Cdagger=AQ.%0A"></p>
+<p>For any <em>query</em> <img src="https://latex.codecogs.com/png.latex?q%5Cin%5Coperatorname%7Bcol%7D(K)">, <img src="https://latex.codecogs.com/png.latex?Qq=q">, so <img src="https://latex.codecogs.com/png.latex?W_%7B%5Cmathrm%7BLS%7D%7Dq=Aq">. For a general <em>query</em>,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AAq-W_%7B%5Cmathrm%7BLS%7D%7Dq=A(I_d-Q)q.%0A"></p>
+<p>The component <img src="https://latex.codecogs.com/png.latex?(I_d-Q)q"> lies in <img src="https://latex.codecogs.com/png.latex?%5Cker(K%5E%5Ctop)">, the orthogonal complement of the input-<em>key</em> span. It need not lie in <img src="https://latex.codecogs.com/png.latex?%5Cker(A)">. This distinguishes an input direction unobserved by the <em>keys</em> from a direction that the intended map itself annihilates.</p>
+<p>More generally, exact fitting of supplied <em>values</em> is possible if and only if</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cker(K)%5Csubseteq%5Cker(V),%0A%5Cquad%5Ctext%7Bequivalently%7D%5Cquad%20Kc=0%5CLongrightarrow%20Vc=0.%0A"></p>
+<p>Necessity follows because <img src="https://latex.codecogs.com/png.latex?WK=V"> implies <img src="https://latex.codecogs.com/png.latex?Vc=WKc=0"> whenever <img src="https://latex.codecogs.com/png.latex?Kc=0">. For sufficiency, <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Bcol%7D(I_M-P)=%5Cker(K)">, so the condition gives <img src="https://latex.codecogs.com/png.latex?V(I_M-P)=0">. Thus <img src="https://latex.codecogs.com/png.latex?V=VP=W_%7B%5Cmathrm%7BLS%7D%7DK">, proving exact fitting.</p>
+<p>Here <img src="https://latex.codecogs.com/png.latex?%5Cker(K)%5Csubseteq%5Cmathbb%20R%5EM"> describes dependencies among <em>key–value pairs</em>, while <img src="https://latex.codecogs.com/png.latex?%5Cker(K%5E%5Ctop)%5Csubseteq%5Cmathbb%20R%5Ed"> describes input directions outside the <em>key</em> span. These spaces have different roles and must not be interchanged.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>machine learning</category>
+  <category>linear algebra</category>
+  <category>memory</category>
+  <guid>https://dhavala.github.io/saddlepoint/2026-10-24-linear-memory-recall/</guid>
+  <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>k-NN as a Binding Algorithm</title>
   <dc:creator>Soma S Dhavala</dc:creator>
