@@ -19,11 +19,31 @@ resources:
 
 *Cartoons illustrate ideas and hypothetical cases, rather than report measured results.*
 
-When we talk about building AI, data often enters the conversation as a quantity: how many documents, images, hours of speech, or tokens do we have? That question matters, but it leaves much of the problem untouched. Data also determines how a principle becomes learned behavior, how knowledge becomes something software can reason over, and how we establish whether a system has helped anyone. This essay grows from my talk for [Data Dialogues](https://iudx.org.in/data-dialogues/) and asks us to widen what we mean by data.
+## Introduction
 
-Three questions organize the argument. **Values:** what should govern an AI system’s decisions? **Verification:** how can its knowledge and reasoning become explicit enough to compute with and check? **Valuation:** what does the data contribute, for which use, and to whom? These questions depend on each other. We cannot judge an outcome without knowing what matters; we cannot reliably attribute value without evidence; and the representations we choose determine what we can examine. The thread through all three is that data needs to be designed for a purpose, together with the methods that consume it.
+AI development often measures data by volume: documents, images, hours of speech, or tokens. Volume matters, but data also represents governing principles, supports computation over knowledge, and provides evidence of outcomes. This essay, based on my talk for [Data Dialogues](https://iudx.org.in/data-dialogues/), examines these roles and their implications for data design.
 
-Start with a consequential decision. An organization uses AI to screen applications. Someone’s opportunity now depends on a model’s output. Before asking how to fine-tune the model, we need to ask what authority the organization is delegating, which obligations accompany that authority, and how a person can challenge an error. This is why the first part begins with AI as an institution.
+Three questions organize the argument:
+
+- **Values:** what should govern an AI system’s decisions?
+- **Verification:** how can its knowledge and reasoning become explicit enough to compute with and check?
+- **Valuation:** what does the data contribute, for which use, and to whom?
+
+These questions depend on each other. We cannot judge an outcome without knowing what matters; we cannot reliably attribute value without evidence; and the representations we choose determine what we can examine. The thread through all three is that data needs to be designed for a purpose, together with the methods that consume it.
+
+::: {.callout-important title="Key message"}
+**Make explicit what the system relies on, so that it can be represented, computed with, and checked.** Symbolization is a common task across all three parts:
+
+- **Values:** represent governing commitments as explicit principles, rules, and obligations.
+- **Verification:** represent knowledge and reasoning as facts, relationships, constraints, and executable steps.
+- **Valuation:** represent purpose, contribution, costs, and outcomes explicitly so that claims of value can be assessed.
+
+This does not require a complete formal representation of every judgment. It requires making assumptions, uncertainty, and disagreement visible alongside what can be formalized.
+:::
+
+## Part 1: Values
+
+An organization uses AI to screen applications. Its decisions affect access to opportunities. The organization must specify the authority delegated to the system, the obligations governing its use, and the process for challenging errors. These responsibilities motivate an institutional view of AI.
 
 Nisheeth Vishnoi offers the framing that anchors this argument: **“Institutions are not just buildings or bureaucracies. They are systems of trust and authority.”** An AI system acquires a functional institutional role when people rely on its judgments and those judgments shape access to opportunities. Next-token prediction alone does not confer that authority; deployment does. [Vishnoi, *AI Are the New Institutions*](https://nisheethvishnoi.substack.com/p/ai-are-the-new-institutions)
 
@@ -35,15 +55,15 @@ Imagine an applicant whose credential is missing from the submitted record. The 
 
 Andrej Karpathy’s utility and operating-system analogies help explain another side of AI. A large provider supplies capability through infrastructure and metered access; applications build on that capability, much as appliances use electricity. But purchasing access does not settle the rules for its use. The model supplier provides screening capability; the employer remains responsible for how a missing record affects an applicant. The utility analogy explains supply and consumption. The institutional lens makes us examine authority and responsibility. [Karpathy, *Software Is Changing (Again)*](https://www.youtube.com/watch?v=LCEmiRjPEtQ&t=366s)
 
-Nor should we assume that substituting one model for another preserves the judgment. Sachdeva and van Nuenen examine responses to the same everyday moral dilemmas. In one selected case, an adult sister with social anxiety asks her sibling for help obtaining emergency contraception, and the sibling refuses. The reported responses differ: GPT-3.5 blames the refusing sibling; GPT-4 blames neither; Claude Haiku does not blame the refusing sibling; Gemma 7B blames both. These are paraphrases from a deliberately selected disagreement case involving older models, not a verdict about the people involved or a description of every current system. [Sachdeva and van Nuenen, Table 1](https://arxiv.org/html/2501.18081v1)
+Different models can make different judgments about the same case. Sachdeva and van Nuenen report disagreements over responsibility in everyday moral dilemmas among the model versions they tested. The comparison shows that normative judgments require evaluation; it does not establish what caused the differences. [Sachdeva and van Nuenen, Table 1](https://arxiv.org/html/2501.18081v1)
 
-The example establishes a practical point: equivalent inputs need not produce equivalent normative judgments. It does not establish that a particular constitution caused the differences. Avner Seror’s complementary work examines the consistency and variation of moral preferences across models using structured dilemmas and revealed-preference methods. Together, these studies make expressed values an empirical question rather than something we can infer from a model’s fluency. [Seror, *The Moral Mind(s) of Large Language Models*](https://arxiv.org/abs/2412.04476v3)
+Avner Seror examines consistency and variation in models’ expressed moral preferences. Such studies provide evidence about expressed values that cannot be inferred from fluency alone. [Seror, *The Moral Mind(s) of Large Language Models*](https://arxiv.org/abs/2412.04476v3)
 
-Judgments can also change when the framing changes. Suppose the choice is between attending a meeting and helping a roommate. If someone is already at the meeting, remaining there is inaction. If they are already helping the roommate, continuing to help is inaction. The underlying alternatives remain work and help, but the option that requires no change has switched.
+Judgments can also change with framing. Presenting an option as continuing an existing activity rather than starting a new one can alter the response, even when the underlying alternatives remain similar.
 
-Cheung, Maier, and Lieder study this kind of omission framing. Across six everyday dilemmas, some tested models showed a larger average shift toward inaction than the human participants. “Stronger than human” means a larger measured framing effect; it does not mean better judgment. “Aggregate omission bias” refers to the effect averaged across the scenarios, not a precise verdict for this one roommate example. GPT-4o did not show a significantly larger average effect than humans in that comparison. [Cheung, Maier, and Lieder, Study 3](https://doi.org/10.1073/pnas.2412015122)
+Across six everyday dilemmas, Cheung, Maier, and Lieder found a larger average shift toward inaction in some tested models than in human participants. GPT-4o did not show a significantly larger average effect in that comparison. [Cheung, Maier, and Lieder, Study 3](https://doi.org/10.1073/pnas.2412015122)
 
-Return to hiring. One response may emphasize consistent application of a rule, another the circumstances of a caregiving break, and another the applicant’s opportunity to explain. These priorities need not be mutually exclusive. The point is that different responses can give them different weight. The cartoon below illustrates that possibility; its three models are not experimental subjects.
+In hiring, a response may emphasize consistent application of a rule, the circumstances of a caregiving break, or the applicant’s opportunity to explain. These priorities can coexist, but models may weight them differently. The following illustration shows these possible differences.
 
 ![The same applicant case reaches three illustrative models that emphasize consistency, care, and due process.](figures/same-context-different-values.png)
 
@@ -59,11 +79,11 @@ The constitution may be the least visible layer, yet it should shape what happen
 
 *The governing layer is often invisible. Its commitments should shape the data above it, beginning with collection.*
 
-Who writes those commitments? The buyer, developer, user, and person affected may all be different. A participatory process could bring together beneficiaries, makers, reviewers, and other stakeholders. An independent body or consortium could play a role. The talk deliberately leaves the institutional arrangement open, while insisting that the process identify who contributes, who adopts the rules, and who can amend them.
+Who writes those commitments? The buyer, developer, user, and person affected may all be different. A participatory process could bring together beneficiaries, makers, reviewers, and other stakeholders. An independent body or consortium could play a role. The institutional arrangement remains open. Any process must identify who contributes, who adopts the rules, and who can amend them.
 
 *Collective Constitutional AI* provides an example of public input informing a model constitution. It helps move the question from “Can we write principles?” to “Whose input becomes an adopted principle, and through what process?” Participation needs records of disagreements and reasons as well as the final text. [Huang et al., *Collective Constitutional AI*](https://arxiv.org/abs/2406.07814); [Anthropic’s account of the project](https://www.anthropic.com/research/collective-constitutional-ai-aligning-a-language-model-with-public-input)
 
-A charter also needs an operating architecture. If AI exercises institutional authority, democratic self-government offers useful lessons. In the Indian constitutional context, the legislature makes and amends laws and scrutinizes government; the executive implements policy and administers services; the judiciary interprets law, resolves disputes, and protects rights. These functions interact, and India’s parliamentary system does not separate legislative and executive membership completely. The useful analogy is distinct responsibilities, checks, and routes to challenge—not a claim that an AI system is a state. [Parliament of India](https://sansad.in/poi/about); [Supreme Court of India: Constitution](https://www.sci.gov.in/constitution/); [constitutional text](https://legislative.gov.in/constitution-of-india/)
+A charter needs procedures for adopting rules, applying them, and hearing challenges. Constitutional governance provides an analogy: legislative, executive, and judicial functions distinguish these responsibilities and provide checks. The analogy concerns accountability within an AI deployment. [Parliament of India](https://sansad.in/poi/about); [Supreme Court of India: Constitution](https://www.sci.gov.in/constitution/)
 
 Translate those functions into the applicant’s case. A responsible body adopts the rule that missing credentials require review. An operational workflow pauses rejection and sends the case to a human reviewer. An independent appeal process checks whether the rule and evidence were applied properly. Findings can lead to a corrected record, a repaired decision, or a proposed amendment.
 
@@ -79,19 +99,25 @@ Bai and colleagues’ Constitutional AI method uses principles to guide critique
 
 Training is only one place where data is needed. Elicitation needs stakeholder views and disagreements. Specification needs versioned rules. Training needs demonstrations and preferences. Enforcement needs identities, permissions, and action context. Evaluation needs tests and counterexamples. Appeals need evidence and decision histories. Revision needs amendments and regression cases. Each function changes both the data required and the method that uses it.
 
-For example, [Constitutional Classifiers](https://arxiv.org/abs/2501.18837) use synthetic examples generated from rules to train safeguards; the [research overview](https://www.anthropic.com/research/constitutional-classifiers) explains their intended role. Policy and authorization tools such as [Open Policy Agent](https://www.openpolicyagent.org/) and [Cedar](https://www.cedarpolicy.com/), and conversational control frameworks such as [NeMo Guardrails](https://docs.nvidia.com/nemo/guardrails/latest/index.html), illustrate additional implementation layers. They are not interchangeable solutions. The [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework), also available in the [original report](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf), supplies a broader lifecycle perspective. The common requirement is to retain enough evidence to connect a governing commitment to what the system actually did.
+[Constitutional Classifiers](https://arxiv.org/abs/2501.18837) illustrate how rules can inform synthetic training examples for safeguards. Runtime policy tools such as [Open Policy Agent](https://www.openpolicyagent.org/) and [Cedar](https://www.cedarpolicy.com/) address other enforcement needs. The [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) provides broader lifecycle guidance. These approaches serve different functions; each needs evidence connecting intended rules to observed behavior.
 
-The first part therefore ends with a positive design principle: **alignment begins with the constitution and takes shape through data.** Collection protocols, examples, model updates, runtime controls, and appeals carry different parts of that commitment. A corrected case may need only a repaired record; a changed rule may require revised examples, a policy update, retraining, or another intervention. We must decide at which layer the problem resides.
+::: {.callout-note title="Values: make commitments operational" icon=false}
+Represent governing commitments in rules, collection protocols, training examples, runtime controls, and appeal procedures. Preserve the evidence needed to check how each commitment was applied and to revise it when necessary.
+:::
 
-A constitution must also remain revisable. Different legitimate concerns can conflict, and a rule that appears satisfactory in aggregate may fail an individual case. Appeals provide evidence of that failure. The constitution is the foundation, but data is what allows its interpretation, embodiment, and revision to continue. This leads to the next problem: can the knowledge behind a decision be represented in a form that software can work with explicitly?
+A corrected case may require a repaired record. A changed rule may require revised examples, a policy update, or retraining. The intervention should address the layer responsible for the failure.
 
-The second part begins with a change in what we count as data. Documents contain knowledge, but the relationships and rules needed for a decision may be implicit in prose. If we want systems to apply that knowledge consistently, some of it needs to become explicit facts, concepts, constraints, and executable rules. Code and formal mathematics help us see why.
+A constitution must remain revisable. Legitimate concerns can conflict, and a rule that performs well in aggregate may fail an individual case. Appeals provide evidence for correction. Applying and revising commitments also requires explicit representations of the knowledge used in decisions.
 
-A language model can generate a program or a Lean proof as a sequence of symbols. Crucially, other software can consume that output: a compiler can report an error, tests can run, and a proof assistant can check formal steps. This gives generation a source of feedback beyond another fluent explanation. The [Lean system paper](https://lean-lang.org/papers/system.pdf), the [Lean project](https://lean-lang.org/), and the community’s [mathlib](https://github.com/leanprover-community/mathlib4) also remind us that this rests on an accumulated ecosystem of languages, libraries, formalized knowledge, and tools.
+## Part 2: Verification
 
-Recent examples include OpenAI’s October 2026 mathematics release and its reported refutation of the Exponential Time Hypothesis. The former releases many results with Lean formalizations; the latter makes a natural-language argument and formalization available for examination. ETH belongs to computational complexity, not to the physics results announced alongside it. These examples matter here because models produce artifacts that others can compute with and inspect. The reported ETH result should remain attributed to its authors rather than presented as independently established by this article. [Mathematics release](https://openai.com/index/sharing-ai-progress-in-mathematics/); [research catalogue](https://github.com/openai/math); [October 26 announcement](https://openai.com/index/building-scientific-understanding-with-academic-communities/); [released preprint](https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf)
+Documents contain knowledge, but the relationships and rules needed for a decision may be implicit in prose. If we want systems to apply that knowledge consistently, some of it needs to become explicit facts, concepts, constraints, and executable rules. Code and formal mathematics help us see why.
 
-The mechanism is more important than any one headline: generate a formal artifact, execute or check it, and use the feedback to improve the next attempt. DeepSeek-Prover-V1.5 makes that loop concrete through proof-assistant feedback, reinforcement learning, and search in Lean. [Xin et al., *DeepSeek-Prover-V1.5*](https://arxiv.org/abs/2408.08152)
+A language model can generate a program or a Lean proof as a sequence of symbols. Other software can check that output: a compiler can report an error, tests can run, and a proof assistant can check formal steps. This gives generation a source of feedback beyond another fluent explanation. The [Lean system paper](https://lean-lang.org/papers/system.pdf), the [Lean project](https://lean-lang.org/), and the community’s [mathlib](https://github.com/leanprover-community/mathlib4) also remind us that this rests on an accumulated ecosystem of languages, libraries, formalized knowledge, and tools.
+
+OpenAI’s October 2026 mathematics release includes Lean formalizations of many proofs. Its later reported refutation of the Exponential Time Hypothesis is another example of a research claim accompanied by artifacts for examination. This article does not independently verify that result. The relevance here is the availability of work that others can inspect and check. [Mathematics release](https://openai.com/index/sharing-ai-progress-in-mathematics/); [released ETH preprint](https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf)
+
+The process is to generate a formal artifact, execute or check it, and use the feedback to improve the next attempt. DeepSeek-Prover-V1.5 makes that loop concrete through proof-assistant feedback, reinforcement learning, and search in Lean. [Xin et al., *DeepSeek-Prover-V1.5*](https://arxiv.org/abs/2408.08152)
 
 The enterprise opportunity is to develop an equivalent loop for suitable organizational tasks. A system would work with explicit facts and policy rules, generate an executable query or program, and receive feedback from its execution and validation. This is a research proposal, not a claim that all successful AI must be symbolic. Nor does producing code automatically establish correctness: tests and formal checks establish particular properties under particular specifications. The advantage is that the work can become computable and its failures can produce useful evidence.
 
@@ -99,13 +125,13 @@ In an enterprise, that loop meets fragmented knowledge. One system records an em
 
 Databases already compute. The missing work is often making cross-system meanings, source authority, and policy logic explicit enough to compute the right thing. This is where knowledge engineering becomes central to the data agenda.
 
-We have substantial foundations to build on. [RDF](https://www.w3.org/TR/rdf11-concepts/) represents graph assertions; [OWL](https://www.w3.org/TR/owl2-overview/) supports ontologies and logical entailment; [SPARQL](https://www.w3.org/TR/sparql11-query/) queries graph data; [SHACL](https://www.w3.org/TR/shacl/) validates graphs against stated conditions. Datalog and Prolog offer rule-based computation with their own semantics. Hogan and colleagues survey the models, construction methods, quality issues, and applications of knowledge graphs. [Hogan et al., *Knowledge Graphs*](https://arxiv.org/abs/2003.02320)
+Existing knowledge-representation tools provide foundations: [RDF](https://www.w3.org/TR/rdf11-concepts/) represents graph assertions, [OWL](https://www.w3.org/TR/owl2-overview/) defines ontologies, [SPARQL](https://www.w3.org/TR/sparql11-query/) queries graph data, and [SHACL](https://www.w3.org/TR/shacl/) checks stated graph constraints. Rule languages support further computation. Hogan and colleagues review the methods and their limitations. [Hogan et al., *Knowledge Graphs*](https://arxiv.org/abs/2003.02320)
 
 Choosing a language also means choosing how uncertainty and absence are treated. A missing assertion is not necessarily false. Our original applicant illustrates the consequence: absence of a credential record must not silently become proof of ineligibility. Explicit representations make that choice visible; they do not make it disappear.
 
 Why, then, is this not already routine everywhere? Creating and sustaining shared meaning takes work. Domain experts agree on concepts, teams connect records, and stewards maintain rules as policies change. [Gene Ontology](https://geneontology.org/) and [SNOMED](https://www.snomed.org/) offer examples of sustained domain knowledge infrastructure, with distinct purposes and representation histories. The lesson is that communities and continuing stewardship matter alongside the language.
 
-My hypothesis is that LLMs may reduce parts of the extraction and specification cost, making more enterprise uses economical. That hypothesis must include review, correction, integration, and maintenance costs—not just the speed of producing a first draft. Connectivity initiatives such as [MCP](https://modelcontextprotocol.io/specification) and [UCP](https://ucp.dev/) are related context from the preparation notes: connecting systems and workflows is valuable, but does not by itself establish shared domain meanings or prove a business rule correct.
+My hypothesis is that LLMs may reduce parts of the extraction and specification cost, making more enterprise uses economical. That hypothesis must include review, correction, integration, and maintenance costs—not just the speed of producing a first draft. Connectivity initiatives such as [MCP](https://modelcontextprotocol.io/specification) and [UCP](https://ucp.dev/) connect systems and workflows. Shared domain meanings and correct business rules require additional specification and validation.
 
 Consider an illustrative allowance policy. An employee has four years of service and is confirmed not to be on deputation. The rule requires at least three years of service and no deputation. An ontology identifies the concepts; sourced facts describe the employee; a rule states the conditions. A model can translate “Is this employee eligible?” into a query, and a rule engine can apply the conditions to compute the answer.
 
@@ -117,9 +143,15 @@ The complete picture is documents and domain expertise becoming a knowledge grap
 
 *The output of generation can be something software executes. The data includes the concepts, relationships, facts, rules, and checked reasoning steps.*
 
-That is the second part’s insight: **make more enterprise knowledge available in forms that AI can compute over and tools can check.** Doing so also creates new assets and new costs. Documents, reviewed graphs, rules, queries, and outputs may each contribute to a result. How should those contributions be valued?
+::: {.callout-note title="Verification: make reasoning checkable" icon=false}
+Represent knowledge as explicit facts, concepts, relationships, and rules. Generate queries or programs that tools can execute and check. A successful check establishes only the properties covered by the specification; the facts and specification also require review.
+:::
 
-Valuation comes last because it stretches across everything we have discussed. It concerns input data, training examples, symbolic representations, and generated outputs. The question is always situated: what does this data help a particular user accomplish, given the alternatives and the other inputs available? The same artifact can have different value at different places in the chain.
+Documents, reviewed graphs, rules, queries, and outputs each incur costs and may contribute to a result. Valuation examines those contributions.
+
+## Part 3: Valuation
+
+Valuation applies to input data, training examples, symbolic representations, and generated outputs. It asks what a dataset helps a particular user accomplish, given the alternatives and other inputs available. The same dataset can have different value in different uses.
 
 Imagine a university curating 1,000 hours of Kashmiri speech. This is a hypothetical example, not a reported project or transaction. Recording, transcription, quality assurance, rights management, and stewardship generate costs. A company may pay a licence price for specified uses. The company’s value from the corpus depends on what it enables in a service. These are three different quantities: **cost is expenditure, price is payment, and value is expected or realized benefit to a user.**
 
@@ -133,15 +165,15 @@ Kashmiri willow makes the distinction tangible. Wood can provide heat for cookin
 
 Data follows a related logic. New dialect recordings can help a service that lacks coverage more than one already holding equivalent material. Quality, novelty, permitted use, and complementary processing all matter. Physical volume alone cannot tell us the contribution.
 
-The agricultural example takes the argument one step further. Soil and weather observations support an irrigation recommendation. The farmer must then be able to act: water, a working pump, power, labor, and timely services are part of the causal chain. The outcome might be less water consumed, lower costs, or a better harvest. Advice arriving after the decision, or advice that cannot be used, may change nothing.
+In agriculture, soil and weather observations support an irrigation recommendation. The farmer must then be able to act: water, a working pump, power, labor, and timely services are part of the causal chain. The outcome might be less water consumed, lower costs, or a better harvest. Advice arriving after the decision, or advice that cannot be used, may change nothing.
 
 ![Soil and weather information supports a recommendation, a farmer’s irrigation decision, and a possible harvest outcome.](figures/agriculture-cartoon.png)
 
 *Information → intelligence → decision and action → outcome. The supply and service ecosystem determines whether advice can be used.*
 
-The practical point is: **“If it is not actionable, it has zero value.”** Here that means zero realized operational benefit in this use. Choosing to wait or avoid unnecessary irrigation is also an action in this sense. Data may retain value for other users or future decisions, and costs incurred without benefit can make the net result negative. The farmer’s result depends on the whole ecosystem, so the data cannot claim the entire harvest’s value.
+Data produces realized operational benefit when it supports a decision or action that improves an outcome. Choosing to wait or avoid unnecessary irrigation also counts as a decision. Information that does not affect this use may still have value for other users or future decisions. The farmer’s outcome depends on the whole production system, so the dataset cannot be assigned the entire harvest’s value.
 
-Now follow the same chain through AI. Governing principles shape training data; training produces a model; inference consumes inputs and generates outputs; an application uses those outputs in a decision or service. Cost, price, and value appear at each stage. Tokens meter input and output consumption, not units of benefit. Equal token counts may support a routine response or a consequential insight.
+The same sequence applies to AI services. Governing principles shape training data; training produces a model; inference consumes inputs and generates outputs; an application uses those outputs in a decision or service. Cost, price, and value appear at each stage. Tokens meter input and output consumption, not units of benefit. Equal token counts may support a routine response or a consequential insight.
 
 Dario Amodei’s discussion with Dwarkesh Patel raises this distinction in considering the business model for AI services: charging for consumption and capturing the value enabled are different problems. The interview is useful perspective, rather than an empirical valuation of our examples. [Amodei–Patel interview](https://www.dwarkesh.com/p/dario-amodei-2)
 
@@ -149,7 +181,7 @@ A recurring service charge may also include recovery of earlier investment. Allo
 
 This suggests a funding change: treat some data as enduring productive infrastructure. A curated, rights-cleared corpus can support several model versions, evaluations, and applications. Funding its acquisition, quality, documentation, and stewardship over multiple years could make foundation-model development a sustained programme. Ongoing data feeds and inference consumption, meanwhile, often resemble operating expenditure.
 
-**A capital-investment perspective on reusable data can change what we are willing to build.** This is a strategic proposal, not a rule that all training data qualifies as a capital asset. Mohan, Bharathy, and Jalan discuss enterprise data valuation in the context of intangible assets. OECD’s treatment of data in national accounts is another relevant perspective, distinct from company accounts. IAS 38 sets recognition criteria for intangible assets and distinguishes research from qualifying development expenditure. [Mohan et al., *Enterprise Data Valuation*](https://doi.org/10.1111/joes.12705); [OECD national accounts explanation](https://www.oecd.org/en/data/insights/data-explainers/2024/03/annual-national-accounts-frequently-asked-questions.html); [IAS 38](https://www.ifrs.org/issued-standards/list-of-standards/ias-38-intangible-assets/)
+Long-term funding for reusable data could support projects that short-term budgets cannot sustain. This funding proposal does not imply that all training data qualifies as a capital asset. Mohan, Bharathy, and Jalan discuss enterprise data valuation in the context of intangible assets. OECD’s treatment of data in national accounts is another relevant perspective, distinct from company accounts. IAS 38 sets recognition criteria for intangible assets and distinguishes research from qualifying development expenditure. [Mohan et al., *Enterprise Data Valuation*](https://doi.org/10.1111/joes.12705); [OECD national accounts explanation](https://www.oecd.org/en/data/insights/data-explainers/2024/03/annual-national-accounts-frequently-asked-questions.html); [IAS 38](https://www.ifrs.org/issued-standards/list-of-standards/ias-38-intangible-assets/)
 
 To estimate the speech corpus’s contribution, compare the service with and without it under otherwise comparable conditions. Does recognition improve? Are fewer manual corrections needed? Do more interactions succeed? The corpus contributes alongside models, compute, other data, staff, and deployment, so it should not be assigned the entire service’s benefit.
 
@@ -157,9 +189,9 @@ Data Shapley offers a technical approach to allocating a defined model utility a
 
 The method should follow the decision. Production and replacement costs help budget a collection effort. Comparable agreements help assess a proposed licence, provided rights and uses are comparable. Expected incremental benefits help evaluate an application. Public investment may require evidence of accessibility and social benefit that a commercial price misses.
 
-The reviews by Coyle and Manley, Fleckenstein and colleagues, and Mohan and colleagues provide complementary economic, practical, and enterprise perspectives. The broader survey by Ebiele, Bendechache, and Brennan is the likely match for the recalled review of roughly 70 approaches: it covers 75 studies, which should not be relabelled as 75 distinct valuation models. Its full text was unavailable in the preparation collection, so it is included as further reading rather than the basis for detailed claims here. [Fleckenstein et al., *A Review of Data Valuation Approaches*](https://doi.org/10.1162/99608f92.c18db966); [Ebiele et al., *Quantitative Data Valuation Methods*](https://doi.org/10.1145/3736178)
+Reviews by Coyle and Manley, Fleckenstein and colleagues, and Mohan and colleagues provide economic, practical, and enterprise perspectives on valuation. Ebiele, Bendechache, and Brennan provide a further systematic review. [Fleckenstein et al., *A Review of Data Valuation Approaches*](https://doi.org/10.1162/99608f92.c18db966); [Ebiele et al., *Quantitative Data Valuation Methods*](https://doi.org/10.1145/3736178)
 
-The preparation notes also point to [Karya](https://www.karya.in/impact) and [India’s Open Government Data platform](https://www.data.gov.in/) as contexts for thinking about data production, participation, and public use. They are not evidence for a monetary estimate of our hypothetical corpus. They remind us to specify whose benefits count.
+[Karya](https://www.karya.in/impact) and [India’s Open Government Data platform](https://www.data.gov.in/) provide contexts for examining data production, participation, and public use. Valuation must specify whose benefits count, including benefits that a commercial price may omit.
 
 Even a well-chosen method faces an evidence gap. The producer sees its costs and an immediate exchange. The buyer may transform the data into a model, then become the producer of outputs used by another service. Later outcomes can be invisible to the original producer. Data can be copied, combined, and transformed without being consumed like fuel, complicating both traceability and attribution. OECD’s report on data and data flows places these measurement difficulties in a wider economic context. [OECD, *Measuring the Value of Data and Data Flows*](https://www.oecd.org/content/dam/oecd/en/publications/reports/2022/12/measuring-the-value-of-data-and-data-flows_2561fe7e/923230a6-en.pdf)
 
@@ -171,25 +203,33 @@ Better reporting can make agreed uses and outcomes more observable. It need not 
 
 A useful valuation statement therefore explains its reasoning. Name the user, task, permissions, time period, and alternative. Estimate the improvement attributable to the dataset. Connect that improvement to outcomes, then account for the additional costs needed to realize them. State uncertainty rather than hide it behind a single number. This is a practical synthesis of the valuation literature, not a formula supplied by one paper.
 
-For the speech example, an analyst might estimate manual-correction time saved per interaction, multiply it by expected affected interactions and the relevant cost of time, and subtract incremental integration and operating costs. Each quantity needs evidence; no numbers are invented here. Other benefits, such as improved access to a service, may deserve separate measures. For a purchase decision, report the licence price separately: expected benefit net of realization costs describes value before acquisition, while subtracting the acquisition price gives the buyer’s expected surplus. Avoid counting the same gain both as time saved and as a separate cost reduction. [Coyle and Manley](https://doi.org/10.1111/joes.12585); [Fleckenstein et al.](https://doi.org/10.1162/99608f92.c18db966)
+For the speech example, an analyst might estimate manual-correction time saved per interaction, multiply it by expected affected interactions and the relevant cost of time, and subtract incremental integration and operating costs. Each quantity requires evidence. Other benefits, such as improved access to a service, may deserve separate measures. For a purchase decision, report the licence price separately: expected benefit net of realization costs describes value before acquisition, while subtracting the acquisition price gives the buyer’s expected surplus. Avoid counting the same gain both as time saved and as a separate cost reduction. [Coyle and Manley](https://doi.org/10.1111/joes.12585); [Fleckenstein et al.](https://doi.org/10.1162/99608f92.c18db966)
 
-Cab surge pricing makes the distinction familiar. A fare can rise when demand exceeds available drivers. Two passengers making the same trip can still perceive different benefits: one needs to catch a flight, another is making an optional visit. The fare reflects market conditions; it does not directly measure either person’s benefit. Costs may also vary, so the analogy does not assume that they stay fixed. [Uber’s explanation of surge pricing](https://www.uber.com/us/en/marketplace/pricing/surge-pricing/)
+A market price also differs from a user’s benefit. Two passengers paying the same cab fare may value the trip differently because one must catch a flight and the other is making an optional visit. Surge pricing responds to market conditions; it does not directly measure either passenger’s benefit. [Uber’s explanation](https://www.uber.com/us/en/marketplace/pricing/surge-pricing/)
 
-The third part’s insight is that **valuation needs a declared purpose, evidence of outcomes, and an account of contribution.** Costs are relatively easier to record, though allocation remains difficult. Prices can be observed or negotiated. Value is harder because benefits depend on context, complementary inputs, and uncertain downstream uses. A method gives that difficulty structure; it does not remove it.
+::: {.callout-note title="Valuation: make the contribution explicit" icon=false}
+Specify the user, purpose, alternative, and time period. Distinguish **cost** (expenditure), **price** (payment), and **value** (expected or realized benefit). Estimate the dataset’s contribution alongside other inputs, state uncertainty, and avoid counting the same benefit twice.
+:::
 
-Look back across the system. At the governing layer, data records whose views shaped a rule and how it can change. During collection and training, it teaches how the rule applies. During use, it records decisions and outcomes. For reasoning, it supplies concepts, facts, and executable rules. For revision, it preserves errors, challenges, and corrections. Each stage creates its own data requirements and needs methods suited to them.
+Costs can be recorded and prices observed or negotiated. Benefits depend on context, complementary inputs, and downstream uses. A valuation method must make those dependencies explicit.
 
-That is why “we have collected the dataset” is not the end of the data problem. A larger model can help with parts of this work, but cannot substitute for an institution deciding who is accountable, a domain expert establishing what a rule means, or evidence that a service improved someone’s outcome.
+## Conclusion
 
-The three parts now come together. **Values** asks us to begin with governing commitments and carry them through examples, controls, and redress. **Verification** asks us to count facts, ontologies, rules, and executable reasoning as first-class data. **Valuation** asks what data contributes throughout that system—from inputs and training to intermediate representations and generated outputs—without counting the same benefit repeatedly.
+At the governing layer, data records whose views shaped a rule and how it can change. During collection and training, it teaches how the rule applies. During use, it records decisions and outcomes. For reasoning, it supplies concepts, facts, and executable rules. For revision, it preserves errors, challenges, and corrections. Each stage creates its own data requirements and needs methods suited to them.
 
-Data is a hard scientific, engineering, and institutional problem across the whole system. Better AI requires us to design the data and the methods that use it together: from the principles people agree on, through the computations we can examine, to the outcomes that make the work worthwhile.
+Data design continues after collection. A larger model can help with parts of this work, but cannot substitute for an institution deciding who is accountable, a domain expert establishing what a rule means, or evidence that a service improved someone’s outcome.
+
+- **Values:** begin with governing commitments and carry them through examples, controls, and redress.
+- **Verification:** treat facts, ontologies, rules, and executable reasoning as first-class data.
+- **Valuation:** assess what data contributes throughout the system, from inputs and training to intermediate representations and generated outputs, without counting the same benefit repeatedly.
+
+The common task is to make these dependencies explicit through representations that people and software can examine. Symbolization applies across governing commitments, knowledge and reasoning, and claims of value. It makes assumptions available for scrutiny and revision; it does not by itself establish that a rule is appropriate, a conclusion is true, or a dataset is valuable. Better AI requires us to design these representations and the methods that use them together.
 
 ---
 
-**References and reading materials**
+## References and reading materials
 
-The links above connect sources to the claims or examples they inform. The full preparation collection includes research papers, institutional framing, standards, implementation tools, and contextual examples. These have different evidentiary roles: a tool’s documentation is not an evaluation of this proposed architecture, and a hypothetical case is not an empirical result. The bibliography below collects the research papers, reports, and reference talk. Standards, tools, institutional sources, and contextual examples are linked where they enter the argument. The article follows Values → Verification → Valuation.
+Sources are linked where they support the argument. The bibliography below collects research papers, reports, and the reference talk. Implementation documentation illustrates available tools; hypothetical examples explain the proposed approach without providing empirical evidence for it.
 
 **Research papers, reports, and the reference talk**
 
@@ -204,7 +244,7 @@ The links above connect sources to the claims or examples they inform. The full 
 - [Amirata Ghorbani and James Zou. Data Shapley: Equitable Valuation of Data for Machine Learning](https://proceedings.mlr.press/v97/ghorbani19c/ghorbani19c.pdf).
 - [Amirata Ghorbani, Michael P. Kim, James Zou. A Distributional Framework for Data Valuation](https://arxiv.org/pdf/2002.12334).
 - [Measuring the Value of Data and Data Flows (report)](https://www.oecd.org/content/dam/oecd/en/publications/reports/2022/12/measuring-the-value-of-data-and-data-flows_2561fe7e/923230a6-en.pdf).
-- [Malick Ebiele, Malika Bendechache, Rob Brennan. Quantitative Data Valuation Methods: A Systematic Review and Taxonomy (75 studies)](https://dl.acm.org/doi/pdf/10.1145/3736178). Full-text download unavailable in the preparation collection.
+- [Malick Ebiele, Malika Bendechache, Rob Brennan. Quantitative Data Valuation Methods: A Systematic Review and Taxonomy (75 studies)](https://dl.acm.org/doi/pdf/10.1145/3736178). Further reading; the full text was not reviewed.
 - [Leonardo de Moura, Soonho Kong, Jeremy Avigad, Floris van Doorn, Jakob von Raumer. The Lean Theorem Prover (System Description)](https://lean-lang.org/papers/system.pdf).
 - [DeepSeek-Prover-V1.5](https://arxiv.org/pdf/2408.08152).
 - [Aidan Hogan et al. Knowledge Graphs](https://arxiv.org/pdf/2003.02320).
