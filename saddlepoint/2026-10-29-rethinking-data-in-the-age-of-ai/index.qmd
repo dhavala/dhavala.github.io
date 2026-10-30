@@ -225,6 +225,10 @@ Data design continues after collection. A larger model can help with parts of th
 
 The common task is to make these dependencies explicit through representations that people and software can examine. Symbolization applies across governing commitments, knowledge and reasoning, and claims of value. It makes assumptions available for scrutiny and revision; it does not by itself establish that a rule is appropriate, a conclusion is true, or a dataset is valuable. Better AI requires us to design these representations and the methods that use them together.
 
+::: {.callout-important title="Key message" icon=false}
+**Symbolise, explicitly | across governance, knowledge & reasoning, and impact**
+:::
+
 ---
 
 ## References and reading materials
