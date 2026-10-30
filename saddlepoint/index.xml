@@ -282,7 +282,7 @@
   <media:content url="https://dhavala.github.io/saddlepoint/2026-10-29-rethinking-data-in-the-age-of-ai/figures/constitution-iceberg.png" medium="image" type="image/png" height="96" width="144"/>
 </item>
 <item>
-  <title>Linear Memory, Reconstruction and Recall</title>
+  <title>A Matrix Is a Memory Store</title>
   <dc:creator>Soma S Dhavala</dc:creator>
   <link>https://dhavala.github.io/saddlepoint/2026-10-24-linear-memory-recall/</link>
   <description><![CDATA[ 
@@ -293,38 +293,46 @@
 
 
 
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="The argument">
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="The central idea">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>The argument
+<span class="screen-reader-only">Note</span>The central idea
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>The interpretation of a matrix as a <em>key–value</em> store can be developed quantitatively: how many supplied <em>values</em> can it reproduce from their <em>keys</em>, and with what error?</strong></p>
-<p>We use Wang’s memory-capacity argument to develop this interpretation through SVD. Two explicit constructions let us relate reconstruction error and power SNR to the number of stored pairs <img src="https://latex.codecogs.com/png.latex?M">, the <em>key</em> dimension <img src="https://latex.codecogs.com/png.latex?d">, and the relationships among the <em>keys</em>. The result explains the assumptions behind the estimate <img src="https://latex.codecogs.com/png.latex?M%5Capprox2d"> and what to examine beyond that estimate.</p>
+<p><strong>A matrix is a memory store. Matrix multiplication reads from that memory.</strong></p>
+<p>SVD expresses a matrix <img src="https://latex.codecogs.com/png.latex?W"> as a collection of <em>keys</em> and associated <em>values</em>. In <img src="https://latex.codecogs.com/png.latex?Wq">, the input vector <img src="https://latex.codecogs.com/png.latex?q"> acts as the <em>query</em>, and matrix multiplication retrieves the response from the memory encoded in <img src="https://latex.codecogs.com/png.latex?W">. The <em>query</em> need not match a stored <em>key</em>: a general <em>query</em> retrieves a linear combination of the stored <em>values</em>. When it equals an SVD <em>key</em>, it retrieves the associated <em>value</em> exactly.</p>
+<p>This describes how the matrix is read. Whether the retrieved response matches the intended output is a separate question, assessed here through reconstruction error and signal-to-noise ratio (SNR).</p>
 </div>
 </div>
-<p>In <a href="../../saddlepoint/2026-06-30-towards-testable-theory-of-emergence/index.html#matrix-multiplication-scores-similarity">Towards a Testable Theory of Emergence</a>, I interpreted matrix multiplication as a <em>key–value</em> memory computation through its singular value decomposition. <a href="../../saddlepoint/2026-10-21-knn-binding-algorithm/index.html">k-NN as a Binding Algorithm</a> extends that interpretation across learning methods. The purpose here is to strengthen it with a quantitative account of storage and recall.</p>
-<p>Alex Wang’s <a href="https://alexwang.ai/posts/associative-memory/">You could have invented transformers from memory</a> asks how many memories a store can hold before interference becomes comparable to the desired signal. We use that question to develop the earlier SVD viewpoint: <strong>with <em>keys</em> in <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20R%5Ed">, how accurately can a matrix return the intended <em>values</em> as the number <img src="https://latex.codecogs.com/png.latex?M"> of stored pairs grows?</strong></p>
-<p>SVD gives a memory representation of any linear map. To quantify recall, we then specify the pairs to be stored and how the matrix is fitted. These constructions provide an analysable model of the memory interpretation; their capacity estimates apply under the assumptions stated below. Here <em>recall</em> means reconstructing the intended output vector, rather than identifying an item from a list of candidates.</p>
+<p>A learned matrix encodes a response to every input vector. Its singular value decomposition makes those responses explicit as <em>key–value</em> associations. The matrix contains the associations; multiplication uses a <em>query</em> to read a linear combination of their <em>values</em>. The read operation leaves the matrix unchanged.</p>
+<p>In <a href="../../saddlepoint/2026-06-30-towards-testable-theory-of-emergence/index.html#matrix-multiplication-scores-similarity">Towards a Testable Theory of Emergence</a>, I developed this interpretation through SVD. <a href="../../saddlepoint/2026-10-21-knn-binding-algorithm/index.html">k-NN as a Binding Algorithm</a> connects comparison and aggregation across learning methods. Here we examine what the matrix stores and how accurately multiplication can retrieve intended <em>values</em>.</p>
+<p>Alex Wang’s <a href="https://alexwang.ai/posts/associative-memory/">You could have invented transformers from memory</a> quantifies interference in a matrix memory. His question extends the interpretation: <strong>with <em>keys</em> in <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20R%5Ed">, how does recall change as the number <img src="https://latex.codecogs.com/png.latex?M"> of supplied <em>key–value pairs</em> increases?</strong> We derive recall error and power SNR for two storage rules, explain the assumptions behind <img src="https://latex.codecogs.com/png.latex?M%5Capprox2d">, and examine the effects of <em>key</em> geometry and <em>query</em> noise.</p>
+<p>There are two distinct questions. SVD describes the associations represented by an existing matrix. A storage construction specifies intended associations and fits a matrix to them. The first gives an exact interpretation; the second lets us measure whether the read operation returns what was intended. Here <em>recall</em> means reconstructing an output vector, rather than identifying an item from a list of candidates.</p>
 <p>Vectors are columns, and <img src="https://latex.codecogs.com/png.latex?A%5E%5Ctop"> denotes transpose. Appendix A defines the notation and dimensions; the subsequent appendices give the derivations.</p>
-<section id="a-matrix-as-a-keyvalue-store" class="level2">
-<h2 data-anchor-id="a-matrix-as-a-keyvalue-store">A matrix as a <em>key–value</em> store</h2>
+<section id="what-the-matrix-stores-and-how-multiplication-reads-it" class="level2">
+<h2 data-anchor-id="what-the-matrix-stores-and-how-multiplication-reads-it">What the matrix stores and how multiplication reads it</h2>
 <p>Let <img src="https://latex.codecogs.com/png.latex?W%5Cin%5Cmathbb%20R%5E%7Bp%5Ctimes%20d%7D"> have rank <img src="https://latex.codecogs.com/png.latex?r_W"> and compact singular value decomposition (SVD)</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AW=U%5CSigma%20Z%5E%5Ctop%0A=%5Csum_%7B%5Cell=1%7D%5E%7Br_W%7D%5Csigma_%5Cell%20u_%5Cell%20z_%5Cell%5E%5Ctop.%0A"></p>
 <p>For a <em>query</em> <img src="https://latex.codecogs.com/png.latex?q">,</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AWq=%5Csum_%7B%5Cell=1%7D%5E%7Br_W%7D%0A%5Cunderbrace%7B%5Csigma_%5Cell%20u_%5Cell%7D_%7B%5Ctext%7Bvalue%7D%7D%0A%5Cunderbrace%7Bz_%5Cell%5E%5Ctop%20q%7D_%7B%5Ctext%7Bquery%E2%80%93key%20comparison%7D%7D.%0A"></p>
-<p>The right singular vectors <img src="https://latex.codecogs.com/png.latex?z_%5Cell"> are orthonormal <em>keys</em>; <img src="https://latex.codecogs.com/png.latex?%5Csigma_%5Cell%20u_%5Cell"> are their associated <em>values</em>. Querying with <img src="https://latex.codecogs.com/png.latex?z_j"> returns its <em>value</em> exactly. Components of a <em>query</em> orthogonal to these <em>keys</em> lie in the null space <img src="https://latex.codecogs.com/png.latex?%5Cker(W)=%5C%7Bq:Wq=0%5C%7D"> and contribute zero.</p>
-<p>These SVD-derived pairs describe the action of the learned map; they do not identify its original training pairs. To develop the memory interpretation quantitatively, we now supply a collection of intended <em>key–value pairs</em> and examine two rules for constructing a matrix that reproduces them. Rank counts independent directions, not independently specified memories: one linear rule can generate arbitrarily many consistent input–output pairs.</p>
+<p>The right singular vectors <img src="https://latex.codecogs.com/png.latex?z_%5Cell"> are orthonormal <em>keys</em>; <img src="https://latex.codecogs.com/png.latex?%5Csigma_%5Cell%20u_%5Cell"> are their associated <em>values</em>. Multiplication performs two operations:</p>
+<ol type="1">
+<li><strong>Compare:</strong> compute <img src="https://latex.codecogs.com/png.latex?z_%5Cell%5E%5Ctop%20q"> for each <em>key</em>. This is the component of the <em>query</em> along that direction.</li>
+<li><strong>Combine:</strong> multiply each <em>value</em> by its comparison coefficient and sum the results.</li>
+</ol>
+<p>These coefficients can be negative and need not sum to one. The read operation is a linear combination, not necessarily an average or selection of a single stored item. For a batch of <em>queries</em> <img src="https://latex.codecogs.com/png.latex?X=%5Bq_1,%5Cldots,q_n%5D">, matrix multiplication <img src="https://latex.codecogs.com/png.latex?WX=%5BWq_1,%5Cldots,Wq_n%5D"> performs the same read for every column.</p>
+<p>Querying with <img src="https://latex.codecogs.com/png.latex?z_j"> returns its <em>value</em> exactly: <img src="https://latex.codecogs.com/png.latex?Wz_j=%5Csigma_j%20u_j">. More generally, if <img src="https://latex.codecogs.com/png.latex?q=a%20z_1+b%20z_2">, then <img src="https://latex.codecogs.com/png.latex?Wq=a%5Csigma_1u_1+b%5Csigma_2u_2"> whenever those directions exist. Components orthogonal to all the <em>keys</em> lie in the null space <img src="https://latex.codecogs.com/png.latex?%5Cker(W)=%5C%7Bq:Wq=0%5C%7D"> and contribute zero.</p>
+<p>These SVD-derived pairs describe the action of the learned map; they do not identify its original training pairs. The decomposition need not be computed during use: multiplying by <img src="https://latex.codecogs.com/png.latex?W"> already performs the same operation. Repeated singular values can admit different choices of singular vectors, so this is not a claim of unique or semantically interpretable memories. To develop the memory interpretation quantitatively, we now supply a collection of intended <em>key–value pairs</em> and examine two rules for constructing a matrix that reproduces them. Rank counts independent directions, not independently specified memories: one linear rule can generate arbitrarily many consistent input–output pairs.</p>
 </section>
-<section id="two-ways-to-construct-the-memory-matrix" class="level2">
-<h2 data-anchor-id="two-ways-to-construct-the-memory-matrix">Two ways to construct the memory matrix</h2>
+<section id="writing-intended-associations-into-the-matrix" class="level2">
+<h2 data-anchor-id="writing-intended-associations-into-the-matrix">Writing intended associations into the matrix</h2>
 <p>Suppose we want to store <img src="https://latex.codecogs.com/png.latex?M"> <em>key–value pairs</em> <img src="https://latex.codecogs.com/png.latex?(k_i,v_i)">. Each pair specifies one requirement: querying with <img src="https://latex.codecogs.com/png.latex?k_i"> should return <img src="https://latex.codecogs.com/png.latex?v_i">. Thus <img src="https://latex.codecogs.com/png.latex?M"> counts supplied pairs, with one intended <em>value</em> per <em>key</em>; it does not count SVD components. Put the <em>keys</em> and <em>values</em> into columns:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AK=%5Bk_1,%5Cldots,k_M%5D%5Cin%5Cmathbb%20R%5E%7Bd%5Ctimes%20M%7D,%0A%5Cqquad%0AV=%5Bv_1,%5Cldots,v_M%5D%5Cin%5Cmathbb%20R%5E%7Bp%5Ctimes%20M%7D.%0A"></p>
-<p>Assume <img src="https://latex.codecogs.com/png.latex?%5C%7Ck_i%5C%7C=1">. We want a single matrix <img src="https://latex.codecogs.com/png.latex?W"> that returns <img src="https://latex.codecogs.com/png.latex?v_i"> when multiplied by <img src="https://latex.codecogs.com/png.latex?k_i">. We examine two ways to construct it. The word “store” describes the role of the resulting matrix; it is not a separate statistical estimator.</p>
+<p>Assume <img src="https://latex.codecogs.com/png.latex?%5C%7Ck_i%5C%7C=1">. We want a single matrix <img src="https://latex.codecogs.com/png.latex?W"> that returns <img src="https://latex.codecogs.com/png.latex?v_i"> when multiplied by <img src="https://latex.codecogs.com/png.latex?k_i">. Constructing or fitting <img src="https://latex.codecogs.com/png.latex?W"> is the write operation; computing <img src="https://latex.codecogs.com/png.latex?Wq"> is the read operation. We examine two ways to write the supplied associations. The word “store” describes the role of the resulting matrix; it is not a separate statistical estimator.</p>
 <p><strong>First, construct one matrix per <em>key–value pair</em> and add them.</strong> For each pair <img src="https://latex.codecogs.com/png.latex?(k_i,v_i)">, find a matrix <img src="https://latex.codecogs.com/png.latex?A_i"> using only that pair. Choose the smallest Frobenius norm, <img src="https://latex.codecogs.com/png.latex?%5C%7CA%5C%7C_F=(%5Csum_%7Bab%7DA_%7Bab%7D%5E2)%5E%7B1/2%7D">, among matrices that return <img src="https://latex.codecogs.com/png.latex?v_i"> exactly:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AA_i=%5Cunderset%7BA%7D%7B%5Coperatorname%7Barg%5C,min%7D%7D%5C%20%5Cfrac12%5C%7CA%5C%7C_F%5E2%0A%5Cquad%5Ctext%7Bsubject%20to%7D%5Cquad%20Ak_i=v_i.%0A"></p>
 <p>For a unit <em>key</em>, the solution is <img src="https://latex.codecogs.com/png.latex?A_i=v_i%20k_i%5E%5Ctop">. This is an outer product: a column vector multiplied by a row vector. Summing the matrices gives</p>
@@ -347,8 +355,8 @@
 <p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BLS%7D%7DK=VZ_KZ_K%5E%5Ctop=VP,%0A%5Cqquad%20P=K%5E%5Cdagger%20K.%0A"></p>
 <p>Write <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Bcol%7D(B)"> for the column space of <img src="https://latex.codecogs.com/png.latex?B">, the span of its columns. Here <img src="https://latex.codecogs.com/png.latex?P=Z_KZ_K%5E%5Ctop"> is an orthogonal projector: <img src="https://latex.codecogs.com/png.latex?P%5E%5Ctop=P"> and <img src="https://latex.codecogs.com/png.latex?P%5E2=P">. It projects coefficients over the stored pairs in <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20R%5EM"> onto <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Bcol%7D(Z_K)">, the row space of <img src="https://latex.codecogs.com/png.latex?K">. It differs from <img src="https://latex.codecogs.com/png.latex?Q=KK%5E%5Cdagger=U_KU_K%5E%5Ctop">, which projects inputs in <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20R%5Ed"> onto <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Bcol%7D(K)">. Appendix C derives both projectors.</p>
 </section>
-<section id="measure-the-strength-of-recall" class="level2">
-<h2 data-anchor-id="measure-the-strength-of-recall">Measure the strength of recall</h2>
+<section id="how-accurately-does-the-read-operation-recover-a-value" class="level2">
+<h2 data-anchor-id="how-accurately-does-the-read-operation-recover-a-value">How accurately does the read operation recover a value?</h2>
 <p>The identity <img src="https://latex.codecogs.com/png.latex?W_%7B%5Cmathrm%7BLS%7D%7DK=VP"> tells us what the fitted matrix returns. To assess it as memory, we must ask how much of each response comes from the requested <em>value</em> and how much comes from other stored <em>values</em>. Comparing these contributions lets us quantify how recall changes as we increase the number of stored pairs.</p>
 <p>We use power signal-to-noise ratio (SNR) to compare the intended contribution with cross-talk from other <em>key–value pairs</em>:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathrm%7BSNR%7D=%5Cfrac%7B%5Ctext%7Bpower%20of%20the%20intended%20contribution%7D%7D%7B%5Ctext%7Bexpected%20power%20of%20cross-talk%7D%7D.%0A"></p>
@@ -428,9 +436,9 @@
 <p><img src="https://latex.codecogs.com/png.latex?%0AW_%7B%5Cmathrm%7BLS%7D%7D=AKK%5E%5Cdagger=A%20P_%7B%5Coperatorname%7Bcol%7D(K)%7D.%0A"></p>
 <p>Every <em>query</em> in the <em>key</em> span has its intended output recovered exactly. There can be more than <img src="https://latex.codecogs.com/png.latex?d"> such <em>key–value pairs</em> because their <em>values</em> respect the dependencies among <em>keys</em>. The capacity estimate for independent random <em>values</em> does not limit how many consistent pairs a linear rule can represent. Here <img src="https://latex.codecogs.com/png.latex?P_%7B%5Coperatorname%7Bcol%7D(K)%7D=Q=KK%5E%5Cdagger"> is the input-space projector. Appendix H proves exact recall on this span and gives the general consistency condition.</p>
 </section>
-<section id="what-to-assess-in-a-learned-store" class="level2">
-<h2 data-anchor-id="what-to-assess-in-a-learned-store">What to assess in a learned store</h2>
-<p>The storage calculation gives quantitative content to the earlier interpretation of matrix multiplication as memory. SVD describes the map in terms of <em>keys</em> and <em>values</em>; specifying intended pairs and a fitting rule lets us assess how well that memory works. Does the store reproduce its intended <em>key–value pairs</em>? Are errors concentrated on particular <em>keys</em>? Does recall remain accurate when <em>queries</em> are perturbed?</p>
+<section id="what-this-tells-us-about-a-learned-matrix" class="level2">
+<h2 data-anchor-id="what-this-tells-us-about-a-learned-matrix">What this tells us about a learned matrix</h2>
+<p>A matrix stores a set of linear associations, and multiplication reads them by comparison and combination. SVD makes that statement exact for an existing matrix. Specifying intended <em>key–value pairs</em> introduces a separate test: whether the stored associations reproduce those intended outputs. The recall calculations assess errors at supplied <em>keys</em>, differences across <em>keys</em>, and sensitivity to perturbed <em>queries</em>.</p>
 <p>For the least-squares model analysed here, leverage scores determine expected reconstruction error and SNR at stored <em>keys</em>. The <em>key</em> singular spectrum determines additional sensitivity to isotropic <em>query</em> noise. Wang’s <img src="https://latex.codecogs.com/png.latex?M=2d"> estimate follows when these results are reduced to approximately uniform leverage and a unit-SNR threshold.</p>
 <p>For a particular learned matrix, measure the residuals <img src="https://latex.codecogs.com/png.latex?%5C%7CWk_j-v_j%5C%7C%5E2"> directly. The formula <img src="https://latex.codecogs.com/png.latex?1-h_j"> is an expectation under the least-squares random-<em>value</em> model, not the measured error for arbitrary fixed <em>values</em>. For independent isotropic additive <em>query</em> noise, the additional expected error is <img src="https://latex.codecogs.com/png.latex?%5Ctau%5E2%5C%7CW%5C%7C_F%5E2">; expressing it through the singular values of <img src="https://latex.codecogs.com/png.latex?K"> additionally uses that model.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled" title="Main takeaway">
@@ -443,7 +451,12 @@
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>The memory interpretation supports quantitative questions about reconstruction, interference, and robustness.</strong> Assess <em>key</em> geometry as well as memory count and dimension. Under the least-squares random-<em>value</em> model, leverage scores determine expected error at stored <em>keys</em>, and the nonzero singular values of <img src="https://latex.codecogs.com/png.latex?K"> determine additional expected error from isotropic <em>query</em> noise. The estimate <img src="https://latex.codecogs.com/png.latex?M=2d"> is a particular operating point under approximately uniform leverage, not a universal limit on what a learned matrix can represent.</p>
+<p><strong>A matrix is a memory store; matrix multiplication is its read operation.</strong></p>
+<ul>
+<li><strong>Representation:</strong> SVD expresses the matrix as <em>keys</em> and associated <em>values</em>. Multiplication compares a <em>query</em> with those <em>keys</em> and combines the <em>values</em>.</li>
+<li><strong>Fidelity:</strong> intended associations need not be recovered exactly. Reconstruction error, cross-talk, and sensitivity to <em>query</em> noise measure different aspects of the read operation.</li>
+<li><strong>Capacity:</strong> <img src="https://latex.codecogs.com/png.latex?M%5Capprox2d"> is a unit-SNR estimate for the stated least-squares model with approximately uniform leverage. It is not a universal limit on the number of consistent associations a matrix can represent.</li>
+</ul>
 </div>
 </div>
 </section>

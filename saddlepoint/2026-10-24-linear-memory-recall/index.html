@@ -8,9 +8,9 @@
 
 <meta name="author" content="Soma S Dhavala">
 <meta name="dcterms.date" content="2026-10-24">
-<meta name="description" content="An SVD derivation of linear-memory SNR, Wang’s capacity estimate, and the role of key geometry in recall.">
+<meta name="description" content="A matrix stores key–value associations; multiplication reads them. SVD makes this interpretation explicit, and recall error and SNR quantify its limits.">
 
-<title>Linear Memory, Reconstruction and Recall – Soma S Dhavala</title>
+<title>A Matrix Is a Memory Store – Soma S Dhavala</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -213,12 +213,12 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="Linear Memory, Reconstruction and Recall – Soma S Dhavala">
-<meta property="og:description" content="An SVD derivation of linear-memory SNR, Wang’s capacity estimate, and the role of key geometry in recall.">
+<meta property="og:title" content="A Matrix Is a Memory Store – Soma S Dhavala">
+<meta property="og:description" content="A matrix stores key–value associations; multiplication reads them. SVD makes this interpretation explicit, and recall error and SNR quantify its limits.">
 <meta property="og:image" content="https://dhavala.github.io/saddlepoint/2026-10-24-linear-memory-recall/images/og-image.png">
 <meta property="og:site_name" content="Soma S Dhavala">
-<meta name="twitter:title" content="Linear Memory, Reconstruction and Recall – Soma S Dhavala">
-<meta name="twitter:description" content="An SVD derivation of linear-memory SNR, Wang’s capacity estimate, and the role of key geometry in recall.">
+<meta name="twitter:title" content="A Matrix Is a Memory Store – Soma S Dhavala">
+<meta name="twitter:description" content="A matrix stores key–value associations; multiplication reads them. SVD makes this interpretation explicit, and recall error and SNR quantify its limits.">
 <meta name="twitter:image" content="https://dhavala.github.io/saddlepoint/2026-10-24-linear-memory-recall/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -281,7 +281,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Linear Memory, Reconstruction and Recall</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">A Matrix Is a Memory Store</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -420,12 +420,12 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#a-matrix-as-a-keyvalue-store" id="toc-a-matrix-as-a-keyvalue-store" class="nav-link active" data-scroll-target="#a-matrix-as-a-keyvalue-store">A matrix as a <em>key–value</em> store</a></li>
-  <li><a href="#two-ways-to-construct-the-memory-matrix" id="toc-two-ways-to-construct-the-memory-matrix" class="nav-link" data-scroll-target="#two-ways-to-construct-the-memory-matrix">Two ways to construct the memory matrix</a></li>
-  <li><a href="#measure-the-strength-of-recall" id="toc-measure-the-strength-of-recall" class="nav-link" data-scroll-target="#measure-the-strength-of-recall">Measure the strength of recall</a></li>
+  <li><a href="#what-the-matrix-stores-and-how-multiplication-reads-it" id="toc-what-the-matrix-stores-and-how-multiplication-reads-it" class="nav-link active" data-scroll-target="#what-the-matrix-stores-and-how-multiplication-reads-it">What the matrix stores and how multiplication reads it</a></li>
+  <li><a href="#writing-intended-associations-into-the-matrix" id="toc-writing-intended-associations-into-the-matrix" class="nav-link" data-scroll-target="#writing-intended-associations-into-the-matrix">Writing intended associations into the matrix</a></li>
+  <li><a href="#how-accurately-does-the-read-operation-recover-a-value" id="toc-how-accurately-does-the-read-operation-recover-a-value" class="nav-link" data-scroll-target="#how-accurately-does-the-read-operation-recover-a-value">How accurately does the read operation recover a value?</a></li>
   <li><a href="#recover-wangs-capacity-estimate" id="toc-recover-wangs-capacity-estimate" class="nav-link" data-scroll-target="#recover-wangs-capacity-estimate">Recover Wang’s capacity estimate</a></li>
   <li><a href="#what-the-dimension-only-estimate-leaves-out" id="toc-what-the-dimension-only-estimate-leaves-out" class="nav-link" data-scroll-target="#what-the-dimension-only-estimate-leaves-out">What the dimension-only estimate leaves out</a></li>
-  <li><a href="#what-to-assess-in-a-learned-store" id="toc-what-to-assess-in-a-learned-store" class="nav-link" data-scroll-target="#what-to-assess-in-a-learned-store">What to assess in a learned store</a></li>
+  <li><a href="#what-this-tells-us-about-a-learned-matrix" id="toc-what-this-tells-us-about-a-learned-matrix" class="nav-link" data-scroll-target="#what-this-tells-us-about-a-learned-matrix">What this tells us about a learned matrix</a></li>
   <li><a href="#appendix-a-notation" id="toc-appendix-a-notation" class="nav-link" data-scroll-target="#appendix-a-notation">Appendix A: notation and assumptions</a></li>
   <li><a href="#appendix-b-outer-product" id="toc-appendix-b-outer-product" class="nav-link" data-scroll-target="#appendix-b-outer-product">Appendix B: the matrix for a single <em>key–value pair</em> and its sum</a></li>
   <li><a href="#appendix-c-least-squares" id="toc-appendix-c-least-squares" class="nav-link" data-scroll-target="#appendix-c-least-squares">Appendix C: least squares, the pseudoinverse and the two projectors</a></li>
@@ -445,8 +445,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Linear Memory, Reconstruction and Recall</h1>
-<p class="subtitle lead">What SVD tells us about a learned matrix as memory</p>
+<h1 class="title">A Matrix Is a Memory Store</h1>
+<p class="subtitle lead">Matrix multiplication reads from that memory</p>
   <div class="quarto-categories">
     <div class="quarto-category">machine learning</div>
     <div class="quarto-category">linear algebra</div>
@@ -456,7 +456,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    An SVD derivation of linear-memory SNR, Wang’s capacity estimate, and the role of key geometry in recall.
+    A matrix stores key–value associations; multiplication reads them. SVD makes this interpretation explicit, and recall error and SNR quantify its limits.
   </div>
 </div>
 
@@ -485,26 +485,28 @@ window.Quarto = {
 </header>
 
 
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="The argument">
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="The central idea">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>The argument
+<span class="screen-reader-only">Note</span>The central idea
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>The interpretation of a matrix as a <em>key–value</em> store can be developed quantitatively: how many supplied <em>values</em> can it reproduce from their <em>keys</em>, and with what error?</strong></p>
-<p>We use Wang’s memory-capacity argument to develop this interpretation through SVD. Two explicit constructions let us relate reconstruction error and power SNR to the number of stored pairs <span class="math inline">\(M\)</span>, the <em>key</em> dimension <span class="math inline">\(d\)</span>, and the relationships among the <em>keys</em>. The result explains the assumptions behind the estimate <span class="math inline">\(M\approx2d\)</span> and what to examine beyond that estimate.</p>
+<p><strong>A matrix is a memory store. Matrix multiplication reads from that memory.</strong></p>
+<p>SVD expresses a matrix <span class="math inline">\(W\)</span> as a collection of <em>keys</em> and associated <em>values</em>. In <span class="math inline">\(Wq\)</span>, the input vector <span class="math inline">\(q\)</span> acts as the <em>query</em>, and matrix multiplication retrieves the response from the memory encoded in <span class="math inline">\(W\)</span>. The <em>query</em> need not match a stored <em>key</em>: a general <em>query</em> retrieves a linear combination of the stored <em>values</em>. When it equals an SVD <em>key</em>, it retrieves the associated <em>value</em> exactly.</p>
+<p>This describes how the matrix is read. Whether the retrieved response matches the intended output is a separate question, assessed here through reconstruction error and signal-to-noise ratio (SNR).</p>
 </div>
 </div>
-<p>In <a href="../../saddlepoint/2026-06-30-towards-testable-theory-of-emergence/index.html#matrix-multiplication-scores-similarity">Towards a Testable Theory of Emergence</a>, I interpreted matrix multiplication as a <em>key–value</em> memory computation through its singular value decomposition. <a href="../../saddlepoint/2026-10-21-knn-binding-algorithm/index.html">k-NN as a Binding Algorithm</a> extends that interpretation across learning methods. The purpose here is to strengthen it with a quantitative account of storage and recall.</p>
-<p>Alex Wang’s <a href="https://alexwang.ai/posts/associative-memory/">You could have invented transformers from memory</a> asks how many memories a store can hold before interference becomes comparable to the desired signal. We use that question to develop the earlier SVD viewpoint: <strong>with <em>keys</em> in <span class="math inline">\(\mathbb R^d\)</span>, how accurately can a matrix return the intended <em>values</em> as the number <span class="math inline">\(M\)</span> of stored pairs grows?</strong></p>
-<p>SVD gives a memory representation of any linear map. To quantify recall, we then specify the pairs to be stored and how the matrix is fitted. These constructions provide an analysable model of the memory interpretation; their capacity estimates apply under the assumptions stated below. Here <em>recall</em> means reconstructing the intended output vector, rather than identifying an item from a list of candidates.</p>
+<p>A learned matrix encodes a response to every input vector. Its singular value decomposition makes those responses explicit as <em>key–value</em> associations. The matrix contains the associations; multiplication uses a <em>query</em> to read a linear combination of their <em>values</em>. The read operation leaves the matrix unchanged.</p>
+<p>In <a href="../../saddlepoint/2026-06-30-towards-testable-theory-of-emergence/index.html#matrix-multiplication-scores-similarity">Towards a Testable Theory of Emergence</a>, I developed this interpretation through SVD. <a href="../../saddlepoint/2026-10-21-knn-binding-algorithm/index.html">k-NN as a Binding Algorithm</a> connects comparison and aggregation across learning methods. Here we examine what the matrix stores and how accurately multiplication can retrieve intended <em>values</em>.</p>
+<p>Alex Wang’s <a href="https://alexwang.ai/posts/associative-memory/">You could have invented transformers from memory</a> quantifies interference in a matrix memory. His question extends the interpretation: <strong>with <em>keys</em> in <span class="math inline">\(\mathbb R^d\)</span>, how does recall change as the number <span class="math inline">\(M\)</span> of supplied <em>key–value pairs</em> increases?</strong> We derive recall error and power SNR for two storage rules, explain the assumptions behind <span class="math inline">\(M\approx2d\)</span>, and examine the effects of <em>key</em> geometry and <em>query</em> noise.</p>
+<p>There are two distinct questions. SVD describes the associations represented by an existing matrix. A storage construction specifies intended associations and fits a matrix to them. The first gives an exact interpretation; the second lets us measure whether the read operation returns what was intended. Here <em>recall</em> means reconstructing an output vector, rather than identifying an item from a list of candidates.</p>
 <p>Vectors are columns, and <span class="math inline">\(A^\top\)</span> denotes transpose. <a href="#appendix-a-notation">Appendix A</a> defines the notation and dimensions; the subsequent appendices give the derivations.</p>
-<section id="a-matrix-as-a-keyvalue-store" class="level2">
-<h2 data-anchor-id="a-matrix-as-a-keyvalue-store">A matrix as a <em>key–value</em> store</h2>
+<section id="what-the-matrix-stores-and-how-multiplication-reads-it" class="level2">
+<h2 data-anchor-id="what-the-matrix-stores-and-how-multiplication-reads-it">What the matrix stores and how multiplication reads it</h2>
 <p>Let <span class="math inline">\(W\in\mathbb R^{p\times d}\)</span> have rank <span class="math inline">\(r_W\)</span> and compact singular value decomposition (SVD)</p>
 <p><span class="math display">\[
 W=U\Sigma Z^\top
@@ -516,18 +518,24 @@ Wq=\sum_{\ell=1}^{r_W}
 \underbrace{\sigma_\ell u_\ell}_{\text{value}}
 \underbrace{z_\ell^\top q}_{\text{query–key comparison}}.
 \]</span></p>
-<p>The right singular vectors <span class="math inline">\(z_\ell\)</span> are orthonormal <em>keys</em>; <span class="math inline">\(\sigma_\ell u_\ell\)</span> are their associated <em>values</em>. Querying with <span class="math inline">\(z_j\)</span> returns its <em>value</em> exactly. Components of a <em>query</em> orthogonal to these <em>keys</em> lie in the null space <span class="math inline">\(\ker(W)=\{q:Wq=0\}\)</span> and contribute zero.</p>
-<p>These SVD-derived pairs describe the action of the learned map; they do not identify its original training pairs. To develop the memory interpretation quantitatively, we now supply a collection of intended <em>key–value pairs</em> and examine two rules for constructing a matrix that reproduces them. Rank counts independent directions, not independently specified memories: one linear rule can generate arbitrarily many consistent input–output pairs.</p>
+<p>The right singular vectors <span class="math inline">\(z_\ell\)</span> are orthonormal <em>keys</em>; <span class="math inline">\(\sigma_\ell u_\ell\)</span> are their associated <em>values</em>. Multiplication performs two operations:</p>
+<ol type="1">
+<li><strong>Compare:</strong> compute <span class="math inline">\(z_\ell^\top q\)</span> for each <em>key</em>. This is the component of the <em>query</em> along that direction.</li>
+<li><strong>Combine:</strong> multiply each <em>value</em> by its comparison coefficient and sum the results.</li>
+</ol>
+<p>These coefficients can be negative and need not sum to one. The read operation is a linear combination, not necessarily an average or selection of a single stored item. For a batch of <em>queries</em> <span class="math inline">\(X=[q_1,\ldots,q_n]\)</span>, matrix multiplication <span class="math inline">\(WX=[Wq_1,\ldots,Wq_n]\)</span> performs the same read for every column.</p>
+<p>Querying with <span class="math inline">\(z_j\)</span> returns its <em>value</em> exactly: <span class="math inline">\(Wz_j=\sigma_j u_j\)</span>. More generally, if <span class="math inline">\(q=a z_1+b z_2\)</span>, then <span class="math inline">\(Wq=a\sigma_1u_1+b\sigma_2u_2\)</span> whenever those directions exist. Components orthogonal to all the <em>keys</em> lie in the null space <span class="math inline">\(\ker(W)=\{q:Wq=0\}\)</span> and contribute zero.</p>
+<p>These SVD-derived pairs describe the action of the learned map; they do not identify its original training pairs. The decomposition need not be computed during use: multiplying by <span class="math inline">\(W\)</span> already performs the same operation. Repeated singular values can admit different choices of singular vectors, so this is not a claim of unique or semantically interpretable memories. To develop the memory interpretation quantitatively, we now supply a collection of intended <em>key–value pairs</em> and examine two rules for constructing a matrix that reproduces them. Rank counts independent directions, not independently specified memories: one linear rule can generate arbitrarily many consistent input–output pairs.</p>
 </section>
-<section id="two-ways-to-construct-the-memory-matrix" class="level2">
-<h2 data-anchor-id="two-ways-to-construct-the-memory-matrix">Two ways to construct the memory matrix</h2>
+<section id="writing-intended-associations-into-the-matrix" class="level2">
+<h2 data-anchor-id="writing-intended-associations-into-the-matrix">Writing intended associations into the matrix</h2>
 <p>Suppose we want to store <span class="math inline">\(M\)</span> <em>key–value pairs</em> <span class="math inline">\((k_i,v_i)\)</span>. Each pair specifies one requirement: querying with <span class="math inline">\(k_i\)</span> should return <span class="math inline">\(v_i\)</span>. Thus <span class="math inline">\(M\)</span> counts supplied pairs, with one intended <em>value</em> per <em>key</em>; it does not count SVD components. Put the <em>keys</em> and <em>values</em> into columns:</p>
 <p><span class="math display">\[
 K=[k_1,\ldots,k_M]\in\mathbb R^{d\times M},
 \qquad
 V=[v_1,\ldots,v_M]\in\mathbb R^{p\times M}.
 \]</span></p>
-<p>Assume <span class="math inline">\(\|k_i\|=1\)</span>. We want a single matrix <span class="math inline">\(W\)</span> that returns <span class="math inline">\(v_i\)</span> when multiplied by <span class="math inline">\(k_i\)</span>. We examine two ways to construct it. The word “store” describes the role of the resulting matrix; it is not a separate statistical estimator.</p>
+<p>Assume <span class="math inline">\(\|k_i\|=1\)</span>. We want a single matrix <span class="math inline">\(W\)</span> that returns <span class="math inline">\(v_i\)</span> when multiplied by <span class="math inline">\(k_i\)</span>. Constructing or fitting <span class="math inline">\(W\)</span> is the write operation; computing <span class="math inline">\(Wq\)</span> is the read operation. We examine two ways to write the supplied associations. The word “store” describes the role of the resulting matrix; it is not a separate statistical estimator.</p>
 <p><strong>First, construct one matrix per <em>key–value pair</em> and add them.</strong> For each pair <span class="math inline">\((k_i,v_i)\)</span>, find a matrix <span class="math inline">\(A_i\)</span> using only that pair. Choose the smallest Frobenius norm, <span class="math inline">\(\|A\|_F=(\sum_{ab}A_{ab}^2)^{1/2}\)</span>, among matrices that return <span class="math inline">\(v_i\)</span> exactly:</p>
 <p><span class="math display">\[
 A_i=\underset{A}{\operatorname{arg\,min}}\ \frac12\|A\|_F^2
@@ -574,8 +582,8 @@ W_{\mathrm{LS}}K=VZ_KZ_K^\top=VP,
 \]</span></p>
 <p>Write <span class="math inline">\(\operatorname{col}(B)\)</span> for the column space of <span class="math inline">\(B\)</span>, the span of its columns. Here <span class="math inline">\(P=Z_KZ_K^\top\)</span> is an orthogonal projector: <span class="math inline">\(P^\top=P\)</span> and <span class="math inline">\(P^2=P\)</span>. It projects coefficients over the stored pairs in <span class="math inline">\(\mathbb R^M\)</span> onto <span class="math inline">\(\operatorname{col}(Z_K)\)</span>, the row space of <span class="math inline">\(K\)</span>. It differs from <span class="math inline">\(Q=KK^\dagger=U_KU_K^\top\)</span>, which projects inputs in <span class="math inline">\(\mathbb R^d\)</span> onto <span class="math inline">\(\operatorname{col}(K)\)</span>. <a href="#appendix-c-least-squares">Appendix C</a> derives both projectors.</p>
 </section>
-<section id="measure-the-strength-of-recall" class="level2">
-<h2 data-anchor-id="measure-the-strength-of-recall">Measure the strength of recall</h2>
+<section id="how-accurately-does-the-read-operation-recover-a-value" class="level2">
+<h2 data-anchor-id="how-accurately-does-the-read-operation-recover-a-value">How accurately does the read operation recover a value?</h2>
 <p>The identity <span class="math inline">\(W_{\mathrm{LS}}K=VP\)</span> tells us what the fitted matrix returns. To assess it as memory, we must ask how much of each response comes from the requested <em>value</em> and how much comes from other stored <em>values</em>. Comparing these contributions lets us quantify how recall changes as we increase the number of stored pairs.</p>
 <p>We use power signal-to-noise ratio (SNR) to compare the intended contribution with cross-talk from other <em>key–value pairs</em>:</p>
 <p><span class="math display">\[
@@ -709,9 +717,9 @@ W_{\mathrm{LS}}=AKK^\dagger=A P_{\operatorname{col}(K)}.
 \]</span></p>
 <p>Every <em>query</em> in the <em>key</em> span has its intended output recovered exactly. There can be more than <span class="math inline">\(d\)</span> such <em>key–value pairs</em> because their <em>values</em> respect the dependencies among <em>keys</em>. The capacity estimate for independent random <em>values</em> does not limit how many consistent pairs a linear rule can represent. Here <span class="math inline">\(P_{\operatorname{col}(K)}=Q=KK^\dagger\)</span> is the input-space projector. <a href="#appendix-h-consistency">Appendix H</a> proves exact recall on this span and gives the general consistency condition.</p>
 </section>
-<section id="what-to-assess-in-a-learned-store" class="level2">
-<h2 data-anchor-id="what-to-assess-in-a-learned-store">What to assess in a learned store</h2>
-<p>The storage calculation gives quantitative content to the earlier interpretation of matrix multiplication as memory. SVD describes the map in terms of <em>keys</em> and <em>values</em>; specifying intended pairs and a fitting rule lets us assess how well that memory works. Does the store reproduce its intended <em>key–value pairs</em>? Are errors concentrated on particular <em>keys</em>? Does recall remain accurate when <em>queries</em> are perturbed?</p>
+<section id="what-this-tells-us-about-a-learned-matrix" class="level2">
+<h2 data-anchor-id="what-this-tells-us-about-a-learned-matrix">What this tells us about a learned matrix</h2>
+<p>A matrix stores a set of linear associations, and multiplication reads them by comparison and combination. SVD makes that statement exact for an existing matrix. Specifying intended <em>key–value pairs</em> introduces a separate test: whether the stored associations reproduce those intended outputs. The recall calculations assess errors at supplied <em>keys</em>, differences across <em>keys</em>, and sensitivity to perturbed <em>queries</em>.</p>
 <p>For the least-squares model analysed here, leverage scores determine expected reconstruction error and SNR at stored <em>keys</em>. The <em>key</em> singular spectrum determines additional sensitivity to isotropic <em>query</em> noise. Wang’s <span class="math inline">\(M=2d\)</span> estimate follows when these results are reduced to approximately uniform leverage and a unit-SNR threshold.</p>
 <p>For a particular learned matrix, measure the residuals <span class="math inline">\(\|Wk_j-v_j\|^2\)</span> directly. The formula <span class="math inline">\(1-h_j\)</span> is an expectation under the least-squares random-<em>value</em> model, not the measured error for arbitrary fixed <em>values</em>. For independent isotropic additive <em>query</em> noise, the additional expected error is <span class="math inline">\(\tau^2\|W\|_F^2\)</span>; expressing it through the singular values of <span class="math inline">\(K\)</span> additionally uses that model.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled" title="Main takeaway">
@@ -724,7 +732,12 @@ W_{\mathrm{LS}}=AKK^\dagger=A P_{\operatorname{col}(K)}.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>The memory interpretation supports quantitative questions about reconstruction, interference, and robustness.</strong> Assess <em>key</em> geometry as well as memory count and dimension. Under the least-squares random-<em>value</em> model, leverage scores determine expected error at stored <em>keys</em>, and the nonzero singular values of <span class="math inline">\(K\)</span> determine additional expected error from isotropic <em>query</em> noise. The estimate <span class="math inline">\(M=2d\)</span> is a particular operating point under approximately uniform leverage, not a universal limit on what a learned matrix can represent.</p>
+<p><strong>A matrix is a memory store; matrix multiplication is its read operation.</strong></p>
+<ul>
+<li><strong>Representation:</strong> SVD expresses the matrix as <em>keys</em> and associated <em>values</em>. Multiplication compares a <em>query</em> with those <em>keys</em> and combines the <em>values</em>.</li>
+<li><strong>Fidelity:</strong> intended associations need not be recovered exactly. Reconstruction error, cross-talk, and sensitivity to <em>query</em> noise measure different aspects of the read operation.</li>
+<li><strong>Capacity:</strong> <span class="math inline">\(M\approx2d\)</span> is a unit-SNR estimate for the stated least-squares model with approximately uniform leverage. It is not a universal limit on the number of consistent associations a matrix can represent.</li>
+</ul>
 </div>
 </div>
 </section>
