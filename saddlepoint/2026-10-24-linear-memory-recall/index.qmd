@@ -1,28 +1,32 @@
 ---
-title: "Linear Memory, Reconstruction and Recall"
-subtitle: "What SVD tells us about a learned matrix as memory"
-description: "An SVD derivation of linear-memory SNR, Wang’s capacity estimate, and the role of key geometry in recall."
+title: "A Matrix Is a Memory Store"
+subtitle: "Matrix multiplication reads from that memory"
+description: "A matrix stores key–value associations; multiplication reads them. SVD makes this interpretation explicit, and recall error and SNR quantify its limits."
 author: "Soma S Dhavala"
 date: "2026-10-24"
 categories: ["machine learning", "linear algebra", "memory"]
 draft: false
 ---
 
-::: {.callout-note appearance="default" icon="false" title="The argument"}
-**The interpretation of a matrix as a *key–value* store can be developed quantitatively: how many supplied *values* can it reproduce from their *keys*, and with what error?**
+::: {.callout-note appearance="default" icon="false" title="The central idea"}
+**A matrix is a memory store. Matrix multiplication reads from that memory.**
 
-We use Wang’s memory-capacity argument to develop this interpretation through SVD. Two explicit constructions let us relate reconstruction error and power SNR to the number of stored pairs $M$, the *key* dimension $d$, and the relationships among the *keys*. The result explains the assumptions behind the estimate $M\approx2d$ and what to examine beyond that estimate.
+SVD expresses a matrix $W$ as a collection of *keys* and associated *values*. In $Wq$, the input vector $q$ acts as the *query*, and matrix multiplication retrieves the response from the memory encoded in $W$. The *query* need not match a stored *key*: a general *query* retrieves a linear combination of the stored *values*. When it equals an SVD *key*, it retrieves the associated *value* exactly.
+
+This describes how the matrix is read. Whether the retrieved response matches the intended output is a separate question, assessed here through reconstruction error and signal-to-noise ratio (SNR).
 :::
 
-In [Towards a Testable Theory of Emergence](../2026-06-30-towards-testable-theory-of-emergence/index.ipynb#matrix-multiplication-scores-similarity), I interpreted matrix multiplication as a *key–value* memory computation through its singular value decomposition. [k-NN as a Binding Algorithm](../2026-10-21-knn-binding-algorithm/index.qmd) extends that interpretation across learning methods. The purpose here is to strengthen it with a quantitative account of storage and recall.
+A learned matrix encodes a response to every input vector. Its singular value decomposition makes those responses explicit as *key–value* associations. The matrix contains the associations; multiplication uses a *query* to read a linear combination of their *values*. The read operation leaves the matrix unchanged.
 
-Alex Wang’s [You could have invented transformers from memory](https://alexwang.ai/posts/associative-memory/) asks how many memories a store can hold before interference becomes comparable to the desired signal. We use that question to develop the earlier SVD viewpoint: **with *keys* in $\mathbb R^d$, how accurately can a matrix return the intended *values* as the number $M$ of stored pairs grows?**
+In [Towards a Testable Theory of Emergence](../2026-06-30-towards-testable-theory-of-emergence/index.ipynb#matrix-multiplication-scores-similarity), I developed this interpretation through SVD. [k-NN as a Binding Algorithm](../2026-10-21-knn-binding-algorithm/index.qmd) connects comparison and aggregation across learning methods. Here we examine what the matrix stores and how accurately multiplication can retrieve intended *values*.
 
-SVD gives a memory representation of any linear map. To quantify recall, we then specify the pairs to be stored and how the matrix is fitted. These constructions provide an analysable model of the memory interpretation; their capacity estimates apply under the assumptions stated below. Here *recall* means reconstructing the intended output vector, rather than identifying an item from a list of candidates.
+Alex Wang’s [You could have invented transformers from memory](https://alexwang.ai/posts/associative-memory/) quantifies interference in a matrix memory. His question extends the interpretation: **with *keys* in $\mathbb R^d$, how does recall change as the number $M$ of supplied *key–value pairs* increases?** We derive recall error and power SNR for two storage rules, explain the assumptions behind $M\approx2d$, and examine the effects of *key* geometry and *query* noise.
+
+There are two distinct questions. SVD describes the associations represented by an existing matrix. A storage construction specifies intended associations and fits a matrix to them. The first gives an exact interpretation; the second lets us measure whether the read operation returns what was intended. Here *recall* means reconstructing an output vector, rather than identifying an item from a list of candidates.
 
 Vectors are columns, and $A^\top$ denotes transpose. [Appendix A](#appendix-a-notation) defines the notation and dimensions; the subsequent appendices give the derivations.
 
-## A matrix as a *key–value* store
+## What the matrix stores and how multiplication reads it
 
 Let $W\in\mathbb R^{p\times d}$ have rank $r_W$ and compact singular value decomposition (SVD)
 
@@ -39,11 +43,18 @@ Wq=\sum_{\ell=1}^{r_W}
 \underbrace{z_\ell^\top q}_{\text{query–key comparison}}.
 $$
 
-The right singular vectors $z_\ell$ are orthonormal *keys*; $\sigma_\ell u_\ell$ are their associated *values*. Querying with $z_j$ returns its *value* exactly. Components of a *query* orthogonal to these *keys* lie in the null space $\ker(W)=\{q:Wq=0\}$ and contribute zero.
+The right singular vectors $z_\ell$ are orthonormal *keys*; $\sigma_\ell u_\ell$ are their associated *values*. Multiplication performs two operations:
 
-These SVD-derived pairs describe the action of the learned map; they do not identify its original training pairs. To develop the memory interpretation quantitatively, we now supply a collection of intended *key–value pairs* and examine two rules for constructing a matrix that reproduces them. Rank counts independent directions, not independently specified memories: one linear rule can generate arbitrarily many consistent input–output pairs.
+1. **Compare:** compute $z_\ell^\top q$ for each *key*. This is the component of the *query* along that direction.
+2. **Combine:** multiply each *value* by its comparison coefficient and sum the results.
 
-## Two ways to construct the memory matrix
+These coefficients can be negative and need not sum to one. The read operation is a linear combination, not necessarily an average or selection of a single stored item. For a batch of *queries* $X=[q_1,\ldots,q_n]$, matrix multiplication $WX=[Wq_1,\ldots,Wq_n]$ performs the same read for every column.
+
+Querying with $z_j$ returns its *value* exactly: $Wz_j=\sigma_j u_j$. More generally, if $q=a z_1+b z_2$, then $Wq=a\sigma_1u_1+b\sigma_2u_2$ whenever those directions exist. Components orthogonal to all the *keys* lie in the null space $\ker(W)=\{q:Wq=0\}$ and contribute zero.
+
+These SVD-derived pairs describe the action of the learned map; they do not identify its original training pairs. The decomposition need not be computed during use: multiplying by $W$ already performs the same operation. Repeated singular values can admit different choices of singular vectors, so this is not a claim of unique or semantically interpretable memories. To develop the memory interpretation quantitatively, we now supply a collection of intended *key–value pairs* and examine two rules for constructing a matrix that reproduces them. Rank counts independent directions, not independently specified memories: one linear rule can generate arbitrarily many consistent input–output pairs.
+
+## Writing intended associations into the matrix
 
 Suppose we want to store $M$ *key–value pairs* $(k_i,v_i)$. Each pair specifies one requirement: querying with $k_i$ should return $v_i$. Thus $M$ counts supplied pairs, with one intended *value* per *key*; it does not count SVD components. Put the *keys* and *values* into columns:
 
@@ -53,7 +64,7 @@ K=[k_1,\ldots,k_M]\in\mathbb R^{d\times M},
 V=[v_1,\ldots,v_M]\in\mathbb R^{p\times M}.
 $$
 
-Assume $\|k_i\|=1$. We want a single matrix $W$ that returns $v_i$ when multiplied by $k_i$. We examine two ways to construct it. The word “store” describes the role of the resulting matrix; it is not a separate statistical estimator.
+Assume $\|k_i\|=1$. We want a single matrix $W$ that returns $v_i$ when multiplied by $k_i$. Constructing or fitting $W$ is the write operation; computing $Wq$ is the read operation. We examine two ways to write the supplied associations. The word “store” describes the role of the resulting matrix; it is not a separate statistical estimator.
 
 **First, construct one matrix per *key–value pair* and add them.** For each pair $(k_i,v_i)$, find a matrix $A_i$ using only that pair. Choose the smallest Frobenius norm, $\|A\|_F=(\sum_{ab}A_{ab}^2)^{1/2}$, among matrices that return $v_i$ exactly:
 
@@ -121,7 +132,7 @@ $$
 
 Write $\operatorname{col}(B)$ for the column space of $B$, the span of its columns. Here $P=Z_KZ_K^\top$ is an orthogonal projector: $P^\top=P$ and $P^2=P$. It projects coefficients over the stored pairs in $\mathbb R^M$ onto $\operatorname{col}(Z_K)$, the row space of $K$. It differs from $Q=KK^\dagger=U_KU_K^\top$, which projects inputs in $\mathbb R^d$ onto $\operatorname{col}(K)$. [Appendix C](#appendix-c-least-squares) derives both projectors.
 
-## Measure the strength of recall
+## How accurately does the read operation recover a value?
 
 The identity $W_{\mathrm{LS}}K=VP$ tells us what the fitted matrix returns. To assess it as memory, we must ask how much of each response comes from the requested *value* and how much comes from other stored *values*. Comparing these contributions lets us quantify how recall changes as we increase the number of stored pairs.
 
@@ -281,16 +292,20 @@ $$
 
 Every *query* in the *key* span has its intended output recovered exactly. There can be more than $d$ such *key–value pairs* because their *values* respect the dependencies among *keys*. The capacity estimate for independent random *values* does not limit how many consistent pairs a linear rule can represent. Here $P_{\operatorname{col}(K)}=Q=KK^\dagger$ is the input-space projector. [Appendix H](#appendix-h-consistency) proves exact recall on this span and gives the general consistency condition.
 
-## What to assess in a learned store
+## What this tells us about a learned matrix
 
-The storage calculation gives quantitative content to the earlier interpretation of matrix multiplication as memory. SVD describes the map in terms of *keys* and *values*; specifying intended pairs and a fitting rule lets us assess how well that memory works. Does the store reproduce its intended *key–value pairs*? Are errors concentrated on particular *keys*? Does recall remain accurate when *queries* are perturbed?
+A matrix stores a set of linear associations, and multiplication reads them by comparison and combination. SVD makes that statement exact for an existing matrix. Specifying intended *key–value pairs* introduces a separate test: whether the stored associations reproduce those intended outputs. The recall calculations assess errors at supplied *keys*, differences across *keys*, and sensitivity to perturbed *queries*.
 
 For the least-squares model analysed here, leverage scores determine expected reconstruction error and SNR at stored *keys*. The *key* singular spectrum determines additional sensitivity to isotropic *query* noise. Wang’s $M=2d$ estimate follows when these results are reduced to approximately uniform leverage and a unit-SNR threshold.
 
 For a particular learned matrix, measure the residuals $\|Wk_j-v_j\|^2$ directly. The formula $1-h_j$ is an expectation under the least-squares random-*value* model, not the measured error for arbitrary fixed *values*. For independent isotropic additive *query* noise, the additional expected error is $\tau^2\|W\|_F^2$; expressing it through the singular values of $K$ additionally uses that model.
 
 ::: {.callout-note appearance="default" icon="false" title="Main takeaway"}
-**The memory interpretation supports quantitative questions about reconstruction, interference, and robustness.** Assess *key* geometry as well as memory count and dimension. Under the least-squares random-*value* model, leverage scores determine expected error at stored *keys*, and the nonzero singular values of $K$ determine additional expected error from isotropic *query* noise. The estimate $M=2d$ is a particular operating point under approximately uniform leverage, not a universal limit on what a learned matrix can represent.
+**A matrix is a memory store; matrix multiplication is its read operation.**
+
+- **Representation:** SVD expresses the matrix as *keys* and associated *values*. Multiplication compares a *query* with those *keys* and combines the *values*.
+- **Fidelity:** intended associations need not be recovered exactly. Reconstruction error, cross-talk, and sensitivity to *query* noise measure different aspects of the read operation.
+- **Capacity:** $M\approx2d$ is a unit-SNR estimate for the stated least-squares model with approximately uniform leverage. It is not a universal limit on the number of consistent associations a matrix can represent.
 :::
 
 ## Appendix A: notation and assumptions {#appendix-a-notation}
